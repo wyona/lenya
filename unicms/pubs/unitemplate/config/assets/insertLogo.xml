@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <insert
+    xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <param name="data"/>
+  <param name="type"/>
+  <param name="width"/>
+  <param name="height"/>
+  <param name="caption"/>
+  <param name="link"/>
+  <template>
+      <unizh:logo data="{$data}" alt="{$caption}"></unizh:logo>
+  </template>
+  </insert>

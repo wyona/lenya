@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:elt="http://www.unizh.ch/elt/1.0" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elt:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <dc:title>Anmerkungen und orthogonale Inhalte</dc:title>
+<dc:creator>admin1 (Administrator)</dc:creator>
+<dc:subject/>
+<dc:description> </dc:description>
+<dc:publisher>Universität Zürich</dc:publisher>
+<dc:language>de</dc:language>
+<dc:rights>Universität Zürich</dc:rights>
+<dcterms:created>Sat Dec 04 11:55:43 CET 2004</dcterms:created>
+<dcterms:issued>date of publication</dcterms:issued>
+</lenya:meta>
+  <elt:lernpfad>
+<a href="#" target="popup">Lernziele</a>  <a href="#" title="">Literatur</a>
+    <a href="#">Uebungen</a>
+    <a href="#">Loesungen</a>
+    <a href="#">Lernzielkontrolle</a>
+  </elt:lernpfad>
+  <body>
+   <p>In ELT können Sie erläuternde Anmerkungen zu einem Begriff wahlweise als <elt:footnote-reference idref="Fussnote">Fussnote</elt:footnote-reference> oder <elt:footnote-reference idref="Rollover">Rollover-Layer</elt:footnote-reference> einbinden. </p>
+<p>Wenn sie einen von verschiedenen Seiten gemeinsam genutzten "Pool" von Inhalten anlegen möchten (z.B. ein Glossar), welche nicht in die Navigation eingebunden werden sollen, können sie diese "verstecken". Setzen Sie dazu die oberste Seite des betreffenden Dokumente-Baums auf "invisible in Navigation" (Menu -&gt; edit -&gt; Change Node Visibility). </p><p>Bei ergänzenden Informationen wie z.B. einem Begriffserläuterungen empfielt sich die Darstellung in einem separaten <a href="/lenya/eltemplate/authoring/Glossar/Testeintrag.html" target="popup">Popup-Fenster</a>. Um ein Dokument in einem Popup-Fenster anzuzeigen müssen sie den Link auf dieses Dokument entsprechend anpassen. Wählen sie dazu den betreffenden Link in BXE aus. Klicken sie dann mit der rechten Maustaste und wählen sie "Edit a Attributes". Setzen sie  dann den Eintrag "target" auf "popup".  </p>
+<p>Natürlich können Sie auch ganz "normale" Links zwischen den einzelnen Lesetexten einbauen.</p>
+<p>
+     </p>
+<p> </p></body>
+  <elt:footnotes>
+<title>Fussnoten:</title>
+    <elt:footnote id="Fussnote" rendertype="footnote">
+       Dies ist eine Fussnote.
+    </elt:footnote>
+    <elt:footnote id="Rollover" rendertype="tooltip">Dies ist ein Rollover-Layer.
+    </elt:footnote>   
+    
+  </elt:footnotes>
+</html>

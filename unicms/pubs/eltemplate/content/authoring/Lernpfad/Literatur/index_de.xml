@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:elt="http://www.unizh.ch/elt/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" elt:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Literatur</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>admin1 (Administrator)</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Sat Dec 04 12:47:35 CET 2004</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <body>
+    <h2>Headline</h2>
+    <p>
+     This is a paragraph with a  <a href="note1" class="note">link to a note</a>
+    </p>
+    <div class="note" id="note1">
+     This is a note
+    </div>
+  </body>
+</html>

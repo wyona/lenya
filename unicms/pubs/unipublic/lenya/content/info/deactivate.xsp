@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+
+<xsp:page 
+  language="java" 
+  xmlns:xsp="http://apache.org/xsp"
+  xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+  xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+  >
+  
+<xsp:structure>
+  <xsp:include>org.apache.lenya.cms.publication.DefaultDocumentBuilder</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.SiteTree</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.SiteTreeNode</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.Label</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.xsp.DocumentReferencesHelper</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Article</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Dossier</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.DossiersBox</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.DossiersBoxVersion</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Headlines</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.HeadlinesVersion</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Newsletter</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.NewsletterVersion</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Section</xsp:include>
+  <xsp:include>ch.unizh.unipublic.lenya.cms.publication.UnipublicResourceIdentityMap</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.util.AreaFilter</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.util.ComposedFilter</xsp:include>
+  <xsp:include>org.apache.lenya.cms.publication.util.LanguageFilter</xsp:include>
+</xsp:structure>
+
+<page>
+  <info>
+    
+    <request-uri><xsp-request:get-uri/></request-uri>
+    <document-id><input:get-attribute module="page-envelope" as="string" name="document-id"/></document-id>
+    <document-language><input:get-attribute module="page-envelope" name="document-language" as="string"/></document-language>
+    
+    <workflow-event><input:get-attribute module="request-param" name="lenya.event" as="string"/></workflow-event>
+    <user-id><input:get-attribute module="access-control" name="user-id" as="string"/></user-id>
+    <ip-address><input:get-attribute module="access-control" name="ip-address" as="string"/></ip-address>
+    <role-ids><input:get-attribute module="access-control" name="role-ids" as="string"/></role-ids>
+    
+    <task-id>deactivateDocument</task-id>
+    
+    <xsp:logic>
+      try {
+          Document document = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
+          
+          Object liveNodeObject = <input:get-attribute module="sitetree" as="object" name="live-node"/>;
+          
+          if (!(liveNodeObject instanceof SiteTreeNode)) {
+              throw new ProcessingException("The live node does not exist in the sitetree!");
+          }
+          
+          SiteTreeNode liveNode = (SiteTreeNode) liveNodeObject;
+          <language><xsp:expr>document.getLanguage()</xsp:expr></language>
+          Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+          
+          Label[] labels = liveNode.getLabels();
+          if (labels.length == 1) {
+              SiteTreeNode[] liveChildren = liveNode.getChildren();
+              if (liveChildren.length &gt; 0) {
+                  <message id="children-live"/>
+              }
+          
+              DefaultDocumentBuilder builder = DefaultDocumentBuilder.getInstance();
+              String referer = <input:get-attribute module="request" name="requestURI" as="string"/>;
+                String[] steps = referer.split("/");
+                boolean info = false;
+                if (steps[3].startsWith(Publication.INFO_AREA_PREFIX)){
+                   info = true;
+                }
+              
+              for (int i = 0; i &lt; liveChildren.length; i++) {
+                  Label[] languages = liveChildren[i].getLabels(); 
+                  for (int j = 0; j &lt; languages.length; j++) {
+                      String language = languages[j].getLanguage();
+                      String url = null;
+                      if (info) {
+                          url = builder.buildCanonicalUrl(publication, Publication.INFO_AREA_PREFIX+
+                                document.getArea(), document.getId() + "/" + liveChildren[i].getId(), language);
+                      } else {
+                          url = builder.buildCanonicalUrl(publication,
+                                document.getArea(), document.getId() + "/" + liveChildren[i].getId(), language);
+                      }
+
+          
+                      <live-child>
+                        <xsp:attribute name="href"><xsp-request:get-context-path/><xsp:expr>url</xsp:expr></xsp:attribute>
+                        <xsp:attribute name="id"><xsp:expr>liveChildren[i].getId()</xsp:expr></xsp:attribute>
+                        <xsp:attribute name="language"><xsp:expr>language</xsp:expr></xsp:attribute>
+                      </live-child>
+                  }
+              }
+          }    
+        DocumentReferencesHelper helper = new DocumentReferencesHelper(objectModel);
+        Document[] references = helper.getReferences(Publication.LIVE_AREA);
+        if (references.length &gt; 0) {
+              </xsp:logic><inconsistent-documents><xsp:logic>
+
+              for (int i = 0; i &lt; references.length; i++) {
+	              <inconsistent-document>
+    	              <xsp:attribute name="href"><xsp-request:get-context-path/><xsp:expr>references[i].getCompleteURL()</xsp:expr></xsp:attribute>
+	                  <xsp:expr>references[i].getId()</xsp:expr> [<xsp:expr>references[i].getLanguage()</xsp:expr>]
+	              </inconsistent-document>
+	          }  
+	          </xsp:logic></inconsistent-documents><xsp:logic>
+	      }
+      }
+      catch (Exception e) {
+          throw new ProcessingException(e);
+      }
+    </xsp:logic>
+
+    <xsp:logic>
+      Document document = (Document)<input:get-attribute module="page-envelope" as="object" name="document"/>;
+      Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+      String id = <input:get-attribute module="page-envelope" name="document-id" as="string"/>;    
+      String area = document.getArea();
+      String language = document.getLanguage();
+
+      String userId = <input:get-attribute module="access-control" name="user-id" as="string"/>;
+	  boolean isArticle = Article.isArticleDocument(id);
+	  boolean isDossier = Dossier.isDossierDocument(id);
+
+      UnipublicResourceIdentityMap identityMap = new UnipublicResourceIdentityMap(publication);
+
+      ComposedFilter filter = new ComposedFilter();
+      filter.add(new AreaFilter(area));
+      filter.add(new LanguageFilter(language));
+
+	  if (isArticle) {
+          try {
+         	  Headlines headlines = (Headlines) identityMap.get(Headlines.HEADLINES_ID);
+              HeadlinesVersion headlinesVersion = (HeadlinesVersion)headlines.getVersions(filter)[0];         
+		      if (!headlinesVersion.canCheckOut(userId)) {
+                  <message id="not-check-out"/>
+                  <checkout><xsp:expr>headlinesVersion.getDocument().getCompleteURL()</xsp:expr></checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The headlines can not be checked out", e);
+          }
+          try {
+    		  Newsletter newsletter = (Newsletter) identityMap.get(Newsletter.NEWSLETTER_ID);
+              NewsletterVersion newsletterVersion = (NewsletterVersion) newsletter.getVersions(filter)[0];
+              if (!newsletterVersion.canCheckOut(userId)) {
+                  <message id="not-check-out"/>
+                  <checkout><xsp:expr>newsletterVersion.getDocument().getCompleteURL()</xsp:expr></checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The newsletter can not be checked out", e);
+          }
+          
+	  }
+	  if (isDossier) {
+          try {
+              DossiersBox box = (DossiersBox) identityMap.get(DossiersBox.DOSSIERSBOX_ID);
+              DossiersBoxVersion dossiersBoxVersion = (DossiersBoxVersion) box.getVersions(filter)[0];
+              if (!dossiersBoxVersion.canCheckOut(userId)) {
+                  <message id="not-check-out"/>
+                  <checkout><xsp:expr>dossiersBoxVersion.getDocument().getCompleteURL()</xsp:expr></checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The dossiers' box can not be checked out", e);
+          }
+	  }
+    </xsp:logic>
+    
+    
+  </info>
+</page>
+</xsp:page>
+

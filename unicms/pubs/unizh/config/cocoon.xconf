@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<xconf xpath="/cocoon/input-modules" unless="/cocoon/input-modules/component-instance[@name = 'unizh']">
+
+  <component-instance
+			name="unizh"
+			logger="sitemap.modules.input.unizh"
+			class="ch.unizh.lenya.cms.cocoon.components.modules.input.UnizhModule"/>
+
+</xconf>

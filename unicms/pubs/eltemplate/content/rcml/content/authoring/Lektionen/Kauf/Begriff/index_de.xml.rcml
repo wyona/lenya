@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPSRevisionControl xmlns="">
+<CheckIn>
+<Identity>admin1</Identity>
+<Time>1111324058924</Time>
+<Backup/>
+</CheckIn>
+<CheckOut>
+<Identity>admin1</Identity>
+<Time>1111324037929</Time>
+</CheckOut>
+<CheckIn>
+<Identity>admin1</Identity>
+<Time>1111323126614</Time>
+<Backup/>
+</CheckIn>
+<CheckOut>
+<Identity>admin1</Identity>
+<Time>1111322540235</Time>
+</CheckOut>
+<CheckIn>
+<Identity>admin1</Identity>
+<Time>1111322315707</Time>
+<Backup/>
+</CheckIn>
+<CheckOut>
+<Identity>admin1</Identity>
+<Time>1111322315218</Time>
+</CheckOut>
+<CheckIn>
+<Identity>System</Identity>
+<Time>1109582655000</Time>
+</CheckIn>
+</XPSRevisionControl>

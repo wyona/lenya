@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project default="homepage-root" basedir="." name="migrate">
+
+	<target name="init">
+		<!-- Dummy arguments -->
+		<property name="include-files" value="*/content/*/index/index_*.xml" />
+	</target>
+
+	<target name="backup" description="Backup file before working on them">
+		<tar destfile="backup-content.tar" basedir="${pubs.rootdir}" includes="${include-files}" />
+	</target>
+
+
+	<target name="homepage-root" description="Migrate content according to migrate.xsl" depends="init,backup">
+		<description>Replaces xhtml:homepage by unizh:homepage elements. Add -Dpubs.rootdir=pathToYourPubs. 
+    </description>
+		<xslt basedir="${pubs.rootdir}" destdir="work" style="migrate.xsl" includes="${include-files}" extension=".xml" />
+		<copy todir="${pubs.rootdir}">
+			<fileset dir="work" />
+		</copy>
+		<delete dir="work" />
+	</target>
+	
+	<target name="restore" description="restore the tar file created using the backup target">
+		<untar src="backup-content.tar" dest="${pubs.rootdir}" overwrite="true"></untar>
+	</target>
+
+</project>
+
+
