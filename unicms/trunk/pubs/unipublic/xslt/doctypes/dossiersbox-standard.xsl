@@ -45,8 +45,8 @@
   <xsl:template match="document">
     <html>
       <xsl:call-template name="html-head"/>
-      <body text="black" link="#333399" alink="#CC0000" vlink="#666666" bgcolor="#F5F5F5" background="{$imageprefix}/bg.gif">
-        <div align="center">
+      <body>
+        <div id="main">
           <xsl:call-template name="topnavbar"/>
           <table border="0" cellpadding="0" cellspacing="0" width="585" bordercolor="red">
             <tr>
