@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><unizh:section xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:creator>Autor der Dokuments</dc:creator>
+    <dc:title>Leitung und Verwaltung</dc:title>
+    <dc:subject>Keywords</dc:subject>
+    <dc:publisher>Universitaet Zuerich</dc:publisher>
+    <dc:date>
+      <dc:created>Creation date</dc:created>
+      <dc:issued>First published date</dc:issued>
+    </dc:date>
+    <dc:language>de</dc:language>
+    <dc:rights>Universitaet Zuerich</dc:rights>
+  </lenya:meta>
+  <unizh:column id="1">
+    <unizh:highlights>
+      <unizh:highlight>
+        <xhtml:h2>Title h2 (links allowed?)</xhtml:h2>
+        <xhtml:p>The text of the highlight.</xhtml:p>
+        <xhtml:p>Styles and links are allowed.</xhtml:p>
+        <xhtml:p>There can be zero or more highlights.</xhtml:p>
+        <xhtml:p>Images can be placed in a highlight, too (with link). Maximal width: 180 px</xhtml:p>
+        
+      </unizh:highlight>
+    </unizh:highlights>
+    <unizh:grouplist>
+      <unizh:group>
+        <unizh:head>
+          <unizh:title>Lectures Register</unizh:title>
+          <unizh:link>www.unizh.ch/VVZV1/</unizh:link>
+        </unizh:head>
+        <unizh:entrylist>
+          <unizh:entry>
+            <unizh:title>Theological Faculty</unizh:title>
+            <unizh:link>www.theol.unizh.ch</unizh:link>
+          </unizh:entry>
+
+          <unizh:entry>
+            <unizh:title>Law Faculty</unizh:title>
+            <unizh:link>www.jur.unizh.ch</unizh:link>
+          </unizh:entry>
+
+        </unizh:entrylist>
+      </unizh:group>
+
+    </unizh:grouplist>
+  </unizh:column>
+  <unizh:column id="2">
+    <unizh:grouplist>
+      <unizh:group>
+        <unizh:head>
+          <unizh:title>Fragen zum Studium</unizh:title>
+          <unizh:link>www.unizh.ch/VVZV1/</unizh:link>
+        </unizh:head>
+        <unizh:entrylist>
+          <unizh:entry>
+            <unizh:title>Häufig gestellte Fragen (FAQ)</unizh:title>
+            <unizh:link>www.ifi.unizh.ch/CL/UIS/Kanzlei/FAQ/</unizh:link>
+          </unizh:entry>
+          <unizh:entry>
+            <unizh:title>Frage-Antwort-System (LUIS)</unizh:title>
+            <unizh:link>www.ifi.unizh.ch/CL/UIS/LUIS/</unizh:link>
+          </unizh:entry>
+          <unizh:entry>
+            <unizh:title>Studienführer</unizh:title>
+            <unizh:link>www.ifi.unizh.ch/CL/UIS/Studienfuehrer/VonAbisZ/</unizh:link>
+          </unizh:entry>
+        </unizh:entrylist>
+      </unizh:group>
+
+    </unizh:grouplist>
+  </unizh:column>
+  <unizh:column id="3">
+    <unizh:grouplist>
+      <unizh:group>
+        <unizh:head>
+          <unizh:title>Internationales / Mobilität</unizh:title>
+          <unizh:link>www.unizh.ch/VVZV1/</unizh:link>
+        </unizh:head>
+        <unizh:entrylist>
+          <unizh:entry>
+            <unizh:title>Kontakt</unizh:title>
+            <unizh:link>www.unizh.ch/studium/mobilitaet/kontakt.html</unizh:link>
+          </unizh:entry>
+          <unizh:entry>
+            <unizh:title>Austauschangebote</unizh:title>
+            <unizh:link>www.unizh.ch/studium/mobilitaet/austauschangebote/index.html</unizh:link>
+          </unizh:entry>
+        </unizh:entrylist>
+      </unizh:group>
+    </unizh:grouplist>
+  </unizh:column>
+</unizh:section>

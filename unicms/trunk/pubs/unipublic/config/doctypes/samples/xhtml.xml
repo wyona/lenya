@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:dcterms="http://purl.org/dc/terms/"
+      xmlns:up="http://www.unipublic.unizh.ch/2002/up"
+      dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
+      lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace"
+      >
+
+    <lenya:meta>
+      <dc:title>Dokument- bzw. Seitentitel</dc:title>
+      <dc:description>Abstract</dc:description>
+      <dc:subject>Spitzmarke</dc:subject>
+      <dc:creator>Autor des Dokuments</dc:creator>
+      <dc:publisher>Universit&#195;&#164;t Z&#195;&#188;rich</dc:publisher>
+      <dcterms:created></dcterms:created>
+      <dcterms:dateCopyrighted></dcterms:dateCopyrighted>
+      <dcterms:issued></dcterms:issued>
+      <dcterms:isReferencedBy></dcterms:isReferencedBy>
+      <dc:language>de</dc:language>
+      <dc:rights>Universit&#195;&#164;t Z&#195;&#188;rich</dc:rights>
+      <dcterms:hasVersion></dcterms:hasVersion>
+    </lenya:meta>
+
+      <up:related-contents> 
+        <up:related-content>
+          <up:title>Title</up:title>
+          <up:link><a href="http://www.wyona.com">Link</a></up:link>
+        </up:related-content>
+      </up:related-contents>
+      <up:teaser>
+        <div class="tsr-text">Teaser text</div>
+      </up:teaser>
+
+
+    <body>
+      <p>Paragraph</p>
+      <up:tagline>Tagline</up:tagline>
+    </body>
+  </html>

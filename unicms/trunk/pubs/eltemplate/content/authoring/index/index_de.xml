@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:elt="http://www.unizh.ch/elt/1.0" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elt:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>E-Learning Templates</dc:title>
+    <dc:description/>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universitaet Zuerich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universitaet Zuerich</dc:rights>
+  </lenya:meta>
+  <body>
+  	
+    
+
+
+<p>Die E-Learning Templates (ELT) sind eine Erweiterung des UniCMS. So wie es Templates für Institute und Fakultäten gibt, sollen die E-Learning Templates gestalterische und funktionale Vorlagen für Dozierende geben, die ihre Skripte online publizieren möchten (e-Skripte).</p><p> </p>
+
+
+<p>Der Funkionalität eines CMS (Content Management System) entsprechend können die hiermit gestalteten Inhalte</p>
+<ul class="type1"><li>zeitlich gesteuert veröffentlicht werden</li><li>von mehreren Personen gemeinsam erstellt und bearbeitet werden</li><li>einem Redaktionsprozess unterzogen werden ("Redakteur" schreibt, "Chef-Redakteur" macht fachliche Abnahme und gibt zur Veröffentlichung frei)</li><li>der Zugang zu einzelnen Seiten oder einer ganzen Website kann kontrolliert werden (Passwort oder IP-gestützt)</li></ul>
+
+
+
+
+<p>Folgende Besonderheiten zeichnen die ELT darüber hinaus aus:</p>
+<ul class="type1"><li>Die mit ELT erstellten Inhalte können nach IMS-Standard zu einem "Content Package" geschnürt und damit in OLAT und andere LMS (Learning Management System) importiert werden. Dadurch erhalten die Dozierenden nicht nur einen zusätzlichen Editor für ihr LMS, sondern haben die Freiheit, erst einmal "open content" zu produzieren und sich und die Studierenden später, falls sachlich begründet, alternativ oder ergänzend in die LMS-Welt zu begeben. </li><li>Die durch die Verwandtschaft zum UniCMS gegebene ähnliche Bedienung dürfte die Arbeit für die Dozierenden erleichtern.</li></ul>
+<h3>Erste Schritte</h3>
+<p>Die Grundfunktionen der ELT entsprechen denen des UniCMS. Falls sie noch nicht mit diesen Funktionen vertraut sind, finden sie hier weitere Informationen. </p><p>Über die Navigation links gelangen Sie zu Beispieldokumenten, welche ELT-spezifische Funktionen praktisch erläutern. Diese Dokumente, gemeinsam mit dieser Übersichtsseite werden Sie später mit ihren eigenen Inhalten überschreiben. Falls Sie dann Informationen zur Bedienung von ELT benötigen finden Sie diese hier.  </p><p> </p></body>
+</html>

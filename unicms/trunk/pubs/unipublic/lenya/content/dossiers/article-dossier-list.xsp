@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsp:page 
+  language="java" 
+  xmlns:xsp="http://apache.org/xsp"
+  xmlns:xsp-lenya="http://apache.org/cocoon/lenya/xsp/1.0"
+  xmlns:request="http://apache.org/xsp/request/2.0"
+  xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+>
+
+  <xsp:structure>
+    <xsp:include>java.io.*</xsp:include>
+    <xsp:include>org.apache.cocoon.environment.*</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.DublinCore</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Resource</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.UnipublicResourceIdentityMap</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Article</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Dossier</xsp:include>
+  </xsp:structure>
+
+<dossier-list>
+  <xsp:logic>
+    try {
+      Publication publication = (Publication)<input:get-attribute module="page-envelope" as="object" name="publication"/>;
+      String language = <input:get-attribute module="page-envelope" name="document-language" as="string"/>;
+      UnipublicResourceIdentityMap identityMap = new UnipublicResourceIdentityMap(publication);
+     
+      String articleId = <input:get-attribute module="page-envelope" as="string" name="document-id"/>;
+      Article article =  (Article) identityMap.get(articleId);
+      Document articleDoc = article.getVersion(Publication.AUTHORING_AREA, language);
+      String[] references = articleDoc.getDublinCore().getValues(DublinCore.TERM_ISREFERENCEDBY);
+      
+      for (int i=0; i&lt;references.length; i++) {
+        if (!references[i].equals("")){
+          Dossier dossier = (Dossier) identityMap.get(references[i]);
+          Document doc =  dossier.getVersion(Publication.AUTHORING_AREA, language);
+          String titel = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_TITLE);
+          <dossier>
+            <xsp:attribute name="id"><xsp:expr>references[i]</xsp:expr></xsp:attribute>
+            <xsp:attribute name="selected">false</xsp:attribute>
+            <xsp:expr>titel</xsp:expr>
+          </dossier>   
+        }  
+      }
+
+      <document-language><xsp:expr>language</xsp:expr></document-language>
+      <document-id><xsp:expr>articleId</xsp:expr></document-id>
+
+      <workflow-event><input:get-attribute module="request-param" name="lenya.event" as="string"/></workflow-event>
+      <user-id><input:get-attribute module="access-control" name="user-id" as="string"/></user-id>
+      <ip-address><input:get-attribute module="access-control" name="ip-address" as="string"/></ip-address>
+      <role-ids><input:get-attribute module="access-control" name="role-ids" as="string"/></role-ids>
+
+    } catch (Exception e) {
+      throw new ProcessingException(e);
+    }
+  </xsp:logic>
+</dossier-list>
+
+</xsp:page>

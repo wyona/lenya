@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:up="http://www.unipublic.unizh.ch/2002/up"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:col="http://apache.org/cocoon/lenya/collection/1.0"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         >
+
+
+<include href="xlink.rng"/>
+<include href="xhtml.rng">
+  <start>
+   <ref name="up.dossier"/>
+  </start>
+</include>
+
+  <define name="up.dossier">
+    <element name="up:dossier">
+      <ref name="dummy.attlist"/>
+      <optional>
+        <attribute name="id"><text/></attribute>
+      </optional>
+      <ref name="lenya.meta"/>
+      <ref name="up.color"/>
+      <ref name="up.teaser"/>
+      <ref name="up.related-contents"/>
+      <zeroOrMore>
+        <ref name="col.document"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="up.color">
+    <element name="up:color">
+      <ref name="Text.datatype"/>
+    </element>
+  </define>
+
+  <define name="col.document">
+    <element name="col:document">
+      <attribute name="id"><ref name="Text.datatype"/></attribute>
+      <ref name="XLINK.href.attrib"/>        
+      <ref name="XLINK.show.attrib"/>
+    </element>
+  </define>
+
+</grammar>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:up="http://www.unipublic.unizh.ch/2002/up" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+
+    <lenya:meta>
+      <dc:title>Gesellschaft</dc:title>
+      <dc:description> </dc:description>
+      <dc:subject>Spitzmarke</dc:subject>
+      <dc:creator>lenya (Levi Vanya)</dc:creator>
+      <dc:publisher>Universität Zürich</dc:publisher>
+      <dcterms:created>Tue Sep 14 16:55:20 CEST 2004</dcterms:created>
+      <dcterms:dateCopyrighted>date od revision</dcterms:dateCopyrighted>
+      <dcterms:issued/>
+      <dcterms:isReferencedBy/>
+      <dc:language>de</dc:language>
+      <dc:rights>Universität Zürich</dc:rights>
+      <dcterms:hasVersion>revision number</dcterms:hasVersion>
+    </lenya:meta>
+
+    <up:related-contents> LALALA
+      <up:related-content>
+        <div class="rel-title">Title class rel-title</div>
+        <div class="rel-text">
+          <a href="http://www.wyona.com">Link</a> 
+        </div>
+      </up:related-content>
+    </up:related-contents>
+
+    <body>
+      <up:teaser>
+        <div class="tsr-text">Teaser text</div>
+      </up:teaser>
+      <p>Paragraph</p>
+      <div class="art-author">Tagline</div>
+    </body>
+  </html>

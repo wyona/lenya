@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         ns="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:up="http://www.unipublic.unizh.ch/2002/up"
+         xmlns:col="http://apache.org/cocoon/lenya/collection/1.0"
+         >
+
+  <include href="dublincore/dublincore.rng"/>
+
+  <define name="lenya.meta">
+    <element name="meta">
+      <ref name="dublincore"/>
+    </element>
+  </define>
+
+  <define name="lenya.asset">
+    <element name="asset">
+      <attribute name="size"><ref name="Text.datatype"/></attribute>
+      <attribute name="src"><ref name="Text.datatype"/></attribute>
+      <attribute name="type"><ref name="Text.datatype"/></attribute>
+      <text/>
+    </element>
+  </define>
+
+  <!-- namespace dummy attributes -->
+  <define name="dummy.attlist">
+    <optional>
+      <attribute name="dc:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="dcterms:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="lenya:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="xhtml:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="up:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="col:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+    <optional>
+      <attribute name="xlink:dummy"><ref name="Text.datatype"/></attribute>
+    </optional>
+  </define>
+
+</grammar>

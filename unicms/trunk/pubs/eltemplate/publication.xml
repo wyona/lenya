@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: publication.xml,v 1.1 2004/11/22 12:54:44 thomas Exp $ --><lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
+  <lenya:name>e-Learning Templates</lenya:name>
+  <lenya:version>1.2</lenya:version>
+  <lenya:description>No description of this publication yet.</lenya:description>
+  <lenya:credits>Special thanks to </lenya:credits>
+  <lenya:help/>
+  <lenya:changelog>changes.xml</lenya:changelog>
+  <lenya:license/>
+  <lenya:readme>
+    <ol>
+      <li><a href="live/index.html">Reader`s View</a> (Live)</li>
+      <li><a href="authoring/index.html">Editor`s View</a> (Authoring)</li>
+    </ol>
+  </lenya:readme>
+</lenya:publication>

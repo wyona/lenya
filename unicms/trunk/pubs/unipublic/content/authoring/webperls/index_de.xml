@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webperls 
+  xmlns="http://unizh.ch/doctypes/webperls/1.0"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  >
+  <xhtml:div class="webperlen">
+    <title>HANDVERLESENE PERLEN AUS DEM WEB DER UNI</title>
+    <webperl>
+      <title href="http://www.dergespiegeltemensch.ch/">«Der gespiegelte Mensch»</title>
+      <byline>Ausstellung von lifescience Zurich im Landesmuseum Zürich</byline>
+    </webperl>
+    <webperl>
+      <title href="http://sotomo.geo.unizh.ch/">sotomo</title>
+      <byline> (sociotopological modeling). Grafische Darstellung der politischen
+      Positionierung von Politikern und Parteien des schweizerischen Nationalrats.</byline>
+    </webperl>
+    <webperl>
+      <title href="http://www.feelok.ch">Online-Projekt «feelok»</title>
+      <byline> Die Site des Instituts für Sozial- und Präventivmedizin ist eine
+      Plattform zur Gesundheitsförderung Jugendlicher.</byline>
+    </webperl>
+  </xhtml:div>  
+</webperls>

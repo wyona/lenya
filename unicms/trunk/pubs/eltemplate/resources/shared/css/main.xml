@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+/* ELT ORI Stylesheet
+===================================================*/ 
+
+
+/* ---------------------------------------------Basic Elements----------------------------------------------------- */
+body { font-size: 10pt; font-family: Arial, Verdana, sans-serif; color: #000; background-color: #f5f5f5; margin: 0 0 0 0 }
+div.cmsbody { background-color: #f5f5f5; height: 800px }
+div.content { margin-left: 30px; width: 500px }
+div.popuplive { background-color: #cccccc; width: 100%; height: 100%; padding: 15px }
+div.popupauthoring { height: 450px; width: 450px; margin: 20px auto 0 auto; padding: 30px; background-color: #cccccc } 
+div { font-size: 10pt; font-family: Arial, Verdana, sans-serif }
+table { border-spacing: 0px; padding: 0px }
+td { font-size: 10pt; font-family: Arial, Verdana, sans-serif }
+h1	{ font-size: 14pt; font-family: Arial, Verdana, sans-serif; margin: 0pt, 0pt }
+h2	{ font-size: 12pt; font-family: Arial, Verdana, sans-serif; margin: 0pt, 0pt }
+h3	{ font-size: 10pt; font-family: Arial, Verdana, sans-serif; margin: 0pt, 0pt }
+h4	{ font-size: 9pt; font-family: Arial, Verdana, sans-serif; margin: 0pt, 0pt }
+span.footnote-text { font-size: 8pt }
+span.disclaimer { font-size: 8pt }
+a:link	  { color: #666666 }
+a:active   { color: #ff9933 }
+a:visited	  { color: #666666 }
+
+/* ---------------------------------------------Positioning Table Layout ---------------------------------*/
+table#layout { border-spacing: 2px 2px}
+
+
+/* ---------------------------------------------Breadcrumb Path-------------------------------------------*/
+
+td.breadcrumbs { background-color: #a8cee2 }
+
+
+/* ---------------------------------------------Menu------------------------------------------------------*/
+
+td#navigation { background-color:#a8cee2; }
+table.menu { empty-cells:show } 
+td.menuindex { background-color: #a8cee2; width: 233px; height: 20px; padding: 2px; }
+td.menuitem1 { background-color: #ff993f; width: 233px; height: 20px; padding: 2px }
+td.menuitem2 { background-color: #ffcc93; width: 233px; height: 20px; padding: 2px }
+div.menulabel div.left { position: relative; float:left; cursor:hand }
+div.menulabel div.right { position: relative; float:right; width: 180px; cursor:hand }
+td.menuspacer { height: 2px; background-color: #ffffff } 
+table.infomenu { empty-cells: show }
+td.infomenuindex { background-color: #a8cee2; width: 233px; height: 20px; padding: 2px }
+td.infomenuitem { background-color: #a8cee2; width: 233px; height: 20px; padding: 2px }
+
+
+.nlevel1   { padding: 0px 0px 0px 7px }
+.nlevel2   { padding: 0px 0px 0px 14px }
+td.menuindex a:link  { color: #000000; text-decoration: none }
+td.menuindex a:visited  { color: #000000; text-decoration: none }
+td.menuitem1 a:link { color: #000000; text-decoration: none }
+td.menuitem1 a:visited { color: #000000; text-decoration: none }
+td.menuitem2 a:link { color: #000000; text-decoration: none } 
+td.menuitem2 a:visited { color: #000000; text-decoration: none } 
+
+/* ---------------------------------------------Listen--------------------------------------------------- */
+ul.type1 { list-style-type:circle }
+ul.type2 { list-style-type:square }
+
+
+/* ---------------------------------------------Print--------------------------------------------------- */
+.printview   { margin-left: 20px; width: 600px }
+
+
+/* ------------------------------------------ For Bitfluxeditor ------------------------------------------- */
+.dc-title   { display: block; color: #333; font-size: 24px; font-family: "Times New Roman", Times, serif }
+.asset		{ display: block; color: #000; font-size: 10px; margin: 10px 10px 10px 5px;} /*top, right, bottom, left*/
+.object object { display: block;}
+
+/* -------------------------------------------Layer divs--------------------------------------------------- */
+
+
+div.hideme { visibility: hidden }
+
+div#tooltips div.tooltip {  
+float: right;
+background: url(images/shadow.png) no-repeat bottom right !important;
+background: url(images/shadow.gif) no-repeat bottom right;
+margin: 10px 0 0 10px !important;
+margin: 10px 0 0 5px;
+}
+
+div#tooltips div.tooltip div {
+background: none !important;
+background: url(images/shadow2.gif) no-repeat left top;
+padding: 0 !important;
+padding: 0 6px 6px 0;
+}
+
+div#tooltips div.tooltip p {
+background-color: #a8cee2;
+// border: 1px solid #a9a9a9;
+padding: 4px;
+margin: -6px 6px 6px -6px !important;
+margin: 0;
+}
+
+
+/* -------------------------------------------BXE -------------------------------------------------------------*/
+span.a { text-decoration: underline; color: #666666 }
+span.footnote-reference { text-decoration: underline; color: #666666 }
+div.footnotes { display: block }
+div.footnotes title { display: block; color: #666666 }
+[name=bxe_areaHolder] span.footnote { display: block; background-color: #dedede; margin-bottom: 20px }
+[name=bxe_areaHolder] div.lernpfad {word-spacing: 12px; margin-bottom: 10px }
+
+/* -------------------------------------------Footer ---------------------------------------------------------*/
+
+td.footer { background-color: #a8cee2; height: 80px; padding: 2px }
+
+
+</css>

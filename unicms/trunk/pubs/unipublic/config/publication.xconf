@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publication>
+  <languages>
+    <language default="true">de</language>
+  </languages>
+  <path-mapper>org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper</path-mapper>
+  <document-builder>ch.unizh.unipublic.lenya.cms.publication.UnipublicDocumentBuilder</document-builder>
+  <breadcrumb-prefix>Universit?t Zuerich</breadcrumb-prefix>
+ <!-- 
+  <proxy area="live" ssl="true" url="https://w3.unizh.ch/lenya/unitemplate"/>
+  <proxy area="live" ssl="false" url="http://cms.unitemplate.unizh.ch/lenya"/>
+  <proxy area="authoring" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/authoring"/>
+  <proxy area="authoring" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/authoring"/>
+-->
+</publication>

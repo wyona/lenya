@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<sections xmlns="http://unizh.ch">
+	<section id="forschung" img="fo"/>
+	<section id="studium" img="stu"/>
+	<section id="services" img="dl"/>
+	<section id="info" img="allg"/>
+	<section id="fakultaet" img="fak"/>
+	<section id="admin" img="leit"/>
+	<section id="leben" img="ule"/>
+</sections>

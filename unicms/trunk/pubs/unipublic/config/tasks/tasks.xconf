@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<tasks>
+
+  <task id="assign-to-dossier" class="ch.unizh.unipublic.lenya.cms.task.AssignToDossier">
+    <label>Assign to Dossier</label>
+  </task>
+
+  <task id="remove-from-dossier" class="ch.unizh.unipublic.lenya.cms.task.RemoveFromDossier">
+    <label>Remove from Dossier</label>
+  </task>
+
+  <task id="publish-file" class="org.apache.lenya.cms.task.AntTask">
+    <label>Publish</label>
+    <parameter name="target" value="publish-file"/>
+  </task>
+
+  <task id="publish" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublish">
+    <label>Publish</label>
+  </task>
+
+  <task id="publishtree" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublishTree">
+    <label>Publish Subtree</label>
+  </task>
+
+  <task id="deactivate" class="ch.unizh.unipublic.lenya.cms.task.UnipublicDeactivate">
+    <label>Deactivate</label>
+  </task>
+
+  <task id="deactivatetree" class="ch.unizh.unipublic.lenya.cms.task.UnipublicDeactivateTree">
+    <label>Deactivate Subtree</label>
+  </task>
+
+  <task id="create" class="org.apache.lenya.cms.task.AntTask">
+    <label>Create</label>
+    <parameter name="target" value="create"/>
+  </task>
+
+  <task id="create-language" class="org.apache.lenya.cms.task.AntTask">
+    <label>CreateLanguage</label>
+    <parameter name="target" value="create-language"/>
+  </task>
+
+  <task id="remove-language" class="org.apache.lenya.cms.task.AntTask">
+    <label>RemoveLanguage</label>
+    <parameter name="target" value="remove-language"/>
+  </task>
+
+  <task id="rename-label" class="org.apache.lenya.cms.task.AntTask">
+    <label>Edit Navigation Title</label>
+    <parameter name="target" value="rename-label"/>
+  </task>
+
+  <task id="save-meta-data" class="org.apache.lenya.cms.task.AntTask">
+    <label>SaveMetaData</label>
+    <parameter name="target" value="save-meta-data"/>
+  </task>
+
+  <task id="copyDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>CopyOfDocument</label>
+    <parameter name="target" value="copyDocument"/>
+  </task>
+
+  <task id="moveDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>MoveDocument</label>
+    <parameter name="target" value="moveDocument"/>
+  </task>
+
+  <task id="renameDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>RenameDocument</label>
+    <parameter name="target" value="renameDocument"/>
+  </task>
+
+  <task id="movenode" class="org.apache.lenya.cms.task.AntTask">
+    <label>Move Node</label>
+    <parameter name="target" value="movenode"/>
+  </task>
+
+  <task id="deleteDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>DeleteDocument</label>
+    <parameter name="target" value="deleteDocument"/>
+  </task>
+
+  <task id="archiveDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>ArchiveDocument</label>
+    <parameter name="target" value="archiveDocument"/>
+  </task>
+
+  <task id="remove-asset" class="org.apache.lenya.cms.task.AntTask">
+    <label>RemoveAsset</label>
+    <parameter name="target" value="remove-asset"/>
+  </task>
+
+  <task id="insert-asset" class="org.apache.lenya.cms.task.AntTask">
+    <label>InsertAsset</label>
+    <parameter name="target" value="insert-asset"/>
+  </task>
+
+  <task id="restoreDocument" class="org.apache.lenya.cms.task.AntTask">
+    <label>RestoreDocument</label>
+    <parameter name="target" value="restoreDocument"/>
+  </task>
+
+  <task id="deleteTrash" class="org.apache.lenya.cms.task.AntTask">
+    <label>DeleteTrash</label>
+    <parameter name="target" value="deleteTrash"/>
+  </task>
+
+  <task id="send-newsletter">
+    <label>Dispatch Newsletter</label>
+    <task id="send" class="org.apache.lenya.cms.mail.MailTask">
+      <parameter name="server" value="wyona.com"/>
+      <parameter name="from" value="edith@apache.org"/>
+    </task>
+    <task id="clear" class="ch.unizh.unipublic.lenya.cms.task.ClearNewsletterTask"/>
+  </task>
+
+</tasks>
