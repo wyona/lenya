@@ -19,12 +19,12 @@
 
 <lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0" lenya:show="true">
 <lenya:name>OSCOM</lenya:name>
-<lenya:pub-version>1.0.1</lenya:pub-version>
-<lenya:lenya-version>1.2.1-dev</lenya:lenya-version>
-<lenya:cocoon-version>2.1.5.1</lenya:cocoon-version>
+<lenya:pub-version>1.0.1-dev</lenya:pub-version>
+<lenya:lenya-version>1.2.3-dev (LCR 160234)</lenya:lenya-version>
+<lenya:cocoon-version>2.1.7</lenya:cocoon-version>
 <lenya:description>OSCOM is an international, not-for-profit organization dedicated to Open Source
 Content Management.
-This publication implements the CMS matrix used at <a href="http://www.oscom.org/matrix/">oscom.org</a></lenya:description>
+This publication implements the CMS matrix used at <a href="http://www.oscom.org/matrix/">http://www.oscom.org/matrix/</a></lenya:description>
 <lenya:credits>Special thanks to Eric Wiseman.</lenya:credits>
 <lenya:help></lenya:help>
 <lenya:changelog>changes.xml</lenya:changelog>
