@@ -4,9 +4,10 @@
 ===================================================*/
 
 /* ---------------------------------------------Basic Elements----------------------------------------------------- */
+body{ text-align: left; font-size: 12px; font-family: Verdana, Arial, Helvetica; background-color: #ffffff; text:"black"; link:"#333399"; alink:"#CC0000"; vlink:"#666666"; background-color:#F5F5F5; background-image:
+ url("../images/bg.gif")}
+#main{margin-left: auto; margin-right: auto; width: 600px;}
 
-body { font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular"; background-color: #ffffff }
-#lenya-cmsbody { text:"black"; link:"#333399"; alink:"#CC0000"; vlink:"#666666"; background-color:#F5F5F5; background-image: url("../images/bg.gif")}
 .dos-title1 { color: #fff; font-weight: bold; font-size: 18px; line-height: 20px; font-family: Verdana, Helvetica, Arial }
 .emphasize { font-style: italic; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular }
 .strong { font-weight: bold; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular }
@@ -19,6 +20,7 @@ h4 { font-weight: bold; font-size: 12px; font-family: Verdana, Helvetica, Arial,
 a:hover { color: #66c; text-decoration: none }
 a:link { color: #339; text-decoration: none }
 a:visited { color: #339; text-decoration: none }
+
 
 /*---------------------------------------------  Article -------------------------------------------------*/
 
@@ -41,8 +43,8 @@ a:visited { color: #339; text-decoration: none }
 /*----------------------------------------------- Teaser ------------------------------------------------*/
 
 
-.tsr-title { font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular"; text-transform: uppercase }
-.tsr-text { font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular" }
+.tsr-title { font-weight: bold; font-size: 11px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular"; text-transform: uppercase }
+.tsr-text { font-size: 11px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular" }
 
 /*----------------------------------------------- Menus ------------------------------------------------*/
 
@@ -65,5 +67,10 @@ a:visited { color: #339; text-decoration: none }
 .tagline { font-style: italic; font-size: 12px; font-family: Verdana, Helvetica, Arial, Swiss, SunSans-Regular; text-align: right;}
 .related-content .title {font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
 .related-content .link {font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
+
+/*-----------------------------------------------  Table -----------------------------------------------*/
+
+.ornate {width: 100%; background-color:#FFFFFF; border-collapse: separate; border-spacing: 1px; margin:6px 0px 6px 0px;}
+.ornate td{background-color:#CCCCCC; padding: 2px; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular}
 
 </css>
