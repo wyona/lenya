@@ -95,7 +95,7 @@
         </map:transform>
 
         <map:select type="browser">
-          <map:when test="mozilla5">
+          <map:when test="mozilla5DISABLED">
             <map:match pattern="authoring/**">
               <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/matrix/overview.xml?uiml=xul"/>
               <map:serialize type="xml" mime-type="application/vnd.mozilla.xul+xml"/>
