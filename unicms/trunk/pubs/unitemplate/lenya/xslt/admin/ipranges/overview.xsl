@@ -7,8 +7,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     >
     
-  <xsl:output encoding="ISO-8859-1" indent="yes" version="1.0"/>
-  
   <xsl:import href="../../../../../../xslt/admin/ipranges/overview.xsl"/>
   
   <xsl:template name="group-box"/>
