@@ -33,10 +33,7 @@
       <page:title>Publish</page:title>
       <page:body>
         
-        <table class="lenya-table-noborder">
-        <tr>
-        <td>
-        
+
         <form name="form_publish">
           
           <input type="hidden" name="lenya.step" value="publish"/>
@@ -134,9 +131,7 @@
         -->
 
 
-        </td>
-        </tr>
-        </table>
+
           
       </page:body>
     </page:page>
