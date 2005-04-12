@@ -18,7 +18,9 @@
     <xsl:variable name="metaFileURI">cocoon:<xsl:value-of select="$documentid"/>/<xsl:value-of select="@src"/>.meta</xsl:variable>
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <cinclude:include src="{$metaFileURI}" ignoreErrors="true"/>
+      <cinclude:includexml ignoreErrors="true">
+       <cinclude:src>{$metaFileURI}</cinclude:src>
+      </cinclude:includexml>
     </xsl:copy>
   </xsl:template>
 
@@ -27,7 +29,9 @@
     <xsl:variable name="metaFileURI">cocoon:<xsl:value-of select="$documentid"/>/<xsl:value-of select="@data"/>.meta</xsl:variable>
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <cinclude:include src="{$metaFileURI}" ignoreErrors="true"/>
+      <cinclude:includexml ignoreErrors="true">
+       <cinclude:src>{$metaFileURI}</cinclude:src>
+      </cinclude:includexml>
     </xsl:copy>
   </xsl:template>
 
