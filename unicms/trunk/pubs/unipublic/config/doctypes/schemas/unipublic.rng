@@ -17,7 +17,7 @@
     <element name="up:related-content">
       <ref name="up.title"/>
       <oneOrMore>
-        <ref name="up.link"/>
+        <ref name="up.item"/>
       </oneOrMore>
     </element>
   </define>
@@ -25,6 +25,17 @@
   <define name="up.title">
     <element name="up:title">
       <text/>
+    </element>
+  </define>
+
+  <define name="up.item">
+    <element name="up:item">
+      <zeroOrMore>
+        <ref name="a"/>
+      </zeroOrMore> 
+      <zeroOrMore>
+        <text/>
+      </zeroOrMore> 
     </element>
   </define>
 

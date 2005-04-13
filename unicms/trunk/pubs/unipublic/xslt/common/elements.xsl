@@ -179,7 +179,7 @@
   <xsl:template match="up:related-content">
     <table border="0" cellpadding="0" cellspacing="8" width="100%">
       <xsl:apply-templates select="./up:title"/>
-      <xsl:apply-templates select="./up:link"/>
+      <xsl:apply-templates select="./up:item"/>
     </table>
   </xsl:template>
 
@@ -191,7 +191,7 @@
     </tr>
   </xsl:template>
 
-  <xsl:template match="up:link"> 
+  <xsl:template match="up:item"> 
     <tr>
       <td class="rel-text">
         <xsl:apply-templates/>

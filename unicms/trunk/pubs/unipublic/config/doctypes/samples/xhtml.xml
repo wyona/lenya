@@ -27,7 +27,7 @@
       <up:related-contents> 
         <up:related-content>
           <up:title>Title</up:title>
-          <up:link><a href="http://www.wyona.com">Link</a></up:link>
+          <up:item>Item</up:item>
         </up:related-content>
       </up:related-contents>
       <up:teaser>
