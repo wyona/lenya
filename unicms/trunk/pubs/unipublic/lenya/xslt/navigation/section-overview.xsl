@@ -41,7 +41,7 @@
 <xsl:template name="articles">
   <div class="tsr-title">
     <a href="{@href}"><xsl:apply-templates select="nav:label"/></a>
-      <xi:include href="/{@basic-url}" xpointer="/*[local-name() = 'html' and namespace-uri() = 'http://www.w3.org/1999/xhtml']/*[local-name() = 'body' and namespace-uri() = 'http://www.w3.org/1999/xhtml']/*[local-name() = 'teaser' and namespace-uri() = 'http://www.unipublic.unizh.ch/2002/up]"/> 
+      <xi:include href="/{@basic-url}" xpointer="/*[local-name() = 'html' and namespace-uri() = 'http://www.w3.org/1999/xhtml']/*[local-name() = 'teaser' and namespace-uri() = 'http://www.unipublic.unizh.ch/2002/up']"/> 
       <xi:include href="/{@basic-url}" xpointer="/*[local-name() = 'html' and namespace-uri() = 'http://www.w3.org/1999/xhtml']/*[local-name() = 'meta' and namespace-uri() = 'http://apache.org/cocoon/lenya/page-envelope/1.0']"/>
   </div>
 </xsl:template>
