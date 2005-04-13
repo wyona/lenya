@@ -36,15 +36,16 @@
                 <map:parameter name="contextprefix" value="{request:contextPath}"/>
             </map:transform>
             <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
-            <map:select type="parameter">
-                <map:parameter name="statusCode" value="{statusCode}"/>
-                <map:when test="">
-                    <map:serialize type="html-iso-8859-1"/>
-                </map:when>
-                <map:otherwise>
-                    <map:serialize type="html-iso-8859-1" status-code="{statusCode}"/>
-                </map:otherwise>
-            </map:select>
+      <map:select type="parameter">
+        <map:parameter name="statusCode" value="{statusCode}"/>
+        <map:when test="">
+          <map:serialize type="html" />
+        </map:when>
+        <map:otherwise>
+          <map:serialize type="html" status-code="{statusCode}"/>
+        </map:otherwise>
+      </map:select>
+
         </map:resource>
         
         <map:resource name="cms-screen-xml">
@@ -120,7 +121,7 @@
                             <map:parameter name="context" value="{request:contextPath}"/>
                         </map:transform>
                         <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
-                        <map:serialize type="xhtml-iso-8859-1"/>
+                        <map:serialize type="html"/>
                     </map:act>
                     <map:generate src="../../resources/misc/bxeng/download.xhtml"/>
                     <map:call resource="style-cms-page"/>
@@ -249,17 +250,17 @@
                                 <map:select type="parameter">
                                   <map:parameter name="parameter-selector-test" value="{page-envelope:document-type}"/>
                                     <map:when test="homepage">
-                                      <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+                                      <map:transform src="xslt/common/setXlinkXpath.xsl"/>
                                       <map:transform type="xlink"/>
                                       <map:transform src="xslt/doctypes/{page-envelope:document-type}-bitflux.xsl"/>
                                     </map:when>
                                     <map:when test="dossiersbox">
-                                      <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+                                      <map:transform src="xslt/common/setXlinkXpath.xsl"/>
                                       <map:transform type="xlink"/>
                                       <map:transform src="xslt/doctypes/{page-envelope:document-type}-bitflux.xsl"/>
                                     </map:when>
                                     <map:when test="newsletter">
-                                      <map:transform src="xslt/common/setNewsletterXpath.xsl"/>
+                                      <map:transform src="xslt/common/setXlinkXpath.xsl"/>
                                       <map:transform type="xlink"/>
                                       <map:transform src="xslt/doctypes/{page-envelope:document-type}-bitflux.xsl"/> 
                                     </map:when>
