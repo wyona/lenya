@@ -104,7 +104,7 @@
           <map:part src="content/{page-envelope:area}/webperls/index_{page-envelope:document-language}.xml"/>
           <map:part src="content/{page-envelope:area}/dossiersbox/index_{page-envelope:document-language}.xml"/>
         </map:aggregate>
-        <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
         <map:transform type="xlink"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{3}"/>
@@ -124,7 +124,7 @@
           <map:part src="content/{page-envelope:area}/index/index_{page-envelope:document-language}.xml"/>
           <map:part src="content/{page-envelope:area}/dossiersbox/index_{page-envelope:document-language}.xml"/>
         </map:aggregate>
-        <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
         <map:transform type="xlink"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{3}"/>
@@ -145,7 +145,7 @@
           <map:part src="content/{page-envelope:area}/webperls/index_{page-envelope:document-language}.xml"/>
           <map:part src="content/{page-envelope:area}/index/index_{page-envelope:document-language}.xml"/>
         </map:aggregate>
-        <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
         <map:transform type="xlink"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{3}"/>
@@ -162,7 +162,7 @@
       <!--            1            2         3                4     5             -->
       <map:match pattern="dossier-*-*/*/*/**/*.html">
         <map:generate src="cocoon:/xml"/>
-        <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
         <map:transform type="xlink"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{3}"/>
@@ -182,7 +182,7 @@
           <map:part element="content" src="cocoon:/xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/menu/{5}.html.xml"/>
         </map:aggregate>
-        <map:transform src="xslt/common/setHomepageXpath.xsl"/>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
         <map:transform type="xlink"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{3}"/>
