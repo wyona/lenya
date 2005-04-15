@@ -94,7 +94,7 @@ public class TreeSiteManager extends AbstractSiteManager {
     protected SiteTree getTree(String area) throws SiteException {
         SiteTree tree;
         try {
-            tree = getIdentityMap().getPublication().getSiteTree(area);
+            tree = getIdentityMap().getPublication().getTree(area);
         } catch (SiteTreeException e) {
             throw new SiteException(e);
         }

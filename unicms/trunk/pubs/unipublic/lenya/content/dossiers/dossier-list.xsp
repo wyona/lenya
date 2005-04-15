@@ -24,7 +24,7 @@
     try {
       Publication publication = (Publication)<input:get-attribute module="page-envelope" as="object" name="publication"/>;
       String language = <input:get-attribute module="page-envelope" name="document-language" as="string"/>;
-      DefaultSiteTree siteTree = publication.getSiteTree(Publication.AUTHORING_AREA);
+      DefaultSiteTree siteTree = publication.getTree(Publication.AUTHORING_AREA);
       DocumentBuilder builder = publication.getDocumentBuilder();
      
       String articleId = <input:get-attribute module="page-envelope" as="string" name="document-id"/>;

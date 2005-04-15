@@ -149,7 +149,7 @@ public class PublicationWrapperImpl implements PublicationWrapper {
     public SiteManager getSiteManager() throws PublicationException {
         SiteManager manager = null;
         try {
-            if (getPublication().getSiteTree(Publication.AUTHORING_AREA) != null) {
+            if (getPublication().getTree(Publication.AUTHORING_AREA) != null) {
                 manager = new TreeSiteManager(getIdentityMap());
             }
         } catch (SiteTreeException e) {

@@ -49,7 +49,7 @@
           Document liveParent = DocumentHelper.getParentDocument(liveDocument);
 
           if (liveParent != null) {
-              SiteTree liveTree = publication.getSiteTree(Publication.LIVE_AREA);
+              SiteTree liveTree = publication.getTree(Publication.LIVE_AREA);
               SiteTreeNode liveParentNode = liveTree.getNode(liveParent.getId());
               if (liveParentNode == null) {
                   <usecase:message id="parent-not-live"/>
