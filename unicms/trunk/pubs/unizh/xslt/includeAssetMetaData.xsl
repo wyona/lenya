@@ -19,7 +19,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
       <cinclude:includexml ignoreErrors="true">
-       <cinclude:src>{$metaFileURI}</cinclude:src>
+       <cinclude:src><xsl:value-of select="$metaFileURI"/></cinclude:src>
       </cinclude:includexml>
     </xsl:copy>
   </xsl:template>
@@ -30,7 +30,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
       <cinclude:includexml ignoreErrors="true">
-       <cinclude:src>{$metaFileURI}</cinclude:src>
+       <cinclude:src><xsl:value-of select="$metaFileURI"/></cinclude:src>
       </cinclude:includexml>
     </xsl:copy>
   </xsl:template>
