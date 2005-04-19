@@ -3,6 +3,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
     xmlns:elt="http://www.unizh.ch/elt/1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -158,7 +159,7 @@
                   <fo:table-cell/>
                   <fo:table-cell>
                    <fo:block>
-                     <xsl:apply-templates select="//elt:referenced-docs/elt:referenced-doc[contains(@href, 'Gesetzestexte')]/xhtml:html"/> 
+                     <xsl:apply-templates select="//elt:referenced-docs/elt:referenced-doc[contains(@href, 'Gesetzestexte')]/unizh:popup"/> 
                    </fo:block>
                   </fo:table-cell>
                 </fo:table-row>
@@ -270,7 +271,7 @@
     <xsl:apply-templates select="text()"/>
   </xsl:template>
   
-  <xsl:template match="elt:referenced-doc[contains(@href, 'Gesetzestexte')]/xhtml:html">
+  <xsl:template match="elt:referenced-doc[contains(@href, 'Gesetzestexte')]/unizh:popup">
     <fo:block background-color="#eeeeee" space-after="3mm" padding="3mm 3mm 3mm 3mm">
       <xsl:apply-templates select="lenya:meta/dc:title"/>
         <xsl:apply-templates select="xhtml:body/*"/>
@@ -278,7 +279,7 @@
   </xsl:template>
 
 
-  <xsl:template match="elt:referenced-docs/elt:referenced-doc/xhtml:html/lenya:meta/dc:title">
+  <xsl:template match="elt:referenced-docs/elt:referenced-doc/unizh:popup/lenya:meta/dc:title">
     <fo:block>
       <xsl:value-of select="."/>
     </fo:block>
