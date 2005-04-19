@@ -38,10 +38,10 @@
             <map:select type="parameter">
                 <map:parameter name="statusCode" value="{statusCode}"/>
                 <map:when test="">
-                    <map:serialize type="html-iso-8859-1"/>
+                    <map:serialize type="html"/>
                 </map:when>
                 <map:otherwise>
-                    <map:serialize type="html-iso-8859-1" status-code="{statusCode}"/>
+                    <map:serialize type="html" status-code="{statusCode}"/>
                 </map:otherwise>
             </map:select>
         </map:resource>
@@ -91,7 +91,7 @@
                             <map:parameter name="configfile" value="{request:requestURI}?lenya.usecase=bxeng&amp;lenya.step=config"/>
                             <map:parameter name="context" value="{request:contextPath}"/>
                         </map:transform>
-                        <map:serialize type="xhtml-iso-8859-1"/>
+                        <map:serialize type="html"/>
                     </map:act>
                     <map:generate src="../../resources/misc/bxeng/download.xhtml"/>
                     <map:call resource="style-cms-page"/>
