@@ -69,12 +69,32 @@
 
   <map:pipelines>
 
-    <map:pipeline>
+   <map:pipeline>
+      <map:match pattern="*/">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
       <map:match pattern="**/">
+        <map:redirect-to uri="{request:contextPath}/{page-envelope:publication-id}/{1}.html"/>
+      </map:match>
+
+      <map:match pattern="*/webperls.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/dossiersbox.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/magazin.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/campus.html">
         <map:redirect-to uri="index.html"/>
       </map:match>
     </map:pipeline>
-    
+
     <!-- asset icons -->
     <map:pipeline>
       <map:match pattern="*/images/icons/*.gif">
@@ -216,22 +236,6 @@
     <!-- redirect the 2level to its first child: section to year (sectionoverview) --> 
         <map:match pattern="*/*/*.html">
             <map:redirect-to uri="{3}/{sitetree:first-child-id}.html"/>
-        </map:match>
-
-        <map:match pattern="*/webperls.html">
-          <map:redirect-to uri="index.html"/>
-        </map:match>
-
-        <map:match pattern="*/dossiersbox.html">
-          <map:redirect-to uri="index.html"/>
-        </map:match>
-
-        <map:match pattern="*/magazin.html">
-          <map:redirect-to uri="index.html"/>
-        </map:match>
-
-        <map:match pattern="*/campus.html">
-          <map:redirect-to uri="index.html"/>
         </map:match>
 
       <!-- standard -->
