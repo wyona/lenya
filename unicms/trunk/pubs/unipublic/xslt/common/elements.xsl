@@ -301,6 +301,47 @@
       <xsl:attribute name="align">middle</xsl:attribute>
     </img>
   </xsl:template>
+
+  <xsl:template name="substring-after-last">
+    <xsl:param name="input"/>
+    <xsl:param name="substr"/>
+    <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+    <xsl:choose>
+      <xsl:when test="$substr and contains($temp, $substr)">
+        <xsl:call-template name="substring-after-last">
+          <xsl:with-param name="input" select="$temp"/>
+          <xsl:with-param name="substr" select="$substr"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$temp"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="lenya:asset">
+    <xsl:variable name="extent">
+      <xsl:value-of select="dc:metadata/dc:extent"/>
+    </xsl:variable>
+    <xsl:variable name="suffix">
+      <xsl:call-template name="substring-after-last">
+        <xsl:with-param name="input" select="@src"/>
+        <xsl:with-param name="substr">.</xsl:with-param>
+      </xsl:call-template>
+    </xsl:variable>
+    <div class="asset">
+        <a href="{$nodeid}/{@src}">
+          <img alt="" border="0" height="16"
+            src="{$imageprefix}/icons/{$suffix}.gif" width="16"/>
+        </a>
+        <xsl:text> </xsl:text>
+        <a href="{$nodeid}/{@src}">
+          <xsl:value-of select="text()"/>
+        </a>
+        (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
+    </div>      
+    <xsl:call-template name="asset-dots"/>
+   </xsl:template>
   
   <xsl:template match="xhtml:object" priority="3">
     <p>&#160;</p>
