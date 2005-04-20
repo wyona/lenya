@@ -60,7 +60,16 @@
                 <xsl:apply-templates select="xhtml:div[@id='section-overview']"/>
               </td>
             </tr>
-            <xsl:call-template name="footer"/>
+            <!-- Footer -->         
+            <tr>
+              <td width="135"></td>
+              <td width="5"></td>
+              <td width="445">
+                <xsl:call-template name="footer">
+                  <xsl:with-param name="footer_date" select="xhtml:div[@id='section-overview']/xhtml:div[@class='tsr-title'][1]/lenya:meta/dcterms:dateCopyrighted" />
+                </xsl:call-template>
+              </td>
+            </tr>
           </table>
         </div>
       </body>
