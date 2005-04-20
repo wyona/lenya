@@ -1,12 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><up:newsletter xmlns:up="http://www.unipublic.unizh.ch/2002/up" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:col="http://apache.org/cocoon/lenya/collection/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" id="/newsletter" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace" xlink:dummy="FIXME:keepNamespace"><lenya:meta>
+<?xml version="1.0" encoding="UTF-8"?>
+<up:newsletter 
+  xmlns:up="http://www.unipublic.unizh.ch/2002/up" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:dcterms="http://purl.org/dc/terms/" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" 
+  xmlns:col="http://apache.org/cocoon/lenya/collection/1.0" 
+  dc:dummy="FIXME:keepNamespace" 
+  dcterms:dummy="FIXME:keepNamespace" 
+  lenya:dummy="FIXME:keepNamespace" 
+  xhtml:dummy="FIXME:keepNamespace" 
+  xlink:dummy="FIXME:keepNamespace">
+  
+  <lenya:meta>
     <dc:title>Newsletter Titles</dc:title>
     <dc:description>This is the lead for the newsletter.</dc:description>
-  </lenya:meta><up:email>
-    <up:to>foo@foobar.sorg</up:to>
+  </lenya:meta>
+  <up:email>
+    <up:to>foo@foobar.org</up:to>
     <up:cc/>
     <up:bcc/>
     <up:subject>Newsletter 1/2003</up:subject>
-  </up:email><up:footer>------------------------------------------------------------<xhtml:br/>
+  </up:email>
+  <up:footer>------------------------------------------------------------<xhtml:br/>
 unipublic - das Online-Magazin der Universität Zürich<xhtml:br/>
 http://www.unipublic.unizh.ch<xhtml:br/>
 unipublic@unicom.unizh.ch<xhtml:br/>
