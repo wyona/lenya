@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <catalogue xml:lang="de">
   <message key="publication_Unipublic">Unipublic</message>
 
@@ -6,6 +6,6 @@
   <message key="contact">Kontakt</message>
   <message key="search">Suchen</message>
   
-  <message key="university_zurich">Universität Zürich</message>
+  <message key="university_zurich">UniversitÃ¤t ZÃ¼rich</message>
   <message key="impressum">Impressum</message>
 </catalogue>
