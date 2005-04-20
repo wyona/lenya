@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
  $Id: screen.xsl,v 1.1 2004/12/06 14:20:21 edith Exp $
