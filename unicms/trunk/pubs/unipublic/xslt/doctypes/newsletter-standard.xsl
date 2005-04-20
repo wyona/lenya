@@ -59,30 +59,41 @@
                   </table>
                 </div>
                 <div style="margin: 30px; font-size:medium">
-                  <code>
-                    <div bxe_xpath="/up:newsletter/lenya:meta/dc:title">
+                  <div bxe_xpath="/up:newsletter/lenya:meta/dc:title">
+                    <code>
                       <xsl:value-of select="lenya:meta/dc:title"/>
-                    </div>
-                    <br/>
-                    <xsl:call-template name="underline">
-                      <xsl:with-param name="title" select="lenya:meta/dc:title"/>
-                    </xsl:call-template>
-                    <br/>
-                    <br/>
-                    <div bxe_xpath="/up:newsletter/lenya:meta/dc:description">
+                      <br/>
+                      <xsl:call-template name="underline">
+                        <xsl:with-param name="title" select="lenya:meta/dc:title"/>
+                      </xsl:call-template>
+                      <br/>
+                      <br/>
+                    </code>
+                  </div>
+                  <div bxe_xpath="/up:newsletter/lenya:meta/dc:description">
+                    <code>
                       <xsl:value-of select="lenya:meta/dc:description" />
-                    </div>
-                    <br/>
-                    <br/>
-                  </code>
+                      <br/>
+                      <br/>
+                    </code>
+                  </div>
                   <div bxe_xpath="/up:newsletter/col:documents">
-                    <xsl:apply-templates select="col:document"/>
+                    <code>
+                      <xsl:apply-templates select="col:document"/>
+                    </code>
                   </div>
                   <xsl:apply-templates select="up:footer" />
-                </div>
+                </div>  
               </td>
-            </tr>  
-            <xsl:call-template name="footer_newsletter"/>
+            </tr>
+           <!-- Footer -->
+           <tr>
+             <td width="393" bgcolor="white">
+               <xsl:call-template name="footer">
+                 <xsl:with-param name="footer_date" select="col:document[1]/lenya.meta/dcterms:dateCopyrighted" />
+               </xsl:call-template>
+             </td>
+           </tr>
           </table>
         </div>
       </body>
@@ -90,7 +101,6 @@
   </xsl:template>
 
   <xsl:template match="col:document">
-    <code>
       <xsl:value-of select="lenya:meta/dc:title"/>
       <br/>
       <xsl:call-template name="underline">
@@ -120,18 +130,17 @@
       <br/>
       <br/>
       <br clear="all" />
-    </code>
   </xsl:template>
 
   <xsl:template match="up:email/up:to">
     <tr>
       <td><strong>To:</strong></td>
       <td>
-        <code>
-          <div bxe_xpath="/up:newsletter/up:email/up:to">
+        <div bxe_xpath="/up:newsletter/up:email/up:to">
+          <code>
             <xsl:apply-templates/>
-          </div>
-        </code>
+          </code>
+        </div>
       </td>
     </tr>
   </xsl:template>
@@ -140,11 +149,11 @@
     <tr>
       <td><strong>Cc:</strong></td>
       <td>
-        <code>
-          <div bxe_xpath="/up:newsletter/up:email/up:to">
+        <div bxe_xpath="/up:newsletter/up:email/up:cc">
+          <code>
             <xsl:apply-templates/>
-          </div>
-        </code>
+          </code>
+        </div>
       </td>
     </tr>
   </xsl:template>
@@ -153,11 +162,11 @@
     <tr>
       <td><strong>Bcc:</strong></td>
       <td>
-        <code>
-          <div bxe_xpath="/up:newsletter/up:email/up:bcc">
+        <div bxe_xpath="/up:newsletter/up:email/up:bcc">
+          <code>
             <xsl:apply-templates/>
-          </div>
-        </code>
+          </code>
+        </div>
       </td>
     </tr>
   </xsl:template>
@@ -166,11 +175,11 @@
     <tr>
       <td><strong>Subject:&#160;&#160;</strong></td>
       <td>
-        <code>
-          <div bxe_xpath="/up:newsletter/up:email/up:subject">
+        <div bxe_xpath="/up:newsletter/up:email/up:subject">
+          <code>
             <xsl:apply-templates/>
-          </div>
-        </code>
+          </code>
+        </div>
       </td>
     </tr>
   </xsl:template>
@@ -185,11 +194,11 @@
   </xsl:template>
 
   <xsl:template match="up:footer">
-    <code>
-      <div bxe_xpath="/up:newsletter/up:footer">
+    <div bxe_xpath="/up:newsletter/up:footer">
+      <code>
         <xsl:apply-templates/>
-      </div>
-    </code>
+      </code>
+    </div>
   </xsl:template>
 
   <xsl:template match="@*|node()" priority="-1">
