@@ -8,6 +8,7 @@
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:up="http://www.unipublic.unizh.ch/2002/up"
   exclude-result-prefixes="xhtml lenya dc"
   >
@@ -64,7 +65,15 @@
                 <xsl:apply-templates select="xhtml:div[@id='dossiers-overview']"/>
              </td>
             </tr>
-            <xsl:call-template name="footer"/>
+            <!-- Footer -->
+           <tr>
+             <td width="186"></td>
+             <td width="399" bgcolor="white">
+               <xsl:call-template name="footer">
+                 <xsl:with-param name="footer_date" select="xhtml:div[@id='dossiers-overview']/xhtml:div[@class='tsr-title'][1]/lenya:meta/dcterms:dateCopyrighted "/>
+               </xsl:call-template>
+             </td>
+           </tr>
           </table>
         </div>
       </body>

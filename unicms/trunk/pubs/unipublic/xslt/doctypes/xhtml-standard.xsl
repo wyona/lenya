@@ -97,7 +97,15 @@
               </td>
 
            </tr>
-           <xsl:call-template name="footer"/>
+           <tr>
+             <td width="187"></td>
+             <td width="5" bgcolor="white"></td>
+             <td width="393" bgcolor="white">
+               <xsl:call-template name="footer">
+                 <xsl:with-param name="footer_date"><xsl:value-of select="$content/lenya:meta/dcterms:dateCopyrighted"/></xsl:with-param>
+               </xsl:call-template>
+             </td>
+           </tr>
           </table>
         </div>
       </body>
