@@ -6,6 +6,8 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
+  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:up="http://www.unipublic.unizh.ch/2002/up"
   xmlns:col="http://apache.org/cocoon/lenya/collection/1.0"
   xmlns:service="http://unizh.ch/doctypes/services/1.0"
@@ -66,7 +68,15 @@
                 <xsl:apply-templates select="webperls:webperls"/>
               </td>
             </tr>
-            <xsl:call-template name="footer_home"/>
+            <!-- Footer -->
+            <tr>
+              <td width="135"></td>
+              <td colspan="2">
+                <xsl:call-template name="footer">
+                  <xsl:with-param name="footer_date" select="content/up:homepage/col:document[1]/lenya:meta/dcterms:dateCopyrighted "/>
+                </xsl:call-template>
+              </td>
+            </tr>
           </table>
         </div>
       </body>

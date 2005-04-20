@@ -118,7 +118,16 @@
 
               </td>
             </tr>
-            <xsl:call-template name="footer"/>
+           <!-- Footer -->
+           <tr>
+             <td width="187"></td>
+             <td width="5" bgcolor="white"></td>
+             <td width="393" bgcolor="white">
+               <xsl:call-template name="footer">
+                 <xsl:with-param name="footer_date" select="col:document[1]/lenya:meta/dcterms:dateCopyrighted"/>
+               </xsl:call-template>
+             </td>
+           </tr>
           </table>
         </div>
       </body>
