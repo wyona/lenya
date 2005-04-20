@@ -30,12 +30,12 @@
 
   <define name="up.item">
     <element name="up:item">
-      <zeroOrMore>
-        <ref name="a"/>
-      </zeroOrMore> 
-      <zeroOrMore>
-        <text/>
-      </zeroOrMore> 
+      <oneOrMore>
+        <choice>
+          <text/>
+          <ref name="a"/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
 
