@@ -66,7 +66,6 @@
                 </div>
               </td>
             </tr>
-            <xsl:call-template name="footer_home"/>
           </table>
         </div>
       </body>
