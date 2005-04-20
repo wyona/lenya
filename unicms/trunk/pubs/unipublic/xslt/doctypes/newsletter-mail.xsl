@@ -76,11 +76,15 @@
     <xsl:text>&#10;</xsl:text>
 </xsl:template>
 
+<xsl:template match="up:footer">
+  <xsl:apply-templates/>
+</xsl:template>
+
 <xsl:template match="text()">
   <xsl:value-of select="normalize-space(.)"/>
 </xsl:template>
 
-<xsl:template match="br">
+<xsl:template match="xhtml:br">
    <xsl:text>&#10;</xsl:text>
 </xsl:template>
 
