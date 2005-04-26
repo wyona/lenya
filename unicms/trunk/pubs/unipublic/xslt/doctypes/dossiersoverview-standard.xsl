@@ -116,7 +116,6 @@
                 <xsl:value-of select="lenya:meta/dc:title" />
               </a>
             </div>
-            <br/>
             <xsl:choose>
               <xsl:when test="up:teaser/xhtml:div[@class='tsr-text']!=''">
                 <xsl:value-of select="./up:teaser/xhtml:div[@class='tsr-text']"/>
