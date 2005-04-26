@@ -12,7 +12,7 @@
     <xsp:include>java.io.*</xsp:include>
     <xsp:include>org.apache.cocoon.environment.*</xsp:include>
     <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
-    <xsp:include>org.apache.lenya.cms.publication.DefaultSiteTree</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.SiteTree</xsp:include>
     <xsp:include>org.apache.lenya.cms.publication.DocumentBuilder</xsp:include>
     <xsp:include>org.apache.lenya.cms.publication.DublinCore</xsp:include>
     <xsp:include>org.apache.lenya.cms.publication.SiteTreeNode</xsp:include>
@@ -24,7 +24,7 @@
     try {
       Publication publication = (Publication)<input:get-attribute module="page-envelope" as="object" name="publication"/>;
       String language = <input:get-attribute module="page-envelope" name="document-language" as="string"/>;
-      DefaultSiteTree siteTree = publication.getTree(Publication.AUTHORING_AREA);
+      SiteTree siteTree = publication.getTree(Publication.AUTHORING_AREA);
       DocumentBuilder builder = publication.getDocumentBuilder();
      
       String articleId = <input:get-attribute module="page-envelope" as="string" name="document-id"/>;
