@@ -55,21 +55,24 @@ a:visited { color: #339; text-decoration: none }
 
 #overview { position: relative; top:0px; left:0px; padding: 8px 0px 0px 0px;}
 .top-title { font-size: 18px; font-family: Geneva,Verdana,Helvetica,Arial,Swiss,"Nu Sans Regular"; text-transform: uppercase; }
-.webperlen { font-size: 10px; font-family: Geneva,Verdana,Helvetica,Arial,Swiss,"Nu Sans Regular"; background-color:#CCCCFF;}
 
 /*-----------------------------------------------  Webperls ---------------------------------------------*/
 
-.webperlen { font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular" }
+.webperlen { font-size: 10px; font-family: Geneva,Verdana,Helvetica,Arial,Swiss,"Nu Sans Regular"; background-color:#CCCCFF;}
 .webperl { display:block; padding-bottom: 5px;}
 .webperl .title { padding-left: 10px; padding-bottom: 5px; background-image:url("../images/t_perle.gif"); background-repeat: no-repeat; background-position: 0px 3px; display:block;}
-.document {display:block; padding-bottom: 5px;font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular}
-.tagline { font-style: italic; font-size: 12px; font-family: Verdana, Helvetica, Arial, Swiss, SunSans-Regular; text-align: right;}
-.related-content .title {font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
-.related-content .link {font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
-
 /*-----------------------------------------------  Table -----------------------------------------------*/
 
 .ornate {width: 100%; background-color:#FFFFFF; border-collapse: separate; border-spacing: 1px; margin:6px 0px 6px 0px;}
 .ornate td{background-color:#CCCCCC; padding: 2px; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular}
+
+/*-----------------------------------------------  For Bxe -----------------------------------------------*/
+.document {display:block; padding-bottom: 5px;font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular}
+.tagline { font-style: italic; font-size: 12px; font-family: Verdana, Helvetica, Arial, Swiss, SunSans-Regular; text-align: right;}
+.related-content {background-color:#CCCC99; display:block;}
+.related-content .title {font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
+.related-content .item {font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
+.object { font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; }
+
 
 </css>
