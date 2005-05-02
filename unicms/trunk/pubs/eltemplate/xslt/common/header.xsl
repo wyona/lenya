@@ -10,13 +10,12 @@
                 
   <!-- includes the default CSS stylesheet -->
   <xsl:template name="include-css">
-    <link rel="stylesheet" type="text/css" href="{$contextprefix}/eltemplate/authoring/css/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{$root}/css/main.css" media="screen"/>
   </xsl:template>
     
   <xsl:template name="include-js">
     <script language="javascript" type="text/javascript"  src="javascript/main.js"/>
   </xsl:template>
-
 
   <!-- includes meta headers -->
   <xsl:template name="meta-headers">

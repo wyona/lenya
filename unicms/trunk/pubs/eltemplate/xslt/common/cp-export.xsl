@@ -6,7 +6,10 @@
   xmlns:dir="http://apache.org/cocoon/directory/2.0"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  
+ 
+  <xsl:param name="pubid-live"/>
+  <xsl:param name="pubid-authoring"/>
+
   <xsl:template match="/site">
     <zip:archive>
       <xsl:apply-templates/>
@@ -28,7 +31,7 @@
 
 
   <xsl:template match="page">
-      <xsl:variable name="zip-filepath" select="substring-after(@href, '/eltemplate/live/')"/>
+      <xsl:variable name="zip-filepath" select="substring-after(@href, $pubid-live)"/>
       <zip:entry name="{$zip-filepath}" serializer="html">
         <xsl:apply-templates/>
       </zip:entry>
@@ -53,30 +56,30 @@
 
 
   <xsl:template match="@href[parent::xhtml:link]">
-    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, '/eltemplate/live/')"/>
+    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, $pubid-live)"/>
     <xsl:attribute name="href">
       <xsl:variable name="subdir" select="substring-after($page-path, '/')"/>
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., 'eltemplate/authoring/')"/>
+      <xsl:value-of select="substring-after(., $pubid-authoring)"/>
     </xsl:attribute>
   </xsl:template> 
 
 
   <xsl:template match="@src[parent::xhtml:img]">
-    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, '/eltemplate/live/')"/>
+    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, $pubid-live')"/>
     <xsl:attribute name="src">
       <xsl:variable name="subdir" select="substring-after($page-path, '/')"/>
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., 'eltemplate/authoring/')"/>
+      <xsl:value-of select="substring-after(., $pubid-authoring)"/>
     </xsl:attribute>
   </xsl:template> 
 
   <xsl:template match="@src[parent::xhtml:script]">
-    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, '/eltemplate/live/')"/>
+    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, $pubid-live)"/>
     <xsl:attribute name="src">
       <xsl:variable name="subdir" select="substring-after($page-path, '/')"/>
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
@@ -89,25 +92,25 @@
 
 
   <xsl:template match="@href[parent::xhtml:a]">
-    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, '/eltemplate/live/')"/>
+    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, $pubid-live)"/>
     <xsl:attribute name="href">
       <xsl:variable name="subdir" select="substring-after($page-path, '/')"/>
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., '/eltemplate/live/')"/>
+      <xsl:value-of select="substring-after(., $pubid-live)"/>
     </xsl:attribute>
   </xsl:template>
 
 
  <xsl:template match="@value[parent::xhtml:option]">
-    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, '/eltemplate/live/')"/>
+    <xsl:variable name="page-path" select="substring-after(ancestor::*[name() = 'page']/@href, $pubid-live)"/>
     <xsl:attribute name="value">
       <xsl:variable name="subdir" select="substring-after($page-path, '/')"/>
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., '/eltemplate/live/')"/>
+      <xsl:value-of select="substring-after(., $pubid-live)"/>
     </xsl:attribute>
   </xsl:template>
 

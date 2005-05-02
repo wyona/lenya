@@ -9,6 +9,8 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
 >
 
+ <xsl:param name="imageuriprefix"/>
+
  <!--  body -->
   <xsl:attribute-set name="body">
     <xsl:attribute name="font-size">10pt</xsl:attribute>
@@ -77,7 +79,7 @@
             <fo:table-body>
               <fo:table-row>
                 <fo:table-cell>
-                  <fo:external-graphic src="url('http://localhost:8080/lenya/eltemplate/authoring/images/Logo_mini.gif')" height="1.8cm"/>
+                  <fo:external-graphic src="url('{$imageuriprefix}Logo_mini.gif')" height="1.8cm"/>
                 </fo:table-cell>
                 <fo:table-cell>
                   <fo:block>

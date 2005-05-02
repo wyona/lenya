@@ -21,7 +21,7 @@
     <xsl:if test="$defaultlanguage != $language">_<xsl:value-of select="$language"/></xsl:if>
   </xsl:variable>
                   
-  <xsl:variable name="imageprefix" select="concat($contextprefix, '/eltemplate/authoring/images')"/>
+  <xsl:variable name="imageprefix" select="concat($root,'/images')"/>
   
   <xsl:variable name="content" select="/document/content/*"/>
   

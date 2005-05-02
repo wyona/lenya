@@ -8,7 +8,7 @@
     <task id="export" class="org.apache.lenya.cms.publishing.StaticHTMLExporter">
       <parameter name="server-uri" value="http://localhost"/>
       <parameter name="export-path" value="export"/>
-      <parameter name="substitute-regexp" value="/eltemplate/live/"/>
+      <parameter name="substitute-regexp" value="/ori/live/"/>
       <parameter name="substitute-replacement" value="/"/>
       <parameter name="server-port" value="8888"/>
     </task>

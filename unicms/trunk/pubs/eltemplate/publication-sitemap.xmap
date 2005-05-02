@@ -245,7 +245,9 @@
           <map:parameter name="language" value="{4}"/>
         </map:transform>
         <map:transform type="cinclude"/>
-        <map:transform src="xslt/doctypes/xhtml2fo.xsl"/> 
+        <map:transform src="xslt/doctypes/xhtml2fo.xsl">
+          <map:parameter name="imageuriprefix" value="http://{request:serverName}:{request:serverPort}{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/images/"/>
+        </map:transform> 
         <map:serialize type="fo2pdf"/>
       </map:match>
 
@@ -279,7 +281,9 @@
           <map:parameter name="chosenlanguage" value="de"/>
           <map:parameter name="defaultlanguage" value="de"/>
         </map:transform>
-        <map:transform src="xslt/common/nav2manifest.xsl"/>
+        <map:transform src="xslt/common/nav2manifest.xsl">
+          <map:parameter name="pubid-live" value="{page-envelope:publication-id}/live/"/>
+        </map:transform>
         <map:serialize type="xml"/>
       </map:match>
 
@@ -291,7 +295,10 @@
           <map:part src="cocoon:/directory-listing/javascript"/>
         </map:aggregate>
         <map:transform type="xinclude"/>
-        <map:transform src="xslt/common/xhtml-export.xsl"/> 
+        <map:transform src="xslt/common/xhtml-export.xsl">
+          <map:parameter name="pubid-live" value="{page-envelope:publication-id}/live/"/>
+          <map:parameter name="pubid-authoring" value="{page-envelope:publication-id}/authoring/"/>
+        </map:transform> 
         <map:serialize type="zip"/> 
       </map:match>
 
@@ -304,7 +311,10 @@
           <map:part src="cocoon:/directory-listing/javascript"/>
         </map:aggregate>
         <map:transform type="xinclude"/>
-        <map:transform src="xslt/common/cp-export.xsl"/>
+        <map:transform src="xslt/common/cp-export.xsl">
+          <map:parameter name="pubid-live" value="{page-envelope:publication-id}/live/"/>
+          <map:parameter name="pubid-authoring" value="{page-envelope:publication-id}/authoring/"/>
+        </map:transform>
         <map:serialize type="zip"/>
       </map:match>
 

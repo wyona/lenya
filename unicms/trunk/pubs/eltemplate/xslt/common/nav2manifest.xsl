@@ -4,7 +4,8 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"  
   xmlns:tree="http://apache.org/cocoon/lenya/sitetree/1.0" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  
+
+ <xsl:param name="pubid-live"/>  
 
  <xsl:template match="/tree:site">
     <manifest identifier="Manifest-{generate-id()}" version ="FIXME:datetime" xml:base="/">
@@ -23,7 +24,7 @@
   </xsl:template>
 
   <xsl:template match="tree:node" mode="organisation">
-    <xsl:variable name="document-id" select="substring-after(@href, 'eltemplate/live/')"/>
+    <xsl:variable name="document-id" select="substring-after(@href, $pubid-live)"/>
     <item identifier="{generate-id()}" identifierref="{$document-id}">
       <title><xsl:value-of select="@id"/></title>
         <xsl:apply-templates select="tree:node" mode ="organisation"/>
@@ -31,7 +32,7 @@
   </xsl:template>
 
   <xsl:template match="tree:node" mode="resource">
-    <resource identifier="{substring-after(@href, 'eltemplate/live/')}" type="webcontent" href="{substring-after(@href, 'eltemplate/live/')}"/>
+    <resource identifier="{substring-after(@href, $pubid-live)}" type="webcontent" href="{substring-after(@href, $pubid-live)}"/>
     <xsl:apply-templates select="tree:node" mode="resource"/>
   </xsl:template>
   
