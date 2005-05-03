@@ -9,7 +9,6 @@
 
 
   <xsl:param name="pubid-live"/>
-  <xsl:param name="pubid-authoring"/>
 
 
   <xsl:template match="/site">
@@ -55,7 +54,7 @@
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., $pubid-authoring)"/>
+      <xsl:value-of select="substring-after(., $pubid-live)"/>
     </xsl:attribute>
   </xsl:template> 
 
@@ -68,7 +67,7 @@
       <xsl:if test="$subdir != ''">../<xsl:variable name="subdir-2" select="substring-after($subdir, '/')"/><xsl:if test="$subdir-2 != ''">../<xsl:variable name="subdir-3" select="substring-after($subdir-2, '/')"/><xsl:if test="$subdir-3 != ''">../</xsl:if>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="substring-after(., $pubid-authoring)"/>
+      <xsl:value-of select="substring-after(., $pubid-live)"/>
     </xsl:attribute>
   </xsl:template> 
 

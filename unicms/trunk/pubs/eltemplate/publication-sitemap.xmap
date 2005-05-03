@@ -297,7 +297,6 @@
         <map:transform type="xinclude"/>
         <map:transform src="xslt/common/xhtml-export.xsl">
           <map:parameter name="pubid-live" value="{page-envelope:publication-id}/live/"/>
-          <map:parameter name="pubid-authoring" value="{page-envelope:publication-id}/authoring/"/>
         </map:transform> 
         <map:serialize type="zip"/> 
       </map:match>
