@@ -83,12 +83,6 @@
     </html>
   </xsl:template>
 
-  <xsl:template match="up:dossiersbox">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <xsl:apply-templates select="col:document" mode="dossiersbox"/>
-    </table>  
-  </xsl:template>
-
   <xsl:template name="topArticles">
     <table cellspacing="1" cellpadding="0" width="315" bgcolor="#CCCC99" border="0" bordercolor="blue">
     <tbody>
