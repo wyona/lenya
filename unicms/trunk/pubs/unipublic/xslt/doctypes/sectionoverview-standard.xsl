@@ -53,6 +53,7 @@
             <tr>
               <td id="navigation" align="right" valign="top" width="135">
                 <xsl:apply-templates select="xhtml:div[@id = 'menu']"/>
+                <xsl:apply-templates select="up:dossiersbox"/>
               </td>
               <td id="overview" colspan="2" width="450" valign="top">
                 <img src="{$imageprefix}/r_{$section}.gif" border="0" alt="{$sectionLabel}"/>
