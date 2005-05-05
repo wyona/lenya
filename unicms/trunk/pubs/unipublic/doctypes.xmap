@@ -65,7 +65,10 @@
         <map:aggregate element="document">
           <map:part src="cocoon://navigation/{3}/{4}/menu/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/section-overview/{5}.html.xml"/>
+          <map:part src="content/{page-envelope:area}/dossiersbox/index_{page-envelope:document-language}.xml"/>
         </map:aggregate>
+        <map:transform src="xslt/common/setXlinkXpath.xsl"/>
+        <map:transform type="xlink"/>
         <map:transform type="documentid-file"/>
         <map:transform type="xinclude"/>
         <map:call resource="transformation">
@@ -213,7 +216,6 @@
         <map:transform src="xslt/common/includeReferencedBy.xsl"/>
         <map:transform type="documentid-file"/>
         <map:transform type="xinclude"/>
-		
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
   	    </map:transform>
