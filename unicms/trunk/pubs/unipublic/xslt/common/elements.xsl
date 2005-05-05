@@ -232,16 +232,34 @@
   </xsl:template>
 
   <xsl:template match="up:teaser" mode="dossier-image">
-      <xsl:apply-templates select="./xhtml:p/xhtml:object" mode="teaser-dossier"/>
-        <xsl:if test="$area = 'authoring'">
-          <xsl:call-template name="asset-dots">
- 	        <xsl:with-param name="insertWhat" select="'newteaser'"/>
-            <xsl:with-param name="insertWhere" select="'inside'"/>
-          </xsl:call-template>
-        </xsl:if>
+    <xsl:choose>
+      <xsl:when test="./xhtml:p/xhtml:object">
+        <xsl:apply-templates select="./xhtml:p" mode="dossier-image"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="asset-dots">
+ 	      <xsl:with-param name="insertWhat" select="'teaser'"/>
+          <xsl:with-param name="insertWhere" select="'inside'"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
+  <xsl:template match="xhtml:p" mode="dossier-image">
+    <xsl:apply-templates select="xhtml:object" mode="teaser-dossier"/>
+    <xsl:call-template name="asset-dots">
+      <xsl:with-param name="insertWhat" select="'newteaser'"/>
+    </xsl:call-template>
+  </xsl:template>
 
+  <xsl:template match="xhtml:object" mode="teaser-dossier">
+    <img border="0" height="60" width="80" alt="">
+      <xsl:attribute name="src">
+        <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
+      </xsl:attribute>
+    </img>
+  </xsl:template>
+  
   <xsl:template match="up:teaser" mode="teaser">
     <xsl:if test="$area = 'authoring'">
       <table cellpadding="1" border="0" width="100%" bgcolor="#cccccc">
@@ -253,11 +271,7 @@
                 <td class="tsr-text" widht="60%">
                   <xsl:choose>
                     <xsl:when test="./xhtml:p/xhtml:object">
-                      <xsl:apply-templates select="./xhtml:p/xhtml:object" mode="teaser"/>
-                        <xsl:call-template name="asset-dots">
- 	                      <xsl:with-param name="insertWhat" select="'newteaser'"/>
-                          <xsl:with-param name="insertWhere" select="'inside'"/>
-                        </xsl:call-template>
+                      <xsl:apply-templates select="./xhtml:p" mode="teaser"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:call-template name="asset-dots">
@@ -284,14 +298,13 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="xhtml:object" mode="teaser-dossier">
-    <img border="0" height="60" width="80" alt="">
-      <xsl:attribute name="src">
-        <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
-      </xsl:attribute>
-    </img>
+  <xsl:template match="xhtml:p" mode="teaser">
+    <xsl:apply-templates select="xhtml:object" mode="teaser"/>
+    <xsl:call-template name="asset-dots">
+      <xsl:with-param name="insertWhat" select="'newteaser'"/>
+    </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="xhtml:object" mode="teaser">
     <img border="0">
       <xsl:attribute name="src">
@@ -461,14 +474,16 @@
     <div class="tsr-title">
       <a href="{$root}{@id}{$documentlanguagesuffix}.html"><xsl:value-of select="lenya:meta/dc:title"/></a>
     </div>
+    <div class="tsr-text">
     <xsl:choose>
       <xsl:when test="up:teaser/xhtml:div[@class='tsr-text'] !=''">
-        <xsl:apply-templates select="up:teaser/xhtml:div[@class='tsr-text']"/>
+        <xsl:value-of select="up:teaser/xhtml:div[@class='tsr-text']"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates select="lenya:meta/dc:description" mode="front"/>
+        <xsl:value-of select="lenya:meta/dc:description"/>
       </xsl:otherwise>
     </xsl:choose>
+    </div>
   </xsl:template>
 
 
@@ -478,13 +493,19 @@
   </xsl:template>
 
 
+  <xsl:template match="up:dossiersbox">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <xsl:apply-templates select="col:document" mode="dossiersbox"/>
+    </table>  
+  </xsl:template>
+
   <xsl:template match="col:document" mode="dossiersbox">
     <tr>
       <td colspan="2" bgcolor="{up:color}"> 
         <a href="{$root}{@id}{$documentlanguagesuffix}.html">
           <img border="0">
             <xsl:attribute name="src">
-              <xsl:value-of select="substring-after(@id,'/')"/>/<xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@data"/>
+              <xsl:value-of select="$root"/>/<xsl:value-of select="@id"/>/<xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@data"/>
             </xsl:attribute>
             <xsl:attribute name="alt"><xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@alt"/></xsl:attribute>
             <xsl:attribute name="width">80</xsl:attribute>
