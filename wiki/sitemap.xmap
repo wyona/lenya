@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <map:components>
+    <map:generators default="file">
+      <map:generator logger="sitemap.generator.text" name="text" src="org.apache.cocoon.generation.TextGenerator">
+        <map:parameter name="localizable" value="true"/>
+      </map:generator>
+    </map:generators>
+    <map:transformers default="xslt">
+      <map:transformer name="lexer" src="org.apache.cocoon.transformation.LexicalTransformer" logger="sitemap.transformer.lexer">
+        <parameter name="localizable" value="true"/>
+      </map:transformer>
+      <map:transformer name="parser" src="org.apache.cocoon.transformation.ParserTransformer" logger="sitemap.transformer.parser">
+        <parameter name="flatten" value="true"/>
+        <parameter name="recovery" value="true"/>
+        <parameter name="localizable" value="true"/>
+      </map:transformer>
+    </map:transformers>
+  </map:components>
+
+  <map:resources/>
+
+  <map:pipelines>
+
+    <map:pipeline>
+      <map:match pattern="**/">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+    </map:pipeline>
+
+    <!-- To generate the Wiki Lexicon: wiki.xlex -->
+    <!-- TODO: It seems like the lexer or the parser does not generate the source attribute of the output element if the grammars directory is at some other location! -->
+    <map:pipeline>
+      <map:match pattern="*.xlex">
+        <map:generate  type="text"   src="grammars/{1}.grm"/>
+        <map:transform type="lexer"  src="grammars/grm.xlex"/>
+        <map:transform type="parser" src="grammars/grm.xgrm"/>
+        <map:transform               src="stylesheets/text4regex.xsl"/>
+        <map:transform type="lexer"  src="grammars/regex.xlex"/>
+        <map:transform type="parser" src="grammars/regex.xgrm"/>
+        <map:transform               src="stylesheets/grm2xlex.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <!-- To generate the Wiki Grammar: wiki.grm -->
+    <!-- NOTE: Just the same as the xlex pipeline except for thr very last XSLT! -->
+    <map:pipeline>
+      <map:match pattern="*.xgrm">
+        <map:generate  type="text"   src="grammars/{1}.grm"/>
+        <map:transform type="lexer"  src="grammars/grm.xlex"/>
+        <map:transform type="parser" src="grammars/grm.xgrm"/>
+        <map:transform               src="stylesheets/text4regex.xsl"/>
+        <map:transform type="lexer"  src="grammars/regex.xlex"/>
+        <map:transform type="parser" src="grammars/regex.xgrm"/>
+        <map:transform               src="stylesheets/grm2xgrm.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+  
+    <map:pipeline>
+      <map:match pattern="**.xml">
+        <map:generate type="text" src="repository/paths/{1}.xml/resource::content"/>
+	<!--
+        <map:generate type="text" src="lcr://{1}.xml">
+          <map:parameter name="repository" value="wiki"/>
+	</map:generate>
+	-->
+	<map:transform type="lexer" src="cocoon:/wiki.xlex"/>
+	<map:transform type="parser" src="cocoon:/wiki.xgrm">
+          <map:parameter name="failsafe" value="true"/>
+        </map:transform>
+        <map:transform src="stylesheets/error4wiki.xsl"/>
+	<map:transform type="lexer" src="grammars/error.xlex"/>
+        <map:transform src="stylesheets/error2page.xsl"/>
+	<map:transform src="stylesheets/wiki2xdoc.xsl"/>
+
+	<map:transform src="xslt/xdoc2html.xsl">
+          <map:parameter name="contextPath" value="{request:contextPath}"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+  
+    <map:pipeline>
+      <map:match pattern="**.html">
+        <map:generate src="cocoon:/{1}.xml"/>
+        <map:match pattern="authoring/**.html">
+          <!-- Add Menu -->
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}.xml"/>
+        </map:match>
+	<map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+        <map:serialize type="html"/>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>
