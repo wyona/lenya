@@ -26,23 +26,38 @@
   </map:components>
 
   <map:resources/>
-<!--
-  <map:resources>
-    <map:resource name="style-cms-page">
-      <map:transform type="i18n">      
-        <map:parameter name="locale" value="{request:locale}"/>
-      </map:transform>    
-      <map:transform src="{global:basedir}/xslt/util/page2xhtml.xsl">
-        <map:parameter name="contextprefix" value="{request:contextPath}"/>
-      </map:transform>
-      <map:transform src="{global:basedir}/xslt/util/strip_namespaces.xsl"/>
-      <map:serialize type="xhtml"/>
-    </map:resource>    
-  </map:resources>  
--->
-
 
   <map:pipelines>
+    <!-- To generate the Wiki Lexicon: wiki.xlex -->
+    <!-- TODO: It seems like the lexer or the parser does not generate the source attribute of the output element if the grammars directory is at some other location! -->
+    <map:pipeline>
+      <map:match pattern="*.xlex">
+        <map:generate  type="text"   src="grammars/{1}.grm"/>
+        <map:transform type="lexer"  src="grammars/grm.xlex"/>
+        <map:transform type="parser" src="grammars/grm.xgrm"/>
+        <map:transform               src="stylesheets/text4regex.xsl"/>
+        <map:transform type="lexer"  src="grammars/regex.xlex"/>
+        <map:transform type="parser" src="grammars/regex.xgrm"/>
+        <map:transform               src="stylesheets/grm2xlex.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <!-- To generate the Wiki Grammar: wiki.xgrm -->
+    <!-- NOTE: Just the same as the xlex pipeline except for thr very last XSLT! -->
+    <map:pipeline>
+      <map:match pattern="*.xgrm">
+        <map:generate  type="text"   src="grammars/{1}.grm"/>
+        <map:transform type="lexer"  src="grammars/grm.xlex"/>
+        <map:transform type="parser" src="grammars/grm.xgrm"/>
+        <map:transform               src="stylesheets/text4regex.xsl"/>
+        <map:transform type="lexer"  src="grammars/regex.xlex"/>
+        <map:transform type="parser" src="grammars/regex.xgrm"/>
+        <map:transform               src="stylesheets/grm2xgrm.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
     <map:pipeline>           
       <map:match pattern="wikiedit" type="usecase">
         <map:match pattern="open" type="step">
@@ -83,15 +98,39 @@
 
               <map:generate type="request"/>
               <map:transform src="xslt/wikisaveform.xsl"/>
+              <map:transform type="lexer" src="cocoon:/wiki.xlex"/>
+              <map:transform type="parser" src="cocoon:/wiki.xgrm">
+                <map:parameter name="failsafe" value="true"/>
+              </map:transform>
+
+              <map:transform src="stylesheets/error4wiki.xsl"/>
+              <map:transform type="lexer" src="grammars/error.xlex"/>
+              <map:transform src="stylesheets/error2page.xsl"/>
+<!--
+              <map:transform src="stylesheets/wiki2xdoc.xsl"/>
+              <map:transform src="xslt/xdoc2html.xsl">
+                <map:parameter name="contextPath" value="{request:contextPath}"/>
+              </map:transform>
+-->
+<!--
 	      <map:serialize type="xml"/>
+-->
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
-                <map:parameter name="source" value="repository/paths/authoring/{1}.xml/hugo.txt"/>
+                <map:parameter name="source" value="repository/paths/authoring/{../1}.xml/hugo.xml"/>
               </map:transform>
               <map:transform type="write-source">
                 <map:parameter name="serializer" value="xml"/>
               </map:transform>
+              <map:transform src="xslt/redirect.xsl"/>
+	      <map:serialize type="html"/>
+<!--
 	      <map:serialize type="xml"/>
-              <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
+-->
+
+<!-- NOTE: The redirect seems to be executed first! -->
+<!--
+              <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{../1}.html"/>
+-->
             </map:act>
 
             <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
