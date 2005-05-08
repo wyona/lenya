@@ -60,7 +60,7 @@
       </map:match>
     </map:pipeline>
 
-    <!-- To generate the Wiki Grammar: wiki.grm -->
+    <!-- To generate the Wiki Grammar: wiki.xgrm -->
     <!-- NOTE: Just the same as the xlex pipeline except for thr very last XSLT! -->
     <map:pipeline>
       <map:match pattern="*.xgrm">
