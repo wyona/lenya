@@ -81,7 +81,7 @@
             <map:act type="request-parameter-exists">
               <map:parameter name="parameters" value="save"/>
 
-              <map:generate type="stream"/>
+              <map:generate type="request"/>
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
                 <map:parameter name="source" value="content.txt"/>
                 <!--<map:parameter name="source" value="pubs/{1}/test-xopus.xml"/>-->
@@ -90,14 +90,10 @@
                 <map:parameter name="serializer" value="xml"/>
               </map:transform>
 	      <map:serialize type="xml"/>
+              <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
             </map:act>
 
-            <map:generate type="stream"/>
-	    <map:serialize type="xml"/>
-	  
-	  <!--
             <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
-	    -->
 	    <!--
             <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html?lenya.usecase=checkin&amp;lenya.step=checkin&amp;backup=false"/>
 	    -->
