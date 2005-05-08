@@ -21,7 +21,7 @@
 >
 
   <xsl:template match="/">
-    <text>
+    <text xmlns="http://chaperon.sourceforge.net/schema/text/1.0">
       <xsl:copy-of select="/req:request/req:requestParameters/req:parameter[@name='content']/req:value/text()"/>
     </text>
   </xsl:template>
