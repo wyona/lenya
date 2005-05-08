@@ -82,9 +82,10 @@
               <map:parameter name="parameters" value="save"/>
 
               <map:generate type="request"/>
+              <map:transform src="xslt/wikisaveform.xsl"/>
+	      <map:serialize type="xml"/>
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
-                <map:parameter name="source" value="content.txt"/>
-                <!--<map:parameter name="source" value="pubs/{1}/test-xopus.xml"/>-->
+                <map:parameter name="source" value="repository/paths/authoring/{1}.xml/hugo.txt"/>
               </map:transform>
               <map:transform type="write-source">
                 <map:parameter name="serializer" value="xml"/>
