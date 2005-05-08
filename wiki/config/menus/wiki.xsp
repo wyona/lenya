@@ -51,8 +51,10 @@
   <menus>
     <menu i18n:attr="name" name="File" label="File">
       <block>
-        <item uc:usecase="wikiedit" uc:step="open" href="?&amp;form=entry">Edit</item>
+        <item uc:usecase="wikiedit" uc:step="open" href="?">Edit</item>
+	<!--
         <item uc:usecase="1formedit" uc:step="open" href="?">Edit&#160;with&#160;Source&#160;Editor</item>
+	-->
       </block>
       <!--
       <block>

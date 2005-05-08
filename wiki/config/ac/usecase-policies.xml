@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <!--
   Copyright 1999-2004 The Apache Software Foundation
 
@@ -15,19 +15,7 @@
   limitations under the License.
 -->
 
-<publication>
-  <languages>
-    <language default="true">en</language>
-    <language>de</language>
-    <language>fr</language>
-  </languages>
-  <path-mapper>org.apache.lenya.cms.publication.SingleLanguageIdentityMapper</path-mapper>
-  <!-- 1.2.X -->
-  <document-builder>org.apache.lenya.cms.publication.DefaultDocumentBuilder</document-builder>
-  <!-- 1.4.X -->
-  <!--
-  <document-builder name="default"/>
-  -->
-  <breadcrumb-prefix/>
-  <ssl-prefix/>
-</publication>
+<!-- $Id: usecase-policies.xml 42702 2004-03-13 12:34:18Z gregor $ -->
+
+<usecases xmlns="http://apache.org/cocoon/lenya/ac/1.0">
+</usecases>

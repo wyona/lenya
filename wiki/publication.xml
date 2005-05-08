@@ -22,7 +22,14 @@
 <lenya:name>Lenya's Wiki</lenya:name>
 
 <lenya:description>
-A Wiki Publication
+A Wiki Publication featuring
+
+<ul>
+  <li>Wiki Syntax editor</li>
+  <li>Inline Document Creation (TODO)</li>
+  <li>Documents as XML (TODO)</li>
+  <li>Full-Text Search (TODO)</li>
+</ul>
 
 <ul>
  <li><a href="wiki.xlex">Wiki Lexicon</a></li>
