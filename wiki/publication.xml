@@ -25,10 +25,11 @@
 A Wiki Publication featuring
 
 <ul>
+  <li>Wiki Documents as XML</li>
   <li>Wiki Syntax editor</li>
-  <li>Inline Document Creation (TODO)</li>
-  <li>Documents as XML (TODO)</li>
-  <li>Full-Text Search (TODO)</li>
+  <li>TODO: Inline Document Creation</li>
+  <li>TODO: Simple cloning (1.2.X) resp. fallback (1.4.X)</li>
+  <li>TODO: Full-Text Search</li>
 </ul>
 
 <ul>
@@ -37,7 +38,10 @@ A Wiki Publication featuring
 </ul>
 
 <ul>
+ <!-- Lexicon is contained within the edit usecase! -->
+ <!--
  <li><a href="wiki.xlex">Wiki Lexicon</a></li>
+ -->
  <li><a href="wiki.xgrm">Wiki Grammar</a></li>
 </ul>
 </lenya:description>
