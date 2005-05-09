@@ -197,7 +197,10 @@
           <xsl:value-of select="concat(translate($href,' ',''),'.html')"/>
        </xsl:when>
        <xsl:otherwise>
+          <xsl:value-of select="concat($href,'.html')"/>
+	  <!--
           <xsl:value-of select="concat('view.do?page=',$href)"/>
+	  -->
        </xsl:otherwise>
       </xsl:choose>
        </xsl:attribute>
