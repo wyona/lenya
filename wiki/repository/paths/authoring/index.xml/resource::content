@@ -9,4 +9,21 @@
   <lexeme symbol="hardbreak" text="&#13;&#10;&#13;&#10;"/>
   <lexeme symbol="text" text="This is a little example how easy it is to write a wiki"/>
   <lexeme symbol="softbreak" text="&#13;&#10;"/>
-  <lexeme symbol="text" text="using the Chaperon parser and Apache Lenya/Cocoon."/><lexeme symbol="hardbreak" text="&#13;&#10;&#13;&#10;"/><lexeme symbol="text" text="Here are some example sites:"/><lexeme symbol="softbreak" text="&#13;&#10;"/><lexeme symbol="bulleted1item" text="*"/><lexeme symbol="link" text="[Rule of the wiki|rules]"/><lexeme symbol="softbreak" text="&#13;&#10;"/><lexeme symbol="bulleted2item" text="**"/><lexeme symbol="text" text="Hallo Hugo"/><lexeme symbol="softbreak" text="&#13;&#10;"/><lexeme symbol="bulleted1item" text="*"/><lexeme symbol="link" text="[Test document|selftest]"/><lexeme symbol="softbreak" text="&#13;&#10;"/><lexeme symbol="bulleted1item" text="*"/><lexeme symbol="link" text="[Broken page|broken]"/><lexeme symbol="softbreak" text="&#13;&#10;"/><lexeme symbol="bulleted1item" text="*"/><lexeme symbol="link" text="[New page|new]"/><lexeme symbol="hardbreak" text="&#13;&#10;&#13;&#10;"/><lexeme symbol="text" text="You can edit the page with the little &quot;edit&quot; under the Cocoon logo."/></output>
+  <lexeme symbol="text" text="using the Chaperon parser and Apache Lenya/Cocoon."/>
+  <lexeme symbol="hardbreak" text="&#13;&#10;&#13;&#10;"/>
+  <lexeme symbol="text" text="Here are some example pages:"/>
+  <lexeme symbol="softbreak" text="&#13;&#10;"/>
+  <lexeme symbol="bulleted1item" text="*"/>
+  <lexeme symbol="link" text="[Wiki Syntax|syntax]"/>
+  <lexeme symbol="softbreak" text="&#13;&#10;"/>
+  <lexeme symbol="bulleted2item" text="**"/>
+  <lexeme symbol="text" text="Hello Levi"/>
+  <lexeme symbol="softbreak" text="&#13;&#10;"/>
+  <lexeme symbol="bulleted2item" text="**"/>
+  <lexeme symbol="text" text="Hello Vanya"/>
+  <lexeme symbol="softbreak" text="&#13;&#10;"/>
+  <lexeme symbol="bulleted1item" text="*"/>
+  <lexeme symbol="link" text="[New page|new]"/>
+  <lexeme symbol="hardbreak" text="&#13;&#10;&#13;&#10;"/>
+  <lexeme symbol="text" text="You can edit this page by clicking Edit within the File menu."/>
+</output>
