@@ -98,14 +98,20 @@
 
               <map:generate type="request"/>
               <map:transform src="xslt/wikisaveform.xsl"/>
+
               <map:transform type="lexer" src="cocoon:/wiki.xlex"/>
+	      <!--
               <map:transform type="parser" src="cocoon:/wiki.xgrm">
                 <map:parameter name="failsafe" value="true"/>
               </map:transform>
-
               <map:transform src="stylesheets/error4wiki.xsl"/>
               <map:transform type="lexer" src="grammars/error.xlex"/>
               <map:transform src="stylesheets/error2page.xsl"/>
+	      -->
+
+
+
+
 <!--
               <map:transform src="stylesheets/wiki2xdoc.xsl"/>
               <map:transform src="xslt/xdoc2html.xsl">
