@@ -25,6 +25,9 @@
     </title>
     <xsl:call-template name="include-css"/>
     <xsl:call-template name="include-js"/>
+    <xsl:if test="$documentid='/index'">
+      <xsl:call-template name="include-homepage-style"/>
+    </xsl:if>
   </head>
 </xsl:template>
 

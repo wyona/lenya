@@ -37,6 +37,18 @@ function aboWindow() {
     </script>
   </xsl:template>
 
+  <!-- includes the special style for the homepage -->
+  <xsl:template name="include-homepage-style">
+    <style type="text/css">
+      <xsl:comment>
+         body{ text-align: left; font-size: 12px; font-family: Verdana, Arial, Helvetica; background-color: #ffffff; color:#333333; link:#333399; alink:#CC0000; vlink:#666666; background-color:#F5F5F5; background-image:
+ url("images/bg.gif")}
+        .tsr-title {font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular"; text-transform: uppercase }
+        .tsr-text { font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, "Nu Sans Regular" }
+      </xsl:comment>
+    </style>
+  </xsl:template>
+
   <xsl:template name="topnavbar">
     <xsl:param name="is-front" />
   <form action="http://www.unizh.ch/cgi-bin/unisearch" method="post">
