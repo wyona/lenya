@@ -26,8 +26,12 @@
 
       <up:related-contents> 
         <up:related-content>
-          <up:title>Title</up:title>
-          <up:item>Item</up:item>
+          <up:title>Title1</up:title>
+          <up:item>Item1</up:item>
+        </up:related-content>
+        <up:related-content>
+          <up:title>Title2</up:title>
+          <up:item>Item1</up:item>
         </up:related-content>
       </up:related-contents>
       <up:teaser>
