@@ -42,7 +42,9 @@
   <xsl:variable name="channel"><xsl:value-of select="substring-before($rest,'/')"/></xsl:variable>
   <xsl:variable name="rest2"><xsl:value-of select="substring-after($rest,'/')"/></xsl:variable>
   <xsl:variable name="section"><xsl:value-of select="substring-before($rest2,'/')"/></xsl:variable>
-  
+
+  <xsl:variable name="last-published-date"/>
+
   <xsl:template match="document">
     <html>
       <xsl:call-template name="html-head"/>        
@@ -66,9 +68,20 @@
               <td width="135"></td>
               <td width="5"></td>
               <td width="445">
-                <xsl:call-template name="footer">
-                  <xsl:with-param name="footer_date" select="xhtml:div[@id='section-overview']/xhtml:div[@class='tsr-title'][1]/lenya:meta/dcterms:dateCopyrighted" />
-                </xsl:call-template>
+                <xsl:for-each select="xhtml:div[@id='section-overview']/xhtml:div[@class='tsr-title']">
+                  <!-- sort by the publish date the articles which were already published--> 
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,1,4)" data-type="number" order="descending"/> <!-- year  -->
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,6,2)" data-type="number" order="descending"/> <!-- month -->
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,9,2)" data-type="number" order="descending"/> <!-- day   -->
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,12,2)" data-type="number" order="descending"/> <!-- hour  -->
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,15,2)" data-type="number" order="descending"/> <!-- min -->
+                  <xsl:sort select="substring(lenya:meta/dcterms:issued,17,2)" data-type="number" order="descending"/> <!-- s   -->
+                  <xsl:if test="position()=1">
+                    <xsl:call-template name="footer">
+                      <xsl:with-param name="footer_date"><xsl:value-of select="lenya:meta/dcterms:issued"/></xsl:with-param> 
+                    </xsl:call-template>
+                  </xsl:if>
+                </xsl:for-each>
               </td>
             </tr>
           </table>
