@@ -47,7 +47,7 @@
 	      </tr>
 	      <tr>
 		<td class="lenya-entry-caption"><i18n:text>Source</i18n:text>:</td>
-		<td><xsl:value-of select="/chaperon:text/@source"/></td>
+		<td>Not specified ...</td>
 	      </tr>
 	      <tr>
 		<td class="lenya-entry-caption"><i18n:text>Language</i18n:text>:</td>
@@ -105,7 +105,7 @@
                 <tr>
                   <td>
                     <textarea name="content" cols="80" rows="80">
-                      <xsl:apply-templates/>
+                      <xsl:apply-templates select="/lex:output/lex:lexeme" xmlns:lex="http://chaperon.sourceforge.net/schema/lexer/2.0"/>
                     </textarea>
                   </td>
                 </tr>
@@ -122,4 +122,7 @@
       </body>
     </html>
   </xsl:template>
+
+<xsl:template match="lex:lexeme" xmlns:lex="http://chaperon.sourceforge.net/schema/lexer/2.0"><xsl:value-of select="@text"/></xsl:template>
+
 </xsl:stylesheet>
