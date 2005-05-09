@@ -248,9 +248,7 @@ function check(fileinput) {
                 <xsl:if test="$insertimage = 'true'">
                   <tr>
                     <td class="lenya-form-caption"><i18n:text>Caption</i18n:text>:</td>
-                    <td colspan="4">
-                      <input class="lenya-form-element" type="text" name="properties.insert.asset.caption" value="Default Caption"/>
-                    </td>
+                    <td colspan="4"><textarea class="lenya-form-element" name="properties.insert.asset.caption" rows="3">&#160;</textarea></td>
                   </tr>
                   <tr>
                     <td class="lenya-form-caption"><i18n:text>Link</i18n:text>:</td>
