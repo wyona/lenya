@@ -453,11 +453,15 @@
         <tr>
           <td width="4" bgcolor="white">&#160;</td>
           <td bgcolor="white" class="tsr-text">
+<!--
             <p>
+-->
               <xsl:apply-templates select="up:teaser" mode="front"/>
               <xsl:call-template name="abstract"/>
               (<xsl:apply-templates select="lenya:meta/dcterms:issued" mode="section"/>)
+<!--
             </p>
+-->
           </td>
           <td width="4" bgcolor="white">&#160;</td>
         </tr>
