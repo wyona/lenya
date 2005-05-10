@@ -16,8 +16,10 @@
  */
 package org.apache.lenya.pubs.wiki.cocoon.transformation;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.service.ServiceSelector;
@@ -43,6 +45,7 @@ import org.apache.lenya.cms.publication.Proxy;
 import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.util.ServletHelper;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -162,121 +165,30 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
     public void startElement(String uri, String name, String qname, Attributes attrs) throws SAXException {
         //getLogger().error(this.indent + "<" + qname + "> (ignoreAElement = " + isIgnoreAElement() + ")");
 
+        AttributesImpl newAttrs = new AttributesImpl(attrs);
         if(name.equals("link")) {
             getLogger().error(this.indent + "<" + qname + "> (Link element found)");
             String href = attrs.getValue(ATTRIBUTE_HREF);
             if (href != null) {
                 getLogger().error("href=" + href);
-            }
 
+                // Check if linked file exists
+		File currentFile = getCurrentDocument().getFile();
+		File linkedFile = new File(currentFile.getParent());
+		getLogger().error("Current Document file: " + currentFile);
+
+	        setHrefAttribute(newAttrs, "?lenya.usecase=createwikidoc&lenya.step=confirm");
+            } else {
+                getLogger().warn("Link element does not have href attribute!");
+            }
         }
 
 
         // Re-insert start of element
-        AttributesImpl newAttrs = null;
-        newAttrs = new AttributesImpl(attrs);
-        if (!(lookingAtAElement(name) && isIgnoreAElement())) {
-            if (newAttrs != null) {
-                attrs = newAttrs;
-            }
-            super.startElement(uri, name, qname, attrs);
+        super.startElement(uri, name, qname, newAttrs);
+        if (getLogger().isDebugEnabled()) {
             getLogger().error(this.indent + "<" + qname + "> (Insert element)");
         }
-
-
-
-
-/*
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug(this.indent + "<" + qname + "> (ignoreAElement = " + isIgnoreAElement() + ")");
-	    this.indent += "  ";
-        }
-
-        AttributesImpl newAttrs = null;
-        if (lookingAtLinkElement(name)) {
-
-            setIgnoreAElement(false);
-
-            String href = attrs.getValue(ATTRIBUTE_HREF);
-            if (href != null) {
-
-                Publication publication = getCurrentDocument().getPublication();
-                DocumentBuilder builder = publication.getDocumentBuilder();
-
-                try {
-
-                    newAttrs = new AttributesImpl(attrs);
-
-                    if (getLogger().isDebugEnabled()) {
-                        getLogger().debug(this.indent + "href URL: [" + href + "]");
-                    }
-
-                    String context = this.request.getContextPath();
-
-                    if (href.startsWith(context + "/" + publication.getId())) {
-                        
-                        final String webappUrlWithAnchor = href.substring(context.length());
-                        
-                        String anchor = null;
-                        String webappUrl = null;
-                        
-                        int anchorIndex = webappUrlWithAnchor.indexOf("#");
-                        if (anchorIndex > -1) {
-                            webappUrl = webappUrlWithAnchor.substring(0, anchorIndex);
-                            anchor = webappUrlWithAnchor.substring(anchorIndex + 1);
-                        }
-                        else {
-                            webappUrl = webappUrlWithAnchor;
-                        }
-                        
-                        if (getLogger().isDebugEnabled()) {
-                            getLogger().debug(this.indent + "webapp URL: [" + webappUrl + "]");
-                            getLogger().debug(this.indent + "anchor:     [" + anchor + "]");
-                        }
-                        if (builder.isDocument(publication, webappUrl)) {
-
-                            Document targetDocument = builder.buildDocument(publication, webappUrl);
-
-                            if (getLogger().isDebugEnabled()) {
-                                getLogger().debug(this.indent + "Resolved target document: ["
-                                        + targetDocument + "]");
-                            }
-
-                            String currentAreaUrl = builder.buildCanonicalUrl(publication,
-                                    getCurrentDocument().getArea(),
-                                    targetDocument.getId(),
-                                    targetDocument.getLanguage());
-                            targetDocument = builder.buildDocument(publication, currentAreaUrl);
-
-                            if (targetDocument.exists()) {
-                                rewriteLink(newAttrs, targetDocument, anchor);
-                            } else {
-                                setIgnoreAElement(true);
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    getLogger().error("startElement failed: ", e);
-                    throw new SAXException(e);
-                }
-            }
-
-        }
-
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug(this.indent + "ignoreAElement: " + isIgnoreAElement());
-        }
-
-        if (!(lookingAtAElement(name) && isIgnoreAElement())) {
-            if (newAttrs != null) {
-                attrs = newAttrs;
-            }
-            super.startElement(uri, name, qname, attrs);
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug(this.indent + "<" + qname + "> sent");
-            }
-        }
-*/
     }
 
     /**
