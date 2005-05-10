@@ -24,6 +24,7 @@
       </map:generator>
     </map:generators>
     <map:transformers default="xslt">
+      <map:transformer name="linkchecker" src="org.apache.lenya.pubs.wiki.cocoon.transformation.LinkRewritingTransformer" logger="sitemap.transformer.linkchecker"/>
       <map:transformer name="lexer" src="org.apache.cocoon.transformation.LexicalTransformer" logger="sitemap.transformer.lexer">
         <parameter name="localizable" value="true"/>
       </map:transformer>
@@ -38,7 +39,11 @@
   <map:resources/>
 
   <map:views>
-    <map:view name="wikixml" from-label="error2page">
+    <map:view name="xwiki" from-label="error2page">
+      <map:serialize type="xml"/>
+    </map:view>
+
+    <map:view name="xdoc" from-label="xwiki2xdoc">
       <map:serialize type="xml"/>
     </map:view>
   </map:views>
@@ -85,9 +90,6 @@
   
     <map:pipeline>
       <map:match pattern="**.xml">
-      <!--
-        <map:generate src="repository/paths/{1}.xml/hugo.xml"/>
-	-->
         <map:generate src="repository/paths/{1}.xml/resource::content"/>
 	<!--
         <map:generate type="text" src="repository/paths/{1}.xml/resource::content"/>
@@ -111,7 +113,9 @@
 	<!--
 	<map:transform src="xslt/xwiki2xdoc.xsl"/>
 	-->
-	<map:transform src="stylesheets/wiki2xdoc.xsl"/>
+	<map:transform src="stylesheets/wiki2xdoc.xsl" label="xwiki2xdoc"/>
+
+	<map:transform type="linkchecker"/>
 
 	<map:transform src="xslt/xdoc2html.xsl">
           <map:parameter name="contextPath" value="{request:contextPath}"/>
