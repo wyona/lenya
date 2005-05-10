@@ -27,10 +27,14 @@ A Wiki Publication featuring
 <ul>
   <li>Wiki Documents as XML</li>
   <li>Wiki Syntax editor</li>
-  <li>TODO: Inline Document Creation</li>
+  <li>TODO: Inline Document Creation (LinkChecker and DocumentCreator)</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
-  <li>TODO: Simple cloning (1.2.X) resp. fallback (1.4.X)</li>
+  <li>TODO: Implementing JCR</li>
+  <li>TODO: Simple cloning of publication</li>
+  <li>TODO: User Preferences</li>
   <li>TODO: Full-Text Search</li>
+  <li>TODO: Integrate Wiki Doctype into other publications (e.g. default)</li>
+  <li>TODO: Porting to 1.4.X (Lenya Protocol, Fallback, Publet, ...)</li>
 </ul>
 
 <ul>
