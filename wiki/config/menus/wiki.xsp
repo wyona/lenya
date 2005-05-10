@@ -87,7 +87,8 @@
 
     <menu i18n:attr="name" name="Debug" label="Debug">
       <block>
-        <item href="index.xml?cocoon-view=wikixml"><i18n:text>XML</i18n:text></item>
+        <item href="index.xml?cocoon-view=xwiki"><i18n:text>xwiki</i18n:text></item>
+        <item href="index.xml?cocoon-view=xdoc"><i18n:text>xdoc</i18n:text></item>
       </block>
     </menu>
   </menus>
