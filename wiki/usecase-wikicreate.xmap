@@ -27,7 +27,8 @@
       <map:match pattern="wikicreate" type="usecase">
         <map:match pattern="confirm" type="step">
             <map:generate type="request"/>
-            <map:serialize type="xml"/>
+            <map:transform src="xslt/wikiconfirmcreate.xsl"/>
+            <map:serialize type="html"/>
         </map:match>
 	
         <map:match pattern="create" type="step">
