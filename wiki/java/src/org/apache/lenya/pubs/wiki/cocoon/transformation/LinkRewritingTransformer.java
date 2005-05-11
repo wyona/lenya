@@ -180,7 +180,7 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
                 if(!linkedFile.isDirectory()) {
 		    getLogger().error("Linked document does not exist yet: " + linkedFile);
-                    setHrefAttribute(newAttrs, "?lenya.usecase=createwikidoc&lenya.step=confirm&path=" + removeHTMLSuffix(href));
+                    setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeHTMLSuffix(href));
                 }
             } else {
                 getLogger().warn("Link element does not have href attribute!");
