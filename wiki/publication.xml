@@ -43,10 +43,8 @@ A Wiki Publication featuring
 </ul>
 
 <ul>
- <!-- Lexicon is contained within the edit usecase! -->
- <!--
+ <!-- Lexicon is actually contained within the edit usecase! -->
  <li><a href="wiki.xlex">Wiki Lexicon</a></li>
- -->
  <li><a href="wiki.xgrm">Wiki Grammar</a></li>
 </ul>
 </lenya:description>
