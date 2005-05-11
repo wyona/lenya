@@ -174,10 +174,14 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
                 // Check if linked file exists
 		File currentFile = getCurrentDocument().getFile();
-		File linkedFile = new File(currentFile.getParent());
 		getLogger().error("Current Document file: " + currentFile);
+		File linkedFile = new File(new File(currentFile.getParent()).getParent() + File.separator + replaceHTMLbyXMLSuffix(href));
+		getLogger().error("Linked Document file: " + linkedFile);
 
-	        setHrefAttribute(newAttrs, "?lenya.usecase=createwikidoc&lenya.step=confirm");
+                if(!linkedFile.isDirectory()) {
+		    getLogger().error("Linked document does not exist yet: " + linkedFile);
+                    setHrefAttribute(newAttrs, "?lenya.usecase=createwikidoc&lenya.step=confirm&path=" + removeHTMLSuffix(href));
+                }
             } else {
                 getLogger().warn("Link element does not have href attribute!");
             }
@@ -307,10 +311,25 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
     protected boolean isIgnoreAElement() {
         return ignoreAElement;
     }
+
     /**
      * @param ignoreAElement The ignoreAElement to set.
      */
     protected void setIgnoreAElement(boolean ignoreAElement) {
         this.ignoreAElement = ignoreAElement;
+    }
+
+    /**
+     * Replace HTML by XML suffix
+     */
+    private String replaceHTMLbyXMLSuffix(String href) {
+        return href.substring(0, href.length() - 4) + "xml";
+    }
+
+    /**
+     * Remove HTML suffix
+     */
+    private String removeHTMLSuffix(String href) {
+        return href.substring(0, href.length() - 5);
     }
 }
