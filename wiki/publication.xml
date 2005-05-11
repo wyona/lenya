@@ -28,6 +28,7 @@ A Wiki Publication featuring
   <li>Wiki Documents as XML</li>
   <li>Wiki Syntax editor</li>
   <li>TODO: Inline Document Creation (LinkChecker and DocumentCreator)</li>
+  <li>BUG : Inserting !Hello doesn't work properly</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
   <li>TODO: Implementing JCR</li>
   <li>TODO: Simple cloning of publication</li>
@@ -44,7 +45,7 @@ A Wiki Publication featuring
 
 <ul>
  <!-- Lexicon is actually contained within the edit usecase! -->
- <li><a href="wiki.xlex">Wiki Lexicon</a></li>
+ <li><a href="wiki.xlex?lenya.usecase=wikiedit">Wiki Lexicon</a></li>
  <li><a href="wiki.xgrm">Wiki Grammar</a></li>
 </ul>
 </lenya:description>
