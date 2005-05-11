@@ -21,7 +21,10 @@
     <language>de</language>
     <language>fr</language>
   </languages>
+  <path-mapper>org.apache.lenya.pubs.wiki.LCRIdToPathMapper</path-mapper>
+  <!--
   <path-mapper>org.apache.lenya.cms.publication.SingleLanguageIdentityMapper</path-mapper>
+  -->
   <!-- 1.2.X -->
   <document-builder>org.apache.lenya.cms.publication.DefaultDocumentBuilder</document-builder>
   <!-- 1.4.X -->
