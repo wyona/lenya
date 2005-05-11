@@ -58,6 +58,7 @@
 
     <!-- To generate the Wiki Lexicon: wiki.xlex -->
     <!-- TODO: It seems like the lexer or the parser does not generate the source attribute of the output element if the grammars directory is at some other location! -->
+    <!-- TODO: It seems it not always work when being generated dynamically, see usecase-wikiedit.xmap for further notes -->
     <!--
     <map:pipeline>
       <map:match pattern="*.xlex">
