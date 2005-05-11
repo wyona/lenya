@@ -31,7 +31,8 @@
     <!-- To generate the Wiki Lexicon: wiki.xlex -->
     <!-- TODO: It seems like the lexer or the parser does not generate the source attribute of the output element if the grammars directory is at some other location! -->
     <map:pipeline>
-      <map:match pattern="*.xlex">
+      <map:match pattern="**.xlex">
+        <!--
         <map:generate  type="text"   src="grammars/{1}.grm"/>
         <map:transform type="lexer"  src="grammars/grm.xlex"/>
         <map:transform type="parser" src="grammars/grm.xgrm"/>
@@ -39,12 +40,16 @@
         <map:transform type="lexer"  src="grammars/regex.xlex"/>
         <map:transform type="parser" src="grammars/regex.xgrm"/>
         <map:transform               src="stylesheets/grm2xlex.xsl"/>
+        -->
+        <!-- TODO: Actually it should be generated on the fly, but somehow it only works sometimes! -->
+        <map:generate src="wiki.xlex.xml"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
 
     <!-- To generate the Wiki Grammar: wiki.xgrm -->
     <!-- NOTE: Just the same as the xlex pipeline except for thr very last XSLT! -->
+    <!--
     <map:pipeline>
       <map:match pattern="*.xgrm">
         <map:generate  type="text"   src="grammars/{1}.grm"/>
@@ -57,6 +62,7 @@
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
+    -->
 
     <map:pipeline>           
       <map:match pattern="wikiedit" type="usecase">
@@ -101,8 +107,10 @@
 
               <map:generate type="request"/>
               <map:transform src="xslt/wikisaveform.xsl"/>
+	      
 
               <map:transform type="lexer" src="cocoon:/wiki.xlex"/>
+
 	      <!--
               <map:transform type="parser" src="cocoon:/wiki.xgrm">
                 <map:parameter name="failsafe" value="true"/>
