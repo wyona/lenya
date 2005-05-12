@@ -32,8 +32,15 @@
         </map:match>
 	
         <map:match pattern="create" type="step">
-              <map:generate src="repository/paths/authoring/index.xml/resource::content"/>
-	      <map:serialize type="xml"/>
+          <map:match pattern="authoring/**.html">
+            <map:act type="request-parameter-exists">
+              <map:parameter name="parameters" value="create"/>
+              <map:act type="parent-child">
+                <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
+              </map:act>
+            </map:act>
+            <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
+          </map:match>
         </map:match>
       </map:match>
     </map:pipeline>

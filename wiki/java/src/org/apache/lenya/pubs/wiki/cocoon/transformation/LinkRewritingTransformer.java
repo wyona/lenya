@@ -167,19 +167,19 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
         AttributesImpl newAttrs = new AttributesImpl(attrs);
         if(name.equals("link")) {
-            getLogger().error(this.indent + "<" + qname + "> (Link element found)");
+            getLogger().debug(this.indent + "<" + qname + "> (Link element found)");
             String href = attrs.getValue(ATTRIBUTE_HREF);
             if (href != null) {
-                getLogger().error("href=" + href);
+                getLogger().debug("href=" + href);
 
                 // Check if linked file exists
 		File currentFile = getCurrentDocument().getFile();
-		getLogger().error("Current Document file: " + currentFile);
+		getLogger().debug("Current Document file: " + currentFile);
 		File linkedFile = new File(new File(currentFile.getParent()).getParent() + File.separator + replaceHTMLbyXMLSuffix(href));
-		getLogger().error("Linked Document file: " + linkedFile);
+		getLogger().debug("Linked Document file: " + linkedFile);
 
                 if(!linkedFile.isDirectory()) {
-		    getLogger().error("Linked document does not exist yet: " + linkedFile);
+		    getLogger().warn("Linked document does not exist yet: " + linkedFile);
                     setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeHTMLSuffix(href));
                 }
             } else {
@@ -191,7 +191,7 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
         // Re-insert start of element
         super.startElement(uri, name, qname, newAttrs);
         if (getLogger().isDebugEnabled()) {
-            getLogger().error(this.indent + "<" + qname + "> (Insert element)");
+            getLogger().debug(this.indent + "<" + qname + "> (Insert element)");
         }
     }
 

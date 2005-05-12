@@ -21,11 +21,17 @@
 >
 
   <xsl:template match="/">
+    <xsl:variable name="nodename"><xsl:value-of select="/req:request/req:requestParameters/req:parameter[@name='path']/req:value/text()"/></xsl:variable>
     <html>
     <body>
       Do you really want to create this page?
-      <xsl:copy-of select="/req:request/req:requestParameters/req:parameter[@name='path']/req:value/text()"/>
-      <form>
+      <form method="POST" action="?lenya.usecase=wikicreate&amp;lenya.step=create">
+        <input type="hidden" name="childtype" value="leaf"/>
+        <input type="hidden" name="childid" value="{$nodename}"/>
+	<p>
+        ID: <xsl:value-of select="$nodename"/><br/>
+        Name: <input type="text" name="childname" value="New Wiki Page"/><br/>
+	</p>
         <input type="submit" name="create" value="YES"/>
         <input type="submit" name="cancel" value="cancel"/>
       </form>
