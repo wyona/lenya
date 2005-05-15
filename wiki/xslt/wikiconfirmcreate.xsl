@@ -26,8 +26,10 @@
     <body>
       Do you really want to create this page?
       <form method="POST" action="?lenya.usecase=wikicreate&amp;lenya.step=create">
-        <input type="hidden" name="childtype" value="leaf"/>
+        <input type="hidden" name="childtype" value="branch"/>
+        <!--<input type="hidden" name="childtype" value="leaf"/>-->
         <input type="hidden" name="childid" value="{$nodename}"/>
+        <input type="hidden" name="doctype" value="wiki"/>
 	<p>
         ID: <xsl:value-of select="$nodename"/><br/>
         Name: <input type="text" name="childname" value="New Wiki Page"/><br/>
