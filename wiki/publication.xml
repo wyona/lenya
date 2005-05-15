@@ -28,7 +28,7 @@ A Wiki Publication featuring
   <li>Wiki Documents as XML</li>
   <li>Wiki Syntax editor</li>
   <li>TODO: Inline Document Creation (LinkChecker and DocumentCreator)</li>
-  <li>BUG : Inserting !Hello doesn't work properly</li>
+  <li>BUG : Inserting !Hello at the end doesn't work properly</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
   <li>TODO: Implementing JCR</li>
   <li>TODO: Simple cloning of publication</li>
