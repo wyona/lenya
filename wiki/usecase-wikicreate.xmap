@@ -36,7 +36,7 @@
             <map:act type="request-parameter-exists">
               <map:parameter name="parameters" value="create"/>
               <map:act type="parent-child">
-                <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
+                <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{../../1}.html"/>
               </map:act>
             </map:act>
             <map:redirect-to uri="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/{1}.html"/>
