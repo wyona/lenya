@@ -179,8 +179,8 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 		getLogger().debug("Linked Document file: " + linkedFile);
 
                 if(!linkedFile.isDirectory()) {
-		    getLogger().warn("Linked document does not exist yet: " + linkedFile);
-                    setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeHTMLSuffix(href));
+		    getLogger().info("Linked document does not exist yet: " + linkedFile);
+                    setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeIndex(href));
                 }
             } else {
                 getLogger().warn("Link element does not have href attribute!");
@@ -327,9 +327,9 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
     }
 
     /**
-     * Remove HTML suffix
+     * Remove /index.html
      */
-    private String removeHTMLSuffix(String href) {
-        return href.substring(0, href.length() - 5);
+    private String removeIndex(String href) {
+        return href.substring(0, href.length() - 11);
     }
 }
