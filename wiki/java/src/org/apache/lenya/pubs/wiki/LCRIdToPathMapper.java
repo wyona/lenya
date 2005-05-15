@@ -37,7 +37,7 @@ public class LCRIdToPathMapper extends IdentityDocumentIdToPathMapper {
 
         File file = new File(areaDirectory, getPath(documentId, language) + File.separator + "resource::content");
 
-        log.error(file.toString());
+        log.debug("File resolved: " + file.toString());
 
         return file;
     }
