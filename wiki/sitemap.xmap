@@ -96,7 +96,8 @@
 	<map:transform type="lexer" src="cocoon:/wiki.xlex"/>
         -->
 
-        <map:generate src="repository/paths/{1}.xml/resource::content"/>
+        <!--<map:generate src="repository/paths/{1}.xml/resource::content"/>-->
+        <map:generate src="repository/paths/{1}.xml/resource-content"/>
         <!--
         <map:generate type="text" src="lcr://{1}.xml">
           <map:parameter name="repository" value="wiki"/>
