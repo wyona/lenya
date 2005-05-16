@@ -67,9 +67,8 @@
 -->
               
 	    <!--
-            <map:generate type="text" src="repository/paths/authoring/{1}.xml/resource::content"/>
+            <map:generate type="text" src="repository/paths/authoring/{1}.txt/resource-content"/>
 	    -->
-            <!--<map:generate src="repository/paths/authoring/{1}.xml/resource::content"/>-->
             <map:generate src="repository/paths/authoring/{1}.xml/resource-content"/>
             <map:transform src="xslt/wikieditform.xsl"/>
 
@@ -117,11 +116,7 @@
 	      <map:serialize type="xml"/>
 -->
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
-                <!--<map:parameter name="source" value="repository/paths/authoring/{../1}.xml/resource::content"/>-->
                 <map:parameter name="source" value="repository/paths/authoring/{../1}.xml/resource-content"/>
-		<!--
-                <map:parameter name="source" value="repository/paths/authoring/{../1}.xml/hugo.xml"/>
-		-->
               </map:transform>
               <map:transform type="write-source">
                 <map:parameter name="serializer" value="xml"/>

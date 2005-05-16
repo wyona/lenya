@@ -57,8 +57,6 @@ public class NewWikiDocCreator extends DefaultCreator {
             + "index"
             + getLanguageSuffix(language)
             + ".xml"
-            // Colon does not work, because the write method of org.apache.lenya.xml.DocumentHelper.writeDocument() thows an exception during executing getTransformer(document.getDoctype()).transform(source, result)
-	    //+ File.separator + "resource::content"
 	    + File.separator + "resource-content"
             );
 

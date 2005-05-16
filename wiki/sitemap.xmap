@@ -92,11 +92,10 @@
     <map:pipeline>
       <map:match pattern="**.xml">
         <!--
-        <map:generate type="text" src="repository/paths/{1}.txt/resource::content"/>
+        <map:generate type="text" src="repository/paths/{1}.txt/resource-content"/>
 	<map:transform type="lexer" src="cocoon:/wiki.xlex"/>
         -->
 
-        <!--<map:generate src="repository/paths/{1}.xml/resource::content"/>-->
         <map:generate src="repository/paths/{1}.xml/resource-content"/>
         <!--
         <map:generate type="text" src="lcr://{1}.xml">
