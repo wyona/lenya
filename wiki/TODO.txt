@@ -1,4 +1,2 @@
 
- - New Wiki Page (....?)
- - Wiki Links
- - Form Editor
+ - see publication.xml
