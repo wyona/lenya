@@ -35,7 +35,8 @@ public class LCRIdToPathMapper extends IdentityDocumentIdToPathMapper {
         File areaDirectory = new File(publication.getDirectory(), "repository" + File.separator + "paths" + File.separator + area);
         //File areaDirectory = new File(publication.getDirectory(), Publication.CONTENT_PATH + File.separator + area);
 
-        File file = new File(areaDirectory, getPath(documentId, language) + File.separator + "resource::content");
+        //File file = new File(areaDirectory, getPath(documentId, language) + File.separator + "resource::content");
+        File file = new File(areaDirectory, getPath(documentId, language) + File.separator + "resource-content");
 
         log.debug("File resolved: " + file.toString());
 

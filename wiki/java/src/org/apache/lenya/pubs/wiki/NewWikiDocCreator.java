@@ -49,7 +49,7 @@ public class NewWikiDocCreator extends DefaultCreator {
         log.debug("Parent directory: " + parentDir);
 
         // TODO: Quite a hack, but needs to be replaced by JCR anyway
-        String filename = new File(parentDir.getParent()).getParent()
+        File file = new File(parentDir.getParentFile().getParent()
             + File.separator + "repository" + File.separator + "paths" + File.separator + "authoring"
             + File.separator
             + childId
@@ -57,11 +57,14 @@ public class NewWikiDocCreator extends DefaultCreator {
             + "index"
             + getLanguageSuffix(language)
             + ".xml"
-	    + File.separator + "resource::content";
+            // Colon does not work, because the write method of org.apache.lenya.xml.DocumentHelper.writeDocument() thows an exception during executing getTransformer(document.getDoctype()).transform(source, result)
+	    //+ File.separator + "resource::content"
+	    + File.separator + "resource-content"
+            );
 
-        log.error("Filename: " + filename);
+        log.error("Filename: " + file.getAbsolutePath());
 
-        return filename;
+        return file.getAbsolutePath();
     }
 
     /** (non-Javadoc)
