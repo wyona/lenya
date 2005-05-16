@@ -125,7 +125,14 @@
   
     <map:pipeline>
       <map:match pattern="**.html">
-        <map:generate src="cocoon:/{1}.xml"/>
+        <map:aggregate element="page">
+          <map:part src="cocoon:/{1}.xml"/>
+          <map:part src="navigation.xml"/>
+        </map:aggregate>
+        <map:transform src="xslt/addNavigation.xsl"/>
+	<!--
+<map:serialize type="xml"/>
+-->
         <map:match pattern="authoring/**.html">
           <!-- Add Menu -->
           <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}.xml"/>
