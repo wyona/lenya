@@ -82,6 +82,7 @@
               <li>! A title</li>
               <li>* A list item</li>
               <li>[A link]</li>
+              <li>{{{Text formatted as is}}}</li>
             </ul>
           </div>
 
