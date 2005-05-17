@@ -123,6 +123,7 @@
     <input type="hidden" name="role-ids" value="{/usecase:publish/usecase:role-ids}"/>
 -->
     <input type="hidden" name="properties.source" value="{/usecase:publish/usecase:source}"/>
+    <input type="hidden" name="uris" value="{/usecase:publish/usecase:uris}"/>
   </xsl:template>
   
 </xsl:stylesheet>  

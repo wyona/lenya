@@ -42,6 +42,21 @@
     
     <xsp:logic>
       try {
+          Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+          Document document = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
+          Document liveDocument = publication.getAreaVersion(document, Publication.LIVE_AREA);
+
+          String documentUrl = liveDocument.getCompleteURL();
+          String urisParameter = urisParameter = <xsp-request:get-context-path/> + documentUrl;
+          <usecase:uris><xsp:expr>urisParameter</xsp:expr></usecase:uris>
+      }
+      catch (Exception e) {
+          throw new ProcessingException(e);
+      }
+    </xsp:logic>
+
+    <xsp:logic>
+      try {
           Document document = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
           Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
           

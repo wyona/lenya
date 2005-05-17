@@ -187,6 +187,7 @@
     <input type="hidden" name="user-id" value="{/page/info/user-id}"/>
     <input type="hidden" name="ip-address" value="{/page/info/ip-address}"/>
     <input type="hidden" name="role-ids" value="{/page/info/role-ids}"/>
+    <input type="hidden" name="uris" value="{/page/info/uris}"/>
   </xsl:template>
   
 </xsl:stylesheet>

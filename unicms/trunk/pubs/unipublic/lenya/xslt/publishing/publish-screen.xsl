@@ -156,6 +156,7 @@
     <input type="hidden" name="user-id" value="{/usecase:publish/usecase:user-id}"/>
     <input type="hidden" name="ip-address" value="{/usecase:publish/usecase:ip-address}"/>
     <input type="hidden" name="role-ids" value="{/usecase:publish/usecase:role-ids}"/>
+    <input type="hidden" name="uris" value="{/usecase:publish/usecase:uris}"/>
   </xsl:template>
   
 
