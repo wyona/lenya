@@ -20,6 +20,8 @@
   xmlns:req="http://apache.org/cocoon/request/2.0"
 >
 
+  <xsl:param name="parentid"/>
+
   <xsl:template match="/">
     <xsl:variable name="nodename"><xsl:value-of select="/req:request/req:requestParameters/req:parameter[@name='path']/req:value/text()"/></xsl:variable>
     <html>
@@ -28,7 +30,9 @@
       <form method="POST" action="?lenya.usecase=wikicreate&amp;lenya.step=create">
         <input type="hidden" name="childtype" value="branch"/>
         <!--<input type="hidden" name="childtype" value="leaf"/>-->
-        <input type="hidden" name="childid" value="{$nodename}"/>
+        <!-- NOTE: This is quite a hack, because the Lenya creator API does not forward the parentid to the creator as a separate parameter, but only as part of the parent dir! -->
+        <input type="hidden" name="childid" value="{$parentid}{$nodename}"/>
+        <!--<input type="hidden" name="parentid" value="{$parentid}"/>-->
         <input type="hidden" name="doctype" value="wiki"/>
 	<p>
         ID: <xsl:value-of select="$nodename"/><br/>

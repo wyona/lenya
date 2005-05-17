@@ -46,7 +46,7 @@ public class NewWikiDocCreator extends DefaultCreator {
         String childId,
         String language) {
 
-        log.debug("Parent directory: " + parentDir);
+        log.info("Parent directory: " + parentDir);
 
         // TODO: Quite a hack, but needs to be replaced by JCR anyway
         File file = new File(parentDir.getParentFile().getParent()
@@ -60,24 +60,8 @@ public class NewWikiDocCreator extends DefaultCreator {
 	    + File.separator + "resource-content"
             );
 
-        log.error("Filename: " + file.getAbsolutePath());
+        log.info("Filename: " + file.getAbsolutePath());
 
         return file.getAbsolutePath();
-    }
-
-    /** (non-Javadoc)
-     * @see org.apache.lenya.cms.authoring.DefaultCreator#getChildMetaFileName(java.io.File, java.lang.String)
-     */
-    protected String getChildMetaFileName(
-        File parentDir,
-        String childId,
-        String language) {
-        return parentDir
-            + File.separator
-            + childId
-            + File.separator
-            + "indexmeta"
-            + getLanguageSuffix(language)
-            + ".xml";
     }
 }

@@ -29,7 +29,6 @@ A Wiki Publication featuring
   <li>Wiki Syntax editor</li>
   <li>Inline Document Creation (LinkChecker and DocumentCreator)</li>
   <li>TODO: Navigation and Bread-Crumb Path</li>
-  <li>BUG : Creating a hierarchy does not work!</li>
   <li>BUG : Inserting !Hello at the end doesn't work properly</li>
   <li>BUG : Inserting numbers as links, e.g. [Syntax 1.0|1.0] does not seem to work</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
