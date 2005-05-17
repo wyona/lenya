@@ -156,6 +156,7 @@
     <!-- Drawing dynamic sub-navigation for the years 2002 and after (according to sitetree.xml) -->
     <xsl:apply-templates select="./*"/>
     <!-- Static years 1999-2001  -->
+    <a href="http://www.unipublic.unizh.ch/{$channel}/{$section}/2002/"><img alt="2002" src="{$imageprefix}/jahr/2002_aus.gif" height="13" width="39" border="0" /></a>
     <a href="http://www.unipublic.unizh.ch/{$channel}/{$section}/2001/"><img alt="2001" src="{$imageprefix}/jahr/2001_aus.gif" height="13" width="39" border="0" /></a>
     <a href="http://www.unipublic.unizh.ch/{$channel}/{$section}/2000/"><img alt="2000" src="{$imageprefix}/jahr/2000_aus.gif" height="13" width="39" border="0" /></a>
     <a href="http://www.unipublic.unizh.ch/{$channel}/{$section}/1999/"><img alt="1999" src="{$imageprefix}/jahr/1999_aus.gif" height="13" width="39" border="0" /></a>
