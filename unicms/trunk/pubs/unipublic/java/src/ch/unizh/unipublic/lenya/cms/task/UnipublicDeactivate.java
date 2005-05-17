@@ -42,10 +42,13 @@
  */
 package ch.unizh.unipublic.lenya.cms.task;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.avalon.excalibur.io.FileUtil;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentException;
@@ -114,6 +117,8 @@ public class UnipublicDeactivate extends Deactivate {
         if (authoringVersion.canWorkflowFire(getEventName(), getSituation())) {
             Version liveVersion = getVersion(resource, Publication.LIVE_AREA,
                     getLanguage());
+
+            copyToDeleteDirectory(liveVersion.getDocument(), resource.getPublicationWrapper().getPublication());
             liveVersion.delete();
             if (isArticle) {
                 updateHeadlines(authoringVersion);
@@ -131,6 +136,22 @@ public class UnipublicDeactivate extends Deactivate {
 
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
         }
+    }
+
+    protected void copyToDeleteDirectory(Document document, Publication publication) 
+    throws PublicationException {
+        String destRootPath = publication.getDirectory().getAbsolutePath() + File.separator + Publication.DELETE_PATH;
+        String documentURL = document.getDocumentURL();
+        File destinationFile = new File (destRootPath, documentURL);        
+
+        File file = document.getFile();
+        
+        try {
+            FileUtil.copyFile(file, destinationFile);
+        } catch (IOException e) {
+            throw new PublicationException(e);
+        }
+    
     }
 
     /**
