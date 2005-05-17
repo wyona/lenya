@@ -55,15 +55,14 @@
 	      boolean isDossier = Dossier.isDossierDocument(document.getId());
 
           String documentUrl = liveArticleDocument.getCompleteURL();
-          String urisParameter = <xsp-request:get-context-path/> + documentUrl;
           if (isArticle || isDossier) {
               Document liveYear = DocumentHelper.getParentDocument(liveArticleDocument); 
               String yearUrl = <xsp-request:get-context-path/> + liveYear.getCompleteURL();
               Document liveSection = DocumentHelper.getParentDocument(liveYear);
               String sectionUrl =  <xsp-request:get-context-path/> + liveSection.getCompleteURL();
-              urisParameter = yearUrl + "," + sectionUrl + "," + urisParameter; 
+              String urisParameter = yearUrl + "," + sectionUrl; 
+              <uris><xsp:expr>urisParameter</xsp:expr></uris>
           } 
-          <uris><xsp:expr>urisParameter</xsp:expr></uris>
       }
       catch (Exception e) {
           throw new ProcessingException(e);
