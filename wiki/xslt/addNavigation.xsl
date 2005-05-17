@@ -34,7 +34,17 @@
 </xsl:template>
 
 <xsl:template match="bread-crumbs">
-Bread Crumbs: <a href="{crumb/@id}"><xsl:value-of select="crumb"/></a>
+Bread Crumbs:
+<xsl:for-each select="crumb">
+  <xsl:choose>
+  <xsl:when test="position() = last()">
+    <xsl:value-of select="."/>
+  </xsl:when>
+  <xsl:otherwise>
+    <a href="{@path}"><xsl:value-of select="."/></a> &gt;&gt;
+  </xsl:otherwise>
+  </xsl:choose>
+</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="*|@*|node()|text()" priority="-1">

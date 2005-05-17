@@ -1,8 +1,28 @@
 <?xml version="1.0"?>
 
 <navigation>
-<bread-crumbs>
- <crumb id="">Home</crumb>
- <crumb id="syntax">Syntax</crumb>
+<!--
+<bread-crumbs current="0">
+ <crumb id="" path=".">Home</crumb>
 </bread-crumbs>
+-->
+
+<bread-crumbs current="1">
+ <crumb id="" path="../">Home</crumb>
+ <crumb id="syntax" path=".">Syntax</crumb>
+</bread-crumbs>
+
+<!--
+<bread-crumbs current="2">
+ <crumb id="" path="../../">Home</crumb>
+ <crumb id="syntax" path="../">Syntax</crumb>
+ <crumb id="1.0" path=".">1.0</crumb>
+</bread-crumbs>
+
+<bread-crumbs current="2">
+ <crumb id="" path="../../">Home</crumb>
+ <crumb id="syntax" path="../">Syntax</crumb>
+ <crumb id="2.0" path=".">2.0</crumb>
+</bread-crumbs>
+-->
 </navigation>
