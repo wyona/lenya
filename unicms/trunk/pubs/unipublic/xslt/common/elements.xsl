@@ -509,7 +509,7 @@
         <a href="{$root}{@id}{$documentlanguagesuffix}.html">
           <img border="0">
             <xsl:attribute name="src">
-              <xsl:value-of select="$root"/>/<xsl:value-of select="@id"/>/<xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@data"/>
+              <xsl:value-of select="$root"/><xsl:value-of select="@id"/>/<xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@data"/>
             </xsl:attribute>
             <xsl:attribute name="alt"><xsl:value-of select="up:teaser/xhtml:p/xhtml:object/@alt"/></xsl:attribute>
             <xsl:attribute name="width">80</xsl:attribute>
