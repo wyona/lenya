@@ -10,21 +10,50 @@
     <label>Remove from Dossier</label>
   </task>
 
-  <task id="publish-file" class="org.apache.lenya.cms.task.AntTask">
-    <label>Publish</label>
-    <parameter name="target" value="publish-file"/>
+  <task id="publish-file">
+    <label>Publish File and Export</label>
+    <task id="publish-file" class="org.apache.lenya.cms.task.AntTask">
+      <parameter name="target" value="publish-file"/>
+    </task>
+    <task id="export" class="org.apache.lenya.cms.publishing.StaticHTMLExporter">
+      <parameter name="export-path" value="pending"/>
+      <parameter name="substitute-regexp" value="/lenya/unipublic/live/"/>
+      <parameter name="substitute-replacement" value="/"/>
+      <parameter name="my-server-port" value="8080"/>
+    </task>
   </task>
 
-  <task id="publish" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublish">
-    <label>Publish</label>
+  <task id="publish">
+    <label>Publish and Export</label>
+    <task id="publish" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublish"/>
+    <task id="export" class="org.apache.lenya.cms.publishing.StaticHTMLExporter">
+      <parameter name="export-path" value="pending"/>
+      <parameter name="substitute-regexp" value="/lenya/unipublic/live/"/>
+      <parameter name="substitute-replacement" value="/"/>
+      <parameter name="my-server-port" value="8080"/>
+    </task>
   </task>
 
-  <task id="publishtree" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublishTree">
-    <label>Publish Subtree</label>
+  <task id="publishtree">
+    <label>Publish Subtree and export</label>
+    <task id="publishtree" class="ch.unizh.unipublic.lenya.cms.task.UnipublicPublishTree"/>
+    <task id="export" class="ch.unizh.unipublic.lenya.cms.task.UnipublicStaticHTMLExporterTree">
+      <parameter name="export-path" value="pending"/>
+      <parameter name="substitute-regexp" value="/lenya/unipublic/live/"/>
+      <parameter name="substitute-replacement" value="/"/>
+      <parameter name="my-server-port" value="8080"/>
+    </task>
   </task>
 
-  <task id="deactivate" class="ch.unizh.unipublic.lenya.cms.task.UnipublicDeactivate">
+  <task id="deactivate">
     <label>Deactivate</label>
+    <task id="deactivate" class="ch.unizh.unipublic.lenya.cms.task.UnipublicDeactivate"/>
+    <task id="export" class="org.apache.lenya.cms.publishing.StaticHTMLExporter">
+      <parameter name="export-path" value="pending"/>
+      <parameter name="substitute-regexp" value="/lenya/unipublic/live/"/>
+      <parameter name="substitute-replacement" value="/"/>
+      <parameter name="my-server-port" value="8080"/>
+    </task>
   </task>
 
   <task id="deactivatetree" class="ch.unizh.unipublic.lenya.cms.task.UnipublicDeactivateTree">
