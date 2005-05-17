@@ -36,6 +36,7 @@
         <input type="hidden" name="doctype" value="wiki"/>
 	<p>
         ID: <xsl:value-of select="$nodename"/><br/>
+        Path: <xsl:value-of select="$parentid"/><xsl:value-of select="$nodename"/><br/>
         Name: <input type="text" name="childname" value="New Wiki Page"/><br/>
 	</p>
         <input type="submit" name="create" value="YES"/>
