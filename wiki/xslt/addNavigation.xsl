@@ -27,6 +27,7 @@
     <body>
     <p>
     <xsl:apply-templates select="/page/navigation/bread-crumbs"/>
+    <xsl:apply-templates select="/page/navigation-exception"/>
     </p>
   <xsl:copy-of select="/page/xhtml:html/xhtml:body/*"/>
     </body>
@@ -45,6 +46,10 @@ Bread Crumbs:
   </xsl:otherwise>
   </xsl:choose>
 </xsl:for-each>
+</xsl:template>
+
+<xsl:template match="navigation-exception">
+  EXCEPTION: <xsl:value-of select="."/>
 </xsl:template>
 
 <xsl:template match="*|@*|node()|text()" priority="-1">

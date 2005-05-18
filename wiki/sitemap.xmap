@@ -22,6 +22,7 @@
       <map:generator logger="sitemap.generator.text" name="text" src="org.apache.cocoon.generation.TextGenerator">
         <map:parameter name="localizable" value="true"/>
       </map:generator>
+      <map:generator logger="sitemap.generator.navigation" name="navigation" src="org.apache.lenya.pubs.wiki.cocoon.generation.NavigationGenerator"/>
     </map:generators>
     <map:transformers default="xslt">
       <map:transformer name="linkchecker" src="org.apache.lenya.pubs.wiki.cocoon.transformation.LinkRewritingTransformer" logger="sitemap.transformer.linkchecker"/>
@@ -53,6 +54,13 @@
     <map:pipeline>
       <map:match pattern="**/">
         <map:redirect-to uri="index.html"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="navigation.xml">
+        <map:generate type="navigation"/>
+        <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
 
@@ -127,12 +135,9 @@
       <map:match pattern="**.html">
         <map:aggregate element="page">
           <map:part src="cocoon:/{1}.xml"/>
-          <map:part src="navigation.xml"/>
+          <map:part src="cocoon:/navigation.xml"/>
         </map:aggregate>
         <map:transform src="xslt/addNavigation.xsl"/>
-	<!--
-<map:serialize type="xml"/>
--->
         <map:match pattern="authoring/**.html">
           <!-- Add Menu -->
           <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}.xml"/>
