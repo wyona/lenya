@@ -27,14 +27,16 @@ A Wiki Publication featuring
 <ul>
   <li>Wiki Documents as XML</li>
   <li>Wiki Syntax editor</li>
-  <li>Inline Document Creation (LinkChecker and DocumentCreator)</li>
-  <li>TODO: Navigation and Bread-Crumb Path</li>
+  <li>Inline Document Creation (LinkRewriter and DocumentCreator)</li>
+  <li>Bread-Crumb Path</li>
   <li>BUG : Inserting !Hello at the end doesn't work properly</li>
   <li>BUG : Inserting numbers as links, e.g. [Syntax 1.0|1.0] does not seem to work</li>
+  <li>TODO: Global Navigation (e.g. left hand side)</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
-  <li>TODO: LinkChecker for live area</li>
+  <li>TODO: LinkRewriter for live area</li>
   <li>TODO: Implementing JCR</li>
   <li>TODO: Simple cloning of publication</li>
+  <li>TODO: Asset Doctype</li>
   <li>TODO: User Preferences</li>
   <li>TODO: Full-Text Search</li>
   <li>TODO: Integrate Wiki Doctype into other publications (e.g. default)</li>
