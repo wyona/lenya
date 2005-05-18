@@ -28,41 +28,35 @@ public class NavigationGenerator extends ComposerGenerator {
         SAXParser parser = null;
         try {
             File file = new File(new URL(this.resolver.resolveURI(super.source).getURI()).getFile());
+            File sitemapDir = new File(new URL(this.resolver.resolveURI("").getURI()).getFile());
             String filename = file.getAbsolutePath();
-
-            short status = 1; //new CVSWrapper().updateFile(filename);
-            String statusDescription = "EXCEPTION";
-            switch (status) {
-                case 1:
-                    statusDescription = "UPDATED";
-                    break;
-                case 2:
-                    statusDescription = "ADDED";
-                    break;
-                case 3:
-                    statusDescription = "MODIFIED";
-                    break;
-                case 4:
-                    statusDescription = "QUESTIONMARK";
-                    break;
-                case 5:
-                    statusDescription = "UNMODIFIED";
-                    break;
-                default:
-                    break;
-            }
+            getLogger().error("Source: " + super.source);
+            getLogger().error("File: " + filename);
+            getLogger().error("Sitemap: " + sitemapDir);
 
             // Return XML
             this.contentHandler.startDocument();
             AttributesImpl attr = new AttributesImpl();
-            attr.addAttribute("", "status", "status", "CDATA", "" + status);
-            attr.addAttribute("", "description", "description", "CDATA", "" + statusDescription);
             super.contentHandler.startElement(URI, "navigation", "navigation", attr);
             attr.clear();
-            String data = filename;
-            super.contentHandler.characters(data.toCharArray(), 0, data.length());
+            super.contentHandler.startElement(URI, "bread-crumbs", "bread-crumbs", attr);
+            attr.clear();
+
+            String[] nodes = super.source.toString().split("/");
+            for (int i = 0;i < nodes.length;i++) {
+                attr.addAttribute("", "id", "status", "CDATA", "");
+                attr.addAttribute("", "path", "description", "CDATA", ".");
+                super.contentHandler.startElement(URI, "crumb", "crumb", attr);
+                attr.clear();
+                String data = nodes[i];
+                super.contentHandler.characters(data.toCharArray(), 0, data.length());
+                super.contentHandler.endElement(URI, "crumb", "crumb");
+            }
+            super.contentHandler.endElement(URI, "bread-crumbs", "bread-crumbs");
             super.contentHandler.endElement(URI, "navigation", "navigation");
             this.contentHandler.endDocument();
+
+
 /*
             byte[] sresponse = new byte[1024];
             InputSource input = new InputSource(new ByteArrayInputStream(sresponse));

@@ -58,8 +58,8 @@
     </map:pipeline>
 
     <map:pipeline>
-      <map:match pattern="navigation.xml">
-        <map:generate type="navigation"/>
+      <map:match pattern="navigation**/index.xml">
+        <map:generate type="navigation" src="{1}"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
@@ -135,7 +135,7 @@
       <map:match pattern="**.html">
         <map:aggregate element="page">
           <map:part src="cocoon:/{1}.xml"/>
-          <map:part src="cocoon:/navigation.xml"/>
+          <map:part src="cocoon:/navigation{1}.xml"/>
         </map:aggregate>
         <map:transform src="xslt/addNavigation.xsl"/>
         <map:match pattern="authoring/**.html">
