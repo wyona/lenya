@@ -27,12 +27,13 @@ public class NavigationGenerator extends ComposerGenerator {
 
         SAXParser parser = null;
         try {
-            File file = new File(new URL(this.resolver.resolveURI(super.source).getURI()).getFile());
+            //File file = new File(new URL(this.resolver.resolveURI(super.source).getURI()).getFile());
+            //String filename = file.getAbsolutePath();
+            //getLogger().debug("File: " + filename);
+
             File sitemapDir = new File(new URL(this.resolver.resolveURI("").getURI()).getFile());
-            String filename = file.getAbsolutePath();
-            getLogger().error("Source: " + super.source);
-            getLogger().error("File: " + filename);
-            getLogger().error("Sitemap: " + sitemapDir);
+            getLogger().debug("Sitemap: " + sitemapDir);
+            getLogger().debug("Source: " + super.source);
 
             // Return XML
             this.contentHandler.startDocument();
@@ -45,11 +46,16 @@ public class NavigationGenerator extends ComposerGenerator {
             String[] nodes = super.source.toString().split("/");
             for (int i = 0;i < nodes.length;i++) {
                 attr.addAttribute("", "id", "status", "CDATA", "");
-                attr.addAttribute("", "path", "description", "CDATA", ".");
+                attr.addAttribute("", "path", "description", "CDATA", getPath(nodes.length - i - 1));
                 super.contentHandler.startElement(URI, "crumb", "crumb", attr);
                 attr.clear();
-                String data = nodes[i];
-                super.contentHandler.characters(data.toCharArray(), 0, data.length());
+                String label = null;
+                if (i == 0) {
+                    label = "Home";
+                } else {
+                    label = nodes[i];
+                }
+                super.contentHandler.characters(label.toCharArray(), 0, label.length());
                 super.contentHandler.endElement(URI, "crumb", "crumb");
             }
             super.contentHandler.endElement(URI, "bread-crumbs", "bread-crumbs");
@@ -77,5 +83,16 @@ public class NavigationGenerator extends ComposerGenerator {
         } finally {
             this.manager.release((Component) parser);
         }
+    }
+
+    /**
+     *
+     */
+    private String getPath(int n) {
+        String path = "";
+        for (int i = 0;i < n;i++) {
+            path = path + "../";
+        }
+        return path;
     }
 }
