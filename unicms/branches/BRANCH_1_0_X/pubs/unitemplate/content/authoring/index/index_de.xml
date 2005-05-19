@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><unizh:homepage xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace">
+	
+  <lenya:meta>
+    <dc:title>Unicommunication</dc:title>
+    <dc:description>Abstract</dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject>Keywords</dc:subject>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:identity alt="identity" data="images/default_identity.gif"/>
+  <unizh:slogan>Der Slogan</unizh:slogan>
+  <unizh:logo alt="logo" data="images/default_logo.gif"/>
+  <unizh:highlights>
+    <unizh:highlight>
+      <h3>Title h3</h3>
+<p>Groets</p>
+      <p>The text of the highlight.</p>
+    </unizh:highlight>
+  </unizh:highlights>
+  <body>
+  	<h2>Universität und Öffentlichkeit im Dialog</h2>
+    <p>unicommunication (unicom) hat die Aufgabe, die Kommunikation mit
+der internen und externen Öffentlichkeit zu unterstützen.
+Sie sorgt durch ihre PR- und Medienarbeit für ein
+unverwechselbares Bild der Universität Zürich in der
+Öffentlichkeit.</p>
+
+<h3>Kontakt:</h3>
+
+<p>unicommunication Online<br/>
+ Gloriastrasse 18a<br/>
+ 8006 Zürich<br/>
+ Tel. 01 634 41 58<br/>
+ Fax 01 634 23 46<a href="mailto:online@unicom.unizh.ch">
+<br/>
+ online@unicom.unizh.ch</a>
+</p>
+  </body>
+</unizh:homepage>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sectionoverview
+  xmlns="http://unizh.ch/doctypes/section/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  dc:dummy="FIXME:keepNamespace"
+  lenya:dummy="FIXME:keepNamespace"
+  >
+  <lenya:meta>
+    <dc:creator></dc:creator>
+    <dc:title>Section Overview</dc:title>
+    <dc:publisher>Universitaet Zuerich</dc:publisher>
+    <dcterms:created></dcterms:created>
+    <dcterms:issued></dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universitaet Zuerich</dc:rights>
+  </lenya:meta>
+    <body>
+      <p>There are no articles in this section</p>
+    </body>
+</sectionoverview>

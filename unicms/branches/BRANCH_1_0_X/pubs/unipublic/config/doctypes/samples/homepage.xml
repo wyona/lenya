@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<homepage xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:up="http://www.unipublic.unizh.ch/2002/up" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:col="http://apache.org/cocoon/lenya/collection/1.0" xmlns="http://www.w3.org/1999/xhtml" id="/index" xhtml:dummy="FIXME:keepNamespace">
+<!-- the root element indicates the doctype -->
+
+<col:document id="/magazin/gesundheit/2004/Artikel" xlink:href="/Applications/tomcat4.1.31/webapps/lenya/lenya/pubs/unipublic/content/authoring/magazin/gesundheit/2004/Artikel/index_de.xml" xlink:show="embed">Artikel</col:document><col:document id="/magazin/gesundheit/2004/Artikel2" xlink:href="/Applications/tomcat4.1.31/webapps/lenya/lenya/pubs/unipublic/content/authoring/magazin/gesundheit/2004/Artikel2/index_de.xml" xlink:show="embed">Artikel2</col:document>
+
+</homepage>

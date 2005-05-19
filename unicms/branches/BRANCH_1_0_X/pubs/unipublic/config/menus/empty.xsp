@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xsp:page 
+    language="java" 
+    xmlns:xsp="http://apache.org/xsp"
+    xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+    xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+    xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0"
+    xmlns:uc="http://apache.org/cocoon/lenya/usecase/1.0"
+    xmlns="http://apache.org/cocoon/lenya/menubar/1.0"
+>
+
+  <menu>
+  	
+    <menus>
+      <menu name="File" label="File">
+      </menu>
+      
+      <menu name="Edit" label="Search">
+      </menu>
+      
+      <menu name="Workflow" label="Help">
+      </menu>
+
+      <menu name="Help" label="Debug">
+   	    <block>
+	      <item><xsp:attribute name="href"><xsp-request:get-context-path/>/docs-new/docs/index.html</xsp:attribute>User Documentation</item>
+    	  <item>System Documentation</item>
+	      <item>Support</item>
+    	</block>
+        <block>
+	      <item><xsp:attribute name="href"><xsp-request:get-context-path/>/index.html</xsp:attribute>Apache&#160;Lenya&#160;Start&#160;Page</item>
+     	  <item><xsp:attribute name="href"><xsp-request:get-context-path/>/about.html</xsp:attribute>About&#160;Apache&#160;Lenya</item>
+	    </block>
+
+        <block>
+          <item uc:usecase="view-logs" uc:step="overview" href="?">View Task Logs</item>
+	    </block>
+      </menu>
+    </menus>
+    
+  </menu>
+</xsp:page>

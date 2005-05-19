@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- CVS: $Id: publication-sitemap.xmap,v 1.75 2004/05/15 14:26:29 gregor Exp $ -->
+
+  <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  
+  <map:components>
+    <map:actions>
+      <map:action logger="sitemap.action.language-exists" 
+        name="language-exists" 
+        src="org.apache.lenya.cms.cocoon.acting.LanguageExistsAction"/>
+    </map:actions>
+       
+    <map:transformers default="xslt">
+      <map:transformer name="i18n"
+        src="org.apache.cocoon.transformation.I18nTransformer">
+
+        <catalogues default="unizh">
+          <catalogue id="unizh" name="unizh" location="config/i18n"/>
+        </catalogues>
+        <untranslated-text>untranslated</untranslated-text>
+        <cache-at-startup>false</cache-at-startup>
+      </map:transformer>
+      <map:transformer name="documentid-file" logger="lenya.sitemap.transformer.documentid-file" src="ch.unizh.unipublic.lenya.cms.cocoon.transformation.DocumentidToFileTransformer"/>
+      <map:transformer name="link-rewrite" logger="lenya.sitemap.transformer.link-rewrite" src="org.apache.lenya.cms.cocoon.transformation.LinkRewritingTransformer"/>
+    </map:transformers>
+    
+    <map:selectors>
+      <map:selector name="request-method" logger="sitemap.selector.request-method"
+        src="org.apache.cocoon.selection.RequestMethodSelector"/>
+      <map:selector name="parameter"
+        logger="sitemap.selector.parameter" src="org.apache.cocoon.selection.ParameterSelector"/>
+    </map:selectors>
+    
+    <map:serializers default="html">
+    <map:serializer logger="sitemap.serializer.html" mime-type="text/html" name="html" pool-grow="4" pool-max="32" pool-min="4" src="org.apache.cocoon.serialization.HTMLSerializer">
+      <doctype-public>-//W3C//DTD HTML 4.01 Transitional//EN</doctype-public>
+      <doctype-system>http://www.w3.org/TR/html4/loose.dtd</doctype-system>
+      <buffer-size>1024</buffer-size>
+      <encoding>UTF-8</encoding>
+    </map:serializer>
+    </map:serializers>
+    
+  </map:components>
+
+  <map:views>
+    <map:view name="aggregation" from-label="aggregation">
+      <map:serialize type="xml"/>
+    </map:view>
+  </map:views>
+
+  <map:resources>
+    <map:resource name="style-cms-page">
+      <map:transform src="../../xslt/util/page2xhtml.xsl">
+        <map:parameter name="contextprefix" value="{request:contextPath}"/>
+      </map:transform>
+      <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+      <map:select type="parameter">
+        <map:parameter name="statusCode" value="{statusCode}"/>
+        <map:when test="">
+          <map:serialize/>
+        </map:when>
+        <map:otherwise>
+          <map:serialize status-code="{statusCode}"/>
+        </map:otherwise>
+      </map:select>
+    </map:resource>
+  </map:resources>
+
+  <map:pipelines>
+
+   <map:pipeline>
+      <map:match pattern="*/">
+        <map:select type="parameter">
+          <map:parameter name="parameter-selector-test" value="{1}"/>
+          <map:when test="webperlen">
+          </map:when>
+          <map:otherwise>
+            <map:redirect-to uri="index.html"/>
+          </map:otherwise>
+        </map:select>  
+      </map:match>
+
+      <map:match pattern="**/">
+        <map:redirect-to uri="{request:contextPath}/{page-envelope:publication-id}/{1}.html"/>
+      </map:match>
+
+      <map:match pattern="*/webperls.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/dossiersbox.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/magazin.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
+      <map:match pattern="*/campus.html">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+    </map:pipeline>
+
+    <!-- asset icons -->
+    <map:pipeline>
+      <map:match pattern="*/images/icons/*.gif">
+        <map:act type="resource-exists" src="../unizh/resources/shared/images/icons/{2}.gif">
+          <map:read mime-type="image/gif" src="../unizh/resources/shared/images/icons/{../2}.gif"/>
+        </map:act>
+        <map:read mime-type="image/gif" src="../unizh/resources/shared/images/icons/default.gif"/>
+      </map:match>
+    </map:pipeline>
+    
+    <!-- matches layout images -->
+    <map:pipeline>
+      <map:match pattern="**/images/**.*">
+        <map:read src="resources/shared/images/{2}.{3}" mime-type="image/{3}" />
+      </map:match>
+    </map:pipeline>
+
+    <!-- static resources for BXENG -->
+    <map:pipeline>
+      
+      <map:match pattern="*/**.rng">
+        <map:generate src="config/doctypes/schemas/{2}.rng"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+      <map:match pattern="**/content-bxeng.css">
+	<map:generate src="resources/shared/css/main.xml"/>
+	<map:transform src="../../resources/css/css.xsl">
+	  <map:parameter name="contextprefix" value="{request:contextPath}"/>
+	</map:transform>
+	<map:serialize type="text" mime-type="text/css"/>
+      </map:match>
+      
+    </map:pipeline>
+    
+    <map:pipeline>
+
+      <!-- mounting doctypes.xmap -->
+      <!-- pattern="lenyadocument-{document-type}/{publication-id}/{area}/{document-url}" -->
+      <map:match pattern="lenyadocument-**">
+        <map:mount uri-prefix="lenyadocument-" src="doctypes.xmap" check-reload="true" reload-method="synchron"/>
+      </map:match>
+      
+      
+      <!-- /lenyabody-{rendertype}-{version}/{area}{document-url} -->
+      <map:match pattern="lenyabody-*-*/**">
+        <map:generate src="cocoon:/lenyadocument-{page-envelope:document-type}-{1}-{2}/{page-envelope:publication-id}/{3}"/>
+        <map:transform type="i18n">
+          <map:parameter name="locale" value="{page-envelope:document-language}"/>
+        </map:transform>
+        <map:select type="parameter">
+          <map:parameter name="parameter-selector-test" value="{1}"/>
+          <map:when test="view">
+	      <map:transform type="link-rewrite"/>
+          </map:when>
+        </map:select>
+        <map:serialize type="xml"/>
+      </map:match>
+
+    </map:pipeline>
+    
+    
+    <!-- This is the main entry point into the publication. It fetches the
+         XHTML page and applies the lenya-page transformation, which adds
+         the Lenya menubar.
+         -->
+    <map:pipeline type="noncaching">
+      
+      <!-- The xhtml pipeline is used to generate the XHTML for bxeng (Bitflux) dynamically.
+           The Lenya menubar is not attached.
+           -->
+      <map:match pattern="**.bxe.html">
+        <map:generate src="cocoon:/lenyabody-edit-standard/{1}.html"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <!-- printer friendly -->
+      <map:match pattern="*/**.print.html">
+        
+        <map:act type="language-exists">
+          <map:generate src="cocoon:/lenyabody-view-print/{../1}/{../2}.html"/>
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+          <map:serialize type="html"/>
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+
+      </map:match>
+
+      <!-- with image upload dots -->
+      <map:match pattern="lenya-image-upload/*/**.html">
+        
+        <map:act type="language-exists">
+          <map:generate src="cocoon:/lenyabody-imageupload-standard/{../1}/{../2}.html"/>
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+          <map:serialize type="xml"/>
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+
+      </map:match>
+
+    <!--newsletter-->
+      <map:match pattern="*/**.mail.html">
+        <map:generate src="cocoon:/lenyabody-view-mail/{1}/{2}.html"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+
+    <!-- Dossiers pipelines --> 
+    <!-- redirect the dossiers to its first child's year --> 
+        <map:match pattern="*/dossiers.html">
+            <map:redirect-to uri="dossiers/{sitetree:first-child-id}.html"/>
+        </map:match>
+
+     <!-- the 2level (year) isn't redirect by the dossier  -->  
+        <map:match pattern="*/dossiers/*.html">
+          <map:act type="language-exists">
+            <map:generate src="cocoon:/lenyabody-view-standard/{../1}/dossiers/{../2}.html"/>
+            <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+            <map:serialize type="html"/>
+          </map:act>
+  
+          <!-- There is no version of the requested document-id for the
+               requested language. -->
+          <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+          <map:transform src="../../xslt/exception/missing-language.xsl"/>
+          <map:call resource="style-cms-page"/>
+        </map:match>
+
+    <!-- redirect the 2level to its first child: section to year (sectionoverview) --> 
+        <map:match pattern="*/*/*.html">
+            <map:redirect-to uri="{3}/{sitetree:first-child-id}.html"/>
+        </map:match>
+
+      <!-- standard -->
+      <map:match pattern="*/**.html">
+        
+        <map:act type="language-exists">
+          <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+          <map:serialize type="html"/>
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+
+      </map:match>
+     
+      <map:handle-errors>
+        <map:select type="exception">
+          <map:when test="document-does-not-exist">
+            <map:generate src="../../content/util/empty.xml" />
+            <map:transform src="../../xslt/exception/document-does-not-exist.xsl">
+              <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+              <map:parameter name="documenturl" value="{page-envelope:document-url}"/>
+            </map:transform>
+            <map:call resource="style-cms-page">
+              <map:parameter name="statusCode" value="404"/>
+            </map:call>
+          </map:when>
+           <map:when test="resourcenotfound">
+             <map:generate src="../../content/util/empty.xml" />
+            <map:transform src="../../xslt/exception/document-does-not-exist.xsl">
+              <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+              <map:parameter name="documenturl" value="{page-envelope:document-url}"/>
+            </map:transform>
+            <map:call resource="style-cms-page">
+              <map:parameter name="statusCode" value="404"/>
+            </map:call>
+          </map:when>
+        <map:otherwise>
+        <map:generate type="notifying"/>
+        <map:transform src="../../../stylesheets/system/error2html.xslt">
+          <map:parameter name="contextPath" value="{request:contextPath}"/>
+        </map:transform>
+         </map:otherwise>
+        </map:select>
+        <map:serialize type="html"/>
+      </map:handle-errors>
+      
+    </map:pipeline>
+
+  </map:pipelines>
+</map:sitemap>

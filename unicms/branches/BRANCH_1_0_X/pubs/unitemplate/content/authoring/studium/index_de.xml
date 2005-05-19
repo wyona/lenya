@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://unizh.ch/doctypes/section/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">
+  <lenya:meta>
+    <dc:creator>Autor der Dokuments</dc:creator>
+    <dc:title>Leitung und Verwaltung</dc:title>
+    <dc:subject>Keywords</dc:subject>
+    <dc:publisher>Universitaet Zuerich</dc:publisher>
+    <dc:date>
+      <dc:created>Creation date</dc:created>
+      <dc:issued>First published date</dc:issued>
+    </dc:date>
+    <dc:language>de</dc:language>
+    <dc:rights>Universitaet Zuerich</dc:rights>
+  </lenya:meta>
+  <column id="1">
+    <highlights>
+      <highlight>
+        <h2>Title h2 (link allowed)</h2>
+        <p>The text of the highlight.</p>
+        <p>Styles and links are allowed.</p>
+        <p>There can be zero or many highlights.</p>
+        <p>Images can be placed in a highlight, too (with link).</p>
+        <img alt="Logo der Universitaet Zuerich" src="uni-logo.gif"/>
+      </highlight>
+    </highlights>
+    <grouplist>
+      <group>
+        <head>
+          <title>Lectures Register</title>
+          <link>www.unizh.ch/VVZV1/</link>
+        </head>
+        <entrylist>
+          <entry>
+            <title>Theological Faculty</title>
+            <link>www.theol.unizh.ch</link>
+          </entry>
+          <entry>
+            <title>Law Faculty</title>
+            <link>www.jur.unizh.ch</link>
+          </entry>
+        </entrylist>
+      </group>
+    </grouplist>
+  </column>
+  <column id="2">
+    <grouplist>
+      <group>
+        <head>
+          <title>Fragen zum Studium</title>
+          <link>www.unizh.ch/VVZV1/</link>
+        </head>
+        <entrylist>
+          <entry>
+            <title>Häufig gestellte Fragen (FAQ)</title>
+            <link>www.ifi.unizh.ch/CL/UIS/Kanzlei/FAQ/</link>
+          </entry>
+          <entry>
+            <title>Frage-Antwort-System (LUIS)</title>
+            <link>www.ifi.unizh.ch/CL/UIS/LUIS/</link>
+          </entry>
+          <entry>
+            <title>Studienführer</title>
+            <link>www.ifi.unizh.ch/CL/UIS/Studienfuehrer/VonAbisZ/</link>
+          </entry>
+        </entrylist>
+      </group>
+    </grouplist>
+  </column>
+  <column id="3">
+    <grouplist>
+      <group>
+        <head>
+          <title>Internationales / Mobilität</title>
+          <link>www.unizh.ch/VVZV1/</link>
+        </head>
+        <entrylist>
+          <entry>
+            <title>Kontakt</title>
+            <link>www.unizh.ch/studium/mobilitaet/kontakt.html</link>
+          </entry>
+          <entry>
+            <title>Austauschangebote</title>
+            <link>www.unizh.ch/studium/mobilitaet/austauschangebote/index.html</link>
+          </entry>
+        </entrylist>
+      </group>
+    </grouplist>
+  </column>
+</section>

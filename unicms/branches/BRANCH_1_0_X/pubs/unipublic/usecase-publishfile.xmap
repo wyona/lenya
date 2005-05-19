@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  
+  <map:resources>
+    <map:resource name="style-cms-page">
+      <map:transform src="../../xslt/util/page2xhtml.xsl">
+        <map:parameter name="contextprefix" value="{request:contextPath}"/>
+      </map:transform>
+      <map:select type="parameter">
+        <map:parameter name="statusCode" value="{statusCode}"/>
+        <map:when test="">
+          <map:serialize/>
+        </map:when>
+        <map:otherwise>
+          <map:serialize status-code="{statusCode}"/>
+        </map:otherwise>
+      </map:select>
+    </map:resource>
+  </map:resources>
+	
+  <map:pipelines>
+	  
+    <map:pipeline type="noncaching">
+      
+      <map:match pattern="showscreen" type="step">
+        <map:generate type="serverpages" src="lenya/content/publishing/publish-file-screen.xsp"/>
+        <map:transform src="lenya/xslt/publishing/publish-file-screen.xsl">
+          <map:parameter name="use-request-parameters" value="true"/>
+        </map:transform>
+        <map:call resource="style-cms-page"/>
+      </map:match>
+          
+      <map:match pattern="publish" type="step">
+        <map:act type="task">
+          <map:parameter name="publication-id" value="{page-envelope:publication-id}"/>
+          <map:parameter name="task-id" value="{request-param:task-id}"/>
+          <map:parameter name="properties.export.server-port" value="{request:serverPort}"/>
+          <map:parameter name="properties.export.context-path" value="{request:contextPath}"/>
+          <map:redirect-to session="true" uri="{request:requestURI}"/>
+        </map:act>
+      </map:match>
+
+      <map:handle-errors>
+        <map:select type="exception">
+          <map:when test="parent-node-not-found">
+            <map:generate src="../../content/util/empty.xml"/>
+            <map:transform src="../../xslt/exception/parent-node-not-found.xsl"/>
+            <map:call resource="style-cms-page"/>
+          </map:when>
+          <map:otherwise>
+            <map:generate type="notifying"/>
+            <map:transform src="../../../stylesheets/system/error2html.xslt">
+              <map:parameter name="contextPath" value="{request:contextPath}"/>
+            </map:transform>
+          </map:otherwise>
+        </map:select>
+        <map:serialize type="html"/>
+      </map:handle-errors>
+      
+      
+    </map:pipeline>
+    
+	</map:pipelines>
+	
+</map:sitemap>

@@ -1,0 +1,32 @@
+Um die Authentifizierung mit Hilfe des LDAPUser zu installieren
+muessen folgende Einstellung getaetigt werden: 
+
+1. Das Passwort mgr-pw (Default=sekret) im File ldap.properties muss
+   auf das korrekte Passwort des Managers gestellt werden.
+
+2. Der Public Key muss im File .keystore vorhanden sein. Dazu die
+   Beschreibung des LDAP-Experten der UniZH
+
+> Das CA Certificate der Uni finden sie hier:
+> 
+> https://www.unizh.ch/cgi-bin/ssl-dir/loadCACert?FORMAT=ASCII
+> 
+> Kopieren sie es in ein File und importieren sie dieses dann in ihr
+> Keystore:
+> 
+> keytool -import -keystore <keystorefile> -file <ca_cert_file> \
+>         -alias unizh.ch
+> 
+> Falls sie noch "alte" Keys in ihrem Keystore haben, empfehle ich, diese
+> zu loeschen:
+> 
+> keytool -keystore <keystorefile> -list
+> keytool -keystore <keystorefile> -delete -alias <alias_name>
+> 
+> Gruss,
+> -Luzian Scherrer
+> -- 
+> University of Zurich, Central Computing  <luzian.scherrer@id.unizh.ch> 
+> Tel: +41 1 63 56778   --   Fax: +41 1 63 54505   --   Office: Y11-F-76
+
+

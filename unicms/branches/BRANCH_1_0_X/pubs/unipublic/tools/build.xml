@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<project default="migrate" basedir="." name="migration">
+    <description>Migration of the articles, dossiers, and resources. Property pub.dir must be defined</description> 
+	<property name="pub.dir" value=""/>
+	
+	<target name="migrate" description="migrate the articles, the dossiers and the resources. Needed is the pub.dir property (Call for ex: -Dpub.dir=/home/.../unipublic)">
+  	<antcall target="migrateArticles"/>
+  	<antcall target="migrateDossiers"/>
+  	<antcall target="rename"/>
+  	<antcall target="migrateImages"/>
+  	<antcall target="migrateTree"/>
+  	<antcall target="instantiateWorkflow"/>
+  </target>
+ 
+  <target name="migrateArticles" description="transform the xm of the articles">
+    <taskdef name="write" classname="ch.unizh.unipublic.lenya.cms.ant.ArticleMigrationTask"/>
+    <echo >Write the new date</echo> 
+    <write
+      baseDir="in"
+    />
+    <echo >Call the stylesheet to transform the articles</echo>
+    <xslt
+      basedir="in"
+      destdir="out"
+      extension=".xml"
+      style="articleMigration.xsl">
+      <include name="**/*.xml"/>
+      <exclude name="**/dossiers/**/*.xml"/>
+      <exclude name="**/authoring/newsletter/**.xml"/>
+      <exclude name="**/authoring/*.xml"/>
+      <param name="resourcePath" expression="resources/publication/images/live/"/>
+    </xslt>
+
+  </target>
+
+  <target name="migrateDossiers" description="transform the xml of the dossiers. Needed is the pub.dir property.">
+    <echo >Call the stylesheet to transform the dossiers</echo>
+    <xslt
+      basedir="in"
+      destdir="out"
+      extension=".xml"
+      style="dossierMigration.xsl">
+      <include name="**/dossiers/**/*.xml"/>
+      <param name="publicationPath" expression="${pub.dir}"/>
+    </xslt>
+  </target>
+
+  <target name="rename" description="rename the index.xml file to index_de.xml">
+    <echo >Change the file's file name from index.xml to index_de.xml</echo>
+    <move todir="out" includeemptydirs="false">
+      <fileset dir="out">
+        <exclude name="**/authoring/newsletter/**.xml"/>
+        <exclude name="**/authoring/*.xml"/>
+        <exclude name="**/**_de.xml"/>
+      </fileset>
+      <mapper type="glob" from="*.xml" to="*_de.xml"/>
+    </move>
+  </target>
+  
+  <target name="migrateImages" description="migrate the images">
+    <echo >Migrate the images</echo>
+    <copy todir="out/resources/authoring" includeemptydirs="false">
+      <fileset dir="in/images/live">
+        <include name="**/*.jpg"/>
+        <include name="**/*.gif"/>
+        <exclude name="img/**/*.jpg"/>
+        <exclude name="img_uni/**/*.jpg"/>
+        <exclude name="img_unipublic/**/*.jpg"/>
+        <exclude name="img/**/*.gif"/>
+        <exclude name="img_uni/**/*.gif"/>
+        <exclude name="img_unipublic/**/*.gif"/>
+      </fileset>
+    </copy>
+
+    <echo >Migrate the images ' meta</echo>
+    <replace dir="in/authoring">
+      <include name="**/*.*.meta"/>
+      <replacetoken><![CDATA[<dc:metadata]]></replacetoken>
+      <replacevalue><![CDATA[<dc:metadata xmlns:dc="http://purl.org/dc/elements/1.1/"]]></replacevalue>
+    </replace>
+    <xslt
+      basedir="in/authoring"
+      destdir="out/resources/authoring"
+      extension=".meta"
+      style="imageMetaMigration.xsl">
+      <include name="**/*.*.meta"/>
+    </xslt>
+   </target>
+  	 
+   <target name="migrateTree" description="transform the tree">
+	    <taskdef name="migrateTree" classname="ch.unizh.unipublic.lenya.cms.ant.TreeMigrationTask"/>
+	    <echo >Migrate the authoring tree</echo> 
+	    <migrateTree
+	      baseDir="out/authoring"
+	      siteTreeFile ="/edith/unipublic/sitetree.xml"	
+	    />
+	    <copy file="sitetree.xml" tofile="out/authoring/sitetree.xml"/>
+   </target>
+	
+   <target name="instantiateWorkflow">
+    <taskdef name="instantiateWorkflow" classname="ch.unizh.unipublic.lenya.cms.ant.WorkflowMigrationTask"/>
+    <echo >Instantiate a workflow for all migrated document</echo> 
+    <instantiateWorkflow
+      baseDir="out/authoring"
+      workflowDir = "out/workflow/history/authoring"	
+      workflowFile ="/edith/unipublic/workflow.xml"	
+    />
+   </target>	
+  
+</project>
+
+
