@@ -21,6 +21,8 @@
 <lenya:cocoon-version>2.1.7</lenya:cocoon-version>
 <lenya:name>Lenya's Wiki</lenya:name>
 
+<lenya:credits>This Wiki publication was originally written by Michael Wechner (michael.wechner@wyona.com)</lenya:credits>
+
 <lenya:description>
 A Wiki Publication featuring
 
