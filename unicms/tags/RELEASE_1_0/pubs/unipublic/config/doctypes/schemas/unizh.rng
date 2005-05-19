@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:up="http://www.unipublic.unizh.ch/2002/up"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+         >
+
+<define name="lightblock.class">
+  <choice>
+	<ref name="div"/>
+	<ref name="p"/>
+  </choice>
+</define>
+
+<define name="up.related-contents">
+  <element name="up:related-contents">
+    <zeroOrMore>
+      <ref name="up.related-content"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="up.related-content">
+  <element name="up:related-content">
+    <ref name="up.title"/>
+    <oneOrMore>
+      <ref name="up.link"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="up.title">
+  <element name="up:title">
+    <text/>
+  </element>
+</define>
+
+<define name="up.link">
+  <element name="up:link">
+    <ref name="a"/>
+  </element>
+</define>
+
+<define name="up.teaser">
+  <element name="up:teaser">
+    <oneOrMore>
+      <ref name="lightblock.class"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="up.tagline">
+  <element name="up:tagline">
+    <oneOrMore>
+      <choice>
+        <text/>
+        <ref name="a"/>
+      </choice>
+    </oneOrMore>
+  </element>
+</define>
+
+</grammar>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogue xml:lang="de">
+  <message key="publication_Unipublic">Unipublic</message>
+
+  <message key="print_view">Druckansicht</message>
+  <message key="contact">Kontakt</message>
+  <message key="search">Suchen</message>
+  
+  <message key="university_zurich">Universität Zürich</message>
+  <message key="impressum">Impressum</message>
+</catalogue>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         ns="http://www.w3.org/1999/xhtml"
+         xmlns:up="http://www.unipublic.unizh.ch/2002/up"
+         >
+
+
+  <define name="up.related-contents">
+    <element name="up:related-contents">
+      <zeroOrMore>
+        <ref name="up.related-content"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="up.related-content">
+    <element name="up:related-content">
+      <ref name="up.title"/>
+      <oneOrMore>
+        <ref name="up.item"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="up.title">
+    <element name="up:title">
+      <text/>
+    </element>
+  </define>
+
+  <define name="up.item">
+    <element name="up:item">
+      <oneOrMore>
+        <choice>
+          <text/>
+          <ref name="a"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="up.link">
+    <element name="up:link">
+      <ref name="a"/>
+    </element>
+  </define>
+
+  <define name="up.teaser">
+    <element name="up:teaser">
+      <oneOrMore>
+        <ref name="lightblock.class"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="lightblock.class">
+    <choice>
+      <ref name="div"/>
+      <ref name="p"/>
+    </choice>
+  </define>
+
+  <define name="up.tagline">
+    <element name="up:tagline">
+      <oneOrMore>
+        <choice>
+          <text/>
+          <ref name="a"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+</grammar>

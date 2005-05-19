@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<homepage xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:col="http://apache.org/cocoon/lenya/collection/1.0"
+      xhtml:dummy="FIXME:keepNamespace">
+	<!-- the root element indicates the doctype -->
+</homepage>
+

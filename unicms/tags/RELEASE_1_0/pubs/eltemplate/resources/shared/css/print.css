@@ -1,0 +1,70 @@
+/*Universitaet Zuerich css-Stylesheet unicms Printversion 030915
+================================================================*/
+
+
+/* ---------------------------------------------Sitelemente------------------------------------------------ */
+
+.identity	  { background-color: #ccc; margin-bottom: 10px; border: 1px; width: 100%; height: 80px }
+.logo	  { background-color: #ccc; margin-bottom: 10px; border: 1px; width: 100%; height: 80px }
+.slogan	 { color: #366; font-style: oblique; font-weight: bold; font-size: 24px; font-family: "Times New Roman", Times, serif }
+.ancestor	{ font-weight: bold; font-size: 14px; font-family: "Times New Roman", Times, serif; text-transform: uppercase }
+
+/* ---------------------------------------------Headers------------------------------------------------ */
+h1	{ color: #333; font-weight: bold; font-size: 24px; font-family: "Times New Roman", Times, serif }
+h2	{ color: #669; font-weight: bold; font-size: 18px; font-family: "Times New Roman", Times, serif }
+h3	{ font-weight: bold; font-size: 14px; font-family: "Times New Roman", Times, serif }
+h4	{}
+
+/* ---------------------------------------------Text--------------------------------------------------- */
+body	  { color: #000; background-color: white }
+a:link	  { color: #000 }
+a:active   { color: #000 }
+a:visited	  { color: #000 }
+.content1col   { font-size: 12px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif }
+.content2cols   { font-size: 12px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; padding: 0px 0px 0px 13px }
+.content3cols   { font-size: 12px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; padding: 0px 13px }
+.textblock   { font-size: 12px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; width: 387px }
+
+.caption	 { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular; padding-top: 4px; padding-bottom: 4px }
+.attention  { color: #c00 }
+hr	   { color: #999; background-color: #999; width: 100%; height: 1px }
+.internal  { font-size: 9px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; text-align: center }
+.footer { font-size: 9px; font-family: Verdana, Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; padding: 0px 13px }
+
+
+/* ---------------------------------------------Navigationsblock-------------------------------------- */
+.publtitel   { color: #fff;  font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular;  padding: 0px 0px 0px 7px; text-transform: uppercase }
+.publtitelcel	{ background-color: #669 }
+.navoff   { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular; background-color: #ddd }
+.navon   { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular }
+.nlevel1   { padding: 0px 0px 0px 7px }
+.nlevel2   { padding: 0px 0px 0px 14px }
+.nlevel3   { padding: 0px 0px 0px 21px }
+.nlevel4   { padding: 0px 0px 0px 28px }
+
+/* ---------------------------------------------Highlights---------------------------------------------- */
+.highlighttitle       { font-weight: bold }
+.highlight1         { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; background-color: transparent; margin: 0px 0px 2px; padding: 4px 4px 4px 7px; border: dotted 1px #000; width: 100% }
+.highlight2       { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; background-color: transparent; margin: 0px 0px 2px; padding: 4px 4px 4px 7px; border: dotted 1px #000; width: 100% }
+.highlight3       { font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; background-color: transparent; margin: 0px 0px 2px; padding: 4px 4px 4px 7px; border: dotted 1px #000; width: 100% }
+
+/* ---------------------------------------------Listen--------------------------------------------------- */
+ul.type1 { list-style-type:circle }
+ul.type2 { list-style-type:square }
+ul.type3 { list-style-image:url(/lenya/unizh/live/images/t_pfeil.gif) }
+ul.children { list-style-image:url(/lenya/unizh/live/images/pf_sw.gif) }
+ul.anchors { list-style-image:url(/lenya/unizh/live/images/pf_gn.gif) }
+ol.type1 { list-style-type:decimal }
+ol.type2 { list-style-type:upper-roman }
+
+/* ---------------------------------------------Tabellen------------------------------------------------ */
+table.ornate    { border: solid 1px #000; width: 100%; border-spacing: 0px; empty-cells: show; table-layout: fixed }
+th.ornate	   { background-color: transparent; vertical-align: top; padding: 2px; border: solid 1px #000 }
+td.ornate	   { background-color: transparent; vertical-align: top; padding: 2px; border: solid 1px #000 }
+
+table.basic {  }
+th.basic	 { vertical-align: top }
+td.basic	 { vertical-align: top }
+
+/* ---------------------------------------------Print--------------------------------------------------- */
+.printview   { margin-left: 0px; width: 18cm }
