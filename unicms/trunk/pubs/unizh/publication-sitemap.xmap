@@ -41,7 +41,17 @@
         <map:redirect-to uri="index.html"/>
       </map:match>
     </map:pipeline>
-    
+
+    <!-- asset icons -->
+    <map:pipeline>
+      <map:match pattern="*/images/icons/*.gif">
+        <map:act type="resource-exists" src="../unizh/resources/shared/images/icons/{2}.gif">
+          <map:read mime-type="image/gif" src="../unizh/resources/shared/images/icons/{../2}.gif"/>
+        </map:act>
+        <map:read mime-type="image/gif" src="../unizh/resources/shared/images/icons/default.gif"/>
+      </map:match>
+    </map:pipeline>
+        
     <map:pipeline>
       <!-- pattern="{area}/{doctype}/{document-id}.html" -->
       <map:match pattern="*/*/**.html.xml">
