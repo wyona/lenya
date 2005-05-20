@@ -99,7 +99,7 @@ function validateForm(theForm)
                 <td class="lenya-form-caption">Subject (Keywords):</td><td><input class="lenya-form-element" type="text" name="properties.create.subject"/></td>
               </tr>
               <tr>
-                <td class="lenya-form-caption">Description:</td><td><textarea class="lenya-form-element" name="properties.create.description" rows="3"><xsl:apply-templates select="dc:description"/> </textarea></td>
+                <td class="lenya-form-caption">Description:</td><td><textarea class="lenya-form-element" name="properties.create.description" rows="3"><xsl:apply-templates select="dc:description"/>&#160;</textarea></td>
               </tr>
               <tr>
                 <td class="lenya-form-caption">Publisher:</td><td><input class="lenya-form-element" type="text" name="properties.create.publisher" value="{/parent-child/dc:publisher}"/></td>
