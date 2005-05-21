@@ -35,6 +35,7 @@ A Wiki Publication featuring
   <li>BUG : Inserting numbers as links, e.g. [Syntax 1.0|1.0] does not seem to work</li>
   <li>TODO: Global Navigation (e.g. left hand side)</li>
   <li>TODO: Adding Workflow (Publishing, ...)</li>
+  <li>TODO: Watchlist</li>
   <li>TODO: LinkRewriter for live area</li>
   <li>TODO: Implementing JCR</li>
   <li>TODO: Simple cloning of publication</li>
