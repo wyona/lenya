@@ -84,7 +84,7 @@
               <td valign="top" width="767">
                 <table border="0" width="767">
                   <tr>
-                    <td width="1" height="350"><img src="images/1.gif" width="1" height="350"/></td>
+                    <td width="1" height="350"><img src="{$imageprefix}/1.gif" width="1" height="350"/></td>
                     <td width="516" valign="top">
                       <div class="content">
                         <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
@@ -152,7 +152,7 @@
               <td valign="top" width="750">
                 <table border="0" width="750" height="320">
                   <tr>
-                    <td width="1" height="350"><img src="images/1.gif" width="1" height="350"/></td>
+                    <td width="1" height="350"><img src="{$imageprefix}/1.gif" width="1" height="350"/></td>
                     <td width="500" valign="top">
                       <div class="content">
                         <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
@@ -237,7 +237,7 @@
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-	<a href="javascript:toggleLayer('{@idref}','visible')" onMouseOver="toggleLayer('{@idref}','visible')" onMouseOut="toggleLayer('{@idref}','hidden')"><xsl:value-of select="."/></a>
+	<a href="#" onClick="toggleLayer('{@idref}','visible')" onMouseOver="toggleLayer('{@idref}','visible')" onMouseOut="toggleLayer('{@idref}','hidden')"><xsl:value-of select="."/></a>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
