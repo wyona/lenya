@@ -9,7 +9,7 @@
 	<usecase id="move-node"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
 	<usecase id="rename"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
 	<usecase id="rename-label"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
-	
+	<usecase id="change-visibility"><role id="edit"/><role id="review"/><role id="organize"/></usecase>	
 	<usecase id="asset"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
 	
 	<usecase id="info-meta"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
