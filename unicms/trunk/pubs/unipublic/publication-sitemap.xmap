@@ -163,7 +163,6 @@
 
     </map:pipeline>
     
-    
     <!-- This is the main entry point into the publication. It fetches the
          XHTML page and applies the lenya-page transformation, which adds
          the Lenya menubar.
@@ -176,6 +175,15 @@
       <map:match pattern="**.bxe.html">
         <map:generate src="cocoon:/lenyabody-edit-standard/{1}.html"/>
         <map:serialize type="xml"/>
+      </map:match>
+
+      <!-- RSS -->
+      <map:match pattern="*/**.rss.html">
+        <map:generate src="cocoon:/lenyabody-view-atom/{1}/{2}.html"/>
+<!--
+        <map:transform src="xslt/common/atomToHtml.xsl"/>
+-->
+        <map:serialize type="xml"/>  
       </map:match>
 
       <!-- printer friendly -->
@@ -218,7 +226,6 @@
         <map:serialize type="xml"/>
       </map:match>
 
-
     <!-- Dossiers pipelines --> 
     <!-- redirect the dossiers to its first child's year --> 
         <map:match pattern="*/dossiers.html">
@@ -242,7 +249,7 @@
 
     <!-- redirect the 2level to its first child: section to year (sectionoverview) --> 
         <map:match pattern="*/*/*.html">
-            <map:redirect-to uri="{3}/{sitetree:first-child-id}.html"/>
+          <map:redirect-to uri="{3}/{sitetree:first-child-id}.html"/>   
         </map:match>
 
       <!-- standard -->
