@@ -243,8 +243,12 @@
     </span>
   </xsl:template>
   <xsl:template match="unizh:highlights">
-    <xsl:for-each select="unizh:highlight">
-      <table width="100%">
+    <xsl:apply-templates/>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:highlight">
+     <table width="100%">
         <tr>
           <td class="highlight{(position()-1) mod 3}">
             <xsl:apply-templates/>
@@ -252,12 +256,31 @@
             <xsl:call-template name="asset-dots">
               <xsl:with-param name="insertWhere" select="'inside'"/>
             </xsl:call-template>
-          </td>
+          </td> 
         </tr>
       </table>
-    </xsl:for-each>
   </xsl:template>
-  
+ 
+  <xsl:template match="unizh:rss-reader">
+    <xsl:variable name="items" select="@items"/>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="background-color: #669; color: #fff"><xsl:value-of select="xhtml:title"/></td>
+      </tr>
+      <tr>
+        <td style="background-color: #ddd">
+          <xsl:for-each select="rss/channel/item">
+            <xsl:if test="position() &lt;= $items">
+              <a target="_blank" href="{link}"><xsl:value-of select="title"/></a><br/>
+              <!-- <xsl:value-of select="description"/><br/>-->
+            </xsl:if>
+          </xsl:for-each> 
+         </td>
+      </tr>
+    </table>
+  </xsl:template>
+
+ 
   <xsl:template match="unizh:highlights" mode="print">
     <div class="highlights">
       <xsl:for-each select="unizh:highlight">

@@ -141,6 +141,7 @@
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
   	    </map:transform>
+        <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{4}"/>

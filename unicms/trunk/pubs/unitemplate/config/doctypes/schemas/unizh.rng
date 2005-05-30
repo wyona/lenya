@@ -28,9 +28,14 @@
 <define name="unizh.highlights">
   <optional>
     <element name="unizh:highlights">
-      <zeroOrMore>
-        <ref name="unizh.highlight"/>
-      </zeroOrMore>
+      <interleave>
+        <zeroOrMore>
+          <ref name="unizh.highlight"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="unizh.rss-reader"/>
+        </zeroOrMore>
+      </interleave>
     </element>
   </optional>
 </define>
@@ -61,6 +66,24 @@
         </choice>
       </attribute>
     </optional>
+  </element>
+</define>
+
+<define name="unizh.rss-reader">
+  <element name="unizh:rss-reader">
+    <interleave>
+      <attribute name="url">
+        <text/>
+      </attribute>
+      <optional>
+        <attribute name="numberOfItems">
+          <text/>
+        </attribute>
+      </optional>
+    </interleave>
+    <element name="title">
+      <text/>
+    </element>
   </element>
 </define>
 
