@@ -76,7 +76,7 @@
         <text/>
       </attribute>
       <optional>
-        <attribute name="numberOfItems">
+        <attribute name="items">
           <text/>
         </attribute>
       </optional>

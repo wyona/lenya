@@ -270,11 +270,14 @@
       <tr>
         <td style="background-color: #ddd">
           <xsl:for-each select="rss/channel/item">
-            <xsl:if test="position() &lt;= $items">
+            <xsl:if test="$items = '' or position() &lt;= $items">
               <a target="_blank" href="{link}"><xsl:value-of select="title"/></a><br/>
               <!-- <xsl:value-of select="description"/><br/>-->
             </xsl:if>
           </xsl:for-each> 
+          <xsl:if test="not(rss/channel/item)">
+            --
+          </xsl:if>
          </td>
       </tr>
     </table>

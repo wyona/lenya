@@ -99,6 +99,11 @@ div.highlights h4  { font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regul
 div.highlights p { margin-top: 0; font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif}
 div.highlights table  { margin-bottom: 2px }
 
+/* --------------------------------------------RSS Reader------------------------------------------------ */
+.rss-reader { background-color: #dedede; margin: 0px 0px 2px; padding: 4px 4px 4px 7px; border: 1px #cc9; width: 200px; display: block }
+.rss-reader title { display: block; font-weight: bold; font-size: 10px; font-family: Geneva, Helvetica, Arial, Swiss, SunSans-Regular, sans-serif; margin-top: 0; margin-bottom: 0 }
+
+
 /* ---------------------------------------------Listen--------------------------------------------------- */
 /*ul.type1 { list-style-type:circle }*/
 ul.type2 { list-style-type:square }
