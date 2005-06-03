@@ -85,13 +85,13 @@
       <label xml:lang="de">2002</label>
     </node>
   </node>
-  <node id="lorbeeren" href="http://www.unipublic.unizh.ch/campus/lorbeeren">
+  <node id="lorbeeren" href="http://www.unizh.ch/news/lorbeeren">
     <label xml:lang="de">Lorbeeren</label>
   </node>
-  <node id="berufungen" href="http://www.unipublic.unizh.ch/campus/berufungen">
+  <node id="berufungen" href="http://www.unizh.ch/news/berufungen">
     <label xml:lang="de">Berufungen</label>
   </node>
-  <node id="publikationen" href="http://www.unipublic.unizh.ch/campus/publikationen">
+  <node id="publikationen" href="http://www.unizh.ch/news/publikationen">
     <label xml:lang="de">Publikationen</label>
   </node>
 </node>
