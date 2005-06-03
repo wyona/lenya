@@ -7,7 +7,7 @@
   <message usecase="publish">
     <subject>UniCMS Notification: Publish</subject>
     <body>A document was published:
-<document-url/></body>
+<document-url area="live"/></body>
   </message>
 
   <message usecase="schedule">
