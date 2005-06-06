@@ -13,25 +13,26 @@
   <message usecase="schedule">
     <subject>UniCMS Notification: Publish / Deactivate</subject>
     <body>A document was published or deactivated:
-<document-url/></body>
+<document-url area="authoring"/>
+<document-url area="live"/></body>
   </message>
 
   <message usecase="submit">
     <subject>UniCMS Notification: Submit</subject>
     <body>A document was submitted:
-<document-url/></body>
+<document-url area="authoring"/></body>
   </message>
 
   <message usecase="reject">
     <subject>UniCMS Notification: Reject</subject>
     <body>A document was rejected:
-<document-url/></body>
+<document-url area="authoring"/></body>
   </message>
 
   <message usecase="deactivate">
     <subject>UniCMS Notification: Deactivate</subject>
     <body>A document was deactivated:
-<document-url/></body>
+<document-url area="authoring"/></body>
   </message>
 
 </notification> 
