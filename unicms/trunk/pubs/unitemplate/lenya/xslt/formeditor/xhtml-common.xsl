@@ -201,8 +201,9 @@
 
 
 <xsl:template match="xhtml:h3" mode="body">
-  <xsl:call-template name="insertbeforemenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:h3</xsl:with-param></xsl:call-template>
-  
+  <xsl:if test="not(preceding-sibling::*)">  
+    <xsl:call-template name="insertbeforemenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:h3</xsl:with-param></xsl:call-template>
+  </xsl:if>
   <node name="Headline 3" select="/*/xhtml:body/xhtml:h3[@tagID='{@tagID}']">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/xhtml:h3[@tagID='{@tagID}']&quot;/&gt;"/></action>
     <content>
@@ -211,9 +212,7 @@
       </textarea>
     </content>
   </node>
-  <xsl:if test="not(following-sibling::*)">
     <xsl:call-template name="insertmenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:h3</xsl:with-param></xsl:call-template>
-  </xsl:if>
 </xsl:template>
 
 
