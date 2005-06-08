@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+
 <!-- CVS: $Id: publication-sitemap.xmap,v 1.75 2004/05/15 14:26:29 gregor Exp $ -->
 
   <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
@@ -161,7 +163,7 @@
         
         <map:act type="language-exists">
           <map:generate src="cocoon:/lenyabody-view-print/{../1}/{../2}.html"/>
-          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/> 
           <map:serialize type="html"/>
         </map:act>
   
@@ -193,10 +195,9 @@
 
       <!-- standard -->
       <map:match pattern="*/**.html">
-        
         <map:act type="language-exists">
           <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/> 
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>  
           <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
           <map:serialize type="html"/>
         </map:act>
@@ -206,9 +207,25 @@
         <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
         <map:transform src="../../xslt/exception/missing-language.xsl"/>
         <map:call resource="style-cms-page"/>
-
       </map:match>
-     
+
+
+     <map:match pattern="*/**.pdf">
+        <map:act type="language-exists">
+          <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
+          <map:transform src="../unizh/xslt/common/xhtml2fo.xsl">
+           <map:parameter name="imageuriprefix" value="http://{request:serverName}:{request:serverPort}{page-envelope:context-prefix}/{page-envelope:publication-id}//{page-envelope:area}/images/"/>
+          </map:transform>
+          <map:serialize type="fo2pdf"/>
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+      </map:match>
+
       <map:handle-errors>
         <map:select type="exception">
           <map:when test="document-does-not-exist">
