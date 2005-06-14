@@ -180,13 +180,13 @@
             <item>Rename URL</item>
           }
           
-          if (isDocument) {
+          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen" href="?">Edit Navigation Title</item>
           }
           else {
             <item>Edit Navigation Title</item>
           }
-          if (isDocument) {
+          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item uc:usecase="change-visibility" uc:step="showscreen" href="?">Change node visiblity</item>
           }
           else {
@@ -215,7 +215,8 @@
        	{
        	
        	  if (isDocument &amp;&amp;
-       	    !"/index".equals(<input:get-attribute module="page-envelope" as="string" name="document-id"/>)) {
+       	    !"/index".equals(<input:get-attribute module="page-envelope" as="string" name="document-id"/>)
+       	     &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="delete" uc:usecase="delete" uc:step="showscreen" href="?">Delete</item>
             <item wf:event="archive" uc:usecase="archive" uc:step="showscreen" href="?">Archive</item>
        	  }
