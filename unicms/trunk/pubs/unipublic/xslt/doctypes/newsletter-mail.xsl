@@ -8,6 +8,7 @@
     xmlns:dcterms="http://purl.org/dc/terms/"  
     xmlns:up="http://www.unipublic.unizh.ch/2002/up"
     xmlns:col="http://apache.org/cocoon/lenya/collection/1.0"
+    xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
     xmlns:mail="http://apache.org/cocoon/lenya/mail/1.0">
 
   <xsl:import href="variables.xsl"/>
@@ -62,7 +63,7 @@
     </xsl:choose>
     <xsl:choose>
       <xsl:when test="lenya:meta/dcterms:issued!=''">
-        <xsl:text/>(<xsl:apply-templates select="lenya:meta/dcterms:issued" mode="section"/>)<xsl:text/>
+        <xsl:text/> (<xsl:apply-templates select="lenya:meta/dcterms:issued"/>)<xsl:text/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>&#10;(Noch nie publiziert)</xsl:text>
@@ -75,6 +76,15 @@
     <xsl:text>&#10;</xsl:text>
     <xsl:text>&#10;</xsl:text>
 </xsl:template>
+
+
+<xsl:template match="dcterms:issued">
+  <xsl:variable name="date"><xsl:value-of select="."/></xsl:variable>
+  <xsl:if test="$date!=''">
+      <i18n:date src-pattern="yyyy-MM-dd HH:mm:ss" src-locale="en" value="{$date}"/> 
+  </xsl:if> 
+</xsl:template>
+
 
 <xsl:template match="up:footer">
   <xsl:apply-templates/>
