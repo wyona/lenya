@@ -132,16 +132,21 @@
    </xsl:template>
    
   
-  <xsl:template match="xhtml:p[xhtml:object]" priority="3">
-    
-    <xsl:if test="normalize-space(node()[not(self::xhtml:object)]) != ''">
-      <p>
-        <xsl:apply-templates select="node()[not(self::xhtml:object)]"></xsl:apply-templates>
-      </p>
+  <xsl:template match="xhtml:p[xhtml:object]" priority="3">     
+    <xsl:if test="node()[not(self::xhtml:object) and normalize-space() != '']">
+      <xsl:for-each select="node()">
+        <xsl:choose>
+          <xsl:when test="not(self::xhtml:object)">
+            <xsl:apply-templates select="."/>
+          </xsl:when>
+          <xsl:otherwise>
+            <p></p>
+            <xsl:apply-templates select="self::xhtml:object"/>
+            <p></p>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
     </xsl:if>
-    
-    <xsl:apply-templates select="xhtml:object"/>
-    
   </xsl:template>
   
   
