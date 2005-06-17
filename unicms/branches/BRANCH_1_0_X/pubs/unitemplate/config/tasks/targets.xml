@@ -271,6 +271,16 @@
       />
     <echo>Remove file: ${document.file}</echo>
     <delete file="${document.file}"/>
+    
+    <echo>Delete Revision: dir="${pub.dir}/${rcml.dir}/content/${authoring.area}${remove.label.document-id}/"  includes="*_${remove.label.language}.xml.rcml"</echo>
+    <delete>
+      <fileset dir="${pub.dir}/${rcml.dir}/content/${authoring.area}${remove.label.document-id}/"  includes="*_${remove.label.language}.xml.rcml"/>   
+    </delete>
+
+    <echo>Delete Backups: ${pub.dir}/${rcbak.dir}/content/${authoring.area}${remove.label.document-id}/" includes="*_${remove.label.language}.xml.bak.*</echo>
+    <delete>
+      <fileset dir="${pub.dir}/${rcbak.dir}/content/${authoring.area}${remove.label.document-id}/" includes="*_${remove.label.language}.xml.bak.*"/>
+    </delete>    
   </target>
 
   <!-- Save the dublin core meta data -->
