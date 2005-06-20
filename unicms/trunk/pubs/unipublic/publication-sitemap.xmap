@@ -178,11 +178,18 @@
       </map:match>
 
       <!-- RSS -->
+      <map:match pattern="*/**.rss.xml">
+        <map:generate src="cocoon:/lenyabody-view-atom/{1}/{2}.html"/>
+        <map:transform src="xslt/common/atom2rss.xsl"/>
+        <map:transform type="i18n"/>
+        <map:serialize type="xml"/>  
+      </map:match>
+
       <map:match pattern="*/**.rss.html">
         <map:generate src="cocoon:/lenyabody-view-atom/{1}/{2}.html"/>
-<!--
-        <map:transform src="xslt/common/atomToHtml.xsl"/>
--->
+        <map:transform src="xslt/common/atom2rss.xsl"/>
+        <map:transform type="i18n"/>
+        <map:transform src="xslt/common/rss2html.xsl"/>
         <map:serialize type="xml"/>  
       </map:match>
 
