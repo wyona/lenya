@@ -80,6 +80,11 @@
     <parameter name="target" value="rename-label"/>
   </task>
 
+  <task id="change-visibility" class="org.apache.lenya.cms.task.AntTask">
+    <label>Change Node Visibility</label>
+    <parameter name="target" value="change-visibility"/>
+  </task>
+  
   <task id="save-meta-data" class="org.apache.lenya.cms.task.AntTask">
     <label>SaveMetaData</label>
     <parameter name="target" value="save-meta-data"/>

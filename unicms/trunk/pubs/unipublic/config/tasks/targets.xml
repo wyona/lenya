@@ -118,6 +118,7 @@
     <property name="create.columns" value=""/>
     <property name="create.userid" value=""/>
     <property name="create.ipaddress" value=""/>
+    <property name="create.visible" value=""/>
     
     <taskdef name="create" classname="org.apache.lenya.cms.ant.DocumentCreatorTask"/>
     <create
@@ -129,6 +130,7 @@
       childtype="${create.child-type}"
       documenttype="${create.doctype}"
       language="${create.language}"
+      visibleinnav="${create.visible}"
       />
     
     <!-- Init the workflow history -->
@@ -274,6 +276,16 @@
       />
     <echo>Remove file: ${document.file}</echo>
     <delete file="${document.file}"/>
+
+    <echo>Delete Revision: dir="${pub.dir}/${rcml.dir}/content/${authoring.area}${remove.label.document-id}/"  includes="*_${remove.label.language}.xml.rcml"</echo>
+    <delete>
+      <fileset dir="${pub.dir}/${rcml.dir}/content/${authoring.area}${remove.label.document-id}/"  includes="*_${remove.label.language}.xml.rcml"/>   
+    </delete>
+
+    <echo>Delete Backups: ${pub.dir}/${rcbak.dir}/content/${authoring.area}${remove.label.document-id}/" includes="*_${remove.label.language}.xml.bak.*</echo>
+    <delete>
+      <fileset dir="${pub.dir}/${rcbak.dir}/content/${authoring.area}${remove.label.document-id}/" includes="*_${remove.label.language}.xml.bak.*"/>
+    </delete>    
   </target>
 
   <!-- Save the dublin core meta data -->
@@ -634,6 +646,19 @@
       labelName="${rename.label.label-name}"
       language="${rename.label.language}"
       area="${rename.label.area}"
+      />
+  </target>
+
+  <taskdef name="changeVisibility" classname="org.apache.lenya.cms.ant.ChangeVisibilityTask"/>
+
+  <target name = "change-visibility">
+    <property name="change.visibility.document-id" value=""/>
+    <property name="change.visibility.area" value=""/>
+
+    <echo>Change Visibility</echo>
+    <changeVisibility
+      documentid="${change.visibility.document-id}"
+      area="${change.visibility.area}"
       />
   </target>
 

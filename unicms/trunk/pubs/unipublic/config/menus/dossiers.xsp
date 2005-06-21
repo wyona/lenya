@@ -86,12 +86,18 @@
         
       <block authoring="false">
         <xsp:logic>
-          if (isDocument) {
+          if (isDocument  &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen" href="?">Edit Navigation Title</item>
           }
           else {
             <item>Edit Navigation Title</item>
           }
+        if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+          <item uc:usecase="change-visibility" uc:step="showscreen" href="?">Change node visiblity</item>
+        }
+        else {
+          <item>Change node visiblity</item>
+        }
         </xsp:logic>
       </block>
       <block authoring="false">
@@ -111,7 +117,9 @@
         <xsp:logic>
        	{
        	
-       	  if (isDocument) {
+       	  if (isDocument &amp;&amp;
+       	    !"/index".equals(<input:get-attribute module="page-envelope" as="string" name="document-id"/>)
+       	     &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="delete" uc:usecase="delete" uc:step="showscreen" href="?">Delete</item>
             <item wf:event="archive" uc:usecase="archive" uc:step="showscreen" href="?">Archive</item>
        	  }
@@ -119,13 +127,13 @@
             <item>Delete</item>
             <item>Archive</item>
        	  }
-       	
-        	if (isDocument &amp;&amp; (area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+
+          if (isDocument &amp;&amp; (area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="restore" uc:usecase="restore" uc:step="showscreen" href="?">Restore</item>
-        	}
-        	else {
+          }
+          else {
             <item>Restore</item>
-        	}
+          }
       	}
         </xsp:logic>
         

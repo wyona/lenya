@@ -138,10 +138,6 @@
           <item wf:event="edit" uc:usecase="1formedit" uc:step="open"><xsp:attribute name="href"><xsp-request:get-context-path/>/<input:get-attribute module="page-envelope" as="string" name="publication-id"/>/<input:get-attribute module="page-envelope" as="string" name="area"/>/webperls.html?</xsp:attribute>Edit&#160;Webperlen&#160;with&#160;one&#160;Form</item>
           <item wf:event="edit" uc:usecase="1formedit" uc:step="open"><xsp:attribute name="href"><xsp-request:get-context-path/>/<input:get-attribute module="page-envelope" as="string" name="publication-id"/>/<input:get-attribute module="page-envelope" as="string" name="area"/>/dossiersbox.html?</xsp:attribute>Edit&#160;Dossierkasten&#160;with&#160;one&#160;Form</item>
         </block>
-        <block info="false">
-          <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen"><xsp:attribute name="href"><xsp-request:get-uri/>?</xsp:attribute>Edit Navigation Title</item>
-        </block>
-
 <!--
         <block authoring="false">
         
@@ -200,7 +196,7 @@
             <item>Rename URL</item>
           }
 -->          
-          if (isDocument) {
+          if (isDocument  &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
             <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen" href="?">Edit Navigation Title</item>
           }
           else {
