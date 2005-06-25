@@ -38,6 +38,11 @@
         ID: <xsl:value-of select="$nodename"/><br/>
         Path: <xsl:value-of select="$parentid"/><xsl:value-of select="$nodename"/><br/>
         Name: <input type="text" name="childname" value="New Wiki Page"/><br/>
+        Language: <select name="language">
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Francais</option>
+                  </select><br/>
 	</p>
         <input type="submit" name="create" value="YES"/>
         <input type="submit" name="cancel" value="cancel"/>

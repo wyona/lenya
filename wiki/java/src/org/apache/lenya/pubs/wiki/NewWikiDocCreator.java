@@ -55,21 +55,23 @@ public class NewWikiDocCreator extends DefaultCreator {
         String childId,
         String language) {
 
-        log.info("Parent directory: " + parentDir);
+        log.debug("Parent directory: " + parentDir);
 
         // TODO: Quite a hack, but needs to be replaced by JCR anyway
+        //       The hack is that within the creator screen no parentid is being specified and the chiildid
+	//       is being enhanced with the parentid
         File file = new File(parentDir.getParentFile().getParent()
             + File.separator + "repository" + File.separator + "paths" + File.separator + "authoring"
             + File.separator
             + childId
             + File.separator
             + "index"
-            + getLanguageSuffix(language)
+            //+ getLanguageSuffix(language)
             + ".xml"
 	    + File.separator + "resource-content"
             );
 
-        log.info("Filename: " + file.getAbsolutePath());
+        log.debug("Filename: " + file.getAbsolutePath());
 
         return file.getAbsolutePath();
     }
@@ -139,6 +141,8 @@ public class NewWikiDocCreator extends DefaultCreator {
         DocumentHelper.writeDocument(doc, new File(filename));
 
 	Repository repo = new RepositoryFactory().newRepository("wiki");
+        String DEFAULT_LANGUAGE = "en";
+        if (language == null) language = DEFAULT_LANGUAGE;
         DocumentHelper.writeDocument(doc, repo.getWriter(new Path("/" + id + "_" + language + ".xml")));
 
         // now do the same thing for the meta document if the
