@@ -69,7 +69,10 @@
 	    <!--
             <map:generate type="text" src="repository/paths/authoring/{1}.txt/resource-content"/>
 	    -->
+	    <map:generate src="yarep:/authoring/{1}_en.xml"/>
+	    <!--
             <map:generate src="repository/paths/authoring/{1}.xml/resource-content"/>
+	    -->
             <map:transform src="xslt/wikieditform.xsl"/>
 
 <!--
