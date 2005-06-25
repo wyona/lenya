@@ -143,7 +143,7 @@ public class NewWikiDocCreator extends DefaultCreator {
 	Repository repo = new RepositoryFactory().newRepository("wiki");
         String DEFAULT_LANGUAGE = "en";
         if (language == null) language = DEFAULT_LANGUAGE;
-        DocumentHelper.writeDocument(doc, repo.getWriter(new Path("/" + id + "_" + language + ".xml")));
+        DocumentHelper.writeDocument(doc, repo.getWriter(new Path("/authoring/" + id + "/index_" + language + ".xml")));
 
         // now do the same thing for the meta document if the
         // sampleMetaName is specified
