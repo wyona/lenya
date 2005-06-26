@@ -1,0 +1,8 @@
+!!! Introduction
+
+This is a little example how easy it is to write a wiki page
+using the Chaperon parser and Apache Lenya/Cocoon.
+
+Here are some example sites:
+* [New page|new]
+* [This page|index]
