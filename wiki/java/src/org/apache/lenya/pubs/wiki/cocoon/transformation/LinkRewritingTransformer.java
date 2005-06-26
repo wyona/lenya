@@ -92,6 +92,12 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
         super.setup(resolver, objectModel, source, parameters);
 
         try {
+            getLogger().error("URI: " + parameters.getParameter("uri"));
+        } catch (Exception e) {
+            getLogger().error(e.toString());
+        }
+
+        try {
             PageEnvelope envelope = PageEnvelopeFactory.getInstance().getPageEnvelope(objectModel);
             this.currentDocument = envelope.getDocument();
 

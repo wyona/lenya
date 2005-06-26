@@ -116,7 +116,9 @@
 	<map:transform src="stylesheets/wiki2xdoc.xsl" label="xwiki2xdoc"/>
 
         <map:match pattern="authoring/**">
-	  <map:transform type="linkchecker"/>
+	  <map:transform type="linkchecker">
+            <map:parameter name="uri" value="{1}"/>
+	  </map:transform>
         </map:match>
 
 	<map:transform src="xslt/xdoc2html.xsl">
