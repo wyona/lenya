@@ -119,7 +119,10 @@
 	      <map:serialize type="xml"/>
 -->
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
+                <map:parameter name="source" value="yarep:/authoring/{../1}_en.xml"/>
+		<!--
                 <map:parameter name="source" value="repository/paths/authoring/{../1}.xml/resource-content"/>
+		-->
               </map:transform>
               <map:transform type="write-source">
                 <map:parameter name="serializer" value="xml"/>
