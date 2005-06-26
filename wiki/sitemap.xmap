@@ -100,14 +100,11 @@
     <map:pipeline>
       <map:match pattern="**.xml">
         <!--
-        <map:generate type="text" src="repository/paths/{1}.txt/resource-content"/>
+        <map:generate type="text" src="yarep:/{1}_en.txt"/>
 	<map:transform type="lexer" src="cocoon:/wiki.xlex"/>
         -->
 
         <map:generate src="yarep:/{1}_en.xml"/>
-	<!--
-        <map:generate src="repository/paths/{1}.xml/resource-content"/>
-	-->
 
 	<map:transform type="parser" src="cocoon:/wiki.xgrm">
           <map:parameter name="failsafe" value="true"/>
