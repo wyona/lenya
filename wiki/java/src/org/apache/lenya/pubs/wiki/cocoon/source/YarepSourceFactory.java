@@ -102,32 +102,11 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
                     .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
 
             String path = uri.substring(SCHEME.length() + 1);
-            getLogger().error("HUGO: Path = " + path);
+            getLogger().debug("Path = " + path);
 
             if (!path.startsWith("//")) {
 
                 Map objectModel = ContextHelper.getObjectModel(this.context);
-/*
-                try {
-                    //DocumentIdentityMap map = new DocumentIdentityMap(this.manager, getLogger());
-                    PageEnvelopeFactory pageEnvelopeFactory = PageEnvelopeFactory.getInstance();
-
-                    if (pageEnvelopeFactory != null) {
-                        PageEnvelope pageEnvelope = pageEnvelopeFactory.getPageEnvelope(map,
-                                objectModel);
-
-                        if (pageEnvelope != null) {
-                            String publicationID = pageEnvelope.getPublication().getId();
-                            String area = pageEnvelope.getDocument().getArea();
-                            path = "/" + publicationID + "/" + Publication.CONTENT_PATH + "/"
-                                    + area + path;
-                        }
-                    }
-                } catch (final PageEnvelopeException e1) {
-                    throw new SourceException(
-                            "Cannot attach publication-id and/or area to " + path, e1);
-                }
-*/
             }
 
             while (path.startsWith("/")) {
@@ -137,23 +116,13 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
             //IdentityMap map = null;
 
             Request request = ContextHelper.getRequest(this.context);
-/*
-            UnitOfWork unit = (UnitOfWork) request.getAttribute(UnitOfWork.class.getName());
-            if (unit != null) {
-                map = unit.getIdentityMap();
-            } else {
-                map = new DocumentIdentityMap(this.manager, getLogger());
-            }
-*/
 
             if (getLogger().isDebugEnabled()) {
                 getLogger().debug("Creating repository source for URI [" + uri + "]");
             }
 
-            getLogger().error("HUGO: Creating repository source for URI [" + uri + "]");
+            getLogger().debug("Creating repository source for URI [" + uri + "]");
 
-            //            path = this.delegationScheme + this.delegationPrefix + path;
-            //return new RepositorySource(this.manager, location, map, getLogger());
             return new YarepSource(new Path(uri));
 
             //return sourceResolver.resolveURI(path);

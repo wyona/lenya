@@ -99,7 +99,7 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
         try {
             parentURI = parameters.getParameter("uri");
-            getLogger().error("Parent URI: " + parentURI);
+            getLogger().debug("Parent URI: " + parentURI);
         } catch (Exception e) {
             getLogger().error(e.toString());
         }
@@ -183,29 +183,16 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
             getLogger().debug(this.indent + "<" + qname + "> (Link element found)");
             String href = attrs.getValue(ATTRIBUTE_HREF);
             if (href != null) {
-                getLogger().debug("href=" + href);
-
                 // Check if linked file exists
-/*
-		File currentFile = getCurrentDocument().getFile();
-		getLogger().debug("Current Document file: " + currentFile);
-		File linkedFile = new File(new File(currentFile.getParent()).getParent() + File.separator + replaceHTMLbyXMLSuffix(href));
-		getLogger().debug("Linked Document file: " + linkedFile);
-*/
-
-
-
-                getLogger().error("uri=" + uri);
-                getLogger().error("href=" + href);
+                getLogger().debug("uri=" + uri);
+                getLogger().debug("href=" + href);
                 Path path = new Path("/authoring/" + parentURI.substring(0, parentURI.length() - 9) + replaceHTMLbyXMLSuffix(href));
-		getLogger().error("Path: " + path);
+		getLogger().debug("Path: " + path);
                 Repository repo = new RepositoryFactory().newRepository("wiki");
 
 
                 if(!repo.exists(path)) {
-                //if(!linkedFile.isDirectory()) {
 		    getLogger().info("Linked document does not exist yet: " + path);
-		    //getLogger().info("Linked document does not exist yet: " + linkedFile);
                     setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeIndex(href));
                 }
             } else {
@@ -226,44 +213,6 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
 
 
-
-    /**
-     * Rewrites a link.
-     * 
-     * @param newAttrs The new attributes.
-     * @param targetDocument The target document.
-     * @param anchor The anchor (the string after the # character in the URL).
-     * @throws AccessControlException when something went wrong.
-     * @throws PublicationException when something went wrong.
-     */
-/*
-    protected void rewriteLink(AttributesImpl newAttrs, Document targetDocument, String anchor)
-            throws AccessControlException, PublicationException {
-        String webappUrl = targetDocument.getCompleteURL();
-        Policy policy = this.policyManager.getPolicy(this.accreditableManager, webappUrl);
-
-        Proxy proxy = targetDocument.getPublication().getProxy(targetDocument, policy.isSSLProtected());
-
-        String rewrittenURL;
-        if (proxy == null) {
-            rewrittenURL = this.request.getContextPath() + webappUrl;
-        } else {
-            rewrittenURL = proxy.getURL(targetDocument);
-        }
-        
-        if (anchor != null) {
-            rewrittenURL += "#" + anchor;
-        }
-
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug(this.indent + "SSL protection: [" + policy.isSSLProtected() + "]");
-            getLogger().debug(this.indent + "Resolved proxy: [" + proxy + "]");
-            getLogger().debug(this.indent + "Rewriting URL to: [" + rewrittenURL + "]");
-        }
-
-        setHrefAttribute(newAttrs, rewrittenURL);
-    }
-*/
 
     /**
      * Sets the value of the href attribute.
@@ -309,11 +258,6 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
      * 
      * @return true if we are looking at a link element
      */
-/*
-    protected boolean lookingAtLinkElement(String name) {
-        return lookingAtAElement(name);
-    }
-*/
 
     protected boolean lookingAtAElement(String name) {
         return name.equals("a");

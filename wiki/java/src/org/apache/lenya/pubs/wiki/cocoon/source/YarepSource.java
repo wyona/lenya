@@ -129,7 +129,6 @@ public class YarepSource implements ModifiableSource {
      *
      */
     public OutputStream getOutputStream() throws IOException {
-        log.warn("HUGO");
         Repository repo = new RepositoryFactory().newRepository("wiki");
         return repo.getOutputStream(new Path(SourceUtil.getSpecificPart(path.toString())));
     }
