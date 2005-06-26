@@ -1,6 +1,6 @@
 package org.apache.lenya.pubs.wiki.cocoon.source;
 
-import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.ModifiableSource;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceUtil;
 import org.apache.excalibur.source.SourceValidity;
@@ -8,6 +8,7 @@ import org.apache.log4j.Category;
 
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 
 import org.wyona.yarep.core.Path;
@@ -17,7 +18,7 @@ import org.wyona.yarep.core.RepositoryFactory;
 /**
  *
  */
-public class YarepSource implements Source {
+public class YarepSource implements ModifiableSource {
 
     private static Category log = Category.getInstance(YarepSource.class);
 
@@ -29,7 +30,6 @@ public class YarepSource implements Source {
      *
      */
     public YarepSource(Path path) throws MalformedURLException {
-        log.error("HUGO");
         this.path = path;
         if (!SourceUtil.getScheme(path.toString()).equals(SCHEME)) throw new MalformedURLException();
     }
@@ -38,7 +38,7 @@ public class YarepSource implements Source {
      *
      */
     public boolean exists() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
         return false;
     }
 
@@ -46,7 +46,7 @@ public class YarepSource implements Source {
      *
      */
     public long getContentLength() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
         return System.currentTimeMillis();
     }
 
@@ -54,18 +54,15 @@ public class YarepSource implements Source {
      *
      */
     public InputStream getInputStream() throws IOException, SourceNotFoundException {
-        log.error("HUGO");
         Repository repo = new RepositoryFactory().newRepository("wiki");
         return repo.getInputStream(new Path(SourceUtil.getSpecificPart(path.toString())));
-
-        //return new java.io.FileInputStream("/home/michi/build/jakarta-tomcat-4.1.24-LE-jdk14/webapps/lenya/lenya/pubs/wiki/repository/paths/authoring/index.xml/resource-content");
     }
 
     /**
      *
      */
     public long getLastModified() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
         return System.currentTimeMillis();
     }
 
@@ -73,7 +70,7 @@ public class YarepSource implements Source {
      *
      */
     public String getMimeType() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
         return null;
     }
 
@@ -81,7 +78,6 @@ public class YarepSource implements Source {
      *
      */
     public String getScheme() {
-        log.error("HUGO: " + SCHEME);
         return SCHEME;
     }
 
@@ -89,7 +85,6 @@ public class YarepSource implements Source {
      *
      */
     public String getURI() {
-        log.error("HUGO: " + path.toString());
         return path.toString();
     }
 
@@ -97,7 +92,7 @@ public class YarepSource implements Source {
      *
      */
     public SourceValidity getValidity() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
         return null;
     }
 
@@ -105,6 +100,37 @@ public class YarepSource implements Source {
      *
      */
     public void refresh() {
-        log.error("HUGO");
+        log.warn("Not implemented yet!");
+    }
+
+    /**
+     *
+     */
+    public boolean canCancel(OutputStream out) {
+        log.warn("Not implemented yet!");
+        return false;
+    }
+
+    /**
+     *
+     */
+    public void cancel(OutputStream out) {
+        log.warn("Not implemented yet!");
+    }
+
+    /**
+     *
+     */
+    public void delete() {
+        log.warn("Not implemented yet!");
+    }
+
+    /**
+     *
+     */
+    public OutputStream getOutputStream() throws IOException {
+        log.warn("HUGO");
+        Repository repo = new RepositoryFactory().newRepository("wiki");
+        return repo.getOutputStream(new Path(SourceUtil.getSpecificPart(path.toString())));
     }
 }
