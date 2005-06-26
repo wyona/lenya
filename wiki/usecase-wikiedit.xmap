@@ -67,12 +67,9 @@
 -->
               
 	    <!--
-            <map:generate type="text" src="repository/paths/authoring/{1}.txt/resource-content"/>
+            <map:generate type="text" src="yarep:/authoring/{1}_en.txt"/>
 	    -->
 	    <map:generate src="yarep:/authoring/{1}_en.xml"/>
-	    <!--
-            <map:generate src="repository/paths/authoring/{1}.xml/resource-content"/>
-	    -->
             <map:transform src="xslt/wikieditform.xsl"/>
 
 <!--
@@ -120,9 +117,6 @@
 -->
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
                 <map:parameter name="source" value="yarep:/authoring/{../1}_en.xml"/>
-		<!--
-                <map:parameter name="source" value="repository/paths/authoring/{../1}.xml/resource-content"/>
-		-->
               </map:transform>
               <map:transform type="write-source">
                 <map:parameter name="serializer" value="xml"/>
