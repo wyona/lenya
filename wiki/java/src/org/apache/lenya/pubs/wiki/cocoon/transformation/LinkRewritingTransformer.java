@@ -50,6 +50,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import org.wyona.yarep.core.Path;
+import org.wyona.yarep.core.Repository;
+import org.wyona.yarep.core.RepositoryFactory;
+
 /**
  * <p>
  * Link rewriting transformer.
@@ -82,6 +86,8 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
     private Document currentDocument;
 
+    private String parentURI;
+
     /**
      * @see org.apache.cocoon.sitemap.SitemapModelComponent#setup(org.apache.cocoon.environment.SourceResolver,
      *      java.util.Map, java.lang.String,
@@ -92,7 +98,8 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
         super.setup(resolver, objectModel, source, parameters);
 
         try {
-            getLogger().error("URI: " + parameters.getParameter("uri"));
+            parentURI = parameters.getParameter("uri");
+            getLogger().error("Parent URI: " + parentURI);
         } catch (Exception e) {
             getLogger().error(e.toString());
         }
@@ -179,13 +186,26 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
                 getLogger().debug("href=" + href);
 
                 // Check if linked file exists
+/*
 		File currentFile = getCurrentDocument().getFile();
 		getLogger().debug("Current Document file: " + currentFile);
 		File linkedFile = new File(new File(currentFile.getParent()).getParent() + File.separator + replaceHTMLbyXMLSuffix(href));
 		getLogger().debug("Linked Document file: " + linkedFile);
+*/
 
-                if(!linkedFile.isDirectory()) {
-		    getLogger().info("Linked document does not exist yet: " + linkedFile);
+
+
+                getLogger().error("uri=" + uri);
+                getLogger().error("href=" + href);
+                Path path = new Path("/authoring/" + parentURI.substring(0, parentURI.length() - 9) + replaceHTMLbyXMLSuffix(href));
+		getLogger().error("Path: " + path);
+                Repository repo = new RepositoryFactory().newRepository("wiki");
+
+
+                if(!repo.exists(path)) {
+                //if(!linkedFile.isDirectory()) {
+		    getLogger().info("Linked document does not exist yet: " + path);
+		    //getLogger().info("Linked document does not exist yet: " + linkedFile);
                     setHrefAttribute(newAttrs, "?lenya.usecase=wikicreate&lenya.step=confirm&path=" + removeIndex(href));
                 }
             } else {
@@ -201,6 +221,12 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
         }
     }
 
+
+
+
+
+
+
     /**
      * Rewrites a link.
      * 
@@ -210,6 +236,7 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
      * @throws AccessControlException when something went wrong.
      * @throws PublicationException when something went wrong.
      */
+/*
     protected void rewriteLink(AttributesImpl newAttrs, Document targetDocument, String anchor)
             throws AccessControlException, PublicationException {
         String webappUrl = targetDocument.getCompleteURL();
@@ -236,6 +263,7 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
 
         setHrefAttribute(newAttrs, rewrittenURL);
     }
+*/
 
     /**
      * Sets the value of the href attribute.
@@ -281,9 +309,11 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
      * 
      * @return true if we are looking at a link element
      */
+/*
     protected boolean lookingAtLinkElement(String name) {
         return lookingAtAElement(name);
     }
+*/
 
     protected boolean lookingAtAElement(String name) {
         return name.equals("a");
@@ -329,7 +359,8 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
      * Replace HTML by XML suffix
      */
     private String replaceHTMLbyXMLSuffix(String href) {
-        return href.substring(0, href.length() - 4) + "xml";
+        String language = "en";
+        return href.substring(0, href.length() - 5) + "_" + language + ".xml";
     }
 
     /**

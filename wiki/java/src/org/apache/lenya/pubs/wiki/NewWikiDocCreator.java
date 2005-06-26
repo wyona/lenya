@@ -50,6 +50,7 @@ public class NewWikiDocCreator extends DefaultCreator {
     /** (non-Javadoc)
      * @see org.apache.lenya.cms.authoring.DefaultCreator#getChildFileName(java.io.File, java.lang.String)
      */
+/*
     protected String getChildFileName(
         File parentDir,
         String childId,
@@ -75,6 +76,7 @@ public class NewWikiDocCreator extends DefaultCreator {
 
         return file.getAbsolutePath();
     }
+*/
 
     /**
       * DOCUMENT ME!
@@ -128,6 +130,8 @@ public class NewWikiDocCreator extends DefaultCreator {
 	log.error(parentDir.toString());
 	log.error(id);
 	log.error(language);
+
+/*
         String filename = getChildFileName(parentDir, id, language);
         log.error(filename);
         File parent = new File(new File(filename).getParent());
@@ -138,7 +142,8 @@ public class NewWikiDocCreator extends DefaultCreator {
 
         // Write file
         log.debug("write file: " + filename);
-        DocumentHelper.writeDocument(doc, new File(filename));
+        //DocumentHelper.writeDocument(doc, new File(filename));
+*/
 
 	Repository repo = new RepositoryFactory().newRepository("wiki");
         String DEFAULT_LANGUAGE = "en";

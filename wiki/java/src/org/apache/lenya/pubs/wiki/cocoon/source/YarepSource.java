@@ -38,8 +38,8 @@ public class YarepSource implements ModifiableSource {
      *
      */
     public boolean exists() {
-        log.warn("Not implemented yet!");
-        return false;
+        Repository repo = new RepositoryFactory().newRepository("wiki");
+        return repo.exists(new Path(SourceUtil.getSpecificPart(path.toString())));
     }
 
     /**
