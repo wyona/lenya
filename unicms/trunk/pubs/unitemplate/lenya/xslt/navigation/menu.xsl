@@ -9,31 +9,22 @@
     exclude-result-prefixes="nav"
     >
    
-<xsl:import href="../../../../../xslt/navigation/menu.xsl"/>
+<xsl:import href="node_attrs.xsl"/>
     
 
 <xsl:template match="nav:site">
   <div id="menu">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <xsl:apply-templates select="nav:node"/>
-    </table>
   </div>
 </xsl:template>
 
 <xsl:template match="nav:node[@visibleinnav = 'false']"/>
 
-<xsl:template match="nav:site/nav:node[@id = 'index']">
-	<tr>
-		<td class="publtitle"><a href="{@href}"><xsl:apply-templates select="nav:label"/></a></td>
-	</tr>
-	<tr>
-		<td class="navoff">&#160;</td>
-	</tr>
-</xsl:template>
-
 <xsl:template match="nav:node">
-  <xsl:call-template name="item"/>
-  <xsl:apply-templates select="nav:node"/>
+ <div>
+  <xsl:apply-templates select="." mode="node_attrs"/>
+ </div>
+ <xsl:apply-templates select="nav:node"/>
 </xsl:template>
 
 
@@ -47,25 +38,10 @@
 <xsl:template match="nav:node[@current = 'true']/*/nav:node"/>
 
 
-<xsl:template name="item-default">
-  <tr>
-    <td class="navoff">
-  	  <div class="nlevel{count(ancestor-or-self::nav:node)}">
-        <a href="{@href}"><xsl:apply-templates select="nav:label"/></a>
-      </div>
-    </td>
-  </tr>
-</xsl:template>
-    
-    
-<xsl:template name="item-selected">
-  <tr>
-    <td class="navon">
-  	  <div class="nlevel{count(ancestor-or-self::nav:node)}">
-        <xsl:apply-templates select="nav:label"/>
-      </div>
-    </td>
-  </tr>
+<xsl:template match="@*|node()">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
 </xsl:template>
 
 
