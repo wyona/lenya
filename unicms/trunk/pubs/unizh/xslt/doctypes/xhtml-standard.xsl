@@ -40,6 +40,11 @@
   <xsl:include href="../common/footer.xsl"/>
 
 
+  <xsl:variable name="typeofnavigation">
+    <xsl:value-of select="/document/uz:unizh/uz:navigationtype"/>
+  </xsl:variable>
+
+
   <xsl:template match="document">
     <xsl:apply-templates select="content/*" mode="flat"/>
   </xsl:template>
@@ -58,8 +63,9 @@
             
             <xsl:call-template name="topnavbar"/>
             
-            <tr>
-              <td class="tabs" colspan="3" width="800"><br />
+            <xsl:if test="$typeofnavigation = 'tabbed'">
+              <tr>
+               <td class="tabs" colspan="3" width="800"><br />
 
                 <table cellspacing="1" cellpadding="0" border="1" width="100%" class="ornate">
                   <tr>
@@ -67,8 +73,9 @@
                   </tr>
                 </table>
 
-              </td>
-            </tr>
+               </td>
+              </tr>
+            </xsl:if>
 
             <tr>
               <td class="breadcrumb" colspan="3" width="800"><br />
