@@ -9,13 +9,29 @@
     exclude-result-prefixes="nav"
     >
     
-<xsl:import href="../../../../../xslt/navigation/breadcrumb.xsl"/>
+<xsl:import href="node_attrs.xsl"/>
 
-<xsl:template name="separator">
-  &gt;
+<xsl:template match="nav:site">
+  <div id="breadcrumb">
+    <xsl:apply-templates select="nav:node"/>
+  </div>
 </xsl:template>
 
 <xsl:template match="nav:site/nav:node[@id='index']"/>
 
+<xsl:template match="nav:node">
+ <xsl:if test="descendant-or-self::nav:node[@current = 'true']">
+  <div>
+    <xsl:apply-templates select="." mode="node_attrs"/>
+  </div>
+  <xsl:apply-templates select="nav:node"/>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="@*|node()">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
+</xsl:template>
 
 </xsl:stylesheet> 
