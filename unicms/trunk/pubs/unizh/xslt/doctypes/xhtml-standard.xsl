@@ -41,11 +41,11 @@
 
 
   <xsl:template match="document">
-    <xsl:apply-templates select="content/*"/>
+    <xsl:apply-templates select="content/*" mode="flat"/>
   </xsl:template>
   
   
-  <xsl:template match="content/*">
+  <xsl:template match="content/*" mode="flat">
     <html>
         
       <xsl:call-template name="html-head"/>
@@ -58,6 +58,18 @@
             
             <xsl:call-template name="topnavbar"/>
             
+            <tr>
+              <td class="tabs" colspan="3" width="800"><br />
+
+                <table cellspacing="1" cellpadding="0" border="1" width="100%" class="ornate">
+                  <tr>
+                    <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
             <tr>
               <td class="breadcrumb" colspan="3" width="800"><br />
                 <xsl:call-template name="breadcrumb"/>
@@ -172,6 +184,90 @@
 </xsl:template>
 
   
+  <xsl:template match="xhtml:div[@id = 'menu']">
+
+    <xsl:copy>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <xsl:apply-templates select="node()" mode="menu"/>
+      </table>
+    </xsl:copy>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div[@level = '0']" mode="menu">
+
+	<tr>
+	  <td class="publtitle">
+<!--
+            <a href="{$contextprefix}/physik/{$area}/{@rel_href}">
+-->
+            <a href="{@href}">
+              <xsl:value-of select="@label"/>
+            </a>
+          </td>
+	</tr>
+	<tr>
+	  <td class="navoff">&#160;</td>
+	</tr>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div[(@current = 'true') and not (@level = '0')]" mode="menu">
+
+   <tr>
+    <td class="navon">
+      <div class="nlevel{@level}">
+        <xsl:value-of select="@label"/>
+      </div>
+    </td>
+   </tr>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div" mode="menu">
+
+   <tr>
+    <td class="navoff">
+      <div class="nlevel{@level}">
+<!--
+        <a href="{$contextprefix}/physik/{$area}/{@rel_href}"> <xsl:value-of select="@label"/> </a>
+-->
+        <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+      </div>
+    </td>
+   </tr>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div[@id = 'tabs']">
+
+    <xsl:apply-templates select="node()" mode="tabs"/>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div[@current = 'true']" mode="tabs">
+
+    <td>
+      <xsl:value-of select="@label"/>
+    </td>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div" mode="tabs">
+
+    <td>
+      <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+    </td>
+
+  </xsl:template>
+  
+
 <xsl:template match="@*|node()" priority="-1">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
