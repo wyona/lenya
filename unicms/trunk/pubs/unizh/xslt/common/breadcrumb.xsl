@@ -16,20 +16,20 @@
       <xsl:apply-templates select="/document/uz:unizh/uz:university" mode="breadcrumb"/>
       <xsl:apply-templates select="/document/uz:unizh/uz:section" mode="breadcrumb"/>
       <xsl:apply-templates select="/document/uz:unizh/uz:publication" mode="breadcrumb"/>
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']/node()"/>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']/node()" mode="breadcrumb"/>
     </div>
   </xsl:template>
   
   
   <xsl:template match="uz:unizh/uz:university[not(@breadcrumb = 'false')]" mode="breadcrumb">
     <a href="{@href}"><i18n:text><xsl:value-of select="."/></i18n:text></a>
-    &gt;
+    <xsl:call-template name="breadcrumb_separator"/>
   </xsl:template>
   
   
   <xsl:template match="uz:unizh/uz:section[not(@breadcrumb = 'false')]" mode="breadcrumb">
     <a href="{../uz:university/@href}/{.}/"><i18n:text>section_<xsl:value-of select="."/></i18n:text></a>
-    &gt;
+    <xsl:call-template name="breadcrumb_separator"/>
   </xsl:template>
   
   
@@ -41,6 +41,27 @@
   <xsl:template match="uz:unizh/*[@breadcrumb = 'false']" mode="breadcrumb"/>
   
   
+  <xsl:template match="xhtml:div[@current = 'true']" mode="breadcrumb">
+
+    <xsl:call-template name="breadcrumb_separator"/>
+    <xsl:value-of select="@label"/>
+
+  </xsl:template>
+  
+
+  <xsl:template match="xhtml:div" mode="breadcrumb">
+
+    <xsl:call-template name="breadcrumb_separator"/>
+    <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+
+  </xsl:template>
+
+
+  <xsl:template name="breadcrumb_separator">
+    &gt;
+  </xsl:template>
+
+
 </xsl:stylesheet>
 
 
