@@ -47,7 +47,6 @@
   </baseName>
   <instanceOf><topicRef xlink:href="#employee"/></instanceOf>
   <occurrence>
-    <!--<instanceOf><topicRef xlink:href="#html-format"/></instanceOf>-->
     <resourceRef xlink:href="http://www.wyona.com/people/michael-wechner/index.html"/>
   </occurrence>
 </topic>
@@ -71,6 +70,12 @@
     <baseNameString>Apache Lenya</baseNameString>
   </baseName>
   <instanceOf><topicRef xlink:href="#project"/></instanceOf>
+  <occurrence>
+    <resourceRef xlink:href="http://lenya.apache.org"/>
+  </occurrence>
+  <occurrence>
+    <resourceRef xlink:href="http://wiki.apache.org/lenya/"/>
+  </occurrence>
 </topic>
 
 <topic id="cocoon">
@@ -78,6 +83,12 @@
     <baseNameString>Apache Cocoon</baseNameString>
   </baseName>
   <instanceOf><topicRef xlink:href="#project"/></instanceOf>
+  <occurrence>
+    <resourceRef xlink:href="http://cocoon.apache.org"/>
+  </occurrence>
+  <occurrence>
+    <resourceRef xlink:href="http://wiki.apache.org/cocoon/"/>
+  </occurrence>
 </topic>
 
 <association id="commits-to-lenya">
