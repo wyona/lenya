@@ -91,9 +91,15 @@
   </occurrence>
 </topic>
 
-<association id="commits-to-lenya">
+<topic id="contributes-to">
+  <baseName>
+    <baseNameString>contributes to</baseNameString>
+  </baseName>
+</topic>
+
+<association id="contributes-to-lenya">
 <instanceOf>
-  <topicRef xlink:href="#commits-to"/>
+  <topicRef xlink:href="#contributes-to"/>
 </instanceOf>
 <member>
   <roleSpec>
@@ -105,15 +111,15 @@
 </member>
 <member>
   <roleSpec>
-    <topicRef xlink:href="#code"/>
+    <topicRef xlink:href="#project"/>
   </roleSpec>
   <topicRef xlink:href="#lenya"/>
 </member>
 </association>
 
-<association id="commits-to-cocoon">
+<association id="contributes-to-cocoon">
 <instanceOf>
-  <topicRef xlink:href="#commits-to"/>
+  <topicRef xlink:href="#contributes-to"/>
 </instanceOf>
 <member>
   <roleSpec>
@@ -124,7 +130,7 @@
 </member>
 <member>
   <roleSpec>
-    <topicRef xlink:href="#code"/>
+    <topicRef xlink:href="#project"/>
   </roleSpec>
   <topicRef xlink:href="#cocoon"/>
 </member>
