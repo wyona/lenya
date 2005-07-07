@@ -39,6 +39,7 @@
 
   <target name="run" description="Run Example" depends="init">
     <java classname="org.wyona.erp.CLI">
+      <arg value="${command}"/>
       <classpath refid="classpath.run"/>
     </java>
   </target>
