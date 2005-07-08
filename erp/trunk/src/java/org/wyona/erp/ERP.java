@@ -1,9 +1,15 @@
 package org.wyona.erp;
 
+import org.apache.jackrabbit.core.jndi.RegistryHelper;
+
 import javax.jcr.Repository;
+import javax.jcr.RepositoryException;
 
 import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
+import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
@@ -22,7 +28,11 @@ public class ERP {
      *
      */
     public ERP() {
-        bindRepository();
+        try {
+            bindRepository();
+        } catch(Exception e) {
+            log.error(e);
+        }
     }
 
     /**
@@ -47,6 +57,12 @@ public class ERP {
     /**
      *
      */
-    private void bindRepository() {
+    private void bindRepository() throws NamingException, RepositoryException {
+        Hashtable env = new Hashtable();
+        env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.jackrabbit.core.jndi.provider.DummyInitialContextFactory");
+        env.put(Context.PROVIDER_URL, "localhost");
+
+        context = new InitialContext(env);
+        RegistryHelper.registerRepository(context, REPO_NAME, "repository.xml", "repotest", true);
     }
 }
