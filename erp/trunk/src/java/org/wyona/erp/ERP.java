@@ -19,6 +19,8 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
+import org.wyona.erp.doctypes.Task;
+
 /**
  *
  */
@@ -53,6 +55,8 @@ public class ERP {
      */
     public void addTask(String title, String owner) {
         log.info("Attempting to add task: " + title + " (" + owner + ")");
+
+        Task task = new Task(title, owner);
 
         Session session = null;
         try {
