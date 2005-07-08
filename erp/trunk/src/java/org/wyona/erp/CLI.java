@@ -20,6 +20,9 @@ public class CLI {
 
         if (command.equals("--add-task")) {
             new ERP(repoConfig, repoHomeDir).addTask("My first task", "michi");
+	} else if (command.equals("--list-tasks")) {
+            String workspaceName = "default";
+            new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
         } else {
             System.out.println("No such command: " + command);
         }

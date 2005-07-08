@@ -5,6 +5,7 @@ import org.apache.jackrabbit.core.jndi.RegistryHelper;
 
 import javax.jcr.Credentials;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -79,12 +80,48 @@ public class ERP {
                 taskNode.setProperty("owner", owner);
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
+	        log.info("Path of task node: " + taskNode.getPath());
                 session.checkPermission("/tasks" + relPath, "add_node");
                 //session.checkPermission("/", "read");
                 //session.checkPermission("/", "add_node");
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
+    }
+
+    /**
+     * List all tasks
+     */
+    public void listTasks(String workspaceName) {
+        log.info("Attempting to list all tasks");
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node tasksNode = rootNode.getNode("tasks");
+
+            if (tasksNode != null) {
+                log.info("List ...");
+                NodeIterator nit = tasksNode.getNodes();
+                while (nit.hasNext()) {
+                    Node taskNode = nit.nextNode();
+	            log.info("");
+	            log.info("UUID of task node: " + taskNode.getUUID());
+	            log.info("Name of task node: " + taskNode.getName());
+	            log.info("Path of task node: " + taskNode.getPath());
+                }
+            } else {
+                log.warn("No such node: /tasks");
             }
         } catch (Exception e) {
             log.error(e);
