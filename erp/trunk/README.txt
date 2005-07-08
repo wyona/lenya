@@ -19,8 +19,10 @@
   Run
   ---
 
-    Usage:    sh run-erp.sh
-    Add Task: sh run-erp.sh src/repository.xml repotest --add-task
+    Usage:      sh run-erp.sh --help
+    Add Task:   sh run-erp.sh src/repository.xml repotest --add-task title owner
+    List Tasks: sh run-erp.sh src/repository.xml repotest --list-tasks
+    ...
 
   Misc
   ----
