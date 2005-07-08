@@ -66,13 +66,15 @@ public class ERP {
             if (!rootNode.hasNode(relPath)) {
                 //rootNode.checkout();
                 Node taskNode = rootNode.addNode(relPath);
-                taskNode.addMixin("mix:versionable");
+                //taskNode.addMixin("mix:versionable");
+                taskNode.addMixin("mix:referenceable");
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
-	        //log.info("UUID of task node: " + taskNode.getUUID());
+	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
-                session.checkPermission("/", "read");
-                session.checkPermission("/", "add_node");
+                session.checkPermission("/task-101", "add_node");
+                //session.checkPermission("/", "read");
+                //session.checkPermission("/", "add_node");
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
