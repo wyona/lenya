@@ -19,8 +19,8 @@
   Run
   ---
 
-    Usage:    java -jar build/lib/erp.jar
-    Add Task: java -jar build/lib/erp.jar --add-task
+    Usage:    sh run-erp.sh
+    Add Task: sh run-erp.sh --add-task
 
   Misc
   ----
