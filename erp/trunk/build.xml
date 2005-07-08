@@ -24,7 +24,7 @@
 
     <property
       name="classpath.jar"
-      value="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar ${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar"
+      value="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar ${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar lib"
     />
 
 <!-- obsolete -->
