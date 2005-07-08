@@ -111,8 +111,8 @@ public class ERP {
             Node tasksNode = rootNode.getNode("tasks");
 
             if (tasksNode != null) {
-                log.info("List ...");
                 NodeIterator nit = tasksNode.getNodes();
+                log.info("List " + nit.getSize() + " tasks:");
                 while (nit.hasNext()) {
                     Node taskNode = nit.nextNode();
 	            log.info("");
