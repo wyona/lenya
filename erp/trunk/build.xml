@@ -19,14 +19,23 @@
         <include name="*.jar"/>
       </fileset>
       <pathelement location="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar"/>
+      <pathelement location="${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar"/>
     </path>
 
+    <property
+      name="classpath.jar"
+      value="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar ${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar"
+    />
+
+<!-- obsolete -->
+<!--
     <path id="classpath.run">
       <fileset dir="lib">
         <include name="*.jar"/>
       </fileset>
       <pathelement path="${classes.dir}"/>
     </path>
+-->
   </target>
 
   <target name="compile" description="Compile Java classes" depends="init">
@@ -38,10 +47,11 @@
     />
   </target>
 
-  <target name="jar" description="Build executable jar file" depends="init">
+  <target name="jar" description="Build executable jar file" depends="init, compile">
     <mkdir dir="${build.dir}/lib"/>
     <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
       <manifest>
+        <attribute name="class-path" value="${classpath.jar}"/>
         <attribute name="main-class" value="org.wyona.erp.CLI"/>
       </manifest>
     </jar>

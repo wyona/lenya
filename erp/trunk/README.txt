@@ -14,7 +14,7 @@
   ---------------
 
     Download Libraries: maven
-    Compile:            ant compile
+    Compile:            ant jar
 
   Run
   ---
