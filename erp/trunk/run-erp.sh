@@ -14,4 +14,4 @@ CLASSPATH=$CLASSPATH:$MAVEN_REPO/concurrent/jars/concurrent-1.3.4.jar
 CLASSPATH=$CLASSPATH:$MAVEN_REPO/lucene/jars/lucene-1.4.3.jar
 CLASSPATH=$CLASSPATH:lib
 
-java -cp $CLASSPATH org.wyona.erp.CLI $*
+java -cp $CLASSPATH -Djava.security.auth.login.config==jaas.config org.wyona.erp.CLI $*
