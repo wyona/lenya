@@ -20,7 +20,7 @@
   ---
 
     Usage:    sh run-erp.sh
-    Add Task: sh run-erp.sh --add-task
+    Add Task: sh run-erp.sh src/repository.xml repotest --add-task
 
   Misc
   ----
