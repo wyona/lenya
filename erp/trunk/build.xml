@@ -38,11 +38,23 @@
     />
   </target>
 
+  <target name="jar" description="Build executable jar file" depends="init">
+    <mkdir dir="${build.dir}/lib"/>
+    <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
+      <manifest>
+        <attribute name="main-class" value="org.wyona.erp.CLI"/>
+      </manifest>
+    </jar>
+  </target>
+
+<!-- Obsolete because of executable jar file -->
+<!--
   <target name="run" description="Run Example" depends="init">
     <java classname="org.wyona.erp.CLI">
       <arg value="${command}"/>
       <classpath refid="classpath.run"/>
     </java>
   </target>
+-->
 
 </project>

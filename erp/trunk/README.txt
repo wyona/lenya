@@ -13,13 +13,14 @@
   Getting Started
   ---------------
 
-    maven
-    ant compile
+    Download Libraries: maven
+    Compile:            ant compile
 
   Run
   ---
 
-  ant run -Dargs="--add-task"
+    Usage:    java -jar build/lib/erp.jar
+    Add Task: java -jar build/lib/erp.jar --add-task
 
   Misc
   ----
