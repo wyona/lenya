@@ -18,6 +18,7 @@
       <fileset dir="lib">
         <include name="*.jar"/>
       </fileset>
+      <pathelement location="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar"/>
     </path>
 
     <path id="classpath.run">
