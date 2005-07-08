@@ -1,6 +1,7 @@
 package org.wyona.erp;
 
 import org.apache.jackrabbit.core.jndi.RegistryHelper;
+//import org.apache.jackrabbit.core.value.StringValue;
 
 import javax.jcr.Credentials;
 import javax.jcr.Node;
@@ -25,7 +26,7 @@ public class ERP {
     private static Category log = Category.getInstance(ERP.class);
 
     private String REPO_NAME = "erp-repo";
-    private String ANONYMOUS = "anonymous";
+    private String USERID = "michiii";
     private char[] PASSWORD = "".toCharArray();
 
     Context context;
@@ -50,16 +51,36 @@ public class ERP {
      * @param owner Owner of task
      */
     public void addTask(String title, String owner) {
-        log.info("Add Task: " + title + " (" + owner + ")");
+        log.info("Attempting to add task: " + title + " (" + owner + ")");
+
+        Session session = null;
         try {
             Repository repo = getRepository();
-            Credentials anonymous = new SimpleCredentials(ANONYMOUS, PASSWORD);
-            //Session session = repo.login(credentials, workspaceName);
-            Session session = repo.login(anonymous);
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            //session = repo.login(credentials, workspaceName);
+            session = repo.login(credentials, "default");
             Node rootNode = session.getRootNode();
-	    log.error(rootNode.getName());
+	    log.info("Name of root node: " + rootNode.getPrimaryNodeType().getName());
+            String relPath = "task-101";
+ 
+            if (!rootNode.hasNode(relPath)) {
+                //rootNode.checkout();
+                Node taskNode = rootNode.addNode(relPath);
+                taskNode.addMixin("mix:versionable");
+                taskNode.setProperty("title", title);
+                //taskNode.setProperty("title", new StringValue(title));
+	        //log.info("UUID of task node: " + taskNode.getUUID());
+	        log.info("Name of task node: " + taskNode.getName());
+                session.checkPermission("/", "read");
+                session.checkPermission("/", "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
         } catch (Exception e) {
             log.error(e);
+        } finally {
+            if (session != null) session.logout();
         }
     }
 
