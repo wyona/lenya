@@ -61,18 +61,25 @@ public class ERP {
             session = repo.login(credentials, "default");
             Node rootNode = session.getRootNode();
 	    log.info("Name of root node: " + rootNode.getPrimaryNodeType().getName());
-            String relPath = "task-101";
- 
-            if (!rootNode.hasNode(relPath)) {
-                //rootNode.checkout();
-                Node taskNode = rootNode.addNode(relPath);
+
+            Node tasksNode = null;
+            if (!rootNode.hasNode("tasks")) {
+                tasksNode = rootNode.addNode("tasks");
+            } else {
+                tasksNode = rootNode.getNode("tasks");
+            }
+
+            String relPath = "task-" + System.currentTimeMillis();
+            if (!tasksNode.hasNode(relPath)) {
+                Node taskNode = tasksNode.addNode(relPath);
                 //taskNode.addMixin("mix:versionable");
                 taskNode.addMixin("mix:referenceable");
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
+                taskNode.setProperty("owner", owner);
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
-                session.checkPermission("/task-101", "add_node");
+                session.checkPermission("/tasks" + relPath, "add_node");
                 //session.checkPermission("/", "read");
                 //session.checkPermission("/", "add_node");
                 session.save();
