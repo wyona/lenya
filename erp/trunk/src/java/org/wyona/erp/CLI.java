@@ -9,15 +9,17 @@ public class CLI {
      *
      */
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Usage: --add-task");
+        if (args.length <= 2) {
+            System.out.println("Usage: REPO_CONFIG REPO_HOME --add-task");
             return;
         }
 
-        String command = args[0];
+        String repoConfig = args[0]; // e.g. repository.xml
+        String repoHomeDir = args[1]; // e.g. repotest
+        String command = args[2];
 
         if (command.equals("--add-task")) {
-            new ERP().addTask("My first task", "michi");
+            new ERP(repoConfig, repoHomeDir).addTask("My first task", "michi");
         } else {
             System.out.println("No such command: " + command);
         }

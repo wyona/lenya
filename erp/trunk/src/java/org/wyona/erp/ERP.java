@@ -27,9 +27,9 @@ public class ERP {
     /**
      *
      */
-    public ERP() {
+    public ERP(String repoConfig, String repoHomeDir) {
         try {
-            bindRepository();
+            bindRepository(repoConfig, repoHomeDir);
         } catch(Exception e) {
             log.error(e);
         }
@@ -57,12 +57,12 @@ public class ERP {
     /**
      *
      */
-    private void bindRepository() throws NamingException, RepositoryException {
+    private void bindRepository(String repoConfig, String repoHomeDir) throws NamingException, RepositoryException {
         Hashtable env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.jackrabbit.core.jndi.provider.DummyInitialContextFactory");
         env.put(Context.PROVIDER_URL, "localhost");
 
         context = new InitialContext(env);
-        RegistryHelper.registerRepository(context, REPO_NAME, "repository.xml", "repotest", true);
+        RegistryHelper.registerRepository(context, REPO_NAME, repoConfig, repoHomeDir, true);
     }
 }
