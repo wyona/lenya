@@ -14,7 +14,7 @@
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
 
-    <path id="classpath">
+    <path id="classpath.build">
       <fileset dir="lib">
         <include name="*.jar"/>
       </fileset>
@@ -42,7 +42,7 @@
     <echo>${classes.dir}</echo>
     <mkdir dir="${classes.dir}"/>
     <javac srcdir="src/java" destdir="${classes.dir}"
-      classpathref="classpath"
+      classpathref="classpath.build"
       debug="true"
     />
   </target>
