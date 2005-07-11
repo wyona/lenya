@@ -30,7 +30,7 @@ if (navigator.appVersion.indexOf ('Win') &#62;= 0) {
 
 <!-- Abo Window -->
 function aboWindow() {
-        newWind = open("newsletter_abo.html","Display","toolbar=no,statusbar=no,height=280,width=225");
+        newWind = open("http://www.unizh.ch/news/newsletter_abo.html","Display","toolbar=no,statusbar=no,height=280,width=225");
 }
 
       </xsl:comment>
