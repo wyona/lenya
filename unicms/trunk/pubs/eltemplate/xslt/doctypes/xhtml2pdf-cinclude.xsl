@@ -17,19 +17,19 @@
            <xsl:variable name="path"><xsl:value-of select="substring-before(substring-after(@href, $area), '.')"/></xsl:variable>
            <xsl:if test="not(@href = preceding::xhtml:a/@href)">
              <elt:referenced-doc href="{@href}">
-               <cinclude:include src="content/{$area}{$path}/index_{$language}.xml"/></elt:referenced-doc>
+               <cinclude:include ignoreErrors="true" src="content/{$area}{$path}/index_{$language}.xml"/></elt:referenced-doc>
            </xsl:if>
         </xsl:for-each>
         <xsl:for-each select="//elt:lernpfad/xhtml:a[contains(@href, 'Literatur')]">
            <xsl:variable name="path"><xsl:value-of select="substring-before(substring-after(@href, $area), '.')"/></xsl:variable>
            <elt:referenced-doc href="{@href}">
-             <cinclude:include src="content/{$area}{$path}/index_{$language}.xml"/>
+             <cinclude:include ignoreErrors="true" src="content/{$area}{$path}/index_{$language}.xml"/>
            </elt:referenced-doc>
         </xsl:for-each>
         <xsl:for-each select="//elt:lernpfad/xhtml:a[contains(@href, 'Entscheide')]">
            <xsl:variable name="path"><xsl:value-of select="substring-before(substring-after(@href, $area), '.')"/></xsl:variable>
            <elt:referenced-doc href="{@href}">
-             <cinclude:include src="content/{$area}{$path}/index_{$language}.xml"/>
+             <cinclude:include ignoreErrors="true"  src="content/{$area}{$path}/index_{$language}.xml"/>
            </elt:referenced-doc>
         </xsl:for-each>
       </elt:referenced-docs>

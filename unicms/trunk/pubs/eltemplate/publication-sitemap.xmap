@@ -239,7 +239,7 @@
       <map:match pattern="*/**/*_*.pdf">
         <map:generate src="content/{1}/{2}/{3}/index_{4}.xml"/>
         <map:transform src="xslt/doctypes/xhtml2pdf-cinclude.xsl">
-          <map:parameter name="area" value="{1}"/>
+          <map:parameter name="area" value="authoring"/>
           <map:parameter name="path" value="{2}"/>
           <map:parameter name="docid" value="{3}"/>
           <map:parameter name="language" value="{4}"/>
@@ -247,7 +247,7 @@
         <map:transform type="cinclude"/>
         <map:transform src="xslt/doctypes/xhtml2fo.xsl">
           <map:parameter name="imageuriprefix" value="http://{request:serverName}:{request:serverPort}{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring/images/"/>
-        </map:transform> 
+        </map:transform>
         <map:serialize type="fo2pdf"/>
       </map:match>
 

@@ -2,7 +2,6 @@
 <!-- $Id: header.xsl,v 1.8 2005/03/29 08:28:40 thomas Exp $ -->
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
                 xmlns="http://www.w3.org/1999/xhtml" 
                 xmlns:dc="http://purl.org/dc/elements/1.1/" 

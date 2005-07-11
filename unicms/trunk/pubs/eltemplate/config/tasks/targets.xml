@@ -76,7 +76,7 @@
 	<property name="notification.tolist" value=""/>
 	<property name="notification.subject" value=""/>
 	<property name="notification.message" value=""/>
-	<property name="mail.mailhost" value="mail.wyona.com"/>
+	<property name="mail.mailhost" value="mailhost.unizh.ch"/>
 	
 	<echo>Sending Mail</echo>
 	<echo>From:     [${notification.from}]</echo>

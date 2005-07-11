@@ -247,12 +247,12 @@
   
     <xsl:choose>
       <xsl:when test="$export = 'cp'">
-        <a href="{@href}?olatraw=true" target="_blank" onClick="window.open(this.href, 'popup', 'width=450,height=450'); return false">
+        <a href="{@href}?olatraw=true" target="_blank" onClick="window.open(this.href, 'popup', 'width=500,height=500'); return false">
           <xsl:value-of select="."/>
         </a>
       </xsl:when>
       <xsl:when test="$area = 'live'">
-        <a href="{@href}" target="_blank" onClick="window.open(this.href, 'popup', 'width=450,height=450'); return false">
+        <a href="{@href}" target="_blank" onClick="window.open(this.href, 'popup', 'width=500,height=500'); return false">
           <xsl:value-of select="."/>
         </a>
       </xsl:when>

@@ -231,10 +231,7 @@
         </choice>
       </attribute>
     </optional>
-    <choice>
-     <text/>
-     <ref name="Inline.class"/>
-    </choice>
+    <ref name="Inline.model"/>
   </element>
 </define>
 
