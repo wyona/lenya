@@ -58,6 +58,13 @@
     </map:pipeline>
 
     <map:pipeline>
+      <map:match pattern="**/sitemap.html">
+        <map:generate src="sitemap.xmap"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
       <map:match pattern="navigation**/index.xml">
         <map:generate type="navigation" src="{1}"/>
         <map:serialize type="xml"/>

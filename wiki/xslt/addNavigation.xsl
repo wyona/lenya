@@ -26,8 +26,15 @@
   <xsl:copy-of select="/page/xhtml:html/xhtml:head"/>
     <body>
     <p>
+    <table width="100%">
+    <tr>
+    <td>
     <xsl:apply-templates select="/page/navigation/bread-crumbs"/>
     <xsl:apply-templates select="/page/navigation-exception"/>
+    </td>
+    <td valign="right"><a href="sitemap.html">Sitemap</a></td>
+    </tr>
+    </table>
     </p>
   <xsl:copy-of select="/page/xhtml:html/xhtml:body/*"/>
     </body>
