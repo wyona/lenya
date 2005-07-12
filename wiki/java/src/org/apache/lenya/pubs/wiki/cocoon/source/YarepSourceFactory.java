@@ -46,8 +46,6 @@ import org.apache.lenya.transaction.IdentityMap;
 import org.apache.lenya.transaction.UnitOfWork;
 */
 
-import org.wyona.yarep.core.Path;
-
 /**
  * A factory for the "yarep" scheme (virtual protocol), which is used to resolve any src="yarep:..."
  * attributes in sitemaps. This implementation constructs the path to the source document from the
@@ -93,7 +91,7 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
     /**
      * @see org.apache.excalibur.source.SourceFactory#getSource(java.lang.String, java.util.Map)
      */
-    public Source getSource(String uri, Map parameters) throws MalformedURLException, IOException {
+    public Source getSource(String src, Map parameters) throws MalformedURLException, IOException {
 
         SourceResolver sourceResolver = null;
 
@@ -101,8 +99,8 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
             sourceResolver = (SourceResolver) this.manager
                     .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
 
-            String path = uri.substring(SCHEME.length() + 1);
-            getLogger().debug("Path = " + path);
+            String path = src.substring(SCHEME.length() + 1);
+            getLogger().debug("src = " + src);
 
             if (!path.startsWith("//")) {
 
@@ -118,12 +116,12 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
             Request request = ContextHelper.getRequest(this.context);
 
             if (getLogger().isDebugEnabled()) {
-                getLogger().debug("Creating repository source for URI [" + uri + "]");
+                getLogger().debug("Creating repository source for URI [" + src + "]");
             }
 
-            getLogger().debug("Creating repository source for URI [" + uri + "]");
+            getLogger().debug("Creating repository source for URI [" + src + "]");
 
-            return new YarepSource(new Path(uri));
+            return new YarepSource(src);
 
             //return sourceResolver.resolveURI(path);
 

@@ -1,15 +1,18 @@
 package org.apache.lenya.pubs.wiki.cocoon.source;
 
 import org.apache.excalibur.source.ModifiableSource;
+import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceUtil;
 import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.TraversableSource;
 import org.apache.log4j.Category;
 
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.util.Collection;
 
 import org.wyona.yarep.core.Path;
 import org.wyona.yarep.core.Repository;
@@ -18,7 +21,7 @@ import org.wyona.yarep.core.RepositoryFactory;
 /**
  *
  */
-public class YarepSource implements ModifiableSource {
+public class YarepSource implements ModifiableSource, TraversableSource {
 
     private static Category log = Category.getInstance(YarepSource.class);
 
@@ -29,9 +32,9 @@ public class YarepSource implements ModifiableSource {
     /**
      *
      */
-    public YarepSource(Path path) throws MalformedURLException {
-        this.path = path;
-        if (!SourceUtil.getScheme(path.toString()).equals(SCHEME)) throw new MalformedURLException();
+    public YarepSource(String src) throws MalformedURLException {
+        if (!SourceUtil.getScheme(src.toString()).equals(SCHEME)) throw new MalformedURLException();
+        this.path = new Path(SourceUtil.getSpecificPart(src.toString()));
     }
 
     /**
@@ -39,7 +42,7 @@ public class YarepSource implements ModifiableSource {
      */
     public boolean exists() {
         Repository repo = new RepositoryFactory().newRepository("wiki");
-        return repo.exists(new Path(SourceUtil.getSpecificPart(path.toString())));
+        return repo.exists(path);
     }
 
     /**
@@ -55,7 +58,7 @@ public class YarepSource implements ModifiableSource {
      */
     public InputStream getInputStream() throws IOException, SourceNotFoundException {
         Repository repo = new RepositoryFactory().newRepository("wiki");
-        return repo.getInputStream(new Path(SourceUtil.getSpecificPart(path.toString())));
+        return repo.getInputStream(path);
     }
 
     /**
@@ -85,7 +88,8 @@ public class YarepSource implements ModifiableSource {
      *
      */
     public String getURI() {
-        return path.toString();
+        log.warn("Not really implemented yet! Path: " + path);
+        return "file:" + path.toString();
     }
 
     /**
@@ -130,6 +134,46 @@ public class YarepSource implements ModifiableSource {
      */
     public OutputStream getOutputStream() throws IOException {
         Repository repo = new RepositoryFactory().newRepository("wiki");
-        return repo.getOutputStream(new Path(SourceUtil.getSpecificPart(path.toString())));
+        return repo.getOutputStream(path);
+    }
+
+    /**
+     *
+     */
+    public Source getParent() {
+        log.warn("Not implemented yet!");
+        return null;
+    }
+
+    /**
+     *
+     */
+    public String getName() {
+        log.warn("Not implemented yet!");
+        return null;
+    }
+
+    /**
+     *
+     */
+    public Source getChild(String name) {
+        log.warn("Not implemented yet!");
+        return null;
+    }
+
+    /**
+     *
+     */
+    public Collection getChildren() {
+        log.warn("Not implemented yet!");
+        return null;
+    }
+
+    /**
+     *
+     */
+    public boolean isCollection() {
+        log.warn("Not implemented yet!");
+        return false;
     }
 }
