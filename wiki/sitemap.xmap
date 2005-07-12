@@ -59,7 +59,7 @@
 
     <map:pipeline>
       <map:match pattern="**/sitemap.html">
-        <map:generate src="sitemap.xmap"/>
+        <map:generate type="directory" src="yarep:/"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
