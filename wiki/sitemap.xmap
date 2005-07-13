@@ -19,6 +19,8 @@
 
   <map:components>
     <map:generators default="file">
+      <map:generator logger="sitemap.generator.traversable" name="traversable" src="org.apache.cocoon.generation.TraversableGenerator">
+      </map:generator>
       <map:generator logger="sitemap.generator.text" name="text" src="org.apache.cocoon.generation.TextGenerator">
         <map:parameter name="localizable" value="true"/>
       </map:generator>
@@ -59,7 +61,10 @@
 
     <map:pipeline>
       <map:match pattern="**/sitemap.html">
+        <map:generate type="traversable" src="yarep:/"/>
+<!--
         <map:generate type="directory" src="yarep:/"/>
+-->
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>

@@ -29,19 +29,22 @@ public class YarepSource implements ModifiableSource, TraversableSource {
 
     private String SCHEME = "yarep";
 
+    private Repository repo;
+
     /**
      *
      */
     public YarepSource(String src) throws MalformedURLException {
         if (!SourceUtil.getScheme(src.toString()).equals(SCHEME)) throw new MalformedURLException();
         this.path = new Path(SourceUtil.getSpecificPart(src.toString()));
+
+        repo = new RepositoryFactory().newRepository("wiki");
     }
 
     /**
      *
      */
     public boolean exists() {
-        Repository repo = new RepositoryFactory().newRepository("wiki");
         return repo.exists(path);
     }
 
@@ -57,7 +60,6 @@ public class YarepSource implements ModifiableSource, TraversableSource {
      *
      */
     public InputStream getInputStream() throws IOException, SourceNotFoundException {
-        Repository repo = new RepositoryFactory().newRepository("wiki");
         return repo.getInputStream(path);
     }
 
@@ -133,7 +135,6 @@ public class YarepSource implements ModifiableSource, TraversableSource {
      *
      */
     public OutputStream getOutputStream() throws IOException {
-        Repository repo = new RepositoryFactory().newRepository("wiki");
         return repo.getOutputStream(path);
     }
 
@@ -149,8 +150,7 @@ public class YarepSource implements ModifiableSource, TraversableSource {
      *
      */
     public String getName() {
-        log.warn("Not implemented yet!");
-        return null;
+        return path.getName();
     }
 
     /**
@@ -165,15 +165,22 @@ public class YarepSource implements ModifiableSource, TraversableSource {
      *
      */
     public Collection getChildren() {
-        log.warn("Not implemented yet!");
-        return null;
+        Path[] children = repo.getChildren(path);
+        java.util.Vector collection = new java.util.Vector();
+        try {
+        for (int i = 0; i < children.length; i++) {
+            collection.add(new YarepSource("yarep:" + children[i].toString()));
+        }
+        } catch (MalformedURLException e) {
+            log.error(e);
+        }
+        return collection;
     }
 
     /**
      *
      */
     public boolean isCollection() {
-        log.warn("Not implemented yet!");
-        return false;
+        return repo.isCollection(path);
     }
 }
