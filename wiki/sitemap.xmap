@@ -61,7 +61,9 @@
 
     <map:pipeline>
       <map:match pattern="**/sitemap.html">
-        <map:generate type="traversable" src="yarep:/"/>
+        <map:generate type="traversable" src="yarep:/">
+          <map:parameter name="depth" value="3"/>
+	</map:generate>
 <!--
         <map:generate type="directory" src="yarep:/"/>
 -->
