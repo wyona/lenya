@@ -32,47 +32,46 @@
         <script Language="JavaScript">
 function validRequired(formField,fieldLabel)
 {
-	var result = true;
-	
-	if (formField.value == "")
-	{
-		alert('Please enter a value for the "' + fieldLabel +'" field.');
-		formField.focus();
-		result = false;
-	}
-	
-	return result;
+    var result = true;
+
+    if (formField.value == "")
+    {
+        alert('Please enter a value for the "' + fieldLabel +'" field.');
+        formField.focus();
+        result = false;
+    }
+    return result;
 }
 
 function validContent(formField,fieldLabel)
 {
-	var result = true;
-	
-	if (formField.value.match("[^a-zA-Z0-9\\-]+"))
-	{
-		alert('Please enter a valid value for the "' + fieldLabel +'" field. A-Z, a-z, 0-9 or -');
-		formField.focus();
-		result = false;
-	}
-	
-	return result;
+    var result = true;
+
+    if (formField.value.match("[^a-zA-Z0-9\\-]+"))
+    {
+        alert('Please enter a valid value for the "' + fieldLabel +'" field. A-Z, a-z, 0-9 or -');
+        formField.focus();
+        result = false;
+    }
+
+    return result;
 }
 
 function validateForm(theForm)
 {
-	if (!validContent(theForm["properties.create.child-id"],"Document ID"))
-		return false;
+    if (!validContent(theForm["properties.create.child-id"],"Document ID"))
+        return false;
 
-	if (!validRequired(theForm["properties.create.child-id"],"Document ID"))
-		return false;
+    if (!validRequired(theForm["properties.create.child-id"],"Document ID"))
+        return false;
 
-	if (!validRequired(theForm["properties.create.child-name"],"Navigation Title"))
-		return false;
+    if (!validRequired(theForm["properties.create.child-name"],"Navigation Title"))
+        return false;
 
-	if (!validRequired(theForm["properties.create.title"],"Document Title"))
-		return false;
-	
-	return true;
+    if (!validRequired(theForm["properties.create.title"],"Document Title"))
+        return false;
+
+    return true;
 }
 </script>
    
