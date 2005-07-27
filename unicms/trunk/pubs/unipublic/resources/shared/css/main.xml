@@ -73,6 +73,6 @@ a:visited { color: #339; text-decoration: none }
 .related-content .title {font-weight: bold; font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left;}
 .related-content .item {font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; text-align:left; margin:5px 0px 5px 0px;}
 .object { font-size: 10px; font-family: Geneva, Verdana, Helvetica, Arial, Swiss, SunSans-Regular; display:block; }
-
+.asset {color: #339; text-decoration: none }
 
 </css>
