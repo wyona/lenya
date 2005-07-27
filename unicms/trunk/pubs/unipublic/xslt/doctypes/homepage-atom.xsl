@@ -67,7 +67,7 @@
     <xsl:variable name="id"><xsl:value-of select="../../../@id"/></xsl:variable>
       <link rel="alternate">
        <xsl:attribute name="type"><xsl:value-of select="concat('image/', $type)"/></xsl:attribute>
-       <xsl:attribute name="href"><xsl:value-of select="concat('http://www.unipublic.unizh.ch', $root, $id,'/', $data)"/></xsl:attribute>
+       <xsl:attribute name="href"><xsl:value-of select="concat('http://www.unipublic.unizh.ch', $id,'/', $data)"/></xsl:attribute>
        <xsl:attribute name="title"><xsl:value-of select="@title"/></xsl:attribute>
       </link> 
   </xsl:template>
