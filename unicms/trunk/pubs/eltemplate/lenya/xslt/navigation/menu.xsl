@@ -18,11 +18,13 @@
         <xsl:call-template name="item">
           <xsl:with-param name="level">1</xsl:with-param>
         </xsl:call-template>
-        <xsl:for-each select="nav:node">
-          <xsl:call-template name="item">
-            <xsl:with-param name="level">2</xsl:with-param>
-          </xsl:call-template>
-        </xsl:for-each>
+        <xsl:if test="descendant-or-self::nav:node[@current = 'true']">
+          <xsl:for-each select="nav:node">
+            <xsl:call-template name="item">
+              <xsl:with-param name="level">2</xsl:with-param>
+            </xsl:call-template>
+          </xsl:for-each>
+        </xsl:if>
       </xsl:for-each>
     </table>
   </div>
@@ -68,9 +70,16 @@
 </xsl:template>
 
 <xsl:template match="nav:label">
-  <div class="menulabel">
-    <div class="left"><xsl:value-of select="substring-before (., ' ')"/></div>
-    <div class="right"><xsl:value-of select="substring-after (., ' ')"/></div>
+  <div class="menulabel">  
+    <xsl:choose>
+      <xsl:when test="contains(., ' ')">
+        <div class="left"><xsl:value-of select="substring-before (., ' ')"/></div>
+        <div class="right"><xsl:value-of select="substring-after (., ' ')"/></div>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="."/>
+      </xsl:otherwise>
+    </xsl:choose>
   </div>
 </xsl:template>
 
