@@ -190,7 +190,7 @@
         <map:transform src="xslt/common/atom2rss.xsl"/>
         <map:transform type="i18n"/>
         <map:transform src="xslt/common/rss2html.xsl"/>
-        <map:serialize type="html"/>  
+        <map:serialize type="html-no-dtd"/>  
       </map:match>
 
       <!-- printer friendly -->
