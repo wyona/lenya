@@ -203,7 +203,7 @@
       <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
   <!-- (above, the last restriction) the homepage should always be treated in 'root' mode - thus considering its siblings as its children -->
 
-        <xsl:for-each select="*[(@level &lt; $depth) and ((@same_language = 'true') or ($show = 'any_language'))]">
+        <xsl:for-each select="*[(@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language'))]">
 
           <xsl:choose>
             <xsl:when test="@level = 0">
@@ -222,7 +222,7 @@
       </xsl:when>
       <xsl:otherwise>
 
-        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth) and ((@same_language = 'true') or ($show = 'any_language'))]">
+        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language'))]">
           <xsl:choose>
             <xsl:when test="@level = $current_nodes_level">
               <h3> <i> (Start) </i> <u> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </u> </h3>
@@ -270,11 +270,11 @@
           <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
 
   <!-- write header, if there is an entry belonging to this group -->
-            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth) and (@level &gt; $grouping_level)  and ((@same_language = 'true') or ($show = 'any_language'))]">
+            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth + 1) and (@level &gt; $grouping_level)  and ((@same_language = 'true') or ($show = 'any_language'))]">
               <h3> <a name="{$current_letter}"> <xsl:value-of select="$current_letter"/> </a> </h3> 
             </xsl:if>
 
-            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
+            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth + 1) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
               <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
             </xsl:for-each>
 
@@ -299,11 +299,11 @@
           <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
 
   <!-- write header, if there is an entry belonging to this group -->
-            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
+            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
               <h3> <a name="{$current_letter}"> <xsl:value-of select="$current_letter"/> </a> </h3> 
             </xsl:if>
 
-            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
+            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
               <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
             </xsl:for-each>
 
@@ -332,7 +332,7 @@
 
         <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
 
-        <xsl:for-each select="*[(@level &lt; $depth) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
+        <xsl:for-each select="*[(@level &lt; $depth + 1) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
           <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
         </xsl:for-each>
 
@@ -341,7 +341,7 @@
 
         <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
 
-        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
+        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
           <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
         </xsl:for-each>
 
