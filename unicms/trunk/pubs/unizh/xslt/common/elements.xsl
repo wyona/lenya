@@ -200,41 +200,44 @@
     <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
 
     <xsl:choose>
+  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
       <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-  <!-- (above, the last restriction) the homepage should always be treated in 'root' mode - thus considering its siblings as its children -->
 
-        <xsl:for-each select="*[(@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language'))]">
+        <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
 
-          <xsl:choose>
-            <xsl:when test="@level = 0">
-              <h3> <i> (Start) </i> <u> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </u> </h3>
-            </xsl:when>
-            <xsl:when test="@level = $grouping_level">
-              <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3>
-            </xsl:when>
-            <xsl:when test="@level &gt; $grouping_level">
-              <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-            </xsl:when>
-            <xsl:otherwise/>
-          </xsl:choose>
+  <!-- identify the groups, see if their nodes fulfill the restrictions, and - if yes - print group header and items -->
+        <xsl:for-each select="*[(@level = $grouping_level) and (@level &lt; $depth + 1)]">
+
+          <xsl:variable name="headers-basic-url" select="@basic-url"/>
+
+          <xsl:if test="../*[(@level != 0) and (@level &gt; $grouping_level) and (@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
+            <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3> 
+          </xsl:if>
+
+          <xsl:for-each select="../*[(@level != 0) and (@level &gt; $grouping_level) and (@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
+            <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
+          </xsl:for-each>
+
         </xsl:for-each>
 
       </xsl:when>
       <xsl:otherwise>
 
-        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language'))]">
-          <xsl:choose>
-            <xsl:when test="@level = $current_nodes_level">
-              <h3> <i> (Start) </i> <u> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </u> </h3>
-            </xsl:when>
-            <xsl:when test="@level = $current_nodes_level + $grouping_level">
-              <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3>
-            </xsl:when>
-            <xsl:when test="@level &gt; $current_nodes_level + $grouping_level">
-              <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-            </xsl:when>
-            <xsl:otherwise/>
-          </xsl:choose>
+        <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
+
+  <!-- identify the groups, see if their nodes fulfill the restrictions, and - if yes - print group header and items -->
+        <xsl:for-each select="*[(@currents_child = 'true') and (@level = $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1)]">
+
+          <xsl:variable name="headers-basic-url" select="@basic-url"/>
+
+          <xsl:if test="../*[(@level != $current_nodes_level) and (@level &gt; $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
+            <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3> 
+          </xsl:if>
+
+          <xsl:for-each select="../*[(@level != $current_nodes_level) and (@level &gt; $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
+            <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
+          </xsl:for-each>
+
         </xsl:for-each>
 
       </xsl:otherwise>
@@ -253,20 +256,18 @@
     <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
 
     <xsl:choose>
+  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
       <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-  <!-- (above, the last restriction) the homepage should always be treated in 'root' mode - thus considering its siblings as its children -->
 
         <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
 
+  <!-- traverse ALL nodes, since position() relates to the WHOLE set, not to a subselection -->
         <xsl:for-each select="*">
 
-  <!-- (above) traverse ALL nodes, since:
-               1) position() relates to the WHOLE set, not to a subselection
-               2) the group header is written when traversing the FIRST node starting with a new letter
-  -->
           <xsl:variable name="precedent_pos" select="position() - 1"/>
           <xsl:variable name="current_letter" select="substring(@label, 1, 1)"/>
 
+  <!-- the group header is written when reaching the FIRST node starting with a new letter -->
           <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
 
   <!-- write header, if there is an entry belonging to this group -->
@@ -287,15 +288,13 @@
 
         <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
 
+  <!-- traverse ALL nodes, since position() relates to the WHOLE set, not to a subselection -->
         <xsl:for-each select="*">
 
-  <!-- (above) traverse ALL nodes, since:
-               1) position() relates to the WHOLE set, not to a subselection
-               2) the group header is written when traversing the FIRST node starting with a new letter
-  -->
           <xsl:variable name="precedent_pos" select="position() - 1"/>
           <xsl:variable name="current_letter" select="substring(@label, 1, 1)"/>
 
+  <!-- the group header is written when reaching the FIRST node starting with a new letter -->
           <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
 
   <!-- write header, if there is an entry belonging to this group -->
@@ -327,8 +326,8 @@
     <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
 
     <xsl:choose>
+  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
       <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-  <!-- (above, the last restriction) the homepage should always be treated in 'root' mode - thus considering its siblings as its children -->
 
         <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
 
