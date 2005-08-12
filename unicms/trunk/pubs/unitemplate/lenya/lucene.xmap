@@ -71,7 +71,7 @@
           <map:parameter name="area" value="{2}"/>
           <map:parameter name="context-prefix" value="{request:contextPath}"/>
         </map:transform>
-        <map:serialize type="html-iso-8859-1"/>
+        <map:serialize type="html"/>
       </map:match>
       <map:handle-errors>
         <map:select type="exception">
