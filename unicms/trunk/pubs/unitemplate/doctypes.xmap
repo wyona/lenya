@@ -68,6 +68,13 @@
         <map:serialize type="xml"/>
       </map:match>
       
+      <!-- load XML file for ancestry -->
+      <!-- pattern="xml/{area}/{doctype}/{document-path}" -->
+      <map:match pattern="xml/**/*.xml">       
+        <map:generate src="content/{1}/{2}.xml"/>
+        <map:serialize type="xml"/>   
+      </map:match>
+
       <!-- load XML file -->
       <!-- pattern="{area}/{doctype}/{document-path}" -->
       <map:match pattern="xml">
@@ -129,21 +136,26 @@
         <map:aggregate element="document">
           <map:part element="content" src="cocoon:/xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/breadcrumb/{6}.html.xml"/>
-          <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/sitemap/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/ancestry/{6}.html.xml"/>
           <map:part src="cocoon:/sections.xconf"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
+
         <map:transform type="index">
           <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
           <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/> 
         </map:transform>
+
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
-  	    </map:transform>
+  	</map:transform>
+
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/addDoctypeToNav.xsl"/>
+
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{4}"/>
           <map:parameter name="area" value="{5}"/>
@@ -151,6 +163,7 @@
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
         </map:call>
+
         <map:serialize type="xml"/>
       </map:match>
       
