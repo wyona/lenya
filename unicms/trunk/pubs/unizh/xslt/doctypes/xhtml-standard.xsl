@@ -40,8 +40,8 @@
   <xsl:include href="../common/footer.xsl"/>
 
 
-  <xsl:variable name="navigationType">
-    <xsl:value-of select="/document/uz:unizh/uz:publication/@navigationType"/>
+  <xsl:variable name="tabs">
+    <xsl:value-of select="/document/uz:unizh/uz:publication/@tabs"/>
   </xsl:variable>
 
 
@@ -63,7 +63,7 @@
             
             <xsl:call-template name="topnavbar"/>
             
-            <xsl:if test="$navigationType = 'tabbed'">
+            <xsl:if test="$tabs = 'true'">
               <tr>
                 <td class="tabs" colspan="3" width="800"><br />
                   <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="tabs"/>
