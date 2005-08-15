@@ -23,8 +23,8 @@
 <xsl:template match="nav:node">
  <div>
   <xsl:apply-templates select="." mode="node_attrs"/>
+  <xsl:apply-templates select="nav:node"/>
  </div>
- <xsl:apply-templates select="nav:node"/>
 </xsl:template>
 
 
