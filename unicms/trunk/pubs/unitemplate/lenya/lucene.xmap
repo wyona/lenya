@@ -52,16 +52,16 @@
 
           <map:parameter name="pub0-id" value="{1}"/>
           <map:parameter name="pub0-name" value="www.{1}.unizh.ch"/>
-          <map:parameter name="pub0-index-dir" value="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/index/{2}/{1}-index"/>
+          <map:parameter name="pub0-index-dir" value="../work/search/lucene/index/{2}/{1}-index"/>
           <map:parameter name="pub0-search-fields" value="title,contents,keywords"/>
-          <map:parameter name="pub0-excerpt-dir" value="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/htdocs_dump/{2}/www.{1}.unizh.ch"/>
+          <map:parameter name="pub0-excerpt-dir" value="../work/search/lucene/htdocs_dump/{2}/www.{1}.unizh.ch"/>
           <map:parameter name="pub0-prefix" value="http://www.{1}.unizh.ch"/>
 
           <map:parameter name="pub1-id" value="unizh"/>
           <map:parameter name="pub1-name" value="www.unizh.ch"/>
-          <map:parameter name="pub1-index-dir" value="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/index/{2}/unizh-index"/>
+          <map:parameter name="pub1-index-dir" value="/tmp/cocoon-lenya/work/search/lucene/index/{2}/unizh-index"/>
           <map:parameter name="pub1-search-fields" value="title,contents,keywords"/>
-          <map:parameter name="pub1-excerpt-dir" value="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/htdocs_dump/{2}"/>
+          <map:parameter name="pub1-excerpt-dir" value="/tmp/cocoon-lenya/work/search/lucene/htdocs_dump/{2}"/>
           <map:parameter name="pub1-prefix" value="http:/"/>
         </map:generate>
         <map:transform src="../../../xslt/search/sort.xsl"/>
