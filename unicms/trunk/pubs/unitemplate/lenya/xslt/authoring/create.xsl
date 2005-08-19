@@ -111,6 +111,16 @@ function validateForm(theForm)
               <tr>
                 <td class="lenya-form-caption">Language:</td><td><input class="lenya-form-element" type="hidden" name="properties.create.language" value="{/parent-child/dc:language}"/><xsl:value-of select="/parent-child/dc:language"/></td>
               </tr>
+              <xsl:choose>
+                <xsl:when test="$doctype = 'homepage'">
+                  <tr>
+                    <td class="lenya-form-caption">Subhomepage Type:</td><td><select class="lenya-form-element" name="properties.create.subhomepageType"><option selected="true">full_subhome</option><option>lean_subhome</option><option>homepage_clone</option></select></td>
+                  </tr>
+                </xsl:when>
+                <xsl:otherwise>
+                  <input type="hidden" name="properties.create.subhomepageType" value="full_subhome"/>
+                </xsl:otherwise>
+              </xsl:choose>
               <tr>
                 <td class="lenya-form-caption">Subject (Keywords):</td><td><input class="lenya-form-element" type="text" name="properties.create.subject"/></td>
               </tr>
