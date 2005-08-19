@@ -25,6 +25,16 @@
   </attribute>
 </define>
 
+<define name="unizh.subhomepageType.attrib">
+  <attribute name="unizh:subhomepageType">
+    <choice>
+      <value type="string">full_subhome</value>
+      <value type="string">lean_subhome</value>
+      <value type="string">homepage_clone</value>
+    </choice>
+  </attribute>
+</define>
+
 <define name="unizh.highlights">
   <optional>
     <element name="unizh:highlights">
