@@ -60,16 +60,11 @@
 	    {
         if (Publication.ARCHIVE_AREA.equals(area) || Publication.TRASH_AREA.equals(area)) {
           <item>New Document</item>
-	  <item>New Homepage</item>
+	  <item>New Subhomepage</item>
         }
         else {
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
-          if (!isDocument &amp;&amp; area.equals(Publication.AUTHORING_AREA)) {
-              <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item>
-          }
-          else {
-              <item>New Homepage</item>
-          }
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Subhomepage</item>
         }
 	    }
 	  </xsp:logic>
