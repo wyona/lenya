@@ -38,6 +38,7 @@
   <xsl:include href="../common/breadcrumb.xsl"/>
   <xsl:include href="../common/elements.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
+  <xsl:include href="../common/menu.xsl"/>
 
 
   <xsl:variable name="tabs">
@@ -122,7 +123,16 @@
   
 <xsl:template name="two-columns">
   <td id="navigation" valign="top" width="187">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu"/>
+
+    <xsl:choose>
+      <xsl:when test="$tabs = 'true'">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_for_tabs"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_only"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
   </td>
   <td colspan="2" width="613" valign="top" align="left">
     <div class="content2cols">
@@ -140,7 +150,16 @@
 
 <xsl:template name="three-columns">
   <td id="navigation" valign="top" width="187">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu"/>
+
+    <xsl:choose>
+      <xsl:when test="$tabs = 'true'">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_for_tabs"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_only"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
   </td>
   <td width="413" valign="top" align="left">
     <div class="content3cols">
@@ -185,131 +204,6 @@
 </xsl:template>
 
   
-  <xsl:template match="xhtml:div[@id = 'menu']" mode="menu">
-
-    <xsl:variable name="subhome" select="descendant::*[(@doctype = 'unizh:homepage')]"/>
-<!-- there could be several subhome pages - the last is the deepest -->
-    <xsl:variable name="deepestSubhome" select="$subhome[last()]"/>
-
-    <xsl:copy>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <xsl:choose>
-          <xsl:when test="$deepestSubhome">
-            <xsl:apply-templates select="$deepestSubhome" mode="menu">
-              <xsl:with-param name="baseLevel" select="$deepestSubhome/@level"/>
-            </xsl:apply-templates>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:apply-templates select="node()" mode="menu">
-              <xsl:with-param name="baseLevel" select="'0'"/>
-            </xsl:apply-templates>
-          </xsl:otherwise>
-        </xsl:choose>
-      </table>
-    </xsl:copy>
-
-  </xsl:template>
-  
-
-  <xsl:template match="xhtml:div" mode="menu">
-
-    <xsl:param name="baseLevel"/>
-    <xsl:variable name="relativeLevel" select="@level - $baseLevel"/>
-
-    <xsl:choose>
-      <xsl:when test="@level = $baseLevel">
-
-	<tr>
-	  <td class="publtitle">
-            <a href="{@href}"> <xsl:value-of select="@label"/> </a>
-<!--        <a href="{$contextprefix}/physik/{$area}/{@rel_href}"> <xsl:value-of select="@label"/> </a>  -->
-          </td>
-	</tr>
-	<tr>
-	  <td class="navoff">&#160;</td>
-	</tr>
-
-      </xsl:when>
-      <xsl:when test="@current = 'true'">
-
-        <tr>
-          <td class="navon">
-            <div class="nlevel{$relativeLevel}">
-              <xsl:value-of select="@label"/>
-            </div>
-          </td>
-        </tr>
-
-      </xsl:when>
-      <xsl:otherwise>
-
-        <tr>
-          <td class="navoff">
-            <div class="nlevel{$relativeLevel}">
-              <a href="{@href}"> <xsl:value-of select="@label"/> </a>
-<!--          <a href="{$contextprefix}/physik/{$area}/{@rel_href}"> <xsl:value-of select="@label"/> </a>  -->
-            </div>
-          </td>
-        </tr>
-
-      </xsl:otherwise>
-    </xsl:choose>
-
-    <xsl:apply-templates select="node()" mode="menu">
-      <xsl:with-param name="baseLevel" select="$baseLevel"/>
-    </xsl:apply-templates>
-
-  </xsl:template>
-  
-
-  <xsl:template match="xhtml:div[@id = 'menu']" mode="tabs">
-
-    <xsl:variable name="subhome" select="descendant::*[(@doctype = 'unizh:homepage')]"/>
-<!-- there could be several subhome pages - the last is the deepest -->
-    <xsl:variable name="deepestSubhome" select="$subhome[last()]"/>
-
-    <xsl:choose>
-      <xsl:when test="$deepestSubhome">
-        <xsl:if test="$deepestSubhome/node()">
-          <table cellspacing="1" cellpadding="0" border="1" width="100%" class="ornate">
-            <tr>
-              <xsl:apply-templates select="$deepestSubhome/node()" mode="tabs"/>
-            </tr>
-          </table>
-        </xsl:if>
-      </xsl:when>
-      <xsl:otherwise>
-<!-- only if there *are* any tabs (without the homepage - that should not appear in the tabs) -->
-        <xsl:if test="((count(*) &gt; 0) and not(*[@level = '0'])) or (count(*) &gt; 1)">
-          <table cellspacing="1" cellpadding="0" border="1" width="100%" class="ornate">
-            <tr>
-              <xsl:apply-templates select="node()" mode="tabs"/>
-            </tr>
-          </table>
-        </xsl:if>
-      </xsl:otherwise>
-    </xsl:choose>
-
-  </xsl:template>
-  
-
-
-  <xsl:template match="xhtml:div" mode="tabs">
-
-    <xsl:choose>
-<!-- exclude homepage -->
-      <xsl:when test="@level = '0'"/>
-      <xsl:when test="@current = 'true'">
-        <td> <xsl:value-of select="@label"/> </td>
-      </xsl:when>
-      <xsl:otherwise>
-        <td> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </td>
-      </xsl:otherwise>
-    </xsl:choose>
-
-  </xsl:template>
-  
-
 <xsl:template match="@*|node()" priority="-1">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
