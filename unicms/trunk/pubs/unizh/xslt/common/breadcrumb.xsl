@@ -16,7 +16,12 @@
       <xsl:apply-templates select="/document/uz:unizh/uz:university" mode="breadcrumb"/>
       <xsl:apply-templates select="/document/uz:unizh/uz:section" mode="breadcrumb"/>
       <xsl:apply-templates select="/document/uz:unizh/uz:publication" mode="breadcrumb"/>
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']/node()" mode="breadcrumb"/>
+
+<!-- start the breadcrumb path at subhomepage level (not at root level) -->
+      <xsl:variable name="subhomepages" select="/document/xhtml:div[(@id = 'breadcrumb')]/*[@doctype = 'unizh:homepage']"/>
+      <xsl:variable name="lastSubhomepage" select="$subhomepages[last()]"/>
+      <xsl:variable name="lastSubhomepagePosition" select="$lastSubhomepage/@position"/>
+      <xsl:apply-templates select="/document/xhtml:div[(@id = 'breadcrumb')]/*[@position &gt; $lastSubhomepagePosition - 1]" mode="breadcrumb"/>
     </div>
   </xsl:template>
   
@@ -40,7 +45,7 @@
   
   <xsl:template match="uz:unizh/*[@breadcrumb = 'false']" mode="breadcrumb"/>
   
-  
+
   <xsl:template match="xhtml:div[@current = 'true']" mode="breadcrumb">
 
     <xsl:call-template name="breadcrumb_separator"/>
