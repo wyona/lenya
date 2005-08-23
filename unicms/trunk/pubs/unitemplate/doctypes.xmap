@@ -160,12 +160,11 @@
   	</map:transform>
 
         <!-- Doctype / context specific navigation schemes.  --> 
-        <!-- <map:transform src="../unizh/xslt/common/context2nav.xsl/> -->
 
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/> 
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
-        <map:transform src="../unizh/xslt/common/doctype2nav.xsl"/>
+        <map:transform src="lenya/xslt/navigation/context2nav.xsl"/>
        
  
         <map:call resource="transformation">

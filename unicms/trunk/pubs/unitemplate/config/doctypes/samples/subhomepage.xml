@@ -4,7 +4,7 @@ xmlns:xhtml="http://www.w3.org/1999/xhtml"
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
-xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" unizh:columns="3"
+xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" unizh:columns="3" unizh:tabs="false" 
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
