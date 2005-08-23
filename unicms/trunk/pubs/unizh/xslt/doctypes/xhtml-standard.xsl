@@ -38,12 +38,6 @@
   <xsl:include href="../common/breadcrumb.xsl"/>
   <xsl:include href="../common/elements.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
-  <xsl:include href="../common/menu.xsl"/>
-
-
-  <xsl:variable name="tabs">
-    <xsl:value-of select="/document/uz:unizh/uz:publication/@tabs"/>
-  </xsl:variable>
 
 
   <xsl:template match="document">
@@ -64,13 +58,11 @@
             
             <xsl:call-template name="topnavbar"/>
             
-            <xsl:if test="$tabs = 'true'">
               <tr>
                 <td class="tabs" colspan="3" width="800"><br />
-                  <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="tabs"/>
+                  <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
                 </td>
               </tr>
-            </xsl:if>
 
             <tr>
               <td class="breadcrumb" colspan="3" width="800"><br />
@@ -123,16 +115,7 @@
   
 <xsl:template name="two-columns">
   <td id="navigation" valign="top" width="187">
-
-    <xsl:choose>
-      <xsl:when test="$tabs = 'true'">
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_for_tabs"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_only"/>
-      </xsl:otherwise>
-    </xsl:choose>
-
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
   </td>
   <td colspan="2" width="613" valign="top" align="left">
     <div class="content2cols">
@@ -150,16 +133,7 @@
 
 <xsl:template name="three-columns">
   <td id="navigation" valign="top" width="187">
-
-    <xsl:choose>
-      <xsl:when test="$tabs = 'true'">
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_for_tabs"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" mode="menu_only"/>
-      </xsl:otherwise>
-    </xsl:choose>
-
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
   </td>
   <td width="413" valign="top" align="left">
     <div class="content3cols">
@@ -204,6 +178,66 @@
 </xsl:template>
 
   
+<xsl:template match="xhtml:div[@id = 'menu']">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="publtitle">
+        <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+      </td>
+    </tr>
+    <xsl:apply-templates select="xhtml:div" mode="menu">
+      <xsl:with-param name="level">1</xsl:with-param>
+    </xsl:apply-templates>
+  </table>
+</xsl:template>
+  
+
+<xsl:template match="xhtml:div" mode="menu">
+ <xsl:param name="level"/> 
+  <xsl:choose>
+    <xsl:when test="@current = 'true'">
+      <tr>
+        <td class="navon">
+          <div class="nlevel{$level}">
+            <xsl:value-of select="@label"/>
+          </div>
+        </td>
+      </tr>
+    </xsl:when>
+    <xsl:otherwise>
+      <tr>
+        <td class="navoff">
+          <div class="nlevel{$level}">
+            <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+          </div>
+        </td>
+      </tr>
+    </xsl:otherwise>
+  </xsl:choose>
+  <xsl:apply-templates select="xhtml:div" mode="menu">
+    <xsl:with-param name="level" select="$level + 1"/>
+  </xsl:apply-templates>
+</xsl:template>
+  
+<xsl:template match="xhtml:div[@id = 'tabs']">
+  <table border="1" cellpadding="3">
+    <tr>
+      <xsl:for-each select="xhtml:div">
+        <td>&#160;
+          <xsl:choose>
+            <xsl:when test="@current = 'true'">
+              <xsl:value-of select="@label"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+            </xsl:otherwise>
+          </xsl:choose>
+        &#160;</td>
+      </xsl:for-each> 
+    </tr>
+  </table>
+</xsl:template>
+
 <xsl:template match="@*|node()" priority="-1">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>

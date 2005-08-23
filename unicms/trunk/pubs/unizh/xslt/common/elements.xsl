@@ -3,6 +3,7 @@
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
+  xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:uz="http://unizh.ch"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -455,10 +456,6 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
-  <xsl:template match="dc:description"/>
-  
-  <xsl:template match="dc:metadata"/>
 
   <xsl:template match="unizh:attention">
     <span class="attention">
@@ -610,12 +607,39 @@
   
   <xsl:template match="xhtml:h2[(ancestor::index:child)]" mode="anchor"/>
   
+  <xsl:template match="unizh:children[descendant::unizh:newsitem]">
+    <xsl:apply-templates select="index:child"/>
+  </xsl:template>
+
+  <xsl:template match="unizh:level">
+    <xsl:apply-templates select="level:node"/>
+  </xsl:template>
+
+  <xsl:template match="level:node">
+   <xsl:value-of select="descendant::dc:title"/><br/>
+  </xsl:template>
+
+
   <xsl:template match="unizh:children">
     <ul class="children">
       <xsl:apply-templates select="index:child"/>
     </ul>
   </xsl:template>
   
+   <xsl:template match="index:child[descendant::unizh:newsitem]">
+    <h3>
+      <xsl:apply-templates select="descendant::lenya:meta/dc:title"/>
+    </h3>
+    <br/>
+    <xsl:apply-templates mode="collection" select="descendant::unizh:lead"/>
+    <a href="{@href}">mehr</a>
+  </xsl:template>
+
+  <xsl:template match="unizh:lead">
+    <xsl:apply-templates/>
+  </xsl:template>
+
+
   <xsl:template match="index:child">
     <li>
       <xsl:apply-templates mode="index" select="descendant::lenya:meta/dc:title">
@@ -629,7 +653,8 @@
       </xsl:if>
     </li>
   </xsl:template>
-  
+
+ 
   <xsl:template match="dc:title" mode="index">
     <xsl:param name="href"/>
     <a href="{$contextprefix}{$href}">

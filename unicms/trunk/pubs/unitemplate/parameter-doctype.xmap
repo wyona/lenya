@@ -16,8 +16,17 @@
         <sourcetype name="homepage">
           <document-element local-name="homepage"/>
         </sourcetype>
+        <sourcetype name="subhomepage">
+          <document-element local-name="subhomepage"/>
+        </sourcetype>
         <sourcetype name="section">
           <document-element local-name="section"/>
+        </sourcetype>
+        <sourcetype name="news">
+          <document-element local-name="news"/>
+        </sourcetype>
+        <sourcetype name="newsitem">
+          <document-element local-name="newsitem"/>
         </sourcetype>
       </map:action>
     </map:actions>

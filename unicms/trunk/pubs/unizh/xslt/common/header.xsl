@@ -228,14 +228,14 @@ function bildreset () {
                 </a>
               </td>
               <td><img src="{$imageprefix}/1.gif" alt=" "/></td>
-			  <td/>
+            <td/>
             </tr>
-            <tr>
-              <td align="left" colspan="4">
-                <img src="{$imageprefix}/1.gif" alt=" " width="7" height="1"/>
-                <xsl:apply-templates select="$sections/uz:section" mode="link"/>
-              </td>
-			  <td/>
+            <tr bgcolor="#f5f5f5">
+		<td colspan="4" bgcolor="#666666"><img src="{$imageprefix}/1.gif" alt=" " height="30"/>
+                  <a href="{/document/unizh:header/unizh:title/@href}"><font color="white" size="14px">
+                    <xsl:value-of select="/document/unizh:header/unizh:title"/>
+                  </font></a>
+                </td>
             </tr>
           </table>
           <!-- Ende Kopftabelle -->

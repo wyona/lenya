@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:homepage  xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:news xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -9,7 +9,7 @@ dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
   <lenya:meta>
-    <dc:title>Homepage title</dc:title>
+    <dc:title>News</dc:title>
     <dc:description></dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
@@ -19,9 +19,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:identity data="images/default_identity.gif" alt="identity"></unizh:identity>
-  <unizh:slogan>The Slogan</unizh:slogan>
-  <unizh:logo data="images/default_logo.gif" alt="logo"></unizh:logo>
   <unizh:highlights>
     <unizh:highlight>
       <h3>Title h3</h3>
@@ -29,8 +26,9 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     </unizh:highlight>
   </unizh:highlights>
   <body>
-  	<h2>Headline</h2>
-    <p>Paragraph</p>
+    <p>Einleitung: Hier finden Sie Neues.</p>
+    <unizh:children/>
+    <p>Ausleitung: Anmerkungen.</p>
   </body>
-</unizh:homepage>
+</unizh:news>
 

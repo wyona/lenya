@@ -14,7 +14,7 @@
 
 <xsl:template match="nav:site">
   <div id="menu">
-      <xsl:apply-templates select="nav:node"/>
+      <xsl:apply-templates select="nav:node[not(@id = 'index')]"/>
   </div>
 </xsl:template>
 
