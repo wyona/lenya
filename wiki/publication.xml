@@ -18,7 +18,7 @@
 <lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
 <lenya:pub-version>1.2.4-dev</lenya:pub-version>
 <lenya:lenya-version>1.2.4-dev</lenya:lenya-version>
-<lenya:cocoon-version>2.1.7</lenya:cocoon-version>
+<lenya:cocoon-version>2.1.8-dev</lenya:cocoon-version>
 <lenya:name>Lenya's Wiki</lenya:name>
 
 <lenya:credits>This Wiki publication was originally written by Michael Wechner (michael.wechner@wyona.com)</lenya:credits>

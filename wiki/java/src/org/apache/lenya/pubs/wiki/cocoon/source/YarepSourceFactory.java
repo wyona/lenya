@@ -121,7 +121,12 @@ public class YarepSourceFactory extends AbstractLogEnabled implements SourceFact
 
             getLogger().debug("Creating repository source for URI [" + src + "]");
 
-            return new YarepSource(src);
+            try {
+                return new YarepSource(src);
+            } catch (Exception e) {
+                getLogger().error(e.getMessage());
+                throw new IOException(e.getMessage());
+            }
 
             //return sourceResolver.resolveURI(path);
 

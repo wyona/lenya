@@ -34,7 +34,7 @@ public class YarepSource implements ModifiableSource, TraversableSource {
     /**
      *
      */
-    public YarepSource(String src) throws MalformedURLException {
+    public YarepSource(String src) throws MalformedURLException, Exception {
         if (!SourceUtil.getScheme(src.toString()).equals(SCHEME)) throw new MalformedURLException();
         this.path = new Path(SourceUtil.getSpecificPart(src.toString()));
 
@@ -67,7 +67,7 @@ public class YarepSource implements ModifiableSource, TraversableSource {
      *
      */
     public long getLastModified() {
-        log.warn("Not implemented yet!");
+        //return repo.getLastModified(path);
         return System.currentTimeMillis();
     }
 
@@ -168,10 +168,12 @@ public class YarepSource implements ModifiableSource, TraversableSource {
         Path[] children = repo.getChildren(path);
         java.util.Vector collection = new java.util.Vector();
         try {
-        for (int i = 0; i < children.length; i++) {
-            collection.add(new YarepSource("yarep:" + children[i].toString()));
-        }
+            for (int i = 0; i < children.length; i++) {
+                collection.add(new YarepSource("yarep:" + children[i].toString()));
+            }
         } catch (MalformedURLException e) {
+            log.error(e);
+        } catch (Exception e) {
             log.error(e);
         }
         return collection;

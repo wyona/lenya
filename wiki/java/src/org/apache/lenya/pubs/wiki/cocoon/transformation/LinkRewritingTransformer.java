@@ -188,7 +188,13 @@ public class LinkRewritingTransformer extends AbstractSAXTransformer implements 
                 getLogger().debug("href=" + href);
                 Path path = new Path("/authoring/" + parentURI.substring(0, parentURI.length() - 9) + replaceHTMLbyXMLSuffix(href));
 		getLogger().debug("Path: " + path);
-                Repository repo = new RepositoryFactory().newRepository("wiki");
+                Repository repo;
+		try {
+                    repo = new RepositoryFactory().newRepository("wiki");
+                } catch (Exception e) {
+                    getLogger().error(e.getMessage());
+                    return;
+                }
 
 
                 if(!repo.exists(path)) {
