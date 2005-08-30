@@ -5,7 +5,6 @@ xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
 xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
-unizh:columns="3"
 unizh:tabs="root"
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
@@ -21,9 +20,14 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:identity data="images/default_identity.gif" alt="identity"></unizh:identity>
-  <unizh:slogan>The Slogan</unizh:slogan>
-  <unizh:logo data="images/default_logo.gif" alt="logo"></unizh:logo>
+  <unizh:header>
+    <unizh:superscription>Name Departement</unizh:superscription>
+    <unizh:heading>Titel Website</unizh:heading>
+  </unizh:header>
+  <unizh:quicklinks>
+    <a href="#">Quicklink</a>
+  </unizh:quicklinks>
+  </unizh:quicklinks>
   <unizh:highlights>
     <unizh:highlight>
       <h3>Title h3</h3>

@@ -22,24 +22,45 @@
   <define name="html.attlist">
     <ref name="XHTML.version.attrib"/>
     <ref name="I18n.attrib"/>
-    <ref name="unizh.columns.attrib"/>
     <ref name="dummy.attlist"/>
+    <ref name="unizh.columns.attrib"/>
+    <ref name="tab.attrib"/>
   </define>
 
 </include>
+
 
 <define name="unizh.homepage">
   <element name="unizh:homepage">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
     <interleave>
-      <ref name="unizh.identity"/>
-      <ref name="unizh.slogan"/>
-      <ref name="unizh.logo"/>
+      <ref name="unizh.header"/>
+      <ref name="unizh.quicklinks"/>
       <ref name="unizh.highlights"/>
     </interleave>
     <ref name="body"/>
   </element>
 </define>
+
+<define name="tab.attrib">
+  <optional>
+    <attribute name="unizh:tabs">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="unizh.quicklinks">
+  <optional>
+    <element name="unizh:quicklinks">
+      <zeroOrMore>
+        <ref name="a"/> 
+      </zeroOrMore>
+    </element>
+  </optional>
+</define>
+
+
 
 </grammar>

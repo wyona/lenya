@@ -135,41 +135,55 @@
 
 <!-- header -->
  
-<xsl:template match="unizh:header/unizh:title">
-  <unizh:title>
+<xsl:template match="unizh:header">
+  <unizh:header>
     <xsl:choose>
       <xsl:when test="$homepage">
         <xsl:choose> 
           <xsl:when test="not($index) and $subhome-tabs = 'root'">
-            <xsl:attribute name="href">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href"/>
-            </xsl:attribute>
-            <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/lenya:meta/dc:title"/>
+            <unizh:superscription>
+               <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:superscription"/>
+            </unizh:superscription>
+            <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href }">
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:heading"/>
+            </unizh:heading>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="/document/content/unizh:homepage/lenya:meta/dc:title"/>
+            <unizh:superscription>
+              <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:superscription"/>
+            </unizh:superscription>
+            <unizh:heading>
+              <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:heading"/>
+            </unizh:heading>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
           <xsl:when test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage][1]/@basic-url = 'index'">
-            <xsl:attribute name="href">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href"/>
-            </xsl:attribute>
-            <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/lenya:meta/dc:title"/>
+            <unizh:superscription>
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:superscription"/>
+            </unizh:superscription>
+            <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href}">
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:heading"/>              
+            </unizh:heading>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:attribute name="href">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@href"/>
-            </xsl:attribute>
-            <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/lenya:meta/dc:title"/> 
+            <unizh:superscription>
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/unizh:header/unizh:superscription"/>
+            </unizh:superscription> 
+            <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@href}">
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/unizh:header/unizh:heading"/>
+            </unizh:heading> 
           </xsl:otherwise>
         </xsl:choose> 
       </xsl:otherwise>
     </xsl:choose>
-  </unizh:title>
+  </unizh:header>
 </xsl:template>
+
+
+
 
 
 <!-- breadcrumb path -->

@@ -466,6 +466,12 @@
     <xsl:apply-templates/>
   </xsl:template>
 
+  <xsl:template match="unizh:quicklinks">
+    Quicklinks:<br/>
+    <xsl:for-each select="xhtml:a">
+      <xsl:apply-templates select="self::xhtml:a"/><br/>
+    </xsl:for-each>
+  </xsl:template>
 
   <xsl:template match="unizh:highlight">
      <table width="100%">
@@ -480,6 +486,10 @@
         </tr>
       </table>
   </xsl:template>
+
+
+
+
  
   <xsl:template match="unizh:rss-reader">
     <xsl:variable name="items" select="@items"/>

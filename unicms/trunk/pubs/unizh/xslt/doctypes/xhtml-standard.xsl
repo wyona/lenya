@@ -134,6 +134,9 @@
 <xsl:template name="three-columns">
   <td id="navigation" valign="top" width="187">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <xsl:if test="not(/document/xhtml:div[@id = 'menu']/*)">
+      <xsl:apply-templates select="descendant::unizh:quicklinks"/>
+    </xsl:if>
   </td>
   <td width="413" valign="top" align="left">
     <div class="content3cols">
@@ -161,7 +164,6 @@
   </td>
   <td valign="top" width="200" align="left">
     <div class="highlights">
-      <xsl:apply-templates select="$content/unizh:logo"/>
       <div>
         <xsl:choose>
           <xsl:when test="$document-element-name = 'homepage'">

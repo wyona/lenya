@@ -231,9 +231,12 @@ function bildreset () {
             <td/>
             </tr>
             <tr bgcolor="#f5f5f5">
-		<td colspan="4" bgcolor="#666666"><img src="{$imageprefix}/1.gif" alt=" " height="30"/>
-                  <a href="{/document/unizh:header/unizh:title/@href}"><font color="white" size="14px">
-                    <xsl:value-of select="/document/unizh:header/unizh:title"/>
+		<td colspan="4" bgcolor="#666666">
+                  <font color="white" size="2">
+                    <xsl:value-of select="/document/unizh:header/unizh:superscription"/><br/>
+                  </font>
+                  <a href="{/document/unizh:header/unizh:heading/@href}"><font color="white" size="5">
+                    <xsl:value-of select="/document/unizh:header/unizh:heading"/>
                   </font></a>
                 </td>
             </tr>
