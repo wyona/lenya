@@ -11,9 +11,9 @@
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:identity alt="identity" data="images/default_identity.gif"/>
-  <unizh:slogan>Der Slogan</unizh:slogan>
-  <unizh:logo alt="logo" data="images/default_logo.gif"/>
+  <unizh:quicklinks>
+    <xhtml:a href="#">Link</xhtml:a>
+  </unizh:quicklinks>
   <unizh:highlights>
     <unizh:highlight>
       <h3>Title h3</h3>
