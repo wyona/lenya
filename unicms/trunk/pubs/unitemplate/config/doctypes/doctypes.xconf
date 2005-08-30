@@ -24,17 +24,6 @@
     <workflow src="2stage.xml"/>
   </doc>
 
-  <doc type="subhomepage">
-    <children>
-      <doc type="xhtml"/>
-      <doc type="news"/>
-    </children>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>subhomepage.xml</sample-name>
-    </creator>
-    <workflow src="2stage.xml"/>
-  </doc>
-
   <doc type="section">
     <children>
       <doc type="xhtml"/>
