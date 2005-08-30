@@ -164,7 +164,7 @@
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/> 
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
-        <map:transform src="lenya/xslt/navigation/context2nav.xsl"/>
+        <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
        
  
         <map:call resource="transformation">
