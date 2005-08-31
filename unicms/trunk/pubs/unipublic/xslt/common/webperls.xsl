@@ -46,7 +46,7 @@
           <xsl:text>&#160;</xsl:text>
           <img height="7" width="7" src="{$imageprefix}/t_perle.gif" alt=""/>
           <xsl:text>&#160;</xsl:text>
-          <a href="{@id}">weitere Perlen ...</a>
+          <a href="../webperlen/">weitere Perlen ...</a>
         </td>
       </tr>
     </table>
