@@ -254,9 +254,24 @@
           <map:call resource="style-cms-page"/>
         </map:match>
 
-    <!-- redirect the 2level to its first child: section to year (sectionoverview) --> 
+          <!-- redirect the 2level to its first child: section to year (sectionoverview) --> 
         <map:match pattern="*/*/*.html">
-          <map:redirect-to uri="{3}/{sitetree:first-child-id}.html"/>   
+          <map:act type="first-child-exists">
+            <map:redirect-to uri="{../3}/{sitetree:first-child-id}.html"/>   
+          </map:act>
+          <map:act type="language-exists">
+            <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
+            <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>
+            <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+            <map:serialize type="html"/>
+          </map:act>
+  
+          <!-- There is no version of the requested document-id for the
+               requested language. -->
+          <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+          <map:transform src="../../xslt/exception/missing-language.xsl"/>
+          <map:call resource="style-cms-page"/>
+
         </map:match>
 
       <!-- standard -->
@@ -279,6 +294,16 @@
      
       <map:handle-errors>
         <map:select type="exception">
+          <map:when test="no-child-document-exist">
+            <map:generate src="../../content/util/empty.xml" />
+            <map:transform src="../../xslt/exception/no-child-document-exist.xsl">
+              <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+              <map:parameter name="documenturl" value="{page-envelope:document-url}"/>
+            </map:transform>
+            <map:call resource="style-cms-page">
+              <map:parameter name="statusCode" value="404"/>
+            </map:call>
+          </map:when>
           <map:when test="document-does-not-exist">
             <map:generate src="../../content/util/empty.xml" />
             <map:transform src="../../xslt/exception/document-does-not-exist.xsl">
