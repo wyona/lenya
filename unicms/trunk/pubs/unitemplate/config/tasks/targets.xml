@@ -111,7 +111,7 @@
     <property name="create.date" value=""/>
     <property name="create.rights" value=""/>
     <property name="create.columns" value=""/>
-    <property name="create.subhomepageType" value=""/>
+    <property name="create.tabs" value=""/>
     <property name="create.userid" value=""/>
     <property name="create.ipaddress" value=""/>
     <property name="create.visible" value=""/>
@@ -165,7 +165,7 @@
       <param name="date" expression="${create.date}"/>
       <param name="rights" expression="${create.rights}"/>
       <param name="columns" expression="${create.columns}"/>
-      <param name="subhomepageType" expression="${create.subhomepageType}"/>
+      <param name="tabs" expression="${create.tabs}"/>
     </xslt>
     <move file="${temp.file}" tofile="${document.file}"/>
   </target>

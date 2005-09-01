@@ -27,7 +27,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <unizh:quicklinks>
     <a href="#">Quicklink</a>
   </unizh:quicklinks>
-  </unizh:quicklinks>
   <unizh:highlights>
     <unizh:highlight>
       <h3>Title h3</h3>
@@ -35,7 +34,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     </unizh:highlight>
   </unizh:highlights>
   <body>
-  	<h2>Headline</h2>
+    <h2>Headline</h2>
     <p>Paragraph</p>
   </body>
 </unizh:homepage>

@@ -23,8 +23,7 @@
     <ref name="XHTML.version.attrib"/>
     <ref name="I18n.attrib"/>
     <ref name="dummy.attlist"/>
-    <ref name="unizh.columns.attrib"/>
-    <ref name="tab.attrib"/>
+    <ref name="unizh.tabs.attrib"/>
   </define>
 
 </include>
@@ -35,20 +34,14 @@
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
     <interleave>
-      <ref name="unizh.header"/>
+<!--
+      <ref name="unizh.rss-reader"/>
+-->
       <ref name="unizh.quicklinks"/>
       <ref name="unizh.highlights"/>
     </interleave>
     <ref name="body"/>
   </element>
-</define>
-
-<define name="tab.attrib">
-  <optional>
-    <attribute name="unizh:tabs">
-      <text/>
-    </attribute>
-  </optional>
 </define>
 
 <define name="unizh.quicklinks">
