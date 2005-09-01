@@ -117,9 +117,7 @@ function validateForm(theForm)
                     <td class="lenya-form-caption">Tabs in Page Header:</td><td><select class="lenya-form-element" name="properties.create.tabs"><option selected="true">true</option><option>false</option><option>root</option></select></td>
                   </tr>
                 </xsl:when>
-                <xsl:otherwise>
-                  <input type="hidden" name="properties.create.tabs" value="true"/>
-                </xsl:otherwise>
+                <xsl:otherwise/>
               </xsl:choose>
               <tr>
                 <td class="lenya-form-caption">Subject (Keywords):</td><td><input class="lenya-form-element" type="text" name="properties.create.subject"/></td>
