@@ -82,7 +82,7 @@
                 <xsl:when test="$columns = '2'">
                   <xsl:call-template name="two-columns"/>
                 </xsl:when>
-                <xsl:when test="$columns = '3'">
+                <xsl:when test="$columns = '3' or $document-element-name = 'homepage'">
                   <xsl:call-template name="three-columns"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -140,15 +140,7 @@
   </td>
   <td width="413" valign="top" align="left">
     <div class="content3cols">
-      <xsl:apply-templates select="$content/unizh:identity"/>
-      <xsl:choose>
-        <xsl:when test="$content/unizh:slogan">            
-          <xsl:apply-templates select="$content/unizh:slogan"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
       <div>
         <xsl:choose>
           <xsl:when test="$document-element-name = 'homepage'">
@@ -159,6 +151,8 @@
           </xsl:otherwise>
         </xsl:choose>
         <xsl:apply-templates select="$content/xhtml:body/node()"/>
+        <xsl:apply-templates select="/document/xhtml:div[@id='link-to-parent']"/>
+        <xsl:apply-templates select="$content/unizh:level"/> 
       </div>
     </div>
   </td>

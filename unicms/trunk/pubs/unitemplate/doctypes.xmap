@@ -141,6 +141,7 @@
           <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
           <map:part src="cocoon:/sections.xconf"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
@@ -162,8 +163,8 @@
         <!-- Doctype / context specific navigation schemes.  --> 
 
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
-        <map:transform type="cinclude"/> 
-        <map:transform src="lenya/xslt/navigation/header.xsl"/>
+        <map:transform type="cinclude"/>
+        <map:transform src="lenya/xslt/navigation/header.xsl"/> 
         <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
        
  

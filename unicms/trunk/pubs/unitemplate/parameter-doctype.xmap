@@ -25,6 +25,18 @@
         <sourcetype name="newsitem">
           <document-element local-name="newsitem"/>
         </sourcetype>
+        <sourcetype name="publications">
+          <document-element local-name="publications"/>
+        </sourcetype>
+        <sourcetype name="publication">
+          <document-element local-name="publication"/>
+        </sourcetype>
+        <sourcetype name="agenda">
+          <document-element local-name="agenda"/>
+        </sourcetype>
+        <sourcetype name="event">
+          <document-element local-name="event"/>
+        </sourcetype>
       </map:action>
     </map:actions>
   </map:components>

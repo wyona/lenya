@@ -206,14 +206,28 @@
 </xsl:template> 
 
 
-<!-- Doctype News. Hide children nodes in menu -->
+<!-- Collections. Hide children nodes in menu -->
 
-<xsl:template match="xhtml:div[/document/content/unizh:news and ancestor::xhtml:div[@id = 'menu'] and parent::xhtml:div[@current = 'true']]"/>
+<xsl:template match="xhtml:div[/document/content[unizh:news | unizh:publications | unizh:agenda] and ancestor::xhtml:div[@id = 'menu'] and parent::xhtml:div[@current = 'true']]"/>
 
-<!-- Doctype Newsitem. Hide current level in menu -->
+<!-- Collection items. Hide current level in menu -->
 
-<xsl:template match="xhtml:div[/document/content/unizh:newsitem and ancestor::xhtml:div[@id = 'menu'] and (@current = 'true' or ../xhtml:div/@current = 'true')]"/>
+<xsl:template match="xhtml:div[/document/content[unizh:newsitem | unizh:publication | unizh:event] and ancestor::xhtml:div[@id = 'menu'] and (@current = 'true' or ../xhtml:div/@current = 'true')]"/>
 
+<!-- Collection items. Select parent in Menu -->
+
+<xsl:template match="xhtml:div[/document/content[unizh:newsitem | unizh:publication | unizh:event] and ancestor::xhtml:div[@id = 'menu'] and xhtml:div/@current = 'true']">
+  <xhtml:div label="{@label}" current="true"/>
+</xsl:template> -->
+
+
+<!-- Collection items. Link to parent -->
+
+<xsl:template match="xhtml:div[@id='link-to-parent']">
+  <xsl:if test="/document/content[unizh:newsitem | unizh:publication | unizh:event]">
+    <xsl:copy-of select="."/>
+  </xsl:if>
+</xsl:template> 
 
 <xsl:template match="@*|node()">
   <xsl:copy>

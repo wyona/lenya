@@ -24,6 +24,21 @@
         <map:serialize type="xml"/>
       </map:match>
 
+      <map:match pattern="*/news">
+        <map:generate type="serverpages" src="../unizh/config/menus/news.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+     
+      <map:match pattern="*/publications">
+        <map:generate type="serverpages" src="../unizh/config/menus/publications.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/agenda">
+        <map:generate type="serverpages" src="../unizh/config/menus/agenda.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
       <map:match pattern="*/**">
         <map:generate type="serverpages" src="../unizh/config/menus/generic.xsp"/>
         <map:serialize type="xml"/>

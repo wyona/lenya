@@ -16,7 +16,7 @@
 <include href="xhtml.rng">
   
   <start>
-    <ref name="unizh.newsitem"/>
+    <ref name="unizh.publications"/>
   </start>
 
   <define name="html.attlist">
@@ -28,13 +28,18 @@
 
 </include>
 
-<define name="unizh.newsitem">
-  <element name="unizh:newsitem">
+<define name="unizh.publications">
+  <element name="unizh:publications">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.lead"/>
-    <ref name="body"/>
-    <ref name="unizh.level"/>
+    <ref name="unizh.highlights"/>
+    <element name="body">
+      <ref name="Block.class"/>
+      <element name="unizh:children">
+        <empty/>
+      </element>
+      <ref name="Block.class"/>
+    </element>
   </element>
 </define>
 

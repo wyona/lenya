@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:newsitem  xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:agenda xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -9,7 +9,7 @@ dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
   <lenya:meta>
-    <dc:title>Titel</dc:title>
+    <dc:title>News</dc:title>
     <dc:description></dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
@@ -19,10 +19,16 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:lead> Bitte einen Lead einsetzen. </unizh:lead>
+  <unizh:highlights>
+    <unizh:highlight>
+      <h3>Title h3</h3>
+      <p>The text of the highlight.</p>
+    </unizh:highlight>
+  </unizh:highlights>
   <body>
-    <p>Paragraph</p>
+    <p>Beschreibung des Events / der Agenda</p>
+    <unizh:children/>
+    <p>Ausleitung: Anmerkungen.</p>
   </body>
-  <unizh:level/>
-</unizh:newsitem>
+</unizh:agenda>
 

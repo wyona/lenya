@@ -19,6 +19,19 @@
   </choice>
 </define>
 
+<define name="unizh.header">
+  <element name="unizh:header">
+    <element name="unizh:superscription">
+      <optional>
+        <text/>
+      </optional>
+    </element>
+    <element name="unizh:heading">
+      <text/>
+    </element>
+  </element>
+</define>
+
 <define name="unizh.tabs.attrib">
   <attribute name="unizh:tabs">
     <choice>
@@ -76,6 +89,12 @@
         </choice>
       </attribute>
     </optional>
+  </element>
+</define>
+
+<define name="unizh.level">
+  <element name="unizh:level">
+    <empty/>
   </element>
 </define>
 
