@@ -114,11 +114,11 @@ function validateForm(theForm)
               <xsl:choose>
                 <xsl:when test="$doctype = 'homepage'">
                   <tr>
-                    <td class="lenya-form-caption">Subhomepage Type:</td><td><select class="lenya-form-element" name="properties.create.subhomepageType"><option selected="true">full_subhome</option><option>lean_subhome</option><option>homepage_clone</option></select></td>
+                    <td class="lenya-form-caption">Tabs in Page Header:</td><td><select class="lenya-form-element" name="properties.create.tabs"><option selected="true">true</option><option>false</option><option>root</option></select></td>
                   </tr>
                 </xsl:when>
                 <xsl:otherwise>
-                  <input type="hidden" name="properties.create.subhomepageType" value="full_subhome"/>
+                  <input type="hidden" name="properties.create.tabs" value="true"/>
                 </xsl:otherwise>
               </xsl:choose>
               <tr>
@@ -142,9 +142,7 @@ function validateForm(theForm)
                 <xsl:when test="$doctype = 'section'">
                   <input type="hidden" name="properties.create.columns" value="1"/>
                 </xsl:when>
-                <xsl:otherwise>
-                  <input type="hidden" name="properties.create.columns" value="3"/>
-                </xsl:otherwise>
+                <xsl:otherwise/>
               </xsl:choose>
               <tr>
                 <td class="lenya-form-caption">Date:</td><td><input class="lenya-form-element" type="hidden" name="properties.create.date" value="{/parent-child/dc:date}"/><xsl:value-of select="/parent-child/dc:date"/></td>
