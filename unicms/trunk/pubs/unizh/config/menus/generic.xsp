@@ -65,13 +65,8 @@
         else {
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=news">New News Overview</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=newsitem">New News Item</item>          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item> 
-          if (!isDocument &amp;&amp; area.equals(Publication.AUTHORING_AREA)) {
-              <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item>
-          }
-          else {
-              <item>New Homepage</item>
-          }
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=newsitem">New News Item</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item> 
         }
 	    }
 	  </xsp:logic>
