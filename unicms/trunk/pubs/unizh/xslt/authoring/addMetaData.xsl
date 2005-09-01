@@ -22,12 +22,19 @@ $Id: addMetaData.xsl,v 1.6 2004/02/04 14:41:17 gregor Exp $
   <xsl:param name="date"/>
   <xsl:param name="rights"/>
   <xsl:param name="columns"/>
+  <xsl:param name="tabs"/>
 
   <xsl:template match="/*[$columns!='']">
     <xsl:copy>
       <xsl:attribute name="unizh:columns" namespace="http://unizh.ch/doctypes/elements/1.0"><xsl:value-of select="$columns"/></xsl:attribute>
       <xsl:apply-templates select="@*[local-name()!='columns']|node()"/>
+    </xsl:copy>
+  </xsl:template>  
 
+  <xsl:template match="/*[$tabs!='']">
+    <xsl:copy>
+      <xsl:attribute name="unizh:tabs" namespace="http://unizh.ch/doctypes/elements/1.0"><xsl:value-of select="$tabs"/></xsl:attribute>
+      <xsl:apply-templates select="@*[local-name()!='tabs']|node()"/>
     </xsl:copy>
   </xsl:template>  
 
