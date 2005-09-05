@@ -1,4 +1,4 @@
-Cloning Publication
+Cloning Publication 
 ===================
 
 NOTE: After a CVS update of the original, the clone task needs to be executed 
