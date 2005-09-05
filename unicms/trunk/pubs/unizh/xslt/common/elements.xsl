@@ -462,8 +462,8 @@
       <xsl:apply-templates/>
     </span>
   </xsl:template>
+
   <xsl:template match="unizh:highlights">
-    <xsl:apply-templates/>
   </xsl:template>
 
   <xsl:template match="unizh:quicklinks">
@@ -474,23 +474,18 @@
   </xsl:template>
 
   <xsl:template match="unizh:highlight">
-     <table width="100%">
-        <tr>
-          <td class="highlight{(position()-1) mod 3}">
-            <xsl:apply-templates/>
-            <!-- Dots for asset upload -->
-            <xsl:call-template name="asset-dots">
-              <xsl:with-param name="insertWhere" select="'inside'"/>
-            </xsl:call-template>
-          </td> 
-        </tr>
-      </table>
+    <div class="relatedboxborder">
+      <div class="relatedboxcont">
+        <xsl:apply-templates/>
+        <a class="arrow" href="">weiter</a>  
+        <!-- <xsl:call-template name="asset-dots">
+          <xsl:with-param name="insertWhere" select="'inside'"/>
+          </xsl:call-template> -->
+      </div> 
+    </div>
   </xsl:template>
 
 
-
-
- 
   <xsl:template match="unizh:rss-reader">
     <xsl:variable name="items" select="@items"/>
     <table border="0" cellpadding="0" cellspacing="0">
@@ -526,7 +521,7 @@
         </div>
       </xsl:for-each>
     </div>
-  </xsl:template>
+  </xsl:template> 
   
   <xsl:template match="unizh:highlight-title">
     <p class="highlight-title">

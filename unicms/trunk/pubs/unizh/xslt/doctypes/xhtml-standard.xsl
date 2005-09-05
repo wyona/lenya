@@ -14,230 +14,140 @@
   exclude-result-prefixes="xhtml lenya dc unizh uz"
   >
   
-  <xsl:import href="variables.xsl"/>
-  
-  <xsl:param name="root"/> <!-- the URL up to (including) the area -->
   <xsl:param name="contextprefix"/>
-  
-  <xsl:param name="documentid"/>
-  <xsl:param name="nodeid"/>
-  
-  <xsl:param name="language"/>
-  <xsl:param name="defaultlanguage"/>
-  <xsl:param name="languages"/>
-  
-  <xsl:param name="completearea"/>
   <xsl:param name="area"/>
-  
   <xsl:param name="rendertype"/>
-  
-  <xsl:param name="lastmodified"/>
+  <xsl:param name="defaultlanguage"/>
+  <xsl:param name="language"/>
+  <xsl:param name="nodeid"/>
 
-  <xsl:include href="../common/html-head.xsl"/>
-  <xsl:include href="../common/header.xsl"/>
-  <xsl:include href="../common/breadcrumb.xsl"/>
-  <xsl:include href="../common/elements.xsl"/>
-  <xsl:include href="../common/footer.xsl"/>
-
+  <xsl:include href="../doctypes/variables.xsl"/>
+  <xsl:include href="../common/elements.xsl"/> 
 
   <xsl:template match="document">
-    <xsl:apply-templates select="content/*" mode="flat"/>
+    <xsl:apply-templates/>
   </xsl:template>
   
-  
-  <xsl:template match="content/*" mode="flat">
-    <html>
-        
-      <xsl:call-template name="html-head"/>
-        
-      <body>
-        <div id="page">
-          <a name="top"/>
-
-          <table cellspacing="1" cellpadding="0" border="0" width="800">
-            
-            <xsl:call-template name="topnavbar"/>
-            
-              <tr>
-                <td class="tabs" colspan="3" width="800"><br />
-                  <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="breadcrumb" colspan="3" width="800"><br />
-                <xsl:call-template name="breadcrumb"/>
-              </td>
-            </tr>
-            
-            <tr>
-              <td width="187" height="40"><img height="40" width="187" src="{$imageprefix}/1.gif" alt=" "/></td>
-              <td width="413" height="40"><img height="40" width="413" src="{$imageprefix}/1.gif" alt=" "/></td>
-              <td width="200" height="40"><img height="40" width="200" src="{$imageprefix}/1.gif" alt=" "/></td>
-            </tr>
-            
-            <tr id="body">
-              <xsl:variable name="columns" select="@unizh:columns"/>
-              <xsl:choose>
-                <xsl:when test="$columns = '2'">
-                  <xsl:call-template name="two-columns"/>
-                </xsl:when>
-                <xsl:when test="$columns = '3' or $document-element-name = 'homepage'">
-                  <xsl:call-template name="three-columns"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:call-template name="one-column"/>
-                </xsl:otherwise>
-              </xsl:choose>   
-            </tr>
-            
-            <xsl:call-template name="footer"/>
-            
-          </table>
+<xsl:template match="content"> 
+  <html>
+    <head>
+      <title><xsl:value-of select="*/lenya:meta/dc:title"/></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <style type="text/css">
+        @import url("/lenya/unizh/authoring/css/main.css");
+      </style>
+    </head>
+    <body>
+      <div class="bodywidth">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
+        <div id="headerarea">
+          <div style="float:right;width:195px;">
+            <div class="imgunilogo">
+              <img src="/lenya/unizh/authoring/images/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+            </div>
+            <div class="imginstitute">
+              <img src="/lenya/unizh/authoring/images/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
+            </div>
+          </div>
+          <div id="headertitelpos">
+            <div id="servicenavpos">
+              <form action="">
+                <a href="">Home</a> | 
+                <a href="">Kontakt</a> | 
+                <a href="">Sitemap</a> 
+                <input type="text" name="" /> 
+                <a href="">Suche</a>
+              </form>
+            </div>
+            <!-- header -->
+            <div class="headtitelmargintop"></div>
+            <h2><xsl:value-of select="/document/unizh:header/unizh:superscription"/></h2>
+            <h1><xsl:value-of select="/document/unizh:header/unizh:heading"/></h1>
+          </div>
         </div>
-      </body>
-    </html>
-  </xsl:template>
-  
-
-<xsl:template name="one-column">
-  <td colspan="3" valign="top" width="1000" align="left">
-    <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
-    <div>
-      <xsl:if test="$rendertype = 'edit'">
-        <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name"/>/xhtml:body</xsl:attribute>
-      </xsl:if>
-      <xsl:apply-templates select="$content/xhtml:body/node()"/>
-    </div>
-  </td>
-</xsl:template>
-
-  
-<xsl:template name="two-columns">
-  <td id="navigation" valign="top" width="187">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-  </td>
-  <td colspan="2" width="613" valign="top" align="left">
-    <div class="content2cols">
-      <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
-      <div>
-        <xsl:if test="$rendertype = 'edit'">
-          <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name"/>/xhtml:body</xsl:attribute>
-        </xsl:if>
-        <xsl:apply-templates select="$content/xhtml:body/node()"/>
+        <div class="floatclear"></div>
+        <!-- tabs -->
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
+	<div class="floatclear"></div>		
+	<div class="endheaderline">
+          <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+        </div>
+        <!-- menu -->
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/> 
+        <!-- teasers -->
+        <div class="contcol2">
+          <div class="relatedbox">
+            <div id="toolnav">
+              <a href="">English</a> | 
+              <a href=""><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> | 
+              <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
+            </div> 
+            <xsl:apply-templates select="*/unizh:highlights/unizh:highlight"/> 
+          </div>
+          <!-- body --> 
+          <div class="contentarea">
+          <div class="contmargintop"></div>
+	    <div class="content">
+              <xsl:apply-templates select="*/xhtml:body/*"/>
+            </div>
+            <!-- footer -->
+            <div class="footermargintop"></div>
+            <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+            <div id="footer">&#169; 2005 Universitt Zich | <a href="">Impressum</a></div>
+          </div>
+        </div> 
       </div>
-    </div>
-  </td>
+    </body>
+  </html>
 </xsl:template>
-  
-
-<xsl:template name="three-columns">
-  <td id="navigation" valign="top" width="187">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:if test="not(/document/xhtml:div[@id = 'menu']/*)">
-      <xsl:apply-templates select="descendant::unizh:quicklinks"/>
-    </xsl:if>
-  </td>
-  <td width="413" valign="top" align="left">
-    <div class="content3cols">
-      <xsl:apply-templates select="$content/lenya:meta/dc:title"/>
-      <div>
-        <xsl:choose>
-          <xsl:when test="$document-element-name = 'homepage'">
-            <xsl:attribute name="bxe_xpath">/unizh:homepage/xhtml:body</xsl:attribute>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name"/>/xhtml:body</xsl:attribute>
-          </xsl:otherwise>
-        </xsl:choose>
-        <xsl:apply-templates select="$content/xhtml:body/node()"/>
-        <xsl:apply-templates select="/document/xhtml:div[@id='link-to-parent']"/>
-        <xsl:apply-templates select="$content/unizh:level"/> 
-      </div>
-    </div>
-  </td>
-  <td valign="top" width="200" align="left">
-    <div class="highlights">
-      <div>
-        <xsl:choose>
-          <xsl:when test="$document-element-name = 'homepage'">
-            <xsl:attribute name="bxe_xpath">/unizh:homepage/unizh:highlights</xsl:attribute>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name"/>/unizh:highlights</xsl:attribute>
-          </xsl:otherwise>
-        </xsl:choose>
-        <xsl:apply-templates select="$content/unizh:highlights"/>
-      </div>
-    </div>
-  </td>
+ 
+ 
+<xsl:template match="xhtml:div[@id = 'menu']"> 
+  <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
+  <div id="secnav">
+    <div class="contmargintop"></div>
+    <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+    <ul>
+      <xsl:apply-templates select="xhtml:div" mode="menu"/>
+    </ul>
+  </div>        
 </xsl:template>
 
-  
-<xsl:template match="xhtml:div[@id = 'menu']">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="publtitle">
-        <a href="{@href}"> <xsl:value-of select="@label"/> </a>
-      </td>
-    </tr>
-    <xsl:apply-templates select="xhtml:div" mode="menu">
-      <xsl:with-param name="level">1</xsl:with-param>
-    </xsl:apply-templates>
-  </table>
-</xsl:template>
-  
-
+ 
 <xsl:template match="xhtml:div" mode="menu">
- <xsl:param name="level"/> 
-  <xsl:choose>
-    <xsl:when test="@current = 'true'">
-      <tr>
-        <td class="navon">
-          <div class="nlevel{$level}">
-            <xsl:value-of select="@label"/>
-          </div>
-        </td>
-      </tr>
-    </xsl:when>
-    <xsl:otherwise>
-      <tr>
-        <td class="navoff">
-          <div class="nlevel{$level}">
-            <a href="{@href}"> <xsl:value-of select="@label"/> </a>
-          </div>
-        </td>
-      </tr>
-    </xsl:otherwise>
-  </xsl:choose>
-  <xsl:apply-templates select="xhtml:div" mode="menu">
-    <xsl:with-param name="level" select="$level + 1"/>
-  </xsl:apply-templates>
+  <li>
+    <a href="{@href}"><xsl:value-of select="."/></a>
+    <div class="dotline">
+      <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+    </div>
+  </li>
+  <xsl:apply-templates select="xhtml:div" mode="menu"/>
 </xsl:template>
   
 <xsl:template match="xhtml:div[@id = 'tabs']">
-  <table border="1" cellpadding="3">
-    <tr>
-      <xsl:for-each select="xhtml:div">
-        <td>&#160;
-          <xsl:choose>
-            <xsl:when test="@current = 'true'">
-              <xsl:value-of select="@label"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <a href="{@href}"> <xsl:value-of select="@label"/> </a>
-            </xsl:otherwise>
-          </xsl:choose>
-        &#160;</td>
-      </xsl:for-each> 
-    </tr>
-  </table>
+  <div id="primarnav">
+    <xsl:for-each select="xhtml:div">
+      <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+      <xsl:if test="position() &lt; last()">
+        <div class="linkseparator">|</div>
+      </xsl:if>
+    </xsl:for-each>
+  </div>
+</xsl:template>
+
+<xsl:template match="xhtml:div[@id = 'breadcrumb']">
+  <div id="breadclamnav"> 
+    <xsl:for-each select="xhtml:div">
+       <a href="{@href}"><xsl:value-of select="."/></a> 
+       <xsl:if test="position &lt; last()">&gt;</xsl:if>
+    </xsl:for-each>
+  </div> 
 </xsl:template>
 
 <xsl:template match="@*|node()" priority="-1">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
   </xsl:copy>
-</xsl:template>
+</xsl:template> 
 
 </xsl:stylesheet>
