@@ -85,4 +85,11 @@
     <workflow src="2stage.xml"/>
   </doc>
 
+  <doc type="redirect">
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>redirect.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
 </doctypes>

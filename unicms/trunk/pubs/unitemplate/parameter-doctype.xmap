@@ -37,6 +37,9 @@
         <sourcetype name="event">
           <document-element local-name="event"/>
         </sourcetype>
+        <sourcetype name="redirect">
+          <document-element local-name="redirect"/>
+        </sourcetype>
       </map:action>
     </map:actions>
   </map:components>

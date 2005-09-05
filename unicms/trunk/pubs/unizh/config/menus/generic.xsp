@@ -68,6 +68,7 @@
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=publications">New Publications Overview</item> 
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=agenda">New Agenda</item>            
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=redirect">New Redirect</item>
         }
 	    }
 	  </xsp:logic>
