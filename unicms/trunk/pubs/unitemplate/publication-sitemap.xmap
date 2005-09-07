@@ -159,7 +159,7 @@
            -->
       <map:match pattern="**.bxe.html">
         <map:generate src="cocoon:/lenyabody-edit-standard/{1}.html"/>
-        <map:serialize type="xhtml-mime-xml"/>
+        <map:serialize type="xml"/>
       </map:match>
 
       <!-- printer friendly -->
