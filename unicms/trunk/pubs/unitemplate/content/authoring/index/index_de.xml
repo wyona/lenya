@@ -20,8 +20,7 @@
   </unizh:quicklinks>
   <unizh:highlights>
     <unizh:highlight>
-      <h3>Title h3</h3>
-<p>Groets</p>
+      <unizh:highlight-title>Title</unizh:highlight-title>
       <p>The text of the highlight.</p>
     </unizh:highlight>
   </unizh:highlights>

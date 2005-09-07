@@ -29,7 +29,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   </unizh:quicklinks>
   <unizh:highlights>
     <unizh:highlight>
-      <h3>Title h3</h3>
+      <unizh:highlight-title>Title</unizh:highlight-title>
       <p>The text of the highlight.</p>
     </unizh:highlight>
   </unizh:highlights>

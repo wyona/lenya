@@ -473,39 +473,17 @@
     </xsl:for-each>
   </xsl:template>
 
+
   <xsl:template match="unizh:highlight">
     <div class="relatedboxborder">
       <div class="relatedboxcont">
         <xsl:apply-templates/>
         <a class="arrow" href="">weiter</a>  
-        <!-- <xsl:call-template name="asset-dots">
+        <xsl:call-template name="asset-dots">
           <xsl:with-param name="insertWhere" select="'inside'"/>
-          </xsl:call-template> -->
+        </xsl:call-template>
       </div> 
     </div>
-  </xsl:template>
-
-
-  <xsl:template match="unizh:rss-reader">
-    <xsl:variable name="items" select="@items"/>
-    <table border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td style="background-color: #669; color: #fff"><xsl:value-of select="xhtml:title"/></td>
-      </tr>
-      <tr>
-        <td style="background-color: #ddd">
-          <xsl:for-each select="rss/channel/item">
-            <xsl:if test="$items = '' or position() &lt;= $items">
-              <a target="_blank" href="{link}"><xsl:value-of select="title"/></a><br/>
-              <!-- <xsl:value-of select="description"/><br/>-->
-            </xsl:if>
-          </xsl:for-each> 
-          <xsl:if test="not(rss/channel/item)">
-            --
-          </xsl:if>
-         </td>
-      </tr>
-    </table>
   </xsl:template>
 
  
@@ -524,10 +502,33 @@
   </xsl:template> 
   
   <xsl:template match="unizh:highlight-title">
-    <p class="highlight-title">
-      <xsl:apply-templates/>
-    </p>
+    <b><xsl:apply-templates/></b>
   </xsl:template>
+
+
+  <xsl:template match="unizh:rss-reader">
+    <xsl:variable name="items" select="@items"/>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="background-color: #669; color: #fff"><xsl:value-of select="xhtml:title"/></td>
+      </tr>
+      <tr>
+        <td style="background-color: #ddd">
+          <xsl:for-each select="rss/channel/item">
+            <xsl:if test="$items = '' or position() &lt;= $items">
+              <a target="_blank" href="{link}"><xsl:value-of select="title"/></a><br/>
+              <!-- <xsl:value-of select="description"/><br/>-->
+            </xsl:if>
+          </xsl:for-each>
+          <xsl:if test="not(rss/channel/item)">
+            --
+          </xsl:if>
+         </td>
+      </tr>
+    </table>
+  </xsl:template>
+
+
   
   <xsl:template match="xhtml:td[not(ancestor::*[@id = 'menu'])]">
     <xsl:copy>

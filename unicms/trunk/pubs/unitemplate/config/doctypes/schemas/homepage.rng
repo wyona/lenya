@@ -33,6 +33,7 @@
   <element name="unizh:homepage">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
+    <ref name="unizh.header"/>
     <interleave>
 <!--
       <ref name="unizh.rss-reader"/>

@@ -10,8 +10,6 @@
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
-  xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
-  exclude-result-prefixes="xhtml lenya dc unizh uz"
   >
   
   <xsl:param name="contextprefix"/>
@@ -25,7 +23,7 @@
   <xsl:include href="../common/elements.xsl"/> 
 
   <xsl:template match="document">
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="content"/>
   </xsl:template>
   
 <xsl:template match="content"> 
@@ -60,15 +58,15 @@
               </form>
             </div>
             <!-- header -->
-            <div class="headtitelmargintop"></div>
+            <div class="headtitelmargintop"><xsl:comment/></div>
             <h2><xsl:value-of select="/document/unizh:header/unizh:superscription"/></h2>
             <h1><xsl:value-of select="/document/unizh:header/unizh:heading"/></h1>
           </div>
         </div>
-        <div class="floatclear"></div>
+        <div class="floatclear"><xsl:comment/></div>
         <!-- tabs -->
         <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
-	<div class="floatclear"></div>		
+	<div class="floatclear"><xsl:comment/></div>		
 	<div class="endheaderline">
           <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
@@ -86,12 +84,12 @@
           </div>
           <!-- body --> 
           <div class="contentarea">
-          <div class="contmargintop"></div>
+          <div class="contmargintop"><xsl:comment/></div>
 	    <div class="content">
               <xsl:apply-templates select="*/xhtml:body/*"/>
             </div>
             <!-- footer -->
-            <div class="footermargintop"></div>
+            <div class="footermargintop"><xsl:comment/></div>
             <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
             <div id="footer">&#169; 2005 Universitt Zich | <a href="">Impressum</a></div>
           </div>
@@ -105,7 +103,7 @@
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
   <div id="secnav">
-    <div class="contmargintop"></div>
+    <div class="contmargintop"><xsl:comment/></div>
     <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
     <ul>
       <xsl:apply-templates select="xhtml:div" mode="menu"/>
