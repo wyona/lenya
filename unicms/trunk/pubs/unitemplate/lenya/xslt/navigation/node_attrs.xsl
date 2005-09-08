@@ -22,9 +22,6 @@
     </xsl:attribute>
 
     <xsl:attribute name="href">
-<!--
-      <xsl:value-of select="concat(@basic-url, @language-suffix, @suffix)"/>
--->
       <xsl:value-of select="@href"/>
     </xsl:attribute>
 
@@ -35,23 +32,8 @@
     <xsl:attribute name="lang">
       <xsl:value-of select="nav:label/@xml:lang"/>
     </xsl:attribute>
-
-    <xsl:attribute name="level">
-      <xsl:choose>
-        <xsl:when test="@id = 'index'">
-          <xsl:value-of select="count(ancestor-or-self::nav:node) - 1"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="count(ancestor-or-self::nav:node)"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:attribute>
-
-    <xsl:attribute name="suffix">
-      <xsl:value-of select="@suffix"/>
-    </xsl:attribute>
-
-    <xsl:value-of select="nav:label"/>    <!-- node's text -->
+    
+    <xsl:value-of select="nav:label"/>
 
   </xsl:template>
     

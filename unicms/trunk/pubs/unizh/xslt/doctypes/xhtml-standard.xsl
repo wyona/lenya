@@ -136,12 +136,23 @@
  
 <xsl:template match="xhtml:div" mode="menu">
   <li>
-    <a href="{@href}"><xsl:value-of select="."/></a>
-    <div class="dotline">
-      <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
-    </div>
+    <a href="{@href}">
+      <xsl:if test="@current = 'true'">
+        <xsl:attribute name="class">activ</xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="text()"/>
+    </a>
+    <xsl:if test="xhtml:div">
+      <ul>
+        <xsl:apply-templates select="xhtml:div" mode="menu"/>
+      </ul>
+    </xsl:if>
+    <xsl:if test="parent::xhtml:div[@id = 'menu']">
+      <div class="dotline">
+        <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+      </div>
+    </xsl:if>
   </li>
-  <xsl:apply-templates select="xhtml:div" mode="menu"/>
 </xsl:template>
   
 <xsl:template match="xhtml:div[@id = 'tabs']">
