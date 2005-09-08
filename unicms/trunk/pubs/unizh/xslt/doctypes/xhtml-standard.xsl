@@ -59,8 +59,28 @@
             </div>
             <!-- header -->
             <div class="headtitelmargintop"><xsl:comment/></div>
-            <h2><xsl:value-of select="/document/unizh:header/unizh:superscription"/></h2>
-            <h1><xsl:value-of select="/document/unizh:header/unizh:heading"/></h1>
+            <xsl:choose>
+              <xsl:when test="$document-element-name = 'unizh:homepage'">
+                <h2>
+                  <div bxe_xpath="/unizh:homepage/unizh:header/unizh:superscription">
+                    <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:superscription"/>
+                  </div>
+                </h2>  
+                <h1>
+                  <div bxe_xpath="/unizh:homepage/unizh:header/unizh:heading">
+                    <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:heading"/>
+                  </div>
+                </h1>
+              </xsl:when>
+              <xsl:otherwise>
+                <h2>
+                  <xsl:value-of select="/document/unizh:header/unizh:superscription"/>
+                </h2>
+                <h1>
+                  <xsl:value-of select="/document/unizh:header/unizh:heading"/>
+                </h1> 
+              </xsl:otherwise>
+            </xsl:choose>
           </div>
         </div>
         <div class="floatclear"><xsl:comment/></div>
@@ -86,7 +106,9 @@
           <div class="contentarea">
           <div class="contmargintop"><xsl:comment/></div>
 	    <div class="content">
-              <xsl:apply-templates select="*/xhtml:body/*"/>
+              <div bxe_xpath="/{$document-element-name}/xhtml:body">
+                <xsl:apply-templates select="*/xhtml:body/*"/>
+              </div>
             </div>
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>

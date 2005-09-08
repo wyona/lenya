@@ -14,6 +14,10 @@ body {
   	padding:0px;
 
  }
+img {
+	border:0px;
+}
+
 .bodywidth {
   	max-width:800px;
 	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
@@ -38,7 +42,9 @@ h3 {
 	font-style: italic;
 	font-weight:normal;
 }
-
+.klein {
+	font-size: 11px;
+}
 /*link*/
 a { 
 	text-decoration: none;
@@ -66,13 +72,16 @@ a.arrow:hover {
 	margin-left:6px;
 	margin-right:195px;
 }
+
 .imgunilogo {
 	background-color: #d1d1e1;
 	padding-left:15px;
+	height:45px;
 }
 .imginstitute {
 	background-color: #666699;
 	padding-left:15px;
+	height:45px;
 }
 #headerarea h1 {
 	color:#FFFFFF;
@@ -89,6 +98,7 @@ a.arrow:hover {
 .endheaderline {
 	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
 	margin-bottom:26px;
+	height:1px;
 }
 
 /* NAVIGATION */
@@ -135,6 +145,13 @@ a.arrow:hover {
 	margin-left:2px;
 	padding-left:2px;
 }
+#servicenavpos form {
+	display:inline;
+}
+.servieceform {
+	display:inline;
+}
+
 
 /*primar navigation*/
 #primarnav  {
@@ -153,7 +170,7 @@ a.arrow:hover {
 	background-color:#f0f0f5;
 }
 #primarnav a.activ {
-	padding:0px 10px;
+	padding:0px 7px;
 	background-color:#f0f0f5;
 }
 #primarnav .linkseparator {
@@ -260,6 +277,15 @@ a.arrow:hover {
 .content {
 	margin-right:15px;
 }
+.marginLeftCont { 
+	margin-left:15px;
+}
+ul.squarelist{
+	padding:0px;
+	list-style-type:square;
+	margin-left:30px;
+	color:#666666;
+}
 
 /*Related Box*/
 .relatedbox {
@@ -292,13 +318,56 @@ a.arrow:hover {
 	background-color:#f0f0f5;
 }
 
-/* Misc*/
-.floatclear {
-	clear:both;
-}
+/* form*/
 form {
 	margin: 0px;
 	border: 0px;
+}
+.formbg {
+	background-color:#f0f0f5;
+	height:28px;
+	border-bottom: 2px solid #fff;
+	vertical-align: middle;
+
+}
+label { 
+  display:inline;
+  float: left;
+  width: 165px; 
+}
+
+form br {
+  clear: left; 
+}
+.formbg input {display:inline;
+  	float: left;
+	line-height: 18px;
+  	font-size: 11px;
+  	font-family: Arial;
+	width:254px;
+	height:19px;
+	padding-left:2px;
+	border-top:1px solid #696969;
+	border-left:1px solid #696969;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+.submitbutton {
+	margin-left:165px;
+	line-height: 18px;
+  	font-size: 11px;
+  	font-family: Arial;
+	width:70px;
+	height:24px;
+	padding-left:2px;
+	border-top:1px solid #696969;
+	border-left:1px solid #696969;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+/* Misc*/
+.floatclear {
+	clear:both;
 }
 .solidline {
 	background-color: #ccc;
@@ -310,7 +379,9 @@ form {
 .dotline {
 	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
 	width:100%;
+	height:1px;
 }
+
 
 /* Hide from IE5-mac. Only IE-win sees this. gegen 3px text jog \*/
 * html #secnav {

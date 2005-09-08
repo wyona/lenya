@@ -27,6 +27,6 @@
   
   <xsl:variable name="sections" select="/document/uz:sections"/>
   
-  <xsl:variable name="document-element-name" select="local-name($content)"/>
+  <xsl:variable name="document-element-name" select="name($content)"/>
 
 </xsl:stylesheet>
