@@ -97,11 +97,11 @@
       </map:match>
 
 
-      <!-- Doctype redirect (to be replaced by action or sitetree attribute )-->
-
+      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
+      <!--            1            2         3                4     5             -->
       <map:match pattern ="redirect-*-*/*/live/**.html">
         <map:act type="redirect">
-          <map:redirect-to uri="cocoon://{page-envelope:publication-id}/live/{href}"/>
+          <map:redirect-to uri="cocoon://{3}/live/{href}"/>
         </map:act>
       </map:match>
 
