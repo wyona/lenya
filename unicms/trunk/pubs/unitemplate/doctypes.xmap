@@ -100,11 +100,9 @@
       <!-- Doctype redirect (to be replaced by action or sitetree attribute )-->
 
       <map:match pattern ="redirect-*-*/*/live/**.html">
-        <map:generate src="cocoon:/xml"/>
-        <map:transform src="../unizh/xslt/common/redirect.xsl">
-          <map:parameter name="root" value="{request:contextPath}/{3}/live"/> 
-        </map:transform>
-        <map:serialize type="html"/>
+        <map:act type="redirect">
+          <map:redirect-to uri="cocoon://{page-envelope:publication-id}/live/{href}"/>
+        </map:act>
       </map:match>
 
 

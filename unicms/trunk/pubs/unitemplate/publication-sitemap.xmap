@@ -10,9 +10,8 @@
     <map:generators default="file" />
     <map:matchers default="wildcard"/>
     <map:actions>
-      <map:action logger="sitemap.action.language-exists" 
-        name="language-exists" 
-        src="org.apache.lenya.cms.cocoon.acting.LanguageExistsAction"/>
+      <map:action logger="sitemap.action.language-exists" name="language-exists" src="org.apache.lenya.cms.cocoon.acting.LanguageExistsAction"/>
+      <map:action logger="sitemap.action.redirect" name="redirect" src="ch.unizh.lenya.cms.cocoon.acting.UnizhRedirectAction"/>
     </map:actions>
     
     <map:transformers default="xslt">
