@@ -6,7 +6,9 @@
   xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:uz="http://unizh.ch"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:ci="http://apache.org/cocoon/include/1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
   <xsl:template name="compute-path">
     <xsl:if test="name() != 'document' and name() != 'content'">
@@ -548,7 +550,7 @@
   
   <xsl:template match="xhtml:body//xhtml:h2">
     <h2>
-      <a name="{.}"/>
+      <a name="{.}" id="{.}"><xsl:comment/></a>
       <xsl:apply-templates/>
     </h2>
   </xsl:template>
@@ -611,8 +613,8 @@
     </li>
   </xsl:template>
   
-  <xsl:template match="xhtml:h2[(ancestor::index:child)]" mode="anchor"/>
-  
+  <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
+ 
   <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:publication | descendant::unizh:event]">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
@@ -630,10 +632,43 @@
     <xhtml:a href="{@href}"><xsl:value-of select="."/></xhtml:a>
   </xsl:template> 
 
+  <xsl:template match="unizh:children[ancestor::unizh:news]">
+    <xsl:choose>
+      <xsl:when test="index:child">
+        <xsl:for-each select="index:child">
+          <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/></h2>
+          <p>
+            <xsl:value-of select="*/*/unizh:short/unizh:text"/>
+            <br/>
+            <xsl:choose>
+              <xsl:when test="*/*/xhtml:body/*">
+                <a href="{$contextprefix}{@href}">Mehr...</a>
+              </xsl:when>
+              <xsl:otherwise>
+                <a href="{*/*/unizh:short/xhtml:a/@href}">
+                  <xsl:value-of select="*/*/unizh:short/xhtml:a"/>
+                </a>
+                <xsl:if test="$area = 'authoring'">
+                  |  <a href="{$contextprefix}{@href}">Edit View...</a>
+                </xsl:if>
+              </xsl:otherwise>
+            </xsl:choose>
+          </p>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <p> <br /> - Noch kein Eintrag erfasst - </p>
+      </xsl:otherwise>
+    </xsl:choose>
+    <br/>
+  </xsl:template>
+
   <xsl:template match="unizh:children">
-    <ul class="children">
-      <xsl:apply-templates select="index:child"/>
-    </ul>
+    <xsl:if test="index:child">
+      <ul class="children">
+        <xsl:apply-templates select="index:child"/>
+      </ul>
+    </xsl:if>
   </xsl:template>
   
    <xsl:template match="index:child[descendant::unizh:newsitem]">

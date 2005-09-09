@@ -34,11 +34,19 @@
     <ref name="lenya.meta"/>
     <ref name="unizh.highlights"/>
     <element name="body">
-      <ref name="Block.class"/>
+      <zeroOrMore>
+        <element name="p">
+          <ref name="Inline.model"/>
+        </element>
+      </zeroOrMore>
       <element name="unizh:children">
         <empty/>
       </element>
-      <ref name="Block.class"/>
+      <zeroOrMore>
+        <element name="p">
+          <ref name="Inline.model"/>
+        </element>
+      </zeroOrMore>
     </element>
   </element>
 </define>

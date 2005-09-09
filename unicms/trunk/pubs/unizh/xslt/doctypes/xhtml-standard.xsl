@@ -106,8 +106,23 @@
                 </h1>
                 <p>&#160;</p>
               </xsl:if>
+              <xsl:if test="$document-element-name = 'unizh:newsitem' and $area = 'authoring'">
+                <div bxe_xpath="/{$document-element-name}/unizh:short">
+                  <p>
+                   <xsl:value-of select="unizh:newsitem/unizh:short/unizh:text"/>
+                   <br/>
+                   <xsl:if test="not(*/xhtml:body/*)">
+                     <xsl:apply-templates select="unizh:newsitem/unizh:short/xhtml:a"/> 
+                   </xsl:if>
+                  </p>
+                  <br/> 
+                </div> 
+              </xsl:if> 
               <div bxe_xpath="/{$document-element-name}/xhtml:body">
                 <xsl:apply-templates select="*/xhtml:body/*"/>
+                <br/>
+                <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
+                <xsl:apply-templates select="*/unizh:level"/>
               </div>
             </div>
             <!-- footer -->
@@ -134,10 +149,6 @@
   </div> 
 </xsl:template>
 
-
-
-
- 
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
   <div id="secnav">

@@ -183,9 +183,6 @@
 </xsl:template>
 
 
-
-
-
 <!-- breadcrumb path -->
 
 <xsl:template match="xhtml:div[@id = 'breadcrumb']">
@@ -216,9 +213,10 @@
 
 <!-- Collection items. Select parent in Menu -->
 
+ 
 <xsl:template match="xhtml:div[/document/content[unizh:newsitem | unizh:publication | unizh:event] and ancestor::xhtml:div[@id = 'menu'] and xhtml:div/@current = 'true']">
-  <xhtml:div label="{@label}" current="true"/>
-</xsl:template> -->
+  <xhtml:div current="true"><xsl:value-of select="text()"/></xhtml:div>
+</xsl:template> 
 
 
 <!-- Collection items. Link to parent -->

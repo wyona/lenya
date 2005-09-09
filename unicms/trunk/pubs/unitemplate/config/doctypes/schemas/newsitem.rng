@@ -32,9 +32,21 @@
   <element name="unizh:newsitem">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.lead"/>
+    <ref name="unizh.short"/>
     <ref name="body"/>
     <ref name="unizh.level"/>
+  </element>
+</define>
+
+<define name="unizh.short">
+  <element name="unizh:short">
+    <element name="unizh:text">
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional> 
+    <ref name="a"/>
   </element>
 </define>
 

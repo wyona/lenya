@@ -19,7 +19,10 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:lead> Bitte einen Lead einsetzen. </unizh:lead>
+  <unizh:short>
+    Kurzfassung Newseitrag.
+    <a href="#">Mehr...</a>
+  </unizh:short>
   <body>
     <p>Paragraph</p>
   </body>
