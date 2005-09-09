@@ -71,15 +71,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Returns the attribute href specified in <unizh:redirect-to>
- * of the current document. Returns null object if no attribute is specified.
- * The redirecting is done in the sitemap.xmap file.
+ * Redirects the request to the URL specified in the href attribute of the current
+ * document (tag  <unizh:redirect-to> ). Returns null object if no attribute is specified
+ * or if the current document is not of type "redirect".
  * 
  * @author <a href="mailto:michael.trindler@id.unizh.ch">Michael Trindler</a>
  */
-public class UnizhRedirectAction extends AbstractAction {
+public class UnizhRedirectLiveAction extends AbstractAction {
 
-    private static final String PROTOCOL = "cocoon://";
+    private static final String LIVE_AREA = "live";
 
     /**
      * @see org.apache.cocoon.acting.Action#act(org.apache.cocoon.environment.Redirector, org.apache.cocoon.environment.SourceResolver, java.util.Map, java.lang.String, org.apache.avalon.framework.parameters.Parameters)
@@ -106,9 +106,15 @@ public class UnizhRedirectAction extends AbstractAction {
             if (value == null) {
                 return null;
             } else {
+                String area = document.getArea();
+                if (area.equals(LIVE_AREA)) {
+                    redirector.redirect(true, value);
                     Map map = new HashMap();
                     map.put("href", value);
                     return map;
+                } else {
+                    return null;
+                }
             }
         } catch (Exception e) {
             throw new Exception(
