@@ -97,15 +97,6 @@
       </map:match>
 
 
-      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
-      <!--            1            2         3                4     5             -->
-      <map:match pattern ="redirect-*-*/*/live/**.html">
-        <map:act type="redirect">
-          <map:redirect-to uri="cocoon://{../3}/live/{href}"/>
-        </map:act>
-      </map:match>
-
-
       <!-- This pipeline builds the page content (without header) for
              - section pages
              
