@@ -48,15 +48,7 @@
             </div>
           </div>
           <div id="headertitelpos">
-            <div id="servicenavpos">
-              <form action="">
-                <a href="">Home</a> | 
-                <a href="">Kontakt</a> | 
-                <a href="">Sitemap</a> 
-                <input type="text" name="" /> 
-                <a href="">Suche</a>
-              </form>
-            </div>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'servicenav']"/>
             <!-- header -->
             <div class="headtitelmargintop"><xsl:comment/></div>
             <xsl:choose>
@@ -106,6 +98,14 @@
           <div class="contentarea">
           <div class="contmargintop"><xsl:comment/></div>
 	    <div class="content">
+              <xsl:if test="not($document-element-name = 'unizh:homepage')">
+                <h1>
+                  <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+                    <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+                  </div>
+                </h1>
+                <p>&#160;</p>
+              </xsl:if>
               <div bxe_xpath="/{$document-element-name}/xhtml:body">
                 <xsl:apply-templates select="*/xhtml:body/*"/>
               </div>
@@ -121,6 +121,22 @@
   </html>
 </xsl:template>
  
+
+<xsl:template match="xhtml:div[@id = 'servicenav']">
+  <div id="servicenavpos">
+    <form action="">
+      <a href="{xhtml:div[@id='home']/@href}">Home</a> |
+      <a href="">Kontakt</a> | 
+      <a href="">Sitemap</a>
+      <input type="text" name="" />
+      <a href="">Suche</a>
+    </form>
+  </div> 
+</xsl:template>
+
+
+
+
  
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
@@ -167,10 +183,10 @@
 </xsl:template>
 
 <xsl:template match="xhtml:div[@id = 'breadcrumb']">
-  <div id="breadclamnav"> 
+  <div id="breadclamnav">
+    <a href="{@root}"><xsl:value-of select="@label"/></a>  
     <xsl:for-each select="xhtml:div">
-       <a href="{@href}"><xsl:value-of select="."/></a> 
-       <xsl:if test="position &lt; last()">&gt;</xsl:if>
+       &gt; <a href="{@href}"><xsl:value-of select="."/></a> 
     </xsl:for-each>
   </div> 
 </xsl:template>

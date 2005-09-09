@@ -189,7 +189,7 @@
 <!-- breadcrumb path -->
 
 <xsl:template match="xhtml:div[@id = 'breadcrumb']">
-  <xhtml:div id="breadcrumb">
+  <xhtml:div id="breadcrumb" root="{@root}" label="{@label}">
     <xsl:for-each select="xhtml:div">
       <xsl:choose>
         <xsl:when test="following-sibling::xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@basic-url]">

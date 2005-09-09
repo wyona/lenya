@@ -39,7 +39,7 @@
        <doctype-public>-//W3C//DTD XHTML 1.0 Strict//EN</doctype-public>
        <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</doctype-system> 
          <buffer-size>1024</buffer-size>
-        <encoding>UTF-8</encoding>
+        <encoding>iso-8859-1</encoding>
         <omit-xml-declaration>yes</omit-xml-declaration>
         <method>text</method>
       </map:serializer>

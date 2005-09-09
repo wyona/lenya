@@ -149,6 +149,7 @@
         <map:aggregate element="document">
           <map:part element="content" src="cocoon:/xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/breadcrumb/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/servicenav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/>

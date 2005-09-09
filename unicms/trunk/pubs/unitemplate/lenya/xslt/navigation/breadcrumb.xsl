@@ -12,7 +12,7 @@
 <xsl:import href="node_attrs.xsl"/>
 
 <xsl:template match="nav:site">
-  <div id="breadcrumb">
+  <div id="breadcrumb" root="http://www.unizh.ch" label="Universit&#228;t Z&#252;rich">
     <xsl:apply-templates select="nav:node"/>
   </div>
 </xsl:template>
