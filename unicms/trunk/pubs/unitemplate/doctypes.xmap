@@ -101,7 +101,7 @@
       <!--            1            2         3                4     5             -->
       <map:match pattern ="redirect-*-*/*/live/**.html">
         <map:act type="redirect">
-          <map:redirect-to uri="cocoon://{3}/live/{href}"/>
+          <map:redirect-to uri="cocoon://{../3}/live/{href}"/>
         </map:act>
       </map:match>
 
