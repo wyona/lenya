@@ -214,7 +214,7 @@
 <!-- Collection items. Select parent in Menu -->
 
 <xsl:template match="xhtml:div[/document/unizh:ancestors/unizh:ancestor[unizh:news | unizh:collection | unizh:people] and ancestor::xhtml:div[@id = 'menu'] and xhtml:div/@current = 'true']">
-  <xhtml:div current="true"><xsl:value-of select="text()"/></xhtml:div>
+  <xhtml:div current="true" href="{@href}"><xsl:value-of select="text()"/></xhtml:div>
 </xsl:template> 
 
 

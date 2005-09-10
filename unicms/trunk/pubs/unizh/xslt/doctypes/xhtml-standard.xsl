@@ -121,15 +121,58 @@
               <xsl:if test="/document/unizh:ancestors/unizh:ancestor[1][unizh:collection]">
                 <div bxe_xpath="/{$document-element-name}/unizh:abstract"/>
               </xsl:if>
-              <xsl:if test="$docuent-element-name = 'unizh:person'">
-                
-              </xsl:if> 
-              <div bxe_xpath="/{$document-element-name}/xhtml:body">
-                <xsl:apply-templates select="*/xhtml:body/*"/>
-                <br/>
-                <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
-                <xsl:apply-templates select="*/unizh:level"/>
-              </div>
+              <xsl:choose>
+                <xsl:when test="$document-element-name = 'unizh:person'">
+                  Vorname: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:firstname">
+                    <xsl:value-of select="unizh:person/unizh:firstname"/>
+                  </div>
+                  <br/>
+                  Nachname:
+                  <div bxe_xpath="/{$document-element-name}/unizh:lastname">
+                    <xsl:value-of select="unizh:person/unizh:lastname"/>
+                  </div>
+                  <br/>
+                  Grad: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:academictitle">
+                    <xsl:value-of select="unizh:person/unizh:academictitle"/>
+                  </div>
+                  <br/>
+                  Funktion: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:position">
+                    <xsl:value-of select="unizh:person/unizh:position"/>
+                  </div>
+                  <br/>
+                  Unit: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:unit">
+                    <xsl:value-of select="unizh:person/unizh:unit"/>
+                  </div>
+                  <br/>
+                  Email: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:email">
+                    <xsl:value-of select="unizh:person/unizh:email"/>
+                  </div>
+                  <br/>
+                  Homepage: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:url">
+                    <xsl:value-of select="unizh:person/unizh:url"/>
+                  </div>
+                  <br/>
+                  Bemerkungen: 
+                  <div bxe_xpath="/{$document-element-name}/unizh:remarks">
+                    <xsl:value-of select="unizh:person/unizh:remarks"/>
+                  </div>
+                  <br/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <div bxe_xpath="/{$document-element-name}/xhtml:body">
+                    <xsl:apply-templates select="*/xhtml:body/*"/>
+                    <br/>
+                    <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
+                    <xsl:apply-templates select="*/unizh:level"/>
+                  </div>
+                </xsl:otherwise>
+              </xsl:choose>
             </div>
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>

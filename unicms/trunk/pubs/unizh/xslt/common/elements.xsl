@@ -615,7 +615,7 @@
   
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
-  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:publication | descendant::unizh:event]">
+  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:people]">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
 
@@ -662,6 +662,55 @@
     </xsl:choose>
     <br/>
   </xsl:template>
+
+  <xsl:template match="unizh:children[ancestor::unizh:collection]">
+    <xsl:choose>
+      <xsl:when test="index:child">
+        <xsl:for-each select="index:child">
+          <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/></h2>
+          <p>
+            <xsl:apply-templates select="*/*/unizh:abstract/*"/>
+            <br/>
+            <a href="{$contextprefix}{@href}">Mehr...</a>
+          </p>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <p> <br /> - Noch kein Eintrag erfasst - </p>
+      </xsl:otherwise>
+    </xsl:choose>
+    <br/>
+  </xsl:template>
+
+
+   <xsl:template match="unizh:children[ancestor::unizh:people]">
+    <xsl:choose>
+      <xsl:when test="index:child">
+        <xsl:for-each select="index:child">
+          <h2>
+            <xsl:value-of select="*/*/unizh:academictitle"/> 
+            <xsl:value-of select="*/*/unizh:firstname"/>&#160;
+            <xsl:value-of select="*/*/unizh:lastname"/>
+          </h2>
+          <p>
+            Funktion: <xsl:value-of select="*/*/unizh:position"/><br/>
+            Einheit: <xsl:value-of select="*/*/unizh:unit"/><br/>
+            Email: <xsl:value-of select="*/*/unizh:email"/><br/>
+            Homepage: <xsl:value-of select="*/*/unizh:url"/><br/>
+            Bemerkungen: <xsl:value-of select="*/*/unizh:position"/><br/>
+            <xsl:if test="$area = 'authoring'">
+              <a href="{$contextprefix}{@href}">Edit View...</a>
+            </xsl:if>
+          </p>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <p> <br /> - Noch kein Eintrag erfasst - </p>
+      </xsl:otherwise>
+    </xsl:choose>
+    <br/>
+  </xsl:template>
+
 
   <xsl:template match="unizh:children">
     <xsl:if test="index:child">
