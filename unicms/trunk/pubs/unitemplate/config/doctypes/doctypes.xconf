@@ -51,36 +51,19 @@
     <workflow src="2stage.xml"/>
   </doc>
 
-  <doc type="publications">
+  <doc type="collection">
     <children>
-      <doc type="publication"/>
+      <doc type="xhtml"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>publications.xml</sample-name>
+      <sample-name>collection.xml</sample-name>
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
 
-  <doc type="publication">
+   <doc type="persons">
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>publication.xml</sample-name>
-    </creator>
-    <workflow src="2stage.xml"/>
-  </doc>
-
-   <doc type="agenda">
-    <children>
-      <doc type="event"/>
-    </children>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>agenda.xml</sample-name>
-    </creator>
-    <workflow src="2stage.xml"/>
-  </doc>
-
-  <doc type="event">
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>event.xml</sample-name>
+      <sample-name>persons.xml</sample-name>
     </creator>
     <workflow src="2stage.xml"/>
   </doc>

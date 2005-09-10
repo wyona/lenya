@@ -16,26 +16,20 @@
         <sourcetype name="homepage">
           <document-element local-name="homepage"/>
         </sourcetype>
-        <sourcetype name="section">
-          <document-element local-name="section"/>
-        </sourcetype>
         <sourcetype name="news">
           <document-element local-name="news"/>
         </sourcetype>
         <sourcetype name="newsitem">
           <document-element local-name="newsitem"/>
         </sourcetype>
-        <sourcetype name="publications">
-          <document-element local-name="publications"/>
+        <sourcetype name="collection">
+          <document-element local-name="collection"/>
         </sourcetype>
-        <sourcetype name="publication">
-          <document-element local-name="publication"/>
+        <sourcetype name="people">
+          <document-element local-name="people"/>
         </sourcetype>
-        <sourcetype name="agenda">
-          <document-element local-name="agenda"/>
-        </sourcetype>
-        <sourcetype name="event">
-          <document-element local-name="event"/>
+        <sourcetype name="person">
+          <document-element local-name="person"/>
         </sourcetype>
         <sourcetype name="redirect">
           <document-element local-name="redirect"/>

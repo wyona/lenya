@@ -117,6 +117,12 @@
                   </p>
                   <br/> 
                 </div> 
+              </xsl:if>
+              <xsl:if test="/document/unizh:ancestors/unizh:ancestor[1][unizh:collection]">
+                <div bxe_xpath="/{$document-element-name}/unizh:abstract"/>
+              </xsl:if>
+              <xsl:if test="$docuent-element-name = 'unizh:person'">
+                
               </xsl:if> 
               <div bxe_xpath="/{$document-element-name}/xhtml:body">
                 <xsl:apply-templates select="*/xhtml:body/*"/>

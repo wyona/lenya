@@ -27,6 +27,14 @@
   
   <xsl:variable name="sections" select="/document/uz:sections"/>
   
-  <xsl:variable name="document-element-name" select="name($content)"/>
-
+  <xsl:variable name="document-element-name">
+    <xsl:choose>
+      <xsl:when test="name($content) = local-name($content)">
+        <xsl:value-of select="concat('xhtml:', name($content))"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="name($content)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
 </xsl:stylesheet>

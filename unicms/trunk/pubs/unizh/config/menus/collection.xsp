@@ -63,12 +63,7 @@
 	  <item>New Homepage</item>
         }
         else {
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=collection">New Collection</item> 
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=news">New RSS News</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=people">New People</item>            
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=redirect">New Redirect</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document </item>
         }
 	    }
 	  </xsp:logic>
