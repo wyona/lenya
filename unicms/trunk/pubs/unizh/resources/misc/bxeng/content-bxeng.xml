@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+@charset "iso-8859-1";
+/* CSS Document */
+
+/*allgemeine Definition*/
+body {
+  	background-color: #fff;
+  	font-size: 12px;
+  	font-family: Arial;
+  	line-height: 18px;
+ 	color:#555555;  
+  	margin:0px 20px;
+  	padding:0px;
+
+ }
+img {
+	border:0px;
+}
+
+.bodywidth {
+  	max-width:800px;
+	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/*font*/
+h1, h2, h3, h4, h5, p {
+	margin: 0px; 
+	padding: 0px; 
+}
+h1 {
+	font-size: 16px;
+	line-height:20px;
+}
+h2 {
+	font-size: 12px;
+}
+h3 {
+	font-size: 12px;
+	font-style: italic;
+	font-weight:normal;
+}
+.klein {
+	font-size: 11px;
+}
+/*link*/
+a { 
+	text-decoration: none;
+	color:#333399;  
+}
+a.arrow {
+	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+}
+a.arrow:hover {
+	background-color:#f0f0f5;
+}
+
+/*header */
+#headerarea {
+	width:100%;
+	display:block;
+	background-color: #666699;
+	height:90px;
+	min-width:600px;
+}
+#headertitelpos {
+	margin-left:6px;
+	margin-right:195px;
+}
+
+.imgunilogo {
+	background-color: #d1d1e1;
+	padding-left:15px;
+	height:45px;
+}
+.imginstitute {
+	background-color: #666699;
+	padding-left:15px;
+	height:45px;
+}
+#headerarea h1 {
+	color:#FFFFFF;
+	font-size: 20px;
+  	line-height: 26px;
+}
+#headerarea h2 {
+	margin-left:1px;
+	font-size: 11px;
+  	line-height: 16px;
+	color:#FFFFFF;
+	font-weight:normal;
+}
+.endheaderline {
+	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
+	margin-bottom:26px;
+	height:1px;
+}
+
+/* NAVIGATION */
+
+/*breadclam navigation*/
+#breadclamnav { 
+	margin-top:2px;
+	margin-left:6px;
+	margin-bottom:3px;
+	text-align: left;
+	color:#333399; 
+  	line-height: 12px;
+    font-family: Verdana;
+	font-size: 9px;
+ 	height:30px;
+}
+#breadclamnav a:hover{ 
+	background-color:#f0f0f5;
+}
+
+/*service navigation zB. home, sitemap, search */
+#servicenavpos {
+	margin-right:12px;
+	margin-bottom:0px;
+	padding-top:2px;
+	font-size: 9px;
+	font-family: Verdana;
+	color:#ffffff;
+	line-height: 11px;
+	display:block;
+	text-align: right;
+	height:39px;
+}
+#servicenavpos a {
+  	color:#ffffff; 
+	padding:0px 2px;
+}
+#servicenavpos input {
+	line-height: 11px;
+	border: 0px;
+	width: 100px;
+  	font-size: 9px;
+  	font-family: Verdana;
+	margin-left:2px;
+	padding-left:2px;
+}
+#servicenavpos form {
+	display:inline;
+}
+.servieceform {
+	display:inline;
+}
+
+
+/*primar navigation*/
+#primarnav  {
+  	font-size: 11px;
+  	font-family: Arial;
+	line-height: 21px;
+	color:#666699; 
+	display:block;
+}
+#primarnav a {
+	float:left;
+	padding:0px 7px;
+	display:block;
+}
+#primarnav a:hover {
+	background-color:#f0f0f5;
+}
+#primarnav a.activ {
+	padding:0px 7px;
+	background-color:#f0f0f5;
+}
+#primarnav .linkseparator {
+	color:#666699;
+	float:left;
+}
+#primarnav .linkseparatoract {
+	color:#fff;
+	float:left;
+}
+/* Seconder navigation */
+#secnav {
+  	width:165px;
+  	float:left; 
+  	font-size: 11px;
+  	font-family: Arial;
+	line-height: 20px;
+}
+#secnav ul li a {
+	padding-left: 7px;
+	display:block;
+}
+#secnav a:hover {
+	background-color:#f0f0f5;
+}
+#secnav a.activ {
+  	background-color:#f0f0f5;
+}
+#secnav ul {
+	width:100%;
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+}
+#secnav li { 
+	line-height:20px;
+}
+
+/*third navigation*/
+#secnav ul ul { 
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+}
+
+#secnav ul ul li a {
+	padding-left: 20px;
+	padding-right:0px;
+	width:145px;
+}
+
+
+
+/*Ortho navigation*/
+#orthonav  {
+  	font-size: 11px;
+  	font-family: Arial;
+  	text-align:right;
+  	margin-bottom:20px;
+ 	display:block;
+}
+#orthonav a {
+	color:#333; 
+  	padding:0px 20px;
+  	border: 1px solid #ccccff;
+}
+#orthonav a:hover {
+  	background-color:#eaecff; 
+}
+#orthonav a.activ {
+  	background-color:#eaecff; 
+}
+
+/*tool navigation zB. language,print,lupe*/
+#toolnav  {
+  	font-size: 9px;
+  	line-height: 11px;
+  	font-family: Verdana;
+  	text-align: left;
+  	height:25px;
+  	display:block;
+	color:#666; 
+	margin-left: 11px;
+}
+#toolnav a {
+	color:#666; 
+}
+/* Navigation Ende*/
+
+
+/*Content*/
+
+.contcol2 {
+	min-width:400px;
+	float: none;
+	margin-left:180px;
+}
+.contmargintop {
+	height:25px;
+}
+.contentarea {
+	margin-right:180px;
+}
+.content {
+	margin-right:15px;
+}
+.marginLeftCont { 
+	margin-left:15px;
+}
+ul.squarelist{
+	padding:0px;
+	list-style-type:square;
+	margin-left:30px;
+	color:#666666;
+}
+
+/*Related Box*/
+.relatedbox {
+	float:right;
+	width:179px;
+	margin-left:17px;
+}
+.relatedboxborder {
+	width:179px;
+	border: 1px solid #ccc;
+}
+.relatedboxcont {
+	padding: 8px 9px 10px 11px;
+	line-height:15px;
+	font-size:11px;
+}
+
+/*footer*/
+#footer {
+	margin-top:2px;
+ 	font-size: 9px;
+	font-family: Verdana;
+	color:#999;
+	line-height: 11px;
+}
+.footermargintop {
+	height:30px;
+}
+#footer a:hover{ 
+	background-color:#f0f0f5;
+}
+
+/* form*/
+form {
+	margin: 0px;
+	border: 0px;
+}
+.formbg {
+	background-color:#f0f0f5;
+	height:28px;
+	border-bottom: 2px solid #fff;
+	vertical-align: middle;
+
+}
+label { 
+  display:inline;
+  float: left;
+  width: 165px; 
+}
+
+form br {
+  clear: left; 
+}
+.formbg input {display:inline;
+  	float: left;
+	line-height: 18px;
+  	font-size: 11px;
+  	font-family: Arial;
+	width:254px;
+	height:19px;
+	padding-left:2px;
+	border-top:1px solid #696969;
+	border-left:1px solid #696969;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+.submitbutton {
+	margin-left:165px;
+	line-height: 18px;
+  	font-size: 11px;
+  	font-family: Arial;
+	width:70px;
+	height:24px;
+	padding-left:2px;
+	border-top:1px solid #696969;
+	border-left:1px solid #696969;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+/* Misc*/
+.floatclear {
+	clear:both;
+}
+.solidline {
+	background-color: #ccc;
+	height:1px;
+	width:100%;
+	margin:0px;
+	border:0px;
+}
+.dotline {
+	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
+	width:100%;
+	height:1px;
+}
+
+
+/* Hide from IE5-mac. Only IE-win sees this. gegen 3px text jog \*/
+* html #secnav {
+  margin-right: 15px;
+  }
+ 
+* html .contcol2 {
+  height: 1%;
+  margin-left: 0px;
+}
+/* End hide from IE5/mac */
+
+/* BXE */
+
+.teaser {
+        width:175px;
+        border: 1px solid #ccc;
+        display: block;
+}
+
+
+.teaser .title {
+        padding: 0px 0px 0px 11px;
+        font-weight: bold;
+        display: block;
+}
+
+
+.teaser p {
+        padding: 8px 9px 10px 11px;
+        line-height:15px;
+        font-size:11px;
+        display: block;
+}
+
+
+.rss-reader {
+        height:60px;
+        border: 1px solid #ccc;
+        display:block; 
+}
+
+.rss-reader .rss-title  {
+        padding: 0px 0px 0px 11px;
+        font-weight: bold;
+}
+
+.rss-reader .remarks  {
+        padding: 8px 9px 10px 11px;
+        line-height:15px;
+        font-size:11px;
+        display: block;
+}  
+
+
+/* deprecated */
+
+.highlight {
+        width:175px;
+        border: 1px solid #ccc;
+        display:block;
+}
+.highlight p {
+        padding: 8px 9px 10px 11px;
+        line-height:15px;
+        font-size:11px;
+}
+
+.highlight-title {
+        padding: 0px 0px 0px 11px;
+        font-weight: bold;
+}
+
+
+
+
+
+</css>

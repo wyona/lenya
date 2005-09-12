@@ -91,8 +91,12 @@
               <a href="">English</a> | 
               <a href=""><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> | 
               <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
-            </div> 
-            <xsl:apply-templates select="*/unizh:highlights/unizh:highlight"/> 
+            </div>
+            <xsl:if test="*/unizh:related-content/*">
+              <div bxe_xpath="/{$document-element-name}/unizh:related-content">
+                <xsl:apply-templates select="*/unizh:related-content"/> 
+              </div>
+            </xsl:if> 
           </div>
           <!-- body --> 
           <div class="contentarea">
@@ -172,7 +176,7 @@
                     <xsl:apply-templates select="*/unizh:level"/>
                   </div>
                 </xsl:otherwise>
-              </xsl:choose>
+              </xsl:choose> 
             </div>
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>

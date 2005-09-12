@@ -18,12 +18,12 @@
   <unizh:quicklinks>
     <xhtml:a href="#">Link</xhtml:a>
   </unizh:quicklinks>
-  <unizh:highlights>
-    <unizh:highlight>
-      <unizh:highlight-title>Title</unizh:highlight-title>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
       <p>The text of the highlight.</p>
-    </unizh:highlight>
-  </unizh:highlights>
+    </unizh:teaser>
+  </unizh:related-content>
   <body>
   	<h2>Universität und Öffentlichkeit im Dialog</h2>
     <p>unicommunication (unicom) hat die Aufgabe, die Kommunikation mit

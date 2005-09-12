@@ -1,0 +1,46 @@
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:cinclude="http://apache.org/cocoon/include/1.0"
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+  >
+
+ 
+  <xsl:template match="unizh:related-content">
+    <xsl:choose>
+      <xsl:when test="@link != ''">
+        <cinclude:includexml>
+          <cinclude:src ignoreErrors="true">cocoon:/include-related/<xsl:value-of select="@link"/></cinclude:src>
+        </cinclude:includexml> 
+      </xsl:when>
+      <xsl:otherwise>
+        <unizh:related-content>
+          <xsl:apply-templates/>
+        </unizh:related-content>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="unizh:teaser">
+     <xsl:choose>
+      <xsl:when test="@link != ''">
+        <cinclude:includexml>
+          <cinclude:src ignoreErrors="true">cocoon:/include-teaser/<xsl:value-of select="@link"/>.<xsl:value-of select="@id"/></cinclude:src>
+        </cinclude:includexml>   
+      </xsl:when>
+      <xsl:otherwise>
+        <unizh:teaser>
+          <xsl:apply-templates/>
+        </unizh:teaser>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template> 
+
+
+  <xsl:template match="@*|node()" priority="-1">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
+</xsl:stylesheet>

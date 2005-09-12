@@ -9,7 +9,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:ci="http://apache.org/cocoon/include/1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  
+ 
+  <xsl:param name="root"/>
+  <xsl:param name="documentid"/>
+  <xsl:param name="contextprefix"/>
+
+ 
   <xsl:template name="compute-path">
     <xsl:if test="name() != 'document' and name() != 'content'">
       <xsl:text>/</xsl:text>
@@ -465,9 +470,6 @@
     </span>
   </xsl:template>
 
-  <xsl:template match="unizh:highlights">
-  </xsl:template>
-
   <xsl:template match="unizh:quicklinks">
     Quicklinks:<br/>
     <xsl:for-each select="xhtml:a">
@@ -476,17 +478,37 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:highlight">
+  <xsl:template match="unizh:teaser">
     <div class="relatedboxborder">
       <div class="relatedboxcont">
-        <xsl:apply-templates/>
-        <a class="arrow" href="">weiter</a>  
+        <b><xsl:value-of select="unizh:title"/></b><br/>
+        <xsl:value-of select="xhtml:p/text()"/><br/>
+        <xsl:for-each select="lenya:asset">
+          <xsl:apply-templates select="."/><br/>
+        </xsl:for-each>
+        <xsl:for-each select="xhtml:p/xhtml:a">
+          <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+        </xsl:for-each>  
         <xsl:call-template name="asset-dots">
           <xsl:with-param name="insertWhere" select="'inside'"/>
         </xsl:call-template>
       </div> 
     </div>
   </xsl:template>
+
+
+   <xsl:template match="unizh:highlight">
+    <div class="relatedboxborder">
+      <div class="relatedboxcont">
+        <xsl:apply-templates/>
+        <a class="arrow" href="">weiter</a>
+        <xsl:call-template name="asset-dots">
+          <xsl:with-param name="insertWhere" select="'inside'"/>
+        </xsl:call-template>
+      </div>
+    </div>
+  </xsl:template>
+
 
  
   <xsl:template match="unizh:highlights" mode="print">
@@ -508,30 +530,54 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:rss-reader">
+  <xsl:template match="unizh:rss-reader[parent::unizh:related-content]">
     <xsl:variable name="items" select="@items"/>
-    <table border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td style="background-color: #669; color: #fff"><xsl:value-of select="xhtml:title"/></td>
-      </tr>
-      <tr>
-        <td style="background-color: #ddd">
-          <xsl:for-each select="rss/channel/item">
-            <xsl:if test="$items = '' or position() &lt;= $items">
-              <a target="_blank" href="{link}"><xsl:value-of select="title"/></a><br/>
-              <!-- <xsl:value-of select="description"/><br/>-->
-            </xsl:if>
-          </xsl:for-each>
-          <xsl:if test="not(rss/channel/item)">
+    <div class="relatedboxborder">
+      <div class="relatedboxcont">
+         <xsl:choose>
+           <xsl:when test="xhtml:rss/xhtml:channel">
+             <b><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></b><br/>
+             <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
+               <xsl:if test="$items = '' or position() &lt;= $items">
+                 <a target="_blank" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a><br/>
+                 <xsl:if test="@descriptions = 'true'">
+                    <xsl:value-of select="xhtml:description"/><br/>
+                 </xsl:if>
+               </xsl:if>
+             </xsl:for-each>
+             <xsl:if test="xhtml:rss/xhtml:channel/xhtml:link">
+               <a class="arrow" target="_blank" href="{xhtml:rss/xhtml:channel/xhtml:link}">weiter</a>
+             </xsl:if> 
+           </xsl:when>
+           <xsl:otherwise>
             --
-          </xsl:if>
-         </td>
-      </tr>
-    </table>
+           </xsl:otherwise>
+         </xsl:choose>
+      </div>
+    </div>
   </xsl:template>
 
 
-  
+  <xsl:template match="unizh:rss-reader[parent::xhtml:body]">
+    <xsl:variable name="items" select="@items"/>
+       <h2><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></h2><br/>
+       <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
+          <xsl:if test="$items = '' or position() &lt;= $items">
+            <a target="_blank" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a><br/>
+            <xsl:value-of select="xhtml:description"/><br/>
+          </xsl:if>
+      </xsl:for-each>
+      <xsl:if test="xhtml:rss/xhtml:channel/xhtml:link">
+        <a class="arrow" target="_blank" href="{xhtml:rss/xhtml:channel/xhtml:link}">weiter</a>
+      </xsl:if> 
+      <xsl:if test="not(xhtml:rss/xhtml:channel/xhtml:item)">
+        --
+      </xsl:if>
+  </xsl:template> 
+
+
+
+ 
   <xsl:template match="xhtml:td[not(ancestor::*[@id = 'menu'])]">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
@@ -625,7 +671,15 @@
   </xsl:template>
 
   <xsl:template match="level:node">
-   <xsl:value-of select="descendant::dc:title"/><br/>
+    <xsl:choose>
+      <xsl:when test="concat($root, $documentid, '.html') = concat($contextprefix, @href)">
+        <xsl:value-of select="descendant::dc:title"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <a href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a>
+      </xsl:otherwise>
+    </xsl:choose>
+    <br/> 
   </xsl:template>
 
   <xsl:template match="xhtml:div[@id='link-to-parent']">
@@ -641,7 +695,7 @@
             <xsl:value-of select="*/*/unizh:short/unizh:text"/>
             <br/>
             <xsl:choose>
-              <xsl:when test="*/*/xhtml:body/*">
+              <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
                 <a href="{$contextprefix}{@href}">Mehr...</a>
               </xsl:when>
               <xsl:otherwise>

@@ -9,9 +9,16 @@
   <xsl:template match="unizh:rss-reader">
     <unizh:rss-reader items="{@items}">
       <title><xsl:value-of select="."/></title>
-      <cinclude:includexml ignoreErrors="true">
-        <cinclude:src><xsl:value-of select="@url"/></cinclude:src>
-      </cinclude:includexml>
+      <cinclude:includexml>
+        <xsl:choose>
+          <xsl:when test="starts-with(@url, 'http://')">
+            <cinclude:src ignoreErrors="true"><xsl:value-of select="@url"/></cinclude:src>
+          </xsl:when>
+          <xsl:otherwise>
+            <cinclude:src ignoreErrors="true">cocoon:/include-rss/<xsl:value-of select="@url"/></cinclude:src>
+          </xsl:otherwise>
+        </xsl:choose>
+      </cinclude:includexml> 
     </unizh:rss-reader>
   </xsl:template>
 

@@ -10,23 +10,17 @@
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:highlights>
-    <unizh:highlight>
-      <h2>Title h2 (link allowed)</h2>
+  <unizh:related-content>
+    <unizh:teaser id="first">
+      <unizh:title>Title</unizh:title>
       <p>The text of the highlight.</p>
-      <p>Styles and links are allowed.</p>
-    </unizh:highlight>
-    <unizh:highlight>
-      <h2>Title h2 (link allowed)</h2>
-      <p>Some text</p>
-    </unizh:highlight>
-    <unizh:highlight>
-      <p>A highlight without a title.</p>
-    </unizh:highlight>
-    <unizh:highlight>
-      <p>This is great.</p>
-    </unizh:highlight>
-  </unizh:highlights>
+      <p>Multiple Paragraphs.</p>
+    </unizh:teaser>
+    <unizh:teaser link="/index.html" id="example"/>
+      <unizh:title>Linked</unizh:title>
+      <p>Linked teaser. Set "link" and "id" attributes to target page and teaser id</p>
+    </unizh:teaser>
+  </unizh:related-content>
   <body>
     <unizh:toc/>
     <p>Paragraph</p>

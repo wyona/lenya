@@ -35,13 +35,19 @@
     </map:selectors>
     
     <map:serializers default="html">
+
       <map:serializer logger="sitemap.serializer.html" mime-type="text/html" name="xhtml" pool-grow="4" pool-max="32" pool-min="4" src="org.apache.cocoon.serialization.XMLSerializer">
        <doctype-public>-//W3C//DTD XHTML 1.0 Strict//EN</doctype-public>
        <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</doctype-system> 
          <buffer-size>1024</buffer-size>
         <encoding>iso-8859-1</encoding>
         <omit-xml-declaration>yes</omit-xml-declaration>
-        <method>text</method>
+      </map:serializer>
+      
+      <map:serializer logger="sitemap.serializer.html" mime-type="rss PUBLIC" name="xml-rss" pool-grow="4" pool-max="32" pool-min="4" src="org.apache.cocoon.serialization.XMLSerializer">
+       <doctype-public>-//Netscape Communications//DTD RSS 0.91//EN</doctype-public>
+       <doctype-system>http://my.netscape.com/publish/formats/rss-0.91.dtd</doctype-system>
+         <buffer-size>1024</buffer-size>
       </map:serializer>
     </map:serializers>
   </map:components>
@@ -104,7 +110,7 @@
       </map:match>
       
       <map:match pattern="**/content-bxeng.css">
-	<map:generate src="../unizh/resources/shared/css/main.xml"/>
+	<map:generate src="../unizh/resources/misc/bxeng/content-bxeng.xml"/>
 	<map:transform src="../../resources/css/css.xsl">
 	  <map:parameter name="contextprefix" value="{request:contextPath}"/>
 	</map:transform>
@@ -211,7 +217,26 @@
       </map:match>
 
 
-     <map:match pattern="*/**.pdf">
+      <map:match pattern="*/**.rss.xml">
+        <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
+        <map:transform type="index">
+          <map:parameter name="documentId" value="{page-envelope:document-id}"/>
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/rss-writer.xsl">
+          <map:parameter name="channelid" value="/{page-envelope:publication-id}/{page-envelope:area}/{2}"/>
+          <map:parameter name="servername" value="{request:serverName}"/>
+          <map:parameter name="serverport" value="{request:serverPort}"/>
+          <map:parameter name="contextprefix" value="{page-envelope:context-prefix}"/>
+        </map:transform>
+        <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+        <map:serialize type="xml-rss"/>
+      </map:match>
+
+
+      <map:match pattern="*/**.pdf">
         <map:act type="language-exists">
           <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
           <map:transform src="../unizh/xslt/common/xhtml2fo.xsl">

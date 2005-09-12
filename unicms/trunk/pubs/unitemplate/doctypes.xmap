@@ -8,8 +8,9 @@
     <map:generators default="file" />
     <map:matchers default="wildcard"/>
     <map:transformers default="xslt">
-      <map:transformer name="level" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
-      <map:transformer name="sitemap" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.SitemapTransformer"/>
+      <map:transformer name="index" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentIndexTransformer"/>
+      <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
+      <map:transformer name="sitemap" logger="lenya.sitemap.transformer.sitemap" src="ch.unizh.lenya.cms.cocoon.transformation.SitemapTransformer"/>
     </map:transformers> 
    <map:actions/>
   </map:components>
@@ -95,6 +96,58 @@
         <map:serialize type="xml"/>
         
       </map:match>
+    
+       
+      <map:match pattern="include-rss/**.rss.xml">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+        <map:act type="language-exists">
+          <map:generate src="content/{page-envelope:area}/{../../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform type="index">
+            <map:parameter name="documentId" value="{../../1}"/>
+            <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+            <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+          </map:transform>
+          <map:transform type="cinclude"/>
+          <map:transform src="../unizh/xslt/common/rss-writer.xsl">
+            <map:parameter name="channelid" value="/{page-envelope:publication-id}/{page-envelope:area}{../../1}"/> 
+            <map:parameter name="servername" value="{request:serverName}"/>
+            <map:parameter name="serverport" value="{request:serverPort}"/>
+            <map:parameter name="contextprefix" value="{page-envelope:context-prefix}"/>
+          </map:transform>
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
+          <map:serialize type="xml"/>
+        </map:act>
+        </map:act>
+        <map:generate src="cocoon:/xml"/>
+        <map:serialize type="xml"/>
+      </map:match> 
+ 
+
+      <map:match pattern="include-related/**.html">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+          <map:generate src="content/{page-envelope:area}/{../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform src="../unizh/xslt/common/related-writer.xsl">
+            <map:parameter name="element" value="unizh:related-content"/>
+          </map:transform>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+
+      <map:match pattern="include-teaser/**.html.*">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+          <map:generate src="content/{page-envelope:area}/{../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform src="../unizh/xslt/common/related-writer.xsl">
+            <map:parameter name="element" value="unizh:teaser"/>
+            <map:parameter name="id" value="{../2}"/>
+          </map:transform>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+
+      <map:match pattern="include-**">
+        <map:generate src="cocoon:/xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
 
 
       <!-- This pipeline builds the page content (without header) for
@@ -150,6 +203,7 @@
         </map:aggregate>
 
         <map:transform type="index">
+          <map:parameter name="documentId" value="{page-envelope:document-id}"/>
           <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
           <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/> 
         </map:transform>
@@ -161,15 +215,17 @@
         <map:transform type="level">
           <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
           <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
-        </map:transform> 
+        </map:transform>
  
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
   	</map:transform>
 
         <!-- Doctype / context specific navigation schemes.  --> 
-
-        <map:transform src="../unizh/xslt/common/rss.xsl"/>
+        <map:transform src="../unizh/xslt/common/includeRelated.xsl"/>
+        <map:transform type="cinclude"/>
+ 
+        <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
         <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
