@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unizh:homepage xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:tabs="root" xhtml:dummy="FIXME:keepNamespace">
+<?xml version="1.0" encoding="UTF-8"?><unizh:homepage xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:tabs="root" xhtml:dummy="FIXME:keepNamespace">
 	
   <lenya:meta>
     <dc:title>Unicommunication</dc:title>
@@ -19,9 +19,9 @@
     <xhtml:a href="#">Link</xhtml:a>
   </unizh:quicklinks>
   <unizh:related-content>
-    <unizh:teaser>
-      <unizh:title>Title</unizh:title>
-      <p>The text of the highlight.</p>
+    <unizh:teaser id="example">
+      <unizh:title>Example</unizh:title>
+      <p>Example Teaser.</p>
     </unizh:teaser>
   </unizh:related-content>
   <body>

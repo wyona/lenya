@@ -8,7 +8,7 @@
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
          >
 
-<define name="lightblock.class">
+<define name="lightblock.class.deprecated">
   <choice>
 	<ref name="h2"/>
 	<ref name="h3"/>
@@ -18,6 +18,15 @@
     <ref name="lenya.asset"/>
   </choice>
 </define>
+
+<define name="lightblock.class">
+  <choice>
+    <ref name="p"/>
+    <ref name="object"/>
+    <ref name="lenya.asset"/>
+  </choice>
+</define>
+
 
 <define name="unizh.header">
   <element name="unizh:header">
@@ -48,6 +57,45 @@
   </attribute>
 </define>
 
+<define name="unizh.related-content">
+  <optional>
+    <element name="unizh:related-content">
+      <optional>
+        <attribute name="link">
+          <text/>
+        </attribute>
+      </optional>
+      <interleave>
+        <zeroOrMore>
+          <ref name="unizh.teaser"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="unizh.rss-reader"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </optional>
+</define>
+
+<define name="unizh.teaser">
+  <element name="unizh:teaser">
+    <optional>
+      <attribute name="id">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="link">
+        <text/>
+      </attribute>
+    </optional>
+    <element name="unizh:title"><text/></element>
+    <oneOrMore>
+      <ref name="lightblock.class"/>
+    </oneOrMore>
+  </element>
+</define>
+
 <define name="unizh.highlights">
   <optional>
     <element name="unizh:highlights">
@@ -70,7 +118,7 @@
     </optional>
     <!-- a subset of XHTML block -->
     <oneOrMore>
-      <ref name="lightblock.class"/>
+      <ref name="lightblock.class.deprecated"/>
     </oneOrMore>
   </element>
 </define>
@@ -109,8 +157,17 @@
           <text/>
         </attribute>
       </optional>
+      <attribute name="descriptions">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
     </interleave>
-    <element name="title">
+    <element name="unizh:rss-title">
+      <text/>
+    </element>
+    <element name="unizh:remarks">
       <text/>
     </element>
   </element>
@@ -148,11 +205,10 @@
   </element>
 </define>
 
-<define name="unizh.lead">
-  <element name="unizh:lead">
-      <ref name="Inline.model"/>
+<define name="unizh.abstract">
+  <element name="unizh:abstract">
+    <ref name="Inline.model"/>
   </element>
 </define>
-
 
 </grammar>

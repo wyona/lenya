@@ -35,11 +35,8 @@
     <ref name="lenya.meta"/>
     <ref name="unizh.header"/>
     <interleave>
-<!--
-      <ref name="unizh.rss-reader"/>
--->
       <ref name="unizh.quicklinks"/>
-      <ref name="unizh.highlights"/>
+      <ref name="unizh.related-content"/>
     </interleave>
     <ref name="body"/>
   </element>

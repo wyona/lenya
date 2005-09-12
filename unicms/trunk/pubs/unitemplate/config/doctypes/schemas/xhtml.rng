@@ -24,11 +24,8 @@
     <element name="html">
       <ref name="html.attlist"/>
       <ref name="lenya.meta"/>
-      <ref name="unizh.highlights"/>
-    
-      <!-- head element not allowed -->
-      <!-- <ref name="head"/> -->
-    
+      <ref name="unizh.abstract"/>
+      <ref name="unizh.related-content"/>
       <ref name="body"/>
     </element>
   </define>
@@ -151,9 +148,9 @@
   <choice>
     <ref name="lenya.asset"/>
     <ref name="unizh.toc"/>
+    <ref name="unizh.rss-reader"/>
     <ref name="unizh.children"/>
-	<!-- iframe allowed 2.11.04 -->
-	<ref name="iframe"/>
+    <ref name="iframe"/>
   </choice>
 </define>
 

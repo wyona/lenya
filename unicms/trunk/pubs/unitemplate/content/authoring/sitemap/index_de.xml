@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Sitemap</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>admin1 (Administrator)</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Mon Sep 12 23:32:28 CEST 2005</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:abstract>Insert abstract here.</unizh:abstract>
+  <unizh:highlights>
+    <unizh:highlight>
+      <h3>Title h3</h3>
+      <p>The text of the highlight.</p>
+    </unizh:highlight>
+  </unizh:highlights>
+  <body>
+  	<h2>Headline</h2>
+    <p>Paragraph</p>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <lenya:meta>
     <dc:title>Dokument- bzw. Seitentitel</dc:title>
     <dc:description>Abstract</dc:description>
@@ -10,13 +10,14 @@
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
+  <unizh:abstract/>
   <unizh:related-content>
     <unizh:teaser id="first">
       <unizh:title>Title</unizh:title>
-      <p>The text of the highlight.</p>
+      <p>Teaser text.</p>
       <p>Multiple Paragraphs.</p>
     </unizh:teaser>
-    <unizh:teaser link="/index.html" id="example"/>
+    <unizh:teaser link="/index.html" id="example">
       <unizh:title>Linked</unizh:title>
       <p>Linked teaser. Set "link" and "id" attributes to target page and teaser id</p>
     </unizh:teaser>
