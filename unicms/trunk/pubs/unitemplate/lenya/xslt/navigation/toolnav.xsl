@@ -29,11 +29,11 @@
     <div id="language">
       <xsl:attribute name="href">
         <xsl:choose>
-          <xsl:when test="$chosenlanguage = $defaultlanguage">
-            <xsl:value-of select="concat(substring-before($url, '.html'), '_en.html')"/>
+          <xsl:when test="contains($url, '_')">
+            <xsl:value-of select="concat(substring-before($url, '_'), '_en.html')"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="concat(substring-before($url, '_'), '_en.html')"/>
+            <xsl:value-of select="concat(substring-before($url, '.html'), '_en.html')"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -44,11 +44,11 @@
     <div id="language"> 
       <xsl:attribute name="href">
         <xsl:choose>
-          <xsl:when test="$chosenlanguage = $defaultlanguage">
-            <xsl:value-of select="concat(substring-before($url, '.html'), '_de.html')"/>
+          <xsl:when test="contains($url, '_')">
+            <xsl:value-of select="concat(substring-before($url, '_'), '_de.html')"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="concat(substring-before($url, '_'), '_de.html')"/>
+            <xsl:value-of select="concat(substring-before($url, '.html'), '_de.html')"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>

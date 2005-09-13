@@ -67,6 +67,15 @@ the default language.
 </xsl:template>
 
 
+<xsl:template name="alternative-languages">
+  <xsl:attribute name="alternative-languages">
+    <xsl:for-each select="tree:label[@xml:lang != $chosenlanguage]/@xml:lang">
+      <xsl:value-of select="."/>
+      <xsl:if test="position() != last()">,</xsl:if>
+    </xsl:for-each>
+  </xsl:attribute>
+</xsl:template>
+
 
 <!--
 Apply nodes recursively
@@ -85,7 +94,10 @@ Apply nodes recursively
     <xsl:copy-of select="@id"/>
     <xsl:copy-of select="@visibleinnav"/>
     <xsl:copy-of select="@protected"/>
-  
+ 
+    <xsl:call-template name="alternative-languages"/>
+
+ 
     <!-- basic url - for all nodes -->
   
     <xsl:variable name="basic-url">

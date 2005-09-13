@@ -6,8 +6,7 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
   lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace"
-  unizh:columns="2">
-<!-- the root element indicates the doctype -->
+  unizh:columns="3">
     <lenya:meta>
         <dc:title>The Doctype of the University Website</dc:title>
         <dc:creator>Christian Egli</dc:creator>

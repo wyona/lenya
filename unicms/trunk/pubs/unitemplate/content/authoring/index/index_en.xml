@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><unizh:homepage  xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:tabs="root" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
 	
-	<lenya:meta>
-        <dc:title>Corporate Communication</dc:title>
-        <dc:description>Abstract</dc:description>
-		<dc:creator>Autor der Dokuments</dc:creator>
-		<dc:subject>Keywords</dc:subject>
-		<dc:publisher>Universität Zürich</dc:publisher>
-    <dcterms:created>date of creation</dcterms:created>
-    <dcterms:issued>date of publication</dcterms:issued>
-		<dc:language>en</dc:language>
-		<dc:rights>Universität Zürich</dc:rights>
-	</lenya:meta>
-
-  <unizh:identity data="images/default_identity.gif" alt="identity"/>
+<lenya:meta>
+  <dc:title>Corporate Communication</dc:title>
+  <dc:description>Abstract</dc:description>
+  <dc:creator>Autor der Dokuments</dc:creator>
+  <dc:subject>Keywords</dc:subject>
+  <dc:publisher>Universität Zürich</dc:publisher>
+  <dcterms:created>date of creation</dcterms:created>
+  <dcterms:issued>date of publication</dcterms:issued>
+  <dc:language>en</dc:language>
+  <dc:rights>Universität Zürich</dc:rights>
+</lenya:meta>
+  <unizh:header>
+    <unizh:superscription>University of Zurich</unizh:superscription>
+    <unizh:heading>Publication title</unizh:heading>
+  </unizh:header>
+  <unizh:quicklinks>
+    <xhtml:a href="#">Link</xhtml:a>
+  </unizh:quicklinks>
   <unizh:related-content>
     <unizh:teaser>
       <unizh:title>Title</unizh:title>

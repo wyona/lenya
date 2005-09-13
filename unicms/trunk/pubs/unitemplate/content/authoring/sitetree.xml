@@ -22,7 +22,7 @@ $Id: sitetree.xml,v 1.3 2004/11/24 11:48:44 jann Exp $
 		</node>
 	</node>
 
-	<node id="impressum">
+	<node id="impressum" visibleinnav="false">
         <label xml:lang="de">Impressum</label>
     </node>
 
