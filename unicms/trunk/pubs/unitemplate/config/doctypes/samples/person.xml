@@ -19,14 +19,12 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <body>
-    <unizh:firstname>Heinz</unizh:firstname>
-    <unizh:lastname>Muster</unizh:lastname>
-    <unizh:academictitle></unizh:academictitle>
-    <unizh:position></unizh:position>
-    <unizh:unit></unizh:unit>
-    <unizh:email>mail@mail.com</unizh:email>
-    <unizh:url></unizh:url>
-    <unizh:remarks></unizh:remarks>
-  </body>
+  <unizh:firstname>Vorname</unizh:firstname>
+  <unizh:lastname>Nachname</unizh:lastname>
+  <unizh:academictitle>Akad. Titel </unizh:academictitle>
+  <unizh:position>Funktion</unizh:position>
+  <unizh:unit>Unit</unizh:unit>
+  <unizh:email>mail@mail.com</unizh:email>
+  <unizh:url>http://myhome.nocom.org</unizh:url>
+  <unizh:remarks>Bemerkungen</unizh:remarks>
 </unizh:person>

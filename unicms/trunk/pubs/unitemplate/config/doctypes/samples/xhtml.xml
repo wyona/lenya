@@ -18,7 +18,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universitaet Zuerich</dc:rights>
   </lenya:meta>
-  <unizh:abstract>Insert abstract here.</unizh:abstract>
   <unizh:related-content>
     <unizh:teaser>
       <unizh:title>Title</unizh:title>

@@ -751,7 +751,7 @@
             Einheit: <xsl:value-of select="*/*/unizh:unit"/><br/>
             Email: <xsl:value-of select="*/*/unizh:email"/><br/>
             Homepage: <xsl:value-of select="*/*/unizh:url"/><br/>
-            Bemerkungen: <xsl:value-of select="*/*/unizh:position"/><br/>
+            <xsl:value-of select="*/*/unizh:remarks"/><br/>
             <xsl:if test="$area = 'authoring'">
               <a href="{$contextprefix}{@href}">Edit View...</a>
             </xsl:if>

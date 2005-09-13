@@ -24,7 +24,6 @@
     <element name="html">
       <ref name="html.attlist"/>
       <ref name="lenya.meta"/>
-      <ref name="unizh.abstract"/>
       <ref name="unizh.related-content"/>
       <ref name="body"/>
     </element>

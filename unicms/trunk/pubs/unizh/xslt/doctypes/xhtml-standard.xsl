@@ -87,11 +87,7 @@
         <!-- teasers -->
         <div class="contcol2">
           <div class="relatedbox">
-            <div id="toolnav">
-              <a href="">English</a> | 
-              <a href=""><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> | 
-              <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
-            </div>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
             <xsl:if test="*/unizh:related-content/*">
               <div bxe_xpath="/{$document-element-name}/unizh:related-content">
                 <xsl:apply-templates select="*/unizh:related-content"/> 
@@ -181,7 +177,7 @@
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>
             <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
-            <div id="footer">&#169; 2005 Universitt Zich | <a href="">Impressum</a></div>
+            <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <a href="{/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']/@href}"><xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></a></div>
           </div>
         </div> 
       </div>
@@ -193,14 +189,24 @@
 <xsl:template match="xhtml:div[@id = 'servicenav']">
   <div id="servicenavpos">
     <form action="">
-      <a href="{xhtml:div[@id='home']/@href}">Home</a> |
-      <a href="">Kontakt</a> | 
-      <a href="">Sitemap</a>
-      <input type="text" name="" />
+      <xsl:for-each select="xhtml:div[position() &lt; last()]">
+        <a href="{@href}"><xsl:value-of select="."/></a> 
+        <xsl:if test="position() &lt; last()">|</xsl:if>
+      </xsl:for-each>
+      <input type="text" name=""><xsl:comment/></input>
       <a href="">Suche</a>
     </form>
   </div> 
 </xsl:template>
+
+<xsl:template match="xhtml:div[@id = 'toolnav']">
+  <div id="toolnav">
+      <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
+      <a href="{xhtml:div[@id = 'print']/@href}"><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
+      <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
+  </div>
+</xsl:template>
+
 
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
