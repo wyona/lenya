@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <lenya:meta>
-    <dc:title>Kontakt</dc:title>
-    <dc:description> </dc:description>
+    <dc:title>Sitemap</dc:title>
+    <dc:description>  </dc:description>
     <dc:creator>admin1 (Administrator)</dc:creator>
     <dc:subject/>
-    <dc:publisher>Universität Zürich</dc:publisher>
-    <dcterms:created>Wed Sep 14 09:52:01 CEST 2005</dcterms:created>
+    <dc:publisher>University of Zurich</dc:publisher>
+    <dcterms:created>Wed Sep 14 09:54:39 CEST 2005</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
-    <dc:language>de</dc:language>
-    <dc:rights>Universität Zürich</dc:rights>
+    <dc:language>en</dc:language>
+    <dc:rights>University of Zurich</dc:rights>
   </lenya:meta>
   <unizh:related-content>
     <unizh:teaser>
