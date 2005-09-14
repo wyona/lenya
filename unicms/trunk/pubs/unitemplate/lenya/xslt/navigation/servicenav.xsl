@@ -13,10 +13,16 @@
 <xsl:template match="nav:site">
   <div id="servicenav">
     <div id="home" href="{nav:node[@id = 'index']/@href}">Home</div>
-    <div id="contact">Kontakt</div>
-    <div id="sitemap">Sitemap</div>
+    <xsl:apply-templates select="nav:node[@id = 'contact']"/>
+    <xsl:apply-templates select="nav:node[@id = 'sitemap']"/>
     <div id="search" targetURL="">Search</div>
   </div>
 </xsl:template>
 
-</xsl:stylesheet> 
+
+<xsl:template match="nav:node">
+  <div id="{@id}" href="{@href}"><xsl:value-of select="."/></div>
+</xsl:template>
+
+</xsl:stylesheet>
+
