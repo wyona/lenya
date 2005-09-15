@@ -21,9 +21,8 @@
 
 <define name="lightblock.class">
   <choice>
-    <ref name="p"/>
-    <ref name="object"/>
     <ref name="lenya.asset"/>
+    <ref name="a"/>
   </choice>
 </define>
 
@@ -78,7 +77,7 @@
 <define name="unizh.teaser">
   <element name="unizh:teaser">
     <optional>
-      <attribute name="id">
+      <attribute name="name">
         <text/>
       </attribute>
     </optional>
@@ -87,10 +86,21 @@
         <text/>
       </attribute>
     </optional>
-    <element name="unizh:title"><text/></element>
-    <oneOrMore>
-      <ref name="lightblock.class"/>
-    </oneOrMore>
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <element name="p">
+      <ref name="Inline.model"/>
+    </element>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="a"/>
+      </choice>
+    </zeroOrMore>
   </element>
 </define>
 
