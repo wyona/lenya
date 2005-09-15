@@ -482,11 +482,11 @@
     <div class="relatedboxborder">
       <div class="relatedboxcont">
         <b><xsl:value-of select="unizh:title"/></b><br/>
-        <xsl:value-of select="xhtml:p/text()"/><br/>
+        <xsl:apply-templates select="xhtml:p"/>
         <xsl:for-each select="lenya:asset">
           <xsl:apply-templates select="."/><br/>
         </xsl:for-each>
-        <xsl:for-each select="xhtml:p/xhtml:a">
+        <xsl:for-each select="xhtml:a">
           <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
         </xsl:for-each>  
         <xsl:call-template name="asset-dots">
