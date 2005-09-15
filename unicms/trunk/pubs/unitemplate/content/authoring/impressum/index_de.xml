@@ -11,9 +11,12 @@
     <dc:language>de</dc:language>
     <dc:rights>Universitaet Zuerich</dc:rights>
   </lenya:meta>
-  <unizh:highlights>
-    
-  </unizh:highlights>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title></unizh:title>
+      <p></p>
+    </unizh:teaser> 
+  </unizh:related-content>
   <body>
   	<h2>Herausgeber</h2>
 <p>&lt;Gesamtverantwortlicher der Publikation, z.B. Abteilungs-  oder Institutsleiter&gt; </p>

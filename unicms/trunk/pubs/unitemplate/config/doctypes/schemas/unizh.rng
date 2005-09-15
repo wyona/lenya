@@ -58,23 +58,21 @@
 </define>
 
 <define name="unizh.related-content">
-  <optional>
-    <element name="unizh:related-content">
-      <optional>
-        <attribute name="link">
-          <text/>
-        </attribute>
-      </optional>
-      <interleave>
-        <zeroOrMore>
-          <ref name="unizh.teaser"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="unizh.rss-reader"/>
-        </zeroOrMore>
-      </interleave>
-    </element>
-  </optional>
+  <element name="unizh:related-content">
+    <optional>
+      <attribute name="link">
+        <text/>
+      </attribute>
+    </optional>
+    <interleave>
+      <zeroOrMore>
+        <ref name="unizh.teaser"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="unizh.rss-reader"/>
+      </zeroOrMore>
+    </interleave>
+  </element>
 </define>
 
 <define name="unizh.teaser">

@@ -43,13 +43,11 @@
 </define>
 
 <define name="unizh.quicklinks">
-  <optional>
-    <element name="unizh:quicklinks">
-      <zeroOrMore>
-        <ref name="a"/> 
-      </zeroOrMore>
-    </element>
-  </optional>
+  <element name="unizh:quicklinks">
+    <zeroOrMore>
+      <ref name="a"/> 
+    </zeroOrMore>
+  </element>
 </define>
 
 

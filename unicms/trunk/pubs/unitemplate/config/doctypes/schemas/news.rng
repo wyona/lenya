@@ -32,7 +32,7 @@
   <element name="unizh:news">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.highlights"/>
+    <ref name="unizh.related-content"/>
     <element name="body">
       <zeroOrMore>
         <element name="p">

@@ -132,6 +132,9 @@
   </xsl:if>
 </xsl:template> 
 
+<xsl:template match="xhtml:div[@id = 'tabs' and $publication-tabs = 'false']"/>
+<xsl:template match="xhtml:div[@id = 'tabs' and $subhome-tabs = 'false']"/>
+
 
 <!-- header -->
  
@@ -202,6 +205,17 @@
   </xhtml:div>
 </xsl:template> 
 
+
+<!-- Show/Hide Menu on index / subhomepage -->
+
+<xsl:template match="xhtml:div[@id = 'menu' and $index and $publication-tabs = 'true']"/>
+<xsl:template match="xhtml:div[@id = 'menu' and $homepage and $subhome-tabs = 'true']"/>
+
+
+<!-- Show/Hide Quicklinks -->
+
+<xsl:template match="unizh:quicklinks[$index and  $publication-tabs = 'false']"/>
+<xsl:template match="unizh:quicklinks[not($index) and $homepage and $subhome-tabs != 'true']"/> 
 
 <!-- Collections. Hide children nodes in menu -->
 

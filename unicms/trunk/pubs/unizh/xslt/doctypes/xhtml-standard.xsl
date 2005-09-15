@@ -32,7 +32,7 @@
       <title><xsl:value-of select="*/lenya:meta/dc:title"/></title>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
       <style type="text/css">
-        @import url("/lenya/unizh/authoring/css/main.css");
+        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
       </style>
     </head>
     <body>
@@ -83,7 +83,11 @@
           <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
         <!-- menu -->
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/> 
+         <div id="secnav">
+           <div class="contmargintop"><xsl:comment/></div>
+           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+           <xsl:apply-templates select="*/unizh:quicklinks"/> 
+         </div>
         <!-- teasers -->
         <div class="contcol2">
           <div class="relatedbox">
@@ -210,13 +214,20 @@
 
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
-  <div id="secnav">
-    <div class="contmargintop"><xsl:comment/></div>
     <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
     <ul>
       <xsl:apply-templates select="xhtml:div" mode="menu"/>
     </ul>
-  </div>        
+</xsl:template>
+
+<xsl:template match="unizh:quicklinks">
+  <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
+  <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+  <div bxe_xpath="/{$document-element-name}/unizh:quicklinks"><xsl:comment/>
+    <xsl:for-each select="xhtml:a">
+      <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+    </xsl:for-each>
+  </div>
 </xsl:template>
 
  

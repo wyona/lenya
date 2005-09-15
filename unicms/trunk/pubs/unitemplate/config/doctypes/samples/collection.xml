@@ -19,12 +19,12 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:highlights>
-    <unizh:highlight>
-      <h3>Title h3</h3>
-      <p>The text of the highlight.</p>
-    </unizh:highlight>
-  </unizh:highlights>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
   <body>
     <p>Einleitung</p>
     <unizh:children/>

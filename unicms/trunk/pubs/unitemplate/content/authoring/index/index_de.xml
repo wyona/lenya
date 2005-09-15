@@ -19,7 +19,7 @@
     <xhtml:a href="#">Link</xhtml:a>
   </unizh:quicklinks>
   <unizh:related-content>
-    <unizh:teaser id="example">
+    <unizh:teaser>
       <unizh:title>Example</unizh:title>
       <p>Example Teaser.</p>
     </unizh:teaser>

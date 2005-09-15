@@ -17,7 +17,8 @@
 <xsl:template match="nav:site">
   <div id="toolnav">
     <xsl:apply-templates select="descendant::nav:node[@current = 'true']"/>
-    <div id="print" href="{concat(substring-before($url, '.html'), '.print.html')}">
+    <div id="print" href="{concat(descendant::nav:node[@current = 'true']/@id, '_', $chosenlanguage, '.print.html')}">
+
       Print
     </div>
   </div>
@@ -30,10 +31,10 @@
       <xsl:attribute name="href">
         <xsl:choose>
           <xsl:when test="contains($url, '_')">
-            <xsl:value-of select="concat(substring-before($url, '_'), '_en.html')"/>
+            <xsl:value-of select="concat($root, substring-before($url, '_'), '_en.html')"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="concat(substring-before($url, '.html'), '_en.html')"/>
+            <xsl:value-of select="concat($root, substring-before($url, '.html'), '_en.html')"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -45,10 +46,10 @@
       <xsl:attribute name="href">
         <xsl:choose>
           <xsl:when test="contains($url, '_')">
-            <xsl:value-of select="concat(substring-before($url, '_'), '_de.html')"/>
+            <xsl:value-of select="concat($root, substring-before($url, '_'), '_de.html')"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="concat(substring-before($url, '.html'), '_de.html')"/>
+            <xsl:value-of select="concat($root, substring-before($url, '.html'), '_de.html')"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
