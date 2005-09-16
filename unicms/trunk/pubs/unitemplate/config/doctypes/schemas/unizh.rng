@@ -74,6 +74,11 @@
   </element>
 </define>
 
+
+
+
+
+<!-- so haetten wir's gern 
 <define name="unizh.teaser">
   <element name="unizh:teaser">
     <optional>
@@ -102,7 +107,39 @@
       </choice>
     </zeroOrMore>
   </element>
+</define> -->
+
+
+<!-- so will es bxe -->
+
+<define name="unizh.teaser">
+  <element name="unizh:teaser">
+    <optional>
+      <attribute name="name">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="link">
+        <text/>
+      </attribute>
+    </optional>
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <ref name="p"/>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="a"/>
+      </choice>
+    </zeroOrMore>
+  </element>
 </define>
+
 
 <define name="unizh.highlights">
   <optional>
@@ -173,9 +210,6 @@
       </attribute>
     </interleave>
     <element name="unizh:rss-title">
-      <text/>
-    </element>
-    <element name="unizh:remarks">
       <text/>
     </element>
   </element>
