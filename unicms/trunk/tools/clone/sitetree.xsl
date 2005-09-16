@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <xsl:stylesheet version="1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
 
 <xsl:param name="publicationName"/>
 
-<xsl:template match="/">
-<site label="Authoring" xmlns="http://apache.org/cocoon/lenya/sitetree/1.0">
-  <node id="index">
-    <label xml:lang="de"><xsl:value-of select="$publicationName"/></label>
-    <label xml:lang="en"><xsl:value-of select="$publicationName"/></label>
-  </node>
-</site>
+<xsl:template match="*[@id='index']/*">
+  <label xml:lang="{@xml:lang}" xmlns="http://apache.org/cocoon/lenya/sitetree/1.0">
+     <!-- namespace prevents empty attribute xmlns='' -->
+    <xsl:value-of select="$publicationName"/>
+  </label>
 </xsl:template>
-
-
-
 
 
 <!--
@@ -53,13 +49,10 @@
 </xsl:template>
 -->
 
-<!--
-<xsl:template match="@*|node()">
+  <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
-</xsl:template>
--->
-
+  </xsl:template>
 
 </xsl:stylesheet> 

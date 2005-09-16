@@ -8,11 +8,17 @@
 <xsl:param name="publicationSection"/>
 
 <xsl:template match="foo:publication">
-  <publication breadcrumb="true"><xsl:value-of select="$publicationName"/></publication>
+  <publication xmlns="http://unizh.ch">  <!-- namespace prevents empty attribute xmlns='' -->
+    <xsl:apply-templates select="@*"/>
+    <xsl:value-of select="$publicationName"/>
+  </publication>
 </xsl:template>
 
 <xsl:template match="foo:section">
-   <section breadcrumb="false"><xsl:value-of select="$publicationSection"/></section>
+  <section xmlns="http://unizh.ch">      <!-- namespace prevents empty attribute xmlns='' -->
+    <xsl:apply-templates select="@*"/>
+    <xsl:value-of select="$publicationSection"/>
+  </section>
 </xsl:template>
 
 <xsl:template match="@*|node()">

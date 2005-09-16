@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<!-- $Id: build.xml,v 1.16 2005/01/19 13:04:19 michi Exp $ -->
+<!-- $Id: build.xml,v 1.16 2005/09/16 ch.unizh.mike Exp $ -->
 
 <project default="clone" basedir=".">
   
@@ -35,18 +35,26 @@
     <echo>INFO: Copy Access Control</echo>
     <copy todir="${destination.dir}/config/ac">
       <fileset dir="${source.dir}/config/ac">
-	<include name="usecase-policies.xml"/>
+	<exclude name="ac.xconf"/>
       </fileset>
     </copy>
+    
+    <echo>INFO: Change context in ac.xconf</echo>
+    <xslt 
+      in="${source.dir}/config/ac/ac.xconf" 
+      out="${destination.dir}/config/ac/ac.xconf" style="ac-xconf.xsl">
+      <param name="publicationName" expression="${new.publication.prefix}"/>
+      <param name="templatePublication" expression="${old.publication.prefix}"/>
+    </xslt>
     
     <mkdir dir="${destination.dir}/config/ac/passwd"/>
     <copy todir="${destination.dir}/config/ac/passwd" overwrite="yes">
       <fileset dir="${source.dir}/config/ac/passwd">
-		<include name="CACertificate"/>
-		<include name="ldap.properties"/>
-		<include name=".keystore"/>
-		<include name="*.gml"/>
-		<exclude name="lenya.iml"/>
+	<include name="CACertificate"/>
+	<include name="ldap.properties"/>
+	<include name=".keystore"/>
+	<include name="*.gml"/>
+	<exclude name="lenya.iml"/>
       	<include name="support.iml"/>
     	<include name="admin1.iml"/> 
      	<include name="*.rml"/>
@@ -61,14 +69,10 @@
       </fileset>      
     </copy>
     
-    <echo>INFO: Copy Workflow Config</echo>
-    <mkdir dir="${destination.dir}/config/workflow"/>
-    <copy todir="${destination.dir}/config/workflow" overwrite="yes">
-      <fileset dir="${source.dir}/config/workflow/">
-	<include name="1stage.xml"/>
-	<include name="2stage.xml"/>
-	<include name="workflow.xml"/>
-      </fileset>
+    <echo>INFO: Copy assets Config</echo>
+    <mkdir dir="${destination.dir}/config/assets"/>
+    <copy todir="${destination.dir}/config/assets" overwrite="yes">
+      <fileset dir="${source.dir}/config/assets"/>
     </copy>
     
     <echo>INFO: Copy doctypes Config, schemas and samples</echo>
@@ -82,143 +86,12 @@
     <mkdir dir="${destination.dir}/config/doctypes/samples"/>
     <copy todir="${destination.dir}/config/doctypes/samples" overwrite="yes">
       <fileset dir="${source.dir}/config/doctypes/samples"/>
-      <fileset dir="${source.dir}/config/doctypes/samples">
-	<include name="*.xml"/>
-      </fileset>
     </copy>
     
     <mkdir dir="${destination.dir}/config/doctypes/schemas"/>
     <copy todir="${destination.dir}/config/doctypes/schemas" overwrite="yes">
-      <fileset dir="${source.dir}/config/doctypes/schemas">
-	<exclude name="CVS"/>
-      </fileset>
+      <fileset dir="${source.dir}/config/doctypes/schemas"/>
     </copy>
-
-    <echo>INFO: Copy tasks Config</echo>
-    <mkdir dir="${destination.dir}/config/tasks"/>
-    <copy todir="${destination.dir}/config/tasks" overwrite="yes">
-      <fileset dir="${source.dir}/config/tasks">
-	<include name="tasks.xconf"/>
-      </fileset>
-    </copy>
-    
-    <echo>INFO: Copy nofification Config</echo>
-    <mkdir dir="${destination.dir}/config/notification"/>
-    <copy todir="${destination.dir}/config/notification" overwrite="yes">
-      <fileset dir="${source.dir}/config/notification"/>
-    </copy>
-    
-    <echo>INFO: Copy search Config</echo>
-    <mkdir dir="${destination.dir}/config/search"/>
-    <copy todir="${destination.dir}/config/search" overwrite="yes">
-      <fileset dir="${source.dir}/config/search"/>
-    </copy>
-    
-    
-    <echo>INFO: Copy assets Config</echo>
-    <mkdir dir="${destination.dir}/config/assets"/>
-    <copy todir="${destination.dir}/config/assets" overwrite="yes">
-      <fileset dir="${source.dir}/config/assets"/>
-    </copy>
-    
-    <echo>INFO: Copy unizh stuff</echo>
-    <mkdir dir="${destination.dir}/config/unizh"/>
-    <copy todir="${destination.dir}/config/unizh" overwrite="yes">
-      <fileset dir="${source.dir}/config/unizh">
-	<include name="sections.xconf"/>
-      </fileset>
-    </copy>
-    
-    <echo>INFO: Copy resources</echo>
-    <mkdir dir="${destination.dir}/resources"/>
-    <copy todir="${destination.dir}/resources" overwrite="yes">
-      <fileset dir="${source.dir}/resources"/>
-    </copy>
-    
-    <echo>INFO: Copy lenya replacments</echo>
-    <mkdir dir="${destination.dir}/lenya"/>
-    <copy todir="${destination.dir}/lenya" overwrite="yes">
-      <fileset dir="${source.dir}/lenya"/>
-    </copy>
-    
-    <echo>INFO: Copy the index file to the authoring area</echo>
-    <mkdir dir="${destination.dir}/content/authoring/index"/>
-    <copy
-      file="${source.dir}/config/doctypes/samples/homepage.xml" 
-      tofile="${destination.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
-    <copy
-      file="${source.dir}/config/doctypes/samples/homepage.xml" 
-      tofile="${destination.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
-    
-    <echo>INFO: Copy Revision Control file for the index document</echo>
-    <mkdir dir="${destination.dir}/content/rcml/content/authoring/index"/>
-    <copy todir="${destination.dir}/content/rcml/content/authoring/index" overwrite="yes">
-      <fileset dir="${source.dir}/content/rcml/content/authoring/index"/>
-    </copy>
-    
-    <echo>INFO: Copy workflow history file for the index document</echo>
-    <mkdir dir="${destination.dir}/content/workflow/history/authoring/index"/>
-    <copy todir="${destination.dir}/content/workflow/history/authoring/index" overwrite="yes">
-      <fileset dir="${source.dir}/content/workflow/history/authoring/index"/>
-    </copy>
- 
-    <echo>INFO: Create trash and archive including sitetree.xml for both directories</echo>
-    <mkdir dir="${destination.dir}/content/trash"/>  
-    <copy 
-      file="${source.dir}/content/trash/sitetree.xml" 
-      tofile="${destination.dir}/content/trash/sitetree.xml" overwrite="yes"/>
-    <mkdir dir="${destination.dir}/content/archive"/>  
-    <copy 
-      file="${source.dir}/content/archive/sitetree.xml" 
-      tofile="${destination.dir}/content/archive/sitetree.xml" overwrite="yes"/>
-    
-    <echo>INFO: Name new Publication ${source.dir}</echo>
-    <xslt 
-      in="${source.dir}/publication.xml" 
-      out="${destination.dir}/publication.xml" style="publication-xml.xsl">
-      <param name="publicationName" expression="${new.publication.name}"/>
-    </xslt>
-    
-    <echo>INFO: Change context in ac.xconf</echo>
-    <xslt 
-      in="${source.dir}/config/ac/ac.xconf" 
-      out="${destination.dir}/config/ac/ac.xconf" style="ac-xconf.xsl">
-      <param name="publicationName" expression="${new.publication.prefix}"/>
-      <param name="templatePublication" expression="${old.publication.prefix}"/>
-    </xslt>
-    
-    <echo>INFO: Change sitetree.xml</echo>
-    <xslt 
-      in="${source.dir}/content/authoring/sitetree.xml" 
-      out="${destination.dir}/content/authoring/sitetree.xml" style="sitetree.xsl">
-      <outputproperty name="indent" value="yes"/>
-      <param name="publicationName" expression="${new.publication.name}"/>
-      <param name="templateName" expression="${old.publication.name}"/>
-    </xslt>
-    
-    <echo>INFO: Change export.expression in targets.xml</echo>
-    <xslt 
-      in="${source.dir}/config/tasks/targets.xml" 
-      out="${destination.dir}/config/tasks/targets.xml" style="targets.xsl">
-      <param name="publicationName" expression="${new.publication.prefix}"/>
-      <param name="publicationMaster" expression="${new.publication.master}"/>
-    </xslt>
- 
-   
-    <echo>INFO: Change breadcrumb in unizh.xconf</echo>
-    <xslt in="${source.dir}/config/unizh/unizh.xconf"
-      out="${destination.dir}/config/unizh/unizh.xconf" style="unizh-conf.xsl">
-      <outputproperty name="encoding" value="ISO-8859-1"/>
-      <param name="publicationName" expression="${new.publication.name}"/>
-      <param name="publicationSection" expression="${new.publication.section}"/>
-    </xslt>
-
-  	<echo>INFO: Change publication configuration</echo>
-    <xslt in="${source.dir}/config/publication.xconf"
-      out="${destination.dir}/config/publication.xconf" style="publication-xconf.xsl">
-      <param name="publicationName" expression="${new.publication.prefix}"/>
-      <param name="templatePublication" expression="${old.publication.prefix}"/>
-    </xslt>
 
     <echo>INFO: Change i18n config de</echo>
     <xslt 
@@ -237,6 +110,102 @@
       <param name="oldPublicationName" expression="${old.publication.name}"/>
     </xslt>
 
+    <echo>INFO: Copy notification Config</echo>
+    <mkdir dir="${destination.dir}/config/notification"/>
+    <copy todir="${destination.dir}/config/notification" overwrite="yes">
+      <fileset dir="${source.dir}/config/notification"/>
+    </copy>
+    
+    <echo>INFO: Copy search Config</echo>
+    <mkdir dir="${destination.dir}/config/search"/>
+    <copy todir="${destination.dir}/config/search" overwrite="yes">
+      <fileset dir="${source.dir}/config/search"/>
+    </copy>
+    
+    <echo>INFO: Copy tasks Config</echo>
+    <mkdir dir="${destination.dir}/config/tasks"/>
+    <copy todir="${destination.dir}/config/tasks" overwrite="yes">
+      <fileset dir="${source.dir}/config/tasks">
+	<exclude name="targets.xml"/>
+      </fileset>
+    </copy>
+    
+    <echo>INFO: Change export.expression in targets.xml</echo>
+    <xslt 
+      in="${source.dir}/config/tasks/targets.xml" 
+      out="${destination.dir}/config/tasks/targets.xml" style="targets.xsl">
+      <param name="publicationName" expression="${new.publication.prefix}"/>
+      <param name="publicationMaster" expression="${new.publication.master}"/>
+    </xslt>
+
+    <echo>INFO: Copy Workflow Config</echo>
+    <mkdir dir="${destination.dir}/config/workflow"/>
+    <copy todir="${destination.dir}/config/workflow" overwrite="yes">
+      <fileset dir="${source.dir}/config/workflow/"/>
+    </copy>
+    
+    <echo>INFO: Copy unizh stuff</echo>
+    <mkdir dir="${destination.dir}/config/unizh"/>
+    <copy todir="${destination.dir}/config/unizh" overwrite="yes">
+      <fileset dir="${source.dir}/config/unizh">
+	<exclude name="unizh.xconf"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: Change breadcrumb in unizh.xconf</echo>
+    <xslt in="${source.dir}/config/unizh/unizh.xconf"
+      out="${destination.dir}/config/unizh/unizh.xconf" style="unizh-conf.xsl">
+      <outputproperty name="encoding" value="ISO-8859-1"/>
+      <param name="publicationName" expression="${new.publication.name}"/>
+      <param name="publicationSection" expression="${new.publication.section}"/>
+    </xslt>
+
+    <echo>INFO: Change publication configuration</echo>
+    <xslt in="${source.dir}/config/publication.xconf"
+      out="${destination.dir}/config/publication.xconf" style="publication-xconf.xsl">
+      <param name="publicationName" expression="${new.publication.prefix}"/>
+      <param name="templatePublication" expression="${old.publication.prefix}"/>
+    </xslt>
+
+    <echo>INFO: Finished Creating Config</echo>
+
+    <echo>INFO: Copy Content</echo>
+    <copy todir="${destination.dir}/content">
+      <fileset dir="${source.dir}/content">
+	<exclude name="authoring/sitetree.xml"/>
+      </fileset>
+    </copy>
+  
+    <echo>INFO: Change sitetree.xml</echo>
+    <xslt 
+      in="${source.dir}/content/authoring/sitetree.xml" 
+      out="${destination.dir}/content/authoring/sitetree.xml" style="sitetree.xsl">
+      <outputproperty name="indent" value="yes"/>
+      <param name="publicationName" expression="${new.publication.name}"/>
+      <param name="templateName" expression="${old.publication.name}"/>
+    </xslt>
+    
+    <echo>INFO: Finished Creating Content</echo>
+    
+    <echo>INFO: Copy lenya replacments</echo>
+    <mkdir dir="${destination.dir}/lenya"/>
+    <copy todir="${destination.dir}/lenya" overwrite="yes">
+      <fileset dir="${source.dir}/lenya"/>
+    </copy>
+    
+    <echo>INFO: Copy resources</echo>
+    <mkdir dir="${destination.dir}/resources"/>
+    <copy todir="${destination.dir}/resources" overwrite="yes">
+      <fileset dir="${source.dir}/resources"/>
+    </copy>
+    
+    <echo>INFO: Name new Publication ${source.dir}</echo>
+    <xslt 
+      in="${source.dir}/publication.xml" 
+      out="${destination.dir}/publication.xml" style="publication-xml.xsl">
+      <param name="publicationName" expression="${new.publication.name}"/>
+    </xslt>
+    
     <antcall target="touch"/>
 
   </target>
