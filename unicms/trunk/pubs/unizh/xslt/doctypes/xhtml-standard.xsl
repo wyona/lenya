@@ -41,10 +41,10 @@
         <div id="headerarea">
           <div style="float:right;width:195px;">
             <div class="imgunilogo">
-              <img src="/lenya/unizh/authoring/images/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+              <img src="{$contextprefix}/unizh/authoring/images/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
             </div>
             <div class="imginstitute">
-              <img src="/lenya/unizh/authoring/images/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
+              <img src="{$contextprefix}/unizh/authoring/images/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
             </div>
           </div>
           <div id="headertitelpos">
@@ -80,7 +80,7 @@
         <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
 	<div class="floatclear"><xsl:comment/></div>		
 	<div class="endheaderline">
-          <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+          <img src="{$contextprefix}/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
         <!-- menu -->
          <div id="secnav">
@@ -180,7 +180,7 @@
             </div>
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>
-            <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+            <div class="solidline"><img src="{$contextprefix}/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
             <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <a href="{/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']/@href}"><xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></a></div>
           </div>
         </div> 
@@ -206,15 +206,15 @@
 <xsl:template match="xhtml:div[@id = 'toolnav']">
   <div id="toolnav">
       <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
-      <a href="{xhtml:div[@id = 'print']/@href}"><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
-      <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
+      <a href="{xhtml:div[@id = 'print']/@href}"><img src="{$contextprefix}/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
+      <a href=""><img src="{$contextprefix}/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
   </div>
 </xsl:template>
 
 
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
-    <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+    <div class="solidline"><img src="{$contextprefix}/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
     <ul>
       <xsl:apply-templates select="xhtml:div" mode="menu"/>
     </ul>
@@ -222,7 +222,7 @@
 
 <xsl:template match="unizh:quicklinks">
   <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
-  <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+  <div class="solidline"><img src="{$contextprefix}/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
   <div bxe_xpath="/{$document-element-name}/unizh:quicklinks"><xsl:comment/>
     <xsl:for-each select="xhtml:a">
       <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
@@ -246,7 +246,7 @@
     </xsl:if>
     <xsl:if test="parent::xhtml:div[@id = 'menu']">
       <div class="dotline">
-        <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+        <img src="{$contextprefix}/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
       </div>
     </xsl:if>
   </li>

@@ -8,6 +8,6 @@
   <param name="link"/>
   <param name="title"/>
   <template>
-    <xhtml:p><xhtml:object data="{$data}" type="{$type}" href="{$link}" title="{$title}"><xsl:value-of select="$caption"/></xhtml:object></xhtml:p>
+    <xhtml:object data="{$data}" type="{$type}" href="{$link}" title="{$title}"><xsl:value-of select="$caption"/></xhtml:object>
   </template>
   </insert>
