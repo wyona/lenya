@@ -119,9 +119,25 @@
     <echo>INFO: Copy search Config</echo>
     <mkdir dir="${destination.dir}/config/search"/>
     <copy todir="${destination.dir}/config/search" overwrite="yes">
-      <fileset dir="${source.dir}/config/search"/>
+      <fileset dir="${source.dir}/config/search">
+	<exclude name="crawler-unitemplate-live.xconf"/>
+	<exclude name="lucene-unitemplate-live.xconf"/>
+      </fileset>
     </copy>
     
+    <echo>INFO: Change search configuration</echo>
+    <xslt in="${source.dir}/config/search/crawler-unitemplate-live.xconf"
+      out="${destination.dir}/config/search/crawler-unitemplate-live.xconf" style="search.xsl">
+      <param name="publicationName" expression="${new.publication.prefix}"/>
+      <param name="templatePublication" expression="${old.publication.prefix}"/>
+    </xslt>
+
+    <xslt in="${source.dir}/config/search/lucene-unitemplate-live.xconf"
+      out="${destination.dir}/config/search/lucene-unitemplate-live.xconf" style="search.xsl">
+      <param name="publicationName" expression="${new.publication.prefix}"/>
+      <param name="templatePublication" expression="${old.publication.prefix}"/>
+    </xslt>
+
     <echo>INFO: Copy tasks Config</echo>
     <mkdir dir="${destination.dir}/config/tasks"/>
     <copy todir="${destination.dir}/config/tasks" overwrite="yes">
