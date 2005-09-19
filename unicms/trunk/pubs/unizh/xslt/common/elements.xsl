@@ -423,6 +423,11 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:related-content">
+    <xsl:apply-templates/>
+  </xsl:template>
+
+
   <xsl:template match="unizh:teaser">
     <div class="relatedboxborder">
       <div class="relatedboxcont">
@@ -441,7 +446,30 @@
         <xsl:apply-templates select="lenya:asset-dot"/> 
       </div> 
     </div>
+    <p>&#160;</p>
   </xsl:template>
+
+
+  <xsl:template match="unizh:teaser[parent::unizh:column]">
+    <div class="solidline">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+    </div>
+    <p class="titel"><xsl:value-of select="unizh:title"/></p>
+    <div class="dotlinelead">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+    </div>
+    <xsl:apply-templates select="xhtml:p"/>
+    <xsl:for-each select="lenya:asset">
+      <xsl:apply-templates select="."/><br/>
+    </xsl:for-each>
+    <xsl:for-each select="xhtml:a">
+      <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+    </xsl:for-each>
+    <xsl:apply-templates select="lenya:asset-dot"/> 
+    <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <p>&#160;</p>
+  </xsl:template>
+
 
 
    <xsl:template match="unizh:highlight">

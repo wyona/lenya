@@ -242,7 +242,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call> 
+        </map:call>
 
         <map:serialize type="xml"/>
       </map:match>

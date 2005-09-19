@@ -210,7 +210,7 @@
 <!-- Show/Hide Menu on index / subhomepage -->
 
 <xsl:template match="xhtml:div[@id = 'menu' and $index and $publication-tabs = 'true']"/>
-<xsl:template match="xhtml:div[@id = 'menu' and $homepage and $subhome-tabs = 'true']"/>
+<xsl:template match="xhtml:div[@id = 'menu' and ($homepage or $homepage4cols) and $subhome-tabs = 'true']"/>
 
 
 <!-- Show/Hide Quicklinks -->

@@ -32,12 +32,23 @@
       <title><xsl:value-of select="*/lenya:meta/dc:title"/></title>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
       <style type="text/css">
-        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="$rendertype = 'big'">
+              @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/big.css");
+            </xsl:when>
+            <xsl:otherwise>
+              @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:comment>
       </style>
     </head>
     <body>
       <div class="bodywidth">
+        <a name="top"><xsl:comment/></a>
         <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
+        <!-- header -->
         <div id="headerarea">
           <div style="float:right;width:195px;">
             <div class="imgunilogo">
@@ -49,8 +60,6 @@
           </div>
           <div id="headertitelpos">
             <xsl:apply-templates select="/document/xhtml:div[@id = 'servicenav']"/>
-            <!-- header -->
-            <div class="headtitelmargintop"><xsl:comment/></div>
             <xsl:choose>
               <xsl:when test="$document-element-name = 'unizh:homepage'">
                 <h2>
@@ -82,16 +91,15 @@
 	<div class="endheaderline">
           <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
+
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
+
         <!-- menu -->
-         <div id="secnav">
-           <div class="contmargintop"><xsl:comment/></div>
-           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-           <xsl:apply-templates select="*/unizh:quicklinks"/> 
-         </div>
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+         <xsl:apply-templates select="*/unizh:quicklinks"/> 
         <!-- teasers -->
         <div class="contcol2">
           <div class="relatedbox">
-            <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
             <xsl:if test="*/unizh:related-content/*">
               <div bxe_xpath="/{$document-element-name}/unizh:related-content">
                 <xsl:apply-templates select="*/unizh:related-content"/> 
@@ -100,9 +108,8 @@
           </div>
           <!-- body --> 
           <div class="contentarea">
-          <div class="contmargintop"><xsl:comment/></div>
 	    <div class="content">
-              <xsl:if test="not($document-element-name = 'unizh:homepage' or 'unizh:homepage4cols')">
+              <xsl:if test="not($document-element-name = 'unizh:homepage4cols')">
                 <h1>
                   <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
                     <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -180,6 +187,7 @@
             </div>
             <!-- footer -->
             <div class="footermargintop"><xsl:comment/></div>
+            <div class="topnav"><a href="#top">top</a></div>
             <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
             <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <a href="{/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']/@href}"><xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></a></div>
           </div>
@@ -238,13 +246,17 @@
 
 <xsl:template match="xhtml:div[@id = 'servicenav']">
   <div id="servicenavpos">
-    <form action="">
-      <xsl:for-each select="xhtml:div[position() &lt; last()]">
-        <a href="{@href}"><xsl:value-of select="."/></a> 
-        <xsl:if test="position() &lt; last()">|</xsl:if>
-      </xsl:for-each>
-      <input type="text" name=""><xsl:comment/></input>
-      <a href="">Suche</a>
+    <xsl:for-each select="xhtml:div[position() &lt; last()]">
+      <a href="{@href}"><xsl:value-of select="."/></a> 
+      <xsl:if test="position() &lt; last()">|</xsl:if>
+    </xsl:for-each>
+    <form id="formsearch" action="" method="post" enctype="text/plain">
+      <div class="servieceform"> 
+        <input type="text" name="searchtext"/>
+      </div>
+      <div class="servieceform">
+        <a href="javascript:document.forms['formsearch'].submit();">Suche</a>
+      </div>
     </form>
   </div> 
 </xsl:template>
@@ -253,42 +265,25 @@
   <div id="toolnav">
       <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
       <a href="{xhtml:div[@id = 'print']/@href}"><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
-      <a href=""><img src="/lenya/unizh/authoring/images/icon_lupe.gif" alt="icon lupe link" width="10" height="11" border="0" /></a>
+      <a href="#"><img src="/lenya/unizh/authoring/images/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> | 
+      <a href="{xhtml:div[@id = 'pda']/@href}"><img src="/lenya/unizh/authoring/images/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
   </div>
 </xsl:template>
 
 
-<xsl:template match="xhtml:div[@id = 'menu']"> 
-  <!--  <a href="{@href}"> <xsl:value-of select="@label"/> </a> -->
-    <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+<xsl:template match="xhtml:div[@id = 'menu']">
+  <div id="secnav"> 
+    <div class="solidline">
+      <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+    </div>
     <ul>
-      <xsl:apply-templates select="xhtml:div" mode="menu"/>
+      <xsl:apply-templates select="xhtml:div"/>
     </ul>
+  </div>
 </xsl:template>
 
-<xsl:template match="unizh:quicklinks">
-  <div class="solidline">
-    <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-  </div>
-  <p class="titel"><xsl:value-of select="@label"/></p>
-  <div class="dotlinelead">
-    <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-  </div>
-  <xsl:for-each select="unizh:quicklink">
-    <xsl:apply-templates select="xhtml:p"/>
-    <ul>
-      <xsl:for-each select="xhtml:a">
-        <li>
-          <a href="{@href}"><xsl:value-of select="."/></a>
-        </li>
-      </xsl:for-each>
-    </ul>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-  </xsl:for-each> 
-</xsl:template>
 
- 
-<xsl:template match="xhtml:div" mode="menu">
+<xsl:template match="xhtml:div[ancestor::xhtml:div[@id = 'menu']]">
   <li>
     <a href="{@href}">
       <xsl:if test="@current = 'true'">
@@ -298,7 +293,7 @@
     </a>
     <xsl:if test="xhtml:div">
       <ul>
-        <xsl:apply-templates select="xhtml:div" mode="menu"/>
+        <xsl:apply-templates select="xhtml:div"/>
       </ul>
     </xsl:if>
     <xsl:if test="parent::xhtml:div[@id = 'menu']">
@@ -308,7 +303,34 @@
     </xsl:if>
   </li>
 </xsl:template>
-  
+
+
+<xsl:template match="unizh:quicklinks">
+  <div id="col1">
+    <div bxe_xpath="/{$document-element-name}/unizh:quicklinks">
+      <div class="solidline">
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+      </div>
+      <p class="titel"><xsl:value-of select="@label"/></p>
+      <div class="dotlinelead">
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+      </div>
+      <xsl:for-each select="unizh:quicklink">
+        <xsl:apply-templates select="xhtml:p"/>
+        <ul>
+          <xsl:for-each select="xhtml:a">
+            <li>
+              <a href="{@href}"><xsl:value-of select="."/></a>
+            </li>
+          </xsl:for-each>
+        </ul>
+        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+      </xsl:for-each> 
+    </div>
+  </div>
+</xsl:template>
+
+
 <xsl:template match="xhtml:div[@id = 'tabs']">
   <div id="primarnav"><xsl:comment/>
     <xsl:for-each select="xhtml:div">

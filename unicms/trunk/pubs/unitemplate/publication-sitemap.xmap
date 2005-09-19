@@ -182,6 +182,7 @@
 
       </map:match>
 
+
       <!-- with image upload dots -->
       <map:match pattern="lenya-image-upload/*/**.html">
         
@@ -203,7 +204,7 @@
       <map:match pattern="*/**.html">
         <map:act type="language-exists">
           <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>  
+          <!-- <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/> -->
           <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
           <map:serialize type="xhtml"/> 
         </map:act>
