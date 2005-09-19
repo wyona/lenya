@@ -223,6 +223,10 @@
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
   	</map:transform>
 
+        <map:transform src="../unizh/xslt/assetDots.xsl">
+          <map:parameter name="rendertype" value="{2}"/>
+        </map:transform> 
+     
         <!-- Doctype / context specific navigation schemes.  --> 
         <map:transform src="../unizh/xslt/common/includeRelated.xsl"/>
         <map:transform type="cinclude"/>
@@ -238,7 +242,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call>  
+        </map:call> 
 
         <map:serialize type="xml"/>
       </map:match>

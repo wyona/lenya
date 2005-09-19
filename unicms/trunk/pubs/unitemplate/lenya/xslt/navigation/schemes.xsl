@@ -19,14 +19,15 @@
 
 <xsl:variable name="index" select="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = 'index' and @current = 'true']"/>
 <xsl:variable name="homepage" select="/document/content/unizh:homepage"/>
+<xsl:variable name="homepage4cols" select="/document/content/unizh:homepage4cols"/>
 <xsl:variable name="publication-tabs" select="/document/uz:unizh/uz:publication/@tabs"/>
 <xsl:variable name="subhome-tabs">
   <xsl:choose>
-    <xsl:when test="$homepage">
-      <xsl:value-of select="/document/content/unizh:homepage/@unizh:tabs"/>
+    <xsl:when test="$homepage or $homepage4cols">
+      <xsl:value-of select="/document/content/*/@unizh:tabs"/>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/@unizh:tabs"/>
+      <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/*/@unizh:tabs"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:variable>
@@ -36,7 +37,7 @@
     <xsl:choose>
       <xsl:when test="$publication-tabs = 'true'"> <!-- tabs enabled -->
         <xsl:choose>
-          <xsl:when test="$homepage"> 
+          <xsl:when test="$homepage or $homepage4cols"> 
             <xsl:if test="not($index) and ($subhome-tabs = 'root' or $subhome-tabs = 'false')">
               <xsl:if test="$subhome-tabs = 'root'"> 
                 <xsl:attribute name="href">
@@ -57,7 +58,7 @@
              <xsl:otherwise>
                <xsl:choose>
                  <xsl:when test="$subhome-tabs = 'true'">
-                    <xsl:apply-templates select="descendant::xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@basic-url]/xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]/xhtml:div"/>  
+                    <xsl:apply-templates select="descendant::xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@basic-url]/xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]/xhtml:div"/>  
                  </xsl:when>
                  <xsl:otherwise>
                    <xsl:if test="$subhome-tabs = 'root'">  
@@ -78,7 +79,7 @@
       </xsl:when>
       <xsl:otherwise> <!-- tabs disabled -->
         <xsl:choose> 
-          <xsl:when test="$homepage"> 
+          <xsl:when test="$homepage or $homepage4cols"> 
             <xsl:choose>
                <xsl:when test="$index">
                  <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index')]"/>
@@ -90,11 +91,11 @@
           </xsl:when>
           <xsl:otherwise> 
             <xsl:choose>
-              <xsl:when test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage][1]/@basic-url = 'index'">
+              <xsl:when test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/@basic-url = 'index'">
                 <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index')]"/> 
               </xsl:when>
               <xsl:otherwise>
-                <xsl:apply-templates select="descendant::xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@basic-url]/xhtml:div"/> 
+                <xsl:apply-templates select="descendant::xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@basic-url]/xhtml:div"/> 
               </xsl:otherwise>
             </xsl:choose>
           </xsl:otherwise>
@@ -111,20 +112,20 @@
   <xsl:if test="$publication-tabs = 'true'">
     <xhtml:div id="tabs">
       <xsl:choose>
-        <xsl:when test="$homepage">
+        <xsl:when test="$homepage or $homepage4cols">
           <xsl:if test="$index or $subhome-tabs = 'root'">
             <xsl:apply-templates/>
           </xsl:if>
           <xsl:if test="not($index) and $subhome-tabs = 'true'">
-            <xsl:apply-templates select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div"/> 
+            <xsl:apply-templates select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div"/>
           </xsl:if>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:if test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage][1]/@basic-url = 'index' or $subhome-tabs = 'root'">
+          <xsl:if test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/@basic-url = 'index' or $subhome-tabs = 'root'">
             <xsl:apply-templates/>
           </xsl:if>
           <xsl:if test="$subhome-tabs = 'true'">
-            <xsl:apply-templates select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url=/document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@basic-url]/xhtml:div"/>         
+            <xsl:apply-templates select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url=/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@basic-url]/xhtml:div"/> 
           </xsl:if>
         </xsl:otherwise>
       </xsl:choose>
@@ -141,42 +142,42 @@
 <xsl:template match="unizh:header">
   <unizh:header>
     <xsl:choose>
-      <xsl:when test="$homepage">
+      <xsl:when test="$homepage or $homepage4cols">
         <xsl:choose> 
           <xsl:when test="not($index) and $subhome-tabs = 'root'">
             <unizh:superscription>
-               <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:superscription"/>
+               <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/*/unizh:header/unizh:superscription"/>
             </unizh:superscription>
             <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href }">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:heading"/>
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/*/unizh:header/unizh:heading"/>
             </unizh:heading>
           </xsl:when>
           <xsl:otherwise>
             <unizh:superscription>
-              <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:superscription"/>
+              <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
             </unizh:superscription>
             <unizh:heading>
-              <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:heading"/>
+              <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
             </unizh:heading>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage][1]/@basic-url = 'index'">
+          <xsl:when test="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/@basic-url = 'index'">
             <unizh:superscription>
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:superscription"/>
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/*/unizh:header/unizh:superscription"/>
             </unizh:superscription>
             <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href}">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:heading"/>              
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[@basic-url = 'index']/*/unizh:header/unizh:heading"/>              
             </unizh:heading>
           </xsl:when>
           <xsl:otherwise>
             <unizh:superscription>
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/unizh:header/unizh:superscription"/>
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/*/unizh:header/unizh:superscription"/>
             </unizh:superscription> 
-            <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[unizh:homepage]/@href}">
-              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor/unizh:homepage/unizh:header/unizh:heading"/>
+            <unizh:heading href="{/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@href}">
+              <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/*/unizh:header/unizh:heading"/>
             </unizh:heading> 
           </xsl:otherwise>
         </xsl:choose> 

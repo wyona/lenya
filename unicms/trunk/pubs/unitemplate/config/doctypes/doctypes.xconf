@@ -15,14 +15,32 @@
 
   <doc type="homepage">
     <children>
+      <doc type="homepage"/>
       <doc type="xhtml"/>
       <doc type="news"/>
+      <doc type="collection"/>
+      <doc type="people"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>homepage.xml</sample-name>
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
+
+  <doc type="homepage4cols">
+    <children>
+      <doc type="homepage"/>
+      <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="collection"/>
+      <doc type="people"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>homepage4cols.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
 
   <doc type="section">
     <children>
@@ -77,7 +95,6 @@
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
-
 
   <doc type="redirect">
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">

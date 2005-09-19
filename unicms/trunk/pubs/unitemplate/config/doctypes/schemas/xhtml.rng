@@ -50,33 +50,39 @@
         <ref name="URI.datatype"/>
       </attribute>
     </optional>
-  <ref name="Common.attrib"/>
-  <optional>
-    <attribute name="data">
-      <ref name="URI.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="type">
-      <ref name="ContentType.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="standby">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="height">
-      <ref name="Length.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="width">
-      <ref name="Length.datatype"/>
-    </attribute>
-  </optional>
-  </define>
+    <ref name="Common.attrib"/>
+    <optional>
+      <attribute name="data">
+        <ref name="URI.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="type">
+        <ref name="ContentType.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="standby">
+        <ref name="Text.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="height">
+        <ref name="Length.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="width">
+        <ref name="Length.datatype"/>
+      </attribute>
+    </optional>
+    <!-- workaround for bxe 1.0 -->
+    <optional>
+      <attribute name="caption">
+        <ref name="Text.datatype"/>
+      </attribute>
+    </optional>
+  </define> 
 
   <define name="table.attlist">
     <ref name="table.Common.attrib"/>
@@ -86,6 +92,17 @@
       </attribute>
     </optional>
   </define>
+
+  <define name="Inline.model">
+    <zeroOrMore>
+      <choice>
+        <text/>
+        <ref name="Inline.class"/>
+        <ref name="lenya.asset"/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
 
 </include>
 

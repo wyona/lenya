@@ -13,56 +13,34 @@
   <xsl:param name="root"/>
   <xsl:param name="documentid"/>
   <xsl:param name="contextprefix"/>
+  <xsl:param name="rendertype"/>
 
  
-  <xsl:template name="compute-path">
-    <xsl:if test="name() != 'document' and name() != 'content'">
-      <xsl:text>/</xsl:text>
-      <!--       <xsl:value-of select="name()"/> -->
-      <xsl:text>*</xsl:text>
-      <!-- FIXME: there is a less hackish way to do this -->
-      <xsl:if test="name() != 'html' and name() != 'xhtml:html'">
-        <xsl:text>[</xsl:text>
-        <!--       <xsl:value-of select="1+count(preceding-sibling::*[name(current()) = name()])"/> -->
-        <xsl:value-of select="1+count(preceding-sibling::*)"/>
-        <xsl:text>]</xsl:text>
-      </xsl:if>
-    </xsl:if>
+  <xsl:template match="lenya:asset-dot[@class='image']">
+    <a href="{@href}"> 
+      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>  
+    </a>&#160;
   </xsl:template>
-  
-  <xsl:template name="asset-dots">
-    <xsl:param name="insertWhere" select="'after'"/>
-    <xsl:param name="insertWhat"/>
-    <xsl:if test="$area = 'authoring' and $rendertype = 'imageupload'">
-      <xsl:variable name="trimmedElementPath">
-        <xsl:for-each select="(ancestor-or-self::*)">
-          <xsl:call-template name="compute-path"/>
-        </xsl:for-each>
-      </xsl:variable>
-      <xsl:choose>
-        <xsl:when test="$insertWhat = 'identity'">
-          <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere={$insertWhere}&amp;insertTemplate=insertIdentity.xml&amp;insertReplace=true">
-            <img align="top" alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-          </a>
-        </xsl:when>
-        <xsl:when test="$insertWhat = 'logo'">
-          <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere={$insertWhere}&amp;insertTemplate=insertLogo.xml&amp;insertReplace=true">
-            <img align="top" alt="Insert Logo" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-          </a>
-        </xsl:when>
-        <xsl:otherwise>
-          <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere={$insertWhere}&amp;insertTemplate=insertImg.xml">
-            <img align="top" alt="Insert Image" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-          </a>
-          <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath={$trimmedElementPath}&amp;insertWhere={$insertWhere}&amp;insertTemplate=insertAsset.xml">
-            <img align="top" alt="Insert Asset" border="0" src="{$contextprefix}/lenya/images/util/uploadasset.gif"/>
-          </a>
-          <br/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:if>
+
+   <xsl:template match="lenya:asset-dot[@class='image']">
+    <a href="{@href}">
+      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
+    </a>&#160;
   </xsl:template>
-  
+
+  <xsl:template match="lenya:asset-dot[@class='delete']">
+    <a href="{@href}">
+      <img alt="Insert Identity" border="0" src="{$imageprefix}/icons/delete.gif"/>
+    </a>&#160;
+  </xsl:template>
+
+  <xsl:template match="lenya:asset-dot[@class='asset']">
+    <a href="{@href}">
+      <img alt="Insert Asset" border="0" src="{$contextprefix}/lenya/images/util/uploadasset.gif"/>
+    </a>&#160; 
+  </xsl:template>
+ 
+ 
   <xsl:template match="dc:title">
     <h1>
       <xsl:if test="$rendertype = 'edit'">
@@ -72,11 +50,12 @@
     </h1>
   </xsl:template>
 
-  <xsl:template match="unizh:logo">
-     <xsl:choose>
+  
+  <xsl:template match="unizh:identity">
+    <xsl:choose>
       <xsl:when test="@data != 'empty'"> 
-        <div class="logo">
-          <img border="0" height="80" width="200">
+        <div class="identity">
+          <img border="0" height="80" width="100%">
             <xsl:attribute name="src">
               <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
             </xsl:attribute>
@@ -84,61 +63,15 @@
               <xsl:value-of select="@alt"/>
             </xsl:attribute>
           </img>
-          <xsl:call-template name="asset-dots">
-	          <xsl:with-param name="insertWhat" select="'logo'"/>
-          </xsl:call-template>
+          <xsl:apply-templates select="lenya:asset-dot"/>
         </div>
-      </xsl:when>
-      <xsl:otherwise>
-        <div>
-          <xsl:call-template name="asset-dots">
-	          <xsl:with-param name="insertWhat" select="'logo'"/>
-          </xsl:call-template>
-       </div>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-  
-  <xsl:template match="unizh:identity">
-    <xsl:choose>
-      <xsl:when test="@data != 'empty'"> 
-          <div class="identity">
-      <img border="0" height="80" width="100%">
-        <xsl:attribute name="src">
-          <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
-        </xsl:attribute>
-        <xsl:attribute name="alt">
-          <xsl:value-of select="@alt"/>
-        </xsl:attribute>
-      </img>
-      <xsl:call-template name="asset-dots">
-	<xsl:with-param name="insertWhat" select="'identity'"/>
-      </xsl:call-template>
-    </div>
       </xsl:when> 
       <xsl:otherwise>
-        <xsl:call-template name="asset-dots">
-	          <xsl:with-param name="insertWhat" select="'identity'"/>
-        </xsl:call-template>      
-   </xsl:otherwise>
-   </xsl:choose> 
-    
+        <xsl:apply-templates select="lenya:asset-dot"/>
+      </xsl:otherwise>
+    </xsl:choose> 
   </xsl:template>
   
-  <xsl:template match="unizh:slogan">
-    <p class="slogan">
-      <xsl:choose>
-        <xsl:when test="$document-element-name = 'homepage'">
-           <xsl:attribute name="bxe_xpath">/unizh:homepage/unizh:slogan</xsl:attribute>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name"/>/unizh:slogan</xsl:attribute>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates/>
-    </p>
-   </xsl:template>
-   
   
   <xsl:template match="unizh:sitemap">
 
@@ -358,7 +291,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:p[xhtml:object]" priority="3">     
+  <!-- <xsl:template match="xhtml:p[xhtml:object]" priority="3">     
     <xsl:if test="node()[not(self::xhtml:object) and normalize-space() != '']">
       <xsl:for-each select="node()">
         <xsl:choose>
@@ -373,31 +306,43 @@
         </xsl:choose>
       </xsl:for-each>
     </xsl:if>
+  </xsl:template> -->
+  
+
+  <xsl:template match="xhtml:p[ancestor::xhtml:body and $rendertype = 'imageupload']">
+    <xsl:copy>
+       <xsl:apply-templates select="*[not(self::lenya:asset-dot)]|text()"/>
+       <hr/>
+       <xsl:apply-templates select="lenya:asset-dot"/>
+       <br/>
+       <br/>
+    </xsl:copy>
+  </xsl:template> 
+
+  <xsl:template match="xhtml:object[$rendertype = 'imageupload']">
+    <a href="{lenya:asset-dot/@href}">
+      <img src="{$nodeid}/{@data}"/>
+    </a>
+    <xsl:apply-templates select="lenya:asset-dot[@class = 'delete']"/>
   </xsl:template>
-  
-  
-  <xsl:template match="xhtml:object" priority="3">
-    <div align="left">
+
+  <xsl:template match="lenya:asset[$rendertype = 'imageupload']">
+    <a href="{lenya:asset-dot/@href}">
+      <img src="{$imageprefix}/icons/default.gif"/>
+    </a>
+  </xsl:template>
+
+ 
+  <xsl:template match="xhtml:object">
       <xsl:choose>
         <xsl:when test="normalize-space(text())">
-          <table border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td align="left">
-                <xsl:call-template name="object_link"/>
-              </td>
-            </tr>
-            <tr>
-              <td class="caption">
-                <xsl:apply-templates />
-              </td>
-            </tr>
-          </table>
+          <xsl:call-template name="object_link"/>
+           <xsl:apply-templates />
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="object_link"/>
         </xsl:otherwise>
       </xsl:choose>
-    </div>
   </xsl:template>
   
  
@@ -481,6 +426,10 @@
   <xsl:template match="unizh:teaser">
     <div class="relatedboxborder">
       <div class="relatedboxcont">
+        <xsl:if test="xhtml:object">
+          <xsl:apply-templates select="xhtml:object"/>
+          <br/>
+        </xsl:if>
         <b><xsl:value-of select="unizh:title"/></b><br/>
         <xsl:apply-templates select="xhtml:p"/>
         <xsl:for-each select="lenya:asset">
@@ -488,10 +437,8 @@
         </xsl:for-each>
         <xsl:for-each select="xhtml:a">
           <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
-        </xsl:for-each>  
-        <xsl:call-template name="asset-dots">
-          <xsl:with-param name="insertWhere" select="'inside'"/>
-        </xsl:call-template>
+        </xsl:for-each> 
+        <xsl:apply-templates select="lenya:asset-dot"/> 
       </div> 
     </div>
   </xsl:template>
@@ -502,9 +449,7 @@
       <div class="relatedboxcont">
         <xsl:apply-templates/>
         <a class="arrow" href="">weiter</a>
-        <xsl:call-template name="asset-dots">
-          <xsl:with-param name="insertWhere" select="'inside'"/>
-        </xsl:call-template>
+        <xsl:apply-templates select="lenya:asset-dot"/>
       </div>
     </div>
   </xsl:template>
@@ -516,10 +461,6 @@
       <xsl:for-each select="unizh:highlight">
         <div class="highlight{(position()-1) mod 3}">
           <xsl:apply-templates/>
-          <!-- Dots for asset upload -->
-          <xsl:call-template name="asset-dots">
-            <xsl:with-param name="insertWhere" select="'inside'"/>
-          </xsl:call-template>
         </div>
       </xsl:for-each>
     </div>
@@ -581,18 +522,10 @@
   <xsl:template match="xhtml:td[not(ancestor::*[@id = 'menu'])]">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <xsl:call-template name="asset-dots">
-        <xsl:with-param name="insertWhere" select="'inside'"/>
-      </xsl:call-template>
+      <xsl:apply-templates select="lenya:asset-dot"/>
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="xhtml:body/xhtml:*">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-    <xsl:call-template name="asset-dots"/>
-  </xsl:template>
   
   <xsl:template match="xhtml:body//xhtml:h2">
     <h2>
@@ -628,19 +561,17 @@
         <xsl:with-param name="substr">.</xsl:with-param>
       </xsl:call-template>
     </xsl:variable>
-    <div class="asset">
         <a href="{$nodeid}/{@src}">
           <img alt="" border="0" height="16"
-            src="{$imageprefix}/icons/{$suffix}.gif" width="16"/>
+            src="{$imageprefix}/icons/default.gif" width="16" align="left"/>
         </a>
         <xsl:text> </xsl:text>
         <a href="{$nodeid}/{@src}">
           <xsl:value-of select="text()"/>
         </a>
         (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
-    </div>      
-    <xsl:call-template name="asset-dots"/>
-   </xsl:template>
+        <xsl:apply-templates select="lenya:asset-dot"/> 
+  </xsl:template>
     
   <xsl:template match="unizh:toc">
     <ul class="anchors">

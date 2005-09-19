@@ -56,6 +56,7 @@
   </attribute>
 </define>
 
+
 <define name="unizh.related-content">
   <element name="unizh:related-content">
     <optional>
@@ -63,54 +64,53 @@
         <text/>
       </attribute>
     </optional>
-    <interleave>
-      <zeroOrMore>
+    <zeroOrMore>
+      <choice>
         <ref name="unizh.teaser"/>
-      </zeroOrMore>
-      <zeroOrMore>
         <ref name="unizh.rss-reader"/>
-      </zeroOrMore>
-    </interleave>
+      </choice>
+    </zeroOrMore>
   </element>
 </define>
 
 
+<define name="unizh.quicklinks">
+  <element name="unizh:quicklinks">
+    <attribute name="label">
+      <value type="string">Quick Links</value>
+    </attribute>
+    <oneOrMore>
+      <element name="unizh:quicklink">
+        <optional>
+          <element name="p">
+            <text/>
+          </element>
+        </optional>
+        <oneOrMore>
+          <ref name="a"/>
+        </oneOrMore>
+      </element>
+   </oneOrMore>
+  </element>
+</define>
 
 
-
-<!-- so haetten wir's gern 
-<define name="unizh.teaser">
-  <element name="unizh:teaser">
-    <optional>
-      <attribute name="name">
-        <text/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="link">
-        <text/>
-      </attribute>
-    </optional>
+<define name="unizh.links">
+  <element name="unizh:links">
     <element name="unizh:title">
+      <optional>
+        <attribute name="href">
+          <text/>
+        </attribute>
+      </optional>
       <text/>
     </element>
-    <optional>
-      <ref name="object"/>
-    </optional>
-    <element name="p">
-      <ref name="Inline.model"/>
-    </element>
-    <zeroOrMore>
-      <choice>
-        <ref name="lenya.asset"/>
-        <ref name="a"/>
-      </choice>
-    </zeroOrMore>
+    <oneOrMore>
+      <ref name="a"/>
+    </oneOrMore>
   </element>
-</define> -->
+</define>
 
-
-<!-- so will es bxe -->
 
 <define name="unizh.teaser">
   <element name="unizh:teaser">
@@ -212,6 +212,9 @@
     <element name="unizh:rss-title">
       <text/>
     </element>
+    <!-- <element name="unizh:remarks">
+      <text/>
+    </element> -->
   </element>
 </define>
 
