@@ -19,6 +19,9 @@
         <sourcetype name="homepage4cols">
           <document-element local-name="homepage4cols"/>
         </sourcetype>
+        <sourcetype name="overview">
+          <document-element local-name="overview"/>
+        </sourcetype>
         <sourcetype name="news">
           <document-element local-name="news"/>
         </sourcetype>

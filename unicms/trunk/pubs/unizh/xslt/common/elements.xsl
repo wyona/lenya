@@ -290,28 +290,19 @@
 
   </xsl:template>
 
-
-  <!-- <xsl:template match="xhtml:p[xhtml:object]" priority="3">     
-    <xsl:if test="node()[not(self::xhtml:object) and normalize-space() != '']">
-      <xsl:for-each select="node()">
-        <xsl:choose>
-          <xsl:when test="not(self::xhtml:object)">
-            <xsl:apply-templates select="."/>
-          </xsl:when>
-          <xsl:otherwise>
-            <p></p>
-            <xsl:apply-templates select="self::xhtml:object"/>
-            <p></p>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each>
-    </xsl:if>
-  </xsl:template> -->
-  
-
-  <xsl:template match="xhtml:p[ancestor::xhtml:body and $rendertype = 'imageupload']">
+  <xsl:template match="xhtml:p[parent::xhtml:body]">
     <xsl:copy>
-       <xsl:apply-templates select="*[not(self::lenya:asset-dot)]|text()"/>
+       <xsl:apply-templates select="xhtml:object"/>
+       <xsl:apply-templates select="*[not(self::xhtml:object)]|text()"/>
+    </xsl:copy>
+  </xsl:template>
+
+
+
+  <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
+    <xsl:copy>
+       <xsl:apply-templates select="xhtml:object"/>
+       <xsl:apply-templates select="*[not(self::lenya:asset-dot or self::xhtml:object)]|text()"/>
        <hr/>
        <xsl:apply-templates select="lenya:asset-dot"/>
        <br/>
@@ -319,11 +310,10 @@
     </xsl:copy>
   </xsl:template> 
 
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload']">
+  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and ancestor::unizh:teaser]">
     <a href="{lenya:asset-dot/@href}">
-      <img src="{$nodeid}/{@data}"/>
+      <img src="{$nodeid}/{@data}" height="110" width="160"/>
     </a>
-    <xsl:apply-templates select="lenya:asset-dot[@class = 'delete']"/>
   </xsl:template>
 
   <xsl:template match="lenya:asset[$rendertype = 'imageupload']">
@@ -350,7 +340,7 @@
     <xsl:choose>
       <xsl:when test="@href != ''">
         <a href="{@href}">
-          <img border="0">
+          <img  height="100" width="160" class="imgTextfluss">
             <xsl:attribute name="src">
               <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
             </xsl:attribute>
@@ -363,23 +353,13 @@
                 <xsl:otherwise>
                   <xsl:value-of select="dc:metadata/dc:title"/>                    
                 </xsl:otherwise>
-                </xsl:choose>
+              </xsl:choose>
             </xsl:attribute>
-             <xsl:if test="string(@height)">
-              <xsl:attribute name="height">
-                <xsl:value-of select="@height"/>
-              </xsl:attribute>
-            </xsl:if> 
-            <xsl:if test="string(@width)">
-              <xsl:attribute name="width">
-                <xsl:value-of select="@width"/>
-              </xsl:attribute>
-            </xsl:if>         
           </img>
         </a>
       </xsl:when>
       <xsl:otherwise>
-        <img border="0">
+        <img height="100" width="160" class="imgTextfluss">
           <xsl:attribute name="src">
             <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
           </xsl:attribute>
@@ -469,6 +449,69 @@
     <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <p>&#160;</p>
   </xsl:template>
+
+   <xsl:template match="unizh:lead">
+      <div class="lead">
+        <xsl:apply-templates/>
+      </div>
+      <p>&#160;</p>
+   </xsl:template>  
+
+
+   <xsl:template match="unizh:links">
+    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <ul class="linknav">
+      <li>
+        <a href="{unizh:title/@href}">
+          <img src="{$imageprefix}/arrow2.gif" alt="icon arrow" width="13" height="14"  />
+          <b><xsl:value-of select="unizh:title"/></b>
+        </a>
+        <div class="dotline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+        </div>
+      </li>
+      <xsl:for-each select="xhtml:a">
+        <li>
+          <a href="{@href}">
+            <img src="{$imageprefix}/arrow2.gif" alt="icon arrow" width="13" height="14"  />
+            <xsl:value-of select="."/>
+          </a>
+          <div class="dotline">
+            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+          </div>
+        </li>
+      </xsl:for-each>
+    </ul>
+    <p>&#160;</p>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:quicklinks">
+    <div id="col1">
+      <div bxe_xpath="/{$document-element-name}/unizh:quicklinks">
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+        </div>
+        <p class="titel"><xsl:value-of select="@label"/></p>
+        <div class="dotlinelead">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+        </div>
+        <xsl:for-each select="unizh:quicklink">
+          <xsl:apply-templates select="xhtml:p"/>
+          <ul>
+            <xsl:for-each select="xhtml:a">
+              <li>
+                <a href="{@href}"><xsl:value-of select="."/></a>
+              </li>
+            </xsl:for-each>
+          </ul>
+          <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+        </xsl:for-each>
+      </div>
+    </div>
+  </xsl:template>
+
+
 
 
 
@@ -589,11 +632,11 @@
         <xsl:with-param name="substr">.</xsl:with-param>
       </xsl:call-template>
     </xsl:variable>
-        <a href="{$nodeid}/{@src}">
+        <!-- <a href="{$nodeid}/{@src}">
           <img alt="" border="0" height="16"
             src="{$imageprefix}/icons/default.gif" width="16" align="left"/>
         </a>
-        <xsl:text> </xsl:text>
+        <xsl:text> </xsl:text>-->
         <a href="{$nodeid}/{@src}">
           <xsl:value-of select="text()"/>
         </a>

@@ -16,7 +16,7 @@
 <include href="xhtml.rng">
   
   <start>
-    <ref name="unizh.homepage"/>
+    <ref name="unizh.overview"/>
   </start>
 
   <define name="html.attlist">
@@ -29,14 +29,43 @@
 </include>
 
 
-<define name="unizh.homepage">
-  <element name="unizh:homepage">
+<define name="unizh.overview">
+  <element name="unizh:overview">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.header"/> 
-    <ref name="unizh.quicklinks"/>
     <ref name="unizh.related-content"/>
-    <ref name="body"/>
+    <element name="body">
+      <ref name="unizh.columns"/>
+    </element>
+  </element>
+</define>
+
+
+<define name="unizh.columns">
+  <element name="unizh:column">
+    <optional>
+      <ref name="unizh.lead"/>
+    </optional>
+    <oneOrMore>
+      <ref name="unizh.links"/>
+    </oneOrMore>
+  </element>
+  <element name="unizh:column">
+    <oneOrMore>
+      <ref name="unizh.links"/>
+    </oneOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.lead">
+  <element name="unizh:lead">
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <element name="p">
+      <ref name="Inline.model"/>
+    </element>
   </element>
 </define>
 

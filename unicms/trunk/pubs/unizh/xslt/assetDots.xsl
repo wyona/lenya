@@ -50,7 +50,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:p[ancestor::xhtml:body and $rendertype = 'imageupload']">
+  <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
       <xsl:if test="not(xhtml:object)">
@@ -91,6 +91,22 @@
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
       <xsl:if test="not(xhtml:object or lenya:asset)"> 
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">image</xsl:with-param>
+          <xsl:with-param name="insertWhere">inside</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:call-template name="asset-dot">
+        <xsl:with-param name="insertWhat">asset</xsl:with-param>
+        <xsl:with-param name="insertWhere">inside</xsl:with-param>
+      </xsl:call-template>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="unizh:lead[$rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:if test="not(xhtml:object)">
         <xsl:call-template name="asset-dot">
           <xsl:with-param name="insertWhat">image</xsl:with-param>
           <xsl:with-param name="insertWhere">inside</xsl:with-param>

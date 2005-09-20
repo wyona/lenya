@@ -71,7 +71,9 @@
     <optional>
       <ref name="object"/>
     </optional>
-    <ref name="p"/>
+    <element name="p">
+      <ref name="Inline.model"/>
+    </element>
   </element>
 </define>
 
