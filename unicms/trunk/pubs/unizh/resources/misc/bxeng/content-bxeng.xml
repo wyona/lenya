@@ -9,20 +9,20 @@ body {
   	font-size: 12px;
   	font-family: Arial;
   	line-height: 18px;
- 	color:#555555;  
+ 	color:#333;  
   	margin:0px 20px;
   	padding:0px;
 
  }
-img {
-	border:0px;
-}
 
 .bodywidth {
   	max-width:800px;
 	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
 	margin-right: auto;
 	margin-left: auto;
+}
+img {
+	border:0px;
 }
 
 /*font*/
@@ -50,21 +50,39 @@ a {
 	text-decoration: none;
 	color:#333399;  
 }
+.content li a {
+	margin-left:0px;
+}
+a:hover {
+	background-color:#f0f0f5;
+}
+a.download {
+	background-image:url(/lenya/unizh/authoring/images/icon_download.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+a.targetblank {
+	background-image:url(/lenya/unizh/authoring/images/icon_blank.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
 a.arrow {
 	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
+	margin-left:2px;
 }
-a.arrow:hover {
-	background-color:#f0f0f5;
-}
-
 /*header */
 #headerarea {
 	width:100%;
 	display:block;
 	background-color: #666699;
+	/*background-image:url(/lenya/unizh/authoring/images/contimg.jpg);*/
 	height:90px;
 	min-width:600px;
 }
@@ -74,7 +92,7 @@ a.arrow:hover {
 }
 
 .imgunilogo {
-	background-color: #d1d1e1;
+	background-color: #ccccff;
 	padding-left:15px;
 	height:45px;
 }
@@ -115,9 +133,7 @@ a.arrow:hover {
 	font-size: 9px;
  	height:30px;
 }
-#breadclamnav a:hover{ 
-	background-color:#f0f0f5;
-}
+
 
 /*service navigation zB. home, sitemap, search */
 #servicenavpos {
@@ -135,6 +151,9 @@ a.arrow:hover {
 #servicenavpos a {
   	color:#ffffff; 
 	padding:0px 2px;
+}
+#servicenavpos a:hover {
+  	background-color: transparent;
 }
 #servicenavpos input {
 	line-height: 11px;
@@ -188,6 +207,26 @@ a.arrow:hover {
   	font-size: 11px;
   	font-family: Arial;
 	line-height: 20px;
+	margin-right:20px;
+}
+
+.navup  {
+	margin-top:1px;
+	margin-bottom: 23px;
+	display:block;
+}
+.navup a {
+	display:block;
+	background-image:url(/lenya/unizh/authoring/images/icon_arrow_up.gif);
+	padding-left:20px;
+	background-repeat: no-repeat;
+}
+.navup .lead {
+	padding-left: 7px;
+	font-weight:bold;
+	font-size: 12px;
+	font-family: Arial;
+	color:#333399;
 }
 #secnav ul li a {
 	padding-left: 7px;
@@ -199,7 +238,7 @@ a.arrow:hover {
 #secnav a.activ {
   	background-color:#f0f0f5;
 }
-#secnav ul {
+#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
 	padding:0px;
 	margin:0px;
@@ -210,11 +249,6 @@ a.arrow:hover {
 }
 
 /*third navigation*/
-#secnav ul ul { 
-	padding:0px;
-	margin:0px;
-	list-style-type:none;
-}
 
 #secnav ul ul li a {
 	padding-left: 20px;
@@ -222,155 +256,350 @@ a.arrow:hover {
 	width:145px;
 }
 
+/*forth navigation*/
+
+#secnav ul ul ul li a {
+	padding-left: 40px;
+	padding-right:0px;
+	width:125px;
+}
 
 
-/*Ortho navigation*/
-#orthonav  {
-  	font-size: 11px;
-  	font-family: Arial;
-  	text-align:right;
-  	margin-bottom:20px;
- 	display:block;
-}
-#orthonav a {
-	color:#333; 
-  	padding:0px 20px;
-  	border: 1px solid #ccccff;
-}
-#orthonav a:hover {
-  	background-color:#eaecff; 
-}
-#orthonav a.activ {
-  	background-color:#eaecff; 
-}
 
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
-  	font-size: 9px;
-  	line-height: 11px;
-  	font-family: Verdana;
-  	text-align: left;
-  	height:25px;
-  	display:block;
-	color:#666; 
-	margin-left: 11px;
+	font-size: 9px;
+	line-height: 11px;
+	font-family: Verdana;
+	text-align: right;
+	margin-right:59px;
+	height:25px;
+	color:#666;
 }
 #toolnav a {
 	color:#666; 
 }
+#toolnav a:hover {
+	background-color: transparent;
+}
 /* Navigation Ende*/
+/*4 splatige */
+#col1 {
+	width:165px;
+	float:left;
+	font-size: 11px;
+	font-family: Arial;
+	line-height: 15px;
+	margin-right:20px;
+}
 
+#col1 p {
+	padding-left: 7px;
+}
 
+#col1 ul {
+	padding:0 0 0 7px;
+	list-style-type:none;
+	margin: 0;
+}
+
+#col1 ul li a {
+	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	display:block;
+	width:145px;
+}
+#col1 .dotline, .relatedbox .dotline {
+	margin: 7px 0;
+}
+#col1 .titel, .content2 .titel, .content1 .titel {
+	line-height:18px;
+	font-weight:bold;
+}
 /*Content*/
 
 .contcol2 {
 	min-width:400px;
 	float: none;
-	margin-left:180px;
-}
-.contmargintop {
-	height:25px;
+	margin-left:185px;
 }
 .contentarea {
-	margin-right:180px;
+	margin-right:199px;
 }
 .content {
-	margin-right:15px;
 }
-.marginLeftCont { 
-	margin-left:15px;
+.content1 {
+	width:198px;
+	float: left;
 }
-ul.squarelist{
-	padding:0px;
-	list-style-type:square;
-	margin-left:30px;
-	color:#666666;
+.content1 ul.linknav li a, .content2 ul.linknav li a {
+	padding-left:0px;
+	display:block;
+	width:100%;
+}
+* html .content1 {
+  height: 1%;
+  margin-right: 17px;
+}
+* html .content2 {
+  height: 1%;
+  margin-left: 0px;
+}
+
+* html .relatedbox {
+	margin-left:16px;
+}
+.content2 {
+	margin-left:218px;
+	font-size:11px;
+}
+.content2 .klein {
+	line-height:15px;
 }
 
 /*Related Box*/
 .relatedbox {
 	float:right;
 	width:179px;
-	margin-left:17px;
+	margin-left:20px;
 }
 .relatedboxborder {
 	width:179px;
-	border: 1px solid #ccc;
+	border: 1px solid #ccccff;
 }
 .relatedboxcont {
 	padding: 8px 9px 10px 11px;
 	line-height:15px;
 	font-size:11px;
 }
-
 /*footer*/
+.footermargintop {
+	height:30px;
+	clear:both;
+}
+
+.topnav {
+	text-align: right;
+	margin-bottom:7px;
+}
+.topnav a {
+	background-image:url(/lenya/unizh/authoring/images/arrow_top.gif);
+	margin-right:7px;
+	background-repeat: no-repeat;
+	background-position:left;
+	font-size: 11px;
+	padding-left:12px;
+}
 #footer {
 	margin-top:2px;
- 	font-size: 9px;
+	font-size: 9px;
 	font-family: Verdana;
 	color:#999;
 	line-height: 11px;
 }
-.footermargintop {
-	height:30px;
+
+/*list element*/
+
+
+ul.squarelist li {
+	background-image: url(/lenya/unizh/authoring/images/listsq.gif);
+	background-repeat: no-repeat;
+	padding-left:13px;
+
 }
-#footer a:hover{ 
+ul.linklist li  {
+	background-image:url(/lenya/unizh/authoring/images/arrowlist.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+ 	background-position: top left;
+}
+.content2 ul.linklist li   {
+	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	background-repeat: no-repeat;
+}
+
+ul.linknav {
+	font-size:11px;
+	line-height:16px;
+}
+
+* html ul.linknav .dotline {
+	margin-top:1px;
+}
+
+.listarrow {
+	float:left;
+	width:15px;
+}
+ol {
+	margin-top: 0;
+}
+* html ol  {
+	margin-left:20px;
+}
+* html ol li {
+	margin-left:25px;
+}
+ol li a {
+	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+}
+/*linkliste*/
+.linktext {
+	font-size: 12px;
+	line-hegiht:20px;
+	float:left;
+	width:300px;
+}
+.linkrow {
+	display:block;
+	width:100%;
+}
+.linkrow a {
+	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	padding-left:13px;
+	font-size: 12px;
+	line-hegiht:20px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+}
+
+
+/*image*/
+.imgTextfluss a, .imgMitLegende a {
+	background-image:none;
+	padding:0px;
+	margin:0px;
+}
+.legende {
+	font-size: 11px;
+	font-style: italic;
+	padding-left:6px;
+	padding-bottom:18px;
+	line-height:18px;
+}
+* html .legende {
+	margin-top:3px;
+}
+.imgTextfluss .legende {
+	padding-bottom:18px;	
+	display:block;
+	padding-left:6px;
+}
+.imgTextfluss {
+	float: left;
+	margin-right:10px;
 	background-color:#f0f0f5;
+	display:block;
+	margin-top:5px;
 }
+.imgMitLegende {
+	background-color:#f0f0f5;
+	display:block;
+}
+
+
 
 /* form*/
 form {
 	margin: 0px;
 	border: 0px;
 }
-.formbg {
-	background-color:#f0f0f5;
-	height:28px;
-	border-bottom: 2px solid #fff;
-	vertical-align: middle;
 
-}
-label { 
-  display:inline;
-  float: left;
-  width: 165px; 
-}
-
-form br {
-  clear: left; 
-}
-.formbg input {display:inline;
-  	float: left;
+form h2.subtitel {
 	line-height: 18px;
-  	font-size: 11px;
+	padding-top:6px;
+	padding-bottom: 4px;
+	font-size: 12px;
+}
+form h3 {
+	line-height: 18px;
+	padding-bottom: 4px;
+	font-size: 12px;
+}
+
+.fieldarea {
+	background-color: #f0f0f0;
+	border-bottom: 2px solid #fff;
+	display:block;
+	line-height: 28px;
+	font-size: 12px;
+}
+.fieldarea label {
+	display:block;
+	margin-left: 7px;	
+	line-height: 18px;
+	margin-right:170px;
+	padding-top:6px;
+	padding-bottom: 4px;
+}
+.fieldarea input {
+	float: right;
+	margin: 4px 6px 0 0;
+	width: 165px;
+  	font-size: 12px;
   	font-family: Arial;
-	width:254px;
-	height:19px;
+	line-height:18px;
 	padding-left:2px;
 	border-top:1px solid #696969;
 	border-left:1px solid #696969;
 	border-right:1px solid #cccccc;
 	border-bottom:1px solid #cccccc;
+}
+.fieldarea input.inputbreit {
+	width: 254px;
+}
+.optionblock {
+	float: right;
+	margin-top:4px;
+	margin-right:6px;
+	width: 165px;
+  	font-size: 12px;
+  	font-family: Arial;
+	line-height:18px;
+	display:block;
+}
+input.optiontag {
+	float:none;
+	width: auto;
+	display:inline;
+	border:0px;
+	padding:0px;
+	margin-left:10px;
+	border:0px;
+	height:15px;
 }
 .submitbutton {
-	margin-left:165px;
-	line-height: 18px;
-  	font-size: 11px;
-  	font-family: Arial;
-	width:70px;
-	height:24px;
-	padding-left:2px;
-	border-top:1px solid #696969;
-	border-left:1px solid #696969;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
+	text-align:center;
+	margin-top:13px;
+	padding:0px 5px;
+	line-height: 14px;
+	font-size: 11px;
+	font-family: Arial;
+	height:19px;
+ 	color:#555555;  
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	border-right:1px solid #696969;
+	border-bottom:1px solid #696969;
+	background-color: transparent;
 }
+.submitbuttonPosMiddle {
+	margin-left:159px;
+}
+.submitbuttonPosLeft {
+	margin-left:6px;
+}
+
+
 /* Misc*/
 .floatclear {
 	clear:both;
 }
 .solidline {
-	background-color: #ccc;
+	background-color: #999999;
 	height:1px;
 	width:100%;
 	margin:0px;
@@ -380,21 +609,45 @@ form br {
 	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
 	width:100%;
 	height:1px;
+	border:0px;
+	margin:0px;
 }
-
-
+.dotlinelead {
+	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
+	width:100%;
+	height:1px;
+	border:0px;margin: 0 0 7px 0;
+}
+.dotlinemitmargin {
+	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
+	width:100%;
+	height:1px;
+	border:0px;
+	margin: 7px 0;
+}
 /* Hide from IE5-mac. Only IE-win sees this. gegen 3px text jog \*/
 * html #secnav {
-  margin-right: 15px;
+  margin-right: 17px;
   }
- 
+ * html #col1 {
+  margin-right: 17px;
+  }
 * html .contcol2 {
   height: 1%;
   margin-left: 0px;
 }
+* html .fieldarea {
+	width: auto; 
+	height: auto;
+}
 /* End hide from IE5/mac */
 
 /* BXE */
+
+.bxecontent p {
+  display: block;
+}
+
 
 .teaser {
         width:175px;
@@ -418,10 +671,50 @@ form br {
 }
 
 
+.content1 .teaser {
+        width:194px;
+        border: 1px solid #ccc;
+        display: block;
+        border-spacing: 15px;
+}
+
+
+.content2 .teaser {
+        width:194px;
+        border: 1px solid #ccc;
+        display: block;
+}
+
+
+
+.lead {
+        width:194px;
+        border: 1px solid #ccc;
+        display: block;
+}
+
+.lead p {
+        padding: 5px 5px 5px 5px;
+        line-height:15px;
+        font-size:12px;
+}
+
+
+.links {
+        width:194px;
+        border: 1px solid #ccc;
+        display: block;
+}
+
+.links .a {
+        display: block;
+}
+
+
 .rss-reader {
         height:60px;
         border: 1px solid #ccc;
-        display:block; 
+        display: block;
 }
 
 .rss-reader .rss-title  {
@@ -434,29 +727,7 @@ form br {
         line-height:15px;
         font-size:11px;
         display: block;
-}  
-
-
-/* deprecated */
-
-.highlight {
-        width:175px;
-        border: 1px solid #ccc;
-        display:block;
 }
-.highlight p {
-        padding: 8px 9px 10px 11px;
-        line-height:15px;
-        font-size:11px;
-}
-
-.highlight-title {
-        padding: 0px 0px 0px 11px;
-        font-weight: bold;
-}
-
-
-
 
 
 </css>
