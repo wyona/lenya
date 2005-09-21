@@ -132,8 +132,8 @@
       <param name="templatePublication" expression="${old.publication.prefix}"/>
     </xslt>
 
-    <xslt in="${source.dir}/config/search/lucene-unitemplate-live.xconf"
-      out="${destination.dir}/config/search/lucene-unitemplate-live.xconf" style="search.xsl">
+    <xslt in="${source.dir}/config/search/lucene-live.xconf"
+      out="${destination.dir}/config/search/lucene-live.xconf" style="search.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
       <param name="templatePublication" expression="${old.publication.prefix}"/>
     </xslt>
