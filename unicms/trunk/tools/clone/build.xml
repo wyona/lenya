@@ -120,14 +120,14 @@
     <mkdir dir="${destination.dir}/config/search"/>
     <copy todir="${destination.dir}/config/search" overwrite="yes">
       <fileset dir="${source.dir}/config/search">
-	<exclude name="crawler-unitemplate-live.xconf"/>
-	<exclude name="lucene-unitemplate-live.xconf"/>
+	<exclude name="crawler-live.xconf"/>
+	<exclude name="lucene-live.xconf"/>
       </fileset>
     </copy>
     
     <echo>INFO: Change search configuration</echo>
-    <xslt in="${source.dir}/config/search/crawler-unitemplate-live.xconf"
-      out="${destination.dir}/config/search/crawler-unitemplate-live.xconf" style="search.xsl">
+    <xslt in="${source.dir}/config/search/crawler-live.xconf"
+      out="${destination.dir}/config/search/crawler-live.xconf" style="search.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
       <param name="templatePublication" expression="${old.publication.prefix}"/>
     </xslt>
