@@ -15,7 +15,7 @@
  *
  */
 
-/* $Id: SitemapTransformer.java 2005-09-05 ch.unizh.mike $  */
+/* $Id: SitemapTransformer.java 2005-09-21 ch.unizh.mike $  */
 
 package ch.unizh.lenya.cms.cocoon.transformation;
 
@@ -46,12 +46,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- *
  * This transformer lists all documents if the tag <namespaceURI:sitemap> 
- * is present in this document. The list of the documents is in the form :
+ * is present in this document. The list of the documents is in the form:
+ *
  * <namespaceURI:sitemap>
- *   <div href="/pub/area/path/docId.html" label="..." level="..."/>
- *   ...
+ *   <namespaceURI:node id="..." href="/pub/area/path/level1.html">
+ *     <namespaceURI:title>...</namespaceURI:title>
+ *     <namespaceURI:description>...</namespaceURI:description>
+ *     <namespaceURI:node id="..." href="/pub/area/path/level1/level2.html"/>
+ *     ...
+ *   </namespaceURI:node>
  * </namespaceURI:sitemap>
  *
  * Multiple language : if a document doesn't exist in the parent language, then the version 
@@ -62,11 +66,9 @@ public class SitemapTransformer extends AbstractSAXTransformer implements Parame
 
     private String namespace;
 
-    public static final String SITEMAP_ELEMENT = "sitemap";
-    public static final String ABSTRACT_ATTRIBUTE = "abstract";
-    
-    public static final String NAMESPACE = "http://apache.org/cocoon/lenya/documentindex/1.0";
-    public static final String PREFIX = "index:";
+    public static final String SITEMAP_ELEMENT = "sitemap";    
+    public static final String NAMESPACE = "http://unizh.ch/doctypes/elements/1.0";
+    public static final String PREFIX = "unizh:";
 
     /** (non-Javadoc)
     	 * @see org.apache.avalon.framework.parameters.Parameterizable#parameterize(org.apache.avalon.framework.parameters.Parameters)
@@ -136,7 +138,7 @@ public class SitemapTransformer extends AbstractSAXTransformer implements Parame
 
             for (int i = 0; i < topNodes.length; i++) {
                 String topNodeId = "/" + topNodes[i].getId();
-                traverseSiteTree(topNodeId,language,defaultLanguage,1);
+                traverseSiteTree(topNodeId,language,defaultLanguage);
             }
 
         } else {
@@ -146,7 +148,7 @@ public class SitemapTransformer extends AbstractSAXTransformer implements Parame
     }
 
 
-    private void traverseSiteTree(String documentId, String language, String defaultLanguage, int docLevel)
+    private void traverseSiteTree(String documentId, String language, String defaultLanguage)
         throws SAXException {
 
                 //get document with the same language than the parent document
@@ -208,33 +210,42 @@ public class SitemapTransformer extends AbstractSAXTransformer implements Parame
 
                 if (file.exists()) {
                     //create the tags for the document
+                    String docTitle = null;
                     String docDescription = null;
                     DublinCore dublinCore;
                     try {
                         dublinCore = doc.getDublinCore();
+                        docTitle = dublinCore.getTitle();
                         docDescription = dublinCore.getDescription();
                     } catch (DocumentException e) {
                         throw new SAXException(e);
                     }
 
                     AttributesImpl attributes = new AttributesImpl();
+                    attributes.addAttribute("", "id", "id", "", documentId);
                     attributes.addAttribute("", "href", "href", "", url);
-                    attributes.addAttribute("", "label", "label", "", docDescription);
-                    attributes.addAttribute("", "level", "level", "", Integer.toString(docLevel));
-                    super.startElement(NAMESPACE, "div", PREFIX + "div", attributes);
+                    super.startElement(NAMESPACE, "node", PREFIX + "node", attributes);
 
-                    super.endElement(NAMESPACE, "div", PREFIX + "div");
+                    AttributesImpl noAttributes = new AttributesImpl();
+                    super.startElement(NAMESPACE, "title", PREFIX + "title", noAttributes);
+                    sendTextEvent(docTitle);
+                    super.endElement(NAMESPACE, "title", PREFIX + "title");
+
+                    super.startElement(NAMESPACE, "description", PREFIX + "description", noAttributes);
+                    sendTextEvent(docDescription);
+                    super.endElement(NAMESPACE, "description", PREFIX + "description");
+
+                    SiteTreeNode[] children = siteTree.getNode(documentId).getChildren();
+                    for (int i = 0; i < children.length; i++) {
+                        String childId = documentId + "/" + children[i].getId();
+                        traverseSiteTree(childId,language,defaultLanguage);
+                    }
+
+                    super.endElement(NAMESPACE, "node", PREFIX + "node");
                 } else {
                     //do nothing for this document
                     getLogger().warn("There are no existing file for the document with id " + documentId);
                 }
-
-            SiteTreeNode[] children = siteTree.getNode(documentId).getChildren();
-
-            for (int i = 0; i < children.length; i++) {
-                String childId = documentId + "/" + children[i].getId();
-                traverseSiteTree(childId,language,defaultLanguage,docLevel + 1);
-            }
     }
 
 
