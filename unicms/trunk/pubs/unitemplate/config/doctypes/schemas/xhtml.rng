@@ -166,6 +166,7 @@
     <ref name="unizh.toc"/>
     <ref name="unizh.rss-reader"/>
     <ref name="unizh.children"/>
+    <ref name="unizh.sitemap"/>
     <ref name="iframe"/>
   </choice>
 </define>

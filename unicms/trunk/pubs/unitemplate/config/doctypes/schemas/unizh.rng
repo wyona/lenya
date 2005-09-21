@@ -185,6 +185,12 @@
   </element>
 </define>
 
+<define name="unizh.sitemap">
+  <element name="unizh:sitemap">
+    <empty/>
+  </element>
+</define>
+
 <define name="unizh.level">
   <element name="unizh:level">
     <empty/>
