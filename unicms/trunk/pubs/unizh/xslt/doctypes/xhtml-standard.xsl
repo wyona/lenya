@@ -75,6 +75,9 @@
             <xsl:when test="$document-element-name = 'unizh:person'">
               <xsl:call-template name="person"/>
             </xsl:when>
+            <xsl:when test="$document-element-name = 'unizh:redirect'">
+              <xsl:call-template name="redirect"/>
+            </xsl:when>
             <xsl:otherwise>
             </xsl:otherwise>
           </xsl:choose>
@@ -305,6 +308,28 @@
       </div>
     </div>
   </xsl:template>
+
+
+  <xsl:template name="redirect">
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div class="contcol2">
+      <div class="contentarea">
+        <div class="content">
+          <h1>
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+            </div>
+          </h1>
+          <p>&#160;</p>
+          <div bxe_xpath="/{$document-element-name}/xhtml:body">
+            <xsl:apply-templates select="*/xhtml:body/*"/>
+          </div>
+        </div>
+        <xsl:call-template name="footer"/>
+      </div>
+    </div>
+  </xsl:template>
+
 
 
   <xsl:template match="unizh:column[1]">

@@ -46,7 +46,9 @@
     <optional>
       <ref name="object"/>
     </optional> 
-    <ref name="a"/>
+    <optional>
+      <ref name="a"/>
+    </optional>
   </element>
 </define>
 

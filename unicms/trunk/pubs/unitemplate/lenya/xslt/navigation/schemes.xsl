@@ -32,6 +32,20 @@
   </xsl:choose>
 </xsl:variable>
 
+
+<xsl:variable name="homepageurl">
+  <xsl:choose>
+    <xsl:when test="$homepage or $homepage4cols">
+      <xsl:value-of select="descendant::xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/@href"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@href"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:variable> 
+
+
+
 <xsl:template match="xhtml:div[@id = 'menu']">
   <xhtml:div id="menu">
     <xsl:choose>
@@ -104,6 +118,16 @@
     </xsl:choose>
   </xhtml:div>
 </xsl:template>
+
+
+<!-- servicenav -->
+
+<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'home']">
+  <xhtml:div id="home" href="{$homepageurl}">
+    <xsl:value-of select="."/> 
+  </xhtml:div>
+</xsl:template>
+
 
 
 <!-- tabs -->
