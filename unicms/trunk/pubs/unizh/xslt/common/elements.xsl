@@ -22,12 +22,6 @@
     </a>&#160;
   </xsl:template>
 
-   <xsl:template match="lenya:asset-dot[@class='image']">
-    <a href="{@href}">
-      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-    </a>&#160;
-  </xsl:template>
-
   <xsl:template match="lenya:asset-dot[@class='delete']">
     <a href="{@href}">
       <img alt="Insert Identity" border="0" src="{$imageprefix}/icons/delete.gif"/>
