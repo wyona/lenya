@@ -643,7 +643,7 @@
       <!-- this assumes 2 things: each h2 has a corresponding anchor, and that
       anchor has the same name as the h2. The anchor is set by the template
       xhtml:body/xhtml:h2, which should be called before -->
-      <xsl:apply-templates mode="anchor" select="//xhtml:h2[ancestor::xhtml:body]"/>
+      <xsl:apply-templates mode="anchor" select="../xhtml:h2[ancestor::xhtml:body]"/>
     </ul>
   </xsl:template>
   
