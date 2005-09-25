@@ -18,8 +18,19 @@
   <div id="toolnav">
     <xsl:apply-templates select="descendant::nav:node[@current = 'true']"/>
     <div id="print" href="{concat(descendant::nav:node[@current = 'true']/@id, '_', $chosenlanguage, '.print.html')}">
-
       Print
+    </div>
+    <div id="simpleview">
+      <xsl:attribute name="href">
+        <xsl:choose>
+          <xsl:when test="not(contains ($root, 'authoring'))">
+          ?version=simple
+          </xsl:when>
+          <xsl:otherwise>
+          #
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
     </div>
   </div>
 </xsl:template>

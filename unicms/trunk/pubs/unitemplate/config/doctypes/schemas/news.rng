@@ -34,6 +34,9 @@
     <ref name="lenya.meta"/>
     <ref name="unizh.related-content"/>
     <element name="body">
+      <optional>
+        <ref name="object"/>
+      </optional>
       <zeroOrMore>
         <element name="p">
           <ref name="Inline.model"/>

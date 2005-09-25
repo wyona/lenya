@@ -33,9 +33,23 @@
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
       <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
-      <a href="{xhtml:div[@id = 'print']/@href}"><img src="{$imageprefix}/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
-      <a href="#"><img src="{$imageprefix}/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
-      <a href="{xhtml:div[@id = 'pda']/@href}"><img src="{$imageprefix}/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
+      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
+      <a>
+        <xsl:attribute name="href">
+          <xsl:choose>
+            <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
+             ?fontsize=normal
+            </xsl:when>
+            <xsl:when test="contains($fontsize, 'normal')">
+             ?fontsize=big
+            </xsl:when>
+            <xsl:otherwise>
+             ?fontsize=big
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <img src="/lenya/unizh/authoring/images/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
+      <a href="{xhtml:div[@id = 'simpleview']/@href}"><img src="/lenya/unizh/authoring/images/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
     </div>
   </xsl:template>
 
@@ -43,7 +57,7 @@
   <xsl:template match="xhtml:div[@id = 'menu']">
     <div id="secnav">
       <div class="solidline">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
+        <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
       </div>
       <ul>
         <xsl:apply-templates select="xhtml:div"/>
@@ -67,7 +81,7 @@
       </xsl:if>
       <xsl:if test="parent::xhtml:div[@id = 'menu']">
         <div class="dotline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
+          <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
       </xsl:if>
     </li>
@@ -91,6 +105,19 @@
       <a href="{@root}"><xsl:value-of select="@label"/></a>
       <xsl:for-each select="xhtml:div">
          &gt; <a href="{@href}"><xsl:value-of select="."/></a>
+      </xsl:for-each>
+    </div>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:div[@id = 'simplenav']">
+    <div id="primarnav">
+      <xsl:for-each select="xhtml:div">
+        <a href="{@href}"><xsl:value-of select="@label"/></a>
+        <xsl:if test="@id = 'up'"><br/></xsl:if>
+        <xsl:if test="not(@id = 'up') and position() &lt; last()">
+          <div class="linkseparator">|</div>
+        </xsl:if>
       </xsl:for-each>
     </div>
   </xsl:template>

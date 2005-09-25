@@ -22,8 +22,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   </lenya:meta>
   <body>
     <p>
-      Umi diese Seite auf eine andere umzuleiten (Redirect) gehen sie folgendermassen vor:
-
+     Um diese Seite auf eine andere umzuleiten (One-Form Editor), tragen Sie bitte die Zieladdresse im href-Attribut des Elements unizh:redirect-to ein. 
     </p>
   </body>
 </unizh:redirect>

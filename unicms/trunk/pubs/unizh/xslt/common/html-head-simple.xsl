@@ -14,17 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <style type="text/css">
       <xsl:comment>
-        <xsl:choose>
-          <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-            @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/big.css");
-          </xsl:when>
-          <xsl:when test="contains($fontsize, 'normal')">
-            @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
-          </xsl:when>
-          <xsl:otherwise>
-            @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
-          </xsl:otherwise>
-        </xsl:choose>
+        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/simple.css");
       </xsl:comment>
     </style>
   </head>

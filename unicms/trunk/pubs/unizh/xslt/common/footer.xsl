@@ -9,7 +9,7 @@
   <xsl:template name="footer">
     <div class="footermargintop"><xsl:comment/></div>
     <div class="topnav"><a href="#top">top</a></div>
-    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
+    <div class="solidline"><img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" /></div>
     <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <a href="{/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']/@href}"><xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></a></div>
   </xsl:template>
   

@@ -348,6 +348,7 @@
     <property name="insert.asset.caption" value=""/>
     <property name="asset.title" value=""/>
     <property name="insert.asset.link" value=""/>
+    <property name="insert.asset.float" value=""/>
 
     <echo>Generate temporary xsl style sheet with ${pub.dir}/../xslt/util/generate-insertAsset-xsl.xsl </echo>
     <echo>from ${pub.dir}/config/assets/${insert.asset.insertTemplate}</echo>
@@ -388,6 +389,7 @@
       <param name="title" expression="${asset.title}"/>
       <param name="caption" expression="${insert.asset.caption}"/>
       <param name="link" expression="${insert.asset.link}"/>
+      <param name="float" expression="${insert.asset.float}"/>
     </xslt>
     <move file="${temp.file}" tofile="${document.file}"/>
   </target>

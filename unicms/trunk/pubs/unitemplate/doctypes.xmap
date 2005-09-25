@@ -33,6 +33,7 @@
           <map:parameter name="contextprefix" value="{request:contextPath}"/>
           <map:parameter name="rendertype" value="{rendertype}"/>
           <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/> 
         </map:transform>
     </map:resource>
     
@@ -210,6 +211,7 @@
           <map:part src="cocoon://navigation/{4}/{5}/toolnav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/simplenav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/footnav/{6}.html.xml"/> 
@@ -248,14 +250,20 @@
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
         <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
        
- 
+        <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
+          <map:parameter name="version" value="{request-param:version}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}"/>
+        </map:transform> 
+
+        <map:transform type="session"/>
+
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{4}"/>
           <map:parameter name="area" value="{5}"/>
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call>
+        </map:call> 
 
         <map:serialize type="xml"/>
       </map:match>

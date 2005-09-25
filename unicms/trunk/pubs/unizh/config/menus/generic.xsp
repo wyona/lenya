@@ -5,7 +5,6 @@
     xmlns:xsp="http://apache.org/xsp"
     xmlns:xsp-request="http://apache.org/xsp/request/2.0"
     xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
-    xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
     xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0"
     xmlns:uc="http://apache.org/cocoon/lenya/usecase/1.0"
     xmlns="http://apache.org/cocoon/lenya/menubar/1.0"
@@ -85,12 +84,12 @@
             &amp;&amp; Publication.AUTHORING_AREA.equals(area)
 	          ) {
           <xsp:content>
-            <item uc:usecase="create-language" uc:step="showscreen" href="?"><i18n:text>New Language Version</i18n:text></item>
+            <item uc:usecase="create-language" uc:step="showscreen" href="?">New language version</item>
           </xsp:content>
 	      }
 	      else {
           <xsp:content>
-            <item><i18n:text>New language version</i18n:text></item>
+            <item>New language version</item>
           </xsp:content>
 	      }
 	    
@@ -100,11 +99,11 @@
 	          &amp;&amp; availableLanguages.length &gt; 1
 	          ) {
 	        <xsp:content>
-	          <item wf:event="deletelanguage" uc:usecase="removelabel" uc:step="showscreen" href="?"><i18n:text>Remove Language Version</i18n:text></item>
+	          <item wf:event="deletelanguage" uc:usecase="removelabel" uc:step="showscreen" href="?">Remove language version</item>
 	        </xsp:content>
 	      } else {
 	        <xsp:content>
-	          <item><i18n:text>Remove Language Version</i18n:text></item>
+	          <item>Remove language version</item>
 	        </xsp:content>
 	      } 
 	    }
@@ -196,15 +195,11 @@
           else {
            <item>Change node visiblity</item>
           }
-        </xsp:logic>
-      </block>
-      <block authoring="false">
-        <xsp:logic>
           if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
-             <item uc:usecase="forcecheckin" uc:step="showscreen" href="?"><i18n:text>Unlock Document</i18n:text></item>
+             <item uc:usecase="forcecheckin" uc:step="showscreen" href="?">Checkin</item>
           }
           else {
-            <item><i18n:text>Unlock Document</i18n:text></item>
+            <item>Checkin</item>
           }
         </xsp:logic>
       </block>

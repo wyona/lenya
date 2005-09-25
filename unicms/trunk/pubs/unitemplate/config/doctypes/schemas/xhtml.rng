@@ -24,7 +24,9 @@
     <element name="html">
       <ref name="html.attlist"/>
       <ref name="lenya.meta"/>
-      <ref name="unizh.related-content"/>
+      <optional>
+        <ref name="unizh.related-content"/>
+      </optional>
       <ref name="body"/>
     </element>
   </define>
@@ -34,6 +36,28 @@
     <ref name="I18n.attrib"/>
     <ref name="unizh.columns.attrib"/>
     <ref name="dummy.attlist"/>
+  </define>
+
+  <define name="p.attlist">
+    <optional>
+      <attribute name="class">
+        <choice>
+          <value>floatclear</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="Heading.attrib">
+    <ref name="id.attrib"/>
+    <optional>
+      <attribute name="class">
+        <choice>
+          <value>floatclear</value>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="title.attrib"/>
   </define>
   
   <define name="ol.attlist">
@@ -75,6 +99,22 @@
       <attribute name="width">
         <ref name="Length.datatype"/>
       </attribute>
+    </optional>
+    <optional>
+      <attribute name="float">
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="popup">
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute> 
     </optional>
     <!-- workaround for bxe 1.0 -->
     <optional>
@@ -162,11 +202,11 @@
 <!-- additional block elements -->
 <define name="Block.class" combine="choice">
   <choice>
+    <ref name="object"/>
     <ref name="lenya.asset"/>
     <ref name="unizh.toc"/>
     <ref name="unizh.rss-reader"/>
     <ref name="unizh.children"/>
-    <ref name="unizh.sitemap"/>
     <ref name="iframe"/>
   </choice>
 </define>

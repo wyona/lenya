@@ -16,8 +16,11 @@
     <unizh:superscription>University of Zurich</unizh:superscription>
     <unizh:heading>Publication title</unizh:heading>
   </unizh:header>
-  <unizh:quicklinks>
-    <xhtml:a href="#">Link</xhtml:a>
+  <unizh:quicklinks label="Quick Links">
+    <unizh:quicklink>
+      <p>Topic</p>
+      <xhtml:a href="#">Link</xhtml:a>
+    </unizh:quicklink>
   </unizh:quicklinks>
   <unizh:related-content>
     <unizh:teaser>

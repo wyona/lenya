@@ -6,6 +6,7 @@
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
          >
 
 <define name="lightblock.class.deprecated">
@@ -124,13 +125,13 @@
         <text/>
       </attribute>
     </optional>
+    <zeroOrMore><!-- FIXME FIX BXE: should read optional -->
+      <ref name="object"/>
+    </zeroOrMore>
     <element name="unizh:title">
       <text/>
     </element>
     <ref name="p"/>
-    <optional>
-      <ref name="object"/>
-    </optional>
     <zeroOrMore>
       <choice>
         <ref name="lenya.asset"/>
@@ -185,12 +186,6 @@
   </element>
 </define>
 
-<define name="unizh.sitemap">
-  <element name="unizh:sitemap">
-    <empty/>
-  </element>
-</define>
-
 <define name="unizh.level">
   <element name="unizh:level">
     <empty/>
@@ -199,28 +194,35 @@
 
 <define name="unizh.rss-reader">
   <element name="unizh:rss-reader">
-    <interleave>
+    <optional>
       <attribute name="url">
         <text/>
       </attribute>
-      <optional>
-        <attribute name="items">
-          <text/>
-        </attribute>
-      </optional>
+    </optional>
+    <optional>
+      <attribute name="items">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="descriptions">
         <choice>
           <value type="string">true</value>
           <value type="string">false</value>
         </choice>
       </attribute>
-    </interleave>
-    <element name="unizh:rss-title">
+    </optional>
+    <element name="unizh:title">
       <text/>
     </element>
-    <!-- <element name="unizh:remarks">
-      <text/>
-    </element> -->
   </element>
 </define>
 

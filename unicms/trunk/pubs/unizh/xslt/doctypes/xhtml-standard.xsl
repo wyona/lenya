@@ -8,6 +8,7 @@
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
   >
@@ -18,6 +19,7 @@
   <xsl:param name="defaultlanguage"/>
   <xsl:param name="language"/>
   <xsl:param name="nodeid"/>
+  <xsl:param name="fontsize"/>
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/elements.xsl"/>
@@ -96,7 +98,7 @@
     <div class="contcol2">
       <div class="content">
         <h1>
-          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+          <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
             <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
           </div>
         </h1>
@@ -122,7 +124,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -148,7 +150,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -173,7 +175,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -210,35 +212,32 @@
   <xsl:template name="newsitem">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <div class="contcol2">
-      <!-- <div class="relatedbox">
+      <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/>
+          <xsl:apply-templates select="unizh:newsitem/unizh:related-content"/>
         </div> 
-      </div> -->
+      </div> 
       <div class="contentarea">
         <div class="content">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+          <p class="lead"><xsl:value-of select="unizh:newsitem/lenya:meta/dcterms:created"/></p> 
+          <h2>
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
-          </h1>
+          </h2>
+          <h3><xsl:value-of select="unizh:newsitem/lenya:meta/dc:creator"/></h3>
           <p>&#160;</p>
           <xsl:if test="$area = 'authoring'">
-            <div bxe_xpath="/unizh:newsitem/unizh:short">
-              <p>
-                <xsl:value-of select="unizh:newsitem/unizh:short/unizh:text"/>
-                <br/>
-                <xsl:if test="not(unizh:newsitem/xhtml:body/*)">
-                  <xsl:apply-templates select="unizh:newsitem/unizh:short/xhtml:a"/>
-                </xsl:if>
-              </p>
-              <br/>
+            <div class="editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
+              <xsl:apply-templates select="unizh:newsitem/unizh:short/*"/>
             </div>
+            <br class="floatclear"/>
           </xsl:if>
           <div bxe_xpath="/{$document-element-name}/xhtml:body">
             <xsl:apply-templates select="*/xhtml:body/*"/>
-            <br/>
+            <p>&#160;</p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
+            <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
             <xsl:apply-templates select="*/unizh:level"/>
           </div>
         </div>
@@ -259,7 +258,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -316,14 +315,12 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
           <p>&#160;</p>
-          <div bxe_xpath="/{$document-element-name}/xhtml:body">
-            <xsl:apply-templates select="*/xhtml:body/*"/>
-          </div>
+          <xsl:apply-templates select="*/xhtml:body/*"/>
         </div>
         <xsl:call-template name="footer"/>
       </div>

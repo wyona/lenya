@@ -68,9 +68,9 @@
 
 <define name="unizh.lead">
   <element name="unizh:lead">
-    <optional>
+    <zeroOrMore> <!-- FIXME: BXE. Should read optional -->
       <ref name="object"/>
-    </optional>
+    </zeroOrMore>
     <element name="p">
       <ref name="Inline.model"/>
     </element>

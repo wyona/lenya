@@ -25,13 +25,13 @@
     <ref name="unizh.columns.attrib"/>
     <ref name="dummy.attlist"/>
   </define>
-
 </include>
 
 <define name="unizh.newsitem">
   <element name="unizh:newsitem">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
+    <ref name="unizh.related-content"/>
     <ref name="unizh.short"/>
     <ref name="body"/>
     <ref name="unizh.level"/>
@@ -40,12 +40,10 @@
 
 <define name="unizh.short">
   <element name="unizh:short">
-    <element name="unizh:text">
-      <text/>
-    </element>
     <optional>
       <ref name="object"/>
-    </optional> 
+    </optional>
+    <ref name="p"/>
     <optional>
       <ref name="a"/>
     </optional>

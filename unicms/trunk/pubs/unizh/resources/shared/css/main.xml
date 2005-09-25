@@ -23,14 +23,8 @@ body {
 }
 img {
 	border:0px;
+        max-width: 415px;
 }
-
-.floatimage {
-        float: left;
-        border: 2px;
-}
-
-
 
 /*font*/
 h1, h2, h3, h4, h5, p {
@@ -40,6 +34,7 @@ h1, h2, h3, h4, h5, p {
 h1 {
 	font-size: 16px;
 	line-height:20px;
+	margin-bottom:18px;
 }
 h2 {
 	font-size: 12px;
@@ -51,6 +46,11 @@ h3 {
 }
 .klein {
 	font-size: 11px;
+}
+.lead {
+	color:#999999;
+	font-size: 12px;
+	font-weight:bold;
 }
 /*link*/
 a { 
@@ -84,12 +84,26 @@ a.arrow {
 	padding-right:2px;
 	margin-left:2px;
 }
+a.back {
+	background-image:url(/lenya/unizh/authoring/images/arrow_back12.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+.content a.arrow {
+	background-image:url(/lenya/unizh/authoring/images/arrow12.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
 /*header */
 #headerarea {
 	width:100%;
 	display:block;
 	background-color: #666699;
-	/*background-image:url(/lenya/unizh/authoring/images/contimg.jpg);*/
+	/*background-image:url(../img/contimg.jpg);*/
 	height:90px;
 	min-width:600px;
 }
@@ -216,7 +230,9 @@ a.arrow {
 	line-height: 20px;
 	margin-right:20px;
 }
-
+* html #secnav {
+  margin-right: 17px;
+}
 .navup  {
 	margin-top:1px;
 	margin-bottom: 23px;
@@ -291,6 +307,7 @@ a.arrow {
 }
 /* Navigation Ende*/
 /*4 splatige */
+
 #col1 {
 	width:165px;
 	float:left;
@@ -299,7 +316,9 @@ a.arrow {
 	line-height: 15px;
 	margin-right:20px;
 }
-
+* html #col1 {
+  margin-right: 17px;
+ }
 #col1 p {
 	padding-left: 7px;
 }
@@ -331,8 +350,16 @@ a.arrow {
 	float: none;
 	margin-left:185px;
 }
+* html .contcol2 {
+  height: 1%;
+  margin-left: 0px;
+}
 .contentarea {
 	margin-right:199px;
+}
+* html .contentarea {
+  height: 1%;
+  margin-right: 0px;
 }
 .content {
 }
@@ -465,7 +492,7 @@ ol li a {
 	width:100%;
 }
 .linkrow a {
-	background-image:url(/lenya/unizh/authoring/images/arrow.gif);
+	background-image:url(/lenya/unizh/authoring/images/icon_blank.gif);
 	padding-left:13px;
 	font-size: 12px;
 	line-hegiht:20px;
@@ -484,8 +511,8 @@ ol li a {
 	font-size: 11px;
 	font-style: italic;
 	padding-left:6px;
-	padding-bottom:18px;
-	line-height:18px;
+	padding-bottom:15px;
+	line-height:15px;
 }
 * html .legende {
 	margin-top:3px;
@@ -494,6 +521,7 @@ ol li a {
 	padding-bottom:18px;	
 	display:block;
 	padding-left:6px;
+	width:198px;
 }
 .imgTextfluss {
 	float: left;
@@ -506,9 +534,26 @@ ol li a {
 	background-color:#f0f0f5;
 	display:block;
 }
-
-
-
+.imgTeaser {
+	float: left;
+	margin-right:10px;
+	margin-top:5px;
+}
+.titelimgblock {
+	min-height:120px;
+}
+.titelimg {
+	float: left;
+	margin-right:10px;
+	margin-top:5px;
+}
+.artikelmitImg {
+	min-height:64px;
+}
+.fullimg {
+	margin-top:5px;
+	margin-bottom:5px;
+}
 /* form*/
 form {
 	margin: 0px;
@@ -534,6 +579,12 @@ form h3 {
 	line-height: 28px;
 	font-size: 12px;
 }
+
+* html .fieldarea {
+	width: auto; 
+	height: auto;
+}
+
 .fieldarea label {
 	display:block;
 	margin-left: 7px;	
@@ -602,6 +653,7 @@ input.optiontag {
 
 
 /* Misc*/
+
 .floatclear {
 	clear:both;
 }
@@ -611,6 +663,10 @@ input.optiontag {
 	width:100%;
 	margin:0px;
 	border:0px;
+}
+.content .solidline {
+	background-color: #cccccc;
+	margin-top:20px;
 }
 .dotline {
 	background-image: url(/lenya/unizh/authoring/images/dot_line66.gif);
@@ -632,21 +688,14 @@ input.optiontag {
 	border:0px;
 	margin: 7px 0;
 }
-/* Hide from IE5-mac. Only IE-win sees this. gegen 3px text jog \*/
-* html #secnav {
-  margin-right: 17px;
-  }
- * html #col1 {
-  margin-right: 17px;
-  }
-* html .contcol2 {
-  height: 1%;
-  margin-left: 0px;
+
+/* CMS */
+
+
+.editview {
+        background-color: #ccc;
+        min-height: 80px;
 }
-* html .fieldarea {
-	width: auto; 
-	height: auto;
-}
-/* End hide from IE5/mac */
+
 
 </css>
