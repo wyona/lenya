@@ -32,7 +32,9 @@
   <element name="unizh:collection">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.related-content"/>
+    <optional>
+      <ref name="unizh.related-content"/>
+    </optional>
     <element name="body">
       <zeroOrMore>
         <element name="p">

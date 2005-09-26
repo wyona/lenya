@@ -19,11 +19,36 @@
         <map:serialize type="xml"/>
       </map:match>
 
+      <map:match pattern="*/xhtml">
+        <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/homepage">
+        <map:generate type="serverpages" src="../unizh/config/menus/homepage.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/homepage4cols">
+        <map:generate type="serverpages" src="../unizh/config/menus/homepage.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/overview">
+        <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
       <map:match pattern="*/news">
         <map:generate type="serverpages" src="../unizh/config/menus/news.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
      
+      <map:match pattern="*/newsitem">
+        <map:generate type="serverpages" src="../unizh/config/menus/item.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
       <map:match pattern="*/collection">
         <map:generate type="serverpages" src="../unizh/config/menus/collection.xsp"/>
         <map:serialize type="xml"/>
@@ -33,6 +58,12 @@
         <map:generate type="serverpages" src="../unizh/config/menus/people.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
+
+       <map:match pattern="*/person">
+        <map:generate type="serverpages" src="../unizh/config/menus/item.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
 
       <map:match pattern="*/**">
         <map:generate type="serverpages" src="../unizh/config/menus/generic.xsp"/>

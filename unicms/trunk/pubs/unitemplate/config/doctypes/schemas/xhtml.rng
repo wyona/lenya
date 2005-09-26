@@ -116,12 +116,6 @@
         </choice>
       </attribute> 
     </optional>
-    <!-- workaround for bxe 1.0 -->
-    <optional>
-      <attribute name="caption">
-        <ref name="Text.datatype"/>
-      </attribute>
-    </optional>
   </define> 
 
   <define name="table.attlist">

@@ -31,6 +31,9 @@
          <element name="table" ns="http://www.w3.org/1999/xhtml"/>
          <element name="ol" ns="http://www.w3.org/1999/xhtml"/>
          <element name="ul" ns="http://www.w3.org/1999/xhtml"/>
+         <element name="object" ns="http://www.w3.org/1999/xhtml"/>
+         <element name="asset" ns="http://apache.org/cocoon/lenya/page-envelope/1.0"/>
+         
          <!-- attributes --> 
          <attribute name="id"/>      
          <attribute name="style"/>      

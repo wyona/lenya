@@ -55,6 +55,28 @@
     <menus>
       <menu name="File" label="File">
 	<block>
+	  
+	  <xsp:logic>
+	    {
+        if (Publication.ARCHIVE_AREA.equals(area) || Publication.TRASH_AREA.equals(area)) {
+          <item>New Document</item>
+	  <item>New Homepage</item>
+        }
+        else {
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=overview">New Overview</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=news">New RSS News</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=people">New People</item>            
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homepage</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage4cols">New Homepage (Portal)</item>
+
+
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=redirect">New Redirect</item>
+        }
+	    }
+	  </xsp:logic>
+	</block>
+	<block>
 	  <xsp:logic>
 	    {
 	      if (isDocument

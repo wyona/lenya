@@ -5,6 +5,7 @@
   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/" 
   
   >
 
@@ -22,19 +23,21 @@
   </xsl:variable> 
 
   <xsl:template match="unizh:news">
-    <rss>
+    <rss version="2.0">
       <channel>
         <title><xsl:value-of select="lenya:meta/dc:title"/></title>
         <link><xsl:value-of select="$channelhome"/></link>
         <description><xsl:value-of select="lenya:meta/dc:description"/></description>
-        <image>
-          <title></title>
-          <url><xsl:value-of select="$imageprefix"/><xsl:value-of select="xhtml:body/xhtml:object/@data"/></url>
-          <link></link>
-          <width></width>
-          <height></height>
-          <description>News for web users that write back</description>
-        </image>
+        <xsl:if test="xhtml:body/xhtml:object">
+          <image>
+            <title></title>
+            <url><xsl:value-of select="$imageprefix"/><xsl:value-of select="xhtml:body/xhtml:object/@data"/></url>
+            <link></link>
+            <width></width>
+            <height></height>
+            <description>News for web users that write back</description>
+          </image>
+        </xsl:if>
         <xsl:for-each select="//index:child">
           <item>
             <title><xsl:value-of select="*/unizh:newsitem/lenya:meta/dc:title"/></title>
@@ -48,7 +51,8 @@
                 </xsl:otherwise>
               </xsl:choose> 
             </link>
-            <description><xsl:value-of select="*/unizh:newsitem/unizh:short/unizh:text"/></description>
+            <description><xsl:copy-of select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
+            <pubDate><xsl:value-of select="*/unizh:newsitem/lenya:meta/dcterms:created"/></pubDate>
           </item>
         </xsl:for-each>
       </channel>

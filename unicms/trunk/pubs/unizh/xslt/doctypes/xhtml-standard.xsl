@@ -118,7 +118,7 @@
     <div class="contcol2">
       <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/>
+          <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
         </div>
       </div>
       <div class="contentarea">

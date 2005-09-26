@@ -683,9 +683,6 @@
              <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
                <xsl:if test="$items = '' or position() &lt;= $items">
                  <a href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a><br/>
-                 <xsl:if test="@descriptions = 'true'">
-                    <xsl:value-of select="xhtml:description"/><br/>
-                 </xsl:if>
                </xsl:if>
              </xsl:for-each>
              <xsl:if test="xhtml:rss/xhtml:channel/xhtml:link">
@@ -703,22 +700,22 @@
 
 
   <xsl:template match="unizh:rss-reader[parent::xhtml:body]">
+    <br class="floatclear"/>
     <xsl:variable name="items" select="@items"/>
-       <h2><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></h2><br/>
+       <h2><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></h2>
        <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
-          <xsl:if test="$items = '' or position() &lt;= $items">
-            <a target="_blank" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a><br/>
-            <xsl:value-of select="xhtml:description"/><br/>
-          </xsl:if>
-      </xsl:for-each>
-      <xsl:if test="xhtml:rss/xhtml:channel/xhtml:link">
-        <a class="arrow" target="_blank" href="{xhtml:rss/xhtml:channel/xhtml:link}">weiter</a>
-      </xsl:if> 
-      <xsl:if test="not(xhtml:rss/xhtml:channel/xhtml:item)">
-        --
-      </xsl:if>
+         <xsl:if test="$items = '' or position() &lt;= $items">
+           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
+           <h2><xsl:value-of select="xhtml:title"/>&#160;
+           <span class="lead"><xsl:value-of select="xhtml:pubDate"/></span></h2>
+           <p><xsl:apply-templates select="xhtml:description"/></p>
+           <a class="arrow" href="{xhtml:link}">weiter</a>
+         </xsl:if>
+       </xsl:for-each>
+       <xsl:if test="not(xhtml:rss/xhtml:channel/xhtml:item)">
+         <p> -- </p>
+       </xsl:if>
   </xsl:template> 
-
 
 
  

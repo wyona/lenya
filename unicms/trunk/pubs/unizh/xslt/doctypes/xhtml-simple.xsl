@@ -19,6 +19,7 @@
   <xsl:param name="defaultlanguage"/>
   <xsl:param name="language"/>
   <xsl:param name="nodeid"/>
+  <xsl:param name="fontsize"/>
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/elements.xsl"/>
