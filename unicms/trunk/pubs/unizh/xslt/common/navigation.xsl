@@ -33,7 +33,7 @@
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
       <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
-      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="/lenya/unizh/authoring/images/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
+      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="{$imageprefix}/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
       <a>
         <xsl:attribute name="href">
           <xsl:choose>
@@ -48,8 +48,8 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:attribute>
-        <img src="/lenya/unizh/authoring/images/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
-      <a href="{xhtml:div[@id = 'simpleview']/@href}"><img src="/lenya/unizh/authoring/images/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
+        <img src="{$imageprefix}/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
+      <a href="{xhtml:div[@id = 'simpleview']/@href}"><img src="{$imageprefix}/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
     </div>
   </xsl:template>
 
@@ -57,7 +57,7 @@
   <xsl:template match="xhtml:div[@id = 'menu']">
     <div id="secnav">
       <div class="solidline">
-        <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
       </div>
       <ul>
         <xsl:apply-templates select="xhtml:div"/>
@@ -81,7 +81,7 @@
       </xsl:if>
       <xsl:if test="parent::xhtml:div[@id = 'menu']">
         <div class="dotline">
-          <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
         </div>
       </xsl:if>
     </li>

@@ -16,10 +16,10 @@
     <div id="headerarea">
       <div style="float:right;width:195px;">
         <div class="imgunilogo">
-          <img src="/lenya/unizh/authoring/images/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+          <img src="{$imageprefix}/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
         </div>
         <div class="imginstitute">
-          <img src="/lenya/unizh/authoring/images/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
+          <img src="{$imageprefix}/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
         </div>
       </div>
       <div id="headertitelpos">
@@ -65,7 +65,7 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
     <div class="floatclear"><xsl:comment/></div>
     <div class="endheaderline">
-      <img src="/lenya/unizh/authoring/images/1.gif" alt="separation line" width="1" height="1" border="0" />
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
     </div>
   </xsl:template>
 
