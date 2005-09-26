@@ -707,10 +707,13 @@ div.caption {
   color: blue;
 }
 
+.teaser .asset {
+  display: block;
+}
 
 .lead .object {
-  width: 180px;
-  height: 130px;
+  max-width: 180px;
+  max-height: 130px;
   margin-left: 10px;
   background-color: #f0f0f5;
   margin-top: 5px;
@@ -718,8 +721,8 @@ div.caption {
 }
 
 .teaser .object {
-  width: 160px;
-  height: 100px;
+  max-width: 160px;
+  max-height: 100px;
   margin-left: 10px; 
   background-color: #f0f0f5;
   margin-top: 5px;
@@ -728,8 +731,8 @@ div.caption {
 
 
 .lead .object object {
-  width: 180px;
-  height: 130px;
+  max-width: 180px;
+  max-height: 130px;
 }
 
 .lead .object .caption {
@@ -746,8 +749,8 @@ div.caption {
 
 
 .teaser .object object {
-  width: 155px;
-  height: 100px;
+  max-width: 155px;
+  max-height: 100px;
 }
 
 .teaser .object .caption {
@@ -787,8 +790,8 @@ div.caption {
 }
 
 #short .object object {
-  width: 100px;
-  height: 64px;
+  max-width: 100px;
+  max-height: 64px;
   display: block;
 }
 
@@ -815,6 +818,10 @@ div.caption {
         padding: 8px 9px 10px 11px;
         line-height:15px;
         font-size:11px;
+        display: block;
+}
+
+.quicklink .a {
         display: block;
 }
 
@@ -863,19 +870,15 @@ div.caption {
         height:60px;
         border: 1px solid #ccc;
         display: block;
-}
-
-.rss-reader .rss-title  {
         padding: 0px 0px 0px 11px;
-        font-weight: bold;
 }
 
-.rss-reader .remarks  {
-        padding: 8px 9px 10px 11px;
-        line-height:15px;
-        font-size:11px;
+.rss-reader:before {
+        font-weight: bold;
+        content: "RSS Reader";
         display: block;
 }
+
 
 
 </css>
