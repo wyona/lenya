@@ -9,8 +9,8 @@
   <xsl:template match="unizh:related-content">
     <xsl:choose>
       <xsl:when test="@link != ''">
-        <cinclude:includexml>
-          <cinclude:src ignoreErrors="true">cocoon:/include-related/<xsl:value-of select="@link"/></cinclude:src>
+        <cinclude:includexml ignoreErrors="true">
+          <cinclude:src>cocoon:/include-related/<xsl:value-of select="@link"/></cinclude:src>
         </cinclude:includexml> 
       </xsl:when>
       <xsl:otherwise>
@@ -24,8 +24,8 @@
   <xsl:template match="unizh:teaser">
      <xsl:choose>
       <xsl:when test="@link != ''">
-        <cinclude:includexml>
-          <cinclude:src ignoreErrors="true">cocoon:/include-teaser/<xsl:value-of select="@link"/>.<xsl:value-of select="@id"/></cinclude:src>
+        <cinclude:includexml ignoreErrors="true">
+          <cinclude:src>cocoon:/include-teaser/<xsl:value-of select="@link"/>.<xsl:value-of select="@name"/></cinclude:src>
         </cinclude:includexml>   
       </xsl:when>
       <xsl:otherwise>

@@ -10,7 +10,7 @@
 
   <xsl:param name="element"/>
 
-  <xsl:param name="id"/>
+  <xsl:param name="name"/>
 
 
   <xsl:template match="/">
@@ -27,8 +27,8 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="*/unizh:related-content/unizh:teaser[@id = $id]">
-            <xsl:apply-templates select="*/unizh:related-content/unizh:teaser[@id = $id]"/>
+          <xsl:when test="*/unizh:related-content/unizh:teaser[@name = $name]">
+            <xsl:apply-templates select="*/unizh:related-content/unizh:teaser[@name = $name]"/>
           </xsl:when>
           <xsl:otherwise>
             <unizh:teaser>
