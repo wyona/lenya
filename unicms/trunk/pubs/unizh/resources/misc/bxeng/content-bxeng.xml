@@ -826,6 +826,10 @@ div.caption {
 }
 
 
+.teaser .a {
+        display: block;
+}
+
 .content1 .teaser {
         width:194px;
         border: 1px solid #ccc;
