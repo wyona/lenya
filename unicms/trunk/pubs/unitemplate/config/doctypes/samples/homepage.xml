@@ -24,7 +24,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <unizh:superscription>Name Departement</unizh:superscription>
     <unizh:heading>Titel Website</unizh:heading>
   </unizh:header>
-  <unizh:quicklinks>
+  <unizh:quicklinks label="Quick Links">
     <unizh:quicklink>
       <p>Beschreibung</p>
       <a href="#">Link</a>

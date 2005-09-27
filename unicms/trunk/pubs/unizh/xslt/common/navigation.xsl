@@ -56,11 +56,12 @@
 
   <xsl:template match="xhtml:div[@id = 'menu']">
     <div id="secnav">
+      <xsl:apply-templates select="xhtml:div[@id = 'home']"/>
       <div class="solidline">
         <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
       </div>
       <ul>
-        <xsl:apply-templates select="xhtml:div"/>
+        <xsl:apply-templates select="xhtml:div[not(@id = 'home')]"/>
       </ul>
     </div>
   </xsl:template>
@@ -85,6 +86,11 @@
         </div>
       </xsl:if>
     </li>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @id = 'home']">
+    <a class="back" href="{@href}"><xsl:value-of select="."/></a>
   </xsl:template>
 
 

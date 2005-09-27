@@ -23,6 +23,12 @@
         <dc:coverage/>
         <dc:rights>DC Rights</dc:rights>
     </lenya:meta>
+    <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Example</unizh:title>
+      <p>Example Teaser.</p>
+    </unizh:teaser>
+  </unizh:related-content>
 <body>
 
 <h2>The Content Doctypes</h2>

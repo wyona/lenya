@@ -7,18 +7,13 @@
     xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
     >
     
-<xsl:template match="/document">
-  <document>
-    <unizh:header>
-      <unizh:superscription>
-        <xsl:value-of select="unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:superscription"/> 
-      </unizh:superscription>
-      <unizh:heading href="{unizh:ancestors/unizh:ancestor[@basic-url = 'index']/@href}">
-        <xsl:value-of select="unizh:ancestors/unizh:ancestor[@basic-url = 'index']/unizh:homepage/unizh:header/unizh:heading"/>
-      </unizh:heading>
-    </unizh:header>
-    <xsl:apply-templates/>
-  </document>
+<xsl:template match="content/*">
+  <xsl:copy>
+    <xsl:if test="not(unizh:header)">
+      <unizh:header/>
+    </xsl:if>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
 </xsl:template>
 
 <xsl:template match="@*|node()">

@@ -25,38 +25,26 @@
       <div id="headertitelpos">
         <xsl:apply-templates select="/document/xhtml:div[@id = 'servicenav']"/>
         <xsl:choose>
-          <xsl:when test="$document-element-name = 'unizh:homepage'">
+          <xsl:when test="$document-element-name = 'unizh:homepage' or $document-element-name = 'unizh:homepage4cols'">
             <h2>
-              <div bxe_xpath="/unizh:homepage/unizh:header/unizh:superscription">
-                <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:superscription"/>
+              <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:superscription">
+                <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
               </div>
             </h2>
             <h1>
-              <div bxe_xpath="/unizh:homepage/unizh:header/unizh:heading">
-                <xsl:value-of select="/document/content/unizh:homepage/unizh:header/unizh:heading"/>
-              </div>
-            </h1>
-          </xsl:when>
-          <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
-            <h2>
-              <div bxe_xpath="/unizh:homepage4cols/unizh:header/unizh:superscription">
-                <xsl:value-of select="/document/content/unizh:homepage4cols/unizh:header/unizh:superscription"/>
-              </div>
-            </h2>
-            <h1>
-              <div bxe_xpath="/unizh:homepage4cols/unizh:header/unizh:heading">
-                <xsl:value-of select="/document/content/unizh:homepage4cols/unizh:header/unizh:heading"/>
+              <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:heading">
+                <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
               </div>
             </h1>
           </xsl:when>
           <xsl:otherwise>
             <h2>
-              <xsl:value-of select="/document/unizh:header/unizh:superscription"/>
+              <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
             </h2>
             <h1>
-              <xsl:value-of select="/document/unizh:header/unizh:heading"/>
+              <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
             </h1>
-          </xsl:otherwise>
+          </xsl:otherwise> 
         </xsl:choose>
       </div>
     </div>
