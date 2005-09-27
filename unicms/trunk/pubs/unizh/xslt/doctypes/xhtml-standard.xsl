@@ -104,7 +104,7 @@
         </h1>
         <p>&#160;</p>
         <div bxe_xpath="/{$document-element-name}/xhtml:body">
-          <xsl:apply-templates select="*/xhtml:body/*"/>
+          <xsl:apply-templates select="*/xhtml:body/*"/>asdasdff
           <br/>
         </div>
       </div>

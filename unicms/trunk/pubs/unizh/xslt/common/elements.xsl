@@ -700,7 +700,6 @@
 
 
   <xsl:template match="unizh:rss-reader[parent::xhtml:body]">
-    <br class="floatclear"/>
     <xsl:variable name="items" select="@items"/>
        <h2><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></h2>
        <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
@@ -822,7 +821,6 @@
 
 
   <xsl:template match="unizh:children[ancestor::unizh:news]">
-    <br class="floatclear"/>
     <xsl:choose>
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">

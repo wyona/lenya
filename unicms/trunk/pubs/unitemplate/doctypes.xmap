@@ -139,7 +139,7 @@
           <map:generate src="content/{page-envelope:area}/{../1}/index_{page-envelope:document-language}.xml"/>
           <map:transform src="../unizh/xslt/common/related-writer.xsl">
             <map:parameter name="element" value="unizh:teaser"/>
-            <map:parameter name="id" value="{../2}"/>
+            <map:parameter name="name" value="{../2}"/>
           </map:transform>
           <map:serialize type="xml"/>
         </map:act>

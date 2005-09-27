@@ -131,7 +131,9 @@
     <element name="unizh:title">
       <text/>
     </element>
-    <ref name="p"/>
+    <optional>
+      <ref name="p"/>
+    </optional>
     <zeroOrMore>
       <choice>
         <ref name="lenya.asset"/>
