@@ -670,13 +670,32 @@
 
   <xsl:template match="unizh:rss-reader[parent::unizh:related-content]">
     <xsl:variable name="items" select="@items"/>
+
     <div class="relatedboxborder">
       <div class="relatedboxcont">
          <xsl:choose>
            <xsl:when test="xhtml:rss/xhtml:channel">
+
              <xsl:if test="@image = 'true' and xhtml:rss/xhtml:channel/xhtml:image">
-               <img src="{xhtml:rss/xhtml:channel/xhtml:image/xhtml:url}" height="100" width="156"/><br/>
+               <xsl:variable name="imageheight">
+                 <xsl:choose>
+                   <xsl:when test="xhtml:rss/xhtml:channel/xhtml:image/xhtml:height &lt; 100">
+                     <xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:image/xhtml:height"/>
+                   </xsl:when>
+                   <xsl:otherwise>100</xsl:otherwise>
+                 </xsl:choose>
+               </xsl:variable>
+               <xsl:variable name="imagewidth">
+                 <xsl:choose>
+                   <xsl:when test="xhtml:rss/xhtml:channel/xhtml:image/xhtml:width &lt; 156">
+                     <xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:image/xhtml:width"/>
+                   </xsl:when>
+                   <xsl:otherwise>156</xsl:otherwise>
+                 </xsl:choose>
+               </xsl:variable>
+               <img src="{xhtml:rss/xhtml:channel/xhtml:image/xhtml:url}" height="{$imageheight}" width="{$imagewidth}"/><br/>
              </xsl:if>
+
              <div class="titel"><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></div>
              <div class="titel">&#160;</div>
              <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
