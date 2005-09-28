@@ -82,7 +82,7 @@ a.arrow {
 	width:100%;
 	display:block;
 	background-color: #666699;
-	/*background-image:url(../img/contimg.jpg);*/
+	/*background-image:url(<context-prefix/>/unizh/authoring/images/contimg.jpg);*/
 	height:90px;
 	min-width:600px;
 }
@@ -90,7 +90,12 @@ a.arrow {
 	margin-left:6px;
 	margin-right:195px;
 }
-
+#headerarea a {
+	color:#FFFFFF;
+}
+#headerarea a:hover {
+	background-color:transparent;
+}
 .imgunilogo {
 	background-color: #ccccff;
 	padding-left:15px;
@@ -121,8 +126,8 @@ a.arrow {
 
 /* NAVIGATION */
 
-/*breadclam navigation*/
-#breadclamnav { 
+/*breadcrumbnavigation*/
+#breadcrumbnav { 
 	margin-top:2px;
 	margin-left:6px;
 	margin-bottom:3px;
@@ -167,7 +172,7 @@ a.arrow {
 #servicenavpos form {
 	display:inline;
 }
-.servieceform {
+.serviceform  {
 	display:inline;
 }
 
@@ -196,10 +201,7 @@ a.arrow {
 	color:#666699;
 	float:left;
 }
-#primarnav .linkseparatoract {
-	color:#fff;
-	float:left;
-}
+
 /* Seconder navigation */
 #secnav {
   	width:165px;
@@ -635,9 +637,6 @@ input.optiontag {
 	height: auto;
 }
 /* End hide from IE5/mac */
-
-
-/* CMS */
 
 
 .editview {

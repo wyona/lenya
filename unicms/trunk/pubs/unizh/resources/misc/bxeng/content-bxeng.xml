@@ -87,35 +87,35 @@ a:hover {
 	background-color:#f0f0f5;
 }
 a.download {
-	background-image:url(../img/icon_download.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
 a.targetblank {
-	background-image:url(../img/icon_blank.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_blank.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
 a.arrow, ul.squarelist li a, .content a {
-	background-image:url(../img/arrow.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
 a.back {
-	background-image:url(../img/arrow_back12.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_back12.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
 .content a.arrow {
-	background-image:url(../img/arrow12.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow12.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
@@ -170,7 +170,7 @@ a.back {
 	padding:0px;
 }
 .endheaderline {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	margin-bottom:26px;
 	height:1px;
 }
@@ -269,7 +269,7 @@ a.back {
 }
 .navup a {
 	display:block;
-	background-image:url(../img/icon_arrow_up.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_arrow_up.gif);
 	padding-left:20px;
 	background-repeat: no-repeat;
 }
@@ -367,7 +367,7 @@ a.back {
 }
 
 #col1 ul li a {
-	background-image:url(../img/arrow.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
@@ -448,7 +448,7 @@ a.back {
 	font-weight: bold;
 }
 .relatedboxcont a.rss {
-	background-image:url(../img/arrow_rss.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_rss.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
@@ -458,7 +458,7 @@ a.back {
 
 }
 .relatedboxcont .rssdotline {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:159px;
 	height:1px;
 	border:0px;
@@ -474,7 +474,7 @@ a.back {
 	margin-bottom:7px;
 }
 .topnav a {
-	background-image:url(../img/arrow_top.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_top.gif);
 	margin-right:7px;
 	background-repeat: no-repeat;
 	background-position:left;
@@ -496,19 +496,19 @@ ul.squarelist {
 }
 
 ul.squarelist li {
-	background-image: url(../img/listsq.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/listsq.gif);
 	background-repeat: no-repeat;
 	padding-left:13px;
 }
 
 ul.linklist li  {
-	background-image:url(../img/arrowlist.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrowlist.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
  	background-position: top left;
 }
 .content2 ul.linklist li   {
-	background-image:url(../img/arrow.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	background-repeat: no-repeat;
 }
 
@@ -516,7 +516,7 @@ ul.linknav {
 	font-size:11px;
 }
 .content1 ul.linknav li a, .content2 ul.linknav li a {
-	background-image:url(../img/arrow2.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow2.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
@@ -538,7 +538,7 @@ ol {
 	margin-left:25px;
 }
 ol li a {
-	background-image:url(../img/arrow.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 }
@@ -554,7 +554,7 @@ ol li a {
 	width:100%;
 }
 .linkrow a {
-	background-image:url(../img/icon_blank.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_blank.gif);
 	padding-left:13px;
 	font-size: 12px;
 	line-hegiht:20px;
@@ -760,21 +760,21 @@ input.optiontag {
 }
 
 .dotline {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
 	height:1px;
 	border:0px;
 	margin:0px;
 }
 .dotlinelead {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
 	height:1px;
 	border:0px;
 	margin: 0 0 7px 0;
 }
 .dotlinemitmargin {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
 	height:1px;
 	border:0px;
@@ -790,7 +790,7 @@ div.caption {
 /* BXE */
 
 .asset {
-  background-image:url(/lenya/unizh/resources/images/icon_download.gif);
+  background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
   padding-left:13px;
   background-repeat: no-repeat;
   padding-right:2px;
