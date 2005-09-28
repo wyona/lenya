@@ -16,7 +16,9 @@
     <div id="headerarea">
       <div style="float:right;width:195px;">
         <div class="imgunilogo">
-          <img src="{$imageprefix}/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+          <a href="http://www.unizh.ch">
+            <img src="{$imageprefix}/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+          </a>
         </div>
         <div class="imginstitute">
           <img src="{$imageprefix}/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
@@ -42,7 +44,9 @@
               <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
             </h2>
             <h1>
-              <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
+              <a href="{/document/xhtml:div[@id = 'servicenav']/xhtml:div[@id = 'home']/@href}">
+                <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
+              </a>
             </h1>
           </xsl:otherwise> 
         </xsl:choose>
@@ -50,7 +54,14 @@
     </div>
     <div class="floatclear"><xsl:comment/></div>
     <!-- tabs -->
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
+    <xsl:choose>
+      <xsl:when test="/document/xhtml:div[@id = 'tabs']">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'tabs']"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <div id="primarnav">&#160;</div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="floatclear"><xsl:comment/></div>
     <div class="endheaderline">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />

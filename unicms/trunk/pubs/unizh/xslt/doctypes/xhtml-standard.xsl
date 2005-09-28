@@ -102,7 +102,6 @@
             <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
           </div>
         </h1>
-        <p>&#160;</p>
         <div bxe_xpath="/{$document-element-name}/xhtml:body">
           <xsl:apply-templates select="*/xhtml:body/*"/>asdasdff
           <br/>
@@ -128,7 +127,6 @@
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
-          <p>&#160;</p>
           <div bxe_xpath="/{$document-element-name}/xhtml:body">
             <xsl:apply-templates select="*/xhtml:body/*"/>
           </div>
@@ -154,7 +152,6 @@
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
-          <p>&#160;</p>
           <xsl:apply-templates select="*/xhtml:body/*"/>
         </div>
         <xsl:call-template name="footer"/>
@@ -179,7 +176,6 @@
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
-          <p>&#160;</p>
           <div bxe_xpath="/{$document-element-name}/xhtml:body">
             <xsl:apply-templates select="*/xhtml:body/*"/>
           </div>
@@ -319,7 +315,6 @@
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
-          <p>&#160;</p>
           <xsl:apply-templates select="*/xhtml:body/*"/>
         </div>
         <xsl:call-template name="footer"/>

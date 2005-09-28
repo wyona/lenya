@@ -19,10 +19,10 @@
         <xsl:if test="position() &lt; last()">|</xsl:if>
       </xsl:for-each>
       <form id="formsearch" action="" method="post" enctype="text/plain">
-        <div class="servieceform">
+        <div class="serviceform">
           <input type="text" name="searchtext"/>
         </div>
-        <div class="servieceform">
+        <div class="serviceform">
           <a href="javascript:document.forms['formsearch'].submit();">Suche</a>
         </div>
       </form>
@@ -32,20 +32,16 @@
 
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
-      <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> |
+      <xsl:if test="xhtml:div[@id = 'language']">
+        <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> | 
+      </xsl:if>
       <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="{$imageprefix}/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
       <a>
         <xsl:attribute name="href">
           <xsl:choose>
-            <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-             ?fontsize=normal
-            </xsl:when>
-            <xsl:when test="contains($fontsize, 'normal')">
-             ?fontsize=big
-            </xsl:when>
-            <xsl:otherwise>
-             ?fontsize=big
-            </xsl:otherwise>
+            <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">?fontsize=normal</xsl:when>
+            <xsl:when test="contains($fontsize, 'normal')">?fontsize=big</xsl:when>
+            <xsl:otherwise>?fontsize=big</xsl:otherwise>
           </xsl:choose>
         </xsl:attribute>
         <img src="{$imageprefix}/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
@@ -90,7 +86,9 @@
 
 
   <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @id = 'home']">
-    <a class="back" href="{@href}"><xsl:value-of select="."/></a>
+    <div class="navup">
+      <a href="{@href}"><xsl:value-of select="."/></a>
+    </div>
   </xsl:template>
 
 
@@ -107,7 +105,7 @@
 
 
   <xsl:template match="xhtml:div[@id = 'breadcrumb']">
-    <div id="breadclamnav">
+    <div id="breadcrumbnav">
       <a href="{@root}"><xsl:value-of select="@label"/></a>
       <xsl:for-each select="xhtml:div">
          &gt; <a href="{@href}"><xsl:value-of select="."/></a>

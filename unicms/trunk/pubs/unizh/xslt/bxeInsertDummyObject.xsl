@@ -11,6 +11,8 @@
 
 <xsl:template match="unizh:teaser">
   <xsl:copy>
+    <xsl:copy-of select="@name"/>
+    <xsl:copy-of select="@link"/>
     <xsl:if test="not(xhtml:object)">
       <xhtml:object id="dummy"/>
     </xsl:if>

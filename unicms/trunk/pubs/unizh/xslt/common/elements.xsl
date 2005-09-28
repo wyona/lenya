@@ -400,19 +400,24 @@
         </div>
       </xsl:when>
       <xsl:when test="@popup = 'true' and not (@float = 'true')">
-        <div class="imgTextfluss"> <!-- FIXME: css for non floating small image with caption needed -->
+        <div class="imgMitLegende"> 
           <xsl:call-template name="object_link">
             <xsl:with-param name="popup">true</xsl:with-param>
           </xsl:call-template>
-          <p class="legende">
+          <div class="legende">
             <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image')">(+)</a>
-          </p>
+              <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+          </div>
         </div>
         <br class="floatclear"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:call-template name="object_link"/>
+        <div class="imgMitLegende">
+          <xsl:call-template name="object_link"/>
+          <div class="legende"> 
+            <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+          </div>
+        </div>
       </xsl:otherwise>
     </xsl:choose> 
   </xsl:template>
@@ -522,13 +527,6 @@
     </span>
   </xsl:template>
 
-  <xsl:template match="unizh:quicklinks">
-    Quicklinks:<br/>
-    <xsl:for-each select="xhtml:a">
-      <xsl:apply-templates select="self::xhtml:a"/><br/>
-    </xsl:for-each>
-  </xsl:template>
-
 
   <xsl:template match="unizh:related-content">
     <xsl:apply-templates/>
@@ -620,7 +618,7 @@
 
   <xsl:template match="unizh:quicklinks">
     <div id="col1">
-      <div bxe_xpath="/{$document-element-name}/unizh:quicklinks">
+      <div class="quicklinks" bxe_xpath="/{$document-element-name}/unizh:quicklinks">
         <div class="solidline">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
         </div>
@@ -679,15 +677,17 @@
              <xsl:if test="@image = 'true' and xhtml:rss/xhtml:channel/xhtml:image">
                <img src="{xhtml:rss/xhtml:channel/xhtml:image/xhtml:url}" height="100" width="156"/><br/>
              </xsl:if>
-             <b><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></b><br/>
+             <div class="titel"><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></div>
+             <div class="titel">&#160;</div>
+             <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
              <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
                <xsl:if test="$items = '' or position() &lt;= $items">
-                 <a href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a><br/>
+                 <a class="rss" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a>
+                 <xsl:if test="position() &lt; $items">
+                   <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
+                 </xsl:if>
                </xsl:if>
              </xsl:for-each>
-             <xsl:if test="xhtml:rss/xhtml:channel/xhtml:link">
-               <a class="arrow" href="{xhtml:rss/xhtml:channel/xhtml:link}">weiter</a>
-             </xsl:if> 
            </xsl:when>
            <xsl:otherwise>
             --
@@ -731,8 +731,8 @@
       <xsl:if test="@class">
         <xsl:copy-of select="@class"/>
       </xsl:if>
-      <a name="{.}" id="{.}"><xsl:comment/></a>
       <xsl:apply-templates/>
+      <a class="namedanchor" name="{.}" id="{.}"><xsl:comment/></a>
     </h2>
   </xsl:template>
   
@@ -803,20 +803,13 @@
   </xsl:template>
 
   <xsl:template match="level:node">
-    <p>
-      <xsl:choose>
-        <xsl:when test="concat($root, $documentid, '.html') = concat($contextprefix, @href)">
-          <xsl:value-of select="descendant::dc:title"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <a class="arrow" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a>
-        </xsl:otherwise>
-      </xsl:choose>
-    </p>
+    <a class="arrow" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a><br/>
   </xsl:template>
 
   <xsl:template match="xhtml:div[@id='link-to-parent']">
-    <xhtml:a class="back" href="{@href}"><xsl:value-of select="."/></xhtml:a>
+    <p>
+      <xhtml:a class="back" href="{@href}"><xsl:value-of select="."/></xhtml:a>
+    </p>
   </xsl:template> 
 
 
