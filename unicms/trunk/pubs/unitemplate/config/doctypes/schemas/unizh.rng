@@ -46,7 +46,6 @@
     <choice>
       <value type="string">true</value>
       <value type="string">false</value>
-      <value type="string">root</value>
     </choice>
   </attribute>
 </define>
