@@ -9,10 +9,11 @@
     
 <xsl:template match="content/*">
   <xsl:copy>
+    <xsl:apply-templates select="@*"/>
     <xsl:if test="not(unizh:header)">
       <unizh:header/>
     </xsl:if>
-    <xsl:apply-templates select="@*|node()"/>
+    <xsl:apply-templates/>
   </xsl:copy>
 </xsl:template>
 

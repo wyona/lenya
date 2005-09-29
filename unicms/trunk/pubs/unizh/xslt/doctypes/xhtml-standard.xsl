@@ -45,10 +45,10 @@
           <xsl:choose>
             <xsl:when test="$document-element-name='xhtml:html'">
               <xsl:choose>
-                <xsl:when test="xhtml:html/@unizh:columns = '1'">
+                <xsl:when test="xhtml:html[@unizh:columns = '1']">
                   <xsl:call-template name="one-column"/>
                 </xsl:when>
-                <xsl:when test="xhtml:html/@unizh:columns = '2'">
+                <xsl:when test="xhtml:html[@unizh:columns = '2']">
                   <xsl:call-template name="two-columns"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -103,7 +103,7 @@
           </div>
         </h1>
         <div bxe_xpath="/{$document-element-name}/xhtml:body">
-          <xsl:apply-templates select="*/xhtml:body/*"/>asdasdff
+          <xsl:apply-templates select="*/xhtml:body/*"/>
           <br/>
         </div>
       </div>
