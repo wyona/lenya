@@ -213,14 +213,6 @@
         </choice>
       </attribute>
     </optional>
-    <optional>
-      <attribute name="descriptions">
-        <choice>
-          <value type="string">true</value>
-          <value type="string">false</value>
-        </choice>
-      </attribute>
-    </optional>
     <text/>
   </element>
 </define>
