@@ -975,5 +975,11 @@
     <xsl:value-of select="."/>
   </xsl:template>
 
- 
+
+  <xsl:template match="xhtml:textarea">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>&#160;
+    </xsl:copy>
+  </xsl:template>
+
 </xsl:stylesheet>
