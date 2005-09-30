@@ -24,7 +24,7 @@
 
 <xsl:choose>
    <xsl:when test="@unizh:columns = '3'">
-      <xsl:apply-templates select="unizh:highlights"/>
+      <xsl:apply-templates select="unizh:related-content"/>
    </xsl:when>
    <xsl:otherwise/>
 </xsl:choose>   
