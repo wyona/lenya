@@ -9,7 +9,6 @@
 >
 
 <xsl:template match="unizh:related-content">
-  <h2>gaga</h2>
   <node name="Related Content">
   <!-- <action><delete value="true" name="&lt;xupdate:remove select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;/&gt;"/></action> -->
   </node>
