@@ -400,7 +400,7 @@
         </div>
       </xsl:when>
       <xsl:when test="@popup = 'true' and not (@float = 'true')">
-        <div class="imgMitLegende"> 
+        <div class="imgTexfluss"> 
           <xsl:call-template name="object_link">
             <xsl:with-param name="popup">true</xsl:with-param>
           </xsl:call-template>
@@ -412,12 +412,19 @@
         <br class="floatclear"/>
       </xsl:when>
       <xsl:otherwise>
-        <div class="imgMitLegende">
-          <xsl:call-template name="object_link"/>
-          <div class="legende"> 
-            <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-          </div>
-        </div>
+        <xsl:choose>
+          <xsl:when test="xhtml:div[@class = 'caption']">
+            <div class="imgMitLegende">
+              <xsl:call-template name="object_link"/>
+              <div class="legende"> 
+                <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+              </div>
+            </div>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:call-template name="object_link"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:otherwise>
     </xsl:choose> 
   </xsl:template>
@@ -466,6 +473,15 @@
                 <xsl:attribute name="width">200</xsl:attribute>
                 <xsl:attribute name="height">140</xsl:attribute>
               </xsl:when>
+              <xsl:when test="ancestor::xhtml:table">
+                <xsl:attribute name="width">100</xsl:attribute>
+              </xsl:when>
+              <xsl:when test="@width = '415'">
+                <xsl:attribute name="width">415</xsl:attribute>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:attribute name="width">204</xsl:attribute>
+              </xsl:otherwise>
             </xsl:choose>
           </img>
         </a>
@@ -508,6 +524,18 @@
               <xsl:attribute name="width">200</xsl:attribute>
               <xsl:attribute name="height">140</xsl:attribute>
             </xsl:when>
+            <xsl:when test="ancestor::xhtml:table and @width != ''">
+              <xsl:attribute name="width"><xsl:value-of select="@width"/></xsl:attribute>
+            </xsl:when>
+            <xsl:when test="ancestor::xhtml:table">
+              <xsl:attribute name="width">100</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@width = '415'">
+              <xsl:attribute name="width">415</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="width">204</xsl:attribute>
+            </xsl:otherwise> 
           </xsl:choose>
         </img>
       </xsl:otherwise>
@@ -520,6 +548,12 @@
       <xsl:apply-templates/>
     </a>
   </xsl:template>
+
+  <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
+    <a name="{@name}"/><xsl:comment/>
+  </xsl:template>
+
+
 
   <xsl:template match="unizh:attention">
     <span class="attention">
@@ -540,7 +574,7 @@
           <xsl:apply-templates select="xhtml:object"/>
           <br/>
         </xsl:if>
-        <b><xsl:value-of select="unizh:title"/></b><br/>
+        <b><xsl:value-of select="unizh:title"/><xsl:comment/></b><br/>
         <xsl:apply-templates select="xhtml:p"/>
         <xsl:for-each select="lenya:asset">
           <xsl:apply-templates select="."/><br/>
@@ -549,7 +583,7 @@
           <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
         </xsl:for-each> 
         <xsl:apply-templates select="lenya:asset-dot"/>
-        <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
+        <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
       </div> 
     </div>
     <p>&#160;</p>
@@ -735,23 +769,21 @@
        </xsl:if>
   </xsl:template> 
 
-
- 
-  <xsl:template match="xhtml:td[not(ancestor::*[@id = 'menu'])]">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-      <xsl:apply-templates select="lenya:asset-dot"/>
-    </xsl:copy>
-  </xsl:template>
-  
   
   <xsl:template match="xhtml:body//xhtml:h2">
     <h2>
       <xsl:if test="@class">
         <xsl:copy-of select="@class"/>
       </xsl:if>
-      <xsl:apply-templates/>
-      <a class="namedanchor" name="{.}" id="{.}"><xsl:comment/></a>
+      <xsl:value-of select="."/>
+      <xsl:choose>
+        <xsl:when test="xhtml:a">
+          <a class="namedanchor" name="{xhtml:a/@name}"><xsl:comment/></a>
+        </xsl:when>
+        <xsl:otherwise>
+          <a class="namedanchor" name="{.}" id="{.}"><xsl:comment/></a>
+        </xsl:otherwise>
+      </xsl:choose>
     </h2>
   </xsl:template>
   

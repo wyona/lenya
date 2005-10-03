@@ -167,6 +167,19 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:td[$rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:if test=". = '' or . = '&#160;'">
+         <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">image</xsl:with-param>
+          <xsl:with-param name="insertWhere">inside</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>

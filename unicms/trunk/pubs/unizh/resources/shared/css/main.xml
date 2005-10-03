@@ -27,7 +27,10 @@ body {
 }
 img {
 	border:0px;
+        max-width: 415px;
 }
+
+
 
 /*font*/
 h2, h3, h4, h5, h6{
@@ -99,7 +102,7 @@ a.targetblank {
 	padding-right:2px;
 	margin-left:2px;
 }
-a.arrow, ul.squarelist li a, .content a {
+a.arrow, ul.squarelist li a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
@@ -781,6 +784,11 @@ input.optiontag {
 }
 
 /* uni additions */
+
+td img {
+       max-width: 204px;
+}
+
 
 a.namedanchor {
         background-image: none;
