@@ -30,6 +30,7 @@
   </xsl:if>
   <xsl:apply-templates select="unizh:title"/>
   <xsl:apply-templates select="*" mode="teaser"/>
+  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
@@ -38,7 +39,6 @@
     <action><delete name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']&quot;/&gt;"/></action>
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="."/></xsl:attribute></input></content>
   </node>
-  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/unizh:title</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
@@ -62,26 +62,9 @@
   <xsl:variable name="nsxhtml">namespace=&quot;http://www.w3.org/1999/xhtml&quot;</xsl:variable>
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
   <insert-after select="{$path}[@tagID='{@tagID}']">
-    <element name="Paragraph" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:p&quot; {$nsxhtml}&gt;New Paragraph&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-    <element name="Headline 2" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h2&quot; {$nsxhtml}&gt;New Headline 2&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-    <element name="Headline 3" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h3&quot; {$nsxhtml}&gt;New Headline 3&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-    <element name="Headline 4" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
+    <element name="New Teaser" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;New title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;New content&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
-
-
-<xsl:template name="insertbeforehighlightmenu">
-  <xsl:param name="path"/>
-  <xsl:variable name="nsxhtml">namespace=&quot;http://www.w3.org/1999/xhtml&quot;</xsl:variable>
-  <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
-  <insert-before select="{$path}[@tagID='{@tagID}']">
-    <element name="Paragraph" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:p&quot; {$nsxhtml}&gt;New Paragraph&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-    <element name="Headline 2" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h2&quot; {$nsxhtml}&gt;New Headline 2&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-    <element name="Headline 3" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h3&quot; {$nsxhtml}&gt;New Headline 3&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-    <element name="Headline 4" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-  </insert-before>
-</xsl:template>
-
 
 <xsl:template match="*[local-name()='children']" mode="body">
   <node name="Children">
@@ -121,10 +104,6 @@
 
 
 <xsl:template match="xhtml:p" mode="teaser">
-  <xsl:if test="not(preceding-sibling::*)">
-    <xsl:call-template name="insertbeforehighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:p</xsl:with-param>
-    </xsl:call-template>
-  </xsl:if>
   <xsl:choose>
     <xsl:when test="xhtml:object">
       <xsl:apply-templates select="xhtml:object" mode="teaser"/>
@@ -136,7 +115,6 @@
       </node>
     </xsl:otherwise>
   </xsl:choose>
-  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:p</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
@@ -148,45 +126,6 @@
       <textarea name="&lt;xupdate:update select=&quot;/*/unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']&quot;&gt;" cols="40" size="3"><xsl:value-of select="."/></textarea>
     </content>
   </node>
-</xsl:template>
-
-
-<xsl:template match="xhtml:h2" mode="teaser">
-  <xsl:if test="not(preceding-sibling::*)">
-    <xsl:call-template name="insertbeforehighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h2</xsl:with-param>
-    </xsl:call-template>
-  </xsl:if>
-  <node name="Headline 2" select="//unizh:related-content/unizh:teaser/xhtml:h2[@tagID='{@tagID}']">
-    <action><delete value="true" name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:h2[@tagID='{@tagID}']&quot;/&gt;"/></action>
-    <content><textarea name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/xhtml:h2[@tagID='{@tagID}']&quot;&gt;" cols="40" size="5"><xsl:value-of select="."/></textarea></content>
-  </node>
-  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h2</xsl:with-param></xsl:call-template>
-</xsl:template>
-
-
-<xsl:template match="xhtml:h3" mode="teaser">
-  <xsl:if test="not(preceding-sibling::*)">
-    <xsl:call-template name="insertbeforehighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h3</xsl:with-param>
-    </xsl:call-template>
-  </xsl:if>
-  <node name="Headline 3" select="//unizh:related-content/unizh:teaser/xhtml:h3[@tagID='{@tagID}']">
-    <action><delete value="true" name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:h3[@tagID='{@tagID}']&quot;/&gt;"/></action>
-    <content><textarea name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/xhtml:h3[@tagID='{@tagID}']&quot;&gt;" cols="40" size="5"><xsl:value-of select="."/></textarea></content>
-  </node>
-  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h3</xsl:with-param></xsl:call-template>
-</xsl:template>
-
-
-<xsl:template match="xhtml:h4" mode="teaser">
-  <xsl:if test="not(preceding-sibling::*)">
-    <xsl:call-template name="insertbeforehighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h4</xsl:with-param>
-    </xsl:call-template>
-  </xsl:if>
-  <node name="Headline 4" select="//unizh:related-content/unizh:teaser/xhtml:h4[@tagID='{@tagID}']">
-    <action><delete value="true" name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:h4[@tagID='{@tagID}']&quot;/&gt;"/></action>
-    <content><textarea name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/xhtml:h4[@tagID='{@tagID}']&quot;&gt;" cols="40" size="5"><xsl:value-of select="."/></textarea></content>
-  </node>
-  <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser/xhtml:h4</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
