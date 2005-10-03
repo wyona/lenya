@@ -30,7 +30,7 @@
     <element name="Headline 3" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h3&quot; {$nsxhtml}&gt;New Headline 3&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
     <element name="Headline 4" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
     <element name="Table of Contents" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:toc&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-    <element name="Children" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
+    <element name="Children" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
   </insert-before>
 </xsl:template>
 
@@ -50,7 +50,7 @@
     <element name="Headline 3" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h3&quot; {$nsxhtml}&gt;New Headline 3&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
     <element name="Headline 4" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
     <element name="Table of Contents" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:toc&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-    <element name="Children" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
+    <element name="Children" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
 
