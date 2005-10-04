@@ -13,6 +13,7 @@
   <!-- <action><delete value="true" name="&lt;xupdate:remove select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;/&gt;"/></action> -->
   </node>
   <xsl:apply-templates select="unizh:teaser"/>
+  <xsl:apply-templates select="unizh:rss-reader"/>
   <node name="Teaser">
     <action><insert name="&lt;xupdate:append select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;Title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;Teaser text&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:append&gt;"/></action>
   </node>
@@ -31,6 +32,16 @@
   <xsl:apply-templates select="unizh:title"/>
   <xsl:apply-templates select="*" mode="teaser"/>
   <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser</xsl:with-param></xsl:call-template>
+</xsl:template>
+
+<xsl:template match="unizh:rss-reader">
+  <node name="RSS">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
+  </node>
+<node name="RSSFeed" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input></content>
+  </node>
+
 </xsl:template>
 
 
@@ -62,6 +73,7 @@
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
   <insert-after select="{$path}[@tagID='{@tagID}']">
     <element name="New Teaser" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;New title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;New content&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
+   <element name="New RSS-Feed" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:rss-reader&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;image&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;items&quot;&gt;3&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;url&quot;&gt;empty&lt;/xupdate:attribute&gt;#rss-reader&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
 
