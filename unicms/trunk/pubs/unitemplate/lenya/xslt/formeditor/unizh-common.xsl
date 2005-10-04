@@ -14,7 +14,7 @@
   </node>
   <xsl:apply-templates select="unizh:teaser"/>
   <node name="Teaser">
-    <action><insert name="&lt;xupdate:append select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;New title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;New content&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:append&gt;"/></action>
+    <action><insert name="&lt;xupdate:append select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;Title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;Teaser text&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:append&gt;"/></action>
   </node>
 </xsl:template>
 
@@ -36,7 +36,6 @@
 
 <xsl:template match="unizh:title">
   <node name="Title" select="/*/unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']"> 
-    <action><delete name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']&quot;/&gt;"/></action>
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="."/></xsl:attribute></input></content>
   </node>
 </xsl:template>
