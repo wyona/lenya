@@ -322,7 +322,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and (ancestor::xhtml:body or parent::unizh:short)]">
+  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and (ancestor::xhtml:body or parent::unizh:short or parent::unizh:person)]">
     <div>
       <xsl:if test="@float = 'true' or @popup = 'true'">
         <xsl:attribute name="class">imgTextfluss</xsl:attribute>
@@ -378,6 +378,46 @@
   <xsl:template match="lenya:asset[$rendertype = 'imageupload']">
     <a class="download" href="{lenya:asset-dot/@href}">
       <xsl:value-of select="text()"/>
+    </a>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object[parent::unizh:person]">
+    <xsl:choose>
+      <xsl:when test="not(@data)">
+        <img src="{$imageprefix}/default_head.jpg"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="ancestor::index:child">
+            <xsl:choose>
+              <xsl:when test="contains(../../../@href, '_')">
+                <img src="{$contextprefix}{substring-before(../../../@href, '_')}/{@data}"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <img src="{$contextprefix}{substring-before(../../../@href, '.html')}/{@data}"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:when>
+          <xsl:otherwise>
+            <img src="{$nodeid}/{@data}" width="100"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and parent::unizh:person and not(ancestor::index:child)]">
+    <a href="{lenya:asset-dot/@href}">
+      <xsl:choose>
+        <xsl:when test="not(@data)">
+          <img src="{$imageprefix}/default_head.jpg"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="{$nodeid}/{@data}" width="100"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </a>
   </xsl:template>
 
@@ -627,7 +667,6 @@
     <ul class="linknav">
       <li>
         <a href="{unizh:title/@href}">
-          <img src="{$imageprefix}/arrow2.gif" alt="icon arrow" width="13" height="14"  />
           <b><xsl:value-of select="unizh:title"/></b>
         </a>
         <div class="dotline">
@@ -637,7 +676,6 @@
       <xsl:for-each select="xhtml:a">
         <li>
           <a href="{@href}">
-            <img src="{$imageprefix}/arrow2.gif" alt="icon arrow" width="13" height="14"  />
             <xsl:value-of select="."/>
           </a>
           <div class="dotline">
@@ -845,7 +883,7 @@
   
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
-  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:people]">
+  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:team]">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
 
@@ -916,25 +954,32 @@
   </xsl:template>
 
 
-   <xsl:template match="unizh:children[ancestor::unizh:people]">
+   <xsl:template match="unizh:children[ancestor::unizh:team]">
     <xsl:choose>
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">
-          <h2>
-            <xsl:value-of select="*/*/unizh:academictitle"/> 
-            <xsl:value-of select="*/*/unizh:firstname"/>&#160;
-            <xsl:value-of select="*/*/unizh:lastname"/>
-          </h2>
-          <p>
-            Funktion: <xsl:value-of select="*/*/unizh:position"/><br/>
-            Einheit: <xsl:value-of select="*/*/unizh:unit"/><br/>
-            Email: <xsl:value-of select="*/*/unizh:email"/><br/>
-            Homepage: <xsl:value-of select="*/*/unizh:url"/><br/>
-            <xsl:value-of select="*/*/unizh:remarks"/><br/>
-            <xsl:if test="$area = 'authoring'">
-              <a href="{$contextprefix}{@href}">Edit View...</a>
-            </xsl:if>
-          </p>
+          <div class="teamBlock">
+            <div class="teamImg">
+              <xsl:apply-templates select="*/unizh:person/xhtml:object"/>
+            </div>
+            <div class="teamText">
+              <p>
+                <b>
+                  <xsl:value-of select="*/unizh:person/unizh:academictitle"/>&#160;
+                  <xsl:value-of select="*/unizh:person/unizh:firstname"/>&#160;
+                  <xsl:value-of select="*/unizh:person/unizh:lastname"/>&#160;
+                </b>
+                <br/>
+                <xsl:value-of select="*/unizh:person/unizh:position"/><br/>
+                Mail: <xsl:value-of select="*/unizh:person/unizh:email"/><br/>
+                <a href="{$contextprefix}{@href}">Mehr...</a>
+              </p>
+            </div>
+            <div class="floatleftclear"><xsl:comment/></div>
+          </div>
+          <div class="solidline">
+            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+          </div>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>

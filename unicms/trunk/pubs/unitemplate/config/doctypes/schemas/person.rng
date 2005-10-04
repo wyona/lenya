@@ -32,6 +32,7 @@
   <element name="unizh:person">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
+    <ref name="object"/>
     <ref name="unizh.firstname"/>
     <ref name="unizh.lastname"/>
     <optional>
@@ -41,14 +42,20 @@
       <ref name="unizh.position"/>
     </optional>
     <optional>
-      <ref name="unizh.unit"/>
+      <element name="unizh:phone">
+        <text/>
+      </element>
     </optional>
     <ref name="unizh.email"/>
     <optional>
-      <ref name="unizh.url"/>
+      <element name="unizh:homepage">
+        <text/>
+      </element>
     </optional>
     <optional>
-      <ref name="unizh.remarks"/>
+      <element name="unizh:description">
+        <ref name="Block.model"/>
+      </element>
     </optional>
   </element>
 </define>

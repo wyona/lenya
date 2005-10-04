@@ -199,6 +199,7 @@
     <ref name="object"/>
     <ref name="lenya.asset"/>
     <ref name="unizh.toc"/>
+    <!-- <ref name="unizh.list"/> -->
     <ref name="unizh.rss-reader"/>
     <ref name="unizh.children"/>
     <ref name="iframe"/>

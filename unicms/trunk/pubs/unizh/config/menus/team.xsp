@@ -63,13 +63,7 @@
 	  <item>New Homepage</item>
         }
         else {
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=overview">New Overview</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=news">New RSS News</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=team">New Team Page</item>  
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=list">New List</item>             
-
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=redirect">New Redirect</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=person">New Person</item>
         }
 	    }
 	  </xsp:logic>
@@ -191,12 +185,6 @@
           }
           else {
            <item>Change node visiblity</item>
-          }
-          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
-             <item uc:usecase="forcecheckin" uc:step="showscreen" href="?">Checkin</item>
-          }
-          else {
-            <item>Checkin</item>
           }
         </xsp:logic>
       </block>

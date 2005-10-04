@@ -142,33 +142,45 @@
   </element>
 </define>
 
-
-<define name="unizh.highlights">
-  <optional>
-    <element name="unizh:highlights">
-      <interleave>
-        <zeroOrMore>
-          <ref name="unizh.highlight"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="unizh.rss-reader"/>
-        </zeroOrMore>
-      </interleave>
-    </element>
-  </optional>
-</define>
-
-<define name="unizh.highlight">
-  <element name="unizh:highlight">
-    <optional>
-      <element name="unizh:highlight-title"><text/></element>
-    </optional>
-    <!-- a subset of XHTML block -->
+<define name="unizh.list">
+  <element name="unizh:list">
     <oneOrMore>
-      <ref name="lightblock.class.deprecated"/>
+      <choice>
+        <ref name="list.product"/>
+        <ref name="list.publication"/>
+      </choice>
     </oneOrMore>
   </element>
 </define>
+
+<define name="list.product">
+  <element name="unizh:product">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <unizh:description>
+      <ref name="Block.model"/>
+    </unizh:description>
+  </element>
+</define>
+
+<define name="list.publication">
+  <element name="unizh:publication">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <unizh:description>
+      <ref name="Block.model"/>
+    </unizh:description>
+  </element>
+</define>
+
 
 <define name="unizh.toc">
   <element name="unizh:toc"><empty/></element>

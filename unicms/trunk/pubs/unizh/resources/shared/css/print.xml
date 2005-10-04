@@ -196,6 +196,26 @@ ol {
 }
 
 
+/* team 2 blocke */
+.teamBlock {
+        padding-top:9px;
+        padding-bottom:9px;
+}
+.teamImg {
+        margin-top:5px;
+        float:left;
+        width:120px;
+}
+.teamText {
+        float:left;
+        width:290px; 
+}
+.floatleftclear {
+        clear:left;
+        line-height:1px;
+}
+
+
 
 /* form*/
 form {

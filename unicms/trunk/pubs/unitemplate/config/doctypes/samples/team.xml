@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:person xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:team xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -9,7 +9,7 @@ dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
   <lenya:meta>
-    <dc:title>Name</dc:title>
+    <dc:title>Personenverzeichnis</dc:title>
     <dc:description></dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
@@ -19,18 +19,15 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <xhtml:object>Insert photo here</xhtml:object>
-  <unizh:firstname>Gret</unizh:firstname>
-  <unizh:lastname>Muster</unizh:lastname>
-  <unizh:academictitle>Prof. Dr.</unizh:academictitle>
-  <unizh:position>#</unizh:position>
-  <unizh:phone>111</unizh:phone>
-  <unizh:email>gret@muster.net</unizh:email>
-  <unizh:homepage>http://myhome.nocom.org</unizh:homepage>
-  <unizh:description>
-   <h2>Curriculum vitae</h2>
-   <p>
-     Enter CV or similar here.   
-   </p>
-  </unizh:description>
-</unizh:person>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Titel</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <unizh:children/>
+    <p>Ausleitung, Anmerkungen.</p>
+  </body>
+</unizh:team>
+

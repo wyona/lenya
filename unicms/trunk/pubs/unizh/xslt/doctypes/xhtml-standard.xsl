@@ -71,11 +71,14 @@
             <xsl:when test="$document-element-name = 'unizh:newsitem'">
               <xsl:call-template name="newsitem"/>
             </xsl:when> 
-            <xsl:when test="$document-element-name = 'unizh:people'">
+            <xsl:when test="$document-element-name = 'unizh:team'">
               <xsl:call-template name="three-columns"/>
             </xsl:when>
             <xsl:when test="$document-element-name = 'unizh:person'">
               <xsl:call-template name="person"/>
+            </xsl:when>
+            <xsl:when test="$document-element-name = 'unizh:list'">
+              <xsl:call-template name="three-columns"/>
             </xsl:when>
             <xsl:when test="$document-element-name = 'unizh:redirect'">
               <xsl:call-template name="redirect"/>
@@ -253,51 +256,44 @@
       </div> -->
       <div class="contentarea">
         <div class="content">
-          <h1>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+          <p>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
+          </p>
+          <div class="solidline">
+            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+          </div>
+          <div class="teamBlock">
+            <div class="teamImg">
+              <xsl:apply-templates select="unizh:person/xhtml:object"/>
             </div>
-          </h1>
-          Vorname:
-          <div bxe_xpath="/{$document-element-name}/unizh:firstname">
-            <xsl:value-of select="unizh:person/unizh:firstname"/>
+            <div class="teamText">
+              <p>
+                <b>
+                  <div bxe_xpath="/{$document-element-name}/unizh:academictitle"><xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;</div><div bxe_xpath="/{$document-element-name}/unizh:firstname"><xsl:value-of select="unizh:person/unizh:firstname"/>&#160;</div><div bxe_xpath="/{$document-element-name}/unizh:lastname"><xsl:value-of select="unizh:person/unizh:lastname"/></div>
+                </b><br/>
+                <div bxe_xpath="/{$document-element-name}/unizh:position">
+                  <xsl:value-of select="unizh:person/unizh:position"/>
+                </div>
+                <br/>
+                Tel.: 
+                <div bxe_xpath="/{$document-element-name}/unizh:phone">
+                  <xsl:value-of select="unizh:person/unizh:phone"/>
+                </div>
+                <br/>
+                Mail: 
+                <div bxe_xpath="/{$document-element-name}/unizh:email">
+                  <xsl:value-of select="unizh:person/unizh:email"/>
+                </div>
+              </p>
+            </div>
+            <div class="floatleftclear"><xsl:comment/></div>
           </div>
-          <br/>
-          Nachname:
-          <div bxe_xpath="/{$document-element-name}/unizh:lastname">
-            <xsl:value-of select="unizh:person/unizh:lastname"/>
+          <div class="solidline">
+            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
           </div>
-          <br/>
-          Grad:
-          <div bxe_xpath="/{$document-element-name}/unizh:academictitle">
-            <xsl:value-of select="unizh:person/unizh:academictitle"/>
+          <div bxe_xpath="/{$document-element-name}/unizh:description">
+            <xsl:apply-templates select="unizh:person/unizh:description/*"/>
           </div>
-          <br/>
-          Funktion:
-          <div bxe_xpath="/{$document-element-name}/unizh:position">
-            <xsl:value-of select="unizh:person/unizh:position"/>
-          </div>
-          <br/>
-          Unit:
-          <div bxe_xpath="/{$document-element-name}/unizh:unit">
-            <xsl:value-of select="unizh:person/unizh:unit"/>
-          </div>
-          <br/>
-          Email:
-          <div bxe_xpath="/{$document-element-name}/unizh:email">
-            <xsl:value-of select="unizh:person/unizh:email"/>
-          </div>
-          <br/>
-          Homepage:
-          <div bxe_xpath="/{$document-element-name}/unizh:url">
-            <xsl:value-of select="unizh:person/unizh:url"/>
-          </div>
-          <br/>
-          Bemerkungen:
-          <div bxe_xpath="/{$document-element-name}/unizh:remarks">
-            <xsl:value-of select="unizh:person/unizh:remarks"/>
-          </div>
-          <p>&#160;</p>
         </div>
         <xsl:call-template name="footer"/>
       </div>

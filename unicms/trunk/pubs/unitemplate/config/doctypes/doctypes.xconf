@@ -7,8 +7,9 @@
       <doc type="homepage"/>
       <doc type="xhtml"/>
       <doc type="news"/>
-      <doc type="collection"/>
-      <doc type="people"/>
+      <doc type="team"/>
+      <doc type="list"/>
+      <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>homepage.xml</sample-name>
@@ -21,8 +22,9 @@
       <doc type="homepage"/>
       <doc type="xhtml"/>
       <doc type="news"/>
-      <doc type="collection"/>
-      <doc type="people"/>
+      <doc type="team"/>
+      <doc type="list"/>
+      <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>homepage4cols.xml</sample-name>
@@ -35,12 +37,11 @@
       <doc type="homepage"/>
       <doc type="homepage4cols"/>
       <doc type="xhtml"/>
-      <doc type="xhtml2cols"/>
-      <doc type="xhtml3cols"/>
       <doc type="overview"/>
       <doc type="news"/>
-      <doc type="people"/>
-      <doc type="collection"/>
+      <doc type="team"/>
+      <doc type="list"/>
+      <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>xhtml.xml</sample-name>
@@ -54,12 +55,11 @@
       <doc type="homepage"/>
       <doc type="homepage4cols"/>
       <doc type="xhtml"/>
-      <doc type="xhtml2cols"/>
-      <doc type="xhtml3cols"/>
       <doc type="overview"/>
       <doc type="news"/>
-      <doc type="people"/>
-      <doc type="collection"/>
+      <doc type="team"/>
+      <doc type="list"/>
+      <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>overview.xml</sample-name>
@@ -84,22 +84,13 @@
     <workflow src="2stage.xml"/>
   </doc>
 
-  <doc type="collection">
-    <children>
-      <doc type="xhtml"/>
-    </children>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>collection.xml</sample-name>
-    </creator>
-    <workflow src="2stage.xml"/>
-  </doc>
 
-  <doc type="people">
+  <doc type="team">
     <children>
       <doc type="person"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>people.xml</sample-name>
+      <sample-name>team.xml</sample-name>
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
@@ -110,6 +101,24 @@
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
+
+  <doc type="list">
+    <children>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
+      <doc type="xhtml"/>
+      <doc type="overview"/>
+      <doc type="news"/>
+      <doc type="team"/>
+      <doc type="list"/>
+      <doc type="redirect"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>list.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
 
   <doc type="redirect">
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">

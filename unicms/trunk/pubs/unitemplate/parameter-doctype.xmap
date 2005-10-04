@@ -28,11 +28,11 @@
         <sourcetype name="newsitem">
           <document-element local-name="newsitem"/>
         </sourcetype>
-        <sourcetype name="collection">
-          <document-element local-name="collection"/>
+        <sourcetype name="list">
+          <document-element local-name="list"/>
         </sourcetype>
-        <sourcetype name="people">
-          <document-element local-name="people"/>
+        <sourcetype name="team">
+          <document-element local-name="team"/>
         </sourcetype>
         <sourcetype name="person">
           <document-element local-name="person"/>
