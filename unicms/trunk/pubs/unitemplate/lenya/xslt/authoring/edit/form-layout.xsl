@@ -26,6 +26,24 @@
 
   <xsl:param name="nodeid"/>
   
+  <xsl:template match="node[@name = 'Body']" mode="nodes">
+    <tr>
+      <td valign="top" style="border-color: #000000;border-width: 2px"><xsl:apply-templates select="action"/><xsl:if test="not(action)">&#160;</xsl:if>
+        <xsl:apply-templates select="@select"/>
+      </td>
+      <td colspan="2" valign="top" style="border-color: #000000;border-width: 2px"><h3><xsl:apply-templates select="@name"/></h3></td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="node[@name = 'Related Content']" mode="nodes">
+    <tr>
+      <td valign="top" style="border-color: #ccccff;border-width: 3px"><xsl:apply-templates select="action"/><xsl:if test="not(action)">&#160;</xsl:if>
+        <xsl:apply-templates select="@select"/>
+      </td>
+      <td colspan="2" valign="top" style="border-color:#ccccff;border-width: 3px"><h3><xsl:apply-templates select="@name"/></h3></td>
+    </tr>
+  </xsl:template>
+
   <xsl:template match="content">
     <xsl:choose>
       <xsl:when test="$edit = ../@select">
