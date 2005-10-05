@@ -35,13 +35,41 @@
 </xsl:template>
 
 <xsl:template match="unizh:rss-reader">
-  <node name="RSS">
+  <node name="RSS Feed">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
   </node>
-<node name="RSSFeed" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
+<node name="rss url" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input></content>
   </node>
-
+  <node name="Number of items" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute></input></content>
+  </node><node name="Image">
+    <content>
+      Load appropriate image: 
+      <xsl:choose>
+        <xsl:when test="@image">
+          <select name="&lt;xupdate:update select=&quot;/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@image&quot;&gt;">
+            <xsl:choose>
+              <xsl:when test="@image = 'true'">
+                <option value="true" selected="selected">true</option>
+                <option value="false">false</option>
+              </xsl:when>
+              <xsl:otherwise>
+                <option value="true">true</option>
+                <option value="false" selected="selected">false</option>
+              </xsl:otherwise>
+            </xsl:choose>
+          </select>
+        </xsl:when>
+        <xsl:otherwise>
+          <select name="&lt;xupdate:insert select=&quot;/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@image&quot;&gt;">
+            <option value="true">true</option>
+            <option value="false" selected="selected">false</option>
+          </select>
+        </xsl:otherwise>
+      </xsl:choose>
+    </content>
+  </node>
 </xsl:template>
 
 
