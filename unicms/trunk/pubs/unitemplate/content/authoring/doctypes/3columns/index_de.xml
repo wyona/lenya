@@ -10,16 +10,11 @@
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
-  <unizh:abstract/>
+
   <unizh:related-content>
-    <unizh:teaser id="first">
+    <unizh:teaser>
       <unizh:title>Title</unizh:title>
       <p>Teaser text.</p>
-      <p>Multiple Paragraphs.</p>
-    </unizh:teaser>
-    <unizh:teaser link="/index.html" id="example">
-      <unizh:title>Linked</unizh:title>
-      <p>Linked teaser. Set "link" and "id" attributes to target page and teaser id</p>
     </unizh:teaser>
   </unizh:related-content>
   <body>
