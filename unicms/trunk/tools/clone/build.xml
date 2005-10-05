@@ -189,6 +189,7 @@
     <copy todir="${destination.dir}/content">
       <fileset dir="${source.dir}/content">
 	<exclude name="authoring/sitetree.xml"/>
+	<exclude name="authoring/index/index_de.xml"/>
       </fileset>
     </copy>
   
@@ -199,6 +200,14 @@
       <outputproperty name="indent" value="yes"/>
       <param name="publicationName" expression="${new.publication.name}"/>
       <param name="templateName" expression="${old.publication.name}"/>
+    </xslt>
+    
+    <echo>INFO: Create Homepages</echo>
+    <xslt 
+      in="${source.dir}/content/authoring/index/index_de.xml" 
+      out="${destination.dir}/content/authoring/index/index_de.xml" style="index.xsl">
+      <outputproperty name="indent" value="yes"/>
+      <param name="publicationName" expression="${new.publication.name}"/>
     </xslt>
     
     <echo>INFO: Finished Creating Content</echo>
