@@ -151,10 +151,24 @@
     <xsl:attribute name="href">
       <xsl:choose>
         <xsl:when test="$isHomepage = 'true' and not($index)">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'contact')]/@href"/>
+          <xsl:choose>
+            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url , 'contact')]">
+              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'contact')]/@href"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@href"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:when test="$homepage-basic-url != 'index'">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'contact')]/@href"/> 
+          <xsl:choose>
+            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'contact')]">
+              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'contact')]/@href"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@href"/>
+            </xsl:otherwise>
+          </xsl:choose> 
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="@href"/>
@@ -171,10 +185,24 @@
     <xsl:attribute name="href">
       <xsl:choose>
         <xsl:when test="$isHomepage = 'true' and not($index)">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/>
+          <xsl:choose>
+            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url , 'sitemap')]">
+              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@href"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:when test="$homepage-basic-url != 'index'">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/> 
+          <xsl:choose>
+            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'sitemap')]">
+              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@href"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="@href"/>
