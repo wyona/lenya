@@ -18,7 +18,7 @@
 
 
 <xsl:template match="nav:node">
-  <div id="{@id}" href="{@href}"><xsl:value-of select="."/></div>
+  <div id="{@id}" href="{@href}"><xsl:value-of select="nav:label"/></div>
 </xsl:template>
 
 </xsl:stylesheet>
