@@ -95,7 +95,12 @@
   <xsl:template match="xhtml:div[@id = 'tabs']">
     <div id="primarnav"><xsl:comment/>
       <xsl:for-each select="xhtml:div">
-        <a href="{@href}"> <xsl:value-of select="@label"/> </a>
+        <a href="{@href}">
+          <xsl:if test="@current = 'true'">
+            <xsl:attribute name="class">activ</xsl:attribute>
+          </xsl:if>
+          <xsl:value-of select="@label"/>
+        </a>
         <xsl:if test="position() &lt; last()">
           <div class="linkseparator">|</div>
         </xsl:if>
