@@ -82,220 +82,33 @@
   
   
   <xsl:template match="unizh:sitemap">
+    <xsl:apply-templates/>
+  </xsl:template> 
 
-    <xsl:variable name="group" select="@group"/>
 
-    <xsl:variable name="grouping_level">
-      <xsl:choose>
-        <xsl:when test="@grouping_level">
-          <xsl:value-of select="@grouping_level"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="1"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:variable name="depth">
-      <xsl:choose>
-        <xsl:when test="@depth">
-          <xsl:value-of select="@depth"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="99"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:variable name="show">
-      <xsl:choose>
-        <xsl:when test="@show">
-          <xsl:value-of select="@show"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="'any_language'"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:choose>
-      <xsl:when test="not(@group) or (@group = 'no_grouping')">
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'sitemap']/xhtml:div[@id = 'alphabetically']" mode="no_grouping">
-          <xsl:with-param name="base" select="@base"/>
-          <xsl:with-param name="depth" select="$depth"/>
-          <xsl:with-param name="grouping_level" select="$grouping_level"/>
-          <xsl:with-param name="show" select="$show"/>
-        </xsl:apply-templates>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'sitemap']/xhtml:div[@id = $group]">
-          <xsl:with-param name="base" select="@base"/>
-          <xsl:with-param name="depth" select="$depth"/>
-          <xsl:with-param name="grouping_level" select="$grouping_level"/>
-          <xsl:with-param name="show" select="$show"/>
-        </xsl:apply-templates>
-      </xsl:otherwise>
-    </xsl:choose>
+  <xsl:template match="unizh:node[parent::unizh:sitemap]">
+    <div class="navtitel">
+      <a href="{@href}"><xsl:value-of select="unizh:title"/></a>
+    </div>
+    <div class="solidline">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
+    <ul>
+      <xsl:apply-templates select="unizh:node"/>
+      <xsl:comment/>
+    </ul>
+    <div>&#160;</div>
   </xsl:template>
 
 
-  <xsl:template match="xhtml:div[@id = 'by_topic']">
-
-    <xsl:param name="base"/>
-    <xsl:param name="depth"/>
-    <xsl:param name="grouping_level"/>
-    <xsl:param name="show"/>
-
-    <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
-
-    <xsl:choose>
-  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
-      <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
-
-  <!-- identify the groups, see if their nodes fulfill the restrictions, and - if yes - print group header and items -->
-        <xsl:for-each select="*[(@level = $grouping_level) and (@level &lt; $depth + 1)]">
-
-          <xsl:variable name="headers-basic-url" select="@basic-url"/>
-
-          <xsl:if test="../*[(@level != 0) and (@level &gt; $grouping_level) and (@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
-            <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3> 
-          </xsl:if>
-
-          <xsl:for-each select="../*[(@level != 0) and (@level &gt; $grouping_level) and (@level &lt; $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
-            <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-          </xsl:for-each>
-
-        </xsl:for-each>
-
-      </xsl:when>
-      <xsl:otherwise>
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
-
-  <!-- identify the groups, see if their nodes fulfill the restrictions, and - if yes - print group header and items -->
-        <xsl:for-each select="*[(@currents_child = 'true') and (@level = $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1)]">
-
-          <xsl:variable name="headers-basic-url" select="@basic-url"/>
-
-          <xsl:if test="../*[(@level != $current_nodes_level) and (@level &gt; $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
-            <h3> <a name="{@label}"> <xsl:value-of select="@label"/> </a> </h3> 
-          </xsl:if>
-
-          <xsl:for-each select="../*[(@level != $current_nodes_level) and (@level &gt; $current_nodes_level + $grouping_level) and (@level &lt; $current_nodes_level + $depth + 1) and ((@same_language = 'true') or ($show = 'any_language')) and (starts-with(@basic-url, $headers-basic-url))]">
-            <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-          </xsl:for-each>
-
-        </xsl:for-each>
-
-      </xsl:otherwise>
-    </xsl:choose>
-
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:div[@id = 'alphabetically']">
-
-    <xsl:param name="base"/>
-    <xsl:param name="depth"/>
-    <xsl:param name="grouping_level"/>
-    <xsl:param name="show"/>
-
-    <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
-
-    <xsl:choose>
-  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
-      <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
-
-  <!-- traverse ALL nodes, since position() relates to the WHOLE set, not to a subselection -->
-        <xsl:for-each select="*">
-
-          <xsl:variable name="precedent_pos" select="position() - 1"/>
-          <xsl:variable name="current_letter" select="substring(@label, 1, 1)"/>
-
-  <!-- the group header is written when reaching the FIRST node starting with a new letter -->
-          <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
-
-  <!-- write header, if there is an entry belonging to this group -->
-            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth + 1) and (@level &gt; $grouping_level)  and ((@same_language = 'true') or ($show = 'any_language'))]">
-              <h3> <a name="{$current_letter}"> <xsl:value-of select="$current_letter"/> </a> </h3> 
-            </xsl:if>
-
-            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@level &lt; $depth + 1) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
-              <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-            </xsl:for-each>
-
-          </xsl:if>
-
-        </xsl:for-each>
-
-      </xsl:when>
-      <xsl:otherwise>
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
-
-  <!-- traverse ALL nodes, since position() relates to the WHOLE set, not to a subselection -->
-        <xsl:for-each select="*">
-
-          <xsl:variable name="precedent_pos" select="position() - 1"/>
-          <xsl:variable name="current_letter" select="substring(@label, 1, 1)"/>
-
-  <!-- the group header is written when reaching the FIRST node starting with a new letter -->
-          <xsl:if test="(position() = 1) or (substring(., 1, 1) != substring(../*[$precedent_pos], 1, 1))">
-
-  <!-- write header, if there is an entry belonging to this group -->
-            <xsl:if test="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
-              <h3> <a name="{$current_letter}"> <xsl:value-of select="$current_letter"/> </a> </h3> 
-            </xsl:if>
-
-            <xsl:for-each select="../*[(substring(@label, 1, 1)= $current_letter) and (@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
-              <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-            </xsl:for-each>
-
-          </xsl:if>
-
-        </xsl:for-each>
-
-      </xsl:otherwise>
-    </xsl:choose>
-
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:div[@id = 'alphabetically']" mode="no_grouping">
-
-    <xsl:param name="base"/>
-    <xsl:param name="depth"/>
-    <xsl:param name="grouping_level"/>
-    <xsl:param name="show"/>
-
-    <xsl:variable name="current_nodes_level" select="*[@current = 'true']/@level"/>
-
-    <xsl:choose>
-  <!-- the homepage should always be treated in 'root' mode - thus considering its siblings as its children (last restriction) -->
-      <xsl:when test="not($base) or ($base = 'root') or ($current_nodes_level = 0)">
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@level = 0]/@label}"> <xsl:value-of select="*[@level = 0]/@label"/> </a> </u> </h3>
-
-        <xsl:for-each select="*[(@level &lt; $depth + 1) and (@level &gt; $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
-          <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-        </xsl:for-each>
-
-      </xsl:when>
-      <xsl:otherwise>
-
-        <h3> <i> (Start) </i> <u> <a name="{*[@current = 'true']/@label}"> <xsl:value-of select="*[@current = 'true']/@label"/> </a> </u> </h3>
-
-        <xsl:for-each select="*[(@currents_child = 'true') and (@level &lt; $current_nodes_level + $depth + 1) and (@level &gt; $current_nodes_level + $grouping_level) and ((@same_language = 'true') or ($show = 'any_language'))]">
-          <p> <a href="{@href}"> <xsl:value-of select="@label"/> </a> </p>
-        </xsl:for-each>
-
-      </xsl:otherwise>
-    </xsl:choose>
-
+  <xsl:template match="unizh:node[ancestor::unizh:sitemap and not(parent::unizh:sitemap)]">
+    <li>
+      <a href="{@href}"><xsl:value-of select="unizh:title"/></a>
+      <div class="dotline">
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+      </div>
+      <xsl:apply-templates select="unizh:node"/>
+    </li>
   </xsl:template>
 
 

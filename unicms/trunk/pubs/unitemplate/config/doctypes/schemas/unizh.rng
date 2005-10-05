@@ -186,6 +186,12 @@
   <element name="unizh:toc"><empty/></element>
 </define>
 
+
+<define name="unizh.sitemap">
+  <element name="unizh:sitemap"><empty/></element>
+</define>
+
+
 <define name="unizh.children">
   <element name="unizh:children">
     <optional>

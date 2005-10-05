@@ -17,7 +17,6 @@
     </unizh:teaser>
   </unizh:related-content>
   <body>
-  	<h2>Headline</h2>
-    <p>Paragraph</p>
+    <unizh:sitemap/>
   </body>
 </html>
