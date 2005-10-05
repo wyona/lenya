@@ -5,12 +5,15 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   >
 
+
+
+  <xsl:param name="area"/>
  
   <xsl:template match="unizh:related-content">
     <xsl:choose>
       <xsl:when test="@link != ''">
         <cinclude:includexml ignoreErrors="true">
-          <cinclude:src>cocoon:/include-related/<xsl:value-of select="@link"/></cinclude:src>
+          <cinclude:src>cocoon:/include-related/<xsl:value-of select="substring-after(@link, $area)"/></cinclude:src>
         </cinclude:includexml> 
       </xsl:when>
       <xsl:otherwise>
@@ -23,9 +26,9 @@
 
   <xsl:template match="unizh:teaser">
      <xsl:choose>
-      <xsl:when test="@link != ''">
+      <xsl:when test="@link != '' and @name != ''">
         <cinclude:includexml ignoreErrors="true">
-          <cinclude:src>cocoon:/include-teaser/<xsl:value-of select="@link"/>.<xsl:value-of select="@name"/></cinclude:src>
+          <cinclude:src>cocoon:/include-teaser/<xsl:value-of select="@name"/><xsl:value-of select="substring-after(@link, $area)"/></cinclude:src>
         </cinclude:includexml>   
       </xsl:when>
       <xsl:otherwise>

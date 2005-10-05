@@ -134,21 +134,21 @@
         </map:act>
       </map:match>
 
-      <map:match pattern="include-teaser/**.html.*">
-        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
-          <map:generate src="content/{page-envelope:area}/{../1}/index_{page-envelope:document-language}.xml"/>
+      <map:match pattern="include-teaser/*/**.html">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{2}/index_{page-envelope:document-language}.xml">
+          <map:generate src="content/{page-envelope:area}/{../2}/index_{page-envelope:document-language}.xml"/>
           <map:transform src="../unizh/xslt/common/related-writer.xsl">
             <map:parameter name="element" value="unizh:teaser"/>
-            <map:parameter name="name" value="{../2}"/>
+            <map:parameter name="name" value="{../1}"/>
           </map:transform>
           <map:serialize type="xml"/>
         </map:act>
       </map:match>
 
-      <map:match pattern="include-**">
+      <!-- <map:match pattern="include-**">
         <map:generate src="cocoon:/xml"/>
         <map:serialize type="xml"/>
-      </map:match>
+      </map:match> -->
 
 
       <!-- This pipeline builds the page content (without header) for
@@ -243,7 +243,9 @@
         </map:transform> 
      
         <!-- Doctype / context specific navigation schemes.  --> 
-        <map:transform src="../unizh/xslt/common/includeRelated.xsl"/>
+        <map:transform src="../unizh/xslt/common/includeRelated.xsl">
+          <map:parameter name="area" value="{page-envelope:area}"/>
+        </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
@@ -263,7 +265,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call>  
+        </map:call> 
 
         <map:serialize type="xml"/>
       </map:match>

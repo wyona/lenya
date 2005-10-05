@@ -8,7 +8,7 @@
   <path-mapper>org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper</path-mapper>
   <document-builder>org.apache.lenya.cms.publication.DefaultDocumentBuilder</document-builder>
   <breadcrumb-prefix>Universit?t Zuerich</breadcrumb-prefix>
-  <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
+  <link-attribute xpath="//@*[local-name() = 'href' or local-name() = 'link']"/>
   <!-- <proxy area="live" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/live"/>
   <proxy area="live" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/live"/>
   <proxy area="authoring" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/authoring"/>
