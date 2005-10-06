@@ -25,12 +25,10 @@
     </textarea>
   </content>
 </node>
-
-<xsl:apply-templates select="unizh:slogan"/>
-<node/>
-<xsl:apply-templates select="unizh:highlights"/>
 <node/>
 <xsl:apply-templates select="xhtml:body"/>
+<node/>
+<xsl:apply-templates select="unizh:related-content"/>
 
 </xsl:template>
 

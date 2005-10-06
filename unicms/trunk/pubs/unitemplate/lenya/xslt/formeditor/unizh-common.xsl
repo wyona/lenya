@@ -12,15 +12,18 @@
   <node name="Related Content">
   <!-- <action><delete value="true" name="&lt;xupdate:remove select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;/&gt;"/></action> -->
   </node>
+  <xsl:apply-templates mode="rc"/>
+<!--
   <xsl:apply-templates select="unizh:teaser"/>
   <xsl:apply-templates select="unizh:rss-reader"/>
   <node name="Teaser">
     <action><insert name="&lt;xupdate:append select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;Title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;Teaser text&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:append&gt;"/></action>
   </node>
+-->
 </xsl:template>
 
 
-<xsl:template match="unizh:teaser">
+<xsl:template match="unizh:teaser" mode="rc">
   <node name="Teaser">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:teaser[@tagID='{@tagID}']&quot;/&gt;"/></action>
   </node>
@@ -30,11 +33,11 @@
     </node>
   </xsl:if>
   <xsl:apply-templates select="unizh:title"/>
-  <xsl:apply-templates select="*" mode="teaser"/>
+  <xsl:apply-templates select="*" mode="rc"/>
   <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:teaser</xsl:with-param></xsl:call-template>
 </xsl:template>
 
-<xsl:template match="unizh:rss-reader">
+<xsl:template match="unizh:rss-reader" mode="rc">
   <node name="RSS Feed">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
   </node>
@@ -70,19 +73,13 @@
       </xsl:choose>
     </content>
   </node>
+ <xsl:call-template name="inserthighlightmenu"><xsl:with-param name="path">//unizh:related-content/unizh:rss-reader</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
-<xsl:template match="unizh:title">
+<xsl:template match="unizh:title" mode="rc">
   <node name="Title" select="/*/unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']"> 
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/unizh:title[@tagID='{@tagID}']&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="."/></xsl:attribute></input></content>
-  </node>
-</xsl:template>
-
-
-<xsl:template match="unizh:slogan">
-  <node name="Slogan" select="/*/unizh:slogan[@tagID='{@tagID}']">
-    <content><input type="text" name="&lt;xupdate:update select=&quot;/*/unizh:slogan[@tagID='{@tagID}']&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="."/></xsl:attribute></input></content>
   </node>
 </xsl:template>
 
@@ -95,7 +92,7 @@
 </xsl:template>
 
 
-<xsl:template name="inserthighlightmenu">
+<xsl:template name="inserthighlightmenu" mode="rc">
   <xsl:param name="path"/>
   <xsl:variable name="nsxhtml">namespace=&quot;http://www.w3.org/1999/xhtml&quot;</xsl:variable>
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
@@ -142,10 +139,10 @@
 </xsl:template>
 
 
-<xsl:template match="xhtml:p" mode="teaser">
+<xsl:template match="xhtml:p" mode="rc">
   <xsl:choose>
     <xsl:when test="xhtml:object">
-      <xsl:apply-templates select="xhtml:object" mode="teaser"/>
+      <xsl:apply-templates select="xhtml:object" mode="rc"/>
     </xsl:when>
     <xsl:otherwise>
       <node name="Paragraph" select="//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']">
@@ -157,7 +154,7 @@
 </xsl:template>
 
 
-<xsl:template match="xhtml:object" mode="teaser">
+<xsl:template match="xhtml:object" mode="rc">
   <node name="Object" select="//unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
     <content>
@@ -168,7 +165,7 @@
 </xsl:template>
 
 
-<xsl:template match="lenya:asset" mode="teaser">
+<xsl:template match="lenya:asset" mode="rc">
   <node name="Asset">
     <action>
       <delete name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/lenya:asset[@tagID='{@tagID}']&quot;/&gt;"/>
