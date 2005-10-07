@@ -54,6 +54,18 @@
   </h1>
 </xsl:template>
 
+<xsl:template match="wiki:MainTitle">
+  <h2>
+    <xsl:apply-templates/>
+  </h2>
+</xsl:template>
+
+<xsl:template match="wiki:MainMainTitle">
+  <h3>
+    <xsl:apply-templates/>
+  </h3>
+</xsl:template>
+
 <xsl:template match="wiki:Bold">
   <b>
     <xsl:apply-templates/>
@@ -77,12 +89,29 @@
   <xsl:apply-templates/>
 </xsl:template>
 
+<xsl:template match="wiki:BList">
+</xsl:template>
+
+<xsl:template match="wiki:NList">
+</xsl:template>
+
+<xsl:template match="wiki:Table">
+</xsl:template>
+
 <xsl:template match="wiki:Hrule">
   <hr/>
   <xsl:apply-templates/>
 </xsl:template>
 
 <xsl:template match="wiki:Link">
+<xsl:choose>
+    <xsl:when test="@label">
+        <a href="{@href}"><xsl:value-of select="@label"/></a>
+    </xsl:when>
+    <xsl:otherwise>
+    <a href="{@href}"><xsl:value-of select="@href"/></a>
+    </xsl:otherwise>
+</xsl:choose>
 </xsl:template>
 
 <xsl:template match="wiki:Text">
