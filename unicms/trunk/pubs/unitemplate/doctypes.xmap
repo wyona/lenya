@@ -59,7 +59,7 @@
       </map:match>
     </map:pipeline>
 
-    <map:pipeline>
+    <map:pipeline type="noncaching">
       
       <!-- UniZH sections -->
       <map:match pattern="sections.xconf">
