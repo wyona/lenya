@@ -21,7 +21,7 @@
 	<usecase id="schedule"><role id="edit"/><role id="review"/><role id="organize"/></usecase>
 
 	<usecase id="userChangeProfile"><role id="edit"/><role id="organize"/></usecase>
-	<usecase id="userChangePasswordUser"><role id="edit"/></usecase>
+	<usecase id="userChangePasswordUser"><role id="edit"/><role id="review"/></usecase>
 	<usecase id="userChangePasswordAdmin"><role id="organize"/></usecase>
 	<usecase id="userChangeGroups"><role id="organize"/></usecase>
 
