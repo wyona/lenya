@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <css>
+
 @charset "iso-8859-1";
 /* CSS Document */
 
@@ -21,15 +22,6 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
-.bodywidthnolimit {
-	margin-right: auto;
-	margin-left: auto;
-}
-img {
-	border:0px;
-        max-width: 415px;
-}
-
 
 
 /*font*/
@@ -75,53 +67,72 @@ h3, h4, h5, h6 {
 	font-size: 12px;
 	font-weight:bold;
 }
+.urltext {
+	color:#999999;
+}
 /*link*/
 a { 
 	text-decoration: none;
 	color:#333399;  
 }
-/*
-.content li a {
-	margin-left:0px;
-}
-*/
 a:hover {
 	background-color:#f0f0f5;
 }
-a.download {
-	background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
-	padding-left:13px;
-	background-repeat: no-repeat;
-	padding-right:2px;
-	margin-left:2px;
-}
-a.targetblank {
-	background-image:url(<context-prefix/>/unizh/authoring/images/icon_blank.gif);
-	padding-left:13px;
-	background-repeat: no-repeat;
-	padding-right:2px;
-	margin-left:2px;
-}
-a.arrow, ul.squarelist li a {
+a.arrow {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	background-position:left top;
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+
+.relatedbox a.arrow, ul.squarelist li a,  .contentindex a, .klein a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	background-position:left top;
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+.relatedbox a.arrow,.contentindex a, .klein a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow4.gif);
+	background-position:left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
 a.back {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_back12.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_back.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
 }
-.content a.arrow {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow12.gif);
+a.download {
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
+	background-position:left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 	margin-left:2px;
+}
+
+a.extern {
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+
+img {
+	border:0px;
+}
+
+img.icon {
+	vertical-align: middle;	
 }
 /*header */
 #headerarea {
@@ -216,6 +227,7 @@ a.back {
   	font-size: 9px;
   	font-family: Verdana, sans-serif;
 	margin-left:2px;
+	margin-right:2px;
 	padding-left:2px;
 }
 #servicenavpos form {
@@ -282,6 +294,10 @@ a.back {
 	font-family: Arial, sans-serif;
 	color:#333399;
 }
+.parentnav a {
+	padding-left: 7px;
+	display:block;
+}
 #secnav ul li a {
 	padding-left: 7px;
 	display:block;
@@ -324,12 +340,13 @@ a.back {
 	line-height: 11px;
 	font-family: Verdana, sans-serif;
 	text-align: right;
-	margin-right:59px;
+	margin-right:19px;
 	height:25px;
 	color:#666;
 }
 #toolnav a {
 	color:#666; 
+	padding: 0 5px;
 }
 #toolnav a:hover {
 	background-color: transparent;
@@ -348,14 +365,7 @@ a.back {
 * html #col1 {
   margin-right: 17px;
  }
-#col2_nolimit {
-	position:absolute; 
-	margin-left:185px;
-	margin-top:0px;
-}
-* html #col2_nolimit {
-  margin-left: 0px;
- }
+
 
 #col1 p {
 	padding-left: 7px;
@@ -370,6 +380,7 @@ a.back {
 
 #col1 ul li a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	background-position:left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
@@ -393,6 +404,16 @@ a.back {
   height: 1%;
   margin-left: 0px;
 }
+
+#col2_nolimit {
+	position:absolute; 
+	margin-left:185px;
+	margin-top:0px;
+}
+* html #col2_nolimit {
+  margin-left: 0px;
+ }
+ 
 .contentarea {
 	margin-right:199px;
 }
@@ -428,6 +449,7 @@ a.back {
 	line-height:15px;
 }
 
+
 /*Related Box*/
 * html .relatedbox {
 	margin-left:16px;
@@ -440,6 +462,7 @@ a.back {
 .relatedboxborder {
 	width:179px;
 	border: 1px solid #ccccff;
+	margin-bottom:18px;
 }
 .relatedboxcont {
 	padding: 8px 9px 10px 11px;
@@ -451,6 +474,7 @@ a.back {
 }
 .relatedboxcont a.rss {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_rss.gif);
+	background-position:left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
@@ -470,7 +494,13 @@ a.back {
 	height:30px;
 	clear:both;
 }
-
+#footer {
+	margin-top:2px;
+	font-size: 9px;
+	font-family: Verdana, sans-serif;
+	color:#999;
+	line-height: 11px;
+}
 .topnav {
 	text-align: right;
 	margin-bottom:7px;
@@ -483,13 +513,7 @@ a.back {
 	font-size: 11px;
 	padding-left:12px;
 }
-#footer {
-	margin-top:2px;
-	font-size: 9px;
-	font-family: Verdana, sans-serif;
-	color:#999;
-	line-height: 11px;
-}
+
 
 /*list element*/
 
@@ -499,30 +523,21 @@ ul.squarelist {
 
 ul.squarelist li {
 	background-image: url(<context-prefix/>/unizh/authoring/images/listsq.gif);
+	background-position: left top;
 	background-repeat: no-repeat;
 	padding-left:13px;
 }
 
-ul.linklist li  {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrowlist.gif);
-	padding-left:13px;
-	background-repeat: no-repeat;
- 	background-position: top left;
-}
-.content2 ul.linklist li   {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
-	background-repeat: no-repeat;
-}
 
 ul.linknav {
 	font-size:11px;
 }
 .content1 ul.linknav li a, .content2 ul.linknav li a {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow2.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
+	background-position: left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
-	width:185;
 	line-height:18px;
 }
 
@@ -539,15 +554,16 @@ ol {
 * html ol li {
 	margin-left:25px;
 }
-ol li a {
+ol.list a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
+	background-position: left top;
 }
 /*linkliste*/
 .linktext {
 	font-size: 12px;
-	line-hegiht:20px;
+	line-height:20px;
 	float:left;
 	width:300px;
 }
@@ -556,10 +572,10 @@ ol li a {
 	width:100%;
 }
 .linkrow a {
-	background-image:url(<context-prefix/>/unizh/authoring/images/icon_blank.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
 	padding-left:13px;
 	font-size: 12px;
-	line-hegiht:20px;
+	line-height:20px;
 	background-repeat: no-repeat;
 	padding-right:2px;
 }
@@ -590,12 +606,22 @@ ol li a {
 	display:block;
 	margin-top:5px;
 }
+
 .imgMitLegende {
 	background-color:#f0f0f5;
-	display:block;
-	margin-top:5px;
 	margin-bottom:5px;
+	margin-top:5px;
 }
+*html .imgMitLegende {
+	margin-top:14px;
+}
+
+.fullimgMitLegende {
+	background-color:#f0f0f5;
+	margin-bottom:5px;
+	margin-top:14px;
+}
+
 .imgTeaser {
 	float: left;
 	margin-right:10px;
@@ -617,31 +643,37 @@ ol li a {
 	margin-left: 184px; 
 	margin-top: 5px;
 }
-.titelimgblock {
-	min-height:125px;
-	margin-bottom:18px;
-}
-
-.titelimg {
-	float: left;
-	margin-right:10px;
-	margin-top:5px;	
-}
-.artikelmitImg {
-	min-height:64px;
-}
 .fullimg {
 	margin-top:5px;
 	margin-bottom:5px;
 }
 .relatedteaser {
-	margin-top:3px;
+	margin-bottom:3px;
+}
+*html .relatedteaser {
+	margin-bottom:6px;
 }
 .teaser64long {
 	height:64px;
 }
 
+/* artikel Textumfluss*/
 
+.titelImgBlock {
+	min-height:125px;
+}
+.titelImg {
+	float: left;
+	margin-right:10px;
+	margin-top:5px;	
+}
+.titelImgBlock .solidlinemitmargin {
+	margin: 9px 0 0 0;
+}
+
+.artikelmitImg {
+	min-height:64px;
+}
 /* team 2 blocke */
 .teamBlock {
 	padding-top:9px;
@@ -666,6 +698,7 @@ ol li a {
 form {
 	margin: 0px;
 	border: 0px;
+	padding:0px;
 }
 
 form h2.subtitel {
@@ -758,8 +791,68 @@ input.optiontag {
 .submitbuttonPosLeft {
 	margin-left:6px;
 }
+/*search*/
+#formsearchcontent {
+	background-color: #f0f0f0;
+	padding-top:6px;
+	padding-left:4px;
+}
+	
 
+form .endheaderline {
+	margin-top:10px;
+}
+.searchtextblock {
+	margin-bottom:10px;
+}
+input.searchfield {
+	margin-right: 8px;
+	width: 290px;
+  	font-size: 12px;
+  	font-family: Arial, sans-serif;
+	line-height:18px;
+	padding-left:2px;
+	border-top:1px solid #696969;
+	border-left:1px solid #696969;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
 
+}
+.searchtextblock .submitbutton {
+	margin-top:0px;
+}
+.searchoptionblock {
+	display:inline;
+	margin-right: 10px;
+}
+input.searchoption {
+	display:inline;
+	border:0px;
+	padding:0px;
+	border:0px;
+	height:15px;
+}
+/*table*/
+.tabletitel {
+	height:30px;
+	font-weight:bold;
+	font-size:11px;
+	background-color: #f0f0f0;
+	padding-left:4px;
+}
+.tablecontent {
+	font-size:11px;
+}
+th {
+	height:30px;
+}
+.solidlinetable {
+	background-color: #999999;
+	height:1px;
+	width:100%;
+	margin:26px 0 0 0;
+	border:0px;
+}
 /* Misc*/
 
 .floatclear {
@@ -772,6 +865,7 @@ input.optiontag {
 	margin:0px;
 	border:0px;
 }
+
 .content .solidline {
 	background-color: #cccccc;
 }
@@ -782,7 +876,13 @@ input.optiontag {
 	margin: 20px 0 0 0;
 	border:0px;
 }
-
+.solidlinelist {
+	margin: 12px 0 9px 0;
+	background-color: #cccccc;
+	height:1px;
+	width:100%;
+	border:0px;
+}
 .dotline {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
@@ -805,6 +905,8 @@ input.optiontag {
 	margin: 7px 0;
 }
 
+
+
 /* uni additions */
 
 
@@ -814,6 +916,10 @@ input.optiontag {
 
 td img {
        max-width: 204px;
+}
+
+td.flexibleimage img {
+       max-width: 415px;
 }
 
 

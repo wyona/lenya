@@ -22,11 +22,12 @@
   <xsl:param name="fontsize"/>
 
   <xsl:include href="../doctypes/variables.xsl"/>
-  <xsl:include href="../common/elements.xsl"/>
   <xsl:include href="../common/html-head-print.xsl"/>
   <xsl:include href="../common/header-print.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
-  <xsl:include href="../common/navigation.xsl"/> 
+  <xsl:include href="../common/navigation.xsl"/>
+  <xsl:include href="../common/elements.xsl"/> 
+  <xsl:include href="../common/object.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>

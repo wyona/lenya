@@ -135,264 +135,10 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and (ancestor::xhtml:body or parent::unizh:short or parent::unizh:person)]">
-    <div>
-      <xsl:if test="@float = 'true' or @popup = 'true'">
-        <xsl:attribute name="class">imgTextfluss</xsl:attribute>
-      </xsl:if>
-      <a href="{lenya:asset-dot/@href}">
-        <img src="{$nodeid}/{@data}">
-          <xsl:attribute name="width">
-            <xsl:choose>
-              <xsl:when test="parent::unizh:short">
-                100
-              </xsl:when>
-              <xsl:when test="@float = 'true'">
-                204
-              </xsl:when>
-              <xsl:when test="@popup = 'true'">
-                204
-              </xsl:when>
-              <xsl:otherwise></xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </img> 
-      </a>
-      <xsl:if test="@popup = 'true' or @float = 'true' and not(ancestor::unizh:news or parent::unizh:short)">
-        <p class="legende">
-          <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-        </p>
-      </xsl:if>
-    </div>
-    <xsl:if test="@popup = 'true' and not(@float = 'true')">
-      <br class="floatclear"/>
-    </xsl:if>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and ancestor::unizh:teaser]">
-    <a href="{lenya:asset-dot/@href}">
-      <img src="{$nodeid}/{@data}" height="110" width="160"/>
-    </a>
-  </xsl:template>
-
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and ancestor::unizh:teaser and ancestor::unizh:column]">
-    <a href="{lenya:asset-dot/@href}">
-      <img src="{$nodeid}/{@data}" height="130" width="195"/>
-    </a>
-  </xsl:template>
-
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and parent::unizh:lead]">
-    <a href="{lenya:asset-dot/@href}">
-      <img src="{$nodeid}/{@data}" height="140" width="210"/>
-    </a>
-  </xsl:template>
-
   <xsl:template match="lenya:asset[$rendertype = 'imageupload']">
     <a class="download" href="{lenya:asset-dot/@href}">
       <xsl:value-of select="text()"/>
     </a>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[parent::unizh:person]">
-    <xsl:choose>
-      <xsl:when test="not(@data)">
-        <img src="{$imageprefix}/default_head.jpg"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:choose>
-          <xsl:when test="ancestor::index:child">
-            <xsl:choose>
-              <xsl:when test="contains(../../../@href, '_')">
-                <img src="{$contextprefix}{substring-before(../../../@href, '_')}/{@data}"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <img src="{$contextprefix}{substring-before(../../../@href, '.html')}/{@data}"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:when>
-          <xsl:otherwise>
-            <img src="{$nodeid}/{@data}" width="100"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[$rendertype = 'imageupload' and parent::unizh:person and not(ancestor::index:child)]">
-    <a href="{lenya:asset-dot/@href}">
-      <xsl:choose>
-        <xsl:when test="not(@data)">
-          <img src="{$imageprefix}/default_head.jpg"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <img src="{$nodeid}/{@data}" width="100"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </a>
-  </xsl:template>
-
- 
-  <xsl:template match="xhtml:object">
-    <xsl:choose>
-      <xsl:when test="@float = 'true'">
-        <div class="imgTextfluss">
-          <xsl:call-template name="object_link">
-            <xsl:with-param name="float">true</xsl:with-param>
-          </xsl:call-template>
-          <xsl:if test="not(ancestor::unizh:news) and not(parent::unizh:short)">
-            <p class="legende">
-              <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-              <xsl:if test="@popup = 'true'">
-                <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-              </xsl:if>
-            </p>
-          </xsl:if>
-        </div>
-      </xsl:when>
-      <xsl:when test="@popup = 'true' and not (@float = 'true')">
-        <div class="imgTexfluss"> 
-          <xsl:call-template name="object_link">
-            <xsl:with-param name="popup">true</xsl:with-param>
-          </xsl:call-template>
-          <div class="legende">
-            <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-              <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-          </div>
-        </div>
-        <br class="floatclear"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:choose>
-          <xsl:when test="xhtml:div[@class = 'caption']">
-            <div class="imgMitLegende">
-              <xsl:call-template name="object_link"/>
-              <div class="legende"> 
-                <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-              </div>
-            </div>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:call-template name="object_link"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:otherwise>
-    </xsl:choose> 
-  </xsl:template>
-  
- 
-  <xsl:template name="object_link">
-    <xsl:param name="float"/>
-    <xsl:param name="popup"/>
-    <xsl:choose>
-      <xsl:when test="@href != ''">
-        <a href="{@href}">
-          <img>
-            <xsl:attribute name="src">
-              <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-              <xsl:choose>
-                <xsl:when test="@title != ''">
-                  <xsl:value-of select="@title"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="dc:metadata/dc:title"/>                    
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:attribute>
-            <xsl:choose>
-              <xsl:when test="($float = 'true' or $popup = 'true') and not(parent::unizh:short or parent::unizh:teaser)">
-                <xsl:attribute name="width">204</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="ancestor::unizh:news">
-                <xsl:attribute name="height">120</xsl:attribute>
-              </xsl:when> 
-              <xsl:when test="ancestor::unizh:short">
-                <xsl:attribute name="width">100</xsl:attribute>
-                <xsl:attribute name="height">64</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="parent::unizh:teaser and ancestor::unizh:column">
-                <xsl:attribute name="width">195</xsl:attribute>
-                <xsl:attribute name="height">130</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="parent::unizh:teaser">
-                <xsl:attribute name="width">156</xsl:attribute>
-                <xsl:attribute name="height">100</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="parent::unizh:lead">
-                <xsl:attribute name="width">200</xsl:attribute>
-                <xsl:attribute name="height">140</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="ancestor::xhtml:table">
-                <xsl:attribute name="width">100</xsl:attribute>
-              </xsl:when>
-              <xsl:when test="@width = '415'">
-                <xsl:attribute name="width">415</xsl:attribute>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:attribute name="width">204</xsl:attribute>
-              </xsl:otherwise>
-            </xsl:choose>
-          </img>
-        </a>
-      </xsl:when>
-      <xsl:otherwise>
-        <img>
-          <xsl:attribute name="src">
-            <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
-          </xsl:attribute>
-          <xsl:attribute name="alt">
-            <xsl:choose>
-              <xsl:when test="@title != ''">
-                <xsl:value-of select="@title"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="dc:metadata/dc:title"/>                    
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          <xsl:choose>
-            <xsl:when test="($float = 'true' or $popup = 'true') and not(parent::unizh:short or parent::unizh:teaser)">
-              <xsl:attribute name="width">204</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="ancestor::unizh:news and not(parent::unizh:short)">
-              <xsl:attribute name="height">120</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="ancestor::unizh:short">
-              <xsl:attribute name="width">100</xsl:attribute>
-              <xsl:attribute name="height">64</xsl:attribute>
-            </xsl:when> 
-            <xsl:when test="parent::unizh:teaser and ancestor::unizh:column">
-              <xsl:attribute name="width">195</xsl:attribute>
-              <xsl:attribute name="height">130</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="parent::unizh:teaser">
-              <xsl:attribute name="width">156</xsl:attribute>
-              <xsl:attribute name="height">100</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="parent::unizh:lead">
-              <xsl:attribute name="width">200</xsl:attribute>
-              <xsl:attribute name="height">140</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="ancestor::xhtml:table and @width != ''">
-              <xsl:attribute name="width"><xsl:value-of select="@width"/></xsl:attribute>
-            </xsl:when>
-            <xsl:when test="ancestor::xhtml:table">
-              <xsl:attribute name="width">100</xsl:attribute>
-            </xsl:when>
-            <xsl:when test="@width = '415'">
-              <xsl:attribute name="width">415</xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:attribute name="width">204</xsl:attribute>
-            </xsl:otherwise> 
-          </xsl:choose>
-        </img>
-      </xsl:otherwise>
-    </xsl:choose> 
   </xsl:template>
 
 
@@ -405,7 +151,6 @@
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
     <a name="{@name}"/><xsl:comment/>
   </xsl:template>
-
 
 
   <xsl:template match="unizh:attention">
@@ -467,12 +212,6 @@
     <p>&#160;</p>
   </xsl:template>
 
-   <xsl:template match="unizh:lead">
-      <div class="lead">
-        <xsl:apply-templates/>
-      </div>
-      <p>&#160;</p>
-   </xsl:template>  
 
 
    <xsl:template match="unizh:links">
@@ -527,32 +266,6 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:highlight">
-    <div class="relatedboxborder">
-      <div class="relatedboxcont">
-        <xsl:apply-templates/>
-        <a class="arrow" href="">weiter</a>
-        <xsl:apply-templates select="lenya:asset-dot"/>
-      </div>
-    </div>
-  </xsl:template>
-
- 
-  <xsl:template match="unizh:highlights" mode="print">
-    <div class="highlights">
-      <xsl:for-each select="unizh:highlight">
-        <div class="highlight{(position()-1) mod 3}">
-          <xsl:apply-templates/>
-        </div>
-      </xsl:for-each>
-    </div>
-  </xsl:template> 
-  
-  <xsl:template match="unizh:highlight-title">
-    <b><xsl:apply-templates/></b>
-  </xsl:template>
-
-
   <xsl:template match="unizh:rss-reader[parent::unizh:related-content]">
     <xsl:variable name="items" select="@items"/>
 
@@ -567,7 +280,7 @@
                    <xsl:when test="xhtml:rss/xhtml:channel/xhtml:image/xhtml:height &lt; 100">
                      <xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:image/xhtml:height"/>
                    </xsl:when>
-                   <xsl:otherwise>100</xsl:otherwise>
+                   <xsl:otherwise>64</xsl:otherwise>
                  </xsl:choose>
                </xsl:variable>
                <xsl:variable name="imagewidth">
@@ -575,7 +288,7 @@
                    <xsl:when test="xhtml:rss/xhtml:channel/xhtml:image/xhtml:width &lt; 156">
                      <xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:image/xhtml:width"/>
                    </xsl:when>
-                   <xsl:otherwise>156</xsl:otherwise>
+                   <xsl:otherwise>100</xsl:otherwise>
                  </xsl:choose>
                </xsl:variable>
                <img src="{xhtml:rss/xhtml:channel/xhtml:image/xhtml:url}" height="{$imageheight}" width="{$imagewidth}"/><br/>
@@ -716,6 +429,7 @@
 
 
   <xsl:template match="unizh:children[ancestor::unizh:news]">
+    <br class="floatclear"/>
     <xsl:choose>
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">

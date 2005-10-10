@@ -874,6 +874,27 @@ div.caption {
 }
 
 
+.object object {
+  width: 204px;
+}
+
+.object object[width] { 
+  width: inherit;
+  max-width: 415px;
+}
+
+td .object object {
+  max-width: 204px;
+}
+
+
+td .object object[width] {
+  max-width: 204px;
+}
+
+
+
+
 .teaser .object object {
   max-width: 155px;
   max-height: 100px;
@@ -920,9 +941,6 @@ div.caption {
   max-height: 64px;
   display: block;
 }
-
-
-.object object { max-width: 415px }
 
 
 
