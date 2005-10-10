@@ -37,6 +37,9 @@
         <sourcetype name="person">
           <document-element local-name="person"/>
         </sourcetype>
+        <sourcetype name="search">
+          <document-element local-name="search"/>
+        </sourcetype>
         <sourcetype name="redirect">
           <document-element local-name="redirect"/>
         </sourcetype>

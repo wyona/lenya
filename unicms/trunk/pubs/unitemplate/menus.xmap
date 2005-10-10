@@ -50,7 +50,7 @@
       </map:match>
      
       <map:match pattern="*/newsitem">
-        <map:generate type="serverpages" src="../unizh/config/menus/item.xsp"/>
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
 
@@ -64,11 +64,20 @@
         <map:serialize type="xml"/>
       </map:match>
 
-       <map:match pattern="*/person">
-        <map:generate type="serverpages" src="../unizh/config/menus/item.xsp"/>
+      <map:match pattern="*/person">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
 
+      <map:match pattern="*/search">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/redirect">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
 
       <map:match pattern="*/**">
         <map:generate type="serverpages" src="../unizh/config/menus/generic.xsp"/>

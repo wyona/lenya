@@ -70,8 +70,8 @@
           <map:parameter name="unizh.pubId" value="{1}"/>
           <map:parameter name="area" value="{2}"/>
           <map:parameter name="context-prefix" value="{request:contextPath}"/>
-        </map:transform>
-        <map:serialize type="html"/>
+        </map:transform> 
+        <map:serialize type="xml"/>
       </map:match>
       <map:handle-errors>
         <map:select type="exception">
