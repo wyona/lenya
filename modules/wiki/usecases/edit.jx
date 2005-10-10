@@ -19,30 +19,63 @@
            xmlns="http://www.w3.org/1999/xhtml" 
            xmlns:i18n="http://apache.org/cocoon/i18n/2.1" 
            xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
-           xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
+	   xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
+	   xmlns:cinclude="http://apache.org/cocoon/include/1.0"
            >
-           
-  <page:title>
+   <page:title>
     <i18n:text>Edit</i18n:text> <jx:out value="${usecase.getParameter('document').getId()}"/>
   </page:title>
-  <page:body>
+  <page:body onLoad="
+  	var st = ${usecase.getParameterAsString('startline')};
+	var en = ${usecase.getParameterAsString('endline')};
+	var col = ${usecase.getParameterAsString('startcolumn')};
+  	var textarea = document.getElementsByTagName('textarea').item(0);
+	var i,j;
+	var text=textarea.value;
+	var line;
+	var start,end;
+	for (i=0, line=0, end=0; i&lt;=text.length; i++) {
+		if (text[i] == '\n' || i == text.length) {
+			line += 1;
+			start = end;
+			end = i;
+			if (line == st) {
+				if (i == text.length) {
+					textarea.selectionStart = start + col;
+				} else if (col == 1) {
+					textarea.selectionStart = start + 2;
+				} else {
+					textarea.selectionStart = start + col-1;
+				}
+				textarea.selectionEnd = end;
+			} else if (line &gt; st) {
+				textarea.selectionEnd = end;
+			}
+		}
+	}
+  ">
     <div class="lenya-box">
       <div class="lenya-box-body">
         <form method="get" action="">
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-          <table class="lenya-table-noborder">
+	  <table class="lenya-table-noborder">
             <tr>
               <td>
-	        <textarea wrap="virtual" name="content" rows="25" cols="90"><jx:out value="${usecase.getParameter('content')}"/></textarea>
+     	        <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/>
+	      </td>
+	    </tr>
+            <tr>
+              <td>
+                <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${usecase.getParameter('content')}"/></textarea>
 	      </td>		  
 	    </tr>		  
             <tr>
               <td>
 		<br/>
-		<input i18n:attr="value" type="submit" name="advance" value="Validate"/>      
+		<input i18n:attr="value" type="submit" name="submit" value="Save"/>
 		&#160;
-                <input i18n:attr="value" type="submit" name="submit" value="Save"/>
+		<input i18n:attr="value" type="submit" name="preview" value="Preview"/>
                 &#160;
                 <input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
               </td>

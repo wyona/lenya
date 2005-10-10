@@ -113,18 +113,40 @@ public class Edit extends DocumentUsecase {
         Node[] nodes = { docNode, siteNode };
         return nodes;
     }
-
+    
     public void advance() throws UsecaseException {
         super.advance();
         Request request = ContextHelper.getRequest(this.context);
-        String content = getParameterAsString("content");                
-        String encoding = request.getCharacterEncoding();        
+        String content = getParameterAsString("wikimarkup");
+        String encoding = request.getCharacterEncoding();                
         try {
-            validate(content, "ISO-8859-1");
-        } catch (Exception e) { 
+            setParameter("content", new String(content.getBytes("ISO-8859-1"), "UTF-8"));                                          
+            validate(content, encoding);
+        } catch (ParseException pe) {            
+            setParameter("startline", new Integer(pe.currentToken.beginLine));
+            setParameter("endline", new Integer(pe.currentToken.endLine));
+            addInfoMessage(pe.getMessage());
+        } catch (Exception e) {
             throw new UsecaseException(e);
-        }        
+        }
     }
+    
+    
+    protected void doCheckExecutionConditions() throws Exception {        
+        super.doCheckExecutionConditions();
+        Request request = ContextHelper.getRequest(this.context);
+        String content = getParameterAsString("wikimarkup");
+        String encoding = request.getCharacterEncoding();                        
+        try {            
+            validate(content, encoding);            
+        } catch (ParseException pe) {
+            setParameter("startline", new Integer(pe.currentToken.next.beginLine));
+            setParameter("startcolumn", new Integer(pe.currentToken.next.beginColumn));
+            setParameter("endline", new Integer(pe.currentToken.next.endLine));
+            addErrorMessage(pe.getMessage());
+        }
+    }
+
     
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doExecute()
@@ -132,16 +154,14 @@ public class Edit extends DocumentUsecase {
     protected void doExecute() throws Exception {
         super.doExecute();
         Request request = ContextHelper.getRequest(this.context);
-        String content = getParameterAsString("content");                
-        String encoding = request.getCharacterEncoding();        
-        validate(content, encoding);                
+        String content = new String(getParameterAsString("wikimarkup").getBytes("ISO-8859-1"), "UTF-8");        
         OutputStream wikiOut = getSourceDocument().getRepositoryNode().getOutputStream();
-        Writer writer = new OutputStreamWriter(wikiOut, "ISO-8859-1");
+        Writer writer = new OutputStreamWriter(wikiOut, "UTF-8");
         writer.write(content);
         writer.close();
     }
     
-    protected void validate(String content, String encoding) throws Exception {                     
+    protected void validate(String content, String encoding) throws ParseException, UnsupportedEncodingException {                     
         InputStream wikiIs = new ByteArrayInputStream(content.getBytes(encoding));
         charStream = new SimpleCharStream(new InputStreamReader(wikiIs, encoding));
         tokenManager = new WikiParserTokenManager(charStream); 
