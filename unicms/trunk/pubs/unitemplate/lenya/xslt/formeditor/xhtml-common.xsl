@@ -31,6 +31,7 @@
     <element name="Headline 4" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
     <element name="Table of Contents" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:toc&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
     <element name="Children" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
+   <element name="New RSS-Feed" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:rss-reader&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;image&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;items&quot;&gt;3&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;url&quot;&gt;empty&lt;/xupdate:attribute&gt;#rss-reader&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
   </insert-before>
 </xsl:template>
 
@@ -51,9 +52,48 @@
     <element name="Headline 4" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:h4&quot; {$nsxhtml}&gt;New Headline 4&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
     <element name="Table of Contents" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:toc&quot; {$nsunizh}&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
     <element name="Children" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
+   <element name="New RSS-Feed" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:rss-reader&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;image&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;items&quot;&gt;3&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;url&quot;&gt;empty&lt;/xupdate:attribute&gt;#rss-reader&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
 
+<xsl:template match="unizh:rss-reader" mode="body">
+  <node name="RSS Feed">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
+  </node>
+<node name="rss url" select="/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']"> 
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input></content>
+  </node>
+  <node name="RSS: Number of items" select="/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']"> 
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute></input></content>
+  </node><node name="RSS: Image">
+    <content>
+      Load appropriate image: 
+      <xsl:choose>
+        <xsl:when test="@image">
+          <select name="&lt;xupdate:update select=&quot;/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@image&quot;&gt;">
+            <xsl:choose>
+              <xsl:when test="@image = 'true'">
+                <option value="true" selected="selected">true</option>
+                <option value="false">false</option>
+              </xsl:when>
+              <xsl:otherwise>
+                <option value="true">true</option>
+                <option value="false" selected="selected">false</option>
+              </xsl:otherwise>
+            </xsl:choose>
+          </select>
+        </xsl:when>
+        <xsl:otherwise>
+          <select name="&lt;xupdate:insert select=&quot;/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@image&quot;&gt;">
+            <option value="true">true</option>
+            <option value="false" selected="selected">false</option>
+          </select>
+        </xsl:otherwise>
+      </xsl:choose>
+    </content>
+  </node>
+ <xsl:call-template name="insertmenu"><xsl:with-param name="path">//xhtml:body/unizh:rss-reader</xsl:with-param></xsl:call-template>
+</xsl:template>
 
 <xsl:template match="xhtml:p" mode="body">
   <xsl:if test="not(preceding-sibling::*)">
