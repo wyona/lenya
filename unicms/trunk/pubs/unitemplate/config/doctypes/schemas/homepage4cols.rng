@@ -34,7 +34,7 @@
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
     <ref name="unizh.header"/> 
-    <ref name="unizh.quicklinks"/>
+    <ref name="unizh.contcol1"/>
     <ref name="unizh.related-content"/>
     <element name="body">
       <ref name="unizh.columns"/>

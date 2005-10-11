@@ -269,9 +269,9 @@
 </xsl:template> 
 
 
-<!-- Show/Hide Quicklinks -->
+<!-- Show/Hide Contcol1 -->
 
-<xsl:template match="unizh:quicklinks[$tabs = 'false']"/>
+<xsl:template match="unizh:contcol1[$tabs = 'false']"/>
 
 <!-- Collections. Hide children nodes in menu -->
 

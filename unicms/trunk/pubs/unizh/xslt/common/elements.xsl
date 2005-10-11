@@ -6,7 +6,8 @@
   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
   xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
-  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:uz="http://unizh.ch"
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+  xmlns:uz="http://unizh.ch"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:ci="http://apache.org/cocoon/include/1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -240,9 +241,15 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:contcol1">
+    <div class="contcol1" id="col1" bxe_xpath="/{$document-element-name}/unizh:contcol1">
+      <xsl:apply-templates/>
+    </div>
+  </xsl:template>
+
+
   <xsl:template match="unizh:quicklinks">
-    <div id="col1">
-      <div class="quicklinks" bxe_xpath="/{$document-element-name}/unizh:quicklinks">
+      <div class="quicklinks">
         <div class="solidline">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
         </div>
@@ -262,7 +269,6 @@
           <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
         </xsl:for-each>
       </div>
-    </div>
   </xsl:template>
 
 

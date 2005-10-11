@@ -84,6 +84,7 @@
     </xsl:copy>
   </xsl:template>
 
+
   <xsl:template match="xhtml:p[parent::unizh:short and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:if test="not(preceding-sibling::xhtml:object)">
@@ -95,6 +96,7 @@
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
   </xsl:template>
+
 
   <xsl:template match="xhtml:object[$rendertype = 'imageupload']">
     <xsl:copy>
@@ -130,6 +132,7 @@
     </xsl:copy>
   </xsl:template>
 
+
   <xsl:template match="unizh:title[parent::unizh:teaser and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
@@ -139,6 +142,17 @@
           <xsl:with-param name="insertWhere">before</xsl:with-param>
         </xsl:call-template>
       </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:contcol1[not(unizh:quicklinks) and not(xhtml:object) and $rendertype = 'imageupload']">
+    <xsl:copy>    
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:call-template name="asset-dot">
+        <xsl:with-param name="insertWhat">image</xsl:with-param>
+        <xsl:with-param name="insertWhere">inside</xsl:with-param>
+      </xsl:call-template> 
     </xsl:copy>
   </xsl:template>
 

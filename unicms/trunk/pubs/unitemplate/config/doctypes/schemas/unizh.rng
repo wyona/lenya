@@ -74,6 +74,18 @@
 </define>
 
 
+<define name="unizh.secnav">
+  <element name="unizh:secnav">
+    <zeroOrMore>
+      <choice>
+        <ref name="unizh.quicklinks"/>
+        <ref name="object"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+
 <define name="unizh.quicklinks">
   <element name="unizh:quicklinks">
     <attribute name="label">

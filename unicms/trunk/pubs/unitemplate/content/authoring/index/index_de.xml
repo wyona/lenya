@@ -15,12 +15,14 @@
     <unizh:superscription>Universität Zürich</unizh:superscription>
     <unizh:heading>Titel der Publikation</unizh:heading>
   </unizh:header>
-  <unizh:quicklinks label="Quick Links">
-    <unizh:quicklink>
-      <p>Thema</p>
-      <xhtml:a href="#">Link</xhtml:a>
-    </unizh:quicklink>
-  </unizh:quicklinks>
+  <unizh:contcol1>
+    <unizh:quicklinks label="Quick Links">
+      <unizh:quicklink>
+        <p>Thema</p><a href="asdf" title="asdf">asdf</a>
+        <a href="#">Link</a><a href="qwer" title="qwer">qwer</a>
+      </unizh:quicklink>
+    </unizh:quicklinks>
+  </unizh:contcol1>
   <unizh:related-content>
     <unizh:teaser>
       <unizh:title>Example</unizh:title>

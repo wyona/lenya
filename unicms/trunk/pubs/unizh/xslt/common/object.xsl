@@ -114,6 +114,13 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:object[parent::unizh:contcol1]">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">160</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:object[parent::unizh:lead]">
     <xsl:call-template name="object">
       <xsl:with-param name="width">198</xsl:with-param>

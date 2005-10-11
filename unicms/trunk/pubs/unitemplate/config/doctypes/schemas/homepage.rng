@@ -33,8 +33,8 @@
   <element name="unizh:homepage">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.header"/> 
-    <ref name="unizh.quicklinks"/>
+    <ref name="unizh.header"/>
+    <ref name="unizh.contcol1"/> 
     <ref name="unizh.related-content"/>
     <ref name="body"/>
   </element>

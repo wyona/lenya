@@ -168,7 +168,7 @@
 
   <xsl:template name="homepage">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:apply-templates select="*/unizh:quicklinks"/>
+    <xsl:apply-templates select="*/unizh:contcol1"/>
     <div class="contcol2">
       <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -194,7 +194,7 @@
  
   <xsl:template name="homepage4columns">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:apply-templates select="*/unizh:quicklinks"/>
+    <xsl:apply-templates select="*/unizh:contcol1"/>
     <div class="contcol2">
       <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
