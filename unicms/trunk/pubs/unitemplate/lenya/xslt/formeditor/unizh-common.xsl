@@ -9,17 +9,8 @@
 >
 
 <xsl:template match="unizh:related-content">
-  <node name="Related Content">
-  <!-- <action><delete value="true" name="&lt;xupdate:remove select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;/&gt;"/></action> -->
-  </node>
+  <node name="Related Content"/>
   <xsl:apply-templates mode="rc"/>
-<!--
-  <xsl:apply-templates select="unizh:teaser"/>
-  <xsl:apply-templates select="unizh:rss-reader"/>
-  <node name="Teaser">
-    <action><insert name="&lt;xupdate:append select=&quot;/*/unizh:related-content[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;Title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;Teaser text&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:append&gt;"/></action>
-  </node>
--->
 </xsl:template>
 
 
@@ -44,9 +35,9 @@
 <node name="rss url" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input></content>
   </node>
-  <node name="Number of items" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
+  <node name="RSS: Number of items" select="/*/unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']"> 
     <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute></input></content>
-  </node><node name="Image">
+  </node><node name="RSS: Image">
     <content>
       Load appropriate image: 
       <xsl:choose>
@@ -86,7 +77,7 @@
     
 <xsl:template match="*[local-name()='toc']" mode="body">
   <node name="Table of Contents">
-    <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:toc[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/unizh:toc[@tagID='{@tagID}']&quot;/&gt;"/></action>
   </node>
   <xsl:call-template name="insertmenu"><xsl:with-param name="path">/*/xhtml:body/unizh:toc</xsl:with-param></xsl:call-template>
 </xsl:template>
@@ -140,27 +131,22 @@
 
 
 <xsl:template match="xhtml:p" mode="rc">
-  <xsl:choose>
-    <xsl:when test="xhtml:object">
-      <xsl:apply-templates select="xhtml:object" mode="rc"/>
-    </xsl:when>
-    <xsl:otherwise>
-      <node name="Paragraph" select="//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']">
-        <action><delete value="true" name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']&quot;/&gt;"/></action>
-        <content><textarea name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']&quot;&gt;" cols="40" size="5"><xsl:value-of select="."/></textarea></content>
-      </node>
-    </xsl:otherwise>
-  </xsl:choose>
+  <node name="Paragraph" select="//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']">
+    <action><delete value="true" name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <content><textarea name="&lt;xupdate:update select=&quot;//unizh:related-content/unizh:teaser/xhtml:p[@tagID='{@tagID}']&quot;&gt;" cols="40" size="5"><xsl:value-of select="."/></textarea></content>
+  </node>
 </xsl:template>
 
-
 <xsl:template match="xhtml:object" mode="rc">
-  <node name="Object" select="//unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']">
-    <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
-    <content>
-      <div><xsl:value-of select="@data"/></div>
-      <textarea name="&lt;xupdate:update select=&quot;/*/unizh:related-content/unizh:teaser/xhtml:p/xhtml:object[@tagID='{@tagID}']&quot;&gt;" cols="40" size="3"><xsl:value-of select="."/></textarea>
-    </content>
+  <node name="Object" mode="rc">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
+      <content>
+        <input type="text" name="&lt;xupdate:update select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;&gt;" size="40">
+          <xsl:attribute name="value">
+             <xsl:value-of select="@data"/>
+          </xsl:attribute>
+        </input>
+      </content>
   </node>
 </xsl:template>
 
