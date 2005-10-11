@@ -245,9 +245,6 @@
 
 
 <xsl:template match="xhtml:object" mode="body">
-  <!--
-  <xsl:call-template name="insertbeforemenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:p</xsl:with-param></xsl:call-template>
-  -->
   <node name="Object" mode="body">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
       <content>
@@ -257,7 +254,8 @@
           </xsl:attribute>
         </input>
       </content>
-  </node>
+  </node>  
+  <xsl:call-template name="insertmenu"><xsl:with-param name="path">/*/*/xhtml:object</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
