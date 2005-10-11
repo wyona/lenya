@@ -74,14 +74,14 @@
 </define>
 
 
-<define name="unizh.secnav">
-  <element name="unizh:secnav">
-    <zeroOrMore>
+<define name="unizh.contcol1">
+  <element name="unizh:contcol1">
+    <optional>
       <choice>
         <ref name="unizh.quicklinks"/>
         <ref name="object"/>
       </choice>
-    </zeroOrMore>
+    </optional>
   </element>
 </define>
 
