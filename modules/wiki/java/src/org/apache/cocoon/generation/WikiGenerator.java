@@ -44,6 +44,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.wyona.wiki.ParseException;
 import org.wyona.wiki.SimpleCharStream;
 import org.wyona.wiki.SimpleNode;
+import org.wyona.wiki.Tree2XML;
 import org.wyona.wiki.WikiParser;
 import org.wyona.wiki.WikiParserTokenManager;
 
@@ -52,27 +53,7 @@ import org.wyona.wiki.WikiParserTokenManager;
  */
 public class WikiGenerator extends ServiceableGenerator {
 
-    /** The URI of the namespace of this generator. */
-    protected static final String URI = "http://apache.org/cocoon/wiki/1.0";
-
-    /** The namespace prefix for this namespace. */
-    protected static final String PREFIX = "wiki";
-
-    protected static final String WIKI_NODE_NAME = "wiki";
-
-    /** The static parser slave */
-    static boolean initialized = false;
-
     protected Source inputSource = null;
-
-    WikiParser wikiParser;
-    WikiParserTokenManager tokenManager;
-    SimpleCharStream charStream;
-    
-    /**
-     * Convenience object, so we don't need to create an AttributesImpl for every element.
-     */
-    protected AttributesImpl attributes;
 
     /**
      * Set the request parameters. Must be called before the generate method.
@@ -89,13 +70,11 @@ public class WikiGenerator extends ServiceableGenerator {
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException,
             SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
-
         try {
             this.inputSource = super.resolver.resolveURI(src);
         } catch (SourceException se) {
             throw SourceUtil.handle("Error during resolving of '" + src + "'.", se);
         }
-        this.attributes = new AttributesImpl();
     }
 
     /**
@@ -105,45 +84,17 @@ public class WikiGenerator extends ServiceableGenerator {
      *             if an error occurs while outputting the document
      */
     public void generate() throws SAXException, ProcessingException {
-        attributes.clear();
-        this.contentHandler.startDocument();
-        this.contentHandler.startPrefixMapping(PREFIX, URI);
-        this.contentHandler.startElement(URI, WIKI_NODE_NAME, PREFIX + ':' + WIKI_NODE_NAME, attributes);
-
-        try {
-            InputStream wikiIs = inputSource.getInputStream();                            
-            charStream = new SimpleCharStream(new InputStreamReader(wikiIs, "UTF-8"));
-            tokenManager = new WikiParserTokenManager(charStream); 
-            wikiParser = new WikiParser(tokenManager);            
+        try {    
+            InputStream wikiIs = inputSource.getInputStream();
+            WikiParser wikiParser = new WikiParser(new WikiParserTokenManager(new SimpleCharStream(
+                    new InputStreamReader(wikiIs, "UTF-8"))));
             SimpleNode root = wikiParser.WikiBody();
-            handleNode(root, 0);
+            Tree2XML wikiTree = new Tree2XML(this.contentHandler);            
+            wikiTree.traverseJJTree(root);            
+        } catch (SAXException e) {
+            throw e;
         } catch (Exception e) {
             throw new ProcessingException(e);
         }
-
-        this.contentHandler.endElement(URI, WIKI_NODE_NAME, PREFIX + ':' + WIKI_NODE_NAME);
-        this.contentHandler.endPrefixMapping(PREFIX);
-        this.contentHandler.endDocument();
-    }
-
-    private void handleNode(SimpleNode node, int depth) throws SAXException {
-        attributes.clear();
-        if (!node.optionMap.isEmpty()) {
-            Set keySet = node.optionMap.keySet();
-            Iterator kit = keySet.iterator();
-            while (kit.hasNext()) {
-                Object option = kit.next();
-                Object value = node.optionMap.get(option);
-                attributes.addAttribute("", option.toString(), option.toString(), "CDATA", value.toString());
-            }
-        }
-
-        this.contentHandler.startElement(URI, node.toString(), PREFIX + ':' + node.toString(), attributes);
-        if (node.jjtGetNumChildren() > 0) {
-            for (int i = 0; i < node.jjtGetNumChildren(); i++) {
-                handleNode((SimpleNode) node.jjtGetChild(i), depth + 1);
-            }
-        }
-        this.contentHandler.endElement(URI, node.toString(), PREFIX + ':' + node.toString());
     }
 }
