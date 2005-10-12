@@ -18,8 +18,8 @@
   <unizh:contcol1>
     <unizh:quicklinks label="Quick Links">
       <unizh:quicklink>
-        <p>Thema</p><a href="asdf" title="asdf">asdf</a>
-        <a href="#">Link</a><a href="qwer" title="qwer">qwer</a>
+        <p>Thema</p>
+        <a href="#">Link</a>
       </unizh:quicklink>
     </unizh:quicklinks>
   </unizh:contcol1>

@@ -196,7 +196,7 @@
        <map:match pattern="search-*-*/*/*/**.html">
         <map:aggregate element="document">
           <map:part element="content" src="cocoon:/xml"/>
-          <map:part src="cocoon://unitemplate/search-live/lucene"/> 
+          <map:part src="cocoon://{3}/search-live/lucene"/> 
           <map:part src="cocoon://navigation/{3}/{4}/breadcrumb/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/servicenav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/toolnav/{5}.html.xml"/>

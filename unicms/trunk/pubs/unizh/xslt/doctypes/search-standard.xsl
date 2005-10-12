@@ -48,14 +48,10 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
           <div class="contcol2">
             <div class="content">
-              <h1>
-                <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
-                  <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-                </div>
-              </h1>
               <xsl:apply-templates select="/document/xhtml:form[@id = 'search']"/>
               <xsl:apply-templates select="/document/xhtml:div[@id = 'exception']"/>
               <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
+              <xsl:apply-templates select="/document/xhtml:div[@id = 'pages']"/>
             </div>
             <xsl:call-template name="footer"/>
           </div>
@@ -66,17 +62,44 @@
 
 
   <xsl:template match="xhtml:form[@id = 'search']">
-    <form>
-      <xsl:apply-templates select="xhtml:input[@name = 'queryString']"/>
-      <xsl:apply-templates select="xhtml:input[@name = 'sa']"/>
-      <br/>
-      <xsl:apply-templates select="xhtml:a[@id = 'lessoptions']"/> |
-      <xsl:apply-templates select="xhtml:a[@id = 'moreoptions']"/>
-      <br/>
+    <form id="formsearchcontent">
+      <div class="searchtextblock">
+        <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
+        <input class="submitbutton" type="submit" name="sa" value="{xhtml:input[@name='sa']/@value}"/> 
+      </div>
+      <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>
       <xsl:apply-templates select="xhtml:input[@type = 'hidden']"/>
-      <br/>
-      <xsl:apply-templates select="xhtml:select[@name='dummy-index-id.fields']"/>
+      <div class="endheaderline">
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+      </div>
     </form>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:input[@type = 'radio' and @name = 'publication-id']">
+    <div class="searchoptionblock">
+      <input class="searchoption" type="radio" name="{@name}" value="{@value}">
+        <xsl:if test="@checked">
+           <xsl:attribute name="checked">checked</xsl:attribute>
+        </xsl:if>
+      </input>
+      <xsl:value-of select="."/>
+    </div>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:div[@id = 'results']">
+    <h1><xsl:apply-templates select="xhtml:h1"/></h1>
+    <xsl:for-each select="xhtml:p/xhtml:ul/xhtml:li">
+      <div class="solidlinelist">
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+      </div>
+      <a href="{xhtml:a/@href}"><xsl:value-of select="xhtml:a"/></a><br/>
+      <xsl:value-of select="xhtml:span[@class = 'excerpt']"/>
+      <p>
+        <span class="urltext"><xsl:value-of select="xhtml:a/@href"/></span>
+      </p>
+    </xsl:for-each>
   </xsl:template>
 
 
