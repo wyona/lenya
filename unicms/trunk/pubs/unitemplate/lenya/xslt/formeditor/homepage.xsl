@@ -36,16 +36,16 @@
 <xsl:template match="unizh:rss-reader" mode="body">
   <node name="RSS Feed" select="/*/unizh:rss-reader[@tagID='{@tagID}']">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
-      <content>
+    <content>
         <textarea name="&lt;xupdate:update select=&quot;//unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" cols="60">
            <xsl:value-of select="@url"/>
         </textarea>
-     </content>
-  </node>
-  <node name="RSS: Number of items" select="/*/unizh:rss-reader[@tagID='{@tagID}']/@items"> 
-    <content><input type="text" name="&lt;xupdate:update select=&quot;//unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute></input></content>
-  </node>
-  <node name="RSS: Image">
+    </content>
+    <content>
+        <textprefix>Number of items:</textprefix>
+        <input type="text" name="&lt;xupdate:update select=&quot;//unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute>
+        </input>
+    </content>
     <content>
       Load appropriate image: 
       <xsl:choose>

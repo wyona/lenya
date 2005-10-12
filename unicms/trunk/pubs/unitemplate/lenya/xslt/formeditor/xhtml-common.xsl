@@ -57,17 +57,16 @@
 </xsl:template>
 
 <xsl:template match="unizh:rss-reader" mode="body">
-  <node name="RSS Feed">
+  <node name="RSS Feed" select="/*/unizh:rss-reader[@tagID='{@tagID}']">
     <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']&quot;/&gt;"/></action>
-  </node>
-<node name="rss url" select="/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']"> 
-    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input></content>
-  </node>
-  <node name="RSS: Number of items" select="/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']"> 
-    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="40"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute></input></content>
-  </node><node name="RSS: Image">
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@url&quot;&gt;" size="50"><xsl:attribute name="value"><xsl:value-of select="@url"/></xsl:attribute></input>
+    </content>
     <content>
-      Load appropriate image: 
+       <textprefix>Number of items:</textprefix><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@items&quot;&gt;" size="5"><xsl:attribute name="value"><xsl:value-of select="@items"/></xsl:attribute>
+       </input>
+    </content>
+    <content>
+      Load appropriate image:
       <xsl:choose>
         <xsl:when test="@image">
           <select name="&lt;xupdate:update select=&quot;/*/xhtml:body/unizh:rss-reader[@tagID='{@tagID}']/@image&quot;&gt;">
