@@ -39,6 +39,9 @@
       <buffer-size>1024</buffer-size>
       <encoding>UTF-8</encoding>
     </map:serializer>
+    <map:serializer name="xml-iso-8859-1" logger="sitemap.serializer.xml" mime-type="application/xml; charset=utf-8" src="org.apache.cocoon.serialization.XMLSerializer">
+      <encoding>ISO-8859-1</encoding>
+    </map:serializer>
     </map:serializers>
     
   </map:components>
@@ -230,7 +233,7 @@
     <!--newsletter-->
       <map:match pattern="*/**.mail.html">
         <map:generate src="cocoon:/lenyabody-view-mail/{1}/{2}.html"/>
-        <map:serialize type="xml"/>
+        <map:serialize type="xml-iso-8859-1"/>
       </map:match>
 
     <!-- Dossiers pipelines --> 
