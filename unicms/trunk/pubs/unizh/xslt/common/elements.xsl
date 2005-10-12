@@ -241,9 +241,15 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:contcol1">
+  <xsl:template match="unizh:contcol1[parent::unizh:homepage or parent::unizh:homepage4cols]">
     <div class="contcol1" id="col1" bxe_xpath="/{$document-element-name}/unizh:contcol1">
-      <xsl:apply-templates/>
+      <xsl:apply-templates/><xsl:comment/>
+    </div>
+  </xsl:template>
+
+  <xsl:template id="col1" match="unizh:contcol1">
+    <div class="contcol1" id="col1">
+      <xsl:apply-templates/><xsl:comment/>
     </div>
   </xsl:template>
 

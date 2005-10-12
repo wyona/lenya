@@ -21,15 +21,13 @@
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
 
-
   <xsl:include href="../doctypes/variables.xsl"/>
-  <xsl:include href="../common/html-head.xsl"/>
-  <xsl:include href="../common/header.xsl"/>
+  <xsl:include href="../common/html-head-print.xsl"/>
+  <xsl:include href="../common/header-print.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
   <xsl:include href="../common/navigation.xsl"/>
   <xsl:include href="../common/elements.xsl"/> 
-  <xsl:include href="../common/object.xsl"/> 
-
+  <xsl:include href="../common/object.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
@@ -41,56 +39,30 @@
       <xsl:call-template name="html-head"/>
       <body>
         <div class="bodywidth">
-          <a name="top"><xsl:comment/></a>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
-          <xsl:call-template name="header"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-          <xsl:apply-templates select="/document/unizh:contcol1"/>
-          <div class="contcol2">
-            <div class="content">
-              <h1> 
-                <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
-                  <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-                </div>
-              </h1>
-              <xsl:apply-templates select="/document/xhtml:form[@id = 'search']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'exception']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'pages']"/>
-            </div>
-            <xsl:call-template name="footer"/>
+          <div class="imgunilogo">
+            <img src="{$imageprefix}/uni_logo_simpleview.gif" alt="unizh logo" width="148" height="35"/>
           </div>
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
+          <xsl:call-template name="header"/>
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"  /></div>
+          <div class="content">
+            <h1>
+              <xsl:value-of select="*/lenya:meta/dc:title"/>
+            </h1>
+            <p>&#160;</p>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'exception']"/>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
+          </div>
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
+          <xsl:apply-templates select="*/unizh:related-content/unizh:teaser"/>
+          <xsl:apply-templates select="*/xhtml:body/unizh:column/unizh:teaser"/>
+          <div class="footermargintop"><xsl:comment/></div>
+          <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></div>
         </div>
-      </body>
+        <br/>
+      </body> 
     </html>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:form[@id = 'search']">
-    <form id="formsearchcontent">
-      <div class="searchtextblock">
-        <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
-        <input class="submitbutton" type="submit" name="sa" value="{xhtml:input[@name='sa']/@value}"/> 
-      </div>
-      <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>
-      <xsl:apply-templates select="xhtml:input[@type = 'hidden']"/>
-      <div class="endheaderline">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-      </div>
-    </form>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:input[@type = 'radio' and @name = 'publication-id']">
-    <div class="searchoptionblock">
-      <input class="searchoption" type="radio" name="{@name}" value="{@value}">
-        <xsl:if test="@checked">
-           <xsl:attribute name="checked">checked</xsl:attribute>
-        </xsl:if>
-      </input>
-      <xsl:value-of select="."/>
-    </div>
   </xsl:template>
 
 
@@ -112,6 +84,8 @@
   <xsl:template match="xhtml:div[@id = 'exception']">
     <xsl:value-of select="."/>
   </xsl:template>
+
+
 
 
   <xsl:template match="@*|node()" priority="-1">

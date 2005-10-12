@@ -18,9 +18,9 @@
         <a href="{@href}"><xsl:value-of select="."/></a>
         <xsl:if test="position() &lt; last()">|</xsl:if>
       </xsl:for-each>
-      <form id="formsearch" action="" method="post" enctype="text/plain">
+      <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
         <div class="serviceform">
-          <input type="text" name="searchtext"/>
+          <input type="text" name="queryString"/>
         </div>
         <div class="serviceform">
           <a href="javascript:document.forms['formsearch'].submit();">Suche</a>

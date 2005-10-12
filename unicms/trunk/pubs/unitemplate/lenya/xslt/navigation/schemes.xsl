@@ -12,6 +12,9 @@
 
 <!-- doctype specific navigation logic -->
 
+<xsl:param name="node-id"/>
+
+
 <xsl:variable name="isHomepage">
   <xsl:if test="/document/content/unizh:homepage">true</xsl:if>
   <xsl:if test="/document/content/unizh:homepage4cols">true</xsl:if>
@@ -37,7 +40,7 @@
 <xsl:variable name="index" select="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = 'index' and @current = 'true']"/>
 
 
-<xsl:template match="xhtml:div[@id = 'menu']">
+<xsl:template match="xhtml:div[@id = 'menu']"> 
   <xsl:choose>
     <xsl:when test="$isHomepage = 'true'">
       <xsl:if test="$tabs = 'false'">
@@ -89,6 +92,16 @@
       </xhtml:div>
     </xsl:otherwise>
   </xsl:choose>
+</xsl:template>
+
+
+<!-- Contcol1 (tabs) for contact, impressum, sitemap, search --> 
+
+
+<xsl:template match="xhtml:div[@id = 'menu' and $tabs = 'true' and ($node-id = 'contact' or $node-id='sitemap' or $node-id = 'impressum' or $node-id = 'search')]">
+  <unizh:contcol1> 
+    <xsl:apply-templates select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/*/unizh:contcol1/unizh:quicklinks"/> 
+  </unizh:contcol1>
 </xsl:template>
 
 

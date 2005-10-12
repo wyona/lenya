@@ -228,7 +228,9 @@
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
-        <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
+        <map:transform src="lenya/xslt/navigation/schemes.xsl">
+          <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+        </map:transform>
 
         <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
           <map:parameter name="version" value="{request-param:version}"/>
@@ -308,7 +310,9 @@
         <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
-        <map:transform src="lenya/xslt/navigation/schemes.xsl"/>
+        <map:transform src="lenya/xslt/navigation/schemes.xsl">
+          <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+        </map:transform>
        
         <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
           <map:parameter name="version" value="{request-param:version}"/>
@@ -323,7 +327,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call> 
+        </map:call>  
 
         <map:serialize type="xml"/>
       </map:match>

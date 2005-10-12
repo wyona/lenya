@@ -15,7 +15,7 @@
     <div id="home" href="{nav:node[@id = 'index']/@href}">Home</div>
     <xsl:apply-templates select="nav:node[@id = 'contact']"/>
     <xsl:apply-templates select="nav:node[@id = 'sitemap']"/>
-    <div id="search" targetURL="">Search</div>
+    <xsl:apply-templates select="nav:node[@id = 'search']"/>
   </div>
 </xsl:template>
 
