@@ -13,6 +13,12 @@
     <xsl:apply-templates select="@src"/>
   </xsl:template>
 
+  <xsl:template match="robots/@src">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template match="@href | @src">
      <xsl:variable name="attrValue">
        <xsl:value-of select="substring-before(.,$templatePublication)"/>
