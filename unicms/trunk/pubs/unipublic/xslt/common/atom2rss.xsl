@@ -18,7 +18,7 @@
     <channel>
         <xsl:apply-templates select="@xml:lang"/>
         <xsl:apply-templates select="atom:title"/> 
-        <xsl:apply-templates select="atom:link" mode="feed"/>
+        <xsl:apply-templates select="atom:link"/>
         <xsl:apply-templates select="atom:modified" mode="feed"/>
         <description>no description available</description>
         <xsl:apply-templates select="atom:entry"/> 
@@ -40,26 +40,27 @@
   <xsl:template match="atom:entry">
     <item> 
       <xsl:apply-templates select="atom:title"/>    
+      <xsl:apply-templates select="atom:summary"/>
       <xsl:apply-templates select="atom:link"/>    
     </item>
   </xsl:template>
+  
+  <xsl:template match="atom:summary">
+    <description>
+      <xsl:apply-templates/>
+    </description>
+  </xsl:template>
  
   <xsl:template match="atom:link">
-    <link>
-      <xsl:value-of select="@href"/>
-    </link>
-  </xsl:template>
-
-  <xsl:template match="atom:link" mode="feed">
     <xsl:choose>
-      <xsl:when test="starts-with(@type, 'image')">
+      <xsl:when test="@rel='enclosure'">
         <image>
-          <url><xsl:value-of select="@href"/></url>
           <title><xsl:value-of select="@title"/></title>
-          <link><xsl:value-of select="../atom:link/@href"/></link>
+          <url><xsl:value-of select="@href"/></url>
+          <link><xsl:value-of select="../atom:link[@rel='alternate']/@href"/></link>
           <width>80</width>
           <height>60</height>
-        </image>
+        </image>  
       </xsl:when>
       <xsl:otherwise>
         <link>
@@ -68,7 +69,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
+
   <xsl:template match="atom:modified" mode="feed">
     <lastBuildDate>
       <i18n:date-time src-pattern="yyyy-MM-dd'T'hh:mm:ss" pattern="EEE, d MMM yyyy HH:mm:ss Z"><xsl:value-of select="."/></i18n:date-time>

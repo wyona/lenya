@@ -30,8 +30,11 @@
           <xsl:value-of select="$lastmodified"/>
         </i18n:date-time>
       </modified>
+      <xsl:apply-templates select="content/up:homepage/col:document"/>
+      <!--
       <xsl:apply-templates select="content/up:homepage/col:document[1]/up:teaser/xhtml:p/xhtml:object"/>
       <xsl:apply-templates select="content/up:homepage/col:document[1]"/>
+      -->
     </feed>
   </xsl:template>
 
@@ -42,6 +45,9 @@
       <link rel="alternate" type="text/html">
         <xsl:attribute name="href"><xsl:value-of select="concat('http://www.unipublic.unizh.ch',$id,'.html')"/></xsl:attribute>
       </link> 
+      <summary>
+        <xsl:value-of select="lenya:meta/dc:description"/>
+      </summary>
       <author>
         <name>
           <xsl:value-of select="lenya:meta/dc:creator"/>
@@ -58,6 +64,7 @@
         </i18n:date-time>
       </modified>
       <id><xsl:value-of select="concat('http://www.unipublic.unizh.ch',$id,'.html')"/></id>
+      <xsl:apply-templates select="up:teaser/xhtml:p/xhtml:object"/>
     </entry>
   </xsl:template>
   
@@ -65,7 +72,7 @@
     <xsl:variable name="data"><xsl:value-of select="@data"/></xsl:variable>
     <xsl:variable name="type"><xsl:value-of select="substring-after($data, '.')"/></xsl:variable>
     <xsl:variable name="id"><xsl:value-of select="../../../@id"/></xsl:variable>
-      <link rel="alternate">
+    <link rel="enclosure">
        <xsl:attribute name="type"><xsl:value-of select="concat('image/', $type)"/></xsl:attribute>
        <xsl:attribute name="href"><xsl:value-of select="concat('http://www.unipublic.unizh.ch', $id,'/', $data)"/></xsl:attribute>
        <xsl:attribute name="title"><xsl:value-of select="@title"/></xsl:attribute>

@@ -10,16 +10,7 @@
   
   <xsl:template match="rss/channel">
     <table cellpadding="0" cellspacing="0" border="0">
-    <tr>
-      <td>
-        <xsl:apply-templates select="image"/>
-      </td>
-      <td>&#160;</td>
-      <td>
-        <xsl:apply-templates select="item"/>
-      </td>
-      <td>&#160;</td>
-    </tr>
+      <xsl:apply-templates select="item"></xsl:apply-templates>
     </table>
   </xsl:template>
 
@@ -35,11 +26,33 @@
     </a>
   </xsl:template>
 
-  <xsl:template match="item">
+  <xsl:template match="enclosure">
     <a>
-      <xsl:attribute name="href"><xsl:value-of select="../link"/></xsl:attribute>
-      <span class="tsr-title"><xsl:value-of select="title"/></span>
+      <xsl:attribute name="href"><xsl:value-of select="../../link"/></xsl:attribute>
+      <img border="0">
+        <xsl:attribute name="width">80</xsl:attribute>
+        <xsl:attribute name="height">60</xsl:attribute>
+        <xsl:attribute name="alt"><xsl:value-of select="../description"/></xsl:attribute>
+        <xsl:attribute name="src"><xsl:value-of select="@url"/></xsl:attribute>
+      </img>    
     </a>
+  </xsl:template>
+
+  <xsl:template match="item">
+    <tr>
+      <td>
+        <xsl:apply-templates select="image"></xsl:apply-templates>
+      </td>
+      <td>&#160;</td>
+      <td>
+        <a>
+          <xsl:attribute name="href"><xsl:value-of select="../link"/></xsl:attribute>
+          <span class="tsr-title"><xsl:value-of select="title"/></span>
+        </a>
+      </td>
+      <td>&#160;</td>
+    </tr>
+    
   </xsl:template>
 
 </xsl:stylesheet>
