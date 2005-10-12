@@ -114,7 +114,7 @@ function validateForm(theForm)
               <xsl:choose>
                 <xsl:when test="$doctype = 'homepage'">
                   <tr>
-                    <td class="lenya-form-caption">Tabs in Page Header:</td><td><select class="lenya-form-element" name="properties.create.tabs"><option selected="true">true</option><option>false</option></select></td>
+                    <td class="lenya-form-caption">Tabs in Page Header:</td><td><select class="lenya-form-element" name="properties.create.tabs"><option>true</option><option selected="true">false</option></select></td>
                   </tr>
                 </xsl:when>
                 <xsl:otherwise/>
