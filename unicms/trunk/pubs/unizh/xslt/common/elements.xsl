@@ -83,7 +83,19 @@
   
   
   <xsl:template match="unizh:sitemap">
-    <xsl:apply-templates/>
+    <xsl:variable name="sitemap-nodes" select="count(descendant::unizh:node)"/>
+    <xsl:variable name="center" select="descendant::unizh:node[round($sitemap-nodes div 2)]"/>
+    <table border="0" width="100%">
+      <tr>
+        <td width="200" valign="top">
+          <xsl:apply-templates select="unizh:node[not(preceding-sibling::unizh:node[descendant::unizh:node = $center])]"/>
+        </td>
+        <td>&#160;&#160;</td>
+        <td width="200" valign="top">
+           <xsl:apply-templates select="unizh:node[preceding-sibling::unizh:node[descendant::unizh:node = $center]]"/>
+        </td>
+      </tr>
+    </table>
   </xsl:template> 
 
 
