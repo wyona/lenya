@@ -6,11 +6,23 @@
   <xsl:param name="templatePublication"/>
 
   <xsl:template match="base-url | scope-url">
-    <xsl:apply-templates select="@href"/>
+    <xsl:element name="{name(..)}">
+      <xsl:attribute name="{name()}">
+	<xsl:call-template name="replace">
+	  <xsl:with-param name="textinput" select="@href"/>
+	</xsl:call-template>
+      </xsl:attribute>
+    </xsl:element>
   </xsl:template>
-
+  
   <xsl:template match="uri-list | htdocs-dump-dir | index-dir">
-    <xsl:apply-templates select="@src"/>
+    <xsl:element name="{name(..)}">
+      <xsl:attribute name="{name()}">
+	<xsl:call-template name="replace">
+	  <xsl:with-param name="textinput" select="@src"/>
+	</xsl:call-template>
+      </xsl:attribute>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="robots/@src">
@@ -19,19 +31,28 @@
     </xsl:copy>
   </xsl:template>
 
-  <xsl:template match="@href | @src">
-     <xsl:variable name="attrValue">
-       <xsl:value-of select="substring-before(.,$templatePublication)"/>
-       <xsl:value-of select="$publicationName"/>
-       <xsl:value-of select="substring-after(.,$templatePublication)"/>
-     </xsl:variable>
-     <xsl:element name="{name(..)}">
-       <xsl:attribute name="{name()}">
-         <xsl:value-of select="$attrValue"/>
-       </xsl:attribute>
-     </xsl:element>
+  <xsl:template name="replace">
+    <xsl:param name="textinput"/>
+    <xsl:choose>
+      <xsl:when test="contains($textinput,$templatePublication)">
+	
+	<xsl:value-of select=
+		      "concat(substring-before($textinput,$templatePublication),
+		       $publicationName)"/>
+	<xsl:call-template name="replace">
+	  <xsl:with-param name="textinput" 
+			  select="substring-after($textinput,$templatePublication)"/>
+	  <xsl:with-param name="templatePublication" select="$templatePublication"/>
+	  <xsl:with-param name="publicationName" 
+			  select="$publicationName"/>
+	</xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:value-of select="$textinput"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-
+    
   <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
