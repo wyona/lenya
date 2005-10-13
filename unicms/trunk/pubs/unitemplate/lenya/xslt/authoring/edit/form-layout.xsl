@@ -28,10 +28,11 @@ xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
 
 <xsl:template match="node[@name = 'Body']" mode="nodes">
 <tr>
-<td valign="top" style="border-color: #000000;border-width: 2px"><xsl:apply-templates select="action"/><xsl:if test="not(action)">&#160;</xsl:if>
+<td valign="top" style="border-color: #000000;border-width: 1px"><xsl:apply-templates select="action"/><xsl:if test="not(action)">&#160;</xsl:if>
 <xsl:apply-templates select="@select"/>
 </td>
-<td colspan="2" valign="top" style="border-color: #000000;border-width: 2px"><h3><xsl:apply-templates select="@name"/></h3></td>
+<td  valign="top" style="border-color: #000000;border-width: 1px"><h3><a name="body"><xsl:apply-templates select="@name"/></a></h3></td>
+<td  valign="middle" align="right" style="border-color: #000000;border-width: 1px"><a href="#rc"><input type="button" value="GoTo Related Content Area" name="insert-after" style="color: #FFFFFF; background-color: #3300CC"/></a></td>
 </tr>
 </xsl:template>
 
@@ -40,7 +41,8 @@ xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
 <td valign="top" style="border-color: #ccccff;border-width: 3px"><xsl:apply-templates select="action"/><xsl:if test="not(action)">&#160;</xsl:if>
 <xsl:apply-templates select="@select"/>
 </td>
-<td colspan="2" valign="top" style="border-color:#ccccff;border-width: 3px"><h3><xsl:apply-templates select="@name"/></h3></td>
+<td valign="top" style="border-color:#ccccff;border-width: 3px"><h3><a name="rc"><xsl:apply-templates select="@name"/></a></h3></td>
+<td  valign="middle" align="right" style="border-color: #000000;border-width: 1px"><a href="#body"><input type="button" value="GoTo Body Area" name="insert-after" style="color: #FFFFFF; background-color: #3300CC"/></a></td>
 </tr>
 </xsl:template>
 
