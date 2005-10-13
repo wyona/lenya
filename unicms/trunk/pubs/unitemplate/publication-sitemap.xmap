@@ -226,7 +226,8 @@
             </map:otherwise>
           </map:select>
 
-          <!-- <map:transform src="../../xslt/util/strip_namespaces.xsl"/> -->
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
+          <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
           <map:serialize type="xhtml"/> 
         </map:act>
   

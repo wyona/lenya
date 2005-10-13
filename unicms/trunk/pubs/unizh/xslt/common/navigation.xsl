@@ -15,15 +15,14 @@
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
       <xsl:for-each select="xhtml:div[position() &lt; last()]">
-        <a href="{@href}"><xsl:value-of select="."/></a>
-        <xsl:if test="position() &lt; last()">|</xsl:if>
+        <a href="{@href}"><xsl:value-of select="."/></a> |
       </xsl:for-each>
-      <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
+      Suche: <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
         <div class="serviceform">
           <input type="text" name="queryString"/>
         </div>
         <div class="serviceform">
-          <a href="javascript:document.forms['formsearch'].submit();">Suche</a>
+          <a href="javascript:document.forms['formsearch'].submit();">go!</a>
         </div>
       </form>
     </div>

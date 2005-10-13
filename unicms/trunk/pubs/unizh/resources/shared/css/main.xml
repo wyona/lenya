@@ -6,7 +6,7 @@
 
 /*allgemeine Definition*/
 body {
-  	ground-color: #fff;
+  	background-color: #fff;
   	font-size: 12px;
   	font-family: Arial, sans-serif;
   	line-height: 18px;
@@ -55,8 +55,16 @@ h3, h4, h5, h6 {
 	font-style: italic;
 	font-weight:normal;
 }
-.klein {
+.titel {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+	font-weight:normal;
+}
+.klein, .teasertext {
 	font-size: 11px;
+	line-height: 15px;
 }
 .kleintitel {
 	font-size: 11px;
@@ -196,13 +204,15 @@ img.icon {
 	margin-left:6px;
 	margin-bottom:3px;
 	text-align: left;
-	color:#333399; 
+	color:#999; 
   	line-height: 12px;
     font-family: Verdana, sans-serif;
 	font-size: 9px;
  	height:30px;
 }
-
+#breadcrumbnav a {
+	color:#999;
+}
 
 /*service navigation zB. home, sitemap, search */
 #servicenavpos {
@@ -235,6 +245,7 @@ img.icon {
 }
 .serviceform  {
 	display:inline;
+	margin-left:3px;
 }
 
 
@@ -386,9 +397,7 @@ img.icon {
 	display:block;
 	width:145px;
 }
-#col1 .dotline, .relatedbox .dotline {
-	margin: 7px 0;
-}
+
 #col1 .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
@@ -469,26 +478,20 @@ img.icon {
 	line-height:15px;
 	font-size:11px;
 }
-.relatedboxcont .titel {
-	font-weight: bold;
-}
-.relatedboxcont a.rss {
+
+a.rss {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_rss.gif);
 	background-position:left top;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
-	width:146px;
 	padding-top:4px;
 	padding-bottom:4px;
+}
+.relatedboxcont a.rss {
+	width:146px;
+}
 
-}
-.relatedboxcont .rssdotline {
-	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-	width:159px;
-	height:1px;
-	border:0px;
-}
 /*footer*/
 .footermargintop {
 	height:30px;
@@ -647,10 +650,10 @@ ol.list a {
 	margin-top:5px;
 	margin-bottom:5px;
 }
-.relatedteaser {
+.teaserImg160 {
 	margin-bottom:3px;
 }
-*html .relatedteaser {
+*html .teaserImg160 {
 	margin-bottom:6px;
 }
 .teaser64long {
@@ -703,8 +706,9 @@ form {
 
 form h2.subtitel {
 	line-height: 18px;
-	padding-top:6px;
-	padding-bottom: 4px;
+	padding-top:15px;
+	padding-bottom: 9px;
+	margin-bottom:0px;
 	font-size: 12px;
 }
 form h3 {
@@ -791,6 +795,9 @@ input.optiontag {
 .submitbuttonPosLeft {
 	margin-left:6px;
 }
+.submitbuttonPosRight {
+	margin-left:359px;
+}
 /*search*/
 #formsearchcontent {
 	background-color: #f0f0f0;
@@ -845,6 +852,12 @@ input.searchoption {
 }
 th {
 	height:30px;
+}
+th.width170 {
+	width:170px;
+}
+th.width105 {
+	width:105px;
 }
 .solidlinetable {
 	background-color: #999999;
@@ -909,10 +922,6 @@ th {
 
 /* uni additions */
 
-
-[bxe_xpath] {
-       display:inline;
-}
 
 td img {
        max-width: 204px;

@@ -217,6 +217,8 @@
 
    <xsl:template match="unizh:links">
     <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <div class="titel">Aufgaben</div>
+    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <ul class="linknav">
       <li>
         <a href="{unizh:title/@href}">
@@ -589,6 +591,30 @@
  
   <xsl:template match="dc:description" mode="collection">
     <xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="xhtml:table[@class = 'ornate']">
+    <xsl:variable name="cols">
+      <xsl:value-of select="count(xhtml:tr[1]/xhtml:td[not(@colspan)]) + sum (xhtml:tr[1]/xhtml:td/@colspan)"/>
+    </xsl:variable>
+    <div class="solidlinetable">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
+    <xsl:copy>
+      <xsl:attribute name="width">100%</xsl:attribute>
+      <xsl:for-each select="xhtml:tr">
+        <tr>
+          <xsl:apply-templates select="xhtml:td"/>
+        </tr>
+        <tr>
+          <td colspan="{$cols}" align="left">
+            <div class="dotline">
+              <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+            </div>
+          </td>
+        </tr>
+      </xsl:for-each>
+    </xsl:copy>
   </xsl:template>
 
 
