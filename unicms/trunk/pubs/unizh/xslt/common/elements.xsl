@@ -468,7 +468,7 @@
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
             <xsl:choose>
               <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
-                <a class="arrow" href="{$contextprefix}{@href}">Weiter</a>
+                <a class="arrow" href="{$contextprefix}{@href}">Weiter</a><br/>
               </xsl:when>
               <xsl:otherwise>
                 <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}">
@@ -479,11 +479,12 @@
                 </xsl:if>
               </xsl:otherwise>
             </xsl:choose>
+            <br/>
           </p>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        <p> <br /> - Noch kein Eintrag erfasst - </p>
+        - Noch kein Eintrag erfasst - <br/> 
       </xsl:otherwise>
     </xsl:choose>
     <br/>
