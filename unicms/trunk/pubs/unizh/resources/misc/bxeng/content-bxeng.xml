@@ -1012,6 +1012,14 @@ td .object object[width] {
         padding: 0px 0px 0px 11px;
 }
 
+
+.teaser p .a {
+        background-image: none;
+        font-size: 11px;
+        display: inline;
+        padding: 0px 0px 0px 0px;
+}
+
 .content1 .teaser {
         width:194px;
         border: 1px solid #ccc;

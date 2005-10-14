@@ -163,6 +163,11 @@
     </a>
   </xsl:template>
 
+  <xsl:template match="xhtml:a[ancestor::unizh:teaser and parent::xhtml:p]">
+    <a href="{@href}"><xsl:value-of select="text()"/></a>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
     <a name="{@name}"/><xsl:comment/>
   </xsl:template>
