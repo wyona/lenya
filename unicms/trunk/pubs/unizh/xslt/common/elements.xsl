@@ -204,7 +204,6 @@
         <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
       </div> 
     </div>
-    <p>&#160;</p>
   </xsl:template>
 
 
