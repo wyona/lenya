@@ -52,35 +52,28 @@
   <xsl:template match="xhtml:div[@id = 'menu']">
     <xsl:variable name="descendants" select="descendant::xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]"/>
     <xsl:variable name="current" select="descendant::xhtml:div[@current = 'true']"/>
-    <xsl:variable name="levels" select="count($descendants)"/>
-    <xsl:variable name="up" select="$descendants[$levels - 2]"/>
+    <xsl:variable name="level" select="count($descendants)"/>
 
     <div id="secnav">
       <xsl:apply-templates select="xhtml:div[@id = 'home']"/>
-      <xsl:if test="$up">
-        <xsl:choose>
-          <xsl:when test="$current/xhtml:div">
-            <a href="{$descendants[$levels - 2]/@href}">[...] <xsl:value-of select="$descendants[$levels - 2]/text()"/></a>
-          </xsl:when>
-          <xsl:otherwise>
-            <a href="{$descendants[$levels - 3]/@href}">[...] <xsl:value-of select="$descendants[$levels - 3]/text()"/></a>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="$level > 2 and $current/xhtml:div">
+          <a href="{$descendants[$level - 2]/@href}">[...] <xsl:value-of select="$descendants[$level - 2]/text()"/></a>
+        </xsl:when>
+        <xsl:when test="$level > 3">
+          <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
+         </xsl:when>
+      </xsl:choose>
       <div class="solidline">
         <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
       </div>
       <ul>
         <xsl:choose>
-          <xsl:when test="$up">
-            <xsl:choose>
-              <xsl:when test="$current/xhtml:div"> 
-                <xsl:apply-templates select="$descendants[$levels - 1]"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:apply-templates select="$descendants[$levels - 2]"/>
-              </xsl:otherwise>
-            </xsl:choose>
+          <xsl:when test="$level > 2 and $current/xhtml:div"> 
+            <xsl:apply-templates select="$descendants[$level - 1]"/>
+          </xsl:when>
+          <xsl:when test="$level > 3">
+            <xsl:apply-templates select="$descendants[$level - 2]"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="xhtml:div[not(@id = 'home')]"/>
