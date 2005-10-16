@@ -33,7 +33,8 @@
           <map:parameter name="contextprefix" value="{request:contextPath}"/>
           <map:parameter name="rendertype" value="{rendertype}"/>
           <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
-          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/> 
+          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+          <map:parameter name="querystring" value="{request:queryString}"/> 
         </map:transform>
     </map:resource>
     

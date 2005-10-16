@@ -59,29 +59,16 @@
     </h1>
   </xsl:template>
 
-  
-  <xsl:template match="unizh:identity">
-    <xsl:choose>
-      <xsl:when test="@data != 'empty'"> 
-        <div class="identity">
-          <img border="0" height="80" width="100%">
-            <xsl:attribute name="src">
-              <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@data"/>
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-              <xsl:value-of select="@alt"/>
-            </xsl:attribute>
-          </img>
-          <xsl:apply-templates select="lenya:asset-dot"/>
-        </div>
-      </xsl:when> 
-      <xsl:otherwise>
-        <xsl:apply-templates select="lenya:asset-dot"/>
-      </xsl:otherwise>
-    </xsl:choose> 
+
+  <xsl:template match="xhtml:iframe">
+    <xsl:copy>
+      <xsl:attribute name="src"><xsl:value-of select="@src"/>?<xsl:value-of select="$querystring"/></xsl:attribute>
+      <xsl:apply-templates select="@*[name() != 'src']"/>
+      <xsl:apply-templates/><xsl:comment/>
+    </xsl:copy> 
   </xsl:template>
-  
-  
+
+
   <xsl:template match="unizh:sitemap">
     <xsl:variable name="sitemap-nodes" select="count(descendant::unizh:node)"/>
     <xsl:variable name="center" select="descendant::unizh:node[round($sitemap-nodes div 2)]"/>
@@ -183,29 +170,8 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:a[parent::xhtml:li]" mode="break">
-    <a class="arrow" href="{@href}"><xsl:value-of select="text()"/></a><br/>
-  </xsl:template>
-
-
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
     <a name="{@name}"/><xsl:comment/>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:ul">
-    <xsl:choose>
-      <xsl:when test="xhtml:li[*[not(self::xhtml:a) and not(self::lenya:asset)]] or xhtml:li[text() and not(xhtml:a or lenya:asset)]">
-        <ul>
-          <xsl:apply-templates/>
-        </ul>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="xhtml:li/xhtml:a" mode="break"/>
-        <xsl:apply-templates select="xhtml:li/lenya:asset"/>
-        <br/>
-      </xsl:otherwise>
-    </xsl:choose>
   </xsl:template>
 
 
@@ -364,12 +330,12 @@
 
              <div class="titel"><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></div>
              <div class="titel">&#160;</div>
-             <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
+             <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
              <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
                <xsl:if test="$items = '' or position() &lt;= $items">
                  <a class="rss" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a>
                  <xsl:if test="position() &lt; $items">
-                   <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
+                   <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
                  </xsl:if>
                </xsl:if>
              </xsl:for-each>
