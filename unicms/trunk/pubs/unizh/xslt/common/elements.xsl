@@ -129,17 +129,16 @@
 
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
     <xsl:copy>
-      <xsl:apply-templates select="*[not(self::lenya:asset-dot)]|text()"/>
-      <hr>
-        <xsl:if test="preceding-sibling::xhtml:object[@float = 'true']">
-          <xsl:attribute name="class">floatclear</xsl:attribute>
-        </xsl:if>
-      </hr>
-      <xsl:apply-templates select="lenya:asset-dot"/>
-      <br/>
-      <br/>
+      <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
+      <xsl:if test="lenya:asset-dot">
+        <hr/>
+        <xsl:apply-templates select="lenya:asset-dot"/>
+        <br/>
+        <br/>
+      </xsl:if>
     </xsl:copy>
-  </xsl:template> 
+  </xsl:template>
+
 
   <xsl:template match="xhtml:p[parent::unizh:lead and $rendertype = 'imageupload']">
     <xsl:copy>
@@ -154,6 +153,21 @@
     <a class="download" href="{lenya:asset-dot/@href}">
       <xsl:value-of select="text()"/>
     </a>
+    <br/>
+  </xsl:template>
+
+
+  <xsl:template match="lenya:asset[parent::xhtml:body and $rendertype = 'imageupload']">
+    <a class="download" href="{lenya:asset-dot[1]/@href}">
+      <xsl:value-of select="text()"/>
+    </a>
+    <br/>
+    <xsl:if test="lenya:asset-dot[2]">
+      <hr/>
+      <xsl:apply-templates select="lenya:asset-dot[2]"/>
+      <br/>
+      <br/>
+    </xsl:if>
   </xsl:template>
 
 
@@ -163,13 +177,35 @@
     </a>
   </xsl:template>
 
+
   <xsl:template match="xhtml:a[ancestor::unizh:teaser and parent::xhtml:p]">
     <a href="{@href}"><xsl:value-of select="text()"/></a>
   </xsl:template>
 
 
+  <xsl:template match="xhtml:a[parent::xhtml:li]" mode="break">
+    <a class="arrow" href="{@href}"><xsl:value-of select="text()"/></a><br/>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
     <a name="{@name}"/><xsl:comment/>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:ul">
+    <xsl:choose>
+      <xsl:when test="xhtml:li[*[not(self::xhtml:a) and not(self::lenya:asset)]] or xhtml:li[text() and not(xhtml:a or lenya:asset)]">
+        <ul>
+          <xsl:apply-templates/>
+        </ul>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="xhtml:li/xhtml:a" mode="break"/>
+        <xsl:apply-templates select="xhtml:li/lenya:asset"/>
+        <br/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
@@ -195,7 +231,7 @@
         <b><xsl:value-of select="unizh:title"/><xsl:comment/></b><br/>
         <xsl:apply-templates select="xhtml:p"/>
         <xsl:for-each select="lenya:asset">
-          <xsl:apply-templates select="."/><br/>
+          <xsl:apply-templates select="."/>
         </xsl:for-each>
         <xsl:for-each select="xhtml:a">
           <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
@@ -220,7 +256,7 @@
     </xsl:if>
     <xsl:apply-templates select="xhtml:p"/>
     <xsl:for-each select="lenya:asset">
-      <xsl:apply-templates select="."/><br/>
+      <xsl:apply-templates select="."/>
     </xsl:for-each>
     <xsl:for-each select="xhtml:a">
       <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
@@ -328,12 +364,12 @@
 
              <div class="titel"><xsl:value-of select="xhtml:rss/xhtml:channel/xhtml:title"/></div>
              <div class="titel">&#160;</div>
-             <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
+             <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
              <xsl:for-each select="xhtml:rss/xhtml:channel/xhtml:item">
                <xsl:if test="$items = '' or position() &lt;= $items">
                  <a class="rss" href="{xhtml:link}"><xsl:value-of select="xhtml:title"/></a>
                  <xsl:if test="position() &lt; $items">
-                   <div class="rssdotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
+                   <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
                  </xsl:if>
                </xsl:if>
              </xsl:for-each>
@@ -401,7 +437,8 @@
   </xsl:template>
  
 
-  <xsl:template match="lenya:asset">
+ <xsl:template match="lenya:asset">
+    <div class="asset">
     <xsl:variable name="extent">
       <xsl:value-of select="dc:metadata/dc:extent"/>
     </xsl:variable>
@@ -420,7 +457,10 @@
       <xsl:value-of select="text()"/><xsl:comment/>
     </a>
     (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
-    <xsl:apply-templates select="lenya:asset-dot"/>
+    </div>
+    <xsl:if test="parent::xhtml:body and not(following-sibling::*[1][name() = 'lenya:asset'])">
+      <br/>
+    </xsl:if>
   </xsl:template>
 
     

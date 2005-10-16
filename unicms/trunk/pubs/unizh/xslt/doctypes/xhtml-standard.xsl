@@ -126,6 +126,7 @@
 
   <xsl:template name="three-columns">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <xsl:apply-templates select="/document/unizh:contcol1"/>
     <div class="contcol2">
       <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">

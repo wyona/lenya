@@ -56,18 +56,22 @@
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <xsl:call-template name="asset-dot">
-        <xsl:with-param name="insertWhat">image</xsl:with-param>
-        <xsl:with-param name="insertWhere">after</xsl:with-param>
-      </xsl:call-template>
-      <xsl:call-template name="asset-dot">
-        <xsl:with-param name="insertWhat">floatImage</xsl:with-param>
-        <xsl:with-param name="insertWhere">before</xsl:with-param>
-      </xsl:call-template> 
-      <xsl:call-template name="asset-dot">
-        <xsl:with-param name="insertWhat">asset</xsl:with-param>
-        <xsl:with-param name="insertWhere">inside</xsl:with-param>
-      </xsl:call-template>
+      <xsl:if test="not(preceding-sibling::*[1][local-name() = 'object' and @float = 'true'])">
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">image</xsl:with-param>
+          <xsl:with-param name="insertWhere">after</xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">floatImage</xsl:with-param>
+          <xsl:with-param name="insertWhere">before</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:if test="not(following-sibling::*[1][name() = 'lenya:asset'])">
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">asset</xsl:with-param>
+          <xsl:with-param name="insertWhere">after</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
     </xsl:copy>
   </xsl:template>
 
@@ -129,6 +133,24 @@
         <xsl:with-param name="insertReplace">true</xsl:with-param>
         <xsl:with-param name="insertWhere">after</xsl:with-param>
       </xsl:call-template>
+    </xsl:copy>
+  </xsl:template>
+
+
+  <xsl:template match="lenya:asset[parent::xhtml:body and $rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:call-template name="asset-dot">
+        <xsl:with-param name="insertWhat">asset</xsl:with-param>
+        <xsl:with-param name="insertReplace">true</xsl:with-param>
+        <xsl:with-param name="insertWhere">after</xsl:with-param>
+      </xsl:call-template>
+      <xsl:if test="not(following-sibling::*[1][name() = 'lenya:asset'])">
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">asset</xsl:with-param>
+          <xsl:with-param name="insertWhere">after</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
     </xsl:copy>
   </xsl:template>
 
