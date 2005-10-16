@@ -88,15 +88,15 @@
     <table border="0" width="100%">
       <tr>
         <td width="200" valign="top">
-          <xsl:apply-templates select="unizh:node[not(preceding-sibling::unizh:node[descendant::unizh:node = $center])]"/>
+          <xsl:apply-templates select="unizh:node[not(preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center])]"/>
         </td>
         <td>&#160;&#160;</td>
         <td width="200" valign="top">
-           <xsl:apply-templates select="unizh:node[preceding-sibling::unizh:node[descendant::unizh:node = $center]]"/>
+           <xsl:apply-templates select="unizh:node[preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center]]"/>
         </td>
       </tr>
     </table>
-  </xsl:template> 
+  </xsl:template>
 
 
   <xsl:template match="unizh:node[parent::unizh:sitemap]">
@@ -181,7 +181,7 @@
 
 
   <xsl:template match="unizh:related-content">
-    <xsl:apply-templates/>
+    <xsl:apply-templates/><xsl:comment/>
   </xsl:template>
 
 
@@ -399,7 +399,8 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
+ 
+
   <xsl:template match="lenya:asset">
     <xsl:variable name="extent">
       <xsl:value-of select="dc:metadata/dc:extent"/>
@@ -410,17 +411,18 @@
         <xsl:with-param name="substr">.</xsl:with-param>
       </xsl:call-template>
     </xsl:variable>
-        <!-- <a href="{$nodeid}/{@src}">
-          <img alt="" border="0" height="16"
-            src="{$imageprefix}/icons/default.gif" width="16" align="left"/>
-        </a>
-        <xsl:text> </xsl:text>-->
-        <a class="download" href="{$nodeid}/{@src}">
-          <xsl:value-of select="text()"/>
-        </a>
-        (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
-        <xsl:apply-templates select="lenya:asset-dot"/> 
+    <!-- <a href="{$nodeid}/{@src}">
+      <img alt="" border="0" height="16"
+        src="{$imageprefix}/icons/default.gif" width="16" align="left"/>
+    </a>
+    <xsl:text> </xsl:text>-->
+    <a class="download" href="{$nodeid}/{@src}">
+      <xsl:value-of select="text()"/><xsl:comment/>
+    </a>
+    (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
+    <xsl:apply-templates select="lenya:asset-dot"/>
   </xsl:template>
+
     
   <xsl:template match="unizh:toc">
     <ul class="anchors">
