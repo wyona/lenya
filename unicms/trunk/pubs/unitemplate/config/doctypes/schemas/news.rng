@@ -46,9 +46,10 @@
         <empty/>
       </element>
       <zeroOrMore>
-        <element name="p">
-          <ref name="Inline.model"/>
-        </element>
+        <choice>
+          <ref name="p"/>
+          <ref name="object"/> 
+        </choice>
       </zeroOrMore>
     </element>
   </element>
