@@ -636,10 +636,32 @@ input.optiontag {
 /* End hide from IE5/mac */
 
 
+/* uni additions */
+
+td {
+       vertical-align: top;
+}
+
+
+td img {
+       max-width: 204px;
+       padding: 4px;
+}
+
+td.flexibleimage img {
+       max-width: 415px;
+}
+
+
+a.namedanchor { 
+        background-image: none;
+}
+
 .editview {
         background-color: #ccc;
         min-height: 80px;
 }
+
 
 
 </css>
