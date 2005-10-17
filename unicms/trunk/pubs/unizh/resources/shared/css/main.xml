@@ -916,9 +916,14 @@ th.width105 {
 
 /* uni additions */
 
+td {
+       vertical-align: top;
+}
+
 
 td img {
        max-width: 204px;
+       padding: 4px;
 }
 
 td.flexibleimage img {
