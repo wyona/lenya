@@ -20,6 +20,7 @@
   <xsl:param name="language"/>
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
+  <xsl:param name="querystring"/>
 
 
   <xsl:include href="../doctypes/variables.xsl"/>
@@ -73,7 +74,7 @@
         <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
         <input class="submitbutton" type="submit" name="sa" value="{xhtml:input[@name='sa']/@value}"/> 
       </div>
-      <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>
+      <!-- <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>  -->
       <xsl:apply-templates select="xhtml:input[@type = 'hidden']"/>
       <div class="endheaderline">
         <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
@@ -91,7 +92,7 @@
       </input>
       <xsl:value-of select="."/>
     </div>
-  </xsl:template>
+  </xsl:template> 
 
 
   <xsl:template match="xhtml:div[@id = 'results']">
