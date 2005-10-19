@@ -89,8 +89,11 @@ public class WikiGenerator extends ServiceableGenerator {
             WikiParser wikiParser = new WikiParser(new WikiParserTokenManager(new SimpleCharStream(
                     new InputStreamReader(wikiIs, "UTF-8"))));
             SimpleNode root = wikiParser.WikiBody();
-            Tree2XML wikiTree = new Tree2XML(this.contentHandler);            
+            Tree2XML wikiTree = new Tree2XML(this.contentHandler);           
+            wikiTree.startDocument();
             wikiTree.traverseJJTree(root);            
+            wikiTree.endDocument();
+            
         } catch (SAXException e) {
             throw e;
         } catch (Exception e) {
