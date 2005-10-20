@@ -126,7 +126,7 @@
 </xsl:template>
 
 <xsl:template match="wiki:Table">
-<table border="1">
+<table>
 	<xsl:for-each select="wiki:TableRow">
 	<tr>
 	<xsl:for-each select="wiki:TableCol">
