@@ -126,6 +126,15 @@
 </xsl:template>
 
 <xsl:template match="wiki:Table">
+<table border="1">
+	<xsl:for-each select="wiki:TableRow">
+	<tr>
+	<xsl:for-each select="wiki:TableCol">
+		<td><xsl:apply-templates/></td>
+	</xsl:for-each>
+	</tr>
+	</xsl:for-each>
+</table>
 </xsl:template>
 
 <xsl:template match="wiki:Hrule">
