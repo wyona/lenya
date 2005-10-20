@@ -89,39 +89,19 @@
   <xsl:apply-templates/>
 </xsl:template>
 
-<!-- not good solved -->
 <xsl:template match="wiki:BList">
-
-<xsl:if test="@depth=1">
-    <ul>
-    <li>
-    <xsl:apply-templates/>
-    </li>
-    </ul>
-</xsl:if>
-<xsl:if test="@depth=2">
-    <ul>
-    <ul><li>
-    <xsl:apply-templates/>
-    </li>
-    </ul>
-    </ul>
-</xsl:if>
-<xsl:if test="@depth=3">
-    <ul>
-    <ul>
-    <ul><li>
-    <xsl:apply-templates/>
-    </li>
-    </ul>
-    </ul>
-    </ul>
-</xsl:if>
+<ul>
+    <xsl:for-each select="wiki:BListItem">
+    <li><xsl:apply-templates/></li>
+    </xsl:for-each>
+</ul>
 </xsl:template>
 
 <xsl:template match="wiki:NList">
 <ol>
-  <li><xsl:apply-templates/></li>
+    <xsl:for-each select="wiki:NListItem">
+    <li><xsl:apply-templates/></li>
+    </xsl:for-each>
 </ol>
 </xsl:template>
 
