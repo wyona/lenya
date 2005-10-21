@@ -315,5 +315,17 @@
   </node>
 </xsl:template>
 
+<xsl:template match="xhtml:iframe" mode="body">
+  <node name="iframe" select="/*/xhtml:body/xhtml:iframe[@tagID='{@tagID}']">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/xhtml:iframe[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <content><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/xhtml:iframe[@tagID='{@tagID}']/@src&quot;&gt;" size="50"><xsl:attribute name="value"><xsl:value-of select="@src"/></xsl:attribute></input>
+    </content>
+    <content>
+      <textprefix>width:</textprefix><input type="text" name="&lt;xupdate:update select=&quot;//xhtml:body/xhtml:iframe[@tagID='{@tagID}']/@width&quot;&gt;" size="15"><xsl:attribute name="value"><xsl:value-of select="@width"/></xsl:attribute>
+    </input>
+    </content>
+  </node>
+  <xsl:call-template name="insertmenu"><xsl:with-param name="path">//xhtml:body/xhtml:iframe</xsl:with-param></xsl:call-template>
+</xsl:template>
 
 </xsl:stylesheet>  
