@@ -90,20 +90,48 @@
 </xsl:template>
 
 <xsl:template match="wiki:BList">
-<ul>
-    <xsl:for-each select="wiki:BListItem">
-    <li><xsl:apply-templates/></li>
-    </xsl:for-each>
-</ul>
+  <ul>
+    <xsl:apply-templates select="wiki:BListItem"></xsl:apply-templates>
+  </ul>
 </xsl:template>
 
+<xsl:template match="wiki:BListItem">
+  <xsl:param name="depth" select="@depth" />
+  <xsl:choose>
+    <xsl:when test="$depth &lt;= 1">
+      <li><xsl:apply-templates /></li>
+    </xsl:when>
+    <xsl:otherwise>
+      <ul>
+        <xsl:apply-templates select=".">
+          <xsl:with-param name="depth" select="$depth - 1" />
+        </xsl:apply-templates>
+      </ul>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template> 
+
 <xsl:template match="wiki:NList">
-<ol>
-    <xsl:for-each select="wiki:NListItem">
-    <li><xsl:apply-templates/></li>
-    </xsl:for-each>
-</ol>
+  <ol>
+    <xsl:apply-templates select="wiki:NListItem"></xsl:apply-templates>
+  </ol>
 </xsl:template>
+
+<xsl:template match="wiki:NListItem">
+  <xsl:param name="depth" select="@depth" />
+  <xsl:choose>
+    <xsl:when test="$depth &lt;= 1">
+      <li><xsl:apply-templates /></li>
+    </xsl:when>
+    <xsl:otherwise>
+      <ol>
+        <xsl:apply-templates select=".">
+          <xsl:with-param name="depth" select="$depth - 1" />
+        </xsl:apply-templates>
+      </ol>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template> 
 
 <xsl:template match="wiki:Table">
 <table>
