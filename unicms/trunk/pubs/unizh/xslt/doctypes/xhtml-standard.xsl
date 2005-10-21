@@ -20,7 +20,7 @@
   <xsl:param name="language"/>
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
-
+  <xsl:param name="querystring"/>
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/html-head.xsl"/>
