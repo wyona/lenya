@@ -74,46 +74,56 @@
   <xsl:template match="unizh:sitemap">
     <xsl:variable name="sitemap-nodes" select="count(descendant::unizh:node)"/>
     <xsl:variable name="center" select="descendant::unizh:node[round($sitemap-nodes div 2)]"/>
-    <table border="0" width="100%">
-      <tr>
-        <td width="200" valign="top">
-          <xsl:apply-templates select="unizh:node[not(preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center])]"/>
-        </td>
-        <td>&#160;&#160;</td>
-        <td width="200" valign="top">
-           <xsl:apply-templates select="unizh:node[preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center]]"/>
-        </td>
-      </tr>
-    </table>
+    <div class="content1">
+      <xsl:apply-templates select="unizh:node[not(preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center])]"/>
+    </div>
+    <div class="content2"> 
+      <xsl:apply-templates select="unizh:node[preceding-sibling::unizh:node[descendant-or-self::unizh:node = $center]]"/>
+    </div>
   </xsl:template>
 
 
   <xsl:template match="unizh:node[parent::unizh:sitemap]">
-    <b><a href="{@contextprefix}{@href}"><xsl:value-of select="unizh:title"/></a></b>
+    <div class="navtitel">
+      <a href="{$contextprefix}{@href}"><xsl:value-of select="unizh:title"/></a>
+    </div>
     <div class="solidline">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
     </div>
-      <xsl:apply-templates select="unizh:node"/>
+    <ul class="sitemap">
+      <xsl:apply-templates select="unizh:node" mode="firstlevel"/>
       <xsl:comment/>
+    </ul>
     <div>&#160;</div>
   </xsl:template>
 
 
-  <xsl:template match="unizh:node[ancestor::unizh:sitemap and not(parent::unizh:sitemap)]">
-      <xsl:for-each select="ancestor::unizh:node">
-        <xsl:if test="position() &gt; 1">
-          &#160;&#160;&#160;&#160;
-        </xsl:if>
-      </xsl:for-each>
+  <xsl:template match="unizh:node" mode="firstlevel">
+    <li>
       <a href="{$contextprefix}{@href}"><xsl:value-of select="unizh:title"/></a>
-      <br/>
-      <xsl:apply-templates select="unizh:node"/>
-      <xsl:if test="count(ancestor::unizh:node) = 1">
-        <div class="dotline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
+      <xsl:if test="unizh:node">
+        <ul>
+          <xsl:apply-templates select="unizh:node"/>
+        </ul>
       </xsl:if>
+    </li>
+    <div class="dotline">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
   </xsl:template>
+
+
+  <xsl:template match="unizh:node">
+     <li>
+      <a href="{$contextprefix}{@href}"><xsl:value-of select="unizh:title"/></a>
+      <xsl:if test="unizh:node">
+        <ul>
+          <xsl:apply-templates select="unizh:node"/>
+        </ul>
+      </xsl:if>
+    </li>
+  </xsl:template>
+
 
 
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">

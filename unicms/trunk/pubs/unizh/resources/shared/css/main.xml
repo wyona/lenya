@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <css>
+
 /*allgemeine Definition*/
 body {
-  	background-color: #fff;
+  	ground-color: #fff;
   	font-size: 12px;
   	font-family: Arial, sans-serif;
   	line-height: 18px;
  	color:#333;  
   	margin:0px 20px;
   	padding:0px;
-}
+
+ }
 
 .bodywidth {
 	max-width:800px;
@@ -438,12 +440,13 @@ img.icon {
 }
 * html .content1 {
   height: 1%;
-  margin-right: 16px;
+  margin-right: 17px;
 }
 
 .content2 {
 	margin-left:218px;
 	font-size:11px;
+	width:198px;
 }
 * html .content2 {
   height: 1%;
@@ -452,7 +455,46 @@ img.icon {
 .content2 .klein {
 	line-height:15px;
 }
+/*sitemap*/
+.navtitel a {
+	font-weight:bold;
+	line-height:20px;
+	display:block;
+	padding-left:7px;
+	font-size: 11px;
+}
+ul.sitemap {
+	font-size: 11px;
+	width:100%;
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+}
+ul.sitemap li { 
+	line-height:20px;
+}
 
+ul.sitemap li a {
+	padding-left: 7px;
+	display:block;
+	background-image:none;
+	background-repeat: no-repeat;
+}
+ul.sitemap ul li a {
+	padding-left: 20px;
+	padding-right:0px;
+	width:178px;
+}
+ul.sitemap ul ul li a {
+	padding-left: 40px;
+	padding-right:0px;
+	width:158px;
+}
+ul.sitemap ul ul ul li a {
+	padding-left: 60px;
+	padding-right:0px;
+	width:138px;
+}
 
 /*Related Box*/
 * html .relatedbox {
@@ -460,11 +502,11 @@ img.icon {
 }
 .relatedbox {
 	float:right;
-	width:179px;
+	width:178px;
 	margin-left:20px;
 }
 .relatedboxborder {
-	width:179px;
+	width:178px;
 	border: 1px solid #ccccff;
 	margin-bottom:18px;
 }
@@ -537,6 +579,7 @@ ul.linknav {
 	background-repeat: no-repeat;
 	display:block;
 	line-height:18px;
+	width: 185px;
 }
 
 .listarrow {
@@ -618,6 +661,7 @@ ol.list a {
 	background-color:#f0f0f5;
 	margin-bottom:5px;
 	margin-top:14px;
+	width:415px;
 }
 
 .imgTeaser {
@@ -912,6 +956,7 @@ th.width105 {
 	border:0px;
 	margin: 7px 0;
 }
+
 
 
 /* uni additions */

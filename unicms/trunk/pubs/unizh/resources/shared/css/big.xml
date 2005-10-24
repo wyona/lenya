@@ -2,9 +2,9 @@
 <css>
 /*allgemeine Definition*/
 body {
-  	background-color: #fff;
+  	ground-color: #fff;
   	font-size: 16px;
-  	font-family: Arial;
+  	font-family: Arial, sans-serif;
   	line-height: 22px;
  	color:#333;  
   	margin:0px 20px;
@@ -13,8 +13,12 @@ body {
  }
 
 .bodywidth {
-  	max-width:800px;
+	max-width:800px;
 	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
+	margin-right: auto;
+	margin-left: auto;
+}
+.bodywidthnolimit {
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -23,18 +27,32 @@ img {
 }
 
 /*font*/
-h1, h2, h3, h4, h5, p {
-	margin: 0px; 
-	padding: 0px; 
+h2, h3, h4, h5, h6{
+	margin-top: 0px;
+	margin-bottom: 11px;
+	padding-top: 11px;
+	line-height:22px;
+}
+
+p {
+	padding:0px;
+	margin-top: 0px;
+	margin-bottom: 11px;
+}
+.relatedboxcont p {
+	margin:0px;
 }
 h1 {
+	padding: 0;
 	font-size: 22px;
 	line-height:26px;
+	margin-top: 0px;
+	margin-bottom: 11px;
 }
 h2 {
 	font-size: 16px;
 }
-h3 {
+h3, h4, h5, h6 {
 	font-size: 16px;
 	font-style: italic;
 	font-weight:normal;
@@ -42,14 +60,25 @@ h3 {
 .klein {
 	font-size: 14px;
 }
+.kleintitel {
+	font-size: 14px;
+	font-weight:bold;
+}
+.lead {
+	color:#999999;
+	font-size: 16px;
+	font-weight:bold;
+}
 /*link*/
 a { 
 	text-decoration: none;
 	color:#333399;  
 }
+/*
 .content li a {
 	margin-left:0px;
 }
+*/
 a:hover {
 	background-color:#f0f0f5;
 }
@@ -67,8 +96,22 @@ a.targetblank {
 	padding-right:2px;
 	margin-left:2px;
 }
-a.arrow {
+a.arrow, ul.squarelist li a, .content a,  .contentindex a{
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+a.back {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_back12.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+.content a.arrow {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow12.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
@@ -79,20 +122,17 @@ a.arrow {
 	width:100%;
 	display:block;
 	background-color: #666699;
-	/*background-image:url(<context-prefix/>/unizh/authoring/images/contimg.jpg);*/
 	height:90px;
 	min-width:600px;
+}
+.bodywidthnolimit #headerarea, .bodywidthnolimit .endheaderline, .bodywidthnolimit #primarnav, .bodywidthnolimit #toolnav {
+	width:800px;
 }
 #headertitelpos {
 	margin-left:6px;
 	margin-right:195px;
 }
-#headerarea a {
-	color:#FFFFFF;
-}
-#headerarea a:hover {
-	background-color:transparent;
-}
+
 .imgunilogo {
 	background-color: #ccccff;
 	padding-left:15px;
@@ -107,13 +147,23 @@ a.arrow {
 	color:#FFFFFF;
 	font-size: 24px;
   	line-height: 28px;
+	margin:0px;
+	padding:0px;
+}
+#headerarea a {
+	color:#FFFFFF;
+}
+#headerarea a:hover {
+	background-color:transparent;
 }
 #headerarea h2 {
 	margin-left:1px;
+	margin-bottom:0px;
 	font-size: 16px;
   	line-height: 16px;
 	color:#FFFFFF;
 	font-weight:normal;
+	padding:0px;
 }
 .endheaderline {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
@@ -124,14 +174,14 @@ a.arrow {
 /* NAVIGATION */
 
 /*breadcrumbnavigation*/
-#breadcrumbnav { 
-	margin-top:2px;
+#breadcrumbnav{ 
+	margin-top:6px;
 	margin-left:6px;
 	margin-bottom:3px;
 	text-align: left;
 	color:#333399; 
   	line-height: 12px;
-    font-family: Verdana;
+    font-family: Verdana, sans-serif;
 	font-size: 12px;
  	height:30px;
 }
@@ -143,27 +193,24 @@ a.arrow {
 	margin-bottom:0px;
 	padding-top:2px;
 	font-size: 12px;
-	font-family: Verdana;
+	font-family: Verdana, sans-serif;
 	color:#ffffff;
-	line-height: 11px;
+	line-height: 14px;
 	display:block;
 	text-align: right;
 	height:39px;
 }
 #servicenavpos a {
-  	color:#ffffff; 
 	padding:0px 2px;
 }
-#servicenavpos a:hover {
-  	background-color: transparent;
-}
 #servicenavpos input {
-	line-height: 11px;
+	line-height: 14px;
 	border: 0px;
 	width: 100px;
-  	font-size: 9px;
-  	font-family: Verdana;
+  	font-size: 12px;
+  	font-family: Verdana, sans-serif;
 	margin-left:2px;
+	margin-right:2px;
 	padding-left:2px;
 }
 #servicenavpos form {
@@ -177,11 +224,12 @@ a.arrow {
 /*primar navigation*/
 #primarnav  {
   	font-size: 14px;
-  	font-family: Arial;
+  	font-family: Arial, sans-serif;
 	line-height: 21px;
 	color:#666699; 
 	display:block;
 }
+
 #primarnav a {
 	float:left;
 	padding:0px 7px;
@@ -204,9 +252,12 @@ a.arrow {
   	width:165px;
   	float:left; 
   	font-size: 14px;
-  	font-family: Arial;
+  	font-family: Arial, sans-serif;
 	line-height: 20px;
 	margin-right:20px;
+}
+* html #secnav {
+  margin-right: 17px;
 }
 .navup  {
 	margin-top:1px;
@@ -218,6 +269,13 @@ a.arrow {
 	background-image:url(<context-prefix/>/unizh/authoring/images/icon_arrow_up.gif);
 	padding-left:20px;
 	background-repeat: no-repeat;
+}
+.navup .lead {
+	padding-left: 7px;
+	font-weight:bold;
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+	color:#333399;
 }
 #secnav ul li a {
 	padding-left: 7px;
@@ -255,32 +313,11 @@ a.arrow {
 	width:125px;
 }
 
-
-/*Ortho navigation*/
-#orthonav  {
-  	font-size: 14px;
-  	font-family: Arial;
-  	text-align:right;
-  	margin-bottom:20px;
- 	display:block;
-}
-#orthonav a {
-	color:#333; 
-  	padding:0px 20px;
-  	border: 1px solid #ccccff;
-}
-#orthonav a:hover {
-  	background-color:#eaecff; 
-}
-#orthonav a.activ {
-  	background-color:#eaecff; 
-}
-
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
-	font-size: 12px;
-	line-height: 11px;
-	font-family: Verdana;
+	font-size: 14px;
+	line-height: 16px;
+	font-family: Verdana, sans-serif;
 	text-align: right;
 	margin-right:59px;
 	height:25px;
@@ -294,17 +331,30 @@ a.arrow {
 }
 /* Navigation Ende*/
 /*4 splatige */
+
 #col1 {
 	width:165px;
 	float:left;
 	font-size: 14px;
-	font-family: Arial;
+	font-family: Arial, sans-serif;
 	line-height: 15px;
 	margin-right:20px;
 }
+* html #col1 {
+  margin-right: 17px;
+ }
+#col2_nolimit {
+	position:absolute; 
+	margin-left:185px;
+	margin-top:0px;
+}
+* html #col2_nolimit {
+  margin-left: 0px;
+ }
 
 #col1 p {
 	padding-left: 7px;
+	margin-bottom: 0;
 }
 
 #col1 ul {
@@ -327,44 +377,56 @@ a.arrow {
 	line-height:18px;
 	font-weight:bold;
 }
-/*Content*/
 
+/*Content*/
 .contcol2 {
 	min-width:400px;
 	float: none;
 	margin-left:185px;
 }
+* html .contcol2 {
+  height: 1%;
+  margin-left: 0px;
+}
 .contentarea {
 	margin-right:199px;
 }
-.content {
+* html .contentarea {
+  height: 1%;
+  margin-right: 0px;
 }
+.content  {
+}
+.contentnolimit {
+	width:615px;
+	overflow: auto;
+}
+
 .content1 {
-	margin-right:218px;
-}
-.content1 ul.linknav li a, .content2 ul.linknav li a {
-	padding-left:0px;
-	display:block;
-	width:100%;
+	width:198px;
+	float: left;
 }
 * html .content1 {
   height: 1%;
-  margin-right: 0px;
-  padding-right:17px;
+  margin-right: 16px;
 }
-* html .relatedbox {
-	margin-left:16px;
-}
+
 .content2 {
-	float: right;
-	width:198px;
+	margin-left:218px;
 	font-size:14px;
+}
+* html .content2 {
+  height: 1%;
+  margin-left: 0px;
 }
 .content2 .klein {
 	line-height:16px;
 }
 
 /*Related Box*/
+* html .relatedbox {
+	margin-left:16px;
+}
 .relatedbox {
 	float:right;
 	width:179px;
@@ -377,30 +439,65 @@ a.arrow {
 .relatedboxcont {
 	padding: 8px 9px 10px 11px;
 	line-height:18px;
-	font-size:12px;
+	font-size:14px;
+}
+.relatedboxcont .titel {
+	font-weight: bold;
+}
+.relatedboxcont a.rss {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_rss.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	display:block;
+	width:146px;
+	padding-top:4px;
+	padding-bottom:4px;
+
+}
+.relatedboxcont .rssdotline {
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+	width:159px;
+	height:1px;
+	border:0px;
 }
 /*footer*/
-#footer {
-	margin-top:2px;
-	font-size: 12px;
-	font-family: Verdana;
-	color:#999;
-	line-height: 11px;
-}
 .footermargintop {
 	height:30px;
 	clear:both;
 }
+#footer {
+	margin-top:2px;
+	font-size: 12px;
+	font-family: Verdana, sans-serif;
+	color:#999;
+	line-height: 11px;
+}
+.topnav {
+	text-align: right;
+	margin-bottom:10px;
+}
+.topnav a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow_top.gif);
+	margin-right:7px;
+	background-repeat: no-repeat;
+	background-position:left;
+	font-size: 14px;
+	padding-left:12px;
+}
+
 
 /*list element*/
 
+ul.squarelist {
+	margin-bottom:18px;
+}
 
 ul.squarelist li {
 	background-image: url(<context-prefix/>/unizh/authoring/images/listsq.gif);
 	background-repeat: no-repeat;
 	padding-left:13px;
-
 }
+
 ul.linklist li  {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrowlist.gif);
 	padding-left:13px;
@@ -414,11 +511,14 @@ ul.linklist li  {
 
 ul.linknav {
 	font-size:14px;
-	line-height:16px;
 }
-
-* html ul.linknav .dotline {
-	margin-top:1px;
+.content1 ul.linknav li a, .content2 ul.linknav li a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow2.gif);
+	padding-left:13px;
+	background-repeat: no-repeat;
+	display:block;
+	width:185;
+	line-height:18px;
 }
 
 .listarrow {
@@ -441,7 +541,7 @@ ol li a {
 }
 /*linkliste*/
 .linktext {
-	font-size: 14px;
+	font-size: 16px;
 	line-hegiht:20px;
 	float:left;
 	width:300px;
@@ -451,9 +551,9 @@ ol li a {
 	width:100%;
 }
 .linkrow a {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_blank.gif);
 	padding-left:13px;
-	font-size: 12px;
+	font-size: 16px;
 	line-hegiht:20px;
 	background-repeat: no-repeat;
 	padding-right:2px;
@@ -461,25 +561,22 @@ ol li a {
 
 
 /*image*/
-.imgTextfluss a, .imgMitLegende a {
+.imgTextfluss a, .imgMitLegende a, .imgMitLegende a, .imgTeaser a, .imgLupeFullImg a, .imgLupehalfImg a{
 	background-image:none;
 	padding:0px;
 	margin:0px;
 }
 .legende {
-	font-size: 11px;
+	font-size: 14px;
 	font-style: italic;
 	padding-left:6px;
 	padding-bottom:18px;
 	line-height:18px;
 }
-* html .legende {
-	margin-top:3px;
-}
+
 .imgTextfluss .legende {
-	padding-bottom:18px;	
 	display:block;
-	padding-left:6px;
+	width:198px;
 }
 .imgTextfluss {
 	float: left;
@@ -491,8 +588,76 @@ ol li a {
 .imgMitLegende {
 	background-color:#f0f0f5;
 	display:block;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.imgTeaser {
+	float: left;
+	margin-right:10px;
+	margin-top:5px;
+}
+.imgLupeFullImg {
+	position:absolute; 
+	width:15px; 
+	height:15px; 
+	z-index:5; 
+	margin-left: 395px; 
+	margin-top: 5px;
+}
+.imgLupehalfImg {
+	position:absolute; 
+	width:15px; 
+	height:15px; 
+	z-index:5; 
+	margin-left: 184px; 
+	margin-top: 5px;
+}
+.fullimg {
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.teaserImg160 {
+	margin-top:3px;
+}
+.teaser64long {
+	height:64px;
 }
 
+/* artikel Textumfluss*/
+
+.titelImgBlock {
+	min-height:125px;
+}
+.titelImg {
+	float: left;
+	margin-right:10px;
+	margin-top:5px;	
+}
+.titelImgBlock .solidlinemitmargin {
+	margin: 11px 0 0 0;
+}
+
+.artikelmitImg {
+	min-height:64px;
+}
+/* team 2 blocke */
+.teamBlock {
+	padding-top:11px;
+	padding-bottom:11px;
+}
+.teamImg {
+	margin-top:5px;
+	float:left;
+	width:120px;
+}
+.teamText {
+	float:left;
+	width:290px;
+}
+.floatleftclear {
+	clear:left;
+	line-height:1px;
+}
 
 
 /* form*/
@@ -502,15 +667,15 @@ form {
 }
 
 form h2.subtitel {
-	line-height: 18px;
+	line-height: 22px;
 	padding-top:6px;
 	padding-bottom: 4px;
-	font-size: 12px;
+	font-size: 16px;
 }
 form h3 {
-	line-height: 18px;
+	line-height: 22px;
 	padding-bottom: 4px;
-	font-size: 12px;
+	font-size: 16px;
 }
 
 .fieldarea {
@@ -518,12 +683,18 @@ form h3 {
 	border-bottom: 2px solid #fff;
 	display:block;
 	line-height: 28px;
-	font-size: 12px;
+	font-size: 16px;
 }
+
+* html .fieldarea {
+	width: auto; 
+	height: auto;
+}
+
 .fieldarea label {
 	display:block;
 	margin-left: 7px;	
-	line-height: 18px;
+	line-height: 22px;
 	margin-right:170px;
 	padding-top:6px;
 	padding-bottom: 4px;
@@ -532,8 +703,8 @@ form h3 {
 	float: right;
 	margin: 4px 6px 0 0;
 	width: 165px;
-  	font-size: 12px;
-  	font-family: Arial;
+  	font-size: 16px;
+  	font-family: Arial, sans-serif;
 	line-height:18px;
 	padding-left:2px;
 	border-top:1px solid #696969;
@@ -549,8 +720,8 @@ form h3 {
 	margin-top:4px;
 	margin-right:6px;
 	width: 165px;
-  	font-size: 12px;
-  	font-family: Arial;
+  	font-size: 16px;
+  	font-family: Arial, sans-serif;
 	line-height:18px;
 	display:block;
 }
@@ -568,9 +739,9 @@ input.optiontag {
 	text-align:center;
 	margin-top:13px;
 	padding:0px 5px;
-	line-height: 14px;
-	font-size: 11px;
-	font-family: Arial;
+	line-height: 16px;
+	font-size: 14px;
+	font-family: Arial, sans-serif;
 	height:19px;
  	color:#555555;  
 	border-top:1px solid #cccccc;
@@ -588,6 +759,7 @@ input.optiontag {
 
 
 /* Misc*/
+
 .floatclear {
 	clear:both;
 }
@@ -598,6 +770,17 @@ input.optiontag {
 	margin:0px;
 	border:0px;
 }
+.content .solidline {
+	background-color: #cccccc;
+}
+.solidlinemitmargin {
+	background-color: #cccccc;
+	height:1px;
+	width:100%;
+	margin: 20px 0 0 0;
+	border:0px;
+}
+
 .dotline {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
@@ -609,7 +792,8 @@ input.optiontag {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	width:100%;
 	height:1px;
-	border:0px;margin: 0 0 7px 0;
+	border:0px;
+	margin: 0 0 7px 0;
 }
 .dotlinemitmargin {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
@@ -618,22 +802,7 @@ input.optiontag {
 	border:0px;
 	margin: 7px 0;
 }
-/* Hide from IE5-mac. Only IE-win sees this. gegen 3px text jog \*/
-* html #secnav {
-  margin-right: 17px;
-  }
- * html #col1 {
-  margin-right: 17px;
-  }
-* html .contcol2 {
-  height: 1%;
-  margin-left: 0px;
-}
-* html .fieldarea {
-	width: auto; 
-	height: auto;
-}
-/* End hide from IE5/mac */
+
 
 
 /* uni additions */
@@ -661,7 +830,5 @@ a.namedanchor {
         background-color: #ccc;
         min-height: 80px;
 }
-
-
 
 </css>
