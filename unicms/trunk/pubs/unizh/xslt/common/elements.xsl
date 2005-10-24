@@ -10,12 +10,14 @@
   xmlns:uz="http://unizh.ch"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:ci="http://apache.org/cocoon/include/1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:i18n="http://apache.org/cocoon/i18n/2.1">
  
   <xsl:param name="root"/>
   <xsl:param name="documentid"/>
   <xsl:param name="contextprefix"/>
   <xsl:param name="rendertype"/>
+  <xsl:param name="creationdate"/>
 
  
   <xsl:template match="lenya:asset-dot[@class='image']">
@@ -499,7 +501,8 @@
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">
           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-          <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;<span class="lead"><xsl:value-of select="*/*/lenya:meta/dcterms:created"/></span></h2> 
+	  <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;<span class="lead"><i18n:date pattern="EEE, d. MMM yyyy HH:mm"
+	  src-locale="en" src-pattern="EEE, d. MMM yyyy HH:mm" value="{$creationdate}"/></span></h2>
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>

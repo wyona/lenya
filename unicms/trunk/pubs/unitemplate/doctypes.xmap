@@ -35,6 +35,7 @@
           <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
           <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
           <map:parameter name="querystring" value="{request:queryString}"/> 
+          <map:parameter name="creationdate" value="{page-envelope:document-dc-date-created}"/>
         </map:transform>
     </map:resource>
     
