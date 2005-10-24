@@ -22,7 +22,7 @@
   <component-instance name="wiki"
                       logger="lenya.resourcetypes.wiki"
                       class="org.apache.lenya.cms.publication.ResourceTypeImpl">
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+    <creator src="org.apache.lenya.cms.authoring.DefaultRawCreator">
       <sample-name>fallback://lenya/modules/wiki/samples/sample.wiki</sample-name>
     </creator>
   </component-instance>
