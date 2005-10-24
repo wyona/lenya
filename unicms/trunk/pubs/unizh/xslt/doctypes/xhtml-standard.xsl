@@ -279,7 +279,15 @@
             <div class="teamText">
               <p>
                 <b>
-                  <div bxe_xpath="/{$document-element-name}/unizh:academictitle"><xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;</div><div bxe_xpath="/{$document-element-name}/unizh:firstname"><xsl:value-of select="unizh:person/unizh:firstname"/>&#160;</div><div bxe_xpath="/{$document-element-name}/unizh:lastname"><xsl:value-of select="unizh:person/unizh:lastname"/></div>
+                  <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
+                    <xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;
+                  </span>
+                  <span bxe_xpath="/{$document-element-name}/unizh:firstname">
+                    <xsl:value-of select="unizh:person/unizh:firstname"/>&#160;
+                  </span>
+                  <span bxe_xpath="/{$document-element-name}/unizh:lastname">
+                    <xsl:value-of select="unizh:person/unizh:lastname"/>
+                  </span>
                 </b><br/>
                 <div bxe_xpath="/{$document-element-name}/unizh:position">
                   <xsl:value-of select="unizh:person/unizh:position"/>
