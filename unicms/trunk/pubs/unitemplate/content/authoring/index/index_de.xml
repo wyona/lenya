@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><unizh:homepage xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:tabs="false" xhtml:dummy="FIXME:keepNamespace">
 	
   <lenya:meta>
-    <dc:title>Unicommunication</dc:title>
+    <dc:title>Willkommen!</dc:title>
     <dc:description>Abstract</dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject>Keywords</dc:subject>
@@ -24,28 +24,21 @@
     </unizh:quicklinks>
   </unizh:contcol1>
   <unizh:related-content>
-    <unizh:teaser>
-      <unizh:title>Example</unizh:title>
-      <p>Example Teaser.</p>
-    </unizh:teaser>
+    <unizh:teaser name="Beispiel">
+      <unizh:title>Beispiel-Teaser</unizh:title>
+      <p>Beispiel für einen Teaser.</p><a href="#" title="Teaser Link">Link</a>
+    </unizh:teaser><unizh:rss-reader url="http://www.unipublic.unizh.ch/index.rss.xml" items="1">Unipublic</unizh:rss-reader><unizh:rss-reader url="http://www.unizh.ch/news/rss/cms/ibis_rss.php" items="5">Ibis</unizh:rss-reader>
   </unizh:related-content>
   <body>
-  	<h2>Universität und Öffentlichkeit im Dialog</h2>
-    <p>unicommunication (unicom) hat die Aufgabe, die Kommunikation mit
-der internen und externen Öffentlichkeit zu unterstützen.
-Sie sorgt durch ihre PR- und Medienarbeit für ein
-unverwechselbares Bild der Universität Zürich in der
-Öffentlichkeit.</p>
+    <p>
+UniCMS, das Content Management System der Universität Zürich, steht allen Institutionen der 
+Universität Zürich zur Verfügung, um dezentral und browserbasiert Webseiten zu erstellen 
+und bewirtschaften.
+    </p>
 
-<h3>Kontakt:</h3>
-
-<p>unicommunication Online<br/>
- Gloriastrasse 18a<br/>
- 8006 Zürich<br/>
- Tel. 01 634 41 58<br/>
- Fax 01 634 23 46<a href="mailto:online@unicom.unizh.ch">
-<br/>
- online@unicom.unizh.ch</a>
-</p>
+<h3>Dokumentation:</h3>
+<p>
+Ausführliche Informationen zur Erstellung und Wartung einer UniCMS-Publikation finden Sie in der <a href="http://www.unicms.unizh.ch/docu.html">UniCMS Online-Dokumentation</a>.<br/>
+</p><unizh:rss-reader url="/custom/News.rss.xml" items="3">Beispiel RSS-News (intern)</unizh:rss-reader>
   </body>
 </unizh:homepage>

@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site label="Trash" xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<site xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" label="Trash">
+<node id="doctypes" visibleinnav="true">
+<label xml:lang="de">Dokumenttypen</label>
+<label xml:lang="en">Document types</label>
+</node>
+<node id="redirect" visibleinnav="true">
+<label xml:lang="de">Redirect</label>
+</node>
 </site>
