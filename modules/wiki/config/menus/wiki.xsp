@@ -34,8 +34,13 @@
   </xsp:structure>
   
   <menu>
-
     <menus>
+      <menu i18n:attr="name" name="File">
+        <block admin="false">
+          <item uc:usecase="site.create" href="?doctype=wiki"><i18n:text>New Wiki Document</i18n:text></item>
+        </block>
+      </menu>
+
       <menu i18n:attr="name" name="Edit">
           <xsp:logic>
             String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
