@@ -1,24 +1,30 @@
-! Titel __Ti''tel''__
+! Example Wikidocument
 
-Paragraph mit //  __TEXT__ und ^^allem ''Buntem''^^
+Here you can use behind Wiki-Syntax.
 
----
+* This is a list
+** Deeper
 
-! Blah
+# Numbered List
+## Deeper
 
-{{
-asdasd
-asd
-as
-d
-int main(void)
-{
-        int test;
-        for () {
+!! A Table
 
-        }
+|row0col1|row0col2|row0col3|
+|row1col1|row1col2|row1col3|
+|row2col1|row2col2|row2col3|
+
+!! And Links
+
+[With Label|http://www.foobar.com]
+[http://nolabel.com]
+
+!! Plaintext
+
+{{{
+
+public void helloWorld() {
+    System.out.println("Hello World");
 }
-asdas
-}}
-
+}}}
 
