@@ -69,18 +69,15 @@
               <td>
                 <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${usecase.getParameter('content')}"/></textarea>
 	      </td>		  
-        <td>
-        <b>Wiki Syntax</b><br/>
-        <PRE>
+              <td valign="top">
+              <pre>
 ----             Horizontal ruler
 \\               Forced line break
-[link]           Create hyperlink to "link", where "link" 
-                 can be either an internal WikiName or an
-                 external link (http://)
-[text|link]      Create a hyperlink where the link text
-                 is different from the actual hyperlink link.
-
-*                Make a bulleted list (must be in first column).
+[link]           Create hyperlink to "link", where "link" can 
+                 be either an internal WikiName or an external link (http://)
+[text|link]      Create a hyperlink where the link text is different
+                 from the actual hyperlink link.
+*                Make a bulleted list (must be in first column). 
                  Use more (**) for deeper indentations.
 #                Make a numbered list (must be in first column). 
                  Use more (##, ###) for deeper indentations.
@@ -89,14 +86,13 @@
                  More exclamation marks mean bigger headings.
 
 __text__         Makes text bold.
-''text''         Makes text in italics.
-^^test^^         Makes text underline.
+''text''         Makes text in italics (notice that these are single quotes ('))
 
 |text|more text| Makes a table. Double bars for a table heading.
-</PRE>
 
-
-        </td>
+{{{text}}}       Plaintext as you see it in source.
+              </pre>
+              </td>
 	    </tr>		  
             <tr>
               <td>
