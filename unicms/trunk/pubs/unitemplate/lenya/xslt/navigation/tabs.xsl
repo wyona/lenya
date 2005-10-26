@@ -18,13 +18,16 @@
   </div>
 </xsl:template>
 
-<xsl:template match="nav:node[@visibleinnav = 'false']"/>
 
 <xsl:template match="nav:node">
- <div>
-  <xsl:apply-templates select="." mode="node_attrs"/>
- </div>
+  <div>
+    <xsl:copy-of select="@*"/>
+    <xsl:value-of select="nav:label"/>
+  </div>
 </xsl:template>
+
+
+<xsl:template match="nav:node[@visibleinnav = 'false']"/>
 
 
 </xsl:stylesheet> 

@@ -120,7 +120,7 @@
           <xsl:if test="@current = 'true'">
             <xsl:attribute name="class">activ</xsl:attribute>
           </xsl:if>
-          <xsl:value-of select="@label"/>
+          <xsl:value-of select="text()"/>
         </a>
         <xsl:if test="position() &lt; last()">
           <div class="linkseparator">|</div>

@@ -9,8 +9,6 @@
     exclude-result-prefixes="nav"
     >
    
-<xsl:import href="node_attrs.xsl"/> 
-    
 
 <xsl:template match="nav:site">
   <xhtml:div id="simplenav">

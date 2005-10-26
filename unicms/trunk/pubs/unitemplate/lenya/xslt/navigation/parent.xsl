@@ -9,12 +9,10 @@
     exclude-result-prefixes="nav"
     >
    
-<xsl:import href="node_attrs.xsl"/>
-    
 
 <xsl:template match="nav:site">
   <div id="link-to-parent" href="{descendant::nav:node[nav:node[@current = 'true']]/@href}">
-    <xsl:value-of select="descendant::nav:node[nav:node[@current = 'true']]/node()"/>
+    <xsl:value-of select="descendant::nav:node[nav:node[@current = 'true']]/nav:label"/>
   </div>
 </xsl:template>
 

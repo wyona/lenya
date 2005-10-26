@@ -37,7 +37,7 @@
 
 
 <xsl:template match="nav:node">
-  <xsl:if test="@alternative-languages = 'en'">
+  <xsl:if test="@available-languages = 'en'">
     <div id="language">
       <xsl:attribute name="href">
         <xsl:choose>
@@ -52,7 +52,7 @@
        EN
     </div>
   </xsl:if> 
-  <xsl:if test="@alternative-languages = 'de'">
+  <xsl:if test="@available-languages = 'de'">
     <div id="language"> 
       <xsl:attribute name="href">
         <xsl:choose>

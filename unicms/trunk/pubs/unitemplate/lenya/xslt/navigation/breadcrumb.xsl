@@ -9,7 +9,6 @@
     exclude-result-prefixes="nav"
     >
     
-<xsl:import href="node_attrs.xsl"/>
 
 <xsl:template match="nav:site">
   <div id="breadcrumb" root="http://www.unizh.ch" label="Universit&#228;t Z&#252;rich">
@@ -17,17 +16,13 @@
   </div>
 </xsl:template>
 
+
 <xsl:template match="nav:node[@id = 'index' or descendant-or-self::nav:node[@current = 'true']]">
   <div>
-    <xsl:apply-templates select="." mode="node_attrs"/>
+    <xsl:copy-of select="@*"/>
+    <xsl:value-of select="nav:label"/>
   </div>
   <xsl:apply-templates/>
-</xsl:template>
-
-<xsl:template match="@*|node()">
-  <xsl:copy>
-    <xsl:apply-templates select="@*|node()"/>
-  </xsl:copy>
 </xsl:template>
 
 </xsl:stylesheet> 

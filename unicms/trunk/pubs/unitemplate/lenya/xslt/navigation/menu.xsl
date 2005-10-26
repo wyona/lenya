@@ -9,33 +9,24 @@
     exclude-result-prefixes="nav"
     >
    
-<xsl:import href="node_attrs.xsl"/> 
-    
 
 <xsl:template match="nav:site">
   <xhtml:div id="menu">
-      <xsl:apply-templates select="nav:node"/>
+    <xsl:apply-templates select="nav:node"/>
   </xhtml:div>
 </xsl:template>
 
-<xsl:template match="nav:node[@visibleinnav = 'false']"/>
 
 <xsl:template match="nav:node">
  <xhtml:div>
-  <xsl:apply-templates select="." mode="node_attrs"/>
-  <xsl:apply-templates select="nav:node"/>
+  <xsl:copy-of select="@*"/>
+  <xsl:value-of select="nav:label"/>
+  <xsl:apply-templates select="nav:node[descendant-or-self::nav:node[@current = 'true'] or parent::nav:node[@current = 'true'] or ../nav:node[descendant-or-self::nav:node[@current = 'true']]]"/>
  </xhtml:div>
 </xsl:template>
 
 
-<!-- hide everything but siblings, parents and first level children. yes its that complicated :) -->
-<xsl:template match="nav:node/nav:node
-          [not(ancestor-or-self::nav:node[@current = 'true']) and
-           not(descendant-or-self::nav:node[@current = 'true']) and
-           not(..//nav:node[@current = 'true'])]"/>
-
-
-<xsl:template match="nav:node[@current = 'true']/*/nav:node"/>
+<xsl:template match="nav:node[@visibleinnav = 'false']"/>
 
 
 <xsl:template match="@*|node()">
