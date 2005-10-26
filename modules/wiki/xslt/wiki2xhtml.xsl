@@ -27,6 +27,10 @@
 
 <xsl:param name="rendertype" select="''"/>
 <xsl:param name="nodeid"/>
+<xsl:param name="area"/>
+<xsl:param name="pub"/>
+<xsl:param name="sn"/>
+<xsl:param name="sp"/>
 
 <xsl:template match="/">
   <div id="body">
@@ -135,13 +139,13 @@
 
 <xsl:template match="wiki:Table">
 <table>
-	<xsl:for-each select="wiki:TableRow">
-	<tr>
-	<xsl:for-each select="wiki:TableCol">
-		<td><xsl:apply-templates/></td>
-	</xsl:for-each>
-	</tr>
-	</xsl:for-each>
+    <xsl:for-each select="wiki:TableRow">
+    <tr>
+    <xsl:for-each select="wiki:TableCol">
+        <td><xsl:apply-templates/></td>
+    </xsl:for-each>
+    </tr>
+    </xsl:for-each>
 </table>
 </xsl:template>
 
@@ -152,12 +156,23 @@
 
 <xsl:template match="wiki:Link">
 <xsl:choose>
-    <xsl:when test="@label">
+    <!-- external links -->
+    <xsl:when test="@label and @type = 'external'">
         <a href="{@href}"><xsl:value-of select="@label"/></a>
     </xsl:when>
-    <xsl:otherwise>
-    <a href="{@href}"><xsl:value-of select="@href"/></a>
+    <xsl:when test="@type='external'">
+        <a href="{@href}"><xsl:value-of select="@href"/></a> 
+    </xsl:when>
+    
+    <!-- internal links -->
+    <xsl:when test="@label and @type = 'internal'">
+        <a href="http://{$sn}:{$sp}/{$pub}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
+    </xsl:when>
+
+    <xsl:otherwise test="@type='internal'">
+        <a href="http://{$sn}:{$sp}/{$pub}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
     </xsl:otherwise>
+    
 </xsl:choose>
 </xsl:template>
 
@@ -174,5 +189,5 @@
     <xsl:apply-templates/>
   </pre>
 </xsl:template>
-	
+    
 </xsl:stylesheet> 
