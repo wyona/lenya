@@ -28,9 +28,7 @@
 <xsl:param name="rendertype" select="''"/>
 <xsl:param name="nodeid"/>
 <xsl:param name="area"/>
-<xsl:param name="pub"/>
-<xsl:param name="sn"/>
-<xsl:param name="sp"/>
+<xsl:param name="publication"/>
 
 <xsl:template match="/">
   <div id="body">
@@ -166,11 +164,15 @@
     
     <!-- internal links -->
     <xsl:when test="@label and @type = 'internal'">
-        <a href="http://{$sn}:{$sp}/{$pub}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
+        <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
+    </xsl:when>
+    
+    <xsl:when test="@type = 'internal' and @exists = 'false'">
+        <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a> 
     </xsl:when>
 
-    <xsl:otherwise test="@type='internal'">
-        <a href="http://{$sn}:{$sp}/{$pub}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
+    <xsl:otherwise test="@type='internal' and @exists = 'true'">
+        <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
     </xsl:otherwise>
     
 </xsl:choose>
