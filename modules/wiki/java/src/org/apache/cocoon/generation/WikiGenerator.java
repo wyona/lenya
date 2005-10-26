@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -49,12 +50,12 @@ import org.wyona.wiki.WikiParser;
 import org.wyona.wiki.WikiParserTokenManager;
 
 /**
- * Blog entry generator
+ * Wiki generator
  */
 public class WikiGenerator extends ServiceableGenerator {
 
     protected Source inputSource = null;
-
+                
     /**
      * Set the request parameters. Must be called before the generate method.
      * 
@@ -69,13 +70,15 @@ public class WikiGenerator extends ServiceableGenerator {
      */
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException,
             SAXException, IOException {
+
+       
         super.setup(resolver, objectModel, src, par);
         try {
             this.inputSource = super.resolver.resolveURI(src);
         } catch (SourceException se) {
             throw SourceUtil.handle("Error during resolving of '" + src + "'.", se);
-        }
-    }
+        }        
+   }
 
     /**
      * Generate XML data.
@@ -84,12 +87,15 @@ public class WikiGenerator extends ServiceableGenerator {
      *             if an error occurs while outputting the document
      */
     public void generate() throws SAXException, ProcessingException {
-        try {    
+       
+        try {               
+                                   
             InputStream wikiIs = inputSource.getInputStream();
             WikiParser wikiParser = new WikiParser(new WikiParserTokenManager(new SimpleCharStream(
                     new InputStreamReader(wikiIs, "UTF-8"))));
             SimpleNode root = wikiParser.WikiBody();
-            Tree2XML wikiTree = new Tree2XML(this.contentHandler);           
+            Request request = ObjectModelHelper.getRequest(this.objectModel);
+            Tree2XML wikiTree = new Tree2XML(this.contentHandler, this.manager, objectModel, request, getLogger());           
             wikiTree.startDocument();
             wikiTree.traverseJJTree(root);            
             wikiTree.endDocument();
