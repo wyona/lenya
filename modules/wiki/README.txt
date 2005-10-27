@@ -31,3 +31,12 @@ Wiki Module Installation (default Publication) BETA
 8) create sample files in build/lenya/webapp/lenya/pubs/default/content/authoring/doctypes/index_en.xml (and index_de.xml) (make a newline at end of the files!!!)
 
 9) Start Lenya, login to default pub, check Wiki Doctype.
+
+TODO's
+------
+
+* Modify some File's from Lenya that not so much have to get changed at build time.
+* Finish Link-management (i.E. Sitetree)
+* Maven tweaking / Installation
+* Find & Fix Bugs (test Syntax more and more)
+* maybe think about fileupload (versioning)
