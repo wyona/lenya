@@ -171,7 +171,7 @@
         <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a> 
     </xsl:when>
 
-    <xsl:otherwise test="@type='internal' and @exists = 'true'">
+    <xsl:otherwise>
         <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
     </xsl:otherwise>
     
