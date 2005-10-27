@@ -51,13 +51,14 @@
           <map:parameter name="rendertype" value="{request-param:rendertype}"/>
           <map:parameter name="nodeid" value="{page-envelope:document-name}"/>
           <map:parameter name="language" value="{page-envelope:document-language}"/>
-          <map:parameter name="area" value="{page-envelope:area}" />
-          <map:parameter name="publication" value="{page-envelope:publication-id}" />
-        </map:transform> 
+        </map:transform>
         <map:serialize type="xml"/>
       </map:match>
 
-    </map:pipeline>
+      <map:match pattern="*/*/*.gif">
+        <map:read mime-type="image/gif" src="resources/images/{3}.gif"/>
+      </map:match>
+      </map:pipeline>
     
   </map:pipelines>
 </map:sitemap>
