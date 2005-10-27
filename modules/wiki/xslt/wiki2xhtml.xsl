@@ -14,7 +14,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <!-- $Id: xhtml2xhtml.xsl 201776 2005-06-25 18:25:26Z gregor $ -->
 
 <xsl:stylesheet version="1.0"
@@ -162,7 +161,11 @@
         <a href="{@href}"><xsl:value-of select="@href"/></a> 
     </xsl:when>
     
-    <!-- internal links -->
+    <!-- internal links --> 
+    <xsl:when test="@label and @type = 'internal' and @exists = 'false'">
+        <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@label"/></a> 
+    </xsl:when>
+
     <xsl:when test="@label and @type = 'internal'">
         <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
     </xsl:when>
@@ -171,14 +174,9 @@
         <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a> 
     </xsl:when>
     
-    <xsl:when test="@label and @type = 'internal' and @exists = 'false'">
-        <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a> 
-    </xsl:when>
-
     <xsl:otherwise>
         <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
     </xsl:otherwise>
-    
 </xsl:choose>
 </xsl:template>
 
