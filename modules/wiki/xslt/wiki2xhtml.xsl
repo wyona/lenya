@@ -193,5 +193,10 @@
     <xsl:apply-templates/>
   </pre>
 </xsl:template>
-    
+
+<xsl:template match="wiki:Smile">
+  <img src="/{$publication}/{$area}/icon_smile.gif?lenya.module=wiki"/>
+   <xsl:apply-templates/>
+</xsl:template>
+
 </xsl:stylesheet> 
