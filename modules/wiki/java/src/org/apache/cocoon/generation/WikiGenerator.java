@@ -45,7 +45,6 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.wyona.wiki.ParseException;
 import org.wyona.wiki.SimpleCharStream;
 import org.wyona.wiki.SimpleNode;
-import org.wyona.wiki.Tree2XML;
 import org.wyona.wiki.WikiParser;
 import org.wyona.wiki.WikiParserTokenManager;
 
