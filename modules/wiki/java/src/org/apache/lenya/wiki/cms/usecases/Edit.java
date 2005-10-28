@@ -17,7 +17,6 @@
 package org.apache.lenya.wiki.cms.usecases;
 
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,25 +27,17 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import org.apache.cocoon.components.ContextHelper;
-
 import org.apache.cocoon.environment.Request;
-import org.apache.excalibur.source.ModifiableSource;
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceResolver;
-import org.apache.lenya.cms.publication.Document;
-import org.apache.lenya.cms.publication.DocumentManager;
+import org.apache.cocoon.environment.Session;
 import org.apache.lenya.cms.publication.Publication;
-import org.apache.lenya.cms.publication.util.DocumentHelper;
 import org.apache.lenya.cms.repository.Node;
 import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.site.SiteException;
 import org.apache.lenya.cms.site.SiteUtil;
 import org.apache.lenya.cms.usecase.DocumentUsecase;
 import org.apache.lenya.cms.usecase.UsecaseException;
-
 import org.wyona.wiki.ParseException;
 import org.wyona.wiki.SimpleCharStream;
-import org.wyona.wiki.SimpleNode;
 import org.wyona.wiki.WikiParser;
 import org.wyona.wiki.WikiParserTokenManager;
 
@@ -68,17 +59,21 @@ public class Edit extends DocumentUsecase {
             StringBuffer buf = new StringBuffer();
             char[] cbuf = new char[1024];
             int rb;
-            Request request = ContextHelper.getRequest(this.context);
+            Request request = ContextHelper.getRequest(this.context);            
             String encoding = request.getCharacterEncoding();
-            Reader reader = new InputStreamReader(getSourceDocument().getRepositoryNode().getInputStream(), encoding);
-            while ((rb=reader.read(cbuf)) != -1) { 
-                buf.append(cbuf, buf.length(), rb);
+            Session session = request.getSession();
+            
+            Reader reader = new InputStreamReader(
+                    getSourceDocument().getRepositoryNode().getInputStream(), encoding);            
+            while ((rb=reader.read(cbuf)) != -1) {
+                buf.append(cbuf, 0, rb);
             }
             reader.close();
             if (buf.length() == 0) {
                 buf.append(' ');
             }
-            setParameter("content", buf);            
+            
+            session.setAttribute("wikiContent", buf.toString());                        
         } catch (RepositoryException e) {
             this.addErrorMessage(e.getMessage());
         } catch (IOException e) {
@@ -113,24 +108,6 @@ public class Edit extends DocumentUsecase {
         Node[] nodes = { docNode, siteNode };
         return nodes;
     }
-    
-    public void advance() throws UsecaseException {
-        super.advance();
-        Request request = ContextHelper.getRequest(this.context);
-        String content = getParameterAsString("wikimarkup");
-        String encoding = request.getCharacterEncoding();                
-        try {
-            setParameter("content", new String(content.getBytes("ISO-8859-1"), "UTF-8"));                                          
-            validate(content, encoding);
-        } catch (ParseException pe) {            
-            setParameter("startline", new Integer(pe.currentToken.beginLine));
-            setParameter("endline", new Integer(pe.currentToken.endLine));
-            addInfoMessage(pe.getMessage());
-        } catch (Exception e) {
-            throw new UsecaseException(e);
-        }
-    }
-    
     
     protected void doCheckExecutionConditions() throws Exception {        
         super.doCheckExecutionConditions();

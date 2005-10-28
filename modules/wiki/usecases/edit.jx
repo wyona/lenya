@@ -67,7 +67,7 @@
 	    </tr>
             <tr>
               <td>
-                <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${usecase.getParameter('content')}"/></textarea>
+                <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${session.getAttribute('wikiContent')}"/></textarea>
 	      </td>		  
               <td valign="top">
               <pre>
