@@ -31,9 +31,9 @@
 
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
-      <xsl:if test="xhtml:div[@id = 'language']">
-        <a href="{xhtml:div[@id = 'language']/@href}"><xsl:value-of select="xhtml:div[@id = 'language']"/></a> | 
-      </xsl:if>
+      <xsl:for-each select="xhtml:div[@class='language']">
+        <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> |
+      </xsl:for-each>
       <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="{$imageprefix}/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
       <a>
         <xsl:attribute name="href">

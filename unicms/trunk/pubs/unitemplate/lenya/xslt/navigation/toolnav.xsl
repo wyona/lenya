@@ -8,11 +8,22 @@
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="nav"
     >
-   
+
+<xsl:param name="root"/>   
 <xsl:param name="url"/>
 <xsl:param name="chosenlanguage"/>
 <xsl:param name="defaultlanguage"/>
-<xsl:param name="root"/>
+
+<xsl:variable name="suffix">
+  <xsl:choose>
+    <xsl:when test="$chosenlanguage = $defaultlanguage">
+      <xsl:text>.html</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="concat('_', $chosenlanguage, '.html')"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:variable>
 
 <xsl:template match="nav:site">
   <div id="toolnav">
@@ -24,10 +35,10 @@
       <xsl:attribute name="href">
         <xsl:choose>
           <xsl:when test="not(contains ($root, 'authoring'))">
-          ?version=simple
+            <xsl:text>?version=simple</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-          #
+            <xsl:text>#</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -37,37 +48,55 @@
 
 
 <xsl:template match="nav:node">
-  <xsl:if test="@available-languages = 'en'">
-    <div id="language">
-      <xsl:attribute name="href">
-        <xsl:choose>
-          <xsl:when test="contains($url, '_')">
-            <xsl:value-of select="concat($root, substring-before($url, '_'), '_en.html')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="concat($root, substring-before($url, '.html'), '_en.html')"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-       EN
-    </div>
-  </xsl:if> 
-  <xsl:if test="@available-languages = 'de'">
-    <div id="language"> 
-      <xsl:attribute name="href">
-        <xsl:choose>
-          <xsl:when test="contains($url, '_')">
-            <xsl:value-of select="concat($root, substring-before($url, '_'), '_de.html')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="concat($root, substring-before($url, '.html'), '_de.html')"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-       DE
-    </div>
-  </xsl:if>
+  <xsl:call-template name="split-languages">
+    <xsl:with-param name="languages">
+      <xsl:value-of select="@other-languages"/>
+    </xsl:with-param>
+  </xsl:call-template> 
 </xsl:template>
+
+
+<xsl:template name="split-languages">
+  <xsl:param name="languages"/>
+  <xsl:choose>
+    <xsl:when test="contains($languages, ',')">
+      <div class="language">
+        <xsl:attribute name="href">
+          <xsl:choose>
+            <xsl:when test="substring-before($languages, ',') = $defaultlanguage">
+              <xsl:value-of select="concat($root, substring-before($url, $suffix), '.html')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="concat($root, substring-before($url, $suffix), '_', substring-before($languages, ','), '.html')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:value-of select="substring-before($languages, ',')"/>
+      </div>
+      <xsl:call-template name="split-languages">
+        <xsl:with-param name="languages">
+          <xsl:value-of select="substring-after($languages, ',')"/>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="$languages != ''">
+      <div class="language">
+        <xsl:attribute name="href">
+          <xsl:choose>
+            <xsl:when test="normalize-space($languages) = $defaultlanguage">
+              <xsl:value-of select="concat($root, substring-before($url, $suffix), '.html')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="concat($root, substring-before($url, $suffix), '_', normalize-space($languages), '.html')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:value-of select="normalize-space($languages)"/>
+      </div>
+    </xsl:when>
+  </xsl:choose>
+</xsl:template> 
+
 
 </xsl:stylesheet>
 
