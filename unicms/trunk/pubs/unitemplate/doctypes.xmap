@@ -216,7 +216,7 @@
         </map:transform>
 
 
-        <!-- Doctype / context specific navigation schemes.  --> 
+        <!-- Doctype / context specific navigation logic.  --> 
         <map:transform src="../unizh/xslt/common/includeRelated.xsl">
           <map:parameter name="area" value="{page-envelope:area}"/>
         </map:transform>
@@ -224,7 +224,7 @@
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
-        <map:transform src="lenya/xslt/navigation/schemes.xsl">
+        <map:transform src="lenya/xslt/navigation/logic.xsl">
           <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
         </map:transform>
 
@@ -298,7 +298,7 @@
           <map:parameter name="rendertype" value="{2}"/>
         </map:transform> 
      
-        <!-- Doctype / context specific navigation schemes.  --> 
+        <!-- Doctype / context specific navigation logic.  --> 
         <map:transform src="../unizh/xslt/common/includeRelated.xsl">
           <map:parameter name="area" value="{page-envelope:area}"/>
         </map:transform>
@@ -306,7 +306,7 @@
         <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
-        <map:transform src="lenya/xslt/navigation/schemes.xsl">
+        <map:transform src="lenya/xslt/navigation/logic.xsl">
           <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
         </map:transform>
        
