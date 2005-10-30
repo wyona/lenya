@@ -55,7 +55,7 @@
     <xsl:variable name="level" select="count($descendants)"/>
 
     <div id="secnav">
-      <xsl:apply-templates select="xhtml:div[@id = 'home']"/>
+      <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:choose>
         <xsl:when test="$level > 2 and $current/xhtml:div">
           <a href="{$descendants[$level - 2]/@href}">[...] <xsl:value-of select="$descendants[$level - 2]/text()"/></a>

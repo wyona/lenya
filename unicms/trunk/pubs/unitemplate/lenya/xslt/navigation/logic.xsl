@@ -50,7 +50,7 @@
               <xsl:apply-templates select="descendant::xhtml:div[preceding-sibling::xhtml:div[@current = 'true']]"/>
             </xsl:when>
             <xsl:otherwise>
-              <xhtml:div id="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
+              <xhtml:div class="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
                 <xsl:value-of select="descendant::xhtml:div[@basic-url = 'index']/text()"/>
               </xhtml:div>
               <xsl:apply-templates select="descendant::xhtml:div[@current = 'true']/xhtml:div"/>
@@ -68,7 +68,7 @@
                 <xsl:apply-templates select="xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]/xhtml:div"/> 
               </xsl:when>
               <xsl:otherwise>
-                <xhtml:div id="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
+                <xhtml:div class="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
                   <xsl:value-of select="descendant::xhtml:div[@basic-url = 'index']/text()"/>
                 </xhtml:div>
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]/xhtml:div"/>
@@ -81,7 +81,7 @@
                 <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index')]"/>
               </xsl:when>
               <xsl:otherwise>
-                <xhtml:div id="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
+                <xhtml:div class="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
                   <xsl:value-of select="descendant::xhtml:div[@basic-url = 'index']/text()"/>
                 </xhtml:div>
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div"/>
