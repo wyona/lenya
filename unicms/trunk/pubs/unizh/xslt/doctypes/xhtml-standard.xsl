@@ -112,7 +112,7 @@
     <div class="contcol2">
       <div class="content">
         <h1>
-          <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
             <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
           </div>
         </h1>
@@ -138,7 +138,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -163,7 +163,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -187,7 +187,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
@@ -234,7 +234,7 @@
   	     <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
           </p>
           <h2>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h2>
@@ -329,7 +329,7 @@
       <div class="contentarea">
         <div class="content">
           <h1>
-            <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
             </div>
           </h1>
