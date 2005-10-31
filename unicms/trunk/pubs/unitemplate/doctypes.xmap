@@ -221,6 +221,7 @@
           <map:parameter name="area" value="{page-envelope:area}"/>
         </map:transform>
         <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
@@ -303,6 +304,7 @@
           <map:parameter name="area" value="{page-envelope:area}"/>
         </map:transform>
         <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
         <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
@@ -323,7 +325,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call> 
+        </map:call>  
 
         <map:serialize type="xml"/>
       </map:match>
