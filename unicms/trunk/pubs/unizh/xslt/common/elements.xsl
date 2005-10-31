@@ -369,8 +369,10 @@
            <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
            <h2><xsl:value-of select="xhtml:title"/>&#160;
            <span class="lead"><xsl:value-of select="xhtml:pubDate"/></span></h2>
-           <p><xsl:apply-templates select="xhtml:description"/></p>
-           <a class="arrow" href="{xhtml:link}">weiter</a>
+           <p><xsl:apply-templates select="xhtml:description"/>
+           <a class="arrow" href="{xhtml:link}">Weiter</a><br/>
+           <br/>
+           </p>
          </xsl:if>
        </xsl:for-each>
        <xsl:if test="not(xhtml:rss/xhtml:channel/xhtml:item)">
@@ -484,7 +486,7 @@
   
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
-  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:team]">
+  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:person]">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
 
@@ -525,7 +527,7 @@
                   <xsl:value-of select="*/*/unizh:short/xhtml:a"/>
                 </a>
                 <xsl:if test="$area = 'authoring'">
-                  |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a>
+                  |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a><br/>
                 </xsl:if>
               </xsl:otherwise>
             </xsl:choose>
@@ -610,7 +612,7 @@
     </h3>
     <br/>
     <xsl:apply-templates mode="collection" select="descendant::unizh:lead"/>
-    <a href="{$contextprefix}{@href}">mehr</a>
+    <a href="{$contextprefix}{@href}">Mehr...</a>
   </xsl:template>
 
   <xsl:template match="index:child[descendant::unizh:publication | descendant::unizh:event]">
@@ -619,7 +621,7 @@
     </h3>
     <br/>
     <xsl:apply-templates mode="collection" select="descendant::lenya:meta/dc:description"/>
-    <a href="{$contextprefix}{@href}">mehr</a>
+    <a href="{$contextprefix}{@href}">Mehr...</a>
   </xsl:template>
 
 
