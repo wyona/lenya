@@ -132,7 +132,7 @@
       <choice>
         <text/>
         <ref name="Inline.class"/>
-        <ref name="lenya.asset"/>
+        <!-- <ref name="lenya.asset"/> -->
       </choice>
     </zeroOrMore>
   </define>
