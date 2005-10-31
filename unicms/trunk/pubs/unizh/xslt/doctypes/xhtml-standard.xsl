@@ -97,7 +97,7 @@
 
   <xsl:template name="one-column">
     <h1>
-      <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
+      <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
         <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
       </div>
     </h1>

@@ -27,6 +27,9 @@
         </xsl:choose>
       </xsl:comment>
     </style>
+    <xsl:if test="$document-element-name = 'unizh:news'">
+      <link rel="alternate" type="application/rss+xml" title="{/document/content/*/lenya:meta/dc:title}" href="{$nodeid}.rss.xml" /> 
+    </xsl:if>
   </head>
 </xsl:template>
 
