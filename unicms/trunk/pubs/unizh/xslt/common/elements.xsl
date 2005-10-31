@@ -514,7 +514,7 @@
         <xsl:for-each select="index:child">
           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
 	  <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;<span class="lead"><i18n:date pattern="EEE, d. MMM yyyy HH:mm"
-	  src-locale="en" src-pattern="EEE, d. MMM yyyy HH:mm" value="{$creationdate}"/></span></h2>
+	  src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/></span></h2>
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>

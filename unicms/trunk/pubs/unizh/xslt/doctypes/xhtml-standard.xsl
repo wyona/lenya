@@ -11,6 +11,7 @@
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
+  xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
   >
   
   <xsl:param name="contextprefix"/>
@@ -21,6 +22,7 @@
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
   <xsl:param name="querystring"/>
+  <xsl:param name="creationdate"/>
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/html-head.xsl"/>
@@ -228,7 +230,9 @@
       </div> 
       <div class="contentarea">
         <div class="content">
-          <p class="lead"><xsl:value-of select="unizh:newsitem/lenya:meta/dcterms:created"/></p> 
+           <p class="lead">
+  	     <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
+          </p>
           <h2>
             <div bxe_xpath="/{document-element-nem}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
