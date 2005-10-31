@@ -44,6 +44,9 @@
           <div id="simplenav"> 
             Universit&#228;t Z&#252;rich | 
             <a href="?version=standard">Grafik-Version</a>
+            <xsl:for-each select="/document/xhtml:div[@id = 'toolnav']/xhtml:div[@class='language']">
+              | <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> 
+            </xsl:for-each>
           </div>
           <div class="line"><xsl:comment/></div> 
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
