@@ -50,7 +50,7 @@
     </xsl:variable>
     <xsl:variable name="language-suffix" select="concat('_', $language)"/>
     <xsl:variable name="canonical-language-suffix">
-      <xsl:if test="$language != $defaultlanguage">
+      <xsl:if test="$language !='' and $language != $defaultlanguage">
         <xsl:value-of select="$language-suffix"/>
       </xsl:if>
     </xsl:variable>
@@ -59,8 +59,9 @@
 
     <nav:node>
       <xsl:copy-of select="@id"/>
-      <xsl:attribute name="basic-url"><xsl:value-of select="$parent-dir"/><xsl:value-of select="@id"/></xsl:attribute>
-      <xsl:attribute name="language-suffix"><xsl:value-of select="$canonical-language-suffix"/></xsl:attribute>
+      <xsl:attribute name="basic-url">
+        <xsl:value-of select="$parent-dir"/><xsl:value-of select="@id"/>
+      </xsl:attribute>
       <xsl:call-template name="other-languages"/>
       <xsl:copy-of select="@visibleinnav"/>
     
@@ -71,13 +72,15 @@
       <xsl:attribute name="href">
         <xsl:value-of select="concat($root, $canonical-url)"/>
       </xsl:attribute>
-   
+      
+      <xsl:attribute name="language-suffix" select="$language-suffix"/>
+ 
       <xsl:choose>
-        <xsl:when test="tree:label[lang($chosenlanguage)]"> 
+        <xsl:when test="tree:label[lang($language)]"> 
           <xsl:apply-templates select="tree:label[lang($language)]"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates select="tree:label[lang($language)]"/>
+          <xsl:apply-templates select="tree:label[1]"/>
         </xsl:otherwise>
       </xsl:choose> 
     
