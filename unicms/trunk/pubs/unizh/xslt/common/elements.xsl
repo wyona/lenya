@@ -17,8 +17,6 @@
   <xsl:param name="documentid"/>
   <xsl:param name="contextprefix"/>
   <xsl:param name="rendertype"/>
-  <xsl:param name="creationdate"/>
-
  
   <xsl:template match="lenya:asset-dot[@class='image']">
     <a href="{@href}"> 
@@ -512,9 +510,20 @@
     <xsl:choose>
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">
+          <xsl:variable name="creationdate" select="*/*/lenya:meta/dcterms:created"/>
           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-	  <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;<span class="lead"><i18n:date pattern="EEE, d. MMM yyyy HH:mm"
-	  src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/></span></h2>
+	  <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;
+             <span class="lead">
+             <xsl:choose>
+               <xsl:when test="string-length($creationdate) &lt; '25'">
+                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
+               </xsl:when>
+               <xsl:otherwise>
+                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}"/>
+               </xsl:otherwise>
+             </xsl:choose>
+             </span>
+          </h2>
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>

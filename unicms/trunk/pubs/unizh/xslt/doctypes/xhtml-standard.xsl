@@ -231,8 +231,16 @@
       <div class="contentarea">
         <div class="content">
            <p class="lead">
-  	     <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
-          </p>
+	     <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
+	     <xsl:choose>
+	       <xsl:when test="string-length($creationdate) &lt; '25'">
+		 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/> 
+	       </xsl:when>
+	       <xsl:otherwise>
+                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}"/>
+	       </xsl:otherwise>
+	     </xsl:choose>
+	   </p>
           <h2>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
