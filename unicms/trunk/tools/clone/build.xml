@@ -190,25 +190,6 @@
       <fileset dir="${source.dir}/content">
 	<exclude name="authoring/sitetree.xml"/>
 	<exclude name="authoring/index/index_de.xml"/>
-<!-- temporarily 1/1 -->
-	<exclude name="authoring/doctypes"/>
-	<exclude name="authoring/doctypes/index_de.xml"/>
-	<exclude name="authoring/doctypes/index_en.xml"/>
-	<exclude name="authoring/doctypes/1column"/>
-	<exclude name="authoring/doctypes/2columns"/>
-	<exclude name="authoring/doctypes/3columns"/>
-	<exclude name="authoring/doctypes/1column/index_de.xml"/>
-	<exclude name="authoring/doctypes/2columns/index_de.xml"/>
-	<exclude name="authoring/doctypes/3columns/index_de.xml"/>
-	<exclude name="workflow/history/authoring/doctypes"/>
-	<exclude name="workflow/history/authoring/doctypes/index_de.xml"/>
-	<exclude name="workflow/history/authoring/doctypes/index_en.xml"/>
-	<exclude name="workflow/history/authoring/doctypes/1column"/>
-	<exclude name="workflow/history/authoring/doctypes/2columns"/>
-	<exclude name="workflow/history/authoring/doctypes/3columns"/>
-	<exclude name="workflow/history/authoring/doctypes/1column/index_de.xml"/>
-	<exclude name="workflow/history/authoring/doctypes/2columns/index_de.xml"/>
-	<exclude name="workflow/history/authoring/doctypes/3columns/index_de.xml"/>
       </fileset>
     </copy>
   
