@@ -69,30 +69,9 @@
               <td>
                 <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${session.getAttribute('wikiContent')}"/></textarea>
 	      </td>		  
-              <td valign="top">
-              <pre>
-----             Horizontal ruler
-\\               Forced line break
-[link]           Create hyperlink to "link", where "link" can 
-                 be either an internal WikiName or an external link (http://)
-[text|link]      Create a hyperlink where the link text is different
-                 from the actual hyperlink link.
-*                Make a bulleted list (must be in first column). 
-                 Use more (**) for deeper indentations.
-#                Make a numbered list (must be in first column). 
-                 Use more (##, ###) for deeper indentations.
-
-!, !!, !!!       Start a line with an exclamation mark (!) to make a heading. 
-                 More exclamation marks mean bigger headings.
-
-__text__         Makes text bold.
-''text''         Makes text in italics (notice that these are single quotes ('))
-
-|text|more text| Makes a table. Double bars for a table heading.
-
-{{{text}}}       Plaintext as you see it in source.
-              </pre>
-              </td>
+          <td valign="top">
+<input i18n:attr="value" type="submit" name="insertLink" value="Insert"/>
+          </td>
 	    </tr>		  
             <tr>
               <td>
@@ -104,6 +83,32 @@ __text__         Makes text bold.
                 <input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
               </td>
             </tr>
+            <tr>
+<td>
+<PRE>
+----             Horizontal ruler
+\\               Forced line break
+[link]           Create hyperlink to "link", where "link" can be either an internal 
+                 WikiName or an external link (http://)
+[text|link]      Create a hyperlink where the link text is different from the actual 
+                 hyperlink link.
+
+*                Make a bulleted list (must be in first column). Use more (**) 
+                 for deeper indentations.
+#                Make a numbered list (must be in first column). Use more (##, ###) 
+                 for deeper indentations.
+
+!, !!, !!!       Start a line with an exclamation mark (!) to make a heading. 
+                 More exclamation marks mean bigger headings.
+
+__text__         Makes text bold.
+^^text^^         Makes text in italics (notice that these are single quotes ('))
+{{{text}}}       Makes text as it is (Plaintext).
+
+|text|more text| Makes a table. Double bars for a table heading.
+</PRE>
+</td> 
+</tr>
           </table>
         </form>
       </div>
