@@ -141,7 +141,7 @@
 
 <xsl:template match="xhtml:object" mode="rc">
   <node name="Object" mode="rc">
-    <action><delete name="&lt;xupdate:remove select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <action><delete name="&lt;xupdate:remove select=&quot;//unizh:related-content/unizh:teaser/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
       <content>
         <input type="text" name="&lt;xupdate:update select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;&gt;" size="40">
           <xsl:attribute name="value">
