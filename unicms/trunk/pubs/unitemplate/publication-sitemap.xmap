@@ -188,7 +188,7 @@
         
         <map:act type="language-exists">
           <map:generate src="cocoon:/lenyabody-imageupload-standard/{../1}/{../2}.html"/>
-          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/> 
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
           <map:serialize type="xml"/>
         </map:act>
   
@@ -210,7 +210,7 @@
             </map:when>
             <map:when test="standard">
               <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-              <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/> 
+              <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
             </map:when>
             <map:otherwise>
               <map:select type="parameter">
@@ -220,7 +220,7 @@
                 </map:when>
                 <map:otherwise>
                   <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-                  <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}"/>  
+                  <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/>  
                 </map:otherwise>
               </map:select>
             </map:otherwise>
