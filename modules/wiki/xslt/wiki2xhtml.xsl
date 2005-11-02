@@ -135,11 +135,11 @@
 </xsl:template> 
 
 <xsl:template match="wiki:Table">
-<table>
+<table style="border:1px #000000 solid; border-collapse: collapse;">
     <xsl:for-each select="wiki:TableRow">
     <tr>
     <xsl:for-each select="wiki:TableCol">
-        <td><xsl:apply-templates/></td>
+        <td style="border:1px #000000 solid; padding: 2px"><xsl:apply-templates/></td>
     </xsl:for-each>
     </tr>
     </xsl:for-each>
