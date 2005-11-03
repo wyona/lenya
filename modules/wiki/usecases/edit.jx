@@ -102,7 +102,9 @@
                  More exclamation marks mean bigger headings.
 
 __text__         Makes text bold.
-^^text^^         Makes text in italics (notice that these are single quotes ('))
+^^text^^         Makes text underline.
+''text''         Makes text in italic.
+
 {{{text}}}       Makes text as it is (Plaintext).
 
 |text|more text| Makes a table. Double bars for a table heading.
