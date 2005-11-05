@@ -76,7 +76,7 @@
             <xsl:apply-templates select="$descendants[$level - 2]"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:apply-templates select="xhtml:div[not(@id = 'home')]"/>
+            <xsl:apply-templates select="xhtml:div[not(@class = 'home')]"/>
           </xsl:otherwise>
         </xsl:choose>
       </ul>
@@ -106,7 +106,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @id = 'home']">
+  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @class = 'home']">
     <div class="navup">
       <a href="{@href}"><xsl:value-of select="."/></a>
     </div>
