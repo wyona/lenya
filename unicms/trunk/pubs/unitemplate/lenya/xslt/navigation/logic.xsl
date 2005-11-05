@@ -8,6 +8,7 @@
     xmlns:uz="http://unizh.ch"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+    xmlns="http://www.w3.org/1999/xhtml"
     >
 
 <!-- doctype specific navigation logic -->
@@ -252,30 +253,24 @@
 
 <!-- breadcrumb path -->
 
+
 <xsl:template match="xhtml:div[@id = 'breadcrumb']">
-
-  <xsl:variable name="home-basic-url">
-    <xsl:if test="$isHomepage = 'true'">
-      <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/@basic-url"/>
-    </xsl:if>
-  </xsl:variable>
-
-  <xhtml:div id="breadcrumb" root="{@root}" label="{@label}">
+  <div id="breadcrumb" root="{@root}" label="{@label}">
     <xsl:if test="/document/uz:unizh/uz:section/@breadcrumb = 'true'">
-      <xhtml:div><xsl:value-of select="/document/uz:unizh/uz:section"/></xhtml:div>
+      <div>
+        <xsl:value-of select="/document/uz:unizh/uz:section"/>
+      </div>
     </xsl:if>
-    <xsl:for-each select="xhtml:div">
-      <xsl:choose>
-        <xsl:when test="not(@basic-url = 'index') and following-sibling::xhtml:div[@basic-url = $home-basic-url]"> 
-        </xsl:when> 
-        <xsl:when test="not(@basic-url = 'index') and following-sibling::xhtml:div[@basic-url = $homepage-basic-url]">
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates select="."/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each>
-  </xhtml:div>
+    <xsl:apply-templates select="xhtml:div[@basic-url = 'index']"/>
+    <xsl:choose>
+      <xsl:when test="$isHomepage = 'true'">
+        <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index' or following-sibling::xhtml:div[@current = 'true'])]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index' or following-sibling::xhtml:div[@basic-url = $homepage-basic-url])]"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </div>
 </xsl:template> 
 
 
