@@ -39,7 +39,6 @@
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
   <insert-before select="{$path}[@tagID='{@tagID}']">
     <element name="Paragraph" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:p&quot; {$nsxhtml}&gt;New Paragraph&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
-    <element name="Children" xupdate="&lt;xupdate:insert-before select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-before&gt;"/>
   </insert-before>
 </xsl:template>
 
@@ -49,7 +48,6 @@
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
   <insert-after select="{$path}[@tagID='{@tagID}']">
     <element name="Paragraph" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;xhtml:p&quot; {$nsxhtml}&gt;New Paragraph&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-    <element name="Children" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:children&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;abstracts&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
 
