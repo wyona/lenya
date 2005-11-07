@@ -221,7 +221,7 @@
 
         <!-- Doctype / context specific navigation logic.  --> 
         <map:transform src="../unizh/xslt/common/includeRelated.xsl">
-          <map:parameter name="area" value="{page-envelope:area}"/>
+          <map:parameter name="area" value="authoring"/>
         </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
@@ -273,7 +273,7 @@
           <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/footnav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/simplenav/{6}.html.xml"/>
-          <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/> 
           <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/allnodes/{6}.html.xml"/> 
           <map:part src="cocoon:/sections.xconf"/>
@@ -304,7 +304,7 @@
         </map:transform> 
      
         <map:transform src="../unizh/xslt/common/includeRelated.xsl">
-          <map:parameter name="area" value="{page-envelope:area}"/>
+          <map:parameter name="area" value="authoring"/>
         </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
