@@ -184,6 +184,20 @@
     <a name="{@name}"/><xsl:comment/>
   </xsl:template>
 
+  
+  <xsl:template match="xhtml:a[starts-with(@href, 'mailto:')]">
+    <script language="javascript">
+      <xsl:comment>
+           var mailtouser = "<xsl:value-of select="substring-before(@href , '@')"/>"; 
+           var hostname = "<xsl:value-of select="substring-after(@href, '@')"/>"; 
+           var linktext = "<xsl:value-of select="."/>";
+           <![CDATA[ 
+             document.write("<a href=" + mailtouser + "@" + hostname + ">" + linktext + "</a>");
+           ]]>
+      </xsl:comment> 
+    </script>
+  </xsl:template>
+
 
   <xsl:template match="unizh:attention">
     <span class="attention">
