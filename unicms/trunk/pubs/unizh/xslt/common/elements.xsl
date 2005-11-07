@@ -390,7 +390,7 @@
           <a class="namedanchor" name="{xhtml:a/@name}"><xsl:comment/></a>
         </xsl:when>
         <xsl:otherwise>
-          <a class="namedanchor" name="{.}" id="{.}"><xsl:comment/></a>
+          <a class="namedanchor" name="{position()}"><xsl:comment/></a>
         </xsl:otherwise>
       </xsl:choose>
     </h2>
@@ -467,20 +467,16 @@
     
   <xsl:template match="unizh:toc">
     <ul class="anchors">
-      <!-- this assumes 2 things: each h2 has a corresponding anchor, and that
-      anchor has the same name as the h2. The anchor is set by the template
-      xhtml:body/xhtml:h2, which should be called before -->
-      <xsl:apply-templates mode="anchor" select="../xhtml:h2[ancestor::xhtml:body]"/>
+      <xsl:for-each select="../*">
+        <xsl:if test="self::xhtml:h2">
+          <li>
+            <a href="#{position()}"><xsl:value-of select="."/></a>
+          </li>
+        </xsl:if>
+      </xsl:for-each>
     </ul>
   </xsl:template>
   
-  <xsl:template match="xhtml:h2[ancestor::xhtml:body]" mode="anchor">
-    <li>
-      <a href="#{.}">
-        <xsl:value-of select="."/>
-      </a>
-    </li>
-  </xsl:template>
   
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
