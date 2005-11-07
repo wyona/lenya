@@ -3,6 +3,7 @@
 
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
     xmlns:uz="http://unizh.ch"
@@ -11,7 +12,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     >
 
-<!-- doctype specific navigation logic -->
+<!-- doctypes specific navigation logic -->
 
 <xsl:param name="node-id"/>
 
@@ -20,7 +21,6 @@
   <xsl:if test="/document/content/unizh:homepage">true</xsl:if>
   <xsl:if test="/document/content/unizh:homepage4cols">true</xsl:if>
 </xsl:variable>
-
 
 <xsl:variable name="tabs">
   <xsl:choose>
@@ -33,35 +33,40 @@
   </xsl:choose>
 </xsl:variable>
 
-
 <xsl:variable name="homepage-basic-url" select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/@basic-url">
 </xsl:variable>
 
-
 <xsl:variable name="index" select="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = 'index' and @current = 'true']"/>
 
+
+<!-- hide navigation tree -->
+
+<xsl:template match="nav:site"/>
+
+
+<!-- Menu -->
 
 <xsl:template match="xhtml:div[@id = 'menu']"> 
   <xsl:choose>
     <xsl:when test="$isHomepage = 'true'">
       <xsl:if test="$tabs = 'false'">
-        <xhtml:div id="menu">
+        <div id="menu">
           <xsl:choose>
             <xsl:when test="$index">
               <xsl:apply-templates select="xhtml:div[@basic-url != 'index']"/> 
             </xsl:when>
             <xsl:otherwise>
-              <xhtml:div class="home" href="{xhtml:div[@basic-url = 'index']/@href}">
+              <div class="home" href="{xhtml:div[@basic-url = 'index']/@href}">
                 <xsl:value-of select="xhtml:div[@basic-url = 'index']/text()"/>
-              </xhtml:div><xsl:if test="descendant::xhtml:div[@current = 'true']/xhtml:div">asf</xsl:if>
+              </div>
               <xsl:apply-templates select="descendant::xhtml:div[@current = 'true']/xhtml:div"/>
             </xsl:otherwise>
           </xsl:choose>
-        </xhtml:div>
+        </div>
       </xsl:if>
     </xsl:when>
     <xsl:otherwise>
-      <xhtml:div id="menu">
+      <div id="menu">
         <xsl:choose>
           <xsl:when test="$tabs = 'true'">
             <xsl:choose>
@@ -79,22 +84,21 @@
                 <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index')]"/>
               </xsl:when>
               <xsl:otherwise>
-                <xhtml:div class="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
+                <div class="home" href="{descendant::xhtml:div[@basic-url = 'index']/@href}">
                   <xsl:value-of select="descendant::xhtml:div[@basic-url = 'index']/text()"/>
-                </xhtml:div>
+                </div>
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div"/>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:otherwise>
         </xsl:choose>
-      </xhtml:div>
+      </div>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 
 
 <!-- Contcol1 (tabs) for contact, impressum, sitemap, search --> 
-
 
 <xsl:template match="xhtml:div[@id = 'menu' and $tabs = 'true' and ($node-id = 'contact' or $node-id='sitemap' or $node-id = 'impressum' or $node-id = 'search')]">
   <unizh:contcol1> 
@@ -107,7 +111,7 @@
 
 <xsl:template match="xhtml:div[@id = 'tabs']">
   <xsl:if test="$tabs = 'true'">
-    <xhtml:div id="tabs">
+    <div id="tabs">
       <xsl:choose>
         <xsl:when test="$isHomepage = 'true'">
           <xsl:choose>
@@ -130,7 +134,7 @@
           </xsl:choose>
         </xsl:otherwise> 
       </xsl:choose>
-    </xhtml:div>
+    </div>
   </xsl:if>
 </xsl:template>
 
@@ -138,14 +142,14 @@
 <!-- servicenav -->
 
 <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'home']">
-  <xhtml:div id="home">
+  <div id="home">
     <xsl:attribute name="href">
       <xsl:choose>
-        <xsl:when test="$isHomepage = 'true'">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/@href"/>
+        <xsl:when test="$isHomepage = 'true' and not($index)">
+          <xsl:value-of select="//nav:node[@current = 'true']/@href"/>
         </xsl:when>
         <xsl:when test="$homepage-basic-url != 'index'">
-          <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/@href"/> 
+          <xsl:value-of select="//nav:node[@basic-url = $homepage-basic-url]/@href"/> 
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="@href"/>
@@ -153,75 +157,47 @@
       </xsl:choose>
     </xsl:attribute> 
     <xsl:value-of select="."/> 
-  </xhtml:div>
+  </div>
 </xsl:template>
 
 
 <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'contact']">
-  <xhtml:div id="contact">
+  <div id="contact">
     <xsl:attribute name="href">
       <xsl:choose>
-        <xsl:when test="$isHomepage = 'true' and not($index)">
-          <xsl:choose>
-            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url , 'contact')]">
-              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'contact')]/@href"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@href"/>
-            </xsl:otherwise>
-          </xsl:choose>
+        <xsl:when test="$isHomepage = 'true' and not($index) and //nav:node[@current = 'true']/nav:node[@id = 'contact']">
+          <xsl:value-of select="//nav:node[@current = 'true']/nav:node[@id = 'contact']/@href"/>  
         </xsl:when>
-        <xsl:when test="$homepage-basic-url != 'index'">
-          <xsl:choose>
-            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'contact')]">
-              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'contact')]/@href"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@href"/>
-            </xsl:otherwise>
-          </xsl:choose> 
-        </xsl:when>
+        <xsl:when test="$homepage-basic-url != 'index' and //nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'contact']">
+          <xsl:value-of select="//nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'contact']/@href"/>
+        </xsl:when> 
         <xsl:otherwise>
           <xsl:value-of select="@href"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
     <xsl:value-of select="."/> 
-  </xhtml:div>
+  </div>
 </xsl:template>
 
 
 <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'sitemap']">
-  <xhtml:div id="sitemap">
+  <div id="contact">
     <xsl:attribute name="href">
       <xsl:choose>
-        <xsl:when test="$isHomepage = 'true' and not($index)">
-          <xsl:choose>
-            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url , 'sitemap')]">
-              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @current = 'true']/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@href"/>
-            </xsl:otherwise>
-          </xsl:choose>
+        <xsl:when test="$isHomepage = 'true' and not($index) and //nav:node[@current = 'true']/nav:node[@id = 'sitemap']">
+          <xsl:value-of select="//nav:node[@current = 'true']/nav:node[@id = 'sitemap']/@href"/>
         </xsl:when>
-        <xsl:when test="$homepage-basic-url != 'index'">
-          <xsl:choose>
-            <xsl:when test="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'sitemap')]">
-              <xsl:value-of select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div[contains(@basic-url, 'sitemap')]/@href"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@href"/>
-            </xsl:otherwise>
-          </xsl:choose>
+        <xsl:when test="$homepage-basic-url != 'index' and //nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'sitemap']">
+          <xsl:value-of select="//nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'sitemap']/@href"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="@href"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
-    <xsl:value-of select="."/> 
-  </xhtml:div>
+    <xsl:value-of select="."/>
+  </div>
 </xsl:template>
 
 
@@ -272,6 +248,28 @@
     </xsl:choose>
   </div>
 </xsl:template> 
+
+
+<!-- footer -->
+
+<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'footnav'] and @id = 'impressum']">
+  <div id="impressum">
+    <xsl:attribute name="href">
+      <xsl:choose>
+        <xsl:when test="$isHomepage = 'true' and not($index) and //nav:node[@current = 'true']/nav:node[@id = 'impressum']">
+          <xsl:value-of select="//nav:node[@current = 'true']/nav:node[@id = 'impressum']/@href"/>
+        </xsl:when>
+        <xsl:when test="$homepage-basic-url != 'index' and //nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'impressum']">
+          <xsl:value-of select="//nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'impressum']/@href"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@href"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+    <xsl:value-of select="."/>
+  </div>
+</xsl:template>
 
 
 <!-- Show/Hide Contcol1 -->

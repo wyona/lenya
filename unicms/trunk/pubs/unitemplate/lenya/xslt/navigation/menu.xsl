@@ -6,7 +6,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    exclude-result-prefixes="nav"
     >
    
 
@@ -19,7 +18,9 @@
 
 <xsl:template match="nav:node">
  <xhtml:div>
-  <xsl:copy-of select="@*"/>
+  <xsl:copy-of select="@href"/>
+  <xsl:copy-of select="@basic-url"/>
+  <xsl:copy-of select="@current"/> 
   <xsl:value-of select="nav:label"/>
   <xsl:apply-templates select="nav:node[descendant-or-self::nav:node[@current = 'true'] or parent::nav:node[@current = 'true'] or ../nav:node[descendant-or-self::nav:node[@current = 'true']]]"/>
  </xhtml:div>
