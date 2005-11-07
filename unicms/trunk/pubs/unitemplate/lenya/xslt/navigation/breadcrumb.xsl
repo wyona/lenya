@@ -11,19 +11,19 @@
 
 <xsl:template match="nav:site">
   <div id="breadcrumb" root="http://www.unizh.ch" label="Universit&#228;t Z&#252;rich">
-    <xsl:apply-templates select="nav:node"/>
+    <xsl:apply-templates select="nav:node[@id = 'index' or descendant-or-self::nav:node[@current = 'true']]"/> 
   </div>
 </xsl:template>
 
 
-<xsl:template match="nav:node[@id = 'index' or descendant-or-self::nav:node[@current = 'true']]">
+<xsl:template match="nav:node">
   <div>
     <xsl:copy-of select="@href"/>
     <xsl:copy-of select="@basic-url"/>
     <xsl:copy-of select="@current"/>
     <xsl:value-of select="nav:label"/>
-  </div>
-  <xsl:apply-templates/>
+  </div> 
+ <xsl:apply-templates select="nav:node"/> 
 </xsl:template>
 
 </xsl:stylesheet> 

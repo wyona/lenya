@@ -8,8 +8,6 @@
     xmlns="http://www.w3.org/1999/xhtml"
     >
    
-<xsl:import href="node_attrs.xsl"/>
-    
 
 <xsl:template match="nav:site">
   <div id="tabs">
@@ -20,7 +18,9 @@
 
 <xsl:template match="nav:node">
   <div>
-    <xsl:copy-of select="@*"/>
+    <xsl:copy-of select="@href"/>
+    <xsl:copy-of select="@basic-url"/>
+    <xsl:copy-of select="@current"/>
     <xsl:value-of select="nav:label"/>
   </div>
 </xsl:template>

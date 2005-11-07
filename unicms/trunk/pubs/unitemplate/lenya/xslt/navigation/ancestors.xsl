@@ -13,7 +13,12 @@
 <xsl:param name="chosenlanguage"/>
 <xsl:param name="defaultlanguage"/>
 
-<xsl:template match="nav:node[@current = 'true']">
+
+<xsl:template match="nav:site">
+  <xsl:apply-templates select="descendant::nav:node[@current = 'true']"/>
+</xsl:template>
+
+<xsl:template match="nav:node">
   <unizh:ancestors>
     <xsl:apply-templates select="parent::nav:node" mode="ancestor"/>
     <xsl:apply-templates select="/nav:site/nav:node[@id = 'index']" mode="ancestor"/> 
