@@ -505,15 +505,13 @@
 
     
   <xsl:template match="unizh:toc">
-    <ul class="anchors">
+    <p>
       <xsl:for-each select="../*">
         <xsl:if test="self::xhtml:h2">
-          <li>
-            <a href="#{position()}"><xsl:value-of select="."/></a>
-          </li>
+          <a class="arrow" href="#{position()}"><xsl:value-of select="."/></a><br/>
         </xsl:if>
       </xsl:for-each>
-    </ul>
+    </p>
   </xsl:template>
   
   
