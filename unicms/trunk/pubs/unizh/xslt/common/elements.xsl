@@ -62,7 +62,14 @@
 
   <xsl:template match="xhtml:iframe">
     <xsl:copy>
-      <xsl:attribute name="src"><xsl:value-of select="@src"/>?<xsl:value-of select="$querystring"/></xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="$querystring">
+	  <xsl:attribute name="src"><xsl:value-of select="@src"/>?<xsl:value-of select="$querystring"/></xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+	  <xsl:attribute name="src"><xsl:value-of select="@src"/></xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="@*[name() != 'src']"/>
       <xsl:apply-templates/><xsl:comment/>
     </xsl:copy> 
