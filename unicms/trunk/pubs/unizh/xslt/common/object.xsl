@@ -16,7 +16,36 @@
 
   <xsl:template match="xhtml:object[@width != '']">
     <xsl:call-template name="object">
-       <xsl:with-param name="width" select="@width"/>
+      <xsl:with-param name="width">
+        <xsl:choose>
+          <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
+            <xsl:choose>
+              <xsl:when test="@width > 800">
+                <xsl:text>800</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="@width"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:when>
+          <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2">                  
+            <xsl:choose>
+              <xsl:when test="@width > 615">
+                <xsl:text>615</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="@width"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:when>
+          <xsl:when test="@width > 415">
+            <xsl:text>415</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="@width"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
@@ -26,7 +55,36 @@
       <tr>
         <td class="flexibleimage">
           <xsl:call-template name="object">
-            <xsl:with-param name="width" select="@width"/>
+            <xsl:with-param name="width">
+              <xsl:choose>
+                <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
+                  <xsl:choose>
+                    <xsl:when test="@width > 800">
+                      <xsl:text>800</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:value-of select="@width"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:when>
+                <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2"> 
+                  <xsl:choose>
+                    <xsl:when test="@width > 615">
+                      <xsl:text>615</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:value-of select="@width"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:when>
+                <xsl:when test="@width > 415">
+                  <xsl:text>415</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="@width"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
           </xsl:call-template>
         </td>
       </tr>
@@ -268,6 +326,5 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template> 
-
 
 </xsl:stylesheet>

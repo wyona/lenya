@@ -970,20 +970,8 @@ td {
 }
 
 
-td img {
-       max-width: 204px;
-       padding: 4px;
-}
-
-
 table.imgMitLegende tr td img {
-  max-width: 415px;
   padding: 0px;
-}
-
-
-td.flexibleimage img {
-       max-width: 415px;
 }
 
 
