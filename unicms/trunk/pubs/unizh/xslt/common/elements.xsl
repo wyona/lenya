@@ -254,24 +254,16 @@
     <xsl:apply-templates select="lenya:asset-dot"/>
     <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
     <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-    <p>&#160;</p>
   </xsl:template>
 
 
-
-   <xsl:template match="unizh:links">
+  <xsl:template match="unizh:links[unizh:title/@href != '']">
     <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-    <div class="titel">Aufgaben</div>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <ul class="linknav">
       <li>
-        <a href="{unizh:title/@href}">
-          <b><xsl:value-of select="unizh:title"/></b>
-        </a>
-        <div class="dotline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-        </div>
+        <b><a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a></b>
       </li>
+      <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
       <xsl:for-each select="xhtml:a">
         <li>
           <a href="{@href}">
@@ -283,7 +275,29 @@
         </li>
       </xsl:for-each>
     </ul>
-    <p>&#160;</p>
+    <br/>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:links">
+    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <div class="titel">
+      <xsl:value-of select="unizh:title"/>
+    </div>
+    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <ul class="linknav">
+      <xsl:for-each select="xhtml:a">
+        <li>
+          <a href="{@href}">
+            <xsl:value-of select="."/>
+          </a>
+          <div class="dotline">
+            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+          </div>
+        </li>
+      </xsl:for-each>
+    </ul>
+    <br/>
   </xsl:template>
 
 
