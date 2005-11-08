@@ -14,7 +14,7 @@
 
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
-      <xsl:for-each select="xhtml:div[position() &lt; last()]">
+      <xsl:for-each select="xhtml:div[@id != 'search']">
         <a href="{@href}"><xsl:value-of select="."/></a> |
       </xsl:for-each>
       Suche: <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
