@@ -423,7 +423,7 @@
       <xsl:if test="@class">
         <xsl:copy-of select="@class"/>
       </xsl:if>
-      <xsl:value-of select="."/>
+      <xsl:apply-templates/>
       <xsl:choose>
         <xsl:when test="xhtml:a">
           <a class="namedanchor" name="{xhtml:a/@name}"><xsl:comment/></a>
