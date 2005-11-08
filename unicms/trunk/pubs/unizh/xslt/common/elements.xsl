@@ -177,13 +177,17 @@
 
   <xsl:template match="xhtml:a">
     <a class="arrow" href="{@href}">
+      <xsl:copy-of select="@target"/>
       <xsl:apply-templates/>
     </a>
   </xsl:template>
 
 
   <xsl:template match="xhtml:a[ancestor::unizh:teaser and parent::xhtml:p]">
-    <a href="{@href}"><xsl:value-of select="text()"/></a>
+    <a href="{@href}">
+      <xsl:copy-of select="@target"/>
+      <xsl:value-of select="text()"/>
+    </a>
   </xsl:template>
 
 
