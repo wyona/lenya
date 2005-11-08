@@ -2,7 +2,7 @@
 
 <identity id="lenya" class="org.apache.lenya.ac.file.FileUser">
   <name>Levi Vanya</name>
-  <email>jann.forrer@id.unizh.ch</email>
+  <email>lenya@id.unizh.ch</email>
   <password type="md5">8e07dafd13495561db9063ebe4db4b27</password>
   <groups>
     <group>authors</group>

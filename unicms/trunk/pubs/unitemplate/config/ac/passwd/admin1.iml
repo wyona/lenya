@@ -2,7 +2,7 @@
 
 <identity class="org.apache.lenya.ac.file.FileUser" id="admin1">
   <name>Administrator</name>
-  <email>michael.trindler@id.unizh.ch</email>
+  <email>lenya@id.unizh.ch</email>
   <password type="md5">e00cf25ad42683b3df678c61f42c6bda</password>
   <groups>
     <group>authors</group>
