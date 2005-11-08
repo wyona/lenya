@@ -294,7 +294,9 @@
               <p>
                 <b>
                   <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
-                    <xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;
+                    <xsl:if test="unizh:person/unizh:academictitle !=''">
+                      <xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;
+                    </xsl:if>
                   </span>
                   <span bxe_xpath="/{$document-element-name}/unizh:firstname">
                     <xsl:value-of select="unizh:person/unizh:firstname"/>&#160;
@@ -302,20 +304,21 @@
                   <span bxe_xpath="/{$document-element-name}/unizh:lastname">
                     <xsl:value-of select="unizh:person/unizh:lastname"/>
                   </span>
-                </b><br/>
-                <div bxe_xpath="/{$document-element-name}/unizh:position">
+                </b>
+                <br/>
+                <span bxe_xpath="/{$document-element-name}/unizh:position">
                   <xsl:value-of select="unizh:person/unizh:position"/>
-                </div>
+                </span>
                 <br/>
                 Tel.: 
-                <div bxe_xpath="/{$document-element-name}/unizh:phone">
+                <span bxe_xpath="/{$document-element-name}/unizh:phone">
                   <xsl:value-of select="unizh:person/unizh:phone"/>
-                </div>
+                </span>
                 <br/>
                 Mail: 
-                <div bxe_xpath="/{$document-element-name}/unizh:email">
+                <span bxe_xpath="/{$document-element-name}/unizh:email">
                   <xsl:value-of select="unizh:person/unizh:email"/>
-                </div>
+                </span>
               </p>
             </div>
             <div class="floatleftclear"><xsl:comment/></div>

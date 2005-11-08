@@ -596,7 +596,9 @@
             <div class="teamText">
               <p>
                 <b>
-                  <xsl:value-of select="*/unizh:person/unizh:academictitle"/>&#160;
+                  <xsl:if test="*/unizh:person/unizh:academictitle != ''">
+                    <xsl:value-of select="*/unizh:person/unizh:academictitle"/>&#160;
+                  </xsl:if>
                   <xsl:value-of select="*/unizh:person/unizh:firstname"/>&#160;
                   <xsl:value-of select="*/unizh:person/unizh:lastname"/>&#160;
                 </b>
