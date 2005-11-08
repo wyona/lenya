@@ -582,25 +582,6 @@
     <br/>
   </xsl:template>
 
-  <xsl:template match="unizh:children[ancestor::unizh:collection]">
-    <xsl:choose>
-      <xsl:when test="index:child">
-        <xsl:for-each select="index:child">
-          <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/></h2>
-          <p>
-            <xsl:apply-templates select="*/*/unizh:abstract/*"/>
-            <br/>
-            <a href="{$contextprefix}{@href}">Mehr...</a>
-          </p>
-        </xsl:for-each>
-      </xsl:when>
-      <xsl:otherwise>
-        <p> <br /> - Noch kein Eintrag erfasst - </p>
-      </xsl:otherwise>
-    </xsl:choose>
-    <br/>
-  </xsl:template>
-
 
    <xsl:template match="unizh:children[ancestor::unizh:team]">
     <xsl:choose>
@@ -639,11 +620,7 @@
 
 
   <xsl:template match="unizh:children">
-    <xsl:if test="index:child">
-      <ul class="children">
-        <xsl:apply-templates select="index:child"/>
-      </ul>
-    </xsl:if>
+    <xsl:apply-templates select="index:child"/>
   </xsl:template>
   
    <xsl:template match="index:child[descendant::unizh:newsitem]">
@@ -671,7 +648,7 @@
 
 
   <xsl:template match="index:child">
-    <li>
+    <p>
       <xsl:apply-templates mode="index" select="descendant::lenya:meta/dc:title">
         <xsl:with-param name="href">
           <xsl:value-of select="@href"/>
@@ -681,13 +658,13 @@
         <br/>
         <xsl:apply-templates mode="index" select="descendant::lenya:meta/dc:description"/>
       </xsl:if>
-    </li>
+    </p>
   </xsl:template>
 
  
   <xsl:template match="dc:title" mode="index">
     <xsl:param name="href"/>
-    <a href="{$contextprefix}{$href}">
+    <a class="arrow" href="{$contextprefix}{$href}">
       <xsl:value-of select="."/>
     </a>
   </xsl:template>
