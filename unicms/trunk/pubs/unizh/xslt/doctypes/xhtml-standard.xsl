@@ -103,7 +103,9 @@
         <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
       </div>
     </h1>
-    <xsl:apply-templates select="*/xhtml:body/*"/>
+    <div bxe_xpath="/{$document-element-name}/xhtml:body">
+      <xsl:apply-templates select="*/xhtml:body/*"/>
+    </div>
   </xsl:template>
 
 
