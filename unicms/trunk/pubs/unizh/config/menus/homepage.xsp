@@ -64,6 +64,7 @@
         }
         else {
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=xhtml">New Document</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=homepage">New Homapge</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=overview">New Overview</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=news">New RSS News</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=team">New Team Page</item>  
