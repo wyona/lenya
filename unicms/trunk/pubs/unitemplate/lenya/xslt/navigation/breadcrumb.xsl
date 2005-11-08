@@ -16,7 +16,7 @@
 </xsl:template>
 
 
-<xsl:template match="nav:node">
+<xsl:template match="nav:node[@id = 'index' or descendant-or-self::nav:node[@current = 'true']]">
   <div>
     <xsl:copy-of select="@href"/>
     <xsl:copy-of select="@basic-url"/>
