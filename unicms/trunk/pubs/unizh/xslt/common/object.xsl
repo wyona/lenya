@@ -14,7 +14,6 @@
   <xsl:param name="rendertype"/>
 
 
-
   <xsl:template match="xhtml:object[@width != '']">
     <xsl:call-template name="object">
        <xsl:with-param name="width" select="@width"/>
@@ -44,7 +43,7 @@
 
   <xsl:template match="xhtml:object">
     <xsl:call-template name="object">
-       <xsl:with-param name="width">204</xsl:with-param>
+       <xsl:with-param name="width">204</xsl:with-param> 
     </xsl:call-template>
     <xsl:if test="xhtml:div[@class = 'caption']">
       <p class="legende">
@@ -223,16 +222,49 @@
     <xsl:choose>
       <xsl:when test="$rendertype = 'imageupload'">
         <a href="{lenya:asset-dot/@href}">
-          <img src="{$src}" width="{$width}" height="{$height}" alt="{$alt}"/>
+          <img src="{$src}" alt="{$alt}">
+            <xsl:if test="$width">
+              <xsl:attribute name="width">
+                <xsl:value-of select="$width"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="$height">
+              <xsl:attribute name="height">
+                <xsl:value-of select="$height"/>
+              </xsl:attribute>
+            </xsl:if>
+          </img>
         </a>
       </xsl:when>
       <xsl:when test="$href != ''">
         <a href="{$href}">
-          <img src="{$src}" width="{$width}" height="{$height}" alt="{$alt}"/>
+          <img src="{$src}" alt="{$alt}">
+            <xsl:if test="$width">
+              <xsl:attribute name="width">
+                <xsl:value-of select="$width"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="$height">
+              <xsl:attribute name="height">
+                <xsl:value-of select="$height"/>
+              </xsl:attribute>
+            </xsl:if>
+          </img>
         </a>
       </xsl:when>
       <xsl:otherwise>
-        <img src="{$src}" width="{$width}" height="{$height}" alt="{$alt}"/>
+        <img src="{$src}" alt="{$alt}">
+          <xsl:if test="$width">
+            <xsl:attribute name="width">
+              <xsl:value-of select="$width"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="$height">
+            <xsl:attribute name="height">
+              <xsl:value-of select="$height"/>
+            </xsl:attribute>
+          </xsl:if>
+        </img>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template> 
