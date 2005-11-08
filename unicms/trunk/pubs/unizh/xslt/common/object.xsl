@@ -100,17 +100,20 @@
 
 
   <xsl:template match="xhtml:object">
-    <xsl:call-template name="object">
-       <xsl:with-param name="width">204</xsl:with-param> 
-    </xsl:call-template>
-    <xsl:if test="xhtml:div[@class = 'caption']">
-      <p class="legende">
-        <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-        <xsl:if test="@popup = 'true'">
-          <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-        </xsl:if>
-      </p>
-    </xsl:if>
+    <div class="imgTextfluss">
+      <xsl:call-template name="object">
+         <xsl:with-param name="width">204</xsl:with-param> 
+      </xsl:call-template>
+      <xsl:if test="xhtml:div[@class = 'caption']">
+        <div class="legende">
+          <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+          <xsl:if test="@popup = 'true'">
+            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+          </xsl:if>
+        </div>
+      </xsl:if>
+    </div>
+    <br class="floatclear"/>
   </xsl:template>
 
 
@@ -119,24 +122,27 @@
       <xsl:call-template name="object">
         <xsl:with-param name="width">204</xsl:with-param>
       </xsl:call-template>
-      <p class="legende">
+      <div class="legende">
         <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
         <xsl:if test="@popup = 'true'">
           <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
         </xsl:if>
-      </p>
+      </div>
     </div>
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[@popup = 'true']">
-    <xsl:call-template name="object">
-       <xsl:with-param name="width">204</xsl:with-param>
-    </xsl:call-template>
-    <p class="legende">
-      <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-      <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-    </p>
+  <xsl:template match="xhtml:object[@popup = 'true' and not(@float = 'true')]">
+    <div class="imgTextfluss">
+      <xsl:call-template name="object">
+        <xsl:with-param name="width">204</xsl:with-param>
+      </xsl:call-template>
+      <div class="legende">
+        <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+        <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+      </div>
+    </div>
+    <br class="floatclear"/>
   </xsl:template>
 
 
