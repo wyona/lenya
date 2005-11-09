@@ -63,7 +63,9 @@
             <br/> 
           </div>
           <div class="line"><xsl:comment/></div>
-          <xsl:apply-templates select="*/unizh:related-content"/>
+          <xsl:if test="not(/document/content/xhtml:html[@unizh:columns = 1 or @unizh:columns = 2])">
+            <xsl:apply-templates select="*/unizh:related-content"/>
+          </xsl:if>
           <div class="topnav"><a href="#top">top</a></div>
           <div class="footermargintop"><xsl:comment/></div>
           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/></div>
