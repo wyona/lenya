@@ -61,7 +61,7 @@
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
 	  <table class="lenya-table-noborder">
             <tr>
-              <td>
+              <td colspan="2">
      	        <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/>
 	      </td>
 	    </tr>
@@ -69,18 +69,16 @@
               <td>
                 <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${session.getAttribute('wikiContent')}"/></textarea>
 	      </td>		  
-          <td valign="top">
-<input i18n:attr="value" type="submit" name="insertLink" value="Insert"/>
-          </td>
+              <td valign="top">
+                <input i18n:attr="value" type="submit" name="insertLink" value="Insert"/>
+             </td>
 	    </tr>		  
             <tr>
               <td>
 		<br/>
 		<input i18n:attr="value" type="submit" name="submit" value="Save"/>
-		&#160;
-		<input i18n:attr="value" type="submit" name="preview" value="Preview"/>
                 &#160;
-                <input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
+		<input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
               </td>
             </tr>
             <tr>
