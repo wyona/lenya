@@ -965,6 +965,10 @@ th.width105 {
 /* uni additions */
 
 
+.attention {
+        color: #993333;
+}
+
 td {
        vertical-align: top;
 }
