@@ -1,6 +1,6 @@
 ! Example Wikidocument
 
-Here you can use behind Wiki-Syntax.
+Here you can see a few Wiki elements %)
 
 * This is a list
 ** Deeper
