@@ -194,9 +194,19 @@
   </pre>
 </xsl:template>
 
-<xsl:template match="wiki:Smile">
-  <img src="/{$publication}/{$area}/icon_smile.gif?lenya.module=wiki"/>
-   <xsl:apply-templates/>
+<xsl:template match="wiki:Emoticons">
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="node()[starts-with(local-name(),'em_')]">
+  <xsl:call-template name="emoticon">
+    <xsl:with-param name="icon_name" select="local-name()"/>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template name="emoticon">
+  <xsl:param name="icon_name" select="none.png"/>
+  <img alt="{$icon_name}" src="/{$publication}/{$area}/{$icon_name}.png?lenya.module=wiki"/>
 </xsl:template>
 
 </xsl:stylesheet> 
