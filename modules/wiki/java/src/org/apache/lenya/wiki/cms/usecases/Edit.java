@@ -48,10 +48,9 @@ import org.wyona.wiki.WikiParserTokenManager;
  */
 public class Edit extends DocumentUsecase {
 
-    static boolean initialized = false;        
-    WikiParser wikiParser;
-    WikiParserTokenManager tokenManager;
-    SimpleCharStream charStream;
+    public final static String SESSION_CONTENT = "wikiContent";
+    
+    public final static String PARAM_MARKUP = "wikimarkup";
     
     protected void initParameters() {
         super.initParameters();
@@ -64,7 +63,7 @@ public class Edit extends DocumentUsecase {
             Session session = request.getSession();
             
             Reader reader = new InputStreamReader(
-                    getSourceDocument().getRepositoryNode().getInputStream(), encoding);            
+                    getSourceDocument().getRepositoryNode().getInputStream(), "UTF-8");            
             while ((rb=reader.read(cbuf)) != -1) {
                 buf.append(cbuf, 0, rb);
             }
@@ -73,7 +72,7 @@ public class Edit extends DocumentUsecase {
                 buf.append(' ');
             }
             
-            session.setAttribute("wikiContent", buf.toString());                        
+            session.setAttribute(SESSION_CONTENT, buf.toString());                        
         } catch (RepositoryException e) {
             this.addErrorMessage(e.getMessage());
         } catch (IOException e) {
@@ -112,7 +111,7 @@ public class Edit extends DocumentUsecase {
     protected void doCheckExecutionConditions() throws Exception {        
         super.doCheckExecutionConditions();
         Request request = ContextHelper.getRequest(this.context);
-        String content = getParameterAsString("wikimarkup");
+        String content = getParameterAsString(PARAM_MARKUP);
         String encoding = request.getCharacterEncoding();                        
         try {            
             validate(content, encoding);            
@@ -120,6 +119,7 @@ public class Edit extends DocumentUsecase {
             setParameter("startline", new Integer(pe.currentToken.next.beginLine));
             setParameter("startcolumn", new Integer(pe.currentToken.next.beginColumn));
             setParameter("endline", new Integer(pe.currentToken.next.endLine));
+            request.getSession().setAttribute(SESSION_CONTENT, new String(content.getBytes("ISO-8859-1"), "UTF-8"));
             addErrorMessage(pe.getMessage());
         }
     }
@@ -140,9 +140,8 @@ public class Edit extends DocumentUsecase {
     
     protected void validate(String content, String encoding) throws ParseException, UnsupportedEncodingException {                     
         InputStream wikiIs = new ByteArrayInputStream(content.getBytes(encoding));
-        charStream = new SimpleCharStream(new InputStreamReader(wikiIs, encoding));
-        tokenManager = new WikiParserTokenManager(charStream); 
-        wikiParser = new WikiParser(tokenManager); 
+        WikiParser wikiParser = new WikiParser(new WikiParserTokenManager(new SimpleCharStream(
+                new InputStreamReader(wikiIs, encoding))));
         wikiParser.WikiBody();
     }
 
