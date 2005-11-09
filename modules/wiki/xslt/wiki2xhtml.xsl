@@ -163,15 +163,15 @@
     
     <!-- internal links --> 
     <xsl:when test="@label and @type = 'internal' and @exists = 'false'">
-        <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@label"/></a> 
+      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@label"/></a><img src="/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/> 
     </xsl:when>
 
     <xsl:when test="@label and @type = 'internal'">
-        <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
+      <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
     </xsl:when>
     
     <xsl:when test="@type = 'internal' and @exists = 'false'">
-        <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a> 
+      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a><img src="/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/>
     </xsl:when>
     
     <xsl:otherwise>
