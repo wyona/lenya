@@ -706,6 +706,15 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:table[@class = 'grid']">
+    <xsl:copy>
+      <xsl:copy-of select="@class"/>
+      <xsl:attribute name="width">100%</xsl:attribute>
+        <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:textarea">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>&#160;

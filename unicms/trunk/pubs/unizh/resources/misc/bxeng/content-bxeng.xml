@@ -812,7 +812,14 @@ table.ornate td {
   border-style: dotted;
 }
 
+
 table.basic td {
+  border-width: 1px;
+  border-style: dotted;
+}
+
+
+table.grid td {
   border-width: 1px;
   border-style: dotted;
 }

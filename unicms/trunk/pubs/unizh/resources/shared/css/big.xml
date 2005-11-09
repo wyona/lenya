@@ -815,6 +815,30 @@ td img {
        padding: 4px;
 }
 
+
+table.grid {
+        border-width: 1px;
+        border-spacing: 3px;
+        border-style: solid;
+        border-color: #999;
+        border-collapse: collapse;
+}
+
+table.grid th {
+        border-width: 1px;
+        padding: 2px;
+        border-style: solid;
+        border-color: #999;
+}
+
+table.grid td {
+        border-width: 1px;
+        padding: 2px;
+        border-style: solid;
+        border-color: #999;
+}
+
+
 table.imgMitLegende tr td img {
   padding: 0px;
 }

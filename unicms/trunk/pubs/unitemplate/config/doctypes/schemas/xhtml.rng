@@ -132,7 +132,6 @@
       <choice>
         <text/>
         <ref name="Inline.class"/>
-        <!-- <ref name="lenya.asset"/> -->
       </choice>
     </zeroOrMore>
   </define>
@@ -179,8 +178,9 @@
   <ref name="title.attrib"/>
   <attribute name="class">
     <choice>
-      <value type="string">ornate</value>
       <value type="string">basic</value>
+      <value type="string">ornate</value>
+      <value type="string">grid</value>
     </choice>
   </attribute>
 </define>
