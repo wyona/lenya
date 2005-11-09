@@ -223,9 +223,19 @@
 
   <xsl:template match="xhtml:object[parent::unizh:short]">
     <div class="imgTextfluss">
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">100</xsl:with-param>
-      </xsl:call-template>
+      <xsl:choose>
+	<xsl:when test="ancestor::index:child">
+	  <xsl:call-template name="object">
+	    <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', @data)"/>
+	    <xsl:with-param name="width">100</xsl:with-param>
+	  </xsl:call-template>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:call-template name="object">
+	    <xsl:with-param name="width">100</xsl:with-param>
+	  </xsl:call-template>
+	</xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 
