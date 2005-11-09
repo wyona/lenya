@@ -4,13 +4,14 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   >
 
 <xsl:template name="html-head">
   <head>
-    <title><xsl:value-of select="*/lenya:meta/dc:title"/></title>
+    <title>UZH - <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/> - <xsl:value-of select="*/lenya:meta/dc:title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <style type="text/css">
       <xsl:comment>
