@@ -204,6 +204,7 @@
     <ref name="unizh.rss-reader"/>
     <ref name="unizh.children"/>
     <ref name="iframe"/>
+    <ref name="unizh.toplink"/>
   </choice>
 </define>
 

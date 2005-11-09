@@ -511,7 +511,12 @@
     </p>
   </xsl:template>
   
-  
+
+  <xsl:template match="unizh:toplink">
+    <div class="topnav"><a href="#top">top</a></div>  
+  </xsl:template>
+
+ 
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
   <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:person]">

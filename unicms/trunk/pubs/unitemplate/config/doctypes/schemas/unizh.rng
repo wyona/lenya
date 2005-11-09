@@ -198,6 +198,9 @@
   <element name="unizh:toc"><empty/></element>
 </define>
 
+<define name="unizh.toplink">
+  <element name="unizh:toplink"><empty/></element>
+</define>
 
 <define name="unizh.sitemap">
   <element name="unizh:sitemap"><empty/></element>
