@@ -57,8 +57,8 @@
         <map:serialize type="xml"/>
       </map:match>
 
-      <map:match pattern="*/*/*.gif">
-        <map:read mime-type="image/gif" src="resources/images/{3}.gif"/>
+      <map:match pattern="*/*/*.png">
+        <map:read mime-type="image/png" src="resources/images/{3}.png"/>
       </map:match>
       </map:pipeline>
     
