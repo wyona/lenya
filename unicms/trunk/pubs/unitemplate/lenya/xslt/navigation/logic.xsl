@@ -182,7 +182,7 @@
 
 
 <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'sitemap']">
-  <div id="contact">
+  <div id="sitemap">
     <xsl:attribute name="href">
       <xsl:choose>
         <xsl:when test="$isHomepage = 'true' and not($index) and //nav:node[@current = 'true']/nav:node[@id = 'sitemap']">

@@ -15,9 +15,19 @@
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
       <xsl:for-each select="xhtml:div[@id != 'search']">
-        <a href="{@href}"><xsl:value-of select="."/></a> |
+		<xsl:if test="@id = 'home'">
+		  <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a> 	
+		</xsl:if>
+		<xsl:if test="@id = 'contact'">
+		  <a href="{@href}" accesskey="3"><xsl:value-of select="."/></a> 	
+		</xsl:if>
+		<xsl:if test="@id = 'sitemap'">
+		  <a href="{@href}" accesskey="4"><xsl:value-of select="."/></a> 	
+		</xsl:if>
+        |
       </xsl:for-each>
-      Suche: <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
+      <label for="formsearch" accesskey="5">Suche: </label>
+      <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
         <div class="serviceform">
           <input type="text" name="queryString"/>
         </div>
@@ -55,6 +65,9 @@
     <xsl:variable name="level" select="count($descendants)"/>
 
     <div id="secnav">
+	  <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
+	    <a accesskey="1" name="navigation"><xsl:comment/></a>
+	  </xsl:if>
       <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:choose>
         <xsl:when test="$level > 2 and $current/xhtml:div">
@@ -114,7 +127,8 @@
 
 
   <xsl:template match="xhtml:div[@id = 'tabs']">
-    <div id="primarnav"><xsl:comment/>
+    <div id="primarnav">
+      <a accesskey="1" name="navigation"><xsl:comment/></a> 
       <xsl:for-each select="xhtml:div">
         <a href="{@href}">
           <xsl:if test="@current = 'true'">
@@ -142,6 +156,7 @@
 
   <xsl:template match="xhtml:div[@id = 'simplenav']">
     <div id="primarnav">
+	<a accesskey="1" name="navigation"><xsl:comment/></a>
       <xsl:for-each select="xhtml:div">
         <a href="{@href}"><xsl:value-of select="@label"/></a>
         <xsl:if test="@id = 'up'"><br/></xsl:if>
