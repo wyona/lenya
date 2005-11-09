@@ -30,7 +30,8 @@
 
 <xsl:template match="xhtml:body">
   <node name="Body"/>
-  <xsl:apply-templates mode="body"/> -->
+  <xsl:apply-templates mode="body"/>
+  <xsl:apply-templates select="xhtml:object"/>
 </xsl:template>
 
 <xsl:template name="insertbeforemenu">
@@ -56,23 +57,28 @@
   <xsl:if test="not(preceding-sibling::*)">
   <xsl:call-template name="insertbeforemenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:p</xsl:with-param></xsl:call-template>
   </xsl:if>
-  <xsl:choose >
-    <xsl:when test="xhtml:object">
-      <xsl:apply-templates select="xhtml:object" mode="body"/>
-    </xsl:when>
-    <xsl:otherwise>
-      <node name="Paragraph" select="/*/xhtml:body/xhtml:p[@tagID='{@tagID}']">
-        <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/xhtml:p[@tagID='{@tagID}']&quot;/&gt;"/></action>
-        <content>
-          <textarea name="&lt;xupdate:update select=&quot;/*/xhtml:body/xhtml:p[@tagID='{@tagID}']&quot;&gt;" cols="60" rows="30">
-            <xsl:copy-of select="node()"/>
-          </textarea>
-        </content>
-      </node>
-    </xsl:otherwise>
-  </xsl:choose>
+  <node name="Paragraph" select="/*/xhtml:body/xhtml:p[@tagID='{@tagID}']">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/xhtml:body/xhtml:p[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <content>
+      <textarea name="&lt;xupdate:update select=&quot;/*/xhtml:body/xhtml:p[@tagID='{@tagID}']&quot;&gt;" cols="60" rows="30">
+	<xsl:copy-of select="node()"/>
+      </textarea>
+    </content>
+  </node>
 <!--  <xsl:call-template name="insertmenu"><xsl:with-param
   name="path">/*/xhtml:body/xhtml:p</xsl:with-param></xsl:call-template> -->
 </xsl:template>
 
+<xsl:template match="xhtml:object">
+  <node name="Object">
+    <action><delete name="&lt;xupdate:remove select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;/&gt;"/></action>
+    <content>
+      <input type="text" name="&lt;xupdate:update select=&quot;/*/*/xhtml:object[@tagID='{@tagID}']&quot;&gt;" size="40">
+	<xsl:attribute name="value">
+	  <xsl:value-of select="@data"/>
+	</xsl:attribute>
+      </input>
+    </content>
+  </node>
+</xsl:template>
 </xsl:stylesheet>  
