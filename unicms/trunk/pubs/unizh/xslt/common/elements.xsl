@@ -454,9 +454,6 @@
 
 
 
-
- 
-
  <xsl:template match="lenya:asset">
    <xsl:variable name="extent">
      <xsl:value-of select="dc:metadata/dc:extent"/>
@@ -687,12 +684,18 @@
     </xsl:variable>
     <div class="solidlinetable">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-    </div>
+    </div> 
+    <xsl:if test="xhtml:caption">
+      <div class="tabletitel">
+        <xsl:value-of select="xhtml:caption"/>
+      </div>
+      <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
+    </xsl:if>
     <xsl:copy>
       <xsl:attribute name="width">100%</xsl:attribute>
       <xsl:for-each select="xhtml:tr">
         <tr>
-          <xsl:apply-templates select="xhtml:td"/>
+          <xsl:apply-templates select="xhtml:td | xhtml:th"/>
         </tr>
         <tr>
           <td colspan="{$cols}" align="left">
