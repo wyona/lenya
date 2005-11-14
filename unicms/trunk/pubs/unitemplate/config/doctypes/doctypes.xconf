@@ -4,11 +4,12 @@
 
   <doc type="homepage">
     <children>
-      <doc type="homepage"/>
       <doc type="xhtml"/>
       <doc type="news"/>
       <doc type="team"/>
-      <doc type="list"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
       <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
@@ -19,11 +20,12 @@
 
   <doc type="homepage4cols">
     <children>
-      <doc type="homepage"/>
       <doc type="xhtml"/>
       <doc type="news"/>
       <doc type="team"/>
-      <doc type="list"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
       <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
@@ -34,13 +36,12 @@
 
   <doc type="xhtml">
     <children>
-      <doc type="homepage"/>
-      <doc type="homepage4cols"/>
       <doc type="xhtml"/>
-      <doc type="overview"/>
       <doc type="news"/>
       <doc type="team"/>
-      <doc type="list"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
       <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
@@ -52,13 +53,10 @@
   <doc type="overview">
     <children>
       <doc type="xhtml"/>
-      <doc type="homepage"/>
-      <doc type="homepage4cols"/>
-      <doc type="xhtml"/>
-      <doc type="overview"/>
       <doc type="news"/>
       <doc type="team"/>
-      <doc type="list"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
       <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
