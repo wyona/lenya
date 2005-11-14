@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <catalogue xml:lang="de">
-  <message key="section_forschung">Forschung</message>
-  <message key="section_studium">Studium</message>         
-  <message key="section_services">Dienstleistungen &amp; Produkte</message>         
-  <message key="section_info">Allgemeine Informationen</message>
-  <message key="section_fakultaet">Fakultäten &amp; Institute</message>
-  <message key="section_admin">Leitung &amp; Zentrale Dienste</message>
-  <message key="section_leben">Universitäres Leben</message>
-
-  <message key="publication_Unitemplate">Unitemplate</message>
-
-  <message key="print_view">Druckansicht</message>
-  <message key="contact">Kontakt</message>
-  <message key="search">Suchen</message>
-  
-  <message key="university_zurich">Universität Zürich</message>
-  <message key="impressum">Impressum</message>
+  <!-- <message key="key">Value</message> -->
 </catalogue>
