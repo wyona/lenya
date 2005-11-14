@@ -73,7 +73,9 @@
         <xsl:value-of select="concat($root, $canonical-url)"/>
       </xsl:attribute>
       
-      <xsl:attribute name="language-suffix" select="$language-suffix"/>
+      <xsl:attribute name="language-suffix">
+        <xsl:value-of select="$language-suffix"/>
+      </xsl:attribute>
  
       <xsl:choose>
         <xsl:when test="tree:label[lang($language)]"> 
