@@ -84,7 +84,6 @@
     <workflow src="2stage.xml"/>
   </doc>
 
-
   <doc type="team">
     <children>
       <doc type="person"/>
@@ -98,23 +97,6 @@
   <doc type="person">
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>person.xml</sample-name>
-    </creator>
-    <workflow src="2stage.xml"/>
-  </doc>
-
-  <doc type="list">
-    <children>
-      <doc type="homepage"/>
-      <doc type="homepage4cols"/>
-      <doc type="xhtml"/>
-      <doc type="overview"/>
-      <doc type="news"/>
-      <doc type="team"/>
-      <doc type="list"/>
-      <doc type="redirect"/>
-    </children>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>list.xml</sample-name>
     </creator>
     <workflow src="2stage.xml"/>
   </doc>
