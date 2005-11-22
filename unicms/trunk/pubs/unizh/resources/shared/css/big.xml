@@ -843,6 +843,11 @@ table.grid td {
 }
 
 
+tr.strip {
+        background-color: #f0f0f0;
+}
+
+
 table.imgMitLegende tr td img {
   padding: 0px;
 }
