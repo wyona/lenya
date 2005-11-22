@@ -181,6 +181,7 @@
       <value type="string">basic</value>
       <value type="string">ornate</value>
       <value type="string">grid</value>
+      <value type="string">striped</value>
     </choice>
   </attribute>
 </define>
