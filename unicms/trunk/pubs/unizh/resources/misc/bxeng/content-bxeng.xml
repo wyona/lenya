@@ -825,6 +825,12 @@ table.grid td {
 }
 
 
+table.striped td {
+  border-width: 1px;
+  border-style: dotted;
+}
+
+
 div.caption {
   display: inline;
 }

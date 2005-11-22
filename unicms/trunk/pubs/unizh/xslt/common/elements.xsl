@@ -723,6 +723,23 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:table[@class = 'striped']">
+    <xsl:copy>
+      <xsl:copy-of select="@class"/>
+      <xsl:attribute name="width">100%</xsl:attribute>
+      <xsl:for-each match="xhtml:tr">
+        <xsl:variable name="eins"><xsl:value-of select="position()"/></xsl:variable>
+        <xsl:copy>
+          <xsl:if test="($eins div 4) = round($eins div 4)">
+            <xsl:attribute name="class">strip</xsl:attribute>
+          </xsl:if>
+          <xsl:apply-templates/>
+        </xsl:copy>
+      </xsl:for-each>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:textarea">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>&#160;
