@@ -74,6 +74,10 @@
         <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
         <input class="submitbutton" type="submit" name="sa" value="{xhtml:input[@name='sa']/@value}"/> 
       </div>
+      <div>
+        <a href="http://www.google.com/u/unizh?hl=de&amp;ie=ISO-8859-1&amp;domains=unizh.ch&amp;q={xhtml:input[@name='queryString']/@value}&amp;btnG=Suche&amp;sitesearch=unizh.ch" >Suchen auf "www.unizh.ch"</a>
+      </div>
+      
       <!-- <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>  -->
       <xsl:apply-templates select="xhtml:input[@type = 'hidden']"/>
       <div class="endheaderline">
