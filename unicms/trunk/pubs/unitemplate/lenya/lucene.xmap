@@ -5,7 +5,9 @@
   <map:components>
     <map:generators default="file" />
     <map:matchers default="wildcard"/>
-    <map:actions/>    
+    <map:actions>
+      <map:action name="set-encoding" src="org.apache.cocoon.acting.SetCharacterEncodingAction"/>
+    </map:actions>
     <map:transformers default="xslt"/>
     <map:selectors />
     <map:serializers default="html">
@@ -44,6 +46,9 @@
 
     <map:pipeline>
       <map:match pattern="*/search-*/lucene">
+        <map:act type="set-encoding">
+          <map:parameter name="form-encoding" value="ISO-8859-1"/>
+        </map:act>
         <map:generate type="serverpages" src="../../../content/search/search-and-results.xsp" label="xml">
           <map:parameter name="max-hits-per-page" value="10"/>
           <map:parameter name="max-pages" value="10"/>
