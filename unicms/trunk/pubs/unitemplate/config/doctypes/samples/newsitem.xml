@@ -29,7 +29,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <p>
     Kurzfassung Newseitrag.
     </p>
-    <a href="#">Mehr...</a>
   </unizh:short>
   <body>
     <p>Paragraph</p>
