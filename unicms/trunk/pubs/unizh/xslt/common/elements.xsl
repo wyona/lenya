@@ -235,7 +235,11 @@
           <xsl:apply-templates select="."/>
         </xsl:for-each>
         <xsl:for-each select="xhtml:a">
-          <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+          <a class="arrow" href="{@href}">
+           <xsl:copy-of select="@target"/>
+           <xsl:value-of select="."/>
+          </a>
+          <br/>
         </xsl:for-each> 
         <xsl:apply-templates select="lenya:asset-dot"/>
         <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
