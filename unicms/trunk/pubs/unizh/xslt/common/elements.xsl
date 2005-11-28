@@ -689,7 +689,7 @@
 
   <xsl:template match="xhtml:table[@class = 'ornate']">
     <xsl:variable name="cols">
-      <xsl:value-of select="count(xhtml:tr[1]/xhtml:td[not(@colspan)]) + sum (xhtml:tr[1]/xhtml:td/@colspan)"/>
+      <xsl:value-of select="count(xhtml:tr[1]/xhtml:td [not(@colspan)]) + count(xhtml:tr[1]/xhtml:th [not(@colspan)]) + sum (xhtml:tr[1]/xhtml:td/@colspan) + sum (xhtml:tr[1]/xhtml:th/@colspan)"/>
     </xsl:variable>
     <div class="solidlinetable">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
