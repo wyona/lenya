@@ -244,7 +244,7 @@
     <xsl:choose>
       <xsl:when test="not(@data)">
         <xsl:call-template name="object">
-          <xsl:with-param name="src" select="concat($imageprefix, '/default_head.jpg')"/>
+          <xsl:with-param name="src" select="concat($imageprefix, '/default_head.gif')"/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
