@@ -10,8 +10,6 @@
 
 <project name="Ant Test Project" default="test" basedir=".">
 
-<property name="text" value="Hello World!"/>
-
 <property name="pub.dir" value=""/>
 <property name="pub.id" value=""/>
 <property name="sitetree" value="sitetree.xml"/>
@@ -62,13 +60,45 @@
 <property name="secarea.dir" value=""/>
 <property name="secarea.resource.dir" value=""/>
 
+
+<!-- custom tasks -->
+
+<taskdef name="init-history" classname="org.apache.lenya.cms.ant.InitWorkflowHistoryTask"/>
+<taskdef name="initrc" classname="org.apache.lenya.cms.ant.InitRCTask"/>
+
+<taskdef name="create" classname="org.apache.lenya.cms.ant.DocumentCreatorTask"/>
+
+<taskdef name="copycontent" classname="org.apache.lenya.cms.ant.CopyContentTask"/>
 <taskdef name="copyresources" classname="org.apache.lenya.cms.ant.CopyResourcesTask"/>
+<taskdef name="copyworkflow" classname="org.apache.lenya.cms.ant.InitCopyWorkflowTask"/>
+<taskdef name="copypolicies" classname="org.apache.lenya.cms.ant.CopyPoliciesTask"/>
+<taskdef name="insertcopynode" classname="org.apache.lenya.cms.ant.InsertCopyNode"/>
+<taskdef name="insertlabel" classname="org.apache.lenya.cms.ant.InsertLabelTask"/>
 
-  <taskdef name="mapdocumentidtofile" classname="org.apache.lenya.cms.ant.DocumentIdToFile"/>
+<taskdef name="deletecontent" classname="org.apache.lenya.cms.ant.DeleteContentTask"/>
+<taskdef name="deleteresources" classname="org.apache.lenya.cms.ant.DeleteResourcesTask"/>
+<taskdef name="deletepolicies" classname="org.apache.lenya.cms.ant.DeletePoliciesTask"/>
+<taskdef name="deleterc" classname="org.apache.lenya.cms.ant.DeleteRCTask"/>
+<taskdef name="deleteschedulerentry" classname="org.apache.lenya.cms.ant.DeleteSchedulerEntryTask"/>
 
-  <target name="test">
-    <echo>This is a test of the AntTask: ${text}</echo>
-  </target>
+<taskdef name="movenode" classname="org.apache.lenya.cms.ant.MoveNode"/>
+<taskdef name="moveworkflow" classname="org.apache.lenya.cms.ant.MoveWorkflowTask"/>
+<taskdef name="movenodeupdown" classname="org.apache.lenya.cms.ant.MoveSiteTreeNodeTask"/>
+
+<taskdef name="renameLabel" classname="org.apache.lenya.cms.ant.RenameLabelTask"/>
+<taskdef name="removelabel" classname="org.apache.lenya.cms.ant.RemoveLabelTask"/>
+<taskdef name="changeVisibility" classname="org.apache.lenya.cms.ant.ChangeVisibilityTask"/>
+
+<taskdef name="computesecdocumentid" classname="org.apache.lenya.cms.ant.ComputeCopyDocumentId"/>
+<taskdef name="computerenamedocumentid" classname="org.apache.lenya.cms.ant.ComputeRenameDocumentId"/>
+<taskdef name="computearchivedocumentid" classname="org.apache.lenya.cms.ant.ComputeArchiveDocumentId"/>
+<taskdef name="mapdocumentidtopath" classname="org.apache.lenya.cms.ant.DocumentIdToPath"/>
+<taskdef name="mapdocumentidtofile" classname="org.apache.lenya.cms.ant.DocumentIdToFile"/>
+<taskdef name="write-dc-params" classname="org.apache.lenya.cms.ant.WriteDCParametersTask"/>
+<taskdef name="setareaproperties" classname="org.apache.lenya.cms.ant.SetAreaProperties"/>
+<taskdef name="linkRewrite" classname="org.apache.lenya.cms.ant.LinkRewriteTask"/>
+<taskdef name="setidentifier" classname="org.apache.lenya.cms.ant.SetIdentifier"/>
+<taskdef name="resetsitetree" classname="org.apache.lenya.cms.ant.SiteTreeResetTask"/>
 
 
 <target name="notification">
@@ -94,8 +124,7 @@
 		/>
 </target>
 
-  <taskdef name="init-history" classname="org.apache.lenya.cms.ant.InitWorkflowHistoryTask"/>
-  <target name="create">
+<target name="create">
     
     <property name="create.parent-id" value=""/>
     <property name="create.child-id" value=""/>
@@ -116,7 +145,6 @@
     <property name="create.ipaddress" value=""/>
     <property name="create.visible" value=""/>
     
-    <taskdef name="create" classname="org.apache.lenya.cms.ant.DocumentCreatorTask"/>
     <create
       authoringpath="${authoring.dir}"
       area="${authoring.area}"
@@ -189,7 +217,6 @@
     <property name="create.ipaddress" value=""/>
     
     <!-- Add a node to the tree -->
-    <taskdef name="insertlabel" classname="org.apache.lenya.cms.ant.InsertLabelTask"/>
     <insertlabel
       documentid="${create.document-id}"
       labelName="${create.child-name}"
@@ -256,7 +283,6 @@
     <echo>for language: ${remove.label.language}</echo>
     <echo>from document: ${remove.label.document-id}</echo>
     <echo>in area: ${authoring.area}</echo>
-    <taskdef name="removelabel" classname="org.apache.lenya.cms.ant.RemoveLabelTask"/>
     <removelabel
       documentid="${remove.label.document-id}"
       labelName="${remove.label.label-name}"
@@ -309,7 +335,6 @@
     <echo>meta.publisher ${save.meta.publisher}</echo>
     <echo>meta.rights ${save.meta.rights}</echo>
 
-    <taskdef name="write-dc-params" classname="org.apache.lenya.cms.ant.WriteDCParametersTask"/>
     <write-dc-params
       documentid="${save.meta.documentid}"
       area="${save.meta.area}"
@@ -394,7 +419,6 @@
     <move file="${temp.file}" tofile="${document.file}"/>
   </target>
 
-  <taskdef name="computesecdocumentid" classname="org.apache.lenya.cms.ant.ComputeCopyDocumentId"/>
   <target name = "newcopydocumentid">
     <computesecdocumentid
       area="${authoring.area}"
@@ -405,7 +429,6 @@
   </target>
 
   <target name = "newnamedocumentid">
-    <taskdef name="computerenamedocumentid" classname="org.apache.lenya.cms.ant.ComputeRenameDocumentId"/>
     <computerenamedocumentid
       area="authoring"
       firstdocumentid="${node.firstdocumentid}"
@@ -413,8 +436,6 @@
       />
     <echo>the document id for the renamed file is now ${node.newdocumentid}</echo>
   </target>
-  
-  <taskdef name="computearchivedocumentid" classname="org.apache.lenya.cms.ant.ComputeArchiveDocumentId"/>
   
   <target name = "newarchivedocumentid">
     <computearchivedocumentid
@@ -425,7 +446,6 @@
     <echo>the document id for the ${secarea} is ${node.newdocumentid}</echo>
   </target>
 
-<taskdef name="mapdocumentidtopath" classname="org.apache.lenya.cms.ant.DocumentIdToPath"/>
 
 <target name = "firstdocumentpath">
   <mapdocumentidtopath
@@ -451,9 +471,6 @@
   />
 </target>
 
-<taskdef name="copycontent" classname="org.apache.lenya.cms.ant.CopyContentTask"/>
-<taskdef name="copyworkflow" classname="org.apache.lenya.cms.ant.InitCopyWorkflowTask"/>
-<taskdef name="initrc" classname="org.apache.lenya.cms.ant.InitRCTask"/>
 
 <target name = "copyDocument" depends="newcopydocumentid">
   <echo>Copy Content</echo>
@@ -493,7 +510,6 @@
 
   <echo> Insert copied node</echo>
 
-  <taskdef name="insertcopynode" classname="org.apache.lenya.cms.ant.InsertCopyNode"/>
   <insertcopynode
     firstdocumentid="${node.firstdocumentid}"
     secdocumentid="${node.newdocumentid}"
@@ -503,7 +519,6 @@
  
 </target>
 
-<taskdef name="setareaproperties" classname="org.apache.lenya.cms.ant.SetAreaProperties"/>
 <target name = "firstareaproperties">
   <setareaproperties
     area="${firstarea}"
@@ -518,14 +533,6 @@
   />
 </target>
 				
-<taskdef name="movenode" classname="org.apache.lenya.cms.ant.MoveNode"/>
-<taskdef name="moveworkflow" classname="org.apache.lenya.cms.ant.MoveWorkflowTask"/>
-<taskdef name="copypolicies" classname="org.apache.lenya.cms.ant.CopyPoliciesTask"/>
-<taskdef name="deleteschedulerentry" classname="org.apache.lenya.cms.ant.DeleteSchedulerEntryTask"/>
-<taskdef name="deletecontent" classname="org.apache.lenya.cms.ant.DeleteContentTask"/>
-<taskdef name="deleteresources" classname="org.apache.lenya.cms.ant.DeleteResourcesTask"/>
-<taskdef name="deletepolicies" classname="org.apache.lenya.cms.ant.DeletePoliciesTask"/>
-<taskdef name="deleterc" classname="org.apache.lenya.cms.ant.DeleteRCTask"/>
 
 <target name = "move">
   <echo>Copy Content</echo>
@@ -621,8 +628,6 @@
 
   <target name = "rewrite-links">
 
-    <taskdef name="linkRewrite" classname="org.apache.lenya.cms.ant.LinkRewriteTask"/>
-    
     <linkRewrite baseDir="${pub.dir}/${authoring.dir}"
       stylesheet="${pub.dir}/../../xslt/util/linkRewrite.xsl"
       area="${authoring.area}"
@@ -630,8 +635,6 @@
       newDocumentId="${node.newdocumentid}"/>
     
   </target>
-  
-  <taskdef name="renameLabel" classname="org.apache.lenya.cms.ant.RenameLabelTask"/>
   
   <target name = "rename-label">
     <property name="rename.label.document-id" value=""/>
@@ -647,8 +650,6 @@
       area="${rename.label.area}"
       />
   </target>
-
-  <taskdef name="changeVisibility" classname="org.apache.lenya.cms.ant.ChangeVisibilityTask"/>
 
   <target name = "change-visibility">
     <property name="change.visibility.document-id" value=""/>
@@ -674,7 +675,6 @@
 </target>
 
 <target name = "setIdentifier">
-  <taskdef name="setidentifier" classname="org.apache.lenya.cms.ant.SetIdentifier"/>
   <setidentifier
     area="${firstarea}"
     documentid="${node.firstdocumentid}"
@@ -714,7 +714,6 @@
     </fileset>
   </delete>
 
-  <taskdef name="resetsitetree" classname="org.apache.lenya.cms.ant.SiteTreeResetTask"/>
   <resetsitetree
     area="${trash.area}"
   />
@@ -729,7 +728,6 @@
 	<echo>Document ID: ${movenode.documentid}</echo>
 	<echo>Direction: ${movenode.direction}</echo>
 	
-  <taskdef name="movenodeupdown" classname="org.apache.lenya.cms.ant.MoveSiteTreeNodeTask"/>
   <movenodeupdown
     documentid="${movenode.documentid}"
     direction="${movenode.direction}"

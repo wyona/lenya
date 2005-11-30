@@ -63,13 +63,8 @@
 
     <map:pipeline type="noncaching">
       
-      <!-- UniZH sections -->
-      <map:match pattern="sections.xconf">
-        <map:generate src="config/unizh/sections.xconf"/>
-        <map:serialize type="xml"/>
-      </map:match>
 
-      <!-- UniZH sections -->
+      <!-- UniZH config -->
       <map:match pattern="unizh.xconf">
         <map:generate src="config/unizh/unizh.xconf"/>
         <map:serialize type="xml"/>
@@ -162,32 +157,6 @@
       </map:match>
 
 
-      <!-- This pipeline builds the page content (without header) for
-             - section pages
-             
-         {rendertype}: "view" | "edit" | "imageupload" (with asset dots)
-         {version}: "xhtml" | "print"
-         -->
-         
-      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
-      <!--            1            2         3                4     5             -->
-      <map:match pattern="section-*-*/*/*/**.html">
-        <map:aggregate element="document">
-          <map:part element="content" src="cocoon:/xml"/>
-          <map:part src="cocoon:/sections.xconf"/>
-          <map:part src="cocoon:/unizh.xconf"/>
-        </map:aggregate>
-        <map:call resource="transformation">
-          <map:parameter name="publication-id" value="{3}"/>
-          <map:parameter name="area" value="{4}"/>
-          <map:parameter name="stylesheet" value="section"/>
-          <map:parameter name="rendertype" value="{1}"/>
-          <map:parameter name="version" value="{2}"/>
-        </map:call>
-        <map:serialize type="xml"/>
-      </map:match>
-
-
       <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
       <!--            1            2         3                4     5             -->
 
@@ -205,7 +174,6 @@
           <map:part src="cocoon://navigation/{3}/{4}/ancestors/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/parent/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/allnodes/{5}.html.xml"/>
-          <map:part src="cocoon:/sections.xconf"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
 
@@ -276,7 +244,6 @@
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/> 
           <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/allnodes/{6}.html.xml"/> 
-          <map:part src="cocoon:/sections.xconf"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
 
@@ -328,7 +295,7 @@
           <map:parameter name="stylesheet" value="xhtml"/>
           <map:parameter name="rendertype" value="{2}"/>
           <map:parameter name="version" value="{3}"/>
-        </map:call>  
+        </map:call> 
 
         <map:serialize type="xml"/>
       </map:match>

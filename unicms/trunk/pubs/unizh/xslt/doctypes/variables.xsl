@@ -25,8 +25,6 @@
   
   <xsl:variable name="content" select="/document/content/*"/>
   
-  <xsl:variable name="sections" select="/document/uz:sections"/>
-  
   <xsl:variable name="document-element-name">
     <xsl:choose>
       <xsl:when test="name($content) = local-name($content)">
