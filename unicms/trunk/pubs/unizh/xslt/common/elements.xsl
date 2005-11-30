@@ -195,7 +195,7 @@
     <a name="{@name}"/><xsl:comment/>
   </xsl:template>
 
-  
+  <!--
   <xsl:template match="xhtml:a[starts-with(@href, 'mailto:')]">
     <script language="javascript">
       <xsl:comment>
@@ -205,10 +205,10 @@
            <![CDATA[ 
              document.write("<a href=" + mailtouser + "@" + hostname + ">" + linktext + "</a>");
            ]]>
-      </xsl:comment> 
+      </xsl:comment>
     </script>
   </xsl:template>
-
+  -->
 
   <xsl:template match="unizh:attention">
     <span class="attention">
@@ -237,7 +237,7 @@
         <xsl:for-each select="xhtml:a">
           <a class="arrow" href="{@href}">
            <xsl:copy-of select="@target"/>
-           <xsl:value-of select="."/>
+           <xsl:apply-templates/>
           </a>
           <br/>
         </xsl:for-each> 
