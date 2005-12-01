@@ -17,7 +17,7 @@
   <map:pipelines>
 
     <map:pipeline>
-    	
+    
       <map:match pattern="live/**">
         <map:generate type="serverpages" src="../../content/menus/live.xsp"/>
         <map:serialize type="xml"/>
@@ -25,11 +25,6 @@
 
      <!-- document type: links -->
       <map:match type="doctype" pattern="xhtml">
-        <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="list">
         <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
@@ -71,11 +66,6 @@
 
       <map:match type="doctype" pattern="redirect">
         <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="collection">
-        <map:generate type="serverpages" src="../unizh/config/menus/collection.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
 

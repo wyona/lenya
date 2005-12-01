@@ -28,9 +28,6 @@
         <sourcetype name="newsitem">
           <document-element local-name="newsitem"/>
         </sourcetype>
-        <sourcetype name="list">
-          <document-element local-name="list"/>
-        </sourcetype>
         <sourcetype name="team">
           <document-element local-name="team"/>
         </sourcetype>
