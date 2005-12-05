@@ -47,11 +47,34 @@
 
 
 <xsl:template match="nav:node">
-  <xsl:call-template name="split-languages">
-    <xsl:with-param name="languages">
-      <xsl:value-of select="@other-languages"/>
-    </xsl:with-param>
-  </xsl:call-template> 
+  <xsl:choose>
+    <xsl:when test="contains($root, '/id/') or contains($root, '/idsandbox/')">
+
+      <xsl:choose>
+        <xsl:when test="starts-with(@basic-url,'xhtml') and $chosenlanguage != 'en'">
+          <xsl:call-template name="split-languages">
+            <xsl:with-param name="languages">en</xsl:with-param>
+          </xsl:call-template> 
+        </xsl:when>
+        <xsl:when test="starts-with(@basic-url,'xhtml') and $chosenlanguage = 'en'">
+          <xsl:call-template name="split-languages">
+            <xsl:with-param name="languages">de</xsl:with-param>
+          </xsl:call-template> 
+        </xsl:when>
+        <xsl:otherwise/>
+      </xsl:choose>
+
+    </xsl:when>
+    <xsl:otherwise>
+
+      <xsl:call-template name="split-languages">
+        <xsl:with-param name="languages">
+          <xsl:value-of select="@other-languages"/>
+        </xsl:with-param>
+      </xsl:call-template> 
+
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 

@@ -169,6 +169,7 @@
           <map:part src="cocoon://navigation/{3}/{4}/toolnav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/menu/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/tabs/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/orthonav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/footnav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/simplenav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/ancestors/{5}.html.xml"/>
@@ -239,6 +240,7 @@
           <map:part src="cocoon://navigation/{4}/{5}/toolnav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/orthonav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/footnav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/simplenav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/> 
