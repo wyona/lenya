@@ -46,6 +46,7 @@
           <a name="top"><xsl:comment/></a>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
           <xsl:choose>
             <xsl:when test="$document-element-name='xhtml:html'">

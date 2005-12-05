@@ -313,6 +313,16 @@ a.back {
 	width:125px;
 }
 
+/*orthonav*/
+#orthonav {
+	text-align: left;
+	color:#999;
+	margin-left:185px;
+}
+#orthonav .current{
+	color:#000;
+}
+
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
 	font-size: 14px;

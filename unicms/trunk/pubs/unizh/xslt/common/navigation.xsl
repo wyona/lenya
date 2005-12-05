@@ -12,6 +12,33 @@
                 >
                 
 
+  <xsl:template match="xhtml:div[@id = 'orthonav']">
+    <xsl:if test="*">
+      <div id="orthonav">
+        <xsl:variable name="itemNr" select="count(*)"/>
+        <xsl:for-each select="*">
+          <xsl:choose>
+	    <xsl:when test="@href">
+	      <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="@current = 'true'">
+                  <span class="current"><xsl:value-of select="."/></span>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="."/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:if test="position() != $itemNr"> | </xsl:if>
+        </xsl:for-each>
+      </div>
+    </xsl:if>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
       <xsl:for-each select="xhtml:div[@id != 'search']">
