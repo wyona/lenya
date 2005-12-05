@@ -966,7 +966,7 @@ th.width105 {
 
 
 .attention {
-        color: #993333;
+        color: #cc3333;
 }
 
 td {
