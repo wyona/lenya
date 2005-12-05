@@ -135,10 +135,8 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <xsl:apply-templates select="/document/unizh:contcol1"/>
     <div class="contcol2">
-      <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
-        </div>
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
         <div class="content">
@@ -161,10 +159,8 @@
   <xsl:template name="overview">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <div class="contcol2">
-      <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/>
-        </div>
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
         <div class="content">
@@ -186,10 +182,8 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <xsl:apply-templates select="*/unizh:contcol1"/>
     <div class="contcol2">
-      <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/>
-        </div>
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
         <div class="content">
@@ -213,10 +207,8 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <xsl:apply-templates select="*/unizh:contcol1"/>
     <div class="contcol2">
-      <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content"/>
-        </div>
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
         <div class="content">
@@ -232,11 +224,9 @@
   <xsl:template name="newsitem">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <div class="contcol2">
-      <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="unizh:newsitem/unizh:related-content"/>
-        </div> 
-      </div> 
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+      </div>
       <div class="contentarea">
         <div class="content">
           <a accesskey="2" name="content"><xsl:comment/></a>
