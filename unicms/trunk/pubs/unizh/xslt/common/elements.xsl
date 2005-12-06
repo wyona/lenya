@@ -488,14 +488,11 @@
       </xsl:when>
       <xsl:otherwise>
         <div class="asset">
-          <a href="{$nodeid}/{@src}">
-            <img alt="" border="0" height="16" src="{$imageprefix}/icons/default.gif" width="16" align="left"/>
-          </a>
           <xsl:text> </xsl:text>
           <a class="download" href="{$nodeid}/{@src}">
             <xsl:value-of select="text()"/><xsl:comment/>
           </a>
-          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
+          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" border="0"/>)
         </div>
         <xsl:if test="parent::xhtml:body and not(following-sibling::*[1][name() = 'lenya:asset'])">
           <br/>
