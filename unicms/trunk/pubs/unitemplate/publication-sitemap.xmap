@@ -10,7 +10,6 @@
     <map:generators default="file" />
     <map:matchers default="wildcard"/>
     <map:actions>
-      <map:action logger="sitemap.action.language-exists" name="language-exists" src="org.apache.lenya.cms.cocoon.acting.LanguageExistsAction"/>
       <map:action logger="sitemap.action.redirect" name="redirect" src="ch.unizh.lenya.cms.cocoon.acting.UnizhRedirectAction"/>
     </map:actions>
     
@@ -24,15 +23,8 @@
         <untranslated-text>untranslated</untranslated-text>
         <cache-at-startup>false</cache-at-startup>
       </map:transformer>
-      <map:transformer name="link-rewrite" logger="lenya.sitemap.transformer.link-rewrite" src="org.apache.lenya.cms.cocoon.transformation.LinkRewritingTransformer"/>
     </map:transformers>
-    
-    <map:selectors>
-      <map:selector name="request-method" logger="sitemap.selector.request-method"
-        src="org.apache.cocoon.selection.RequestMethodSelector"/>
-      <map:selector name="parameter"
-        logger="sitemap.selector.parameter" src="org.apache.cocoon.selection.ParameterSelector"/>
-    </map:selectors>
+    <map:selectors/>
     
     <map:serializers default="html">
 
@@ -54,11 +46,6 @@
     </map:serializers>
   </map:components>
 
-  <map:views>
-    <map:view name="aggregation" from-label="aggregation">
-      <map:serialize type="xml"/>
-    </map:view>
-  </map:views>
 
   <map:resources>
     <map:resource name="style-cms-page">
