@@ -329,4 +329,11 @@ input.optiontag {
 	margin-left:6px;
 }
 
+/* uni additions */
+
+
+.attention {
+        color: #cc3333;
+}
+
 </css>
