@@ -21,7 +21,7 @@
           </a>
         </div>
         <div class="imginstitute">
-          <img src="{$imageprefix}/uniimg.jpg" alt="uni picture" width="180" height="45" border="0" />
+          <img src="{$localsharedresources}/images/key-visual.jpg" alt="institute's picture" width="180" height="45" border="0" />
         </div>
       </div>
       <div id="headertitelpos">

@@ -121,7 +121,6 @@ a.back {
 #headerarea {
 	width:100%;
 	display:block;
-	background-color: #666699;
 	height:90px;
 	min-width:600px;
 }
@@ -134,12 +133,10 @@ a.back {
 }
 
 .imgunilogo {
-	background-color: #ccccff;
 	padding-left:15px;
 	height:45px;
 }
 .imginstitute {
-	background-color: #666699;
 	padding-left:15px;
 	height:45px;
 }

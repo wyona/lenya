@@ -14,6 +14,7 @@
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
   >
   
+  <xsl:param name="root"/>
   <xsl:param name="contextprefix"/>
   <xsl:param name="area"/>
   <xsl:param name="rendertype"/>
