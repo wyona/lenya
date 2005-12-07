@@ -67,13 +67,7 @@
 
   <map:pipelines>
 
-    <map:pipeline>
-      <map:match pattern="**/">
-        <map:redirect-to uri="index.html"/>
-      </map:match>
-    </map:pipeline>
- 
-    <!-- asset icons -->
+    <!-- icons -->
     <map:pipeline>
       <map:match pattern="*/images/icons/*.gif">
         <map:act type="resource-exists" src="../unizh/resources/shared/images/icons/{2}.gif">
@@ -83,33 +77,33 @@
       </map:match>
     </map:pipeline>
     
-    <!-- matches layout images -->
+    <!-- images -->
     <map:pipeline>
       <map:match pattern="**/images/**.*">
         <map:read src="resources/shared/images/{2}.{3}" mime-type="image/{3}" />
       </map:match>
     </map:pipeline>
 
-    <!-- static resources for BXENG -->
+    <!-- relaxNG schema -->
     <map:pipeline>
-      
       <map:match pattern="*/**.rng">
         <map:generate src="config/doctypes/schemas/{2}.rng"/>
         <map:serialize type="xml"/>
       </map:match>
-      
+    </map:pipeline>
+
+    <!-- BXE css --> 
+    <map:pipeline>
       <map:match pattern="**/content-bxeng.css">
 	<map:generate src="../unizh/resources/misc/bxeng/content-bxeng.xml"/>
 	<map:transform src="../../resources/css/css.xsl">
 	  <map:parameter name="contextprefix" value="{request:contextPath}"/>
 	</map:transform>
 	<map:serialize type="text" mime-type="text/css"/>
-      </map:match>
-      
+      </map:match>  
     </map:pipeline>
     
     <map:pipeline>
-
       <!-- mounting doctypes.xmap -->
       <!-- pattern="lenyadocument-{document-type}/{publication-id}/{area}/{document-url}" -->
       <map:match pattern="lenyadocument-**">
@@ -135,7 +129,6 @@
         </map:select>
         <map:serialize type="xml"/>
       </map:match>
-
     </map:pipeline>
     
     
@@ -165,7 +158,6 @@
         <!-- There is no version of the requested document-id for the
              requested language. -->
         <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
-        <map:serialize type="xml"/>
         <map:transform src="../../xslt/exception/missing-language.xsl"/>
         <map:call resource="style-cms-page"/>
 
@@ -214,7 +206,6 @@
               </map:select>
             </map:otherwise>
           </map:select>
-
           <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
           <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
           <map:serialize type="xhtml"/> 
