@@ -169,7 +169,6 @@
           <map:part src="cocoon://navigation/{3}/{4}/toolnav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/menu/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/tabs/{5}.html.xml"/>
-          <map:part src="cocoon://navigation/{4}/{5}/orthonav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/footnav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/simplenav/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/ancestors/{5}.html.xml"/>
