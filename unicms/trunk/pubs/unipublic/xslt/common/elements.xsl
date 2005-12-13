@@ -344,20 +344,6 @@
     </xsl:choose>
   </xsl:template>
   
-<!--
-  <xsl:template match="lenya:asset" mode="item">
-    <xsl:variable name="extent">
-      <xsl:value-of select="dc:metadata/dc:extent"/>
-    </xsl:variable>
-    <div class="asset">
-        <a href="{$nodeid}/{@src}">
-          <xsl:value-of select="text()"/>
-        </a>
-        (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
-    </div>      
-  </xsl:template>
-
--->
   <xsl:template match="lenya:asset">
     <xsl:variable name="extent">
       <xsl:value-of select="dc:metadata/dc:extent"/>
@@ -368,20 +354,15 @@
         <xsl:with-param name="substr">.</xsl:with-param>
       </xsl:call-template>
     </xsl:variable>
-      <xsl:if test="name(parent::*)!='up:item'">
         <a href="{$nodeid}/{@src}">
           <img alt="" border="0" height="16"
             src="{$imageprefix}/icons/{$suffix}.gif" width="16"/>
         </a>
         <xsl:text> </xsl:text>
-      </xsl:if>
       <a href="{$nodeid}/{@src}">
         <xsl:value-of select="text()"/>
       </a>
       (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB)
-    <xsl:if test="name(parent::*)!='up:item'">
-      <xsl:call-template name="asset-dots"/>
-    </xsl:if>
    </xsl:template>
   
   <xsl:template match="xhtml:object" priority="3">
