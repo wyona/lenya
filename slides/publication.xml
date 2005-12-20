@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: publication.xml,v 1.12 2005/12/13 17:58:24 michi Exp $ -->
+
+<lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
+<lenya:name>Slides</lenya:name>
+<lenya:pub-version>1.0</lenya:pub-version>
+<lenya:lenya-version>1.2.4 or 1.2.5-dev</lenya:lenya-version>
+<lenya:cocoon-version>2.1.7</lenya:cocoon-version>
+
+<lenya:description>
+This publication implements a repository for XML-based slides in various output formats such as PDF.
+</lenya:description>
+
+<lenya:credits>Special thanks to Michi</lenya:credits>
+
+<lenya:readme>
+
+<h3>ApacheCon USA 2005, San Diego, USA</h3>
+<a href="slideml/apachecon-usa2005.html">HTML</a>
+<br />
+<a href="slideml/apachecon-usa2005.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
+<h3>Open Publish 2005, Sydney, Australia</h3>
+<a href="slideml/openpublish2005.html">HTML</a>
+<br />
+<a href="slideml/openpublish2005.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
+<h3>ApacheCon 2005, Stuttgart, Germany</h3>
+<a href="slideml/apachecon2005.html">HTML</a>
+<br />
+<a href="slideml/apachecon2005.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
+<h3>LOTS 2005, Bern, Switzerland</h3>
+<a href="slideml/lots2005.html">HTML</a>
+<br />
+<a href="slideml/lots2005.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
+<h3>ApacheCon 2004, Las Vegas, USA</h3>
+<a href="slideml/apachecon2004.html">HTML</a>
+<br />
+<a href="slideml/apachecon2004.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
+<h3>ApacheCon 2003, Las Vegas, USA</h3>
+<a href="slideml/apachecon2003.html">HTML</a>
+<br />
+<a href="slideml/apachecon2003.pdf">PDF</a>
+
+<h3>The Cocoon GetTogether 2003, Ghent, Belgium</h3>
+<a href="slideml/gt2003.html">HTML</a>
+<br />
+<a href="slideml/gt2003.pdf">PDF</a>
+
+<h3>Gilbane at Seybold SF 03, San Francisco, USA</h3>
+<a href="slideml/CMS4_michael_wechner.html">HTML</a>
+<br />
+<a href="slideml/CMS4_michael_wechner.pdf">PDF</a>
+
+<h3>Ittingen 2003, Zurich, Switzerland</h3>
+<a href="slideml/ittingen2003.html">HTML</a>
+<br />
+<a href="slideml/ittingen2003.pdf">PDF</a>
+
+<h3>iEX 2003, Zurich, Switzerland</h3>
+<a href="slideml/iex2003.html">HTML</a>
+<br />
+<a href="slideml/iex2003.pdf">PDF</a>
+
+<h3>OSCOM Conference 2002, Berkeley, CA, USA</h3>
+<a href="slideml/berkeley2002.html">HTML</a>
+<br />
+<a href="slideml/berkeley2002.pdf">PDF</a>
+
+<h3>First Annual Open Source CMS Conference, 2002, Zurich, Switzerland</h3>
+<a href="oscms2002/">HTML</a><br />
+<!--
+<a href="oscms2002/printer-friendly.pdf">PDF</a> (Printer Friendly Version)
+-->
+
+
+</lenya:readme>
+</lenya:publication>

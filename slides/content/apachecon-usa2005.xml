@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Lenya and Jackrabbit make a fine couple</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michi@apache.org</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2005-12-13</s:start>
+				<s:end>2005-12-13</s:end>
+			</s:confdates> 
+  			<s:conftitle>ApacheCon USA, San Diego 2005</s:conftitle> 
+  			<s:address>
+Sheraton Harbor Island
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio" status="ready">
+<s:title>Short Bio of michi</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth</li>
+  <li>Co-Founder Wyona</li>
+  <li>Co-Founder OSCOM</li>
+  <li>Original Creator of Apache Lenya</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="demo14" status="ready">
+<s:title>Demo of Lenya 1.4-dev</s:title>
+<s:content>
+<p>
+<ol>
+  <li><a href="http://127.0.0.1:7777">http://127.0.0.1:7777</a> (Editing, Workflow, Search, OpenDocument, ...)</li>
+  <li>Public Demos: <a href="http://wiki.apache.org/lenya/FrontPage">http://wiki.apache.org/lenya/FrontPage</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="versions" status="ready">
+<s:title>Current Versions (2005.12.13)</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Lenya 1.2.5-dev (Maintenance Release, Backwards Compatible)</li>
+  <li>Lenya 1.4-dev</li>
+  <li>Jackrabbit 1.0-dev</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="newfeatures" status="ready">
+<s:title>New Features of Lenya 1.4</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Publication Templating</li>
+  <li>WebDAV</li>
+  <li>Repository Layer/JCR</li>
+  <li>Usecase Framework</li>
+  <li>Modules</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<!--
+<s:slide id="publication-templating" status="ready">
+<s:title>Publication Templating</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Publication instances contain only configuration files and customized files</li>
+  <li>Fallback</li>
+  <li>Lower Maintenance</li>
+  <li>Out-of-the-box usecase framework</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="webdav-support" status="wip" note="reasons for that and Wiki page">
+<s:title>WebDAV Support</s:title>
+<s:content>
+<p>
+<ol>
+  <li>/lenya/PUBID/webdav</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+-->
+
+<s:slide id="jcr" status="ready">
+<s:title>JCR - Java Content Repository API</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Specifies a standard API to access content repositories in Java 2 independently of implementation</li>
+  <li>Very similar to WebDAV, whereas WebDAV is a protocol</li>
+  <li>David Nuescheler (Day Software): Java Specification Request</li>
+  <li>JCR 1.0: <a href="http://jcp.org/en/jsr/detail?id=170">JSR-170</a></li>
+  <li>JCR 2.0: <a href="http://jcp.org/en/jsr/detail?id=283">JSR-283</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="jcr-implementations" status="ready">
+<s:title>JCR Implementations</s:title>
+<s:content>
+<p>
+<ol>
+  <li><a href="http://incubator.apache.org/jackrabbit/">Apache Jackrabbit</a> (Apache License)</li>
+  <li><a href="http://www.jeceira.com">Jeceira</a> (Apache License)</li>
+  <li>Proprietary Implementations ...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="jcr-features" status="ready">
+<s:title>JCR Features</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Versioning</li>
+  <li>Transactions (--> Clustering)</li>
+  <li>Locking</li>
+  <li>Observation</li>
+  <li>Search</li>
+  <li>Metadata</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="jcr-terms" status="ready">
+<s:title>JCR Terms</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Repository</li>
+  <li>Workspace (Authoring/Live or SVN Workspaces, ...)</li>
+  <li>Session</li>
+  <li>Node ("Directory")</li>
+  <li>Property ("File")</li>
+  <li>Example: Curriculum Vitae (title, content, attachments, ...)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="jcr-getting-started" status="ready">
+<s:title>JCR Getting Started</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Get Repository (e.g. JNDI, RepositoryFactory, ...)</li>
+  <li>Login Repository - Session</li>
+  <li>Get/Set Node/Property (Path and UUID)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="data-types" status="ready">
+<s:title>Data Types</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Video Tape</li>
+  <li>Task</li>
+  <li>Project</li>
+  <li>Invoice</li>
+  <li>Invoices</li>
+  <li>Company/Customer</li>
+  <li>Asset (in general)</li>
+  <li>Image</li>
+  <li>Open Document</li>
+  <li>Blog Entry</li>
+  <li>E-Mail</li>
+  <li>ODT</li>
+  <li>Person/Employee</li>
+  <li>Wiki</li>
+  <li>XHTML</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="data-type-example" status="wip">
+<s:title>Data Type Example: Video Tape</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<data-type>
+  <description></description>
+</data-type>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="document-types" status="ready">
+<s:title>Data Types versus Document Types</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Model (Document Type, Data Type)</li>
+  <li>View (Document Type, Data Type)</li>
+  <li>Controller (Data Type)</li>
+  <li>Example: Invoice - Total Amount</li>
+  <li>"Objects": Graffito, Zope, ...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="node-types" status="ready">
+<s:title>Jackrabbit Node Types</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Jackrabbit: repository/nodetypes/custom_nodetypes.xml</li>
+  <li>JCR 2.0</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="jcronly" status="ready">
+<s:title>My Content Repository Layer versus JCR</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Example: "Teamsite"</li>
+  <li>Export/Import</li>
+  <li>My own JCR implementation</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="obsolete" status="ready">
+<s:title>Does Lenya become obsolete?</s:title>
+<s:content>
+<p>
+<ol>
+  <li>No, but ...</li>
+  <li>Maps (Sitetree, Topic Maps, Search, ...)</li>
+  <li>Cocoon Sitemap/Pipelines</li>
+  <li>Not the only interface!</li>
+  <li>Decouple UI from Server (--> <a href="http://www.wyona.org/osr-101/index.html">OSR-101</a>)</li>
+  <li>Merging approaches - Consolidation</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="future-emphasis" status="ready">
+<s:title>Future Emphasis</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Redundancy --> Clustering</li>
+  <li>Simplicity --> Data Types</li>
+  <li>Upgradeability --> Package Manager</li>
+  <li>Performance</li>
+  <li>Scalability</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="qanda" status="ready">
+<s:title>Q and A</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Thanks</li>
+  <li>Questions and Answers</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+</s:slideset>

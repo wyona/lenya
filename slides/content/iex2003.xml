@@ -1,0 +1,718 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>XML Publishing with Cocoon</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michael.wechner@lenya.com</s:email>
+				<s:orgname>Lenya</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2003-02-05</s:start>
+				<s:end>2003-02-07</s:end>
+			</s:confdates> 
+  			<s:conftitle>iEX 2003, Z&#252;rich</s:conftitle> 
+  			<s:address>
+                         Messe Zurich
+                         Oerlikon
+                         Zurich
+                         Switzerland
+			</s:address> 
+  		</s:confgroup>	
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<!--
+<s:slide id="xml_test">
+<s:title>XML Beispiel</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+
+<directors>
+  <director did="michael">
+    <name>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+-->
+
+
+
+
+
+	<s:slide id="overview">
+		<s:title>Einleitung</s:title>
+		<s:content>
+<p>
+<ol>
+  <li>Hallo Welt!</li>
+  <li>Fragen an die Seminarteilnehmer:</li>
+  <li>Wer hat XML Kenntnisse?</li>
+  <li>Wer hat XSLT Kenntnisse?</li>
+  <li>Wer setzt XML in einem produktiven System ein?</li>
+  <li>Wer setzt XSLT in einem produktiven System ein?</li>
+  <li>Wer hat Cocoon Kenntnisse?</li>
+  <li>Wer setzt Cocoon in einem produktiven System ein?</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="was_ist_cocoon">
+		<s:title>Was ist Cocoon?</s:title>
+		<s:content>
+<p>
+<ol>
+  <li>Apache Software Foundation</li>
+  <li>Unterprojekt: Apache - XML -Cocoon</li>
+  <li>XML Publishing and Application Framework</li>
+  <li><a href="http://xml.apache.org/cocoon/">http://xml.apache.org/cocoon/</a></li>
+  <li>XML, XSLT, XSP, Java</li>
+  <li>Release: 2.0.4 (2.1-dev)</li>
+  <li>circa 40 Committer</li>
+  <li>circa 2000 Subscriber</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+
+<s:slide id="verwandt">
+<s:title>Verwandte Technologien</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Perl: AxKit (<a href="http://axkit.org">http://axkit.org</a>)</li>
+  <li>PHP: Krysalis (<a href="http://www.interakt.ro/products/Krysalis/">http://www.interakt.ro/products/Krysalis/</a>)</li>
+  <li>PHP: Popoon (<a href="http://www.bitflux.ch/developer/cms/popoon.html">http://www.bitflux.ch/developer/cms/popoon.html</a>)</li>
+  <li>XML Pipeline Definition Language (W3C) (<a href="http://www.w3.org/TR/xml-pipeline/">http://www.w3.org/TR/xml-pipeline/</a>)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="warum">
+<s:title>Warum wurde Cocoon entwickelt?</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Semantic Web</li>
+  <li>Cross-Media Publishing</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="samples">
+<s:title>Cocoon Beispiele</s:title>
+<s:content>
+<p>
+<ol>
+  <li><a href="/cocoon/samples/welcome">Samples</a></li>
+  <li>Hello World!</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="requirements">
+<s:title>Cocoon Voraussetzungen</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Java Virtual Machine: &gt;= 1.2 (SUN JDK 1.3.1)</li>
+  <li>Servlet Engine: &gt;= 2.2 (Apache Tomcat 4.0.4-b3)</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/installing/index.html">http://xml.apache.org/cocoon/installing/index.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="download">
+<s:title>Download Cocoon</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Releases: <a href="http://xml.apache.org/cocoon/dist/">http://xml.apache.org/cocoon/dist/</a></li>
+  <li>Nightly Snapshots: <a href="http://cvs.apache.org/snapshots/xml-cocoon2/">http://cvs.apache.org/snapshots/xml-cocoon2/</a></li>
+  <li>CVS: cvs -d :pserver:anoncvs@apache.org:/home/cvspublic co -r HEAD xml-cocoon2</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="install">
+<s:title>Cocoon installieren</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Binary Version (WAR File): cp cocoon.war tomcat/webapps/.</li>
+  <li>Source Version: ./build.sh -Dinclude.webapp.libs=yes -Dinclude.scratchpad.libs=yes webapp</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="xml_intro">
+<s:title>Kleine XML Einf&#252;hrung</s:title>
+<s:content>
+<p>
+<ol>
+  <li>XML Einf&#252;hrung von Marc Liyanage: <a href="http://www.futurelab.ch/xmlkurs/index.html">http://www.futurelab.ch/xmlkurs/index.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+
+
+<s:slide id="xml_beispiel">
+<s:title>XML Beispiel</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+
+<they-rule>
+
+<directors>
+  <director did="michael">
+    <name>
+      <first>Michael</first>
+      <middle-initial>H</middle-initial>
+      <last>Wechner</last>
+    </name>
+  
+    <companies>
+      <company cid="lenya">
+    </companies>
+  </director>
+</directors>
+
+<companies>
+  <company cid="lenya">
+    <name>Lenya</name>
+      <board-of-directors>
+        <director did="michael" type="president">
+        <director did="david">
+      </board-of-directors>
+  </company>
+</companies>
+
+</they-rule>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+
+<s:slide id="xml_schema_beispiel">
+<s:title>XML Schema Beispiel</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="they-rule">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="directors" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="companies" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="directors">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="director" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="director">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="did" use="required" type="xs:string"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="name">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="first" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="middle-initial" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="last" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="xslt_beispiel">
+<s:title>XSLT Beispiel</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:output method="html" version="1.0" indent="yes" encoding="ISO-8859-1"/>
+
+<xsl:template match="/">
+<xsl:apply-templates select="/they-rule/directors"/>
+<xsl:apply-templates select="/they-rule/companies"/>
+</xsl:template>
+
+<xsl:template match="directors">
+<h1>Directors</h1>
+<xsl:apply-templates select="director"/>
+</xsl:template>
+
+<xsl:template match="director">
+<p>
+<b>Name:</b>
+<xsl:value-of select="name/first"/>
+<xsl:apply-templates select="name/middle-initial"/>
+<xsl:apply-templates select="name/last"/>
+</p>
+</xsl:template>
+
+</xsl:stylesheet>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="grundelemente">
+<s:title>Cocoon Sitemap: Grundelemente</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Sitemap</li>
+  <li>Pipeline/Resource/View</li>
+  <li>Matcher</li>
+  <li>Generator/Reader</li>
+  <li>Transformer</li>
+  <li>Serializer</li>
+  <li>...</li>
+  <li>Action/Selector</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="matchers">
+<s:title>Sitemap Component: Matchers</s:title>
+<s:content>
+<p>
+<ol>
+  <li>WildCard URI Matcher</li>
+  <li>Regexp URI Matcher</li>
+  <li>Request Parameter Matcher</li>
+  <li>Wildcard Request Parameter Matcher</li>
+  <li>Wildcard Session Parameter Matcher</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/matchers/matchers.html">http://xml.apache.org/cocoon/userdocs/matchers/matchers.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="readers">
+<s:title>Sitemap Component: Readers</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Resource Reader</li>
+  <li>Database Reader</li>
+  <li>JSP Reader</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/readers/readers.html">http://xml.apache.org/cocoon/userdocs/readers/readers.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="generators">
+<s:title>Sitemap Component: Generators</s:title>
+<s:content>
+<p>
+<ol>
+  <li>File Generator</li>
+  <li>HTML Generator</li>
+  <li>Directory Generator</li>
+  <li>Stream Generator</li>
+  <li>Proxy Generator</li>
+  <li>PHP Generator</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/generators/generators.html">http://xml.apache.org/cocoon/userdocs/generators/generators.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="transformers">
+<s:title>Sitemap Component: Transformers</s:title>
+<s:content>
+<p>
+<ol>
+  <li>XSLT Transformer</li>
+  <li>XInclude Transformer</li>
+  <li>SQL Transformer</li>
+  <li>LDAP Transformer</li>
+  <li>Chart Transformer</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/transformers/transformers.html">http://xml.apache.org/cocoon/userdocs/transformers/transformers.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="serializers">
+<s:title>Sitemap Component: Serializers</s:title>
+<s:content>
+<p>
+<ol>
+  <li>XML Serializer</li>
+  <li>HTML Serializer</li>
+  <li>Text Serializer</li>
+  <li>PDF Serializer</li>
+  <li>WML/WAP Serializer</li>
+  <li>SVG/JPEG Serializer</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/serializers/serializers.html">http://xml.apache.org/cocoon/userdocs/serializers/serializers.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="actions">
+<s:title>Sitemap Component: Actions</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Form Validator Action</li>
+  <li>Resource Exist Action</li>
+  <li>Request Parameter Action</li>
+  <li>Authenticator Action</li>
+  <li>Authorizer Action</li>
+  <li>More Info: <a href="http://xml.apache.org/cocoon/userdocs/actions/actions.html">http://xml.apache.org/cocoon/userdocs/actions/actions.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="xsp">
+<s:title>XSP - Extensible Server Pages</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+
+<xsp:page language="java" xmlns:xsp="http://apache.org/xsp">
+
+<xsp:structure>
+  <xsp:include>java.text.DateFormat</xsp:include>
+  <xsp:include>java.util.Locale</xsp:include>
+</xsp:structure>
+
+<current-date>
+  <xsp:logic>
+  Date date=new Date();
+  DateFormat df=DateFormat.getDateTimeInstance(DateFormat.FULL,  //date
+                                               DateFormat.SHORT, // time
+                                               new Locale("de","DE"));
+  </xsp:logic>
+
+  <xsp:expr>df.format(date)</xsp:expr>
+</current-date>
+</xsp:page>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="logisheets">
+<s:title>Logicsheets</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+<?xml version="1.0"?>
+
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xsp="http://apache.org/xsp"
+  xmlns:xsp-lenya="http://www.lenya.org/xsp/lenya/1.0"
+>
+
+<xsl:template match="xsp:page">
+  <xsp:page>
+    <xsl:apply-templates select="@*"/>
+
+    <xsp:structure>
+      <xsp:include>java.text.DateFormat</xsp:include>
+      <xsp:include>java.util.Locale</xsp:include>
+    </xsp:structure>
+
+    <xsl:apply-templates/>
+  </xsp:page>
+</xsl:template>
+
+<xsl:template match="xsp-lenya:current-date">
+  <xsp:logic>
+  Date date=new Date();
+  DateFormat df=DateFormat.getDateTimeInstance(DateFormat.FULL,  //date
+                                               DateFormat.SHORT, // time
+                                               new Locale("de","DE"));
+  </xsp:logic>
+
+  <current-date><xsp:expr>df.format(date)</xsp:expr></current-date>
+</xsl:template>
+
+<!-- Standard Templates -->
+...
+
+</xsl:stylesheet>  
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="logging">
+<s:title>Logging and Debugging</s:title>
+<s:content>
+<p>
+<ol>
+  <li>logkit
+<br />
+<source>
+<![CDATA[
+<map:transformer 
+     name="xlink" 
+     src="org.lenya.cms.cocoon.transformation.IncludeTransformer" 
+     logger="oscom.sitemap.transformer.xlink"
+>
+  <publication type="oscom"/>
+</map:transformer>
+]]>
+</source>
+<br />
+<source>
+<![CDATA[
+  <!-- log-level: One of DEBUG, INFO, WARN, ERROR, FATAL-ERROR.  -->
+  <categories>
+    <category name="sitemap" log-level="WARN">
+      <category name="action" log-level="WARN">
+        <category name="xopus-handler" log-level="DEBUG">
+          <log-target id-ref="sitemap"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+      </category>
+      <log-target id-ref="sitemap"/>
+      <log-target id-ref="error"/>
+    </category>
+    <category name="oscom" log-level="DEBUG">
+      <log-target id-ref="sitemap"/>
+      <log-target id-ref="error"/>
+    </category>
+  </categories>
+]]>
+</source>
+           </li>
+  <li>log4j</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="lenya">
+<s:title>Lenya resp. Lenya</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Content Management System</li>
+  <li>NZZ, Universit&#228;t Z&#252;rich, Computerworld, ...</li>
+  <li><a href="http://incubator.apache.org/">http://incubator.apache.org/</a></li>
+  <li>Apache Slide (WebDAV, JSR 170)</li>
+  <li><a href="/lenya/index.html">Demo</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="hands_on_slides">
+<s:title>Hands-On Slides</s:title>
+<s:content>
+<p>
+<ol>
+  <li>HTML</li>
+  <li>PDF</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="hands_on_OSCOM">
+<s:title>Hands-On OSCOM</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Authoring</li>
+  <li>Live</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="conclucsion">
+<s:title>Fazit</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Wunder dauern ein bisschen l&#228;nger!</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="buecher">
+<s:title>B&#252;cher</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Cocoon 2 Programming: Web Publishing with XML and Java</li>
+  <li>Cocoon: Developer's Handbook</li>
+  <li>Cocoon: Building XML Applications</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+<s:slide id="communities">
+<s:title>Communities</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Cocoon Users Group Switzerland: <a href="http://www.cocoon-users.ch">http://www.cocoon-users.ch</a></li>
+  <li>Lenya Sprints</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="more_info">
+<s:title>Links</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Cocoon Docu Wiki: <a href="http://wiki.cocoondev.org">http://wiki.cocoondev.org</a></li>
+  <li>CocoonDev: <a href="http://www.cocoondev.org/index.html">http://www.cocoondev.org/index.html</a></li>
+  <li>CocoonCenter: <a href="http://www.cocooncenter.org">http://www.cocooncenter.org</a></li>
+  <li>More Links: <a href="http://xml.apache.org/cocoon/link/sites.html">http://xml.apache.org/cocoon/link/sites.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="vielen_dank">
+<s:title>Vielen Dank f&#252;r Ihre Teilnahme!</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Fragen?</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+	
+</s:slideset>	

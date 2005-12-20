@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-5">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-4</Previous>
+  <Next>slide-6</Next>
+</Navigation>
+
+<Content>
+  <Title>Component Layers</Title>
+
+  <Points>
+    <Point>
+      <Keywords>View: XSP, XSLT</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Controller: Java</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Model: XML</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Interworking of MVC: Cocoon Sitemap</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

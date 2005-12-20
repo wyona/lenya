@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Apache Lenya</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michi@apache.org</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2004-02-17</s:start>
+				<s:end>2004-02-19</s:end>
+			</s:confdates> 
+  			<s:conftitle>LOTS 2005, Bern, Switzerland</s:conftitle> 
+  			<s:address>
+Alexis Park Resort
+Las Vegas, Nevada, US
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio">
+<s:title>Short Bio of michi</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth</li>
+  <li>Co-Founder Wyona</li>
+  <li>Co-Founder OSCOM</li>
+  <li>Original Creator of Apache Lenya</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="lenya1.2.x">
+<s:title>Apache Lenya 1.2.x</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Demo: <a href="http://olr.kbs.uni-hannover.de:8888/index.html">http://olr.kbs.uni-hannover.de:8888/index.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="lenya1.4-dev">
+<s:title>Apache Lenya 1.4-dev</s:title>
+<s:content>
+<p>
+<ol>
+  <li>JSR-170/JCR, Jackrabbit</li>
+  <li>XUL/XAML</li>
+  <li>Publets</li>
+  <li>Portlets</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="qanda">
+<s:title>Q and A</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Thanks</li>
+  <li>Questions and Answers</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+</s:slideset>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<Slide Id="slide-0" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="meta.xml"/>
+
+<Navigation>
+  <!--<Previous>slide-0</Previous>-->
+  <Next>slide-1</Next>
+</Navigation>
+
+<Content>
+  <Title>Lenya Content Management System</Title>
+
+  <Points>
+    <Point>
+      <Keywords>michael.wechner@lenya.org</Keywords>
+      <Comments/>
+    </Point>
+
+    <Point>
+      <Keywords>First Annual Open Source CMS Conference, Z&#252;rich, Switzerland</Keywords>
+      <Comments/>
+    </Point>
+
+    <Point>
+      <Keywords>Thursday, March 21, 2002</Keywords>
+      <Comments/>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

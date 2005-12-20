@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Powering high-volume websites with Apache Lenya/Cocoon and mod_lenya</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michi@apache.org</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2003-11-15</s:start>
+				<s:end>2003-11-17</s:end>
+			</s:confdates> 
+  			<s:conftitle>ApacheCon, Las Vegas 2004</s:conftitle> 
+  			<s:address>
+Alexis Park Resort
+Las Vegas, Nevada, US
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio">
+<s:title>Short Bio of michi</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth</li>
+  <li>Co-Founder Wyona</li>
+  <li>Co-Founder OSCOM</li>
+  <li>Original Creator of Apache Lenya</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="lenya1.2.x">
+<s:title>Apache Lenya 1.2.x</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Demo: <a href="http://olr.kbs.uni-hannover.de:8888/index.html">http://olr.kbs.uni-hannover.de:8888/index.html</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="lenya1.4-dev">
+<s:title>Apache Lenya 1.4-dev</s:title>
+<s:content>
+<p>
+<ol>
+  <li>JSR-170/JCR, Jackrabbit</li>
+  <li>XUL/XAML</li>
+  <li>Publets</li>
+  <li>Portlets</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="components">
+<s:title>Components</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Apache Webserver 2</li>
+  <li>mod_lenya (<a href="http://svn.apache.org/repos/asf/">http://svn.apache.org/repos/asf/</a>)</li>
+  <li>mod_proxy</li>
+  <li>Tomcat or Jetty</li>
+  <li>Lenya/Cocoon</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="schema">
+<s:title>Schema</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+            +---------------+                      
+            +               +
+            +    Browser    +
+            +               +
+            +---------------+                            +---------------------+
+                ||                                       |tomcat / jetty       |      
+                || (1)                                   | +-----------------+ |
+                \/                                       | | cocoon          | |
++---------------->>-+    (2)                             | | +-------------+ | |
+|                +-----------+     +-----------------+   | | |             | | |
+|                | mod_lenya |====>+ cache directory +<======|             | | |
+|                +-----------+     +-----------------+   | | |    Lenya    | | |                  
+|  Apache 2         | ||                 ====================>             | | |
+|                   | \/ (3)            //               | | +-------------+ | |       
+|                +-----------+         //                | +-----------------+ |
+|                | mod_proxy |========//                 +---------------------+
+|                +-----------+             
+|                   |                                          
++-----------------<<+ (4)                                         
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+
+
+
+<s:slide id="cocoonsitemap">
+<s:title>Cocoon Sitemap Snippet</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+      <map:match pattern="*/**.html">
+        <!-- caching read -->
+        <map:select type="resource-exists">
+          <map:when test="{global:cache-dir}/{../1}/{../2}.html">
+            <map:read src="{global:cache-dir}/{../1}/{../2}.html" mime-type="text/html"/>  
+          </map:when>
+          <map:otherwise>
+            <map:generate src="..."/>
+	    <map:transform src="..."/>
+	    <map:transform src="..."/>
+            <!-- caching write -->
+	    <map:select type="parameter">
+              <map:parameter name="parameter-selector-test" value="{../1}"/>
+              <map:when test="live">           	
+              <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
+                <map:parameter name="source" value="{global:cache-dir}/{../1}/{../2}.html"/>
+              </map:transform>   
+              <map:transform type="write-source">
+                 <map:parameter name="serializer" value="html-no-dtd"/>
+              </map:transform>
+             <map:transform src="../../xslt/authoring/edit/removeSourceTags.xsl"/>             
+            </map:when>
+            </map:select>
+          </map:otherwise>  
+        </map:select>	
+        <map:serialize type="html"/>
+      </map:match>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="httpd.conf">
+<s:title>Apache httpd.conf</s:title>
+<s:content>
+<p>
+<source>
+<![CDATA[
+  LoadModule lenya_module   lib/apache/mod_lenya.so
+
+  <VirtualHost 192.168.1.1>
+    <IfModule mod_lenya.c>
+       LenyaCacheDir "<WEBAPP-DIR>/lenya/pubs/<PUB-ID>/work/cache/live"
+       Prefix "/"
+       Index "index.html"
+       Logging On
+    </IfModule>
+
+    ProxyPass  /cgi-bin/ !
+
+#   Read CSS and Images directly through Apache
+#   Create softlinks within Apache htdocs:
+    ProxyPass /lenya/<PUB-ID>/live/css/ !
+    ProxyPass /lenya/<PUB-ID>/live/images/ !
+
+    ProxyPass  / http://127.0.0.1:8080/<PUB-ID>/live/
+    ProxyPassReverse  / http://127.0.0.1:8080/<PUB-ID>/live/
+  </VirtualHost>
+]]>
+</source>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="dependency-manager">
+<s:title>Dependency Manager</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Publisher</li>
+  <li>Resolve dependencies</li>
+  <li>Delete entries from cache</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="casestudy">
+<s:title>Case Study: Newspaper</s:title>
+<s:content>
+<p>
+<ol>
+  <li>10 Mio pageviews per month</li>
+  <li>2 Debian machines</li>
+  <li>Loadbalancer</li>
+  <li>Akamai (304)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="generalization1">
+<s:title>Generalization 1: mod_proxy_x</s:title>
+<s:content>
+<p>
+<ol>
+  <li>mod_proxy_http</li>
+  <li>mod_proxy_ajp</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="generalization2">
+<s:title>Generalization 2: Servlet API</s:title>
+<s:content>
+<p>
+<ol>
+  <li>request.insertIntoCache()</li>
+  <li>request.deleteFromCache()</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="acknowledgements">
+<s:title>Acknowledgements</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Gregor Imboden</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="qanda">
+<s:title>Q and A</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Thanks</li>
+  <li>Questions and Answers</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+</s:slideset>

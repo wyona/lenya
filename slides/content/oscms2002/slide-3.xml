@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-3">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-2</Previous>
+  <Next>slide-4</Next>
+</Navigation>
+
+<Content>
+  <Title>Lenya (CMS)</Title>
+
+  <Points>
+    <Point>
+      <Keywords>The Lorax (Dr. Seuss): Business is business! And business must grow, regardless of crummies in tummies, you know.</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Solution Provider: Efficiency</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Client: Total Cost of Ownership</Keywords>
+    </Point>
+    <Point>
+      <Keywords>See the Lenya Demo Website</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

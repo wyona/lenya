@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<Meta>
+  <Author>
+    <FirstName>Michael</FirstName>
+    <LastName>Wechner</LastName>
+    <Webpage>http://www.lenya.ch/people/michael-wechner.html</Webpage>
+  </Author>
+
+  <Title>Lenya Content Management System</Title>
+
+  <Occasion>First Annual Open Source CMS Conference</Occasion>
+
+  <Date>
+    <Year>2002</Year>
+    <Month Name="March">3</Month>
+    <Day Name="Thursday">21</Day>
+  </Date>
+</Meta>

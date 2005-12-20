@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-6">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-5</Previous>
+  <Next>slide-8</Next>
+</Navigation>
+
+<Content>
+  <Title>Example: Access Controller</Title>
+
+  <Points>
+    <Point>
+      <Keywords>Interworking: <a href="">Sitemap</a></Keywords>
+    </Point>
+    <Point>
+      <Keywords>Model: IML and PML (XACML)</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Controller: AbstractAuthorizer.authorize, AbstractAuthenticator.authenticate</Keywords>
+    </Point>
+    <Point>
+      <Keywords>View: Login, Logout, Switch User, Usermanagement, etc.</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Lenya - a Cocoon based CMF/S</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michi@apache.org</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2003-11-16</s:start>
+				<s:end>2003-11-19</s:end>
+			</s:confdates> 
+  			<s:conftitle>ApacheCon, Las Vegas 2003</s:conftitle> 
+  			<s:address>
+Alexis Park Resort
+Las Vegas, Nevada, US
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio">
+<s:title>Short Bio of michi</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at Swiss Federal Institute of Technology (Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth</li>
+  <li>Co-Founder Wyona</li>
+  <li>Co-Founder OSCOM</li>
+  <li>Original Creator of Lenya: A Cocoon based CMF/S (subproject under incubation)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+
+
+
+<s:slide id="samples">
+<s:title>Sample Publications</s:title>
+<s:content>
+<p>
+<ol>
+  <li><a href="/lenya/blog/introduction.html">Lenya's Weblog</a></li>
+  <li><a href="/lenya/default/introduction.html">Default</a></li>
+  <li><a href="/lenya/docs-new/introduction.html">Project Site and Documentation</a></li>
+  <li><a href="/lenya/oscom/introduction.html">OSCOM CMF/S Matrix</a></li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="areas">
+<s:title>Areas</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Admin</li>
+  <li>Site</li>
+  <li>Authoring</li>
+  <li>"Staging" (Collaborative Pages, e.g. Newspaper Frontpage)</li>
+  <li>"Live"</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+
+<s:slide id="architecture">
+<s:title>Architecture</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Lenya Core</li>
+  <li>Lenya Publications</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="core_features">
+<s:title>Core Features</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Workflow</li>
+  <li>Access Controlling</li>
+  <li>Versioning</li>
+  <li>Editor Interfaces</li>
+  <li>Content Creator/Deleter API</li>
+  <li>Publisher API</li>
+  <li>Scheduler</li>
+  <li>Search Engine</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="publications">
+<s:title>Publications</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Information Architecture</li>
+  <li>Functionality</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="tasks">
+<s:title>Ant Tasks</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Content Creator/Deleter</li>
+  <li>Workflow</li>
+  <li>Publisher</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="flow">
+<s:title>Flow</s:title>
+<s:content>
+<p>
+<ol>
+  <li>User Management</li>
+  <li>Group Management</li>
+  <li>IP/Subnet Management</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="roadmap">
+<s:title>Roadmap</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Consolidation of Core Features</li>
+  <li>Consolidation of Sample Publications</li>
+  <li>WebDAV (AtomAPI), JSR-170</li>
+  <li>Multimedia/Data Repository (Lookups)</li>
+  <li>Lenya 1.2</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="community">
+<s:title>Community</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Installation</li>
+  <li>Sample Publications</li>
+  <li>Release Management</li>
+  <li>Documentation</li>
+  <li>Leverage and Reuse</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="mypublication">
+<s:title>My Publication</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Take existing publication (sample or third party)</li>
+  <li>Create from scratch</li>
+  <li>Enhance existing Cocoon "sitemap"</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="conclusion">
+<s:title>Conclusion</s:title>
+<s:content>
+<p>
+<ol>
+  <li>thanks</li>
+  <li>BOF on CMF/S: Tuesday Night, 8 pm, Apollo 3</li>
+  <li>BOF on Lexus (XUpdate)?</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+	
+</s:slideset>

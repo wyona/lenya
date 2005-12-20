@@ -1,0 +1,257 @@
+<?xml version="1.0" ?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<!-- slideset - the root element of SlideML -->
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Distributed Content Management using P2P</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michael.wechner@lenya.org</s:email>
+				<s:orgname>lenya.org</s:orgname>
+		</s:author>
+			
+		
+		<!-- confgroup - a wrapper for conference information, confgroup is optional -->
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2002-09-25</s:start>
+				<s:end>2002-09-27</s:end>
+			</s:confdates> 
+  			<s:conftitle>OSCOM2 Berkeley 2002</s:conftitle> 
+  			<s:address>
+			 Lawrence Hall of Science,
+			 University of California,
+			 Berkeley, CA 94720 
+			 USA
+			</s:address> 
+								<!-- another possibility would have been
+			
+			<s:address xsi:type="dcterms:URI">
+			 http://www.lhs.berkeley.edu/generalinfo/directions.html
+			</s:address> 
+																		-->
+  		</s:confgroup>	
+		
+		
+		<!-- 
+		Here comes the Dublin Core Block 
+		dc:subject and dc:date are mandatory, dc:rights isn't. 
+		-->
+		<!-- comma-separated keywords -->
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<!-- dc:date is the creation date. Dates are in the YYYY-MM-DD format (ISO 8601).-->
+		<dc:date>Fill in the date in YYYY-MM-DD format</dc:date>
+		<!-- some information about the rights management -->
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract
+		<!-- 
+		================================================================
+		XHTML 1.0. Elements here. 
+		
+		Allowed are: 
+		
+		code - for code examples, use inline CDATA 
+		p - for paragraphs
+		em - for emphasis
+		strong - which renders bold, 
+				 but as b will depreceated we use strong instead.
+		br - breaks a line
+		
+		a - for links and email address'
+		
+		ul - unordered list
+		ol - ordered list
+		li - listitem
+		
+		img - for images (max. size hasn't been defined yet)
+		
+		table - a table - do not use tables for layout purposes!
+		tr - table row
+		td - table data cell
+		
+		================================================================
+		-->
+		</s:abstract>
+	</s:metadata>
+	
+
+
+
+
+	
+	<!-- slide id's are optional, but strongly advised. 
+	 Two demo slides. Note: you cannot use numbers only as a slide id.
+	 If you have numbers, use an underscore or a letter instead-->
+	 
+
+	<s:slide id="overview">
+		<s:title>Overview</s:title>
+		<s:content>
+<p>
+<ol>
+  <li>Origin of Lenya</li>
+  <li>Lenya Demo</li>
+  <li>Distributed Content Management using P2P</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="what_is_dcm">
+		<s:title>What is distributed content management</s:title>
+		<s:content>
+<p>
+<ol>
+  <li>Distributed physically</li>
+  <li>Distributed virtually</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+
+	<s:slide id="what_is_p2p">
+		<s:title>What is P2P</s:title>
+		<s:content>
+<p>
+No clear definition, but ...<br />
+<ol>
+  <li>Peer nodes know about other peers</li>
+  <li>Peers form virtual network</li>
+  <li>Peers are grouped into peergroups</li>
+  <li>Peers are Server and Client</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="p2p_models">
+		<s:title>P2P Models</s:title>
+		<s:content>
+<p>
+<ol>
+<!--
+  <li>Atomistic (Multiplayer Network Games, etc.)</li>
+-->
+  <li>User centered (Instant Messaging, etc.)</li>
+  <li>Data centered (Scientific Papers, etc.)</li>
+  <li>Resource centered (SETI@home, etc.)</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+	<s:slide id="how_p2p_works">
+		<s:title>How does P2P work?</s:title>
+		<s:content>
+<p>
+<ol>
+  <li>Broadcast/Greeting (Gnutella, Freenet, etc.)</li>
+  <li>Server (Napster, etc.)</li>
+  <li>That's it?</li>
+</ol>
+</p>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="jxta">
+		<s:title>JXTA</s:title>
+		<s:content>
+<ol>
+  <li>PRP</li>
+  <li>PIP</li>
+  <li>PMP</li>
+  <li>PBP</li>
+  <li>RVP</li>
+  <li>PEP</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+
+
+
+
+	<s:slide id="examples">
+		<s:title>"Applications"</s:title>
+		<s:content>
+<ol>
+  <li>Scientific Papers (Physics: : <a href="http://www.arxiv.org">http://www.arxiv.org</a>, <a href="http://www.publiclibraryofscience.org">http://www.publiclibraryofscience.org</a>, Mathematics, etc.)</li>
+  <li>Enterprise Alliance (Newspapers, etc.)</li>
+  <li>RSS propagation (Slashdot, etc.)</li>
+  <li>Content Replication (Loadbalancing, etc.)</li>
+  <li>Virtual Workspaces (Managers on Airplanes, etc.)</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="business_side">
+		<s:title>The Business Side</s:title>
+		<s:content>
+<ol>
+  <li><a href="http://marketplacena.gartner.com/010022501oth-NextPage.PDF">http://marketplacena.gartner.com/010022501oth-NextPage.PDF</a></li>
+  <li>Gartner Group believes that by the year 2003, 30 percent of corporations will have experimented with data centered P2P applications (0.7 probality)</li>
+  <li>Gartner Group believes that by the year 2005, 50 percent of the current server-based content management vendors will add data centered P2P functionality to their products (0.7 probablity)</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="software">
+		<s:title>Software</s:title>
+		<s:content>
+<ol>
+  <li>SOAP meets RSS by Dave Winer (<a href="http://www.thetwowayweb.com/soapMeetsRss">http://www.thetwowayweb.com/soapMeetsRss</a>)</li>
+  <li>BlogNet (<a href="http://www.peerfear.org/blognet/">http://www.peerfear.org/blognet/</a>)</li>
+  <li>JXTA Content Management Service (<a href="http://cms.jxta.org">http://cms.jxta.org</a>)</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+
+
+	<s:slide id="p2p_challenges">
+		<s:title>P2P Challenges</s:title>
+		<s:content>
+<ol>
+  <li>Security/Access Controlling</li>
+  <li>DRM (Digital Right Managements)</li>
+  <li>Falsifying/Data Integrity</li>
+  <li>Network Saturation</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+
+	<s:slide id="p2p_advantages">
+		<s:title>P2P Advantages</s:title>
+		<s:content>
+<ol>
+  <li>Scalability</li>
+  <li>Redundancy</li>
+  <li>Ease of use</li>
+</ol>
+		</s:content>
+	</s:slide>
+
+	
+</s:slideset>	

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-1" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="meta.xml"/>
+
+<Navigation>
+  <Previous>slide-0</Previous>
+  <Next>slide-2</Next>
+</Navigation>
+
+<Content>
+  <Title>XPS (Extensible Publishing System)</Title>
+
+  <Points>
+    <Point>
+      <Keywords>
+      October 2000: "NZZ Online" (Neue Z&#252;rcher Zeitung) is powered by XPS
+      </Keywords>
+    </Point>
+    <Point>
+      <Keywords>
+      May 2001: WYSIWYG Interface featuring Xopus from Q42
+      </Keywords>
+    </Point>
+    <Point>
+      <Keywords>
+      March 2002: Online Version of "NZZ am Sonntag" powered by XPS
+      </Keywords>
+    </Point>
+    <Point>
+      <Keywords>
+      See the XPS Demo Website
+      </Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

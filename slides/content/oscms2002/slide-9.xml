@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-9">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-8</Previous>
+  <!--<Next>slide-10</Next>-->
+</Navigation>
+
+<Content>
+  <Title>Conclusion</Title>
+
+  <Points>
+    <Point>
+      <Keywords>Microsoft is NOT the enemy</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

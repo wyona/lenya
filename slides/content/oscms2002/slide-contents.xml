@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-contents" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="meta.xml"/>
+
+<Contents>
+
+<Slide>
+  <Id><xi:include href="slide-0.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-0.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-1.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-1.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-2.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-2.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-3.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-3.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-7.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-7.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-4.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-4.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-5.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-5.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-6.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-6.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-8.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-8.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+<Slide>
+  <Id><xi:include href="slide-9.xml#xpointer(/Slide/@Id)"/></Id>
+  <xi:include href="slide-9.xml#xpointer(/Slide/Content/Title)"/>
+</Slide>
+
+</Contents>
+
+</Slide>

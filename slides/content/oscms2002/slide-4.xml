@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-4">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-3</Previous>
+  <Next>slide-5</Next>
+</Navigation>
+
+<Content>
+  <Title>Components</Title>
+
+  <Points>
+    <Point>
+      <Keywords>Pipeline Processor (Cocoon2)</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Access Controller</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Content Creator/Importer</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Revision Controller</Keywords>
+    </Point>
+    <Point>
+      <Keywords>"Editor Interfaces"</Keywords>
+    </Point>
+    <Point>
+      <Keywords>"Service Interfaces"</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Workflow Manager</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Publisher/Replicator/Exporter</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Event Dispatcher/Handler</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Dependency Manager</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Scheduler</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

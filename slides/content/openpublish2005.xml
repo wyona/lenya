@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>The Pitfalls of Open Source Content Management</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michael.wechner@wyona.com</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2005-07-27</s:start>
+				<s:end>2005-07-29</s:end>
+			</s:confdates> 
+  			<s:conftitle>Open Publish, Sydney, 2005</s:conftitle> 
+  			<s:address>
+			Wesley Conference Center, Pitt Street
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>This presentation is not about spreading FUD, but to help avoiding the pitfalls when implementing an open source content management solution</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio">
+<s:title>Short Bio of michi</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth</li>
+  <li>Co-Founder of Wyona</li>
+  <li>Co-Founder of OSCOM</li>
+  <li>Original Creator of Apache Lenya</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="questions">
+<s:title>Questions to the audience</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Who has deployed an Open Source CMS?</li>
+  <li>Who has tried to use an Open Source CMS but failed?</li>
+  <li>Who has migrated from one OS CMS to another?</li>
+  <li>Who has dumped an OS CMS and went back to a proprietary solution?</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="presentation">
+<s:title>Presentation</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Marketing Lingo</li>
+  <li>Who are you actually adressing? (Business, IT, Management, ...)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="money">
+<s:title>Money</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Negotiation</li>
+  <li>Feel good package</li>
+  <li>No License Fee</li>
+  <li>Valueing the service/solution</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="culture">
+<s:title>Corporate Culture</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Responsibility</li>
+  <li>Character</li>
+  <li>Scapegoat</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="community">
+<s:title>Community</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Diversity</li>
+  <li>Attached to a specific company</li>
+  <li>Two-Way</li>
+  <li>One-Way</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="code">
+<s:title>Code</s:title>
+<s:content>
+<p>
+<ol>
+  <li>OpenOffice.org</li>
+  <li>Linux</li>
+  <li>Mozilla</li>
+  <li>Contributions</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="support">
+<s:title>Support</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Service Level Agreements</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="future">
+<s:title>Future</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Roadmap</li>
+  <li>Backwards Compatibility</li>
+  <li>Leaving the room ...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="fud">
+<s:title>FUD - Fear Uncertainty Doubt</s:title>
+<s:content>
+<p>
+<ol>
+  <li>IBM ...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="integration">
+<s:title>Integration</s:title>
+<s:content>
+<p>
+<ol>
+  <li>ECM</li>
+  <li>Desktop</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="summary">
+<s:title>Summary</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Expectations</li>
+  <li>Strength - Weakness</li>
+  <li>Professional: Inside - Outside</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="qanda">
+<s:title>Q and A</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Thanks</li>
+  <li>Questions and Answers</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+</s:slideset>

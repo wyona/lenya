@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-2">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-1</Previous>
+  <Next>slide-3</Next>
+</Navigation>
+
+<Content>
+  <Title>Lessons learned</Title>
+
+  <Points>
+    <Point>
+      <Keywords>Architecture</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Usability</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Installation</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Integration</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Maintenance</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Change Management</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Scalability</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Extensibility</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Transparency</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Migrability</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-7">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+<!--
+  <Previous>slide-6</Previous>
+  <Next>slide-8</Next>
+-->
+</Navigation>
+
+<Content>
+  <Title>Cross-Media Publishing</Title>
+
+  <Images>
+    <Image>
+      <HRef>cross-media-publishing.jpeg</HRef>
+      <Comments/>
+    </Image>
+  </Images>
+</Content>
+
+</Slide>

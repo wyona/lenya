@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<Slide Id="slide-8">
+
+<xi:include href="meta.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<Navigation>
+  <Previous>slide-6</Previous>
+  <Next>slide-9</Next>
+</Navigation>
+
+<Content>
+  <Title>Vision</Title>
+
+  <Points>
+    <Point>
+      <Keywords>CMS API based on XML Standards</Keywords>
+    </Point>
+    <Point>
+      <Keywords>The CMS as Interpreter of XML variants</Keywords>
+    </Point>
+    <Point>
+      <Keywords>Components are plugable independent of programming language</Keywords>
+    </Point>
+  </Points>
+</Content>
+
+</Slide>

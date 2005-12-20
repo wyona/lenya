@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<Slides xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="meta.xml"/>
+
+<Content>
+
+  <xi:include href="slide-0.xml"/>
+  <xi:include href="slide-1.xml"/>
+  <xi:include href="slide-2.xml"/>
+  <xi:include href="slide-3.xml"/>
+  <xi:include href="slide-7.xml"/>
+  <xi:include href="slide-4.xml"/>
+  <xi:include href="slide-5.xml"/>
+  <xi:include href="slide-6.xml"/>
+  <xi:include href="slide-8.xml"/>
+  <xi:include href="slide-9.xml"/>
+
+</Content>
+
+</Slides>

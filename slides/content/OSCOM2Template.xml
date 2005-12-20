@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<!--
+======================================================================
+Here comes the License
+======================================================================
+a w3c license
+
+-->
+
+
+<!--
+=======================================================================
+GENERAL INFORMATION
+===================
+You find general information about SlideML at:
+http://www.bitflux.ch/slideml/
+
+
+Some additional information:
+
+LINKS
+=====
+Links with "http://..." point to external resources, all other links
+to internal resources.
+
+xsi:type="dcterms:URI"
+======================
+This will only be necessary, if an element where a SimpleLiteral is 
+expected, uses an URI.
+Elements that cry for an URI, will have a href and alt attribute. 
+Example: orglogo.
+=======================================================================
+-->
+
+
+<!-- slideset - the root element of SlideML -->
+<s:slideset 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<s:metadata>
+		<!-- title - title of the presentation -->
+		<s:title>Fill in Presentation Title</s:title>
+		
+		<!-- authorgroup or author - authorgroup, if there is more than one author,
+		 otherwise just use author without s:authorgroup -->
+		
+		<!-- author - the author of the presentation -->
+		<s:author>Fill in Author name
+				<!-- email - here the author's email address -->
+				<s:email>Fill in Email Address of Author (optional)</s:email>
+				<!-- jobtitle - the author's jobtitle -->
+				<s:jobtitle>Fill in Jobtitle of Author (optional)</s:jobtitle>
+				<!-- orgname  - an organization's name -->
+				<s:orgname>Fill in Organization Name of Author (optional)</s:orgname>
+				<!-- orglogo - the logo of the organization, 
+				external resources start with http://; internal resources without http://-->
+				<!-- orglogo is optional -->
+				<s:orglogo href="Fill in some href" alt="Fill in some alt text"/>
+				<!-- authorblurb - A bio, a short description or note about an author -->
+				<s:authorblurb>Fill in some bio (optional)
+				<!-- 
+		================================================================
+		XHTML 1.0. Elements here. 
+		
+		Allowed are: 
+		
+		code - for code examples, use inline CDATA 
+		p - for paragraphs
+		em - for emphasis
+		strong - which renders bold, 
+				 but as b will depreceated we use strong instead.
+		br - breaks the line (use sparringly or not at all)
+		
+		a - for links and email address'
+		
+		ul - unordered list
+		ol - ordered list
+		li - listitem
+		
+		img - for images (max. size hasn't been defined yet)
+		
+		table - a table - do not use tables for layout purposes!
+		tr - table row
+		td - table data cell
+		
+		================================================================
+		--> 	</s:authorblurb>
+		</s:author>
+			
+		
+		<!-- confgroup - a wrapper for conference information, confgroup is optional -->
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2002-09-25</s:start>
+				<s:end>2002-09-27</s:end>
+			</s:confdates> 
+  			<s:conftitle>The Second Open Source Content Management Conference</s:conftitle> 
+  			<s:address>
+			 Lawrence Hall of Science,
+			 University of California,
+			 Berkeley, CA 94720 
+			 USA
+			</s:address> 
+								<!-- another possibility would have been
+			
+			<s:address xsi:type="dcterms:URI">
+			 http://www.lhs.berkeley.edu/generalinfo/directions.html
+			</s:address> 
+																		-->
+  		</s:confgroup>	
+		
+		
+		<!-- 
+		Here comes the Dublin Core Block 
+		dc:subject and dc:date are mandatory, dc:rights isn't. 
+		-->
+		<!-- comma-separated keywords -->
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<!-- dc:date is the creation date. Dates are in the YYYY-MM-DD format (ISO 8601).-->
+		<dc:date>Fill in the date in YYYY-MM-DD format</dc:date>
+		<!-- some information about the rights management -->
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract
+		<!-- 
+		================================================================
+		XHTML 1.0. Elements here. 
+		
+		Allowed are: 
+		
+		code - for code examples, use inline CDATA 
+		p - for paragraphs
+		em - for emphasis
+		strong - which renders bold, 
+				 but as b will depreceated we use strong instead.
+		br - breaks a line
+		
+		a - for links and email address'
+		
+		ul - unordered list
+		ol - ordered list
+		li - listitem
+		
+		img - for images (max. size hasn't been defined yet)
+		
+		table - a table - do not use tables for layout purposes!
+		tr - table row
+		td - table data cell
+		
+		================================================================
+		-->
+		</s:abstract>
+	</s:metadata>
+	   <!-- METADATA PART IS FINISHED, NOW COME THE INDIVIDUAL SLIDES -->
+	
+	
+	<!-- slide id's are optional, but strongly advised. 
+	 Two demo slides. Note: you cannot use numbers only as a slide id.
+	 If you have numbers, use an underscore or a letter instead-->
+	 
+	<s:slide id="nameofslideone">
+		<s:title>First Slide</s:title>
+		<s:content>
+		<!-- XHTML 1.0. Elements here. Allowed are: see above under abstract -->
+		</s:content>
+	</s:slide>
+	<s:slide id="nameofslidetwo">
+		<s:title>Overview</s:title>
+		<s:content>
+		<!-- XHTML 1.0. Elements here. Allowed are: see above under abstract -->
+		</s:content>
+	</s:slide>
+	
+</s:slideset>	
+
