@@ -254,6 +254,10 @@
         <map:call resource="style-cms-page"/>
       </map:match>
 
+      <map:match pattern="*/">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+
       <map:handle-errors>
         <map:select type="exception">
           <map:when test="document-does-not-exist">
