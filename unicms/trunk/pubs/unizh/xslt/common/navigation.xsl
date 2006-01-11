@@ -18,8 +18,8 @@
         <xsl:variable name="itemNr" select="count(*)"/>
         <xsl:for-each select="*">
           <xsl:choose>
-	    <xsl:when test="@href">
-	      <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a>
+            <xsl:when test="@href">
+              <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a>
             </xsl:when>
             <xsl:otherwise>
               <xsl:choose>
@@ -53,10 +53,10 @@
 		</xsl:if>
         |
       </xsl:for-each>
-      <label for="formsearch" accesskey="5">Suche: </label>
+      <label for="formsearch">Suche: </label>
       <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
         <div class="serviceform">
-          <input type="text" name="queryString"/>
+          <input type="text" titel="suchen" name="queryString" accesskey="5" />
         </div>
         <div class="serviceform">
           <a href="javascript:document.forms['formsearch'].submit();">go!</a>
@@ -155,7 +155,7 @@
 
   <xsl:template match="xhtml:div[@id = 'tabs']">
     <div id="primarnav">
-      <a accesskey="1" name="navigation"><xsl:comment/></a> 
+      <a name="navigation"><xsl:comment/></a> 
       <xsl:for-each select="xhtml:div">
         <a href="{@href}">
           <xsl:if test="@current = 'true'">
@@ -183,7 +183,7 @@
 
   <xsl:template match="xhtml:div[@id = 'simplenav']">
     <div id="primarnav">
-	<a accesskey="1" name="navigation"><xsl:comment/></a>
+	<a name="navigation"><xsl:comment/></a>
       <xsl:for-each select="xhtml:div">
         <a href="{@href}"><xsl:value-of select="@label"/></a>
         <xsl:if test="@id = 'up'"><br/></xsl:if>

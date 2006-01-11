@@ -44,6 +44,8 @@
       <xsl:call-template name="html-head"/>
       <body>
         <div class="bodywidth">
+          <a accesskey="1" title="Zur Navigation springen" href="#navigation"><xsl:comment/></a>
+          <a accesskey="2" title="Zum Inhalt springen" href="#content"><xsl:comment/></a>
           <a name="top"><xsl:comment/></a>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
@@ -100,7 +102,7 @@
 
 
   <xsl:template name="one-column">
-    <a accesskey="2" name="content"><xsl:comment/></a>
+    <a name="content"><xsl:comment/></a>
     <h1>
       <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
         <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -116,7 +118,7 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     <div class="contcol2">
       <div class="content">
-        <a accesskey="2" name="content"><xsl:comment/></a>
+        <a name="content"><xsl:comment/></a>
         <h1>
           <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
             <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -141,7 +143,7 @@
       </div>
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -165,7 +167,7 @@
       </div>
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -188,7 +190,7 @@
       </div>
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -213,7 +215,7 @@
       </div>
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
           <xsl:apply-templates select="*/xhtml:body/*"/>
         </div>
         <xsl:call-template name="footer"/>
@@ -230,7 +232,7 @@
       </div>
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
            <p class="lead">
 	     <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
 	     <xsl:choose>
@@ -279,7 +281,7 @@
       </div> -->
       <div class="contentarea">
         <div class="content">
-          <a accesskey="2" name="content"><xsl:comment/></a>
+          <a name="content"><xsl:comment/></a>
           <p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
           </p>
