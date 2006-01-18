@@ -3,14 +3,13 @@
 
 /*allgemeine Definition*/
 body {
-  	ground-color: #fff;
   	font-size: 12px;
-  	font-family: Arial, sans-serif;
-  	line-height: 18px;
- 	color:#333;  
-  	margin:0px 20px;
-  	padding:0px;
-
+	font-family: Arial, sans-serif;
+	line-height: 18px;
+	color:#333;
+	margin:0px 20px;
+	padding:0px;
+	background-color: #FFFFFF;
  }
 
 .bodywidth {
@@ -47,7 +46,12 @@ h1 {
 h2 {
 	font-size: 12px;
 }
-h3, h4, h5, h6 {
+h3 {
+	font-size: 12px;
+	font-style: italic;
+	font-weight:bold;
+}
+h4, h5, h6 {
 	font-size: 12px;
 	font-style: italic;
 	font-weight:normal;
@@ -82,6 +86,9 @@ a {
 }
 a:hover {
 	background-color:#f0f0f5;
+}
+.contentarea a:visited {
+	color:#999999; 
 }
 a.arrow {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
@@ -143,6 +150,7 @@ img.icon {
 #headerarea {
 	width:100%;
 	display:block;
+	background-color: #666699;
 	height:90px;
 	min-width:600px;
 }
@@ -155,10 +163,12 @@ img.icon {
 }
 
 .imgunilogo {
+	background-color: #ccccff;
 	padding-left:15px;
 	height:45px;
 }
 .imginstitute {
+	background-color: #666699;
 	padding-left:15px;
 	height:45px;
 }
@@ -186,7 +196,7 @@ img.icon {
 }
 .endheaderline {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-	margin-bottom:26px;
+	margin-bottom:0px;
 	height:1px;
 }
 
@@ -207,7 +217,10 @@ img.icon {
 #breadcrumbnav a {
 	color:#999;
 }
-
+#breadcrumbnav a:hover {
+	color:#000;
+	background-color:#fff;
+}
 /*service navigation zB. home, sitemap, search */
 #servicenavpos {
 	margin-right:12px;
@@ -269,17 +282,22 @@ img.icon {
 	float:left;
 }
 
-/* Seconder navigation */
-#secnav {
-  	width:165px;
-  	float:left; 
-  	font-size: 11px;
-  	font-family: Arial, sans-serif;
-	line-height: 20px;
+/* linke spalte */
+#col1 {
+	width:165px;
+	float:left;
+	font-size: 11px;
+	font-family: Arial, sans-serif;
+	line-height: 15px;
 	margin-right:20px;
 }
-* html #secnav {
+* html #col1 {
   margin-right: 17px;
+ }
+
+/* Seconder navigation */
+#secnav {
+	line-height: 20px;
 }
 .navup  {
 	margin-top:1px;
@@ -339,61 +357,57 @@ img.icon {
 	width:125px;
 }
 
-/*orthonav*/
-#orthonav {
-	text-align: left;
-	color:#999;
-	margin-left:185px;
-}
-#orthonav .current{
-	color:#000;
-}
-
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
 	font-size: 9px;
 	line-height: 11px;
 	font-family: Verdana, sans-serif;
-	text-align: right;
-	margin-right:19px;
-	height:25px;
+	width:171px;
+	height:51px;
 	color:#666;
+	float:right;
 }
 #toolnav a {
 	color:#666; 
-	padding: 0 5px;
+	padding: 0 2px;
 }
 #toolnav a:hover {
 	background-color: transparent;
 }
-/* Navigation Ende*/
-/*4 splatige */
-
-#col1 {
-	width:165px;
-	float:left;
-	font-size: 11px;
-	font-family: Arial, sans-serif;
-	line-height: 15px;
-	margin-right:20px;
+#toolnav a.active {
+	color:#999;
 }
-* html #col1 {
-  margin-right: 17px;
- }
+.icontextpos {
+	width:171px;
+	height:18px;
+	margin-top:8px;
+}
+#icontext {
+	color:#333; 
+	padding: 0 0 1px 3px;
+	line-height: 14px;
 
+}
+.icontextbg {
+	background-color:#f0f0f5;
+}
+.icontextnobg {
+	background-color:#fff;
+}
+/*Quicklink */
 
-#col1 p {
+#quicklink p {
 	padding-left: 7px;
 	margin-bottom: 0;
 }
 
-#col1 ul {
+#quicklink ul {
 	padding:0 0 0 7px;
 	list-style-type:none;
 	margin: 0;
 }
 
-#col1 ul li a {
+#quicklink ul li a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	background-position:left top;
 	padding-left:13px;
@@ -402,7 +416,7 @@ img.icon {
 	width:145px;
 }
 
-#col1 .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
 }
@@ -419,12 +433,13 @@ img.icon {
 }
 
 #col2_nolimit {
-	position:absolute; 
+	
 	margin-left:185px;
 	margin-top:0px;
 }
 * html #col2_nolimit {
   margin-left: 0px;
+  position:absolute; 
  }
  
 .contentarea {
@@ -506,11 +521,14 @@ ul.sitemap ul ul ul li a {
 /*Related Box*/
 * html .relatedbox {
 	margin-left:16px;
+	padding-right:0px;
 }
 .relatedbox {
 	float:right;
 	width:178px;
-	margin-left:20px;
+	margin-left:18px;
+	padding-right:2px;
+
 }
 .relatedboxborder {
 	width:178px;
@@ -518,7 +536,7 @@ ul.sitemap ul ul ul li a {
 	margin-bottom:18px;
 }
 .relatedboxcont {
-	padding: 8px 9px 10px 9px;
+	padding: 8px 11px 10px 11px;
 	line-height:15px;
 	font-size:11px;
 }
@@ -659,18 +677,14 @@ ol.list a {
 	background-color:#f0f0f5;
 	margin-bottom:5px;
 	margin-top:5px;
-
 }
-
-
 *html .imgMitLegende {
 	margin-top:14px;
 }
 
 .fullimgMitLegende {
 	background-color:#f0f0f5;
-	margin-bottom:5px;
-	margin-top:14px;
+	margin:14px 0 5px 0;
 	width:415px;
 }
 
@@ -685,7 +699,7 @@ ol.list a {
 	height:15px; 
 	z-index:5; 
 	margin-left: 395px; 
-	margin-top: 5px;
+	margin-top: 10px;
 }
 .imgLupehalfImg {
 	position:absolute; 
@@ -693,16 +707,22 @@ ol.list a {
 	height:15px; 
 	z-index:5; 
 	margin-left: 184px; 
+	margin-top: 10px;
+}
+.fullimgMitLegende .imgLupeFullImg, .imgTextfluss .imgLupehalfImg {
 	margin-top: 5px;
 }
-.fullimg {
+
+.imgpadding {
 	margin-top:5px;
-	margin-bottom:5px;
+	margin-bottom:0px;
+	padding:0px;
 }
-.teaserImg160 {
+
+.teaserImg {
 	margin-bottom:3px;
 }
-*html .teaserImg160 {
+*html .teaserImg {
 	margin-bottom:6px;
 }
 .teaser64long {
@@ -889,21 +909,52 @@ input.searchoption {
 	height:15px;
 }
 /*table*/
-.tabletitel {
+.tablestyle1 {
+	font-size:11px;
+}
+.tablestyle2 {
+	font-size:11px;
+	border-bottom:1px solid #999;
+	border-left:1px solid #999;
+}
+ .tabletitel1 {
 	height:30px;
 	font-weight:bold;
 	font-size:11px;
 	background-color: #f0f0f0;
 	padding-left:4px;
 }
-.tablecontent {
+ .tabletitel2 {
+	height:30px;
+	font-weight:bold;
 	font-size:11px;
+	background-color: #f0f0f0;
+	padding-left:4px;
+	border-top:1px solid #999;
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+}
+.tablestyle2 td {
+	border-right:1px solid #999;
+}
+.tablestyle2 p {
+	margin-left:4px;
 }
 th {
 	height:30px;
 }
+.tablestyle2 th {
+	height:30px;
+	border-right:1px solid #999;
+}
+.tablestyle2 th {
+	border-right:1px solid #999;
+}
 th.width170 {
 	width:170px;
+}
+.tablestyle2 th.width170 {
+	border-right:1px solid #999;
 }
 th.width105 {
 	width:105px;
@@ -914,6 +965,9 @@ th.width105 {
 	width:100%;
 	margin:26px 0 0 0;
 	border:0px;
+}
+.trstripe{
+	background-color: #f0f0f0;
 }
 /* Misc*/
 
@@ -966,8 +1020,6 @@ th.width105 {
 	border:0px;
 	margin: 7px 0;
 }
-
-
 
 /* uni additions */
 

@@ -18,12 +18,6 @@
 
     <map:pipeline>
     
-      <map:match pattern="live/**">
-        <map:generate type="serverpages" src="../../content/menus/live.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-     <!-- document type: links -->
       <map:match type="doctype" pattern="xhtml">
         <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
         <map:serialize type="xml"/>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <css>
+
 /*allgemeine Definition*/
 body {
   	ground-color: #fff;
   	font-size: 16px;
   	font-family: Arial, sans-serif;
   	line-height: 22px;
- 	color:#333;  
+ 	color:#000;  
   	margin:0px 20px;
   	padding:0px;
 
@@ -72,7 +73,7 @@ h3, h4, h5, h6 {
 /*link*/
 a { 
 	text-decoration: none;
-	color:#333399;  
+	color:#0000FF;  
 }
 /*
 .content li a {
@@ -80,7 +81,8 @@ a {
 }
 */
 a:hover {
-	background-color:#f0f0f5;
+	background-color:#000;
+	color:#FFF;
 }
 a.download {
 	background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
@@ -121,6 +123,7 @@ a.back {
 #headerarea {
 	width:100%;
 	display:block;
+	background-color: #666699;
 	height:90px;
 	min-width:600px;
 }
@@ -133,10 +136,12 @@ a.back {
 }
 
 .imgunilogo {
+	background-color: #ccccff;
 	padding-left:15px;
 	height:45px;
 }
 .imginstitute {
+	background-color: #666699;
 	padding-left:15px;
 	height:45px;
 }
@@ -164,7 +169,7 @@ a.back {
 }
 .endheaderline {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-	margin-bottom:26px;
+	margin-bottom:0px;
 	height:1px;
 }
 
@@ -176,13 +181,19 @@ a.back {
 	margin-left:6px;
 	margin-bottom:3px;
 	text-align: left;
-	color:#333399; 
+	color:#999; 
   	line-height: 12px;
     font-family: Verdana, sans-serif;
 	font-size: 12px;
  	height:30px;
 }
-
+#breadcrumbnav a {
+	color:#999;
+}
+#breadcrumbnav a:hover {
+	color:#000;
+	background-color:#fff;
+}
 
 /*service navigation zB. home, sitemap, search */
 #servicenavpos {
@@ -233,28 +244,33 @@ a.back {
 	display:block;
 }
 #primarnav a:hover {
-	background-color:#f0f0f5;
+	background-color:#000;
+	color:#FFF;
 }
 #primarnav a.activ {
 	padding:0px 7px;
-	background-color:#f0f0f5;
+	background-color:#000;
+	color:#FFF;
 }
 #primarnav .linkseparator {
 	color:#666699;
 	float:left;
 }
-
-/* Seconder navigation */
-#secnav {
-  	width:165px;
-  	float:left; 
-  	font-size: 14px;
-  	font-family: Arial, sans-serif;
-	line-height: 20px;
+/* linke spalte */
+#col1 {
+	width:165px;
+	float:left;
+	font-size: 14px;
+	font-family: Arial, sans-serif;
+	line-height: 18px;
 	margin-right:20px;
 }
-* html #secnav {
+* html #col1 {
   margin-right: 17px;
+ }
+/* Seconder navigation */
+#secnav {
+	line-height: 20px;
 }
 .navup  {
 	margin-top:1px;
@@ -272,17 +288,19 @@ a.back {
 	font-weight:bold;
 	font-size: 12px;
 	font-family: Arial, sans-serif;
-	color:#333399;
+	color:#0000FF;
 }
 #secnav ul li a {
 	padding-left: 7px;
 	display:block;
 }
 #secnav a:hover {
-	background-color:#f0f0f5;
+	background-color:#000;
+	color:#FFF;
 }
 #secnav a.activ {
-  	background-color:#f0f0f5;
+  	background-color:#000;
+	color:#FFF;
 }
 #secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
@@ -310,24 +328,14 @@ a.back {
 	width:125px;
 }
 
-/*orthonav*/
-#orthonav {
-	text-align: left;
-	color:#999;
-	margin-left:185px;
-}
-#orthonav .current{
-	color:#000;
-}
-
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
 	font-size: 14px;
 	line-height: 16px;
 	font-family: Verdana, sans-serif;
-	text-align: right;
-	margin-right:59px;
-	height:25px;
+	width:170px;
+	height:51px;
+	float:right;
 	color:#666;
 }
 #toolnav a {
@@ -336,51 +344,59 @@ a.back {
 #toolnav a:hover {
 	background-color: transparent;
 }
+.icontextpos {
+	width:170px;
+	height:18px;
+	margin-top:8px;
+}
+#icontext {
+	color:#333; 
+	padding: 0 0 1px 3px;
+	line-height: 14px;
+
+}
+.icontextbg {
+	background-color:#f0f0f5;
+}
+.icontextnobg {
+	background-color:#fff;
+}
+
 /* Navigation Ende*/
 /*4 splatige */
 
-#col1 {
-	width:165px;
-	float:left;
-	font-size: 14px;
-	font-family: Arial, sans-serif;
-	line-height: 15px;
-	margin-right:20px;
-}
-* html #col1 {
-  margin-right: 17px;
- }
+
 #col2_nolimit {
-	position:absolute; 
 	margin-left:185px;
 	margin-top:0px;
 }
 * html #col2_nolimit {
   margin-left: 0px;
+  position:absolute; 
  }
 
-#col1 p {
+#quicklink p {
 	padding-left: 7px;
 	margin-bottom: 0;
 }
 
-#col1 ul {
+#quicklink ul {
 	padding:0 0 0 7px;
 	list-style-type:none;
 	margin: 0;
 }
 
-#col1 ul li a {
+#quicklink ul li a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	padding-left:13px;
 	background-repeat: no-repeat;
 	display:block;
 	width:145px;
 }
-#col1 .dotline, .relatedbox .dotline {
+#quicklink .dotline, .relatedbox .dotline {
 	margin: 7px 0;
 }
-#col1 .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
 }
@@ -444,7 +460,7 @@ a.back {
 	border: 1px solid #ccccff;
 }
 .relatedboxcont {
-	padding: 8px 9px 10px 9px;
+	padding: 8px 9px 10px 11px;
 	line-height:18px;
 	font-size:14px;
 }
@@ -619,11 +635,11 @@ ol li a {
 	margin-left: 184px; 
 	margin-top: 5px;
 }
-.fullimg {
+.imgpadding {
 	margin-top:5px;
 	margin-bottom:5px;
 }
-.teaserImg160 {
+.teaserImg {
 	margin-top:3px;
 }
 .teaser64long {
@@ -812,6 +828,7 @@ input.optiontag {
 
 
 
+
 /* uni additions */
 
 .attention {
@@ -861,7 +878,7 @@ table.imgMitLegende tr td img {
 
 
 a.namedanchor { 
-        background-image: none;
+  background-image: none;
 }
 
 .editview {

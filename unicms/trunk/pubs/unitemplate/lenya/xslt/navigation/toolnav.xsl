@@ -28,7 +28,16 @@
   <div id="toolnav">
     <xsl:apply-templates select="descendant::nav:node[@current = 'true']"/>
     <div id="print" href="{concat(descendant::nav:node[@current = 'true']/@id, '_', $chosenlanguage, '.print.html')}">
-      Print
+      <xsl:choose>
+        <xsl:when test="$chosenlanguage = 'en'">Print this page</xsl:when>
+        <xsl:otherwise>Diese Seite drucken</xsl:otherwise>
+      </xsl:choose>
+    </div>
+    <div id="fontsize">
+      <xsl:choose>
+        <xsl:when test="$chosenlanguage = 'en'">Change font size</xsl:when>
+        <xsl:otherwise>Schrift gr&#246;sser/kleiner</xsl:otherwise>
+      </xsl:choose>
     </div>
     <div id="simpleview">
       <xsl:attribute name="href">
@@ -41,6 +50,10 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="$chosenlanguage = 'en'">PDA view</xsl:when>
+        <xsl:otherwise>PDA-optimierte Ansicht</xsl:otherwise>
+      </xsl:choose>
     </div>
   </div>
 </xsl:template>

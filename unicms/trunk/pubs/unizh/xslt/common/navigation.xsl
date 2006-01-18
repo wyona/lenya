@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: header.xsl,v 1.40 2005/03/09 11:11:13 peter Exp $ -->
 <xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
-                xmlns="http://www.w3.org/1999/xhtml" 
-                xmlns:dc="http://purl.org/dc/elements/1.1/" 
-                xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
-                xmlns:uz="http://unizh.ch" 
-                xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
-                >
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns="http://www.w3.org/1999/xhtml" 
+>
                 
 
   <xsl:template match="xhtml:div[@id = 'orthonav']">
@@ -42,16 +37,16 @@
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
       <xsl:for-each select="xhtml:div[@id != 'search']">
-		<xsl:if test="@id = 'home'">
-		  <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a> 	
-		</xsl:if>
-		<xsl:if test="@id = 'contact'">
-		  <a href="{@href}" accesskey="3"><xsl:value-of select="."/></a> 	
-		</xsl:if>
-		<xsl:if test="@id = 'sitemap'">
-		  <a href="{@href}" accesskey="4"><xsl:value-of select="."/></a> 	
-		</xsl:if>
-        |
+        <xsl:if test="@id = 'home'">
+           <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a> 	
+        </xsl:if>
+        <xsl:if test="@id = 'contact'">
+         <a href="{@href}" accesskey="3"><xsl:value-of select="."/></a> 	
+        </xsl:if>
+        <xsl:if test="@id = 'sitemap'">
+          <a href="{@href}" accesskey="4"><xsl:value-of select="."/></a> 	
+        </xsl:if>
+       |
       </xsl:for-each>
       <label for="formsearch">Suche: </label>
       <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
@@ -68,21 +63,24 @@
 
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
+      <div class="icontextpos">
+        <div id="icontext">&#160;</div>
+      </div>
       <xsl:for-each select="xhtml:div[@class='language']">
         <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> |
       </xsl:for-each>
-      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', 'Print', 'width=700,height=700,scrollbars')"><img src="{$imageprefix}/icon_print.gif" alt="icon print link " width="10" height="10" border="0" /></a> |
-      <a>
+      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', '{xhtml:div[@id = 'print']}', 'width=700,height=700,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" border="0" /></a> |
+      <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
         <xsl:attribute name="href">
           <xsl:choose>
             <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">?fontsize=normal</xsl:when>
-            <xsl:when test="contains($fontsize, 'normal')">?fontsize=big</xsl:when>
             <xsl:otherwise>?fontsize=big</xsl:otherwise>
           </xsl:choose>
         </xsl:attribute>
-        <img src="{$imageprefix}/icon_bigfont.gif" alt="icon bigfont link" border="0" width="16" height="10"/></a> |
-      <a href="{xhtml:div[@id = 'simpleview']/@href}"><img src="{$imageprefix}/icon_pda.gif" alt="icon pda link" width="14" height="10" border="0" /></a>
+        <img src="{$imageprefix}/icon_bigfont.gif" alt="{xhtml:div[@id = 'fontsize']}" border="0" width="18" height="9"/></a> |
+      <a href="{xhtml:div[@id = 'simpleview']/@href}" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'simpleview']}')"><img src="{$imageprefix}/icon_pda.gif" alt="{xhtml:div[@id = 'simpleview']}" width="18" height="9" border="0" /></a>
     </div>
+    <div class="floatclear"><xsl:comment/></div>
   </xsl:template>
 
 

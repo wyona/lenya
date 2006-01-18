@@ -15,8 +15,7 @@
    <map:actions/>
   </map:components>
 
-  <map:views>
-  </map:views>
+  <map:views/>
 
   <map:resources>
     
@@ -28,7 +27,6 @@
           <map:parameter name="language" value="{page-envelope:document-language}"/>
           <map:parameter name="languages" value="{page-envelope:document-languages-csv}"/>
           <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
-          <map:parameter name="completearea" value="{area}"/>
           <map:parameter name="nodeid" value="{page-envelope:document-node-id}"/>
           <map:parameter name="contextprefix" value="{request:contextPath}"/>
           <map:parameter name="rendertype" value="{rendertype}"/>
@@ -59,18 +57,18 @@
         <map:generate src="resources/{page-envelope:area}/{1}.meta"/>
         <map:serialize type="xml"/>
       </map:match>
+
     </map:pipeline>
 
     <map:pipeline type="noncaching">
-      
-
+ 
       <!-- UniZH config -->
       <map:match pattern="unizh.xconf">
         <map:generate src="config/unizh/unizh.xconf"/>
         <map:serialize type="xml"/>
       </map:match>
       
-      <!-- load XML file for ancestry -->
+      <!-- load XML file for ancestors -->
       <!-- pattern="xml/{area}/{doctype}/{document-path}" -->
       <map:match pattern="xml/**/*.xml">       
         <map:generate src="content/{1}/{2}.xml"/>
@@ -244,7 +242,7 @@
           <map:part src="cocoon://navigation/{4}/{5}/simplenav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/> 
           <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
-          <map:part src="cocoon://navigation/{4}/{5}/allnodes/{6}.html.xml"/> 
+          <map:part src="cocoon://navigation/{4}/{5}/allnodes/{6}.html.xml"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
 

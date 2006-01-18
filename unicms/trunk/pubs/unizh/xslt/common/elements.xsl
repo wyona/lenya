@@ -176,7 +176,17 @@
 
 
   <xsl:template match="xhtml:a">
-    <a class="arrow" href="{@href}">
+    <a href="{@href}">
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
+            <xsl:text>extern</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+             <xsl:text>arrow</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:copy-of select="@target"/>
       <xsl:apply-templates/>
     </a>
@@ -317,20 +327,14 @@
 
 
   <xsl:template match="unizh:contcol1[parent::unizh:homepage or parent::unizh:homepage4cols]">
-    <div class="contcol1" id="col1" bxe_xpath="/{$document-element-name}/unizh:contcol1">
-      <xsl:apply-templates/><xsl:comment/>
-    </div>
-  </xsl:template>
-
-  <xsl:template id="col1" match="unizh:contcol1">
-    <div class="contcol1" id="col1">
+    <div class="contcol1" bxe_xpath="/{$document-element-name}/unizh:contcol1">
       <xsl:apply-templates/><xsl:comment/>
     </div>
   </xsl:template>
 
 
   <xsl:template match="unizh:quicklinks">
-      <div class="quicklinks">
+      <div class="quicklinks" id="quicklink">
         <div class="solidline">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
         </div>
@@ -565,14 +569,14 @@
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
             <xsl:choose>
               <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
-                <a class="arrow" href="{$contextprefix}{@href}">Weiter</a><br/>
+                <a class="arrow" href="{$contextprefix}{@href}">Weiter</a>
               </xsl:when>
               <xsl:otherwise>
                 <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}">
                   <xsl:value-of select="*/*/unizh:short/xhtml:a"/>
                 </a>
                 <xsl:if test="$area = 'authoring'">
-                  |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a><br/>
+                  |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a>
                 </xsl:if>
               </xsl:otherwise>
             </xsl:choose>
@@ -585,6 +589,11 @@
       </xsl:otherwise>
     </xsl:choose>
     <br/>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:p[parent::unizh:short]">
+    <xsl:apply-templates/>
   </xsl:template>
 
 

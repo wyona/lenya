@@ -102,8 +102,8 @@
 
 
   <xsl:template name="one-column">
-    <a name="content"><xsl:comment/></a>
     <h1>
+      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
         <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
       </div>
@@ -115,10 +115,12 @@
 
 
   <xsl:template name="two-columns">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    </div>
     <div class="contcol2">
+      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div class="content">
-        <a name="content"><xsl:comment/></a>
         <h1>
           <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
             <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -135,15 +137,17 @@
 
 
   <xsl:template name="three-columns">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:apply-templates select="/document/unizh:contcol1"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
+    </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
         <div class="content">
-          <a name="content"><xsl:comment/></a>
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -160,7 +164,9 @@
 
 
   <xsl:template name="overview">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
@@ -182,15 +188,17 @@
 
 
   <xsl:template name="homepage">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:apply-templates select="*/unizh:contcol1"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:apply-templates select="*/unizh:contcol1"/>
+    </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-          <a name="content"><xsl:comment/></a>
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -207,15 +215,17 @@
 
  
   <xsl:template name="homepage4columns">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    <xsl:apply-templates select="*/unizh:contcol1"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:apply-templates select="*/unizh:contcol1"/>
+    </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-          <a name="content"><xsl:comment/></a>
           <xsl:apply-templates select="*/xhtml:body/*"/>
         </div>
         <xsl:call-template name="footer"/>
@@ -225,14 +235,16 @@
 
 
   <xsl:template name="newsitem">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-          <a name="content"><xsl:comment/></a>
            <p class="lead">
 	     <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
 	     <xsl:choose>
@@ -272,7 +284,9 @@
 
 
   <xsl:template name="person">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    </div>
     <div class="contcol2">
       <!-- <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -280,8 +294,8 @@
         </div>
       </div> -->
       <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-          <a name="content"><xsl:comment/></a>
           <p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
           </p>
@@ -339,7 +353,9 @@
 
 
   <xsl:template name="redirect">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+    </div>
     <div class="contcol2">
       <div class="contentarea">
         <div class="content">
