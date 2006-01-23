@@ -1161,6 +1161,22 @@ a.namedanchor {
   max-width: 415px;
 }
 
+table.ornate {
+  border-collapse: separate;
+}
+
+table.ornate td {
+  border: 1px dotted;
+}
+
+table.striped {
+  border-collapse: separate;
+}
+
+table.striped td {
+  border: 1px dotted;
+}
+
 td .object object {
   max-width: 204px;
 }
@@ -1169,8 +1185,6 @@ td .object object {
 td .object object[width] {
   max-width: 204px;
 }
-
-
 
 
 .teaser .object object {
