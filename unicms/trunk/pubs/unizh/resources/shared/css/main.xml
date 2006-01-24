@@ -477,6 +477,13 @@ img.icon {
 .content2 .klein {
 	line-height:15px;
 }
+
+.content3 {
+	float:right;
+	width:178px;
+	margin-top:30px;
+}
+
 /*sitemap*/
 .navtitel a {
 	font-weight:bold;
@@ -605,6 +612,16 @@ ul.linknav {
 	display:block;
 	line-height:18px;
 	width: 185px;
+}
+
+.content3 ul.linknav li a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
+	background-position: left top;
+	padding-left:13px;
+	background-repeat: no-repeat;
+	display:block;
+	line-height:18px;
+	width: 165px;
 }
 
 .listarrow {
@@ -982,7 +999,7 @@ th.width105 {
 	border:0px;
 }
 
-.content .solidline {
+.content .solidline, .content3 .solidline {
 	background-color: #cccccc;
 }
 .solidlinemitmargin {
