@@ -22,7 +22,7 @@
   </xsl:variable>
                   
   <xsl:variable name="imageprefix" select="concat($contextprefix, '/unizh/authoring/images')"/>
-  <xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'shared')"/>
+  <xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'authoring')"/>
   
   <xsl:variable name="content" select="/document/content/*"/>
   
