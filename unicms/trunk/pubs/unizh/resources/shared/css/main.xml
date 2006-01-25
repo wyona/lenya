@@ -87,7 +87,7 @@ a {
 a:hover {
 	background-color:#f0f0f5;
 }
-.contentarea a:visited {
+.contentarea a:visited, .content3 a:visited {
 	color:#999999; 
 }
 a.arrow {
@@ -331,7 +331,7 @@ img.icon {
 #secnav a.activ {
   	background-color:#f0f0f5;
 }
-#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
+#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, .content3 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
 	padding:0px;
 	margin:0px;
@@ -416,7 +416,7 @@ img.icon {
 	width:145px;
 }
 
-#quicklink .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content3 .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
 }
