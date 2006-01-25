@@ -13,7 +13,7 @@
       <div style="float:right;width:195px;">
         <div class="imgunilogo">
           <a href="http://www.unizh.ch">
-            <img src="{$imageprefix}/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
+            <img src="{$localsharedresources}/images/logo.jpg" alt="unizh logo" width="180" height="45" border="0" />
           </a>
         </div>
         <div class="imginstitute">
