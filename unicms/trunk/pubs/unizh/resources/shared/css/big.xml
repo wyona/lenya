@@ -84,6 +84,9 @@ a:hover {
 	background-color:#000;
 	color:#FFF;
 }
+.contentarea a:visited, .content3 a:visited {
+	color:#999999; 
+}
 a.download {
 	background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
 	padding-left:13px;
@@ -302,7 +305,7 @@ a.back {
   	background-color:#000;
 	color:#FFF;
 }
-#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
+#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, .content3 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
 	padding:0px;
 	margin:0px;
@@ -396,7 +399,7 @@ a.back {
 #quicklink .dotline, .relatedbox .dotline {
 	margin: 7px 0;
 }
-#quicklink .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content3 .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
 }
@@ -444,6 +447,12 @@ a.back {
 }
 .content2 .klein {
 	line-height:16px;
+}
+
+.content3 {
+	float:right;
+	width:179px;
+	margin-top:30px;
 }
 
 /*Related Box*/
@@ -542,6 +551,16 @@ ul.linknav {
 	display:block;
 	width:185;
 	line-height:18px;
+}
+
+.content3 ul.linknav li a {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
+	background-position: left top;
+	padding-left:13px;
+	background-repeat: no-repeat;
+	display:block;
+	line-height:18px;
+	width: 165px;
 }
 
 .listarrow {
@@ -793,7 +812,7 @@ input.optiontag {
 	margin:0px;
 	border:0px;
 }
-.content .solidline {
+.content .solidline, .content3 .solidline {
 	background-color: #cccccc;
 }
 .solidlinemitmargin {
