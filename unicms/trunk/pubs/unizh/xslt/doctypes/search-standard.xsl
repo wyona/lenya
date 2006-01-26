@@ -46,8 +46,10 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-          <xsl:apply-templates select="/document/unizh:contcol1"/>
+          <div id="col1">
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+            <xsl:apply-templates select="/document/unizh:contcol1"/>
+          </div>
           <div class="contcol2">
             <div class="content">
               <h1> 
