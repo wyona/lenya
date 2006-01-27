@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CVS: $Id: parameter-doctype.xmap,v 1.12 2004/05/10 09:50:43 gregor Exp $ -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  
+  <map:components>
+    <map:actions>
+      <map:action logger="sitemap.action.sourcetype" name="sourcetype" src="org.apache.forrest.components.sourcetype.SourceTypeAction">
+        <sourcetype name="xhtml">
+          <document-element local-name="html"/>
+        </sourcetype>
+        <sourcetype name="homepage">
+          <document-element local-name="homepage"/>
+        </sourcetype>
+        <sourcetype name="webperls">
+          <document-element local-name="webperls"/>
+        </sourcetype>
+        <sourcetype name="dossiersbox">
+          <document-element local-name="dossiersbox"/>
+        </sourcetype>
+        <sourcetype name="newsletter">
+          <document-element local-name="newsletter"/>
+        </sourcetype>
+        <sourcetype name="section">
+          <document-element local-name="section"/>
+        </sourcetype>
+        <sourcetype name="sectionoverview">
+          <document-element local-name="sectionoverview"/>
+        </sourcetype>
+        <sourcetype name="dossiers">
+          <document-element local-name="dossiers"/>
+        </sourcetype>
+        <sourcetype name="dossiersoverview">
+          <document-element local-name="dossiersoverview"/>
+        </sourcetype>
+        <sourcetype name="dossier">
+          <document-element local-name="dossier"/>
+        </sourcetype>
+      </map:action>
+    </map:actions>
+  </map:components>
+  
+  <map:pipelines>
+    
+    <map:pipeline>
+      <!-- {area}/{uri} -->
+      <map:match pattern="*/**">
+        <map:act src="content/{1}/{page-envelope:document-path}" type="sourcetype">
+          <map:generate src="../../config/parameters/default.xsp" type="serverpages">
+            <map:parameter name="value" value="{sourcetype}"/>
+          </map:generate>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+    </map:pipeline>
+    
+  </map:pipelines>
+  
+</map:sitemap>

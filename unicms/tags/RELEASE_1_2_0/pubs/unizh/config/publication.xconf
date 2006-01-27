@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publication>
+  <languages>
+    <language>en</language>
+    <language default="true">de</language>
+  </languages>
+  <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
+  <path-mapper>org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper</path-mapper>
+  <document-builder>org.apache.lenya.cms.publication.DefaultDocumentBuilder</document-builder>
+  <breadcrumb-prefix></breadcrumb-prefix>
+</publication>

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+<!-- 
+  Replication to Another server of the HTML of the Headline's RSS
+  
+  See replication task of lenya (lenya-1.2-*/src/webapp/lenya/bin/replication)
+  
+  Depends on jsch-*.jar and ant-contrib-*.jar
+  These two libraries need to be copied to $ANT_HOME/lib
+
+  Also one needs to generate ssh keys, e.g.
+
+  ssh-keygen -t dsa
+  Copy .ssh/id_dsa.pub to remote server .ssh/authorized_keys
+
+  or
+
+  ssh-keygen -t rsa
+  Copy .ssh/id_rsa.pub to remote server .ssh/authorized_keys
+  
+-->
+
+
+<project default="replicate" basedir="." name="replicator">
+
+  <description>
+  	Copy the html of the headline'rss on the unizh server
+  </description>
+  
+  <target name="init">
+    <property file="local.build.properties"/>
+    <property file="build.properties"/>
+  </target>
+  
+  <target name="replicate" depends="init" description="Replicate the html of the rss of the headline">
+    <mkdir dir="${pending.dir}"/>
+  	<pathconvert 
+        property="pending-files.exist"
+        pathsep="/"
+        setonempty="false">
+            <path>
+                 <fileset dir="${pending.dir}">
+                 	<include name="${local.file}"/>
+            	 </fileset> 
+            </path>
+    </pathconvert>
+
+  	<antcall target="copy-to-remote" inheritAll="true"/>
+    <antcall target="cleanup"/>
+  </target>
+  
+  <target name="move-to-tmp" if="pending-files.exist">
+
+  	<tstamp>
+  	  <format property="timestamp" pattern="yyMMdd-HHmmss" locale="de"/>
+    </tstamp>
+
+  	<!-- move pending dir to tmp -->
+    <mkdir dir="${pending_tmp.dir}/${timestamp}"/>
+    <move todir="${pending_tmp.dir}/${timestamp}" failonerror="yes">
+  	  <fileset dir="${pending.dir}">
+    	  <include name="${local.file}"/>
+  	  </fileset>
+    </move>
+
+  	<pathconvert 
+      property="this-pending-files.exist"
+      pathsep="/"
+      setonempty="false">
+        <path>
+             <fileset dir="${pending_tmp.dir}/${timestamp}">
+             	<include name="${local.file}"/>
+        	 </fileset> 
+        </path>
+    </pathconvert>
+  	<!-- wait for Publisher to finish writing the files -->
+    <!--sleep seconds="5"/-->
+  </target>
+  
+  <target name="copy-to-remote" depends="move-to-tmp" if="this-pending-files.exist">
+  	<echo>copy-to-remote in</echo>
+   
+    <property name="src.dir" value="${pending_tmp.dir}/${timestamp}"/>
+  	<apply executable="scp" 
+      resultproperty="return.code"
+      errorproperty="error.message"
+      parallel="true"
+      verbose="true">        
+    	<srcfile/>
+        <arg value="${remote.username}@${remote.host}:${remote.dir}/${remote.file}"/>      
+    	<fileset dir="${src.dir}">
+          <include name="${local.file}"/>
+        </fileset>
+    </apply>
+
+  	<condition property="copy-success">
+      <equals arg1="${return.code}" arg2="0" trim="true"/>
+    </condition>
+    <antcall target="copy-success" inheritAll="true"/>
+  
+    <condition property="copy-fail">
+      <equals arg1="${return.code}" arg2="1" trim="true"/>
+    </condition>
+    <antcall target="copy-fail" inheritAll="true"/> 
+
+  </target> 
+  
+
+  <target name="copy-success" if="copy-success">
+    <echo>Data transfered to remote host ${remote.host}</echo>
+    <delete dir="${src.dir}"/>
+  </target>
+  
+  <target name="copy-fail" if="copy-fail">
+    <property name="failure.message"
+      value="Cannot copy files to remote host ${remote.host}: ${error.message}"/>
+    <property name="exception.dir" value="${src.dir}_EXCEPTION" />
+    <move todir="${exception.dir}">
+      <fileset dir="${src.dir}"/>
+    </move>
+    <echo message="${failure.message}"/>
+    <echo message="${failure.message}" file="${exception.dir}/error.log"/>  
+  </target>  
+
+  <target name="cleanup">
+    <delete dir="${pending_tmp.dir}/${timestamp}"/>
+  </target>
+
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publication>
+  <languages>
+    <language default="true">de</language>
+    <language>en</language>
+  </languages>
+  <path-mapper>org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper</path-mapper>
+  <document-builder>org.apache.lenya.cms.publication.DefaultDocumentBuilder</document-builder>
+  <!-- <breadcrumb-prefix>Universit?t Zuerich</breadcrumb-prefix>  -->
+  <link-attribute xpath="//@*[local-name() = 'href' or local-name() = 'link']"/>
+  <!-- <proxy area="live" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/live"/>
+  <proxy area="live" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/live"/>
+  <proxy area="authoring" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/authoring"/>
+  <proxy area="authoring" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/authoring"/> -->
+</publication>

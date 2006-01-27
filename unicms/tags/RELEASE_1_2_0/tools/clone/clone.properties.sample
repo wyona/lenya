@@ -1,0 +1,48 @@
+# Properties controlling the build process
+
+#------------------------------------------------------------------------------------
+# The prefix of the template directory
+
+old.publication.prefix=unitemplate
+
+#------------------------------------------------------------------------------------
+# The prefix of the new publication  
+
+new.publication.prefix=physik
+
+#------------------------------------------------------------------------------------
+# The name of the old publication 
+
+old.publication.name=Unitemplate
+
+#------------------------------------------------------------------------------------
+# The name of the new publication 
+
+new.publication.name=Physikalisches Institut
+
+#------------------------------------------------------------------------------------
+# The name of the section the publication belongs to
+# (the following sections exist: 
+#      forschung, studium, services, info, fakultaet, admin, leben) 
+
+new.publication.section=forschung
+
+
+#------------------------------------------------------------------------------------
+# The email address of the publication master
+
+new.publication.master=physik@physik.ch
+
+#------------------------------------------------------------------------------------
+# source directory of publication which shall be cloned
+
+source.dir=../../pubs/unitemplate
+
+#------------------------------------------------------------------------------------------------------------
+# source directory of publication which is being patched by publication from source.dir (see above)
+
+new.publication.source.dir=/home/USERNAME/src/lenya-pubs/physik
+
+#------------------------------------------------------------------------------------
+# destination directory of new publication
+destination.dir=/home/USERNAME/src/cocoon-lenya/build/lenya/webapp/lenya/pubs/physik

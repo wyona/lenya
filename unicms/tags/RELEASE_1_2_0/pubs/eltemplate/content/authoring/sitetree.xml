@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" label="Authoring">
+<node id="index">
+
+
+
+<label xml:lang="de">E-Learning Templates</label>
+</node>
+
+
+</site>

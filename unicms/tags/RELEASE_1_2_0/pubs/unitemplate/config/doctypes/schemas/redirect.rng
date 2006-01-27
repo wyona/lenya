@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="xhtml.rng">
+  
+  <start>
+    <ref name="unizh.redirect"/>
+  </start>
+
+  <define name="html.attlist">
+    <ref name="XHTML.version.attrib"/>
+    <ref name="I18n.attrib"/>
+    <ref name="dummy.attlist"/>
+    <ref name="unizh.columns.attrib"/>
+  </define>
+
+  <define name="lenya.meta">
+    <element name="lenya:meta">
+      <ref name="dublincore"/>
+      <ref name="unizh.redirect-to"/>
+    </element>
+  </define>
+
+</include>
+
+<define name="unizh.redirect">
+  <element name="unizh:redirect">
+    <ref name="html.attlist"/>
+    <ref name="lenya.meta"/>
+    <ref name="body"/>
+  </element>
+ </define>
+
+<define name="unizh.redirect-to">
+  <element name="unizh:redirect-to">
+    <attribute name="href">
+      <text/>
+    </attribute>
+  </element>
+</define>
+
+</grammar>
