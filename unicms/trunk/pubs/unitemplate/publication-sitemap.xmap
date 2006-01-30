@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
 <!-- CVS: $Id: publication-sitemap.xmap,v 1.75 2004/05/15 14:26:29 gregor Exp $ -->
 
   <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
@@ -23,6 +21,7 @@
         <untranslated-text>untranslated</untranslated-text>
         <cache-at-startup>false</cache-at-startup>
       </map:transformer>
+      <map:transformer name="index" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentIndexTransformer"/>
     </map:transformers>
     <map:selectors/>
     
@@ -181,8 +180,51 @@
 
       </map:match>
 
+      <!-- load XML file -->
+      <!-- pattern="{area}/{doctype}/{document-path}" -->
+      <map:match pattern="xml">
+
+        <!-- revision controller -->
+        <map:match type="step" pattern="view-revision">
+          <map:generate type="serverpages" src="../../content/rc/view.xsp">
+          </map:generate>
+          <map:transform src="../../xslt/rc/toDoc.xsl"/>
+          <map:serialize type="xml"/>
+        </map:match>
+
+        <!-- standard xml -->
+        <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
+
+        <map:serialize type="xml"/>
+
+      </map:match>
+
+      <map:match pattern="include-rss/**.rss.xml">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+        <map:act type="language-exists">
+          <map:generate src="content/{page-envelope:area}/{../../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform type="index">
+            <map:parameter name="documentId" value="{../../1}"/>
+            <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+            <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+          </map:transform>
+          <map:transform type="cinclude"/>
+          <map:transform src="../unizh/xslt/common/rss-writer.xsl">
+            <map:parameter name="channelid" value="/{page-envelope:publication-id}/{page-envelope:area}{../../1}"/>
+            <map:parameter name="servername" value="{request:serverName}"/>
+            <map:parameter name="serverport" value="{request:serverPort}"/>
+            <map:parameter name="contextprefix" value="{page-envelope:context-prefix}"/>
+          </map:transform>
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        </map:act>
+        <map:generate src="cocoon:/xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
       <!-- standard -->
-      <map:match pattern="*/**.html">
+      <map:match pattern="*/**.html.internal">
         <map:act type="language-exists">
           <map:select type="parameter">
             <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
@@ -206,9 +248,8 @@
               </map:select>
             </map:otherwise>
           </map:select>
-          <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
           <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
-          <map:serialize type="xhtml"/> 
+          <map:serialize type="xml"/> 
         </map:act>
   
         <!-- There is no version of the requested document-id for the
@@ -217,7 +258,45 @@
         <map:transform src="../../xslt/exception/missing-language.xsl"/>
         <map:call resource="style-cms-page"/>
       </map:match>
+        
+        
+      <map:match pattern="*/**.html">
+        <map:select type="resource-exists">
+          <map:when test="work/cache/{1}/{page-envelope:document-path}">
+            <map:generate src="work/cache/{1}/{page-envelope:document-path}"/>
+          </map:when>
+          <map:otherwise>
+            <map:generate src="cocoon:/{1}/{2}.html.internal"/>
+            <map:match pattern="live/**.html">
+              <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
+                <map:parameter name="source" value="work/cache/live/{page-envelope:document-path}"/>
+              </map:transform>
+              <map:transform type="write-source"/>
+              <map:transform src="../../xslt/authoring/edit/removeSourceTags.xsl"/>
+            </map:match>
+          </map:otherwise>
+        </map:select>
 
+        <map:transform src="../unizh/xslt/common/cachePostProcessing.xsl">
+          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+          <map:parameter name="contextprefix" value="{request:contextPath}"/>
+          <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
+          <map:parameter name="area" value="{page-envelope:area}"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/rss-elements.xsl">
+          <map:parameter name="contextprefix" value="{request:contextPath}"/>
+        </map:transform>
+
+        <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
+          <map:parameter name="version" value="{request-param:version}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}"/>
+        </map:transform>
+        <map:transform type="session"/>
+        <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+
+        <map:serialize type="xhtml"/>
+      </map:match>
 
       <map:match pattern="*/**.rss.xml">
         <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
