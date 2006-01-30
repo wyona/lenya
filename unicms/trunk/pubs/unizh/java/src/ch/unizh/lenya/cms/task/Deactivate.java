@@ -65,6 +65,8 @@ import org.apache.lenya.cms.task.ExecutionException;
 import org.apache.lenya.workflow.WorkflowException;
 import org.apache.log4j.Category;
 
+import ch.unizh.lenya.util.CacheHandler;
+
 /**
  * Deactivate a document.
  * 
@@ -75,6 +77,7 @@ public class Deactivate extends ResourceTask {
     private static final Category log = Category.getInstance(Deactivate.class);
 
     public static final String PARAMETER_LANGUAGE = "document-language";
+    public static final String TASK_NAME = "deactivate";
 
     /**
      * @see org.apache.lenya.cms.task.Task#execute(java.lang.String)
@@ -215,6 +218,14 @@ public class Deactivate extends ResourceTask {
                 log.debug("Deleting live version [" + liveVersion + "]");
             }
             
+            // Delete cache entry first because CacheHandler needs the respective node in the sitetree
+            try {
+                CacheHandler cacheHandler = new CacheHandler();
+                cacheHandler.deleteCache(liveVersion, true, TASK_NAME);
+            } catch (SiteTreeException e) {
+                throw new ExecutionException ("Unable to get sitetree.", e);
+            }
+            
             liveVersion.delete();
 
             Document liveDocument = liveVersion.getDocument();
@@ -224,6 +235,7 @@ public class Deactivate extends ResourceTask {
             }
 
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
+            
         }
     }
 

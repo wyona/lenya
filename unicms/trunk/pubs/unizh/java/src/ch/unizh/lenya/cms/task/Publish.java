@@ -42,11 +42,15 @@
  */
 package ch.unizh.lenya.cms.task;
 
+import java.io.File;
 import java.util.Arrays;
 
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.lenya.cms.publication.DocumentBuildException;
 import org.apache.lenya.cms.publication.Publication;
+import org.apache.lenya.cms.publication.SiteTree;
+import org.apache.lenya.cms.publication.SiteTreeNode;
+import org.apache.lenya.cms.publication.SiteTreeException;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.Resource;
 import org.apache.lenya.cms.publication.Version;
@@ -55,6 +59,8 @@ import org.apache.lenya.cms.site.SiteManager;
 import org.apache.lenya.cms.task.ExecutionException;
 import org.apache.lenya.workflow.WorkflowException;
 import org.apache.log4j.Category;
+
+import ch.unizh.lenya.util.CacheHandler;
 
 /**
  * Publish a document.
@@ -66,6 +72,7 @@ public class Publish extends ResourceTask {
     private static final Category log = Category.getInstance(Publish.class);
 
     public static final String PARAMETER_LANGUAGE = "document-language";
+    public static final String TASK_NAME = "publish";
 
     /**
      * @see org.apache.lenya.cms.task.Task#execute(java.lang.String)
@@ -177,16 +184,26 @@ public class Publish extends ResourceTask {
     protected void publish(Resource resource, String language)
         throws ParameterException, ExecutionException, PublicationException, WorkflowException {
         Version authoringVersion = getVersion(resource, Publication.AUTHORING_AREA, language);
+        
         if (authoringVersion.canWorkflowFire(getEventName(), getSituation())
             && areRequiredResourcesLive(resource)) {
             Version liveVersion = getVersion(resource, Publication.LIVE_AREA, getLanguage());
+            boolean isLive = isNodeLive(liveVersion);
 
             resource.getPublicationWrapper().copy(authoringVersion, liveVersion);
             copyResources(authoringVersion.getDocument(), liveVersion.getDocument());
 
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
+            
+            try {
+                CacheHandler cacheHandler = new CacheHandler();
+                cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
+            } catch (SiteTreeException e) {
+                throw new ExecutionException ("Unable to get sitetree.", e);
+            }
         }
     }
+    
 
     /**
      * Returns the language.
@@ -203,6 +220,21 @@ public class Publish extends ResourceTask {
         }
 
         return language;
+    }
+    
+    protected boolean isNodeLive (Version liveVersion){
+        
+        SiteTree siteTree = null;
+        
+        try {
+            Publication pub = liveVersion.getDocument().getPublication();
+            siteTree = pub.getTree(Publication.LIVE_AREA);
+            SiteTreeNode node = siteTree.getNode(liveVersion.getDocument().getId());
+            if (node != null) return true;
+        } catch (SiteTreeException e) {
+            return false;
+        }
+        return false;
     }
 
 }
