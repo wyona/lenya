@@ -60,7 +60,6 @@
     </div>
   </xsl:template>
 
-
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
       <div class="icontextpos">
@@ -69,7 +68,7 @@
       <xsl:for-each select="xhtml:div[@class='language']">
         <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> |
       </xsl:for-each>
-      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', '{xhtml:div[@id = 'print']}', 'width=700,height=700,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" border="0" /></a> |
+      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', '', 'width=700,height=700,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" border="0" /></a> |
       <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
         <xsl:attribute name="href">
           <xsl:choose>
