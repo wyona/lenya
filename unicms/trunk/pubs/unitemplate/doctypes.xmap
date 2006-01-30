@@ -8,7 +8,6 @@
     <map:generators default="file" />
     <map:matchers default="wildcard"/>
     <map:transformers default="xslt">
-      <map:transformer name="index" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentIndexTransformer"/>
       <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
       <map:transformer name="sitemap" logger="lenya.sitemap.transformer.sitemap" src="ch.unizh.lenya.cms.cocoon.transformation.SitemapTransformer"/>
     </map:transformers> 
@@ -191,6 +190,7 @@
         </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
+
         <map:transform src="../unizh/xslt/common/rss.xsl"/>
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
@@ -274,18 +274,19 @@
         </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
+<!--
         <map:transform src="../unizh/xslt/common/rss.xsl"/> 
         <map:transform type="cinclude"/>
+-->
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
         <map:transform src="lenya/xslt/navigation/logic.xsl">
           <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
         </map:transform> 
-       
+
         <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
           <map:parameter name="version" value="{request-param:version}"/>
           <map:parameter name="fontsize" value="{request-param:fontsize}"/>
         </map:transform> 
-
         <map:transform type="session"/>
 
         <map:call resource="transformation">
