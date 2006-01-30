@@ -267,6 +267,8 @@
           </map:when>
           <map:otherwise>
             <map:generate src="cocoon:/{1}/{2}.html.internal"/>
+<!-- Uncomment the following lines if you want to enable caching  -->
+<!-- 
             <map:match pattern="live/**.html">
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
                 <map:parameter name="source" value="work/cache/live/{page-envelope:document-path}"/>
@@ -274,6 +276,7 @@
               <map:transform type="write-source"/>
               <map:transform src="../../xslt/authoring/edit/removeSourceTags.xsl"/>
             </map:match>
+-->
           </map:otherwise>
         </map:select>
 
