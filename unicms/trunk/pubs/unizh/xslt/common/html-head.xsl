@@ -13,6 +13,7 @@
     <title>UZH - <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/> - <xsl:value-of select="*/lenya:meta/dc:title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <style type="text/css">
+    <!--
       <xsl:comment>
         <xsl:choose>
           <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
@@ -24,6 +25,7 @@
         </xsl:choose>
         @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
       </xsl:comment>
+      -->
     </style>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"></script>
     <xsl:if test="$document-element-name = 'unizh:news'">

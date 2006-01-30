@@ -356,7 +356,8 @@
       </div>
   </xsl:template>
 
-
+<!-- rss handling is done later in the pipeline so that rss feeds are not cached -->
+<!--
   <xsl:template match="unizh:rss-reader[parent::unizh:related-content]">
     <xsl:variable name="items" select="@items"/>
 
@@ -398,7 +399,7 @@
              </xsl:for-each>
            </xsl:when>
            <xsl:otherwise>
-            --
+            no rss
            </xsl:otherwise>
          </xsl:choose>
       </div>
@@ -421,10 +422,10 @@
          </xsl:if>
        </xsl:for-each>
        <xsl:if test="not(xhtml:rss/xhtml:channel/xhtml:item)">
-         <p> -- </p>
+         <p> no rss </p>
        </xsl:if>
   </xsl:template> 
-
+-->
   
   <xsl:template match="xhtml:body//xhtml:h2">
     <h2>
