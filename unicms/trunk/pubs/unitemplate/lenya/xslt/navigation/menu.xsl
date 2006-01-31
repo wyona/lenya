@@ -22,7 +22,7 @@
   <xsl:copy-of select="@basic-url"/>
   <xsl:copy-of select="@current"/> 
   <xsl:value-of select="nav:label"/>
-  <xsl:apply-templates select="nav:node[descendant-or-self::nav:node[@current = 'true'] or parent::nav:node[@current = 'true'] or ../nav:node[descendant-or-self::nav:node[@current = 'true']]]"/>
+  <xsl:apply-templates select="nav:node[descendant-or-self::nav:node[@current = 'true'] or parent::nav:node[@current = 'true'] or ../nav:node[@current = 'true']]"/>
  </xhtml:div>
 </xsl:template>
 
