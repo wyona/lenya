@@ -376,12 +376,16 @@
             <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
           </div>
           <div bxe_xpath="/{$document-element-name}/unizh:description">
-            <xsl:apply-templates select="unizh:person/unizh:description/*"/>
+            <xsl:apply-templates select="unizh:person/unizh:description"/>
           </div>
         </div>
         <xsl:call-template name="footer"/>
       </div>
     </div>
+  </xsl:template>
+
+  <xsl:template match="unizh:description[parent::unizh:person]">
+    <xsl:apply-templates/>
   </xsl:template>
 
 
