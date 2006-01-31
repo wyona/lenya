@@ -41,7 +41,7 @@
       <body>
         <div class="bodywidth">
           <div class="imgunilogo">
-            <img src="{$localsharedresources}/images/logo_simpleview.gif" alt="unizh logo" width="148" height="35"/>
+            <img src="{$localsharedresources}/images/logo_print_{$language}.gif" alt="unizh logo" width="148" height="35" border="0" />
           </div>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>

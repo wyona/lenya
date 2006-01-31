@@ -74,10 +74,22 @@
     <form id="formsearchcontent">
       <div class="searchtextblock">
         <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
-        <input class="submitbutton" type="submit" name="sa" value="{xhtml:input[@name='sa']/@value}"/> 
+        <input class="submitbutton" type="submit" name="sa">
+          <xsl:attribute name="value">
+            <xsl:choose>
+              <xsl:when test="$language = 'de'">Suchen</xsl:when>
+              <xsl:otherwise>Search</xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+        </input> 
       </div>
       <div>
-        <a href="http://www.google.com/u/unizh?hl=de&amp;ie=ISO-8859-1&amp;domains=unizh.ch&amp;q={xhtml:input[@name='queryString']/@value}&amp;btnG=Suche&amp;sitesearch=unizh.ch" >Suchen auf "www.unizh.ch"</a>
+        <a href="http://www.google.com/u/unizh?hl=de&amp;ie=ISO-8859-1&amp;domains=unizh.ch&amp;q={xhtml:input[@name='queryString']/@value}&amp;btnG=Suche&amp;sitesearch=unizh.ch" >
+         <xsl:choose>
+           <xsl:when test="$language = 'de'">Suchen auf "www.unizh.ch"</xsl:when>
+           <xsl:otherwise>Search domain "www.unizh.ch"</xsl:otherwise>
+         </xsl:choose>
+         </a>
       </div>
       
       <!-- <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>  -->

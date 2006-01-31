@@ -48,7 +48,7 @@
         </xsl:if>
        |
       </xsl:for-each>
-      <label for="formsearch">Suche: </label>
+      <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
       <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
         <div class="serviceform">
           <input type="text" titel="suchen" name="queryString" accesskey="5" />
