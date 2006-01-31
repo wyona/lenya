@@ -127,16 +127,6 @@
     </optional>
   </define>
 
-  <define name="Inline.model">
-    <zeroOrMore>
-      <choice>
-        <text/>
-        <ref name="Inline.class"/>
-      </choice>
-    </zeroOrMore>
-  </define>
-
-
 </include>
 
 

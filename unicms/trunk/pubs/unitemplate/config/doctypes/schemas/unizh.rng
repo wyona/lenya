@@ -143,7 +143,7 @@
       <text/>
     </element>
     <optional>
-      <ref name="p"/>
+      <ref name="teaser.p"/>
     </optional>
     <zeroOrMore>
       <choice>
@@ -153,6 +153,85 @@
     </zeroOrMore>
   </element>
 </define>
+
+<define name="teaser.p">
+  <element name="p"> 
+     <ref name="teaser.model"/> 
+  </element>
+</define>
+
+
+<define name="teaser.model">
+   <zeroOrMore>
+    <choice>
+      <text/>
+      <ref name="teaser.class"/>
+    </choice>
+  </zeroOrMore>
+</define>
+
+<define name="teaser.class">
+  <choice>
+    <ref name="teaser.b"/>
+    <ref name="br"/>
+    <ref name="teaser.em"/>
+    <ref name="teaser.cite"/>
+    <ref name="teaser.strong"/> 
+    <ref name="teaser.big"/>
+    <ref name="teaser.i"/>
+    <ref name="teaser.a"/> 
+  </choice>
+</define>
+
+<define name="teaser.em">
+  <element name="em">
+    <ref name="em.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.cite">
+  <element name="cite">
+    <ref name="cite.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.strong">
+  <element name="strong">
+    <ref name="strong.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.b">
+  <element name="b">
+    <ref name="b.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.big">
+  <element name="big">
+    <ref name="big.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.i">
+  <element name="i">
+    <ref name="i.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.a">
+  <element name="a">
+    <ref name="a.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
 
 <define name="unizh.list">
   <element name="unizh:list">
