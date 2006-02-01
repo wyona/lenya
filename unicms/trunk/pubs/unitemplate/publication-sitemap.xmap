@@ -62,6 +62,20 @@
         </map:otherwise>
       </map:select>
     </map:resource>
+    
+    <map:resource name="cache-post-processing">
+      <map:transform src="../unizh/xslt/common/cachePostProcessing.xsl">
+        <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+        <map:parameter name="contextprefix" value="{request:contextPath}"/>
+        <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
+        <map:parameter name="area" value="{page-envelope:area}"/>
+      </map:transform>
+      <map:transform type="cinclude"/>
+      <map:transform src="../unizh/xslt/common/rss-elements.xsl">
+        <map:parameter name="contextprefix" value="{request:contextPath}"/>
+      </map:transform>
+    </map:resource>
+
   </map:resources>
 
   <map:pipelines>
@@ -169,6 +183,7 @@
         <map:act type="language-exists">
           <map:generate src="cocoon:/lenyabody-imageupload-standard/{../1}/{../2}.html"/>
           <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
+          <map:call resource="cache-post-processing"/>
           <map:serialize type="xml"/>
         </map:act>
   
@@ -267,7 +282,7 @@
           </map:when>
           <map:otherwise>
             <map:generate src="cocoon:/{1}/{2}.html.internal"/>
-<!-- Uncomment the following lines if you want to enable caching  -->
+<!-- Uncomment the following lines if you want to enable the caching  -->
 <!-- 
             <map:match pattern="live/**.html">
               <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
@@ -280,16 +295,7 @@
           </map:otherwise>
         </map:select>
 
-        <map:transform src="../unizh/xslt/common/cachePostProcessing.xsl">
-          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
-          <map:parameter name="contextprefix" value="{request:contextPath}"/>
-          <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
-          <map:parameter name="area" value="{page-envelope:area}"/>
-        </map:transform>
-        <map:transform type="cinclude"/>
-        <map:transform src="../unizh/xslt/common/rss-elements.xsl">
-          <map:parameter name="contextprefix" value="{request:contextPath}"/>
-        </map:transform>
+        <map:call resource="cache-post-processing"/>
 
         <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
           <map:parameter name="version" value="{request-param:version}"/>
@@ -297,7 +303,6 @@
         </map:transform>
         <map:transform type="session"/>
         <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
-
         <map:serialize type="xhtml"/>
       </map:match>
 
