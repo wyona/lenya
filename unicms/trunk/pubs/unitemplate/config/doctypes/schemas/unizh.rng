@@ -233,46 +233,6 @@
 </define>
 
 
-<define name="unizh.list">
-  <element name="unizh:list">
-    <oneOrMore>
-      <choice>
-        <ref name="list.product"/>
-        <ref name="list.publication"/>
-      </choice>
-    </oneOrMore>
-  </element>
-</define>
-
-<define name="list.product">
-  <element name="unizh:product">
-    <element name="unizh:title">
-      <text/>
-    </element>
-    <optional>
-      <ref name="object"/>
-    </optional>
-    <unizh:description>
-      <ref name="Block.model"/>
-    </unizh:description>
-  </element>
-</define>
-
-<define name="list.publication">
-  <element name="unizh:publication">
-    <element name="unizh:title">
-      <text/>
-    </element>
-    <optional>
-      <ref name="object"/>
-    </optional>
-    <unizh:description>
-      <ref name="Block.model"/>
-    </unizh:description>
-  </element>
-</define>
-
-
 <define name="unizh.toc">
   <element name="unizh:toc"><empty/></element>
 </define>
@@ -326,32 +286,6 @@
       </attribute>
     </optional>
     <text/>
-  </element>
-</define>
-
-<define name="unizh.identity">
-  <element name="unizh:identity">
-    <attribute name="data">
-      <ref name="Text.datatype"/>
-    </attribute>
-    <attribute name="alt">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </element>
-</define>
-
-<define name="unizh.slogan">
-  <element name="unizh:slogan"><text/></element>
-</define>
-
-<define name="unizh.logo">
-  <element name="unizh:logo">
-    <attribute name="data">
-      <ref name="Text.datatype"/>
-    </attribute>
-    <attribute name="alt">
-      <ref name="Text.datatype"/>
-    </attribute>
   </element>
 </define>
 

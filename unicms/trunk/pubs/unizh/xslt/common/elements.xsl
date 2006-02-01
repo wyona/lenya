@@ -525,7 +525,7 @@
  
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
  
-  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:collection | descendant::unizh:person]">
+  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:person]">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
 
@@ -646,15 +646,6 @@
     </h3>
     <br/>
     <xsl:apply-templates mode="collection" select="descendant::unizh:lead"/>
-    <a href="{$contextprefix}{@href}">Mehr...</a>
-  </xsl:template>
-
-  <xsl:template match="index:child[descendant::unizh:publication | descendant::unizh:event]">
-    <h3>
-      <xsl:apply-templates select="descendant::lenya:meta/dc:title"/>
-    </h3>
-    <br/>
-    <xsl:apply-templates mode="collection" select="descendant::lenya:meta/dc:description"/>
     <a href="{$contextprefix}{@href}">Mehr...</a>
   </xsl:template>
 
