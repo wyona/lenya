@@ -497,7 +497,7 @@
           <a class="download" href="{$nodeid}/{@src}">
             <xsl:value-of select="text()"/><xsl:comment/>
           </a>
-          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" border="0"/>)
+          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" alt="{text()}" title="{text()}" border="0"/>)
         </div>
         <xsl:if test="parent::xhtml:body and not(following-sibling::*[1][name() = 'lenya:asset'])">
           <br/>
