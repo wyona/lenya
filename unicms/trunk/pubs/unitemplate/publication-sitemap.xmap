@@ -241,28 +241,22 @@
       <!-- standard -->
       <map:match pattern="*/**.html.internal">
         <map:act type="language-exists">
-          <map:select type="parameter">
-            <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
-            <map:when test="simple">
-              <map:generate src="cocoon:/lenyabody-view-simple/{../1}/{../2}.html"/>
-            </map:when>
-            <map:when test="standard">
-              <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-              <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
-            </map:when>
-            <map:otherwise>
-              <map:select type="parameter">
-                <map:parameter name="parameter-selector-test" value="{session-context:version/}"/>
-                <map:when test="simple">
-                  <map:generate src="cocoon:/lenyabody-view-simple/{../1}/{../2}.html"/>
-                </map:when>
-                <map:otherwise>
-                  <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
-                  <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/>  
-                </map:otherwise>
-              </map:select>
-            </map:otherwise>
-          </map:select>
+          <map:generate src="cocoon:/lenyabody-view-standard/{../1}/{../2}.html"/>
+          <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
+          <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
+          <map:serialize type="xml"/> 
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+      </map:match>
+      
+      <map:match pattern="*/**.html.simple">
+        <map:act type="language-exists">
+          <map:generate src="cocoon:/lenyabody-view-simple/{../1}/{../2}.html"/>
           <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
           <map:serialize type="xml"/> 
         </map:act>
@@ -276,22 +270,41 @@
         
         
       <map:match pattern="*/**.html">
-        <map:select type="resource-exists">
-          <map:when test="work/cache/{1}/{page-envelope:document-path}">
-            <map:generate src="work/cache/{1}/{page-envelope:document-path}"/>
+        <map:select type="parameter">
+          <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
+          <map:when test="simple">
+            <map:generate src="cocoon:/{1}/{2}.html.simple"/>
+          </map:when>
+          <map:when test="standard">
+            <map:generate src="cocoon:/{1}/{2}.html.internal"/>
           </map:when>
           <map:otherwise>
-            <map:generate src="cocoon:/{1}/{2}.html.internal"/>
-<!-- Uncomment the following lines if you want to enable the caching  -->
+            <map:select type="parameter">
+              <map:parameter name="parameter-selector-test" value="{session-context:version/}"/>
+              <map:when test="simple">
+                <map:generate src="cocoon:/{1}/{2}.html.simple"/>
+              </map:when>
+              <map:otherwise>
+                <map:select type="resource-exists">
+                  <map:when test="work/cache/{1}/{page-envelope:document-path}">
+                    <map:generate src="work/cache/{1}/{page-envelope:document-path}"/>
+                  </map:when>
+                  <map:otherwise>
+                    <map:generate src="cocoon:/{1}/{2}.html.internal"/>
+<!-- Uncomment the following lines if you want to enable caching  -->
 <!-- 
-            <map:match pattern="live/**.html">
-              <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
-                <map:parameter name="source" value="work/cache/live/{page-envelope:document-path}"/>
-              </map:transform>
-              <map:transform type="write-source"/>
-              <map:transform src="../../xslt/authoring/edit/removeSourceTags.xsl"/>
-            </map:match>
+                    <map:match pattern="live/**.html">
+                      <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
+                         <map:parameter name="source" value="work/cache/live/{page-envelope:document-path}"/>
+                      </map:transform>
+                      <map:transform type="write-source"/>
+                      <map:transform src="../../xslt/authoring/edit/removeSourceTags.xsl"/>
+                    </map:match>
 -->
+                  </map:otherwise>
+                </map:select>
+              </map:otherwise>
+            </map:select>
           </map:otherwise>
         </map:select>
 
