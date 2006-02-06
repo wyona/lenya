@@ -3,7 +3,7 @@
 
 /*allgemeine Definition*/
 body {
-  	ground-color: #fff;
+  	background-color: #fff;
   	font-size: 16px;
   	font-family: Arial, sans-serif;
   	line-height: 22px;
@@ -366,7 +366,7 @@ a.back {
 }
 
 /* Navigation Ende*/
-/*4 splatige */
+/*4 spaltige */
 
 
 #col2_nolimit {
@@ -407,6 +407,7 @@ a.back {
 /*Content*/
 .contcol2 {
 	min-width:400px;
+  width:expression(document.body.clientWidth &lt; 800? "400px": "auto");
 	float: none;
 	margin-left:185px;
 }
