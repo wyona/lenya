@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
+  <lenya:name>Default Wiki Publication</lenya:name>
+  <lenya:pub-version>1.4-dev</lenya:pub-version>
+  <lenya:lenya-version>1.4-dev</lenya:lenya-version>
+  <lenya:cocoon-version>2.1.8 or 2.1.9-dev</lenya:cocoon-version>
+  <lenya:description>This publication is the default publication enhanced with a Wiki doctype.</lenya:description>
+  <lenya:credits>Special thanks to Gregor Imboden and Michael Wechner</lenya:credits>
+  <lenya:help/>
+  <lenya:changelog>changes.xml</lenya:changelog>
+  <lenya:license/>
+  <lenya:readme>
+    <ol>
+      <li>
+<a href="live/index.html">Reader`s View</a> (Live)</li>
+      <li>
+<a href="authoring/index.html">Editor`s View</a> (Authoring)</li>
+    </ol>
+
+    <h4>Enable JCR</h4>
+    <ul>
+      <li>Build Lenya and start it</li>
+      <li>Import content from filesystem into JCR Repository by executing: <a href="../index.html?lenya.usecase=jcr.import">../index.html?lenya.usecase=jcr.import</a>
+      </li>
+      <li>Stop Lenya</li>
+      <li>Switch the NodeFactory within <i>build/lenya/webapp/WEB-INF/classes/org/apache/lenya/lenya.roles</i> to <i>org.apache.lenya.cms.jcr.JCRNodeFactory</i>
+      </li>
+      <li>Optional: The JCR implementation can be configured within local.build.properties resp. build.properties</li>
+      <li>Start Lenya</li>
+    </ul>
+
+    <h4>JCR Tests and content migration</h4>
+    <ul>
+      <li>./build.sh modules.test</li>
+      <li>./build.sh migrate-14</li>
+    </ul>
+  </lenya:readme>
+</lenya:publication>
