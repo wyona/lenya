@@ -1,0 +1,3 @@
+The Wiki module is based on Wyona Wiki parser:
+
+https://svn.wyona.com/repos/public/wiki-parser
