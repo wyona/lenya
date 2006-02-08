@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!-- $Id: sitemap.xmap 374414 2006-02-02 15:58:32Z josias $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <map:components>
+    <map:generators default="file">
+      <map:generator label="content" logger="sitemap.generator.directory"
+        name="lenyaMetaData" pool-max="16"
+        src="org.apache.lenya.cms.cocoon.generation.LenyaMetaDataGenerator"/>
+    </map:generators>
+    <map:serializers default="xhtml">
+      <map:serializer logger="sitemap.serializer.links" name="links" src="org.apache.lenya.cms.cocoon.serialization.LinkSerializer"/>
+    </map:serializers>
+  </map:components>
+
+  <map:views>
+    <map:view from-label="aggregation" name="aggregation">
+      <map:serialize type="xml"/>
+    </map:view>
+    <map:view from-position="last" name="links">
+      <map:serialize type="links" />
+    </map:view>
+  </map:views>
+
+<!-- =========================== Resources ================================= -->
+
+  <map:resources>
+    <map:resource name="style-cms-page">
+      <map:transform type="i18n">      
+        <map:parameter name="locale" value="{request:locale}"/>
+      </map:transform>    
+      <map:transform src="fallback://lenya/xslt/util/page2xhtml.xsl">
+        <map:parameter name="contextprefix" value="{request:contextPath}"/>
+      </map:transform>
+      <map:transform src="context://lenya/xslt/util/strip_namespaces.xsl"/>
+    </map:resource>
+  </map:resources>
+  
+  <map:pipelines>
+
+    <map:component-configurations>
+      <global-variables>
+        <cache-dir>work/cache</cache-dir>
+      </global-variables>
+    </map:component-configurations>
+
+    <map:pipeline>
+      <map:match pattern="**">
+        <map:match pattern="webdav**">
+          <map:mount uri-prefix="" src="{fallback:lenya/modules/webdav/sitemap.xmap}" check-reload="true" reload-method="synchron"/>    
+        </map:match>
+        <map:select type="request-method">
+          <!-- many client editors like to PUT changes -->
+          <map:when test="PUT">
+            <map:mount uri-prefix="" src="{fallback:lenya/modules/webdav/sitemap.xmap}" check-reload="true" reload-method="synchron"/>
+          </map:when>
+        </map:select>
+      </map:match>
+      
+      <map:match pattern="**/">
+         <map:redirect-to uri="index.html"/>
+      </map:match>
+
+    </map:pipeline>
+    
+    <map:pipeline>
+    <!-- pattern="{rendertype}/{area}/{doctype}/{document-path}" -->
+      <!-- NOTE: rendertype seems to be 'edit' or 'view' -->
+      <map:match pattern="lenya-document/*/*/*/**.xml">
+        <map:mount uri-prefix="lenya-document/" src="{fallback:doctypes.xmap}" check-reload="true" reload-method="synchron"/>
+      </map:match>
+    </map:pipeline>
+
+
+    <!-- This is the pipeline that builds the page. It aggregates all
+    the navigational elements (breadcrumb, tabs, menu) with the actual
+    content of the document. -->
+    <map:pipeline>
+      <!-- pattern="meta?docid={docid}" -->
+      <map:match pattern="**meta">
+        <map:generate type="lenyaMetaData">
+          <map:parameter name="docid" value="{request-param:docid}"/>
+          <map:parameter name="lang" value="en"/>
+        </map:generate>
+        <map:serialize type="xml"/>
+      </map:match>
+      <!-- /lenyabody-{rendertype}/{publication-id}/{area}/{doctype}/{url} -->
+      <map:match pattern="lenyabody-*/*/*/*/**">
+        <map:aggregate element="cmsbody">
+          <map:part src="cocoon://modules/sitetree/{2}/{3}/breadcrumb/{5}.xml"/>
+          <map:part src="cocoon://modules/sitetree/{2}/{3}/tabs/{5}.xml"/>
+          <map:part src="cocoon://modules/sitetree/{2}/{3}/menu/{5}.xml"/>
+          <map:part src="cocoon://modules/sitetree/{2}/{3}/search/{5}.xml"/>
+          <map:part src="cocoon://modules/{page-envelope:document-type}/{1}.xml"/>
+<!--
+          <map:part src="{resource-type:format-xhtml}"/>
+-->
+        </map:aggregate>
+        <map:transform src="fallback://lenya/modules/svg/xslt/image2svg.xsl"/>
+        <map:select type="resource-exists">
+          <map:parameter name="prefix" value="fallback://"/>
+          <map:when test="xslt/page2xhtml-{4}.xsl">
+            <map:transform src="fallback://xslt/page2xhtml-{4}.xsl">
+              <map:parameter name="root" value="{base-url:{2}:{3}}"/>
+              <map:parameter name="url" value="{5}"/>
+              <map:parameter name="document-id" value="{page-envelope:document-id}"/>
+              <map:parameter name="document-type" value="{page-envelope:document-type}"/>
+              <map:parameter name="language" value="{page-envelope:document-language}"/>
+              <map:parameter name="title" value="{dublincore:title}"/>
+            </map:transform>
+          </map:when>
+          <map:otherwise>
+            <map:transform src="fallback://xslt/page2xhtml-xhtml.xsl">
+              <map:parameter name="root" value="{base-url:{2}:{3}}"/>
+              <map:parameter name="url" value="{5}"/>
+              <map:parameter name="document-id" value="{page-envelope:document-id}"/>
+              <map:parameter name="document-type" value="{page-envelope:document-type}"/>
+              <map:parameter name="language" value="{page-envelope:document-language}"/>
+            </map:transform>
+          </map:otherwise>
+        </map:select>
+        
+        <map:transform type="i18n">      
+          <map:parameter name="locale" value="{page-envelope:document-language}"/>
+        </map:transform>    
+        <map:select type="parameter">
+          <map:parameter name="parameter-selector-test" value="{1}"/>
+          <map:when test="view">
+            <map:transform type="link-rewrite"/>
+          </map:when>
+        </map:select>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+    
+    <!-- This is the main entry point into the publication. This
+    pipeline uses the uriparametrizer to determine the doctype of this
+    request. It then aggregates the lenya menu (for the given area) and
+    the lenya body, the actual document. -->
+    <map:pipeline>
+      <map:match pattern="**.bxe.html">
+        <map:generate src="cocoon:/lenyabody-edit/{page-envelope:publication-id}/{page-envelope:area}/{page-envelope:document-type}{page-envelope:document-url}"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+      <map:match pattern="*/**.html">
+      
+        <map:act type="language-exists">
+
+          <map:act type="set-header">
+            <map:parameter name="Last-Modified" value="{date-iso8601-rfc822:{page-envelope:document-lastmodified}}" />
+
+            <!-- HEAD request shouldn't have all the xslt overhead -->
+            <map:select type="request-method">
+              <map:when test="HEAD">
+                <map:generate src="context://lenya/content/util/empty.xml" />
+                <map:serialize type="xhtml"/>
+              </map:when>
+            </map:select>          
+          
+            <map:select type="resource-exists">
+              <!-- Read from cache -->
+              <!-- If configured within Apache then mod_lenya will nevertheless read from cache -->
+              <map:when test="{global:cache-dir}/{../../1}/{../../2}.htmlDISABLED">
+                <map:read src="{global:cache-dir}/{../../1}/{../../2}.html" mime-type="text/html"/>
+              </map:when>
+              <!-- Write to cache and serialize -->
+              <map:otherwise>
+              
+                <map:generate src="cocoon:/lenyabody-view/{page-envelope:publication-id}/{page-envelope:area}/{page-envelope:document-type}{page-envelope:document-url}"/>
+          
+                <map:select type="browser">
+                  <map:when test="mozilla5DISABLED">
+                    <map:match pattern="authoring/**.html">
+                      <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../../../1}/{../../../2}.xml?doctype={page-envelope:document-type}&amp;uiml=xul"/>
+                    </map:match>
+                    <map:serialize type="xml" mime-type="application/vnd.mozilla.xul+xml"/>
+                  </map:when>
+                  <map:otherwise>
+                    <map:match pattern="authoring/**.html">
+                      <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../../../1}/{../../../2}.xml?doctype={page-envelope:document-type}"/>
+                      <!-- TODO: External Links checking should be optional on a document by document basis -->
+                      <!-- uncomment to turn on external broken link reporting -->
+                      <!--<map:transform src="fallback://lenya/xslt/authoring/addJavaScript.xsl">
+                        <map:parameter name="scriptSRC" value="/modules/linkcheck/linkreporter.js"/>
+                      </map:transform>-->
+                    </map:match>
+                    <map:transform src="fallback://lenya/xslt/util/strip_namespaces.xsl"/>
+                    <!-- Write to cache for requests from live area -->
+                    <map:select type="parameter">
+                      <map:parameter name="parameter-selector-test" value="{../../1}"/>
+                      <map:when test="live">
+                        <map:transform src="fallback://lenya/xslt/authoring/edit/addSourceTags.xsl">
+                          <map:parameter name="source" value="{global:cache-dir}/{../../1}/{../../2}.html"/>
+                        </map:transform>
+                        <map:transform type="write-source">
+                          <map:parameter name="serializer" value="xhtml"/>
+                        </map:transform>
+                        <map:transform src="fallback://lenya/xslt/authoring/edit/removeSourceTags.xsl"/>
+                      </map:when>
+                    </map:select>
+                    <map:serialize type="xhtml"/>
+                  </map:otherwise>
+                </map:select>
+              </map:otherwise>
+            </map:select>
+          </map:act>
+        </map:act>
+
+        <map:generate type="serverpages" src="fallback://lenya/content/exception/missing-language.xsp"/>
+        <map:transform src="fallback://lenya/xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page" />
+        <map:serialize status-code="404" />
+      </map:match>
+      
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>
