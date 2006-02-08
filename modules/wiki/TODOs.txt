@@ -1,0 +1,8 @@
+Wiki Module TODO's
+------------------
+
+* Modify some File's from Lenya that not so much have to get changed at build time.
+* Finish Link-management (i.E. Sitetree)
+* Maven tweaking / Installation
+* Find & Fix Bugs (test Syntax more and more)
+* maybe think about fileupload (versioning)
