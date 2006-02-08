@@ -3,13 +3,18 @@ Wiki Module Installation (default Publication) BETA
 
 1) Add wiki module path to local.build.properties of Lenya
 
-2) Build lenya
+2) Add the default-wiki publication path to local.build.properties
+   (https://svn.wyona.com/repos/public/lenya/pubs/defaultwiki)
 
-4) Open build/lenya/webapp/lenya/pubs/default/sitemap.xmap
-    4.1)    Uncomment Line 111: <map:part src="cocoon://modules/{page-envelope:document-type}/{1}.xml"/>
-    4.2)    Comment Line 113: <map:part src="{resource-type:format-xhtml}"/>
+   OR
 
-5) Open build/lenya/webapp/lenya/pubs/default/config/publication.xconf
-    5.1)    Add on line ~40 <module name="wiki"/>
+   patch the default publication build/lenya/webapp/lenya/pubs/default/sitemap.xmap
 
-6) Start Lenya, login to default pub, create a new Wiki document
+    - Uncomment Line 111: <map:part src="cocoon://modules/{page-envelope:document-type}/{1}.xml"/>
+    - Comment Line 113: <map:part src="{resource-type:format-xhtml}"/>
+
+    - Add <module name="wiki"/> to config/publication.xconf
+
+3) Build Lenya
+
+4) Start Lenya, login to default-wiki or default pub and create a new Wiki document
