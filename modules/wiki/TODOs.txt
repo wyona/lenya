@@ -1,6 +1,7 @@
 Wiki Module TODO's
 ------------------
 
+* Sitemap of default publication should not be patched (https://svn.wyona.com/repos/public/lenya/pubs/defaultwiki)
 * Modify some File's from Lenya that not so much have to get changed at build time.
 * Finish Link-management (i.E. Sitetree): INSERT Button
 * Maven tweaking / Installation
