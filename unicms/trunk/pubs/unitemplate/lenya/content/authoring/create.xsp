@@ -23,7 +23,7 @@
         parentId = <input:get-attribute module="page-envelope" as="string" name="document-id"/>;
         // for creation purposes the parentid "/index" (the home page) is special.
         if (parentId.equals("/index")) {
-          parentId = "";
+          parentId = "/";
 	}
       }
 
