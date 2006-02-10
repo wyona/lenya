@@ -45,18 +45,15 @@ package ch.unizh.lenya.util;
 
 import java.io.File;
 
-import org.apache.lenya.cms.publication.DocumentBuildException;
-import org.apache.lenya.cms.publication.DocumentBuilder;
-import org.apache.lenya.cms.publication.DocumentException;
-import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.Publication;
-import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.Version;
 import org.apache.lenya.cms.publication.SiteTree;
 import org.apache.lenya.cms.publication.SiteTreeNode;
 import org.apache.lenya.cms.publication.SiteTreeException;
-import org.apache.lenya.cms.task.ExecutionException;
-import org.xml.sax.SAXException;
+
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
+
 /**
  * 
  * Delete cache entries of a document. If the document has no parent and the document 
@@ -95,8 +92,17 @@ public class CacheHandler {
         path = setPath(node, isLive, task);
         
         File pubDir = pub.getDirectory();
+        String pubId = pub.getId();
         File cacheDir = new File(pubDir, "work" + File.separator + "cache" + File.separator + area);
         File cacheFile = new File(cacheDir, path);
+
+        String cachePrefix = getCachePrefix(pub);
+        
+        if (cachePrefix != null) {
+            cacheDir = new File(cachePrefix + pubId + File.separator + area);
+            cacheFile = new File(cacheDir, path);
+        }
+        
         if (cacheFile.isDirectory()) {
             File oldCacheDir = new File(cacheFile + ".old"); 
             if (path.equals(File.separator)) {
@@ -162,6 +168,33 @@ public class CacheHandler {
         if (isLive && task.equals("publish")) path = documentId;
         
         return path;
+    }
+ 
+    /**
+     * Set the path prefix for the caching directory:
+     *  It reads the configuration file publication.xconf
+     *  if the cache Element is set it takes the value of its path-prefix attriubte
+     *  otherwise the method will return null and the default caching directory is used
+     *  i.e.: work/cache/<area> directory in the respective publication. 
+     * 
+     * @return A String
+     * 
+     */   
+    protected String getCachePrefix(Publication pub){
+        
+        String cacheElement = "cache";
+        String cacheAttr    = "path-prefix";
+            
+        File configurationFile = new File(pub.getDirectory(), Publication.CONFIGURATION_FILE);
+        
+        DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
+
+        try {
+            Configuration config = builder.buildFromFile(configurationFile);
+            return config.getChild(cacheElement).getAttribute(cacheAttr);
+        } catch (Exception e) {
+            return null;
+        }
     }
         
 }
