@@ -4,7 +4,6 @@ function fckloader(host, requesturi)
   oFCKeditor.BasePath	= '/modules/fckeditor/FCKeditor/' ;
   oFCKeditor.Width="800";
   oFCKeditor.Height="700";
-  oFCKeditor.Config[ "Debug" ] = true ;
   oFCKeditor.Config[ "FullPage" ] = true ;
   oFCKeditor.Config[ "BaseHref" ] = host + requesturi ;
   oFCKeditor.Config[ "ImageBrowserURL" ] = host + requesturi +'?lenya.usecase=insertImage.fckeditor' ;
