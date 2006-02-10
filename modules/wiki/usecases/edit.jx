@@ -14,15 +14,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!-- $Id: renameLabel.jx 123364 2004-12-26 16:11:27Z gregor $ -->
-<page:page xmlns:c="http://apache.org/cocoon/templates/jx/1.0" 
-           xmlns="http://www.w3.org/1999/xhtml" 
-           xmlns:i18n="http://apache.org/cocoon/i18n/2.1" 
+
+<page:page xmlns:c="http://apache.org/cocoon/templates/jx/1.0"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
            xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
-	   xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
-	   xmlns:cinclude="http://apache.org/cocoon/include/1.0"
+           xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
+           xmlns:cinclude="http://apache.org/cocoon/include/1.0"
            >
-   <page:title>
+
+  <page:title>
     <i18n:text>Edit</i18n:text> <jx:out value="${usecase.getParameter('document').getId()}"/>
   </page:title>
   <page:body onLoad="
@@ -59,44 +60,41 @@
         <form method="get" action="">
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-	  <table class="lenya-table-noborder">
+          <table class="lenya-table-noborder">
             <tr>
               <td colspan="2">
-     	        <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/>
-	      </td>
-	    </tr>
-            <tr>
-              <td>
-                <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${session.getAttribute('wikiContent')}"/></textarea>
-	      </td>		  
-              <td valign="top">
-                <input i18n:attr="value" type="submit" name="insertLink" value="Insert"/>
-             </td>
-	    </tr>		  
-            <tr>
-              <td>
-		<br/>
-		<input i18n:attr="value" type="submit" name="submit" value="Save"/>
-                &#160;
-		<input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
+                <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/>
               </td>
             </tr>
             <tr>
-<td>
+              <td>
+                <textarea wrap="virtual" name="wikimarkup" rows="25" cols="90"><jx:out value="${session.getAttribute('wikiContent')}"/></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <br/>
+                <input i18n:attr="value" type="submit" name="submit" value="Save"/>
+                &#160;
+                <input i18n:attr="value" type="submit" name="cancel" value="Cancel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
 <PRE>
 ----             Horizontal ruler
 \\               Forced line break
-[link]           Create hyperlink to "link", where "link" can be either an internal 
+[link]           Create hyperlink to "link", where "link" can be either an internal
                  WikiName or an external link (http://)
-[text|link]      Create a hyperlink where the link text is different from the actual 
+[text|link]      Create a hyperlink where the link text is different from the actual
                  hyperlink link.
 
-*                Make a bulleted list (must be in first column). Use more (**) 
+*                Make a bulleted list (must be in first column). Use more (**)
                  for deeper indentations.
-#                Make a numbered list (must be in first column). Use more (##, ###) 
+#                Make a numbered list (must be in first column). Use more (##, ###)
                  for deeper indentations.
 
-!, !!, !!!       Start a line with an exclamation mark (!) to make a heading. 
+!, !!, !!!       Start a line with an exclamation mark (!) to make a heading.
                  More exclamation marks mean bigger headings.
 
 __text__         Makes text bold.
@@ -107,8 +105,8 @@ __text__         Makes text bold.
 
 |text|more text| Makes a table. Double bars for a table heading.
 </PRE>
-</td> 
-</tr>
+              </td>
+            </tr>
           </table>
         </form>
       </div>
