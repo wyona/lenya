@@ -25,6 +25,7 @@
     <creator src="org.apache.lenya.cms.authoring.DefaultRawCreator">
       <sample-name>fallback://lenya/modules/wiki/samples/sample.wiki</sample-name>
     </creator>
+    <format name="xhtml" uri="cocoon://modules/wiki/wiki.xml"/>
   </component-instance>
 
 </xconf>
