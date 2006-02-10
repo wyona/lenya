@@ -13,4 +13,8 @@
   <proxy area="live" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/live"/>
   <proxy area="authoring" ssl="true" url="https://cms.unizh.ch/lenya/unitemplate/authoring"/>
   <proxy area="authoring" ssl="false" url="http://cms.unizh.ch/lenya/unitemplate/authoring"/> -->
+  <!-- set the cache prefix. If the path-prefix attribute is set you have to modify the publication-sitemap
+       accordingly. 
+  -->
+  <!-- <cache path-prefix=""/> -->
 </publication>
