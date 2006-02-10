@@ -53,7 +53,6 @@ public class Edit extends DocumentUsecase {
     public final static String PARAM_MARKUP = "wikimarkup";
     
     protected void initParameters() {
-        super.initParameters();
         try {            
             StringBuffer buf = new StringBuffer();
             char[] cbuf = new char[1024];
@@ -112,14 +111,14 @@ public class Edit extends DocumentUsecase {
         super.doCheckExecutionConditions();
         Request request = ContextHelper.getRequest(this.context);
         String content = getParameterAsString(PARAM_MARKUP);
-        String encoding = request.getCharacterEncoding();                        
+        String encoding = request.getCharacterEncoding();           
         try {            
             validate(content, encoding);            
         } catch (ParseException pe) {
             setParameter("startline", new Integer(pe.currentToken.next.beginLine));
             setParameter("startcolumn", new Integer(pe.currentToken.next.beginColumn));
             setParameter("endline", new Integer(pe.currentToken.next.endLine));
-            request.getSession().setAttribute(SESSION_CONTENT, new String(content.getBytes("ISO-8859-1"), "UTF-8"));
+            request.getSession().setAttribute(SESSION_CONTENT, new String(content.getBytes("UTF-8"), "UTF-8"));
             addErrorMessage(pe.getMessage());
         }
     }
@@ -131,7 +130,7 @@ public class Edit extends DocumentUsecase {
     protected void doExecute() throws Exception {
         super.doExecute();
         Request request = ContextHelper.getRequest(this.context);
-        String content = new String(getParameterAsString("wikimarkup").getBytes("ISO-8859-1"), "UTF-8");        
+        String content = new String(getParameterAsString("wikimarkup").getBytes("UTF-8"), "UTF-8");        
         OutputStream wikiOut = getSourceDocument().getRepositoryNode().getOutputStream();
         Writer writer = new OutputStreamWriter(wikiOut, "UTF-8");
         writer.write(content);
