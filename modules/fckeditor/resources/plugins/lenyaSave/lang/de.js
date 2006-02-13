@@ -1,0 +1,1 @@
+FCKLang['lenyaSaveDlgToolbarName']		= 'Lenya Document Speichern'; 
