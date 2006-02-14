@@ -15,7 +15,7 @@ body {
 
 .bodywidth {
 	max-width:800px;
-	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
+	width:expression(document.body.clientWidth > 800  ? "802px": "auto");
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -73,7 +73,7 @@ h3, h4, h5, h6 {
 /*link*/
 a { 
 	text-decoration: none;
-	color:#0000FF;  
+	color:#333399;
 }
 /*
 .content li a {
