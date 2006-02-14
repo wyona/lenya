@@ -129,7 +129,19 @@
               <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:apply-templates select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div"/>
+              <xsl:for-each select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div">
+                <div>
+                  <xsl:choose>
+                    <xsl:when test="@current = 'true' or descendant::xhtml:div[@current = 'true']">
+                      <xsl:attribute name="current">true</xsl:attribute>
+                    </xsl:when>
+                  </xsl:choose>
+                  <xsl:copy-of select="@href"/>
+                  <xsl:copy-of select="@basic-url"/>
+                  <xsl:value-of select="nav:label"/>
+                  <xsl:apply-templates select="text()"/>
+                </div> 
+              </xsl:for-each>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise> 
