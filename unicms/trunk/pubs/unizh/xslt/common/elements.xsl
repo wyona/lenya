@@ -574,7 +574,7 @@
               </xsl:when>
               <xsl:otherwise>
                 <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}">
-                  <xsl:value-of select="*/*/unizh:short/xhtml:a"/>
+                  <xsl:value-of select="*/*/unizh:short/xhtml:a"/><xsl:comment/>
                 </a>
                 <xsl:if test="$area = 'authoring'">
                   |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a>
