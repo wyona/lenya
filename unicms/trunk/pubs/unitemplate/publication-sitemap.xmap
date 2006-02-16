@@ -229,6 +229,8 @@
             <map:parameter name="servername" value="{request:serverName}"/>
             <map:parameter name="serverport" value="{request:serverPort}"/>
             <map:parameter name="contextprefix" value="{page-envelope:context-prefix}"/>
+            <map:parameter name="channelhome" value="{proxy-url:{page-envelope:area}:{../../1}:{page-envelope:document-language}}"/>
+            <map:parameter name="channelpath" value="{../../1}"/>
           </map:transform>
           <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
           <map:serialize type="xml"/>
@@ -292,7 +294,7 @@
                   <map:otherwise>
                     <map:generate src="cocoon:/{1}/{2}.html.internal"/>
 <!-- Uncomment the following lines if you want to enable caching  -->
-<!-- 
+<!--
                     <map:match pattern="live/**.html">
                       <map:transform src="../../xslt/authoring/edit/addSourceTags.xsl">
                          <map:parameter name="source" value="work/cache/live/{page-envelope:document-path}"/>
