@@ -13,11 +13,15 @@
   <xsl:param name="serverport"/>
   <xsl:param name="contextprefix"/>
   <xsl:param name="channelid"/>
+  <xsl:param name="channelhome"/>
+  <xsl:param name="channelpath"/>
 
   <xsl:variable name="urlprefix" select="concat('http://', $servername, ':', $serverport, $contextprefix)"/> 
-  <xsl:variable name="channelhome">
-   <xsl:value-of select="concat($urlprefix, $channelid, '.html')"/>
+
+  <xsl:variable name="channelHomePath">
+   <xsl:value-of select="substring-before($channelhome, '.html')"/>
   </xsl:variable>
+
   <xsl:variable name="imageprefix">
     <xsl:value-of select="concat($urlprefix, $channelid, '/')"/> 
   </xsl:variable> 
@@ -44,7 +48,7 @@
             <link>
               <xsl:choose><!-- BXE keeps paragraph and &#160; as placeholders -->
                 <xsl:when test="*/unizh:newsitem/xhtml:body/xhtml:p != '&#160;'">
-                  <xsl:value-of select="concat($urlprefix, @href)"/>
+                 <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:value-of select="$channelhome"/>
