@@ -94,6 +94,17 @@
 </s:content>
 </s:slide>
 
+<s:slide id="criticalmass" status="wip">
+<s:title>Critical Mass</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Self-Sustainability</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
 <s:slide id="companies" status="wip">
 <s:title>Companies</s:title>
 <s:content>
