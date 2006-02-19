@@ -14,20 +14,20 @@
         <xsl:for-each select="*">
           <xsl:choose>
             <xsl:when test="@href">
-              <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a>
+              <a href="{@href}" class="activ"><xsl:value-of select="."/></a>
             </xsl:when>
             <xsl:otherwise>
               <xsl:choose>
                 <xsl:when test="@current = 'true'">
-                  <span class="current"><xsl:value-of select="."/></span>
+                  <a href="#" class="current"><xsl:value-of select="."/></a>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:value-of select="."/>
+                  <span><xsl:value-of select="."/></span>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:otherwise>
           </xsl:choose>
-          <xsl:if test="position() != $itemNr"> | </xsl:if>
+          <xsl:if test="position() != $itemNr">&#160;&#160;</xsl:if>
         </xsl:for-each>
       </div>
     </xsl:if>
