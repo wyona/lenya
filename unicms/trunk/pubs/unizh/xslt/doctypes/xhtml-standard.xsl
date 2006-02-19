@@ -49,7 +49,6 @@
           <a name="top"><xsl:comment/></a>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
           <xsl:choose>
             <xsl:when test="$document-element-name='xhtml:html'">
@@ -109,6 +108,7 @@
 
 
   <xsl:template name="one-column">
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
     <h1>
       <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
@@ -126,6 +126,7 @@
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     </div>
     <div class="contcol2">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div class="content">
         <h1>
@@ -152,6 +153,7 @@
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
         <div class="content">
@@ -178,6 +180,7 @@
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
         <div class="content">
           <a name="content"><xsl:comment/></a>
@@ -199,6 +202,7 @@
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
     </div>
     <div class="contcol2">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <xsl:apply-templates select="*/xhtml:body/unizh:column[3]"/>
       <div class="contentarea">
         <div class="content">
@@ -229,6 +233,7 @@
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
@@ -256,6 +261,7 @@
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">

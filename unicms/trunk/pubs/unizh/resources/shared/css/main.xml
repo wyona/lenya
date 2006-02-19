@@ -378,6 +378,35 @@ img.icon {
 #toolnav a.active {
 	color:#999;
 }
+
+/*ortho navigation*/
+#orthonav  {
+  font-size: 11px;
+  font-family: Arial;
+  text-align:right;
+  margin-right:198px;
+  margin-bottom:20px;
+  display:block;
+}
+#orthonav a {
+  color:#333; 
+  padding:0px 5px;
+  border: 1px solid #ccccff;
+}
+#orthonav a:hover {
+  background-color:#eaecff; 
+}
+#orthonav a.current {
+  background-color:#eaecff; 
+}
+#orthonav a.activ {
+}
+#orthonav span {
+  color:#aaa; 
+  padding:0px 5px;
+  border: 1px solid #ccc;
+}
+
 .icontextpos {
 	width:171px;
 	height:18px;
