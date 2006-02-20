@@ -176,6 +176,23 @@
 
       </map:match>
 
+      <!-- navigational context for static pages -->
+      <map:match pattern="*/**.html/*">
+        
+        <map:act type="language-exists">
+          <map:generate src="cocoon:/lenyabody-{../3}-context/{../1}/{../2}.html"/>
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+          <map:serialize type="xhtml"/>
+        </map:act>
+  
+        <!-- There is no version of the requested document-id for the
+             requested language. -->
+        <map:generate type="serverpages" src="../../content/exception/missing-language.xsp"/>
+        <map:transform src="../../xslt/exception/missing-language.xsl"/>
+        <map:call resource="style-cms-page"/>
+
+      </map:match>
+
 
       <!-- with image upload dots -->
       <map:match pattern="lenya-image-upload/*/**.html">
