@@ -9,10 +9,14 @@
   <body>
     <h1>Default Newsletter</h1>
     <p>Welcome to the default Lenya publication!</p>
-    <p>The purpose of this publication is</p>
+    <p>This is a demo newlsetter</p>
     <p>
-    You won't find any fancy and confusing bells and whistles here, but the
+    You won't find any fancy and confusing bells and whistles here, but the<br/>
     publication contains everything you need to get started.
     </p>
+    <ol>
+      <li>Point 1</li>
+      <li>Point 2</li>
+    </ol>
   </body>
 </html>
