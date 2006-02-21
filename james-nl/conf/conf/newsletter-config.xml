@@ -1,0 +1,14 @@
+
+<!--
+ 
+  Newsletter Matcher
+
+-->
+
+<mailet match="NewsletterMatcher=facharbeit@localhost" class="NewsletterMailet">
+  <repositoryName>newsletter-facharbeit</repositoryName>
+</mailet>
+
+<mailet match="NewsletterMatcher=demo1@localhost" class="NewsletterMailet">
+  <repositoryName>newsletter-demo1</repositoryName>
+</mailet>

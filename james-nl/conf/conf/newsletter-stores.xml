@@ -1,0 +1,14 @@
+
+<!--
+ 
+ Newsletter user repositories
+
+-->
+
+<repository name="newsletter-facharbeit" class="org.apache.james.userrepository.UsersFileRepository">
+  <destination URL="file://var/lists/newsletter-facharbeit/"/>
+</repository>
+
+<repository name="newsletter-demo1" class="org.apache.james.userrepository.UsersFileRepository">
+  <destination URL="file://var/lists/newsletter-demo1/"/>
+</repository>

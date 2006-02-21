@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+
+<!--
+
+    Overview of ant targets
+
+    compile         Compile the Newsletter classes
+    compile-james   Compile the James server
+    copy-config     Copy the modified James config to the SAR directory
+    dist            Meta target to bootstrap the whole project
+    download-james  Download the James source release
+    extract-james   Unpack the James source release
+    extract-sar     Extract the James SAR file
+    init            Show the project logo
+    jar             Pack the Newsletter classes into a JAR file
+    javadoc         Generate JavaDocs
+    pack-sar        Pack the James SAR including the Newsletter JAR
+    pack-sar-dev    Pack the James SAR including the Newsletter JAR, don't delete the james-nl directory
+    run-james       Run the James server
+
+-->
+
+<project default="pack-sar-dev" basedir="." name="lenya">
+
+  <property file="build.properties"/>
+
+  <target name="init" description="Show the project logo">
+    <splash imageurl="file://${basedir}/${download.dir}/james-logo.jpg" showduration="0"/>
+  </target>
+
+  <target name="clean" description="Clean up the project">
+    <delete failonerror="false">
+      <fileset dir="${james.dir}"/>
+      <fileset dir="${james.src.dir}"/>
+      <fileset dir="${james.src.dir}"/>
+      <fileset dir="javadoc"/>
+    </delete>
+  </target>
+
+  <target name="download-james" depends="init" description="Download the James source release">
+    <get src="${james.url}" dest="${download.dir}/james-with-phoenix-2.2.0-src.tar.gz" usetimestamp="true"/>
+  </target>
+
+  <target name="extract-james" depends="download-james" description="Unpack the James source release">
+    <delete includeEmptyDirs="true" failonerror="false">
+      <fileset dir="${james.src.dir}"/>
+    </delete>
+    <untar compression="gzip" src="${download.dir}/james-with-phoenix-2.2.0-src.tar.gz" dest="${james.src.dir}"/>
+  </target>
+
+  <target name="compile-james" depends="extract-james" description="Compile the James server">
+    <ant dir="${james.src.dir}" inheritAll="false" inheritRefs="false" target="dist-bin"/>
+    <delete includeEmptyDirs="true" failonerror="false">
+      <fileset dir="${james.dir}"/>
+    </delete>
+    <move todir="${james.dir}" preservelastmodified="true">
+      <fileset dir="${james.src.dir}/dist/james-2.2.0"/>
+    </move>
+  </target>
+
+  <target name="extract-sar" depends="compile-james" description="Extract the James SAR file">
+    <delete includeEmptyDirs="true" failonerror="false">
+      <fileset dir="${tmp.dir}"/>
+    </delete>
+    <unzip src="${james.dir}/apps/james.sar" dest="${tmp.dir}"/>
+  </target>
+
+  <target name="compile" depends="init" description="Compile the Newsletter classes">
+    <delete includeEmptyDirs="true" failonerror="false" >
+      <fileset dir="${classes.dir}"/>
+    </delete>
+    <mkdir dir="${classes.dir}"/>
+    <javac debug="true" srcdir="${src.dir}/java" destdir="${build.dir}/classes">
+      <classpath>
+       <fileset dir="${tmp.dir}/SAR-INF/lib" includes="**.jar"/>
+       <fileset dir="${james.dir}/lib" includes="**.jar"/>
+      </classpath>
+    </javac>
+    <rmic base="${classes.dir}" classname="com.wyona.james.rmi.DefaultNewsletterManager" stubVersion="1.2">
+      <classpath>
+        <fileset dir="${tmp.dir}/SAR-INF/lib" includes="**.jar"/>
+        <fileset dir="${james.dir}/lib" includes="**.jar"/>
+      </classpath>
+    </rmic>
+    <copy todir="${classes.dir}" overwrite="true">
+      <fileset dir="${src.dir}/java">
+        <include name="**/**.xinfo"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="javadoc" depends="init" description="Generate JavaDocs">
+    <javadoc
+            destdir="javadoc"
+            author="true"
+            version="false"
+            use="true"
+            windowtitle="Lenya newsletter module">
+      <packageset dir="${src.dir}/java" defaultexcludes="yes">
+        <include name="com/wyona/james/**"/>
+      </packageset>
+      <packageset dir="${module.dir}/java/src" defaultexcludes="yes">
+        <include name="com/wyona/lenya/**"/>
+      </packageset>
+      <doctitle><![CDATA[<h1>Lenya newsletter module</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2006 Wyona AG. All Rights Reserved.</i>]]></bottom>
+      <tag name="todo" scope="all" description="To do:"/>
+      <group title="Apache James" packages="com.wyona.james.*"/>
+      <group title="Apache Lenya" packages="com.wyona.lenya.*"/>
+      <link offline="true"/>
+    </javadoc>
+  </target>
+
+  <target name="jar" depends="compile" description="Pack the Newsletter classes into a JAR file">
+    <delete file="${tmp.dir}/SAR-INF/lib/newsletter.jar" failonerror="false"/>
+    <jar jarfile="${tmp.dir}/SAR-INF/lib/newsletter.jar">
+      <fileset dir="${build.dir}/classes"/>
+    </jar>
+    <copy todir="${module.dir}/java/lib" file="${tmp.dir}/SAR-INF/lib/newsletter.jar"/>
+  </target>
+
+  <target name="copy-config" description="Copy the modified James config to the SAR directory">
+    <copy todir="${tmp.dir}" overwrite="true">
+      <fileset dir="${conf.dir}">
+        <include name="*/**.xml"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="copy-config-dev" description="Copy the modified James config to the James application directory">
+    <copy todir="${james.dir}/apps/james-nl" overwrite="true">
+      <fileset dir="${conf.dir}">
+        <include name="*/**.xml"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="pack-sar" depends="jar, copy-config" description="Pack the James SAR including the Newsletter JAR">
+    <delete includeEmptyDirs="true" failonerror="false" >
+      <fileset dir="${james.dir}/apps/james-nl"/>
+      <fileset file="${james.dir}/apps/james-nl.sar"/>
+    </delete>
+    <jar jarfile="${james.dir}/apps/james-nl.sar" basedir="${tmp.dir}" includes="**/*" />
+  </target>
+
+  <target name="pack-sar-dev" depends="jar, copy-config" description="Pack the James SAR including the Newsletter JAR, don't delete the james-nl directory">
+    <delete includeEmptyDirs="true" failonerror="false" >
+      <fileset file="${james.dir}/apps/james-nl.sar"/>
+    </delete>
+    <jar jarfile="${james.dir}/apps/james-nl.sar" basedir="${tmp.dir}" includes="**/*" />
+  </target>
+
+  <target name="run-james" depends="pack-sar-dev" description="Run the James server">
+    <exec executable="${james.dir}/bin/run.sh" spawn="false"/>
+  </target>
+
+  <target name="dist" depends="init, download-james, extract-james, compile-james, extract-sar, compile, jar, copy-config, pack-sar, javadoc" description="Meta target to bootstrap the whole project">
+    <echo>Bulding Newletter Module</echo>
+  </target>
+
+</project>

@@ -1,0 +1,30 @@
+
+<!--
+
+    Newsletter RMI Manager
+
+-->
+
+<newslettermanager>
+  <!--
+      host = bind address of the rmi registry
+      port = port of the rmi registry
+      new = should the rmi remote manager block create a new rmiregistry
+      -->
+  <rmiregistry host="localhost" port="1111" new="true" />
+  <objects>
+    <!-- define remote objects
+         bindname = define the name which you can use to get the
+         remote object from the rmi registry
+         bind = define if you would like to bind the object to
+         the rmi registry.
+         -->
+    <object interface="com.wyona.james.rmi.NewsletterManager"
+            class="com.wyona.james.rmi.DefaultNewsletterManager"
+            bindname="newsletterManager"
+            bind="true">
+      <configuration>
+      </configuration>
+    </object>
+  </objects>
+</newslettermanager>
