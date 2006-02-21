@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<xsp:page
+    language="java"
+    xmlns:xsp="http://apache.org/xsp"
+    xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+    xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+    xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
+    xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0"
+    xmlns:uc="http://apache.org/cocoon/lenya/usecase/1.0"
+    xmlns="http://apache.org/cocoon/lenya/menubar/1.0"
+>
+
+  <xsp:structure>
+    <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+  </xsp:structure>
+
+  <menu>
+
+    <menus>
+      <menu i18n:attr="name" name="File">
+        <block admin="false">
+          <item uc:usecase="site.create" href="?doctype=newsletter"><i18n:text>New Newsletter Document</i18n:text></item>
+        </block>
+      </menu>
+
+      <menu i18n:attr="name" name="Edit">
+          <xsp:logic>
+            String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
+            if ("newsletter".equals(doctype)) {
+                <block info="false">
+                  <item wf:event="edit" uc:usecase="kupu" uc:step="open" href="?"><i18n:text>With Kupu</i18n:text></item>
+                  <item wf:event="edit" uc:usecase="edit.bxe" href="?"><i18n:text>With BXE</i18n:text></item>
+                  <item wf:event="edit" uc:usecase="edit.forms"><xsp:attribute name="href"><xsp:expr>"?form=" + doctype</xsp:expr></xsp:attribute><i18n:text>With Forms</i18n:text></item>
+                  <item wf:event="edit" uc:usecase="edit.oneform" href="?"><i18n:text>With one Form</i18n:text></item>
+                </block>
+            }
+          </xsp:logic>
+      </menu>
+
+      <menu i18n:attr="name" name="Workflow">
+        <xsp:logic>
+          if ("newsletter".equals(doctype)) {
+            <block info="false">
+              <item uc:usecase="send.newsletter" href="?doctype=newsletter">Send Newsletter</item>
+            </block>
+          }
+        </xsp:logic>
+      </menu>
+
+    </menus>
+
+  </menu>
+</xsp:page>

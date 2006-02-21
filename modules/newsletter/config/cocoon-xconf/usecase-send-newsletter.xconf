@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+  <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'send.newsletter']">
+
+    <component-instance name="send.newsletter" logger="lenya.newsletter" class="com.wyona.lenya.newsletter.SendNewsletter">
+      <view template="modules/newsletter/usecases/sendNewsletter.jx" menu="true"/>
+      <newsletter>
+        <sender addr="lenya-newsletter@localhost" name="Lenya Newsletter Daemon"/>
+        <format name="text"/>
+      </newsletter>
+    </component-instance>
+
+  </xconf>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+  <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'admin.addNewsletterUser']">
+
+    <component-instance name="admin.addNewsletterUser" logger="lenya.admin" class="com.wyona.lenya.newsletter.AddNewsletterUser">
+      <view template="modules/newsletter/usecases/admin/addNewsletterUser.jx" menu="true">
+        <tab group="admin" name="newsletters"/>
+      </view>
+      <exit usecase="admin.newsletters"/>
+    </component-instance>
+
+  </xconf>

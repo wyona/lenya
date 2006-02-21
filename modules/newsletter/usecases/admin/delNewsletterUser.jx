@@ -1,0 +1,54 @@
+<!--
+    Copyright 1999-2005 The Apache Software Foundation
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+<page:page
+          xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
+          xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
+          >
+
+  <page:body>
+    <jx:import uri="fallback://lenya/usecases/templates/tabs.jx"/>
+    <div id="contentblock1" class="lenya-tab">
+      <table class="lenya-table-noborder">
+        <tr>
+          <td colspan="2">
+            <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/>
+          </td>
+        </tr>
+      </table>
+      <h1>Delete Newsletter User</h1>
+      <br/>
+      <table cellspacing="0" class="lenya-table-noborder">
+        <form method="GET" id="forms-del_user">
+          <input type="hidden" name="lenya.usecase" value="admin.delNewsletterUser"/>
+          <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
+          <input type="hidden" name="email-address" value="${usecase.getParameter('email-address')}"/>
+          <input type="hidden" name="newsletter" value="${usecase.getParameter('newsletter')}"/>
+          <tr>
+            <td>Dou you really want to delete user <q><jx:out value="${usecase.getParameter('email-address')}"/></q></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" name="submit" value="Yes"/>
+              <input type="submit" name="cancel" value="No"/>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+  </page:body>
+</page:page>

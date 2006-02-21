@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+      xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+>
+  <head>
+    <title>Newsletter</title>
+  </head>
+  <body>
+    <h1>Default Newsletter</h1>
+    <p>Welcome to the default Lenya publication!</p>
+    <p>The purpose of this publication is</p>
+    <p>
+    You won't find any fancy and confusing bells and whistles here, but the
+    publication contains everything you need to get started.
+    </p>
+  </body>
+</html>

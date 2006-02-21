@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+  <xconf xpath="/cocoon" unless="/cocoon/component[@class = 'com.wyona.lenya.rmi.DefaultRMIProvider']">
+  
+    <component class="com.wyona.lenya.rmi.DefaultRMIProvider" logger="lenya.rmi.rmiprovider" role="com.wyona.lenya.rmi.RMIProvider">
+      <object url="//localhost:1111/newsletterManager" name="newsletterManager"/>
+    </component>
+    
+  </xconf>
