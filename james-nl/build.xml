@@ -20,7 +20,7 @@
 
 -->
 
-<project default="pack-sar-dev" basedir="." name="lenya">
+<project default="dist" basedir="." name="lenya">
 
   <property file="build.properties"/>
 
@@ -29,11 +29,12 @@
   </target>
 
   <target name="clean" description="Clean up the project">
-    <delete failonerror="false">
+    <delete failonerror="false" includeEmptyDirs="true">
       <fileset dir="${james.dir}"/>
       <fileset dir="${james.src.dir}"/>
       <fileset dir="${james.src.dir}"/>
       <fileset dir="javadoc"/>
+      <fileset dir="${build.dir}"/>
     </delete>
   </target>
 
@@ -63,6 +64,9 @@
       <fileset dir="${tmp.dir}"/>
     </delete>
     <unzip src="${james.dir}/apps/james.sar" dest="${tmp.dir}"/>
+    <delete includeEmptyDirs="true" failonerror="false">
+      <fileset file="${james.dir}/apps/james.sar"/>
+    </delete>
   </target>
 
   <target name="compile" depends="init" description="Compile the Newsletter classes">
@@ -127,7 +131,7 @@
     </copy>
   </target>
 
-  <target name="copy-config-dev" description="Copy the modified James config to the James application directory">
+  <target name="copy-config-dev" depends ="copy-config" description="Copy the modified James config to the James application directory">
     <copy todir="${james.dir}/apps/james-nl" overwrite="true">
       <fileset dir="${conf.dir}">
         <include name="*/**.xml"/>
@@ -143,18 +147,18 @@
     <jar jarfile="${james.dir}/apps/james-nl.sar" basedir="${tmp.dir}" includes="**/*" />
   </target>
 
-  <target name="pack-sar-dev" depends="jar, copy-config" description="Pack the James SAR including the Newsletter JAR, don't delete the james-nl directory">
+  <target name="pack-sar-dev" depends="jar, copy-config-dev" description="Pack the James SAR including the Newsletter JAR, don't delete the james-nl directory">
     <delete includeEmptyDirs="true" failonerror="false" >
       <fileset file="${james.dir}/apps/james-nl.sar"/>
     </delete>
     <jar jarfile="${james.dir}/apps/james-nl.sar" basedir="${tmp.dir}" includes="**/*" />
   </target>
 
-  <target name="run-james" depends="pack-sar-dev" description="Run the James server">
+  <target name="run-james" depends="init" description="Run the James server">
     <exec executable="${james.dir}/bin/run.sh" spawn="false"/>
   </target>
 
-  <target name="dist" depends="init, download-james, extract-james, compile-james, extract-sar, compile, jar, copy-config, pack-sar, javadoc" description="Meta target to bootstrap the whole project">
+  <target name="dist" depends="init, clean, download-james, extract-james, compile-james, extract-sar, compile, jar, copy-config, pack-sar, javadoc" description="Meta target to bootstrap the whole project">
     <echo>Bulding Newletter Module</echo>
   </target>
 
