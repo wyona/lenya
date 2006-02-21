@@ -9,6 +9,3 @@
   <repositoryName>newsletter-facharbeit</repositoryName>
 </mailet>
 
-<mailet match="NewsletterMatcher=demo1@localhost" class="NewsletterMailet">
-  <repositoryName>newsletter-demo1</repositoryName>
-</mailet>
