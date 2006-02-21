@@ -159,7 +159,6 @@
   </target>
 
   <target name="dist" depends="init, clean, download-james, extract-james, compile-james, extract-sar, compile, jar, copy-config, pack-sar, javadoc" description="Meta target to bootstrap the whole project">
-    <echo>Bulding Newletter Module</echo>
   </target>
 
 </project>
