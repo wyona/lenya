@@ -20,12 +20,12 @@
 
 -->
 
-<project default="dist" basedir="." name="lenya">
+<project default="init" basedir="." name="lenya">
 
   <property file="build.properties"/>
 
   <target name="init" description="Show the project logo">
-    <splash imageurl="file://${basedir}/${download.dir}/james-logo.jpg" showduration="0"/>
+    <splash imageurl="file://${basedir}/${download.dir}/james-logo.jpg" showduration="3000"/>
   </target>
 
   <target name="clean" description="Clean up the project">
