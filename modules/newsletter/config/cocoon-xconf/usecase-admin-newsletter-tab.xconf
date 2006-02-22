@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/gui-manager/tab-group[@name = 'admin']" unless="/cocoon/gui-manager/tab-group[@name = 'admin']/tab[@name = 'newsletters']">
+  <tab name="newsletters" label="Newsletter" usecase="admin.newsletters"/>
+</xconf>
