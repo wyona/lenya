@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0">
+
+<!--
+  Copyright 1999-2005 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!-- $Id: index_en.xml 320713 2005-10-13 10:38:56Z thorsten $ -->
+  <head>
+    <title>Document Type Examples</title>
+  </head>
+  <body>
+    <h1>Document Type Examples</h1>
+
+<p>
+The default publication comes with the <a href="doctypes/xhtml-document.html">XHTML Doctype</a>, the <a href="doctypes/links.html">Links Doctype</a>, the <a href="doctypes/opendocument.html">OpenDocument Doctype</a> and the <a href="doctypes/cforms.html">CForms Doctype</a>.
+</p>
+
+<p>
+A tutorial on creating/adding new doctypes can be found <a href="tutorial/new_doctype.html">here</a>.
+</p>
+    
+<p>
+The <strong>XHTML Doctype</strong> is for situations where
+users ask for complete freedom on what information can be inserted
+into a document. While this approach doesn't restrict you, it also
+looses some of the major benefits of well defined document types.
+</p>
+    
+<p>
+The <strong>Links Doctype</strong> is mainly to show that Lenya is able to handle
+arbitrary doctypes but can also be used for link-lists.
+</p>
+    
+<p>
+The <strong>OpenDocument Doctype</strong> is a standardized XML-based file format specification suitable for office applications and has been developed by <a href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office">OASIS</a>.
+</p>
+
+<p>
+The <strong>CForms Doctype</strong> is an example of how Lenya manages formular data based on Cocoon's CForms in conjunction
+with Ajax.
+</p>
+
+  </body>
+</html>
