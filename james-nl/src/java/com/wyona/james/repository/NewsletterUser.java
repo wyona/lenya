@@ -20,12 +20,27 @@ public class NewsletterUser implements User, Serializable {
     /** The users email address */
     private String emailAddr;    
 
+    /** The personal string of this user */
+    private String personal;
+    
     public NewsletterUser(String emailAddress) {
         this.emailAddr = emailAddress;
+        this.personal = null;
     }
 
+    public NewsletterUser(String emailAddress, String personal) {
+        this.emailAddr = emailAddress;
+        this.personal = personal;
+    }
+    
     public NewsletterUser(MailAddress emailAddress) {
         this.emailAddr = emailAddress.getUser() + "@" + emailAddress.getHost();
+        this.personal = null;
+    }
+
+    public NewsletterUser(MailAddress emailAddress, String personal) {
+        this.emailAddr = emailAddress.getUser() + "@" + emailAddress.getHost();
+        this.personal = personal;
     }
     
     /**
@@ -43,6 +58,22 @@ public class NewsletterUser implements User, Serializable {
      */
     public void setMailAddress(MailAddress mailAddress) {
         this.emailAddr = mailAddress.getUser() + "@" + mailAddress.getHost();        
+    }
+       
+    /**
+     * Set this users personal
+     * @param name the user name
+     */
+    public void setPersonal(String personal) {
+        this.personal = personal;
+    }
+
+    /**
+     * Get this users personal
+     * @param name the users personal
+     */
+    public String getPersonal() {
+        return this.personal;
     }
     
     /* (non-Javadoc)

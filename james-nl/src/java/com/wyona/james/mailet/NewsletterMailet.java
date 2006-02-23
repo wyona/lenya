@@ -4,6 +4,7 @@
 package com.wyona.james.mailet;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 
 import org.apache.avalon.framework.component.ComponentException;
 import org.apache.avalon.framework.component.ComponentManager;
@@ -49,11 +50,13 @@ public class NewsletterMailet extends GenericMailet {
     /* (non-Javadoc)
      * @see org.apache.mailet.Mailet#service(org.apache.mailet.Mail)
      */
-    public void service(Mail mail) throws MessagingException {
-        NewsletterUser user = new NewsletterUser(mail.getSender());
+    public void service(Mail mail) throws MessagingException {        
+        InternetAddress[] senderAddress = (InternetAddress[]) mail.getMessage().getFrom();
+        String personal = senderAddress[0].getPersonal();
+        NewsletterUser user = new NewsletterUser(mail.getSender(), personal);       
         if (!this.repository.contains(user.getUserName())) {
             this.repository.addUser(user);
-            log("adding user " + user.getUserName() + " to the newsletter repository");
+            log("adding user " + user.getUserName() + ", " + user.getPersonal() + " to the newsletter repository");
         } else {
             log("user " + user.getUserName() + " is already registered, ignoring");
         }

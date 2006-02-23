@@ -31,7 +31,8 @@ public final class MailUtil {
      * @return The MimeMessage object
      * @throws Exception
      */
-    public static MimeMessage generateMail(String destEmailAddr,            
+    public static MimeMessage generateMail(String destEmailAddr, 
+            String destPersonalName,
             String fromEmailAddr,
             String fromName,
             String emailSubject,
@@ -40,6 +41,9 @@ public final class MailUtil {
         MimeMessage message = new MimeMessage(Session.getDefaultInstance(System.getProperties(), null));
 
         InternetAddress[] toAddrs = InternetAddress.parse(destEmailAddr, false);
+        if (destPersonalName != null) {
+            toAddrs[0].setPersonal(destPersonalName);
+        }        
         InternetAddress from = new InternetAddress(fromEmailAddr);
         from.setPersonal(fromName);
         

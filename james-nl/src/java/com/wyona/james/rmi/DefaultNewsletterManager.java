@@ -5,6 +5,7 @@ package com.wyona.james.rmi;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.mail.MessagingException;
@@ -46,6 +47,9 @@ public class DefaultNewsletterManager extends AbstractLogEnabled implements News
     private MailServer mailServer;
     private UsersRepository repository;
     
+    private static final String USER_COUNT_KEY = "userCount";
+    private static final String USER_LIST_KEY = "userList";
+    
     /** Newsletter repositorys names have to start with this String */
     private static final String NEWSLETTER_REPO_NAME = "newsletter-";
     
@@ -64,7 +68,7 @@ public class DefaultNewsletterManager extends AbstractLogEnabled implements News
         }
         return repositoryNames;
     }
-
+        
     /* (non-Javadoc)
      * @see com.wyona.james.rmi.NewsletterManager#setRepository(java.lang.String)
      */
@@ -82,8 +86,8 @@ public class DefaultNewsletterManager extends AbstractLogEnabled implements News
     /* (non-Javadoc)
      * @see com.wyona.james.rmi.NewsletterManager#addUser(java.lang.String)
      */
-    public boolean addUser(String emailAddress) throws RemoteException {
-        NewsletterUser newsletterUser = new NewsletterUser(emailAddress);
+    public boolean addUser(String emailAddress, String personal) throws RemoteException {
+        NewsletterUser newsletterUser = new NewsletterUser(emailAddress, personal);
         if (this.repository.contains(emailAddress)) {
             return false;
         } else {
@@ -117,22 +121,111 @@ public class DefaultNewsletterManager extends AbstractLogEnabled implements News
         ArrayList users = new ArrayList();
         Iterator it = this.repository.list();
         while (it.hasNext()) {
-            users.add(it.next());
+            NewsletterUser newsletterUser = (NewsletterUser) this.repository.getUserByName((String) it.next());
+            users.add(newsletterUser);
         }
         return users;
     }
+    
 
+    /* (non-Javadoc)
+     * @see com.wyona.james.rmi.NewsletterManager#getPaginatedUserList(int, int, java.lang.String)
+     */
+    public HashMap getPaginatedUserList(int usersPerPage, int pageNr, String queryString) throws RemoteException {
+        if (queryString.length() > 0) {
+            return this.paginateQueryUserList(usersPerPage, pageNr, queryString);
+        } else {
+            return this.paginateUserList(usersPerPage, pageNr);
+        }        
+    }
+
+    /**
+     * Returns an List of repository users having the query string in their
+     * email address or name. 
+     * @param queryString
+     * @return the user list
+     */
+    private ArrayList getQueryUserList(String queryString) {
+        ArrayList matchingUsers = new ArrayList();
+        Iterator it = this.repository.list();
+        while (it.hasNext()) {
+            NewsletterUser newsletterUser = (NewsletterUser) this.repository.getUserByName((String) it.next());
+            if (newsletterUser.getUserName().indexOf(queryString) >= 0 ||
+                    newsletterUser.getPersonal().indexOf(queryString) >= 0) {
+                matchingUsers.add(newsletterUser);
+            }                
+        }        
+        return matchingUsers;
+    }
+    
+    /**
+     * Returns a HashMap containing the user list for this pageNr according to usersPerPage
+     * and the total number of users matched by this query.
+     * This implementations calls the repository iterator (n-1)-times to ge the n'th
+     * repository user.
+     * @param usersPerPage
+     * @param pageNr
+     * @param queryString
+     * @return the user list for this pageNr
+     */
+    private HashMap paginateQueryUserList(int usersPerPage, int pageNr, String queryString) {        
+        int listStart = 0;
+        int listEnd = 0;
+        HashMap userNr = new HashMap();
+        ArrayList paginatedUsers = new ArrayList();
+        ArrayList matchingUsers = this.getQueryUserList(queryString);
+        int userCount = matchingUsers.size();                
+        listStart = (pageNr-1) * usersPerPage;
+        listEnd = Math.min(pageNr * usersPerPage, userCount);        
+        for (int i=listStart; i<listEnd; i++) {
+            paginatedUsers.add(matchingUsers.get(i));
+        }
+        userNr.put(USER_COUNT_KEY, new Integer(userCount));
+        userNr.put(USER_LIST_KEY, paginatedUsers);
+        return userNr;
+    }    
+    
+    /**
+     * Returns HashMap containing the user list for this pageNr according to usersPerPage
+     * and the total number of users in this repository.
+     * This implementation calls the repository iterator (n-1)-times to get the n'th 
+     * repository user.
+     * @param usersPerPage
+     * @param nrUsers
+     * @return the user list for this pageNr
+     */
+    private HashMap paginateUserList(int usersPerPage, int pageNr) {        
+        int listStart = 0;
+        int listEnd = 0;        
+        int userCount = this.repository.countUsers();                        
+        Iterator userIterator = this.repository.list();
+        HashMap userNr = new HashMap();
+        listStart = (pageNr-1) * usersPerPage;
+        listEnd = Math.min(pageNr * usersPerPage, userCount);        
+        for (int i=0; i<listStart && userIterator.hasNext(); i++) {
+            userIterator.next();
+        }
+        ArrayList paginatedUsers = new ArrayList();
+        for (int i=listStart; i<listEnd && userIterator.hasNext(); i++) {
+            paginatedUsers.add(this.repository.getUserByName((String) userIterator.next()));
+        }       
+        userNr.put(USER_COUNT_KEY, new Integer(userCount));
+        userNr.put(USER_LIST_KEY, paginatedUsers);
+        return userNr;
+    }
+    
     /* (non-Javadoc)
      * @see com.wyona.james.rmi.NewsletterManager#sendMailToRepositoryUsers(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
     public void sendMailToRepositoryUsers(String senderAddress, String senderName, String subject, String messageBody) throws RemoteException {                  
-        Iterator it = this.repository.list();              
+        Iterator it = this.getUserList().iterator();          
         try {
             while (it.hasNext()) {
-                String emailAddress = (String) it.next();
+                NewsletterUser newsletterUser = (NewsletterUser) it.next();
                 ArrayList userAddresses = new ArrayList();
-                userAddresses.add(new MailAddress(emailAddress));
-                MimeMessage mail = MailUtil.generateMail(emailAddress, senderAddress, senderName, subject, messageBody);
+                userAddresses.add(newsletterUser.getMailAddress());
+                MimeMessage mail = MailUtil.generateMail(newsletterUser.getUserName(), 
+                        newsletterUser.getPersonal(), senderAddress, senderName, subject, messageBody);
                 this.mailServer.sendMail(new MailAddress(senderAddress), userAddresses, mail);                
             }                        
         } catch (ParseException e) {

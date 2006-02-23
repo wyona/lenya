@@ -3,11 +3,7 @@ package com.wyona.james.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
-import org.apache.mailet.MailAddress;
+import java.util.HashMap;
 
 /**
  * This interface describes the functionality needed to manage and send
@@ -36,11 +32,12 @@ public interface NewsletterManager extends Remote {
     /**
      * Add a user to the repository
      * @param emailAddress
+     * @param personal 
      * @return true if the user was added, false if the user already exists
      * @throws RemoteException
      */
-    boolean addUser(String emailAddress) throws RemoteException;
-
+    boolean addUser(String emailAddress, String personal) throws RemoteException;    
+    
     
     /**
      * Delete a user from the repository
@@ -52,8 +49,8 @@ public interface NewsletterManager extends Remote {
     
     
     /**
-     * Returns a list of all users in the repository
-     * @return list of all users in the repository
+     * Returns a list of all NewsletterUsers in the repository
+     * @return list of of all NewsletterUser objects in this repository
      * @throws RemoteException
      */
     ArrayList getUserList() throws RemoteException;
@@ -76,5 +73,16 @@ public interface NewsletterManager extends Remote {
      * @throws RemoteException
      */
     void sendMailToRepositoryUsers(String senderAddress, String senderName, String subject, String messageBody) 
+        throws RemoteException;
+    
+    
+    /**
+     * Get a paginated list of repository users matching this queryString
+     * @param usersPerPage the number of users each page contains
+     * @param pageNr the desired page
+     * @param queryString the query string 
+     * @return the HashMap containing the user list and the total number of users
+     */
+    public HashMap getPaginatedUserList(int usersPerPage, int pageNr, String queryString)
         throws RemoteException;
 }
