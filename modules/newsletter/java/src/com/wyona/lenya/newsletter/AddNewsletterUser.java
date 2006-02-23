@@ -21,7 +21,8 @@ public class AddNewsletterUser extends AbstractUsecase {
     
     private static final String EMAIL_ADDR_PARAM_NAME = "email-address";            
     private static final String NEWSLETTER_PARAM_NAME = "newsletter";    
-
+    private static final String PERSONAL_PARAM_NAME = "personal";    
+    
     /* (non-Javadoc)
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doExecute()
      */
@@ -37,11 +38,16 @@ public class AddNewsletterUser extends AbstractUsecase {
             } else if (!this.newsletterManager.setRepository(newsletter)) {
                 this.addErrorMessage("No newsletter repository found with that name");
             }
+            String personal = this.getParameterAsString(PERSONAL_PARAM_NAME);
+            if (personal == null || personal.length() == 0) {
+                this.addErrorMessage("Invalid name");
+            }
             String emailAddress = this.getParameterAsString(EMAIL_ADDR_PARAM_NAME);
             if (!isValidEmailAddress(emailAddress)) {
-                this.addErrorMessage("Invalid email address: " + emailAddress);
-            } else if (emailAddress != null) {
-                if (!this.newsletterManager.addUser(emailAddress)) {
+                this.addErrorMessage("Invalid email address");            
+            }
+            if (!this.hasErrors()) {
+                if (!this.newsletterManager.addUser(emailAddress, personal)) {
                     this.addErrorMessage("Newsletter User already exists: " + emailAddress);
                 }
             }

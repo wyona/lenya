@@ -37,8 +37,12 @@
           <input type="hidden" name="lenya.usecase" value="admin.addNewsletterUser"/>
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <tr>
-            <td>Email Address *</td>
+            <td class="lenya-entry-caption">Email Address *</td>
             <td><input type="text" name="email-address" value=""/></td>
+          </tr>
+          <tr>
+            <td class="lenya-entry-caption">Name *</td>
+            <td><input type="text" name="personal" value=""/></td>
           </tr>
           <tr>
             <td></td>

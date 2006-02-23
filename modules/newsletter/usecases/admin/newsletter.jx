@@ -45,24 +45,52 @@
             </form>
           </td>
         </tr>
+        <tr>
+          <td>
+            <br/>
+          </td>
+        </tr>
+        <form method="GET" id="form-add_user">
+          <input type="hidden" name="lenya.usecase" value="admin.newsletter" />
+          <input type="hidden" name="newsletter" value="${usecase.getParameter('newsletter')}" />
+          <input type="hidden" name="pagenr" value="1"/>
+          <tr>
+            <td>Search user:</td>
+            <td>
+              <input type="text" name="query" value="${usecase.getParameter('query')}"/>
+            </td>
+            <td>
+              <input type="submit" name="submit" value="Search"/>
+            </td>
+          </tr>
+        </form>
       </table>
       <br/>
       <table cellspacing="0" class="lenya-table">
         <tr>
-          <th colspan="2">Newsletter Users</th>
+          <th>Email Address</th>
+          <th>Name</th>
+          <th></th>
         </tr>
         <jx:forEach var="user" items="${usecase.getParameter('users')}">
           <form method="GET" id="form-delete_user">
             <input type="hidden" name="lenya.usecase" value="admin.delNewsletterUser" />
-            <input type="hidden" name="email-address" value="${user}"/>
+            <input type="hidden" name="email-address" value="${user.getUserName()}"/>
             <input type="hidden" name="newsletter" value="${usecase.getParameter('newsletter')}" />
             <tr>
-              <td><jx:out value="${user}"/></td>
+              <td><jx:out value="${user.getUserName()}"/></td>
+              <td><jx:out value="${user.getPersonal()}"/></td>
               <td><input type="submit" name="submit" value="Delete"/></td>
             </tr>
           </form>
         </jx:forEach>
       </table>
+      <p>
+        <jx:out value="${usecase.getParameter('user-count')}"/> users found,&#160;
+        <jx:forEach var="page" items="${usecase.getParameter('pages')}">
+          <a href="?lenya.usecase=admin.newsletter&amp;newsletter=${usecase.getParameter('newsletter')}&amp;pagenr=${page}&amp;query=${usecase.getParameter('query')}&amp;submit=submit"><jx:out value="${page}"/></a>
+      </jx:forEach>
+      </p>
     </div>
   </page:body>
 </page:page>
