@@ -274,10 +274,7 @@
         </map:transform>
         <map:transform type="cinclude"/>
         <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
-<!--
-        <map:transform src="../unizh/xslt/common/rss.xsl"/> 
-        <map:transform type="cinclude"/>
--->
+
         <map:transform src="lenya/xslt/navigation/header.xsl"/> 
         <map:transform src="lenya/xslt/navigation/logic.xsl">
           <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
