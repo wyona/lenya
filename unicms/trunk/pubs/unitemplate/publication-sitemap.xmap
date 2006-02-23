@@ -10,7 +10,7 @@
     <map:actions>
       <map:action logger="sitemap.action.redirect" name="redirect" src="ch.unizh.lenya.cms.cocoon.acting.UnizhRedirectAction"/>
     </map:actions>
-    
+       
     <map:transformers default="xslt">
       <map:transformer name="i18n"
         src="org.apache.cocoon.transformation.I18nTransformer">
@@ -23,7 +23,13 @@
       </map:transformer>
       <map:transformer name="index" logger="lenya.sitemap.transformer.index" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentIndexTransformer"/>
     </map:transformers>
-    <map:selectors/>
+ 
+    <map:selectors>
+       <map:selector name="validate-cache" logger="sitemap.selector.validate-cache" src="org.apache.cocoon.selection.ValidateCacheSelector">
+          <!-- define the expires value in s -->
+          <cache-expires>1800</cache-expires>
+       </map:selector>
+    </map:selectors>
     
     <map:serializers default="html">
 
@@ -286,7 +292,40 @@
         <map:transform src="../../xslt/exception/missing-language.xsl"/>
         <map:call resource="style-cms-page"/>
       </map:match>
-        
+ 
+     <!-- a separate matcher for search in order to avoid caching of the search page -->
+      <map:match pattern="*/search*.html">
+        <map:select type="parameter">
+          <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
+          <map:when test="simple">
+            <map:generate src="cocoon:/{1}/search.html.simple"/>
+          </map:when>
+          <map:when test="standard">
+            <map:generate src="cocoon:/{1}/search.html.internal"/>
+          </map:when>
+          <map:otherwise>
+            <map:select type="parameter">
+              <map:parameter name="parameter-selector-test" value="{session-context:version/}"/>
+              <map:when test="simple">
+                <map:generate src="cocoon:/{1}/search.html.simple"/>
+              </map:when>
+              <map:otherwise>
+                 <map:generate src="cocoon:/{1}/search.html.internal"/>
+              </map:otherwise>
+            </map:select>
+          </map:otherwise>
+        </map:select>
+
+        <map:call resource="cache-post-processing"/>
+
+        <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
+          <map:parameter name="version" value="{request-param:version}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}"/>
+        </map:transform>
+        <map:transform type="session"/>
+        <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+        <map:serialize type="xhtml"/>
+      </map:match>       
         
       <map:match pattern="*/**.html">
         <map:select type="parameter">
@@ -304,7 +343,7 @@
                 <map:generate src="cocoon:/{1}/{2}.html.simple"/>
               </map:when>
               <map:otherwise>
-                <map:select type="resource-exists">
+                <map:select type="validate-cache">
                   <map:when test="work/cache/{1}/{page-envelope:document-path}">
                     <map:generate src="work/cache/{1}/{page-envelope:document-path}"/>
                   </map:when>
