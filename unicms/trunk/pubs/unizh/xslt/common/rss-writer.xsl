@@ -55,12 +55,17 @@
                 </xsl:otherwise>
               </xsl:choose> 
             </link>
-            <description><xsl:copy-of select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
+            <description><xsl:apply-templates select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
             <pubDate><xsl:value-of select="*/unizh:newsitem/lenya:meta/dcterms:created"/></pubDate>
           </item>
         </xsl:for-each>
       </channel>
     </rss>
   </xsl:template>
+
+  <xsl:template match="xhtml:p">
+    <xsl:copy-of select="*|text()"/>
+  </xsl:template>
+
 
 </xsl:stylesheet>
