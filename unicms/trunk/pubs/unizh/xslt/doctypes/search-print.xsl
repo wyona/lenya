@@ -21,6 +21,9 @@
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
   <xsl:param name="querystring"/>
+  <xsl:param name="querySubString">
+     <xsl:value-of select="substring-after($querystring, '=')"/>
+  </xsl:param>
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/html-head-print.xsl"/>
@@ -49,7 +52,15 @@
           <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"  /></div>
           <div class="content">
             <h1>
-              <xsl:value-of select="*/lenya:meta/dc:title"/>
+             <xsl:value-of select="*/lenya:meta/dc:title"/> nach 
+             <xsl:choose>
+               <xsl:when test="contains($querystring,'&amp;')">
+                  <xsl:value-of select="substring-before($querySubString, '&amp;')"/>
+	       </xsl:when>
+               <xsl:otherwise>
+                  <xsl:value-of select="$querySubString"/>
+	       </xsl:otherwise>
+	     </xsl:choose>
             </h1>
             <p>&#160;</p>
               <!-- <xsl:apply-templates select="/document/xhtml:form[@id = 'search']"/> -->
