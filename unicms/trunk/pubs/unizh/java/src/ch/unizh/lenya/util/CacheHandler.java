@@ -99,7 +99,7 @@ public class CacheHandler {
         String cachePrefix = getCachePrefix(pub);
         
         if (cachePrefix != null) {
-            cacheDir = new File(cachePrefix + pubId + File.separator + area);
+            cacheDir = new File(cachePrefix + File.separator+ pubId + File.separator + area);
             cacheFile = new File(cacheDir, path);
         }
         
