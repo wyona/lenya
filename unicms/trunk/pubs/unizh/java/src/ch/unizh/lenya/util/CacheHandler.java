@@ -165,7 +165,7 @@ public class CacheHandler {
         } else  {
             path = parentId;
         }
-        if (isLive && task.equals("publish")) path = documentId;
+        // if (isLive && task.equals("publish")) path = documentId;
         
         return path;
     }
