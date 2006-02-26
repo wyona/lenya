@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!-- $Id: doctypes.xconf 164635 2005-04-25 20:01:43Z tschlabach $ -->
+
+<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'aurl']">
+
+  <component-instance name="aurl" logger="lenya.resourcetypes.aurl" class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+<!--
+    <schema language="http://relaxng.org/ns/structure/0.9" src="fallback://lenya/modules/aurl/resources/schemas/aurl.rng"/>
+-->
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>fallback://lenya/modules/aurl/templates/aurl.xml</sample-name>
+    </creator>
+
+<!--
+    <format name="xhtml" uri="cocoon://modules/xhtml/xhtml.xml"/>
+    <format name="webdavGET" uri="cocoon://modules/xhtml/davget.xml"/>
+    <format name="luceneIndex" uri="cocoon://modules/xhtml/lucene-index.xml"/>
+-->
+  </component-instance>
+
+</xconf>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!-- $Id: menus.xmap 178738 2005-05-27 03:42:09Z gregor $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <map:pipelines>
+
+    <map:pipeline>
+    	
+      <map:match pattern="**">
+        <map:generate type="serverpages" src="config/menu.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+    </map:pipeline>
+    
+  </map:pipelines>
+</map:sitemap>
