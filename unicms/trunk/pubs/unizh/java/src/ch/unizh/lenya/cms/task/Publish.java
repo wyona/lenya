@@ -173,16 +173,21 @@ public class Publish extends ResourceTask {
      */
     protected void publish(Resource resource)
         throws PublicationException, ExecutionException, ParameterException, WorkflowException {
-        publish(resource, getLanguage());
+        publish(resource, getLanguage(), null, 1);
     }
 
     /**
      * Publishes a certain language version of a resource.
      * @param resource The resource.
      * @param language The language.
+     * @param firstNode only if a subtree should be published otherwise null
+     * @numOfDocumentsToPublish Number of Documenst to publish. Usually > 1 if a subtree is published
      */
-    protected void publish(Resource resource, String language)
+    protected void publish(Resource resource, String language, Resource firstNode, int numOfDocumentsToPublish)
         throws ParameterException, ExecutionException, PublicationException, WorkflowException {
+        
+        CacheHandler cacheHandler = new CacheHandler();
+        
         Version authoringVersion = getVersion(resource, Publication.AUTHORING_AREA, language);
         
         if (authoringVersion.canWorkflowFire(getEventName(), getSituation())
@@ -196,12 +201,25 @@ public class Publish extends ResourceTask {
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
             
             try {
-                CacheHandler cacheHandler = new CacheHandler();
-                cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
+                if (firstNode == null){
+                    cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
+                }
             } catch (SiteTreeException e) {
                 throw new ExecutionException ("Unable to get sitetree.", e);
             }
         }
+        // If a subtree is published, the cached docuemnt-tree should be deleted 
+        // only if the last document is published otherwise conflicts might occur.
+        try{ 
+            if (firstNode != null && numOfDocumentsToPublish == 1) {
+                Version treeVersion = getVersion(firstNode, Publication.LIVE_AREA, getLanguage()); 
+                boolean isLive = isNodeLive(treeVersion);
+                cacheHandler.deleteCache(treeVersion, isLive, TASK_NAME);
+            }            
+        } catch (SiteTreeException e) {
+            throw new ExecutionException ("Unable to get sitetree.", e);
+        }
+
     }
     
 
