@@ -121,6 +121,7 @@
       <fileset dir="${build.dir}/classes"/>
     </jar>
     <copy todir="${module.dir}/java/lib" file="${tmp.dir}/SAR-INF/lib/newsletter.jar"/>
+    <copy todir="${module.dir}/java/lib" file="${tmp.dir}/SAR-INF/lib/james.jar"/>
   </target>
 
   <target name="copy-config" description="Copy the modified James config to the SAR directory">
