@@ -68,7 +68,6 @@
            <span class="lead"><xsl:value-of select="pubDate"/></span></h2>
            <p><xsl:apply-templates select="description"/>
            <a class="arrow" href="{link}">Weiter</a><br/>
-           <br/>
            </p>
          </xsl:if>
        </xsl:for-each>
@@ -76,6 +75,12 @@
          <p> no rss </p>
        </xsl:if>
   </xsl:template> 
+
+
+  <xsl:template match="description">
+    <xsl:apply-templates/>
+  </xsl:template>
+
 
 <xsl:template match="@*|node()" priority="-3">
   <xsl:copy>
