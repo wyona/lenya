@@ -180,10 +180,10 @@ public class Publish extends ResourceTask {
      * Publishes a certain language version of a resource.
      * @param resource The resource.
      * @param language The language.
-     * @param firstNode only if a subtree should be published otherwise null
+     * @param rootNode only if a subtree should be published otherwise null
      * @numOfDocumentsToPublish Number of Documenst to publish. Usually > 1 if a subtree is published
      */
-    protected void publish(Resource resource, String language, Resource firstNode, int numOfDocumentsToPublish)
+    protected void publish(Resource resource, String language, Resource rootNode, int numOfDocumentsToPublish)
         throws ParameterException, ExecutionException, PublicationException, WorkflowException {
         
         CacheHandler cacheHandler = new CacheHandler();
@@ -201,7 +201,7 @@ public class Publish extends ResourceTask {
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
             
             try {
-                if (firstNode == null){
+                if (rootNode == null){
                     cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
                 }
             } catch (SiteTreeException e) {
@@ -211,8 +211,8 @@ public class Publish extends ResourceTask {
         // If a subtree is published, the cached docuemnt-tree should be deleted 
         // only if the last document is published otherwise conflicts might occur.
         try{ 
-            if (firstNode != null && numOfDocumentsToPublish == 1) {
-                Version treeVersion = getVersion(firstNode, Publication.LIVE_AREA, getLanguage()); 
+            if (rootNode != null && numOfDocumentsToPublish == 1) {
+                Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage()); 
                 boolean isLive = isNodeLive(treeVersion);
                 cacheHandler.deleteCache(treeVersion, isLive, TASK_NAME);
             }            
