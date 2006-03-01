@@ -15,7 +15,7 @@
 <xsl:param name="root"/>
 <xsl:param name="area"/>
 
-<xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'shared')"/>
+<xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'authoring')"/>
 
 
 <xsl:template match="style[@type = 'text/css']">
