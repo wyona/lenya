@@ -659,7 +659,7 @@
     <xsl:copy>
       <xsl:copy-of select="@class"/>
       <xsl:attribute name="width">100%</xsl:attribute>
-      <xsl:for-each match="xhtml:tr">
+      <xsl:for-each select="xhtml:tr">
         <xsl:variable name="eins"><xsl:value-of select="position()"/></xsl:variable>
         <xsl:copy>
           <xsl:if test="($eins div 4) = round($eins div 4)">
