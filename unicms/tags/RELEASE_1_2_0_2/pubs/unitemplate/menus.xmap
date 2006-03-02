@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<!-- CVS: $Id: doctypes.xmap,v 1.2 2003/07/29 14:48:02 andreas Exp $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <map:components>
+    <map:generators default="file" />
+    <map:matchers default="wildcard">
+      <map:matcher name="doctype" logger="sitemap.matcher.doctype" src="org.apache.cocoon.matching.WildcardRequestParameterMatcher">
+        <parameter-name>doctype</parameter-name>
+      </map:matcher>
+    </map:matchers>
+    <map:actions/>
+  </map:components>
+
+  <map:pipelines>
+
+    <map:pipeline>
+    
+      <map:match type="doctype" pattern="xhtml">
+        <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="overview">
+        <map:generate type="serverpages" src="../unizh/config/menus/xhtml.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="homepage">
+        <map:generate type="serverpages" src="../unizh/config/menus/homepage.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+ 
+     <map:match type="doctype" pattern="homepage4cols">
+        <map:generate type="serverpages" src="../unizh/config/menus/homepage.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="news">
+        <map:generate type="serverpages" src="../unizh/config/menus/news.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="newsitem">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="person">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="search">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="redirect">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="doctype" pattern="team">
+        <map:generate type="serverpages" src="../unizh/config/menus/team.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="*/**">
+        <map:generate type="serverpages" src="../unizh/config/menus/generic.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+    </map:pipeline>
+    
+  </map:pipelines>
+</map:sitemap>

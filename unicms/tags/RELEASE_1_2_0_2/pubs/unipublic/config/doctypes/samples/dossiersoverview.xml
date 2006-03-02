@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dossiersoverview 
+  xmlns="http://www.unipublic.unizh.ch/2002/up" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:up="http://www.unipublic.unizh.ch/2002/up" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
+  dc:dummy="FIXME:keepNamespace" 
+  lenya:dummy="FIXME:keepNamespace">
+
+  <lenya:meta>
+    <dc:creator></dc:creator>
+    <dc:title>Dossiers overview</dc:title>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created></dcterms:created>
+    <dcterms:issued></dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <xhtml:body>
+    <xhtml:p>There are no dossier in this overview</xhtml:p>
+  </xhtml:body>
+</dossiersoverview>

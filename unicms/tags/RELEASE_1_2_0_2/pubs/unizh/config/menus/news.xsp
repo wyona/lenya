@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xsp:page 
+    language="java" 
+    xmlns:xsp="http://apache.org/xsp"
+    xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+    xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+    xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0"
+    xmlns:uc="http://apache.org/cocoon/lenya/usecase/1.0"
+    xmlns="http://apache.org/cocoon/lenya/menubar/1.0"
+>
+
+  <xsp:structure>
+    <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+  </xsp:structure>
+  
+  <menu>
+  	
+    <xsp:logic>
+      String projectid = parameters.getParameter("projectid","null");
+    </xsp:logic>
+    
+    <xsp:logic>
+      String xmlSource = <input:get-attribute module="page-envelope" as="string" name="document-path"/>;
+      String documentId = <input:get-attribute module="page-envelope" as="string" name="context-prefix"/> + "/" + <input:get-attribute module="page-envelope" as="string" name="publication-id"/> + "/authoring" + <input:get-attribute module="page-envelope" as="string" name="document-id"/> + "_" + <input:get-attribute module="page-envelope" as="string" name="document-language"/>;
+      String urisParameter = "uris=" + <input:get-attribute module="page-envelope" as="string" name="document-url"/>;
+      String area = <input:get-attribute module="page-envelope" as="string" name="area"/>;
+
+      String docType = "";
+      try {
+      Document document = (Document) <input:get-attribute as="object" module="page-envelope" name="document"/>;
+          if (document.exists()) {
+              docType = <input:get-attribute as="string" module="page-envelope" name="document-type"/>;
+          }
+      }
+      catch (Exception e) {
+          throw new ProcessingException(e);
+      }
+      
+      boolean isDocument = false;
+      {
+        Object document = <input:get-attribute module="page-envelope" as="object" name="document"/>;
+        try {
+          if (document != "" &amp;&amp; ((Document) document).exists()) {
+            isDocument = true;
+          }
+        }
+        catch (Exception e) {
+          throw new ProcessingException(e);
+        }
+      }
+    </xsp:logic>
+    
+    <menus>
+      <menu name="File" label="File">
+	<block>
+	  
+	  <xsp:logic>
+	    {
+        if (Publication.ARCHIVE_AREA.equals(area) || Publication.TRASH_AREA.equals(area)) {
+          <item>New Document</item>
+	  <item>New Homepage</item>
+        }
+        else {
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=newsitem">New Item</item>
+        }
+	    }
+	  </xsp:logic>
+	</block>
+	<block>
+	  <xsp:logic>
+	    {
+	      if (isDocument
+            &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+	          ) {
+          <xsp:content>
+            <item uc:usecase="create-language" uc:step="showscreen" href="?">New language version</item>
+          </xsp:content>
+	      }
+	      else {
+          <xsp:content>
+            <item>New language version</item>
+          </xsp:content>
+	      }
+	    
+	      String[] availableLanguages = (String[])<input:get-attribute module="page-envelope" as="object" name="document-languages"/>;
+	      if (isDocument
+            &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+	          &amp;&amp; availableLanguages.length &gt; 1
+	          ) {
+	        <xsp:content>
+	          <item wf:event="deletelanguage" uc:usecase="removelabel" uc:step="showscreen" href="?">Remove language version</item>
+	        </xsp:content>
+	      } else {
+	        <xsp:content>
+	          <item>Remove language version</item>
+	        </xsp:content>
+	      } 
+	    }
+	  </xsp:logic>
+	</block>
+	<block>
+	  <item uc:usecase="userChangePasswordUser"><xsp:attribute name="href"><xsp-request:get-context-path/>/<input:get-attribute module="page-envelope" as="string" name="publication-id"/>/admin/users/<input:get-attribute module="access-control" as="string" name="user-id"/>.html</xsp:attribute>Change Password</item>
+	  <item uc:usecase="logout" href="?">Logout</item>
+	</block>
+      </menu>
+      
+      <menu name="Edit" label="Search">
+        
+        <block info="false">
+          <item wf:event="edit" uc:usecase="bxeng" uc:step="open" href="?">Edit&#160;with&#160;BXE</item>
+          <item wf:event="edit" uc:usecase="edit" uc:step="open"><xsp:attribute name="href"><xsp:expr>"?form=" + docType</xsp:expr></xsp:attribute>Edit&#160;with&#160;Forms</item>
+          <item wf:event="edit" uc:usecase="1formedit" uc:step="open" href="?">Edit&#160;with&#160;one&#160;Form</item>
+        </block>
+        <block info="false">
+          <item wf:event="edit" uc:usecase="info-meta" uc:step="showscreen"><xsp:attribute name="href"><xsp-request:get-context-path/>/<input:get-attribute module="page-envelope" as="string" name="publication-id"/>/info-<input:get-attribute module="page-envelope" as="string" name="area"/><input:get-attribute module="page-envelope" as="string" name="document-url"/>?</xsp:attribute>Edit Metadata</item>
+          <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen"><xsp:attribute name="href"><xsp-request:get-uri/>?</xsp:attribute>Edit Navigation Title</item>
+          <item wf:event="edit" uc:usecase="asset" uc:step="showdots"><xsp:attribute name="href"><xsp-request:get-uri/>?</xsp:attribute>Enable Asset Upload</item>
+        </block>
+
+        <block authoring="false">
+        
+        <xsp:logic>
+          
+        {
+          String docId = <input:get-attribute module="page-envelope" as="string" name="document-id"/>;
+          
+          if (isDocument
+              &amp;&amp; "".equals(<input:get-attribute module="sitetree" as="string" name="live-node"/>)
+              &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+              &amp;&amp; !"/index".equals(docId)) {
+            <item uc:usecase="cut" uc:step="showscreen" href="?">Cut</item>
+          }
+          else {
+            <item>Cut</item>
+          }
+        
+          if (isDocument
+              &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+              &amp;&amp; !"/index".equals(docId)) {
+            <item uc:usecase="copy" uc:step="showscreen" href="?">Copy</item>
+          }
+          else {
+            <item>Copy</item>
+          }
+        
+        	String clipboard = (String) <input:get-attribute module="session-attr" as="object" name="org.apache.lenya.cms.info.firstdocid"/> + "/";
+        	String currentDocumentId = <input:get-attribute module="page-envelope" as="string" name="document-id"/> + "/";
+        	
+        	if (clipboard != null
+        	    &amp;&amp; !"".equals(clipboard)
+              &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+              &amp;&amp; !currentDocumentId.startsWith(clipboard)
+              &amp;&amp; !"/index".equals(docId)) {
+		        <item uc:usecase="paste" uc:step="showscreen" href="?">Paste</item>
+        	}
+        	else {
+		        <item>Paste</item>
+        	}
+        }
+        </xsp:logic>
+        
+      </block>
+      <block authoring="false">
+        <xsp:logic>
+          if (isDocument
+              &amp;&amp; "".equals(<input:get-attribute module="sitetree" as="string" name="live-node"/>)
+              &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+              &amp;&amp; !"/index".equals(<input:get-attribute module="page-envelope" as="string" name="document-id"/>)) {
+            <item uc:usecase="rename" uc:step="showscreen" href="?">Rename URL</item>
+          }
+          else {
+            <item>Rename URL</item>
+          }
+          
+          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+            <item wf:event="edit" uc:usecase="rename-label" uc:step="showscreen" href="?">Edit Navigation Title</item>
+          }
+          else {
+            <item>Edit Navigation Title</item>
+          }
+          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+            <item uc:usecase="change-visibility" uc:step="showscreen" href="?">Change node visiblity</item>
+          }
+          else {
+           <item>Change node visiblity</item>
+          }
+          if (isDocument &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+             <item uc:usecase="forcecheckin" uc:step="showscreen" href="?">Checkin</item>
+          }
+          else {
+            <item>Checkin</item>
+          }
+        </xsp:logic>
+      </block>
+      <block authoring="false">
+        <xsp:logic>
+          if (isDocument
+              &amp;&amp; "".equals(<input:get-attribute module="sitetree" as="string" name="live-node"/>)
+              &amp;&amp; Publication.AUTHORING_AREA.equals(area)
+              &amp;&amp; !"/index".equals(<input:get-attribute module="sitetree" as="string" name="document-id"/>)) {
+            <item uc:usecase="move-node" uc:step="move-node"><xsp:attribute name="href"><xsp-request:get-uri/>?properties.movenode.direction=up</xsp:attribute>Move Up</item>
+            <item uc:usecase="move-node" uc:step="move-node"><xsp:attribute name="href"><xsp-request:get-uri/>?properties.movenode.direction=down</xsp:attribute>Move Down</item>
+          }
+          else {
+            <item>Move Up</item>
+            <item>Move Down</item>
+          }
+        </xsp:logic>
+      </block>
+      <block authoring="false">
+        
+        <xsp:logic>
+       	{
+       	
+       	  if (isDocument &amp;&amp;
+       	    !"/index".equals(<input:get-attribute module="page-envelope" as="string" name="document-id"/>)
+       	     &amp;&amp; !(area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+            <item wf:event="delete" uc:usecase="delete" uc:step="showscreen" href="?">Delete</item>
+            <item wf:event="archive" uc:usecase="archive" uc:step="showscreen" href="?">Archive</item>
+       	  }
+       	  else {
+            <item>Delete</item>
+            <item>Archive</item>
+       	  }
+       	
+        	if (isDocument &amp;&amp; (area.equals(Publication.TRASH_AREA) || area.equals(Publication.ARCHIVE_AREA))) {
+            <item wf:event="restore" uc:usecase="restore" uc:step="showscreen" href="?">Restore</item>
+        	}
+        	else {
+            <item>Restore</item>
+        	}
+      	}
+        </xsp:logic>
+        
+      </block>
+	
+      </menu>
+      
+      <menu name="Workflow" label="Help">
+	<block>
+	  <xsp:logic>
+      {
+        if (isDocument &amp;&amp; Publication.AUTHORING_AREA.equals(area)) {
+          <item uc:usecase="submit" uc:step="showscreen" wf:event="submit" href="?">Submit</item>
+          <item uc:usecase="reject" uc:step="showscreen" wf:event="reject" href="?">Reject</item>
+          <item uc:usecase="publish" uc:step="showscreen" wf:event="publish"><xsp:attribute name="href">?<xsp:expr>urisParameter</xsp:expr>&amp;sources=<xsp:expr>xmlSource</xsp:expr>&amp;task-id=publish</xsp:attribute>Publish</item>
+          <item uc:usecase="deactivate" uc:step="showscreen" wf:event="deactivate" href="?task-id=deactivateDocument">Deactivate</item>
+          <item uc:usecase="schedule" uc:step="showscreen" href="?">Schedule</item>
+        }
+        else {
+          <item>Submit</item>
+          <item>Reject</item>
+          <item>Publish</item>
+          <item>Deactivate</item>
+          <item>Schedule</item>
+        }
+      }
+	  </xsp:logic>
+	</block>
+      </menu>
+
+      <menu name="Help" label="Debug">
+	<block>
+	  <item><xsp:attribute name="href"><xsp-request:get-context-path/>/docs-new/docs/index.html</xsp:attribute>User Documentation</item>
+	  <item>System Documentation</item>
+	  <item>Support</item>
+	</block>
+  <block>
+	  <item><xsp:attribute name="href"><xsp-request:get-context-path/>/index.html</xsp:attribute>Apache&#160;Lenya&#160;Start&#160;Page</item>
+	  <item><xsp:attribute name="href"><xsp-request:get-context-path/>/about.html</xsp:attribute>About&#160;Apache&#160;Lenya</item>
+	</block>
+
+        <block>
+          <item uc:usecase="view-logs" uc:step="overview" href="?">View Task Logs</item>
+	</block>
+      </menu>
+    </menus>
+    
+  </menu>
+</xsp:page>

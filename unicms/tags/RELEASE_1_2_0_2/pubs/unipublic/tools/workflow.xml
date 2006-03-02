@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wf:history xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0" workflow="1stage.xml">
+<wf:version date="2005-01-11 11:40:17" state="authoring">
+<wf:identity>
+<wf:user id="lenya"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-01-11 13:40:10" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="lenya"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:variable name="is_live" value="false"/>
+</wf:history>

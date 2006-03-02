@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<luc:document xmlns:luc="http://apache.org/cocoon/lenya/lucene/1.0">
+<!--
+  <luc:variable name="" value=""/>
+-->
+<!--
+  <luc:field name="title" type="Text" xpath="/html/lenya:meta/dc:title"/>
+  -->
+  <luc:field name="contents" type="UnStored" xpath="/html"/>
+  <!--
+  <luc:field name="keywords" type="UnStored" xpath="/html/lenya:meta/dc:description"/>
+  -->
+</luc:document>

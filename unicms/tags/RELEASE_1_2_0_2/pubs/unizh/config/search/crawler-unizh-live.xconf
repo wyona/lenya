@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<crawler>
+  <user-agent>lenya</user-agent>
+
+  <base-url href="http://www.unizh.ch/index.html"/>
+  <scope-url href="http://www.unizh.ch/"/>
+  <uri-list src="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/uris-www.unizh.ch.txt"/>
+  <htdocs-dump-dir src="/usr/local/home/lenya/tmp/cocoon-lenya/work/search/lucene/htdocs_dump/live/www.unizh.ch"/>
+  <robots src="robots.txt" domain="www.unizh.ch"/>
+</crawler>

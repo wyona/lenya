@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<unizh xmlns="http://unizh.ch">
+  <university breadcrumb="true" href="http://www.unizh.ch">university_zurich</university>
+  <section breadcrumb="false">services</section>
+  <publication breadcrumb="true">Unitemplate</publication>
+</unizh>
