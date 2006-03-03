@@ -175,7 +175,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:a">
+  <xsl:template match="xhtml:a[@href != '']">
     <a href="{@href}">
       <xsl:attribute name="class">
         <xsl:choose>
