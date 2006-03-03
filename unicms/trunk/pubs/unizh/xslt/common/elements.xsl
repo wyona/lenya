@@ -662,7 +662,7 @@
       <xsl:for-each select="xhtml:tr">
         <xsl:variable name="eins"><xsl:value-of select="position()"/></xsl:variable>
         <xsl:copy>
-          <xsl:if test="($eins div 4) = round($eins div 4)">
+          <xsl:if test="($eins div 2) = round($eins div 2)">
             <xsl:attribute name="class">strip</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates/>
