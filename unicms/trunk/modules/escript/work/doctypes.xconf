@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctypes>
+
+  <doc type="homepage">
+    <children>
+      <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="team"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
+      <doc type="redirect"/>
+    <doc type="elml"/>
+</children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>homepage.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="homepage4cols">
+    <children>
+      <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="team"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
+      <doc type="redirect"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>homepage4cols.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="xhtml">
+    <children>
+      <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="team"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
+      <doc type="redirect"/>
+    <doc type="elml"/>
+</children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>xhtml.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="overview">
+    <children>
+      <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="team"/>
+      <doc type="overview"/>
+      <doc type="homepage"/>
+      <doc type="homepage4cols"/>
+      <doc type="redirect"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>overview.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="news">
+    <children>
+      <doc type="newsitem"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>news.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="newsitem">
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>newsitem.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="team">
+    <children>
+      <doc type="person"/>
+    </children>
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>team.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="person">
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>person.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="search">
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>search.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+  <doc type="redirect">
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>redirect.xml</sample-name>
+    </creator>
+    <workflow src="2stage.xml"/>
+  </doc>
+
+<doc type="elml">
+<creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+<sample-name>elml.xml</sample-name>
+</creator>
+<workflow src="2stage.xml"/>
+</doc>
+</doctypes>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CVS: $Id: parameter-doctype.xmap,v 1.12 2004/05/10 09:50:43 gregor Exp $ -->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  
+  <map:components>
+    <map:generators default="file"/>
+    <map:transformers default="xslt"/>
+    <map:readers default="resource"/>
+    <map:serializers default="html"/>
+    <map:matchers default="wildcard"/>
+    <map:actions>
+      <map:action logger="sitemap.action.sourcetype" name="sourcetype" src="org.apache.forrest.sourcetype.SourceTypeAction">
+<sourcetype name="xhtml">
+          <document-element local-name="html"/>
+        </sourcetype>
+<sourcetype name="homepage">
+          <document-element local-name="homepage"/>
+        </sourcetype>
+<sourcetype name="homepage4cols">
+          <document-element local-name="homepage4cols"/>
+        </sourcetype>
+<sourcetype name="overview">
+          <document-element local-name="overview"/>
+        </sourcetype>
+<sourcetype name="news">
+          <document-element local-name="news"/>
+        </sourcetype>
+<sourcetype name="newsitem">
+          <document-element local-name="newsitem"/>
+        </sourcetype>
+<sourcetype name="team">
+          <document-element local-name="team"/>
+        </sourcetype>
+<sourcetype name="person">
+          <document-element local-name="person"/>
+        </sourcetype>
+<sourcetype name="search">
+          <document-element local-name="search"/>
+        </sourcetype>
+<sourcetype name="redirect">
+          <document-element local-name="redirect"/>
+        </sourcetype>
+<sourcetype name="elml">
+<document-element local-name="lesson"/>
+</sourcetype>
+</map:action>
+    </map:actions>
+  </map:components>
+  
+  <map:pipelines>
+    
+    <map:pipeline>
+      <!-- {area}/{uri} -->
+      <map:match pattern="*/**">
+        <map:act src="content/{1}/{page-envelope:document-path}" type="sourcetype">
+          <map:generate src="../../config/parameters/default.xsp" type="serverpages">
+            <map:parameter name="value" value="{sourcetype}"/>
+          </map:generate>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+    </map:pipeline>
+    
+  </map:pipelines>
+  
+</map:sitemap>
