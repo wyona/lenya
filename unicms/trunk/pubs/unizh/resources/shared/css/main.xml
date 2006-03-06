@@ -489,6 +489,7 @@ img.icon {
 
 .content1 {
 	width:198px;
+	font-size:11px;
 	float: left;
 }
 * html .content1 {

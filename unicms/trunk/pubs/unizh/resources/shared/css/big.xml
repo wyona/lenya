@@ -460,6 +460,7 @@ a.back {
 
 .content1 {
 	width:198px;
+	font-size:14px;
 	float: left;
 }
 * html .content1 {
@@ -566,7 +567,7 @@ ul.linklist li  {
 	background-repeat: no-repeat;
  	background-position: top left;
 }
-.content2 ul.linklist li   {
+.content1 ul.linklist li, .content2 ul.linklist li   {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	background-repeat: no-repeat;
 }
