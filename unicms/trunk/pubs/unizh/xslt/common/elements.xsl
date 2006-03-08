@@ -245,9 +245,19 @@
           <xsl:apply-templates select="."/>
         </xsl:for-each>
         <xsl:for-each select="xhtml:a">
-          <a class="arrow" href="{@href}">
-           <xsl:copy-of select="@target"/>
-           <xsl:apply-templates/>
+          <a href="{@href}">
+            <xsl:attribute name="class">
+              <xsl:choose>
+                <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
+                  <xsl:text>extern</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                   <xsl:text>arrow</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:attribute>
+            <xsl:copy-of select="@target"/>
+            <xsl:apply-templates/>
           </a>
           <br/>
         </xsl:for-each> 
