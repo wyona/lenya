@@ -54,6 +54,7 @@ import org.apache.lenya.cms.publication.SiteTreeException;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 
+
 /**
  * 
  * Delete cache entries of a document. If the document has no parent and the document 
@@ -68,6 +69,8 @@ import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 
 public class CacheHandler {
 
+    private static final String LOCK_FILE = "cache.locked";
+    
     public CacheHandler() {    
     }
     
@@ -89,38 +92,46 @@ public class CacheHandler {
         String area = liveVersion.getDocument().getArea();
         siteTree = pub.getTree(area);
         SiteTreeNode node = siteTree.getNode(liveVersion.getDocument().getId());
-        path = setPath(node, isLive, task);
         
-        File pubDir = pub.getDirectory();
-        String pubId = pub.getId();
-        File cacheDir = new File(pubDir, "work" + File.separator + "cache" + File.separator + area);
-        File cacheFile = new File(cacheDir, path);
+        if (node != null) {
+            path = setPath(node, isLive, task);
+        
+            File pubDir = pub.getDirectory();
+            String pubId = pub.getId();
+            File cacheDir = new File(pubDir, "work" + File.separator + "cache" + File.separator + area);
+            File cacheLockDir = new  File(pubDir, "work" + File.separator + "cache");
+            File cacheFile = new File(cacheDir, path);
 
-        String cachePrefix = getCachePrefix(pub);
+            String cachePrefix = getCachePrefix(pub);
         
-        if (cachePrefix != null) {
-            cacheDir = new File(cachePrefix + File.separator+ pubId + File.separator + area);
-            cacheFile = new File(cacheDir, path);
-        }
-        
-        if (cacheFile.isDirectory()) {
-            File oldCacheDir = new File(cacheFile + ".old"); 
-            if (path.equals(File.separator)) {
-                oldCacheDir = new File("index.old");   
+            if (cachePrefix != null) {
+                cacheDir = new File(cachePrefix + File.separator+ pubId + File.separator + area);
+                cacheLockDir = new File(cachePrefix + File.separator + pubId);
+                cacheFile = new File(cacheDir, path);
             }
-            if (cacheFile.renameTo(oldCacheDir)) {
-                deleteDir(oldCacheDir);
+        
+            lockCacheDir(cacheLockDir);
+
+            if (cacheFile.isDirectory()) {
+                File oldCacheDir = new File(cacheFile + ".old"); 
+                if (path.equals(File.separator)) {
+                    oldCacheDir = new File("index.old");   
+                }
+                if (cacheFile.renameTo(oldCacheDir)) {
+                    deleteDir(oldCacheDir);
+                } else {
+                    deleteDir(cacheFile);
+                }
             } else {
-                deleteDir(cacheFile);
+                if (cacheFile.exists()) {
+                    cacheFile.setReadOnly();
+                    cacheFile.delete();           
+                }
             }
-        } else {
-            if (cacheFile.exists()) {
-                cacheFile.setReadOnly();
-                cacheFile.delete();           
-            }
+            unlockCacheDir(cacheLockDir);
         }
     }
-
+    
     /**
      * delete all Files in a directory recursivley.
      * 
@@ -157,7 +168,6 @@ public class CacheHandler {
         
         String path=File.separator;
         
-        String documentId = node.getAbsoluteId();
         String parentId = node.getAbsoluteParentId();
         
         if (parentId.indexOf(File.separator) == -1){
@@ -195,6 +205,41 @@ public class CacheHandler {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    /**
+     * Locking the whole cache by simply creating a file called
+     * <it>cache.locked</it> on the top level directory of the cache.
+     * 
+     * @return boolean
+     * 
+     */
+    protected boolean lockCacheDir(File file){
+  
+        File cacheLockFile = this.getLockFile(file);
+        try {
+            cacheLockFile.createNewFile();
+        } catch (Exception e ){
+            return false;
+        }
+        return true;
+    }
+    /**
+     * Unlocking the cache by simply deleting the cache.locked file
+     * 
+     */
+    protected void unlockCacheDir(File file){
+        
+        File cacheLockFile = this.getLockFile(file);
+        if (cacheLockFile.exists()) {
+            cacheLockFile.delete();
+        }
+        
+    }
+    
+    protected File getLockFile(File file) {
+        File lockFile = new File(file + File.separator + LOCK_FILE);
+        return lockFile;
     }
         
 }

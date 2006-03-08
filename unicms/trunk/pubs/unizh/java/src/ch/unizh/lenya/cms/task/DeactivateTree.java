@@ -65,6 +65,8 @@ import org.apache.log4j.Category;
  */
 public class DeactivateTree extends Deactivate implements ResourceVisitor {
 
+    private Resource rootNode = null;
+    private int numOfDocuments = 1;
     private static final Category log = Category.getInstance(DeactivateTree.class);
 
     /**
@@ -94,7 +96,12 @@ public class DeactivateTree extends Deactivate implements ResourceVisitor {
 
         SiteManager manager = resource.getPublicationWrapper().getSiteManager();
         Resource[] ancestors = manager.getRequiringResources(resource, Publication.AUTHORING_AREA);
-
+        
+        if (ancestors.length > 0 ) {
+            numOfDocuments = ancestors.length + 1;
+            rootNode = resource;
+        }
+        
         OrderedResourceSet set = new OrderedResourceSet(ancestors);
         set.add(resource);
         set.visitDescending(this);
@@ -136,11 +143,13 @@ public class DeactivateTree extends Deactivate implements ResourceVisitor {
     protected void deactivateAllLanguageVersions(Resource resource) throws ParameterException,
             DocumentException, PublicationException, ExecutionException, IOException,
             WorkflowException {
+        
+        int numOfDocumentsToDeactivate = this.numOfDocuments--;
         String[] languages = getPublication().getLanguages();
         for (int i = 0; i < languages.length; i++) {
             Version version = getVersion(resource, Publication.LIVE_AREA, languages[i]);
             if (version.getDocument().exists()) {
-                deactivate(resource, languages[i]);
+                deactivate(resource, languages[i], this.rootNode, numOfDocumentsToDeactivate);
             }
         }
     }

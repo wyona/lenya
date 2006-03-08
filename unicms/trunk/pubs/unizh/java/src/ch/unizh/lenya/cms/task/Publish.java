@@ -186,8 +186,6 @@ public class Publish extends ResourceTask {
     protected void publish(Resource resource, String language, Resource rootNode, int numOfDocumentsToPublish)
         throws ParameterException, ExecutionException, PublicationException, WorkflowException {
         
-        CacheHandler cacheHandler = new CacheHandler();
-        
         Version authoringVersion = getVersion(resource, Publication.AUTHORING_AREA, language);
         
         if (authoringVersion.canWorkflowFire(getEventName(), getSituation())
@@ -202,6 +200,7 @@ public class Publish extends ResourceTask {
             
             try {
                 if (rootNode == null){
+                    CacheHandler cacheHandler = new CacheHandler();
                     cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
                 }
             } catch (SiteTreeException e) {
@@ -214,6 +213,7 @@ public class Publish extends ResourceTask {
             if (rootNode != null && numOfDocumentsToPublish == 1) {
                 Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage()); 
                 boolean isLive = isNodeLive(treeVersion);
+                CacheHandler cacheHandler = new CacheHandler();
                 cacheHandler.deleteCache(treeVersion, isLive, TASK_NAME);
             }            
         } catch (SiteTreeException e) {

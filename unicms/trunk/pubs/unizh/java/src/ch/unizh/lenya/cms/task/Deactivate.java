@@ -199,14 +199,14 @@ public class Deactivate extends ResourceTask {
      */
     protected void deactivate(Resource resource) throws ParameterException, DocumentException,
             PublicationException, ExecutionException, IOException, WorkflowException {
-        deactivate(resource, getLanguage());
+        deactivate(resource, getLanguage(), null, 1);
     }
 
     /**
      * Deactivates a resource.
      * @param liveDocument The resource.
      */
-    protected void deactivate(Resource resource, String language) throws PublicationException,
+    protected void deactivate(Resource resource, String language, Resource rootNode, int numOfDocumentsToPublish) throws PublicationException,
             ExecutionException, IOException, ParameterException, WorkflowException,
             DocumentException {
 
@@ -220,8 +220,10 @@ public class Deactivate extends ResourceTask {
             
             // Delete cache entry first because CacheHandler needs the respective node in the sitetree
             try {
-                CacheHandler cacheHandler = new CacheHandler();
-                cacheHandler.deleteCache(liveVersion, true, TASK_NAME);
+                if (rootNode == null) {
+                    CacheHandler cacheHandler = new CacheHandler();
+                    cacheHandler.deleteCache(liveVersion, true, TASK_NAME);
+                }
             } catch (SiteTreeException e) {
                 throw new ExecutionException ("Unable to get sitetree.", e);
             }
@@ -237,6 +239,18 @@ public class Deactivate extends ResourceTask {
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
             
         }
+        // If a subtree is deactivated, the cached docuemnt-tree should be deleted 
+        // only if the last document is deactivated otherwise conflicts might occur.
+        try{ 
+            if (rootNode != null && numOfDocumentsToPublish == 1) {
+                Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage()); 
+                CacheHandler cacheHandler = new CacheHandler();
+                cacheHandler.deleteCache(treeVersion, true, TASK_NAME);
+            }            
+        } catch (SiteTreeException e) {
+            throw new ExecutionException ("Unable to get sitetree.", e);
+        }
+
     }
 
     /**
