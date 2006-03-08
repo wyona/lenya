@@ -54,7 +54,7 @@
 							<item>some text</item>
 							<item>another list <list label="Llist2" listStyle="unordered">
 									<item>also text</item>
-									<item>or an image <multimedia src="../image/test.jpg" mimeType="jpeg" height="10" width="10" units="pixels"/>
+									<item>or an image <multimedia src="test.jpg" mimeType="jpeg" height="10" width="10" units="pixels"/>
 									</item>
 								</list>
 							</item>
@@ -79,7 +79,7 @@
 				<paragraph> or another example without an icon</paragraph>
 				<term glossRef="glossary"/>
 				<paragraph role="student" title="Multimedia"> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" label="Limage" legend="Test-Image with act-icon" units="pixels" icon="act"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" label="Limage" legend="Test-Image with act-icon" units="pixels" icon="act"/>
 				<multimedia src="../multimedia/Remember_Me.mp3" mimeType="mpeg" icon="important" legend="die ist ein MP3 file"/>
 				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
 				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
@@ -192,55 +192,55 @@
 		</learningObject>
 		<learningObject title="All about alignments" label="LOAlignments" navTitle="align">
 			<clarify>
-				<paragraph title="the following pictures are inline with text and without the newline tag">The first picture is inline and has the attribute align ="<formatted style="bold">right</formatted>". this is the text befor the picture . <multimedia src="../image/test.jpg" mimeType="jpeg" align="right" height="100" width="150" label="Limage1" units="pixels"/> This is the text after the picture. the text is around the picture. text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text The second picture is inline and has the attribute align ="<formatted style="bold">left</formatted>". This is the text befor the picture <multimedia src="../image/test.jpg" mimeType="jpeg" align="left" height="100" width="150" label="Limage2" units="pixels"/> This is the text after the picture. the text is around the picture. texttext text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
+				<paragraph title="the following pictures are inline with text and without the newline tag">The first picture is inline and has the attribute align ="<formatted style="bold">right</formatted>". this is the text befor the picture . <multimedia src="test.jpg" mimeType="jpeg" align="right" height="100" width="150" label="Limage1" units="pixels"/> This is the text after the picture. the text is around the picture. text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text The second picture is inline and has the attribute align ="<formatted style="bold">left</formatted>". This is the text befor the picture <multimedia src="test.jpg" mimeType="jpeg" align="left" height="100" width="150" label="Limage2" units="pixels"/> This is the text after the picture. the text is around the picture. texttext text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
 				</paragraph>
 				<paragraph title="pictures with and without text in a table"/>
 				<table>
 					<tablerow>
 						<tabledata width="50" units="percent">
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage51" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage51" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata width="50" units="percent">
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage61" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage61" units="pixels"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage52" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage52" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage62" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage62" units="pixels"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage53" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage53" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage63" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage63" units="pixels"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage54" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage54" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage64" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage64" units="pixels"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage55" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage55" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage65" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage65" units="pixels"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage56" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
+							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage56" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage66" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage66" units="pixels"/>
 						</tabledata>
 					</tablerow>
 				</table>
@@ -249,43 +249,43 @@
 					<columnLeft width="250">
 						<paragraph title="with text">
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage31" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage31" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage32" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage32" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage33" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage33" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage34" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage34" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage35" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage35" units="pixels"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage36" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </paragraph>
+							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage36" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </paragraph>
 					</columnLeft>
 					<columnRight width="250">
 						<paragraph title="without text">
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage41" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage41" units="pixels"/>
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage42" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage42" units="pixels"/>
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage43" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage43" units="pixels"/>
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage44" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage44" units="pixels"/>
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage45" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage45" units="pixels"/>
 							<newLine/>
-							<multimedia src="../image/test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage46" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage46" units="pixels"/>
 						</paragraph>
 					</columnRight>
 				</column>
 				<paragraph title="The following pictures are not inside a paragraph"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" label="Limage21" legend="center" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" label="Limage22" legend="right" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" label="Limage23" legend="left" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" label="Limage24" legend="middle" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" label="Limage25" legend="bottom" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" label="Limage26" legend="top" units="pixels"/>
-				<multimedia src="../image/test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" legend="Test-Image" units="pixels" visible="print"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" label="Limage21" legend="center" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" label="Limage22" legend="right" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" label="Limage23" legend="left" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" label="Limage24" legend="middle" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" label="Limage25" legend="bottom" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" label="Limage26" legend="top" units="pixels"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" legend="Test-Image" units="pixels" visible="print"/>
 			</clarify>
 		</learningObject>
 		<selfAssessment title="Titel of this SelfAssessment" label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'.">

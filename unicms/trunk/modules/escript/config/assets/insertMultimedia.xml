@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <insert xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <param name="data"/>
+  <param name="type"/>
+  <param name="size"/>
+  <param name="title"/>
+
+
+  <template>
+    <xsl:choose>
+      <xsl:when test="substring-after($data, '.') = 'gif'">
+        <elml:multimedia src="{$data}" mimeType="gif" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'jpeg'">
+        <elml:multimedia src="{$data}" mimeType="jpeg" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'jpg'">
+        <elml:multimedia src="{$data}" mimeType="jpeg" legend="{$title}"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <elml:multimedia src="{$data}" mimeType="" legend="{$title}"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
+    <!-- <xsl:variable name="mimeType">
+       <xsl:choose>
+         <xsl:when test="$suffix = 'jpg' or $suffix = 'jpeg' or $suffix = 'gif'">
+           <xsl:text><xsl:value-of select="$suffix"/></xsl:text>
+         </xsl:when>
+       </xsl:choose>
+    </xsl:variable> 
+    <elml:multimedia src="{$data}" mimeType="gif" legend="{$title}"/> -->
+  </template>
+  </insert>

@@ -21,6 +21,11 @@
     
     <echo>INFO: Install module in publication ${$publication.prefix}</echo>
 
+    <echo>INFO: Copying resources</echo>
+    <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
+      <fileset dir="resources/shared/images/icons"/>
+    </copy>
+
     <echo>INFO: Copying schemata</echo>
     <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
       <fileset dir="config/doctypes/schemas"/>
@@ -58,6 +63,13 @@
         <include name="doctypes.xmap"/>
       </fileset>
     </copy>
+
+    <echo>INFO: Adding asset configuration files</echo>
+
+    <copy todir="${pub.dir}/config/assets" overwrite="yes">
+      <fileset dir="config/assets"/>
+    </copy>
+
 
     <echo>INFO: Patching menu config files </echo>
 
@@ -118,7 +130,17 @@
       </fileset>
     </copy>
 
-
+    <echo>INFO: Patching html-head to include javascripts</echo>
+    <xslt
+      in="${pubs.dir}/unizh/xslt/common/html-head.xsl"
+      out="work/html-head.xsl" style="ant/html-head.xsl"
+      >
+    </xslt>
+    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
+       <fileset dir="work">
+        <include name="html-head.xsl"/>
+      </fileset>
+    </copy>
 
     <antcall target="touch"/>
     <!-- <antcall target="cleanup"/> -->
