@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lesson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../_config/validate.xsd" label="TestLesson" title="Test and Demo Lesson" xmlns="http://unizh.ch/doctypes/elml/1.0"
-  xmlns:elml="http://unizh.ch/doctypes/elml/1.0">
+<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xsi:noNamespaceSchemaLocation="../../../_config/validate.xsd" label="TestLesson" title="Test and Demo Lesson" lenya:dummy="FIXME:keepNamespace">
 	<entry label="LEntryLesson" title="Introduction to this Demo-Lesson" navTitle="Intro">
-		<paragraph> The structure of an eLearning lesson within GITTA has changed quite a bit. It's now a lot easier to use, we believe. This lesson and the one and only unit of it uses all of the tags and attributes available for creating an eLearning lesson. Viewing it on Cocoon or with the appropriate stylesheet also allows to see how the different xml tags are displayed in HTML. </paragraph>
+		<paragraph> <lenya:asset size="adsf" type="asdf" src="adsf"/> The structure of an eLearning lesson within GITTA has changed quite a bit. It's now a lot easier to use, we believe. This lesson and the one and only unit of it uses all of the tags and attributes available for creating an eLearning lesson. Viewing it on Cocoon or with the appropriate stylesheet also allows to see how the different xml tags are displayed in HTML. </paragraph><lenya:asset size="" type="" src="test.jpg">berg</lenya:asset><elml:multimedia legend="berg" mimeType="jpeg" src="test.jpg"/>
 		<paragraph label="LParagraph" title="Title of the paragraph" role="student" icon="remark"> This lesson and the unit of it is only an example how it could be done. It doesn't mean that you have to do it exactly like this (but this might not be the worst way to do it :-)). Please forgive me all typos. If you think you have found something untrue or a major 'bug' please report it to me (Susanne Bleisch, s.bleisch@fhbb.ch). </paragraph>
 		<paragraph label="LParaTutor" title="Title for this special paragraph for tutors" role="tutor"> This is additional information for the audience (role) specified. Here, I write that all the meta information about a lesson will not be displayed to the students but is only available when viewing the content in the authors view. The tutor of a lesson might decide that some of the meta information is important to the students and make that selected information available to them somewhere (e.g. on WebCT).</paragraph>
 	</entry>
 	<goals>
-		<lObjective role="student">You get to know all the possible tags within a lesson and how they are displayed in HTML.</lObjective>
+		<lObjective role="student">asdfasdf asdfadsf You get to know all the possible tags within a lesson and how they are displayed in HTML.</lObjective>
 		<lObjective role="student">This is the second learning objective.</lObjective>
 		<lObjective role="student">This the third one. Write at least one, and up to ten learning objectives per lesson.</lObjective>
 	</goals>
@@ -79,42 +77,15 @@
 				<paragraph> or another example without an icon</paragraph>
 				<term glossRef="glossary"/>
 				<paragraph role="student" title="Multimedia"> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" label="Limage" legend="Test-Image with act-icon" units="pixels" icon="act"/>
-				<multimedia src="../multimedia/Remember_Me.mp3" mimeType="mpeg" icon="important" legend="die ist ein MP3 file"/>
+				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" label="Limage" legend="Test-Image with act-icon" units="pixels" icon="important"/>
+				<multimedia src="Remember_Me.mp3" mimeType="mpeg" icon="important" legend="die ist ein MP3 file"/>
 				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
 				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
-				<multimedia src="../multimedia/testAnimation.swf" mimeType="flash" align="middle" bibIDRef="b18" height="200" width="300" units="pixels" thumbnail="../multimedia/testAnimation.gif" legend="That's an Animation"/>
+				<multimedia src="testAnimation.swf" mimeType="flash" align="middle" bibIDRef="b18" height="200" width="300" units="pixels" thumbnail="testAnimation.gif" legend="That's an Animation"/>
 				<paragraph> An interaction included in the lesson (without thumbnail) could look like this.</paragraph>
-				<multimedia src="../multimedia/testInteraction.swf" mimeType="flash" align="right" bibIDRef="b18" height="200" width="300" units="pixels" legend="That's an Interaction" icon="act"/>
+				<multimedia src="testInteraction.swf" mimeType="flash" align="right" bibIDRef="b18" height="200" width="300" units="pixels" legend="That's an Interaction" icon="act"/>
 				<paragraph> With the element <indexItem>multimedia</indexItem> also sound can be included (this one is marked 'important').</paragraph>
-				<!--	<paragraph title="MathML">The element multimedia also allows to include MathML formulas. For this set the mimeType of the multimedia element to mathml and add the MathML code inside the multimedia element (as done in the following example).</paragraph>
-				<multimedia mimeType="mathml">
-					<math xmlns="http://www.w3.org/1998/Math/MathML">
-						<mrow>
-							<msup>
-								<mfenced open="[" close="]">
-									<mrow>
-										<mi>a</mi>
-										<mo>+</mo>
-										<mi>b</mi>
-									</mrow>
-								</mfenced>
-								<mn>260</mn>
-							</msup>
-							<mo>+</mo>
-							<msub>
-								<mfenced open="{" close="}">
-									<mrow>
-										<mi>a</mi>
-										<mo>+</mo>
-										<mi>b</mi>
-									</mrow>
-								</mfenced>
-								<mi>i</mi>
-							</msub>
-						</mrow>
-					</math>
-				</multimedia>-->
+				
 			</look>
 			<act label="labelAct1" title="Test" metaSetUpInfo="nothing">
 				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
@@ -176,13 +147,13 @@
 				<paragraph> 3.) A link to another lesson (presented inline, paragraph would also be possible): <link targetLesson="IntroToDBS">Lesson Introduction to Database Management Systems</link>
 					<newLine space="long"/> 4.) A link to a part within this lesson (presented as paragraph, inline would also be possible): </paragraph>
 				<link targetLabel="LColumn1">Link to the column above</link>
-				<paragraph> 5.) A link for downloading material (inline): <link uri="../multimedia/Remember_Me.mp3" size="5.5 MB" type="mp3" legend="might take a while to download this">Remember Me</link>
+				<paragraph> 5.) A link for downloading material (inline): <link uri="Remember_Me.mp3" size="5.5 MB" type="mp3" legend="might take a while to download this">Remember Me</link>
 					<newLine space="long"/> 6.) If a link is presented as paragraph then the attribute icon can be used to set one of the icons (important, remark or question).</paragraph>
 				<paragraph>7.) If you add more then one link one after another, a table with link/download material is created:</paragraph>
-				<link uri="../multimedia/Remember_Me.mp3" size="1GB" type="exe" legend="a software archive">Office 2009</link>
+				<link uri="Remember_Me.mp3" size="1GB" type="exe" legend="a software archive">Office 2009</link>
 				<link uri="http://www.fhbb.ch/geomatik" legend="Click on this link">FHBB Website</link>
-				<link uri="../multimedia/Remember_Me.mp3" type="mp3" legend="might take a while to download this">Remember Me</link>
-				<link uri="../multimedia/Remember_Me.mp3" size="3 MB" type="pdf" legend="you need the acrobat viewer to view this">How to hack eLML?</link>
+				<link uri="Remember_Me.mp3" type="mp3" legend="might take a while to download this">Remember Me</link>
+				<link uri="Remember_Me.mp3" size="3 MB" type="pdf" legend="you need the acrobat viewer to view this">How to hack eLML?</link>
 				<paragraph title="Explanation of the Index Item">Just a few thoughts, why an <indexItem mainEntry="yes" affiliatedTo="index">index</indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
 				<paragraph>Within the above paragraph the word index is set to be an indexItem. That means that it can be included in a final index where this words are referenced back to paragraphs where they show up. Main entries are shown in bold other such as here, <indexItem affiliatedTo="index">indices</indexItem>, are not marked up specially.</paragraph>
 			</look>
@@ -198,10 +169,10 @@
 				<table>
 					<tablerow>
 						<tabledata width="50" units="percent">
-							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage51" units="pixels"/>
+							<elml:multimedia legend="info" mimeType="gif" src="info.gif"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata width="50" units="percent">
-							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage61" units="pixels"/>
+							
 						</tabledata>
 					</tablerow>
 					<tablerow>

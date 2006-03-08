@@ -8,6 +8,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          >
 
   <define name="lesson">
@@ -16,6 +17,7 @@
       <ref name="LessonLabelReq"/>
       <ref name="TitleReq"/>
       <ref name="NavTitleImp"/>
+      <attribute name="lenya:dummy"><text/></attribute>
       <oneOrMore>
         <choice>
           <ref name="entry"/>
@@ -390,7 +392,16 @@
       <ref name="TitleImp"/>
       <ref name="IconImp"/>
       <ref name="VisibleImp"/>
-      <zeroOrMore>
+      <ref name="BlockType"/>
+    </element>
+  </define>
+
+
+  <!-- Type definitions -->
+
+
+  <define name="BlockType">
+    <zeroOrMore>
         <choice>
           <ref name="list"/>
           <ref name="term"/>
@@ -403,17 +414,15 @@
           <text/>
         </choice>
       </zeroOrMore>
-    </element>
   </define>
 
-
-  <!-- Type Definitions -->
 
   <define name="CLType">
     <ref name="LabelImp"/>
     <ref name="TitleImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -438,6 +447,7 @@
     <ref name="NavTitleImp"/> 
     <zeroOrMore>
       <choice>
+        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -471,6 +481,7 @@
     <ref name="AlignmentImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="lenya.asset"/>
         <ref name="table"/>
         <ref name="list"/>
         <ref name="box"/>
@@ -495,6 +506,7 @@
     <ref name="AlignmentImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="lenya.asset"/>
         <ref name="list"/>
         <ref name="term"/>
         <ref name="multimedia"/>
@@ -516,6 +528,7 @@
     <ref name="IconImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>

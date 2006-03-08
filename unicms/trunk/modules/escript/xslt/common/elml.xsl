@@ -593,7 +593,21 @@
             <xsl:call-template name="Alignment">
               <xsl:with-param name="istd">yes</xsl:with-param>
             </xsl:call-template>
-            <xsl:call-template name="MultimediaShow"/>
+            <xsl:choose>
+              <xsl:when test="$rendertype = 'imageupload'">
+                <xsl:variable name="trimmedElementPath">
+                  <xsl:for-each select="(ancestor-or-self::*)">
+                    <xsl:call-template name="compute-path"/>
+                  </xsl:for-each>
+                </xsl:variable>
+                <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
+                  <xsl:call-template name="MultimediaShow"/>
+                </a>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:call-template name="MultimediaShow"/>
+              </xsl:otherwise>
+            </xsl:choose>
          </td>
         </tr>
         <xsl:if test="@legend or @bibIDRef">
@@ -979,8 +993,18 @@
     </xsl:variable>
 
     <xsl:call-template name="asset-dot">
+      <xsl:with-param name="type">
+        <xsl:value-of select="$insertWhat"/>
+      </xsl:with-param>
       <xsl:with-param name="href">
-        ?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=<xsl:value-of select="$trimmedElementPath"/>&amp;insertWhere=<xsl:value-of select="$insertWhere"/>&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=<xsl:value-of select="$insertReplace"/>
+        <xsl:choose>
+          <xsl:when test="$insertWhat = 'asset'">
+            ?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=<xsl:value-of select="$trimmedElementPath"/>&amp;insertWhere=<xsl:value-of select="$insertWhere"/>&amp;insertTemplate=insertAsset.xml&amp;insertReplace=<xsl:value-of select="$insertReplace"/>
+          </xsl:when>
+          <xsl:otherwise>
+            ?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=<xsl:value-of select="$trimmedElementPath"/>&amp;insertWhere=<xsl:value-of select="$insertWhere"/>&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=<xsl:value-of select="$insertReplace"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
@@ -988,10 +1012,19 @@
 
   <xsl:template name="asset-dot">
     <xsl:param name="href"/>
-
-    <a href="{$href}">
-      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-    </a>&#160;
+    <xsl:param name="type"/>
+    <xsl:choose>
+      <xsl:when test="$type = 'image'">
+        <a href="{$href}">
+          <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
+        </a>&#160;
+      </xsl:when>
+      <xsl:otherwise>
+        <a href="{$href}">
+          <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadasset.gif"/>
+        </a>&#160;
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
@@ -1002,6 +1035,10 @@
      <p>
      <xsl:call-template name="assetUpload">
        <xsl:with-param name="insertWhat">image</xsl:with-param>
+       <xsl:with-param name="insertWhere">after</xsl:with-param>
+     </xsl:call-template>
+     <xsl:call-template name="assetUpload">
+       <xsl:with-param name="insertWhat">asset</xsl:with-param>
        <xsl:with-param name="insertWhere">after</xsl:with-param>
      </xsl:call-template>
      </p>

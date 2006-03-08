@@ -31,20 +31,45 @@
           <map:part src="cocoon://navigation/{{3}}/{{4}}/allnodes/{{5}}.html.xml"/>
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
+
+        <map:transform type="index">
+          <map:parameter name="documentId" value="{{page-envelope:document-id}}"/>
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+        </map:transform>
+
+        <map:transform type="sitemap">
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+        </map:transform>
+
+        <map:transform type="level">
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+        </map:transform>
+
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{{page-envelope:document-id}}"/>
         </map:transform>
 
         <map:transform src="../unizh/xslt/assetDots.xsl">
-          <map:parameter name="rendertype" value="{{1}}"/>
+          <map:parameter name="rendertype" value="{{2}}"/>
         </map:transform>
 
+        <map:transform src="../unizh/xslt/common/includeRelated.xsl">
+          <map:parameter name="area" value="authoring"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
+
+        <map:transform src="lenya/xslt/navigation/header.xsl"/>
+        <map:transform src="lenya/xslt/navigation/logic.xsl">
+          <map:parameter name="node-id" value="{{page-envelope:document-node-id}}"/>
+        </map:transform>
 
         <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
           <map:parameter name="version" value="{{request-param:version}}"/>
           <map:parameter name="fontsize" value="{{request-param:fontsize}}"/>
         </map:transform>
-
         <map:transform type="session"/>
 
         <map:call resource="transformation">

@@ -8,6 +8,9 @@
 
   <template>
     <xsl:choose>
+      <xsl:when test="substring-after($data, '.') = 'png'">
+        <elml:multimedia src="{$data}" mimeType="png" legend="{$title}"/>
+      </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'gif'">
         <elml:multimedia src="{$data}" mimeType="gif" legend="{$title}"/>
       </xsl:when>
@@ -17,6 +20,39 @@
       <xsl:when test="substring-after($data, '.') = 'jpg'">
         <elml:multimedia src="{$data}" mimeType="jpeg" legend="{$title}"/>
       </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'swf'">
+        <elml:multimedia src="{$data}" mimeType="flash" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'rm'">
+        <elml:multimedia src="{$data}" mimeType="realone" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'svg'">
+        <elml:multimedia src="{$data}" mimeType="svg" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'mov'">
+        <elml:multimedia src="{$data}" mimeType="quicktime" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'mpg'">
+        <elml:multimedia src="{$data}" mimeType="mpeg" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'mpeg'">
+        <elml:multimedia src="{$data}" mimeType="mpeg" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'jar'">
+        <elml:multimedia src="{$data}" mimeType="applet" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'class'">
+        <elml:multimedia src="{$data}" mimeType="applet" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'vrml'">
+        <elml:multimedia src="{$data}" mimeType="vrml" legend="{$title}"/>
+      </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'x3d'">
+        <elml:multimedia src="{$data}" mimeType="x3d" legend="{$title}"/>
+      </xsl:when>
+
+
+
       <xsl:otherwise>
         <elml:multimedia src="{$data}" mimeType="" legend="{$title}"/>
       </xsl:otherwise>

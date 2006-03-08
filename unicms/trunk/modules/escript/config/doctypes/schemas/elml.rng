@@ -8,7 +8,25 @@
 
 <include href="lenya.rng"/>
 
-<include href="elml/elml.rng"/>
+<include href="elml/elml.rng">
+  <define name="BlockType">
+    <zeroOrMore>
+        <choice>
+          <ref name="lenya.asset"/>
+          <ref name="list"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="formatted"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="newLine"/>
+          <ref name="indexItem"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+  </define>
+</include>
+
 <include href="elml/metadata/metadata.rng"/>
 <include href="elml/bibliography/harvard.rng"/>
 
