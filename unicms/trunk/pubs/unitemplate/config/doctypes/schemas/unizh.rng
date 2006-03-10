@@ -179,8 +179,8 @@
     <ref name="teaser.strong"/> 
     <ref name="teaser.big"/>
     <ref name="teaser.i"/>
-    <ref name="unizh.attention"/>
     <ref name="teaser.a"/> 
+    <ref name="unizh.attention"/>
   </choice>
 </define>
 
