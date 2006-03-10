@@ -122,12 +122,14 @@
       <xsl:call-template name="object">
         <xsl:with-param name="width">204</xsl:with-param>
       </xsl:call-template>
-      <div class="legende">
-        <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-        <xsl:if test="@popup = 'true'">
-          <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-        </xsl:if>
-      </div>
+      <xsl:if test="xhtml:div[@class = 'caption']">
+        <div class="legende">
+          <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+          <xsl:if test="@popup = 'true'">
+            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+          </xsl:if>
+        </div>
+      </xsl:if>
     </div>
   </xsl:template>
 
@@ -338,7 +340,7 @@
               <xsl:value-of select="$height"/>
             </xsl:attribute>
           </xsl:if>
-		  <xsl:if test="$width = 415">
+          <xsl:if test="$width = 415">
             <xsl:attribute name="class">fullimg</xsl:attribute>
           </xsl:if>
         </img>
