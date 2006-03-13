@@ -87,7 +87,7 @@ a {
 a:hover {
 	background-color:#f0f0f5;
 }
-.contentarea a:visited, .content3 a:visited {
+.contentarea a:visited {
 	color:#999999; 
 }
 a.arrow {
@@ -332,7 +332,7 @@ img.icon {
 #secnav a.activ {
   	background-color:#f0f0f5;
 }
-#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, .content3 ul, ul.squarelist, ul.linklist, ul.linknav  {
+#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
 	padding:0px;
 	margin:0px;
@@ -446,7 +446,7 @@ img.icon {
 	width:145px;
 }
 
-#quicklink .titel, .content3 .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
 }
@@ -508,12 +508,6 @@ img.icon {
 }
 .content2 .klein {
 	line-height:15px;
-}
-
-.content3 {
-	float:right;
-	width:178px;
-	margin-top:30px;
 }
 
 /*sitemap*/
@@ -647,16 +641,6 @@ ul.linknav {
 	display:block;
 	line-height:18px;
 	width: 185px;
-}
-
-.content3 ul.linknav li a {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
-	background-position: left top;
-	padding-left:13px;
-	background-repeat: no-repeat;
-	display:block;
-	line-height:18px;
-	width: 165px;
 }
 
 .listarrow {
@@ -1034,7 +1018,7 @@ th.width105 {
 	border:0px;
 }
 
-.content .solidline, .content3 .solidline {
+.content .solidline {
 	background-color: #cccccc;
 }
 .solidlinemitmargin {

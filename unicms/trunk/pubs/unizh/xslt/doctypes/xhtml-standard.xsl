@@ -65,14 +65,7 @@
               </xsl:choose>
             </xsl:when>
             <xsl:when test="$document-element-name = 'unizh:overview'">
-              <xsl:choose>
-                <xsl:when test="unizh:overview/xhtml:body/unizh:column[3]">
-                  <xsl:call-template name="overview-3cols"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:call-template name="overview"/>
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:call-template name="overview"/>
             </xsl:when> 
             <xsl:when test="$document-element-name = 'unizh:homepage'">
               <xsl:call-template name="homepage"/>
@@ -193,33 +186,6 @@
         </div>
         <xsl:call-template name="footer"/>
       </div>
-    </div>
-  </xsl:template>
-
-
-  <xsl:template name="overview-3cols">
-    <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-    </div>
-    <div class="contcol2">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <xsl:apply-templates select="*/xhtml:body/unizh:column[3]"/>
-      <div class="contentarea">
-        <div class="content">
-          <a name="content"><xsl:comment/></a>
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
-          <xsl:apply-templates select="*/xhtml:body/unizh:column[1]/unizh:lead"/>
-          <div class="content1" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[1]">
-            <xsl:apply-templates select="*/xhtml:body/unizh:column[1]/unizh:links"/>
-          </div>
-          <xsl:apply-templates select="*/xhtml:body/unizh:column[2]"/>
-        </div>
-      </div>
-      <xsl:call-template name="footer"/>
     </div>
   </xsl:template>
 
@@ -425,13 +391,6 @@
 
   <xsl:template match="unizh:column[2]">
     <div class="content2" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[2]">
-      <xsl:apply-templates/>
-    </div>
-  </xsl:template>
-
-
-  <xsl:template match="unizh:column[3]">
-    <div class="content3" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[3]">
       <xsl:apply-templates/>
     </div>
   </xsl:template>
