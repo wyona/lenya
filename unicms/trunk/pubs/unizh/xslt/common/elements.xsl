@@ -590,6 +590,14 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:lead[parent::xhtml:body]">
+    <div bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
+      <xsl:apply-templates/>
+      <br/>
+    </div>
+  </xsl:template>
+
+
   <xsl:template match="unizh:lead">
     <xsl:apply-templates/>
   </xsl:template>

@@ -209,9 +209,22 @@
 
 
   <xsl:template match="xhtml:object[parent::unizh:lead]">
-    <xsl:call-template name="object">
-      <xsl:with-param name="width">198</xsl:with-param>
-    </xsl:call-template>
+    <xsl:choose>
+      <xsl:when test="not(following-sibling::xhtml:p)">
+        <div class="imgTextfluss">
+          <xsl:call-template name="object">
+            <xsl:with-param name="width">405</xsl:with-param>
+          </xsl:call-template>
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="imgTextfluss">
+          <xsl:call-template name="object">
+            <xsl:with-param name="width">198</xsl:with-param>
+          </xsl:call-template>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
