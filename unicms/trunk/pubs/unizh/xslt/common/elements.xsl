@@ -593,7 +593,7 @@
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <div bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
       <xsl:apply-templates/>
-      <br/>
+      <div class="floatclear"/>
     </div>
   </xsl:template>
 
