@@ -18,8 +18,7 @@
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
-    <h1><xsl:value-of select="@title"/></h1>
-    <xsl:apply-templates select="*[not(self::unizh:header or self::elml:metadata)]"/>
+    <xsl:apply-templates select="*[not(self::unizh:header or self::elml:metadata or self::lenya:meta)]"/>
   </xsl:template>
 
   <xsl:template match="elml:entry">

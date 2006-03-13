@@ -1,356 +1,307 @@
-<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xsi:noNamespaceSchemaLocation="../../../_config/validate.xsd" label="TestLesson" title="Test and Demo Lesson" lenya:dummy="FIXME:keepNamespace">
-	<entry label="LEntryLesson" title="Introduction to this Demo-Lesson" navTitle="Intro">
-		<paragraph> <lenya:asset size="adsf" type="asdf" src="adsf"/> The structure of an eLearning lesson within GITTA has changed quite a bit. It's now a lot easier to use, we believe. This lesson and the one and only unit of it uses all of the tags and attributes available for creating an eLearning lesson. Viewing it on Cocoon or with the appropriate stylesheet also allows to see how the different xml tags are displayed in HTML. </paragraph><lenya:asset size="" type="" src="test.jpg">berg</lenya:asset><elml:multimedia legend="berg" mimeType="jpeg" src="test.jpg"/>
-		<paragraph label="LParagraph" title="Title of the paragraph" role="student" icon="remark"> This lesson and the unit of it is only an example how it could be done. It doesn't mean that you have to do it exactly like this (but this might not be the worst way to do it :-)). Please forgive me all typos. If you think you have found something untrue or a major 'bug' please report it to me (Susanne Bleisch, s.bleisch@fhbb.ch). </paragraph>
-		<paragraph label="LParaTutor" title="Title for this special paragraph for tutors" role="tutor"> This is additional information for the audience (role) specified. Here, I write that all the meta information about a lesson will not be displayed to the students but is only available when viewing the content in the authors view. The tutor of a lesson might decide that some of the meta information is important to the students and make that selected information available to them somewhere (e.g. on WebCT).</paragraph>
-	</entry>
-	<goals>
-		<lObjective role="student">asdfasdf asdfadsf You get to know all the possible tags within a lesson and how they are displayed in HTML.</lObjective>
-		<lObjective role="student">This is the second learning objective.</lObjective>
-		<lObjective role="student">This the third one. Write at least one, and up to ten learning objectives per lesson.</lObjective>
-	</goals>
-	<unit label="Ltestunit" title="Test and Demo Unit">
-		<entry label="Lunitentry" title="A short entry to this Test and Demo Unit" navTitle="Demo Entry">
-			<paragraph> This unit shall give you an overview over all <indexItem mainEntry="no">tags</indexItem> within <indexItem mainEntry="yes">GITTA</indexItem> which are possible to use in a unit. Therefore all paragraph tags and all other tags like glossaryTerm will be used and as far as possible be explained within this unit.<newLine space="short"/>I hope you learn a lot and enjoy your learning! Good luck :-)!</paragraph>
-		</entry>
-		<goals>
-			<lObjective role="tutor">This is the first facultative learning objective of this unit. Visible only for tutors</lObjective>
-			<lObjective role="student">This is the second facultative learning objective of this unit. Visible for students</lObjective>
-		</goals>
-		<learningObject label="LLearnOb1" title="This is the first learningObject - the structure, paragraph and formatting elements" navTitle="paragraph and formatting">
-			<clarify label="LClarify1" title="Clarify">
-				<paragraph> This clarify uses all structure, paragraph and formatting elements possible within a GITTA unit. As GITTA authors often do not know which tags they can use and how these tags are displayed, I am writting this demo lesson. With the help of it and the Schema documentation the authors should be able to understand the XML structure of GITTA lessons and units much better. With these the also have an example at which they can have a look when in trouble with the XML structure of their own units and lessons.<newLine space="long"/>The special tags useable within a paragraph are shown in the second learningObject 'Specials'. The text your are reading just now is simple text written directly inside the clarify tag.<newLine space="long"/>If you want to write a remark then add a paragraph and set the attribute icon to 'remark'.</paragraph>
-				<paragraph icon="remark" label="Lpara1" role="student" title="Title of this Remark-Paragraph">The remark paragraph has got a special icon. Use it if you want to add something to your writing (eg. similiar problem but not the same context) which gives a deeper insight to the problem but is not actually part of the problem itselfs.</paragraph>
+<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" title="Test and Demo Lesson" label="TestLesson"><lenya:meta>
+    <dc:title>Lesson </dc:title>
+    <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>UZH</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UZH</dc:rights>
+</lenya:meta><elml:entry xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" label="LEntryLesson" title="Introduction to this Demo-Lesson" navTitle="Intro">
+		<paragraph>  The structure of an eLearning lesson within GITTA has changed quite a bit. It's now a lot easier to use, we believe. This lesson and the one and only unit of it uses all of the tags and attributes available for creating an eLearning lesson. Viewing it on Cocoon or with the appropriate stylesheet also allows to see how the different xml tags are displayed in HTML. </paragraph>
+		<paragraph> This lesson and the unit of it is only an example how it could be done. It doesn't mean that you have to do it exactly like this (but this might not be the worst way to do it :-)). Please forgive me all typos. If you think you have found something untrue or a major 'bug' please report it to me (Susanne Bleisch, s.bleisch@fhbb.ch). </paragraph>
+		<paragraph> This is additional information for the audience (role) specified. Here, I write that all the meta information about a lesson will not be displayed to the students but is only available when viewing the content in the authors view. The tutor of a lesson might decide that some of the meta information is important to the students and make that selected information available to them somewhere (e.g. on WebCT).</paragraph>
+	</elml:entry><elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<elml:lObjective role="student">asdfasdf asdfadsf You get to know all the possible tags within a lesson and how they are displayed in HTML.</elml:lObjective>
+		<elml:lObjective role="student">This is the second learning objective.</elml:lObjective>
+		<elml:lObjective role="student">This the third one. Write at least one, and up to ten learning objectives per lesson.</elml:lObjective>
+	</elml:goals><elml:unit xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" label="Ltestunit" title="Test and Demo Unit">
+		<elml:entry label="Lunitentry" title="A short entry to this Test and Demo Unit" navTitle="Demo Entry">
+			<paragraph> This unit shall give you an overview over all <elml:indexItem mainEntry="no">tags</elml:indexItem> within <elml:indexItem mainEntry="yes">GITTA</elml:indexItem> which are possible to use in a unit. Therefore all paragraph tags and all other tags like glossaryTerm will be used and as far as possible be explained within this unit.<newLine/>I hope you learn a lot and enjoy your learning! Good luck :-)!</paragraph>
+		</elml:entry>
+		<elml:goals>
+			<elml:lObjective role="tutor">This is the first facultative learning objective of this unit. Visible only for tutors</elml:lObjective>
+			<elml:lObjective role="student">This is the second facultative learning objective of this unit. Visible for students</elml:lObjective>
+		</elml:goals>
+		<elml:learningObject label="LLearnOb1" navTitle="paragraph and formatting" title="This is the first learningObject - the structure, paragraph and formatting elements">
+			<elml:clarify label="LClarify1" title="Clarify">
+				<paragraph> This clarify uses all structure, paragraph and formatting elements possible within a GITTA unit. As GITTA authors often do not know which tags they can use and how these tags are displayed, I am writting this demo lesson. With the help of it and the Schema documentation the authors should be able to understand the XML structure of GITTA lessons and units much better. With these the also have an example at which they can have a look when in trouble with the XML structure of their own units and lessons.<newLine/>The special tags useable within a paragraph are shown in the second learningObject 'Specials'. The text your are reading just now is simple text written directly inside the clarify tag.<newLine/>If you want to write a remark then add a paragraph and set the attribute icon to 'remark'.</paragraph>
+				<paragraph>The remark paragraph has got a special icon. Use it if you want to add something to your writing (eg. similiar problem but not the same context) which gives a deeper insight to the problem but is not actually part of the problem itselfs.</paragraph>
 				<paragraph> The same happens if you want to add a question or mark a paragraph as important. Just add a new paragraph and set the attribute icon to 'question' or 'important'.</paragraph>
-				<paragraph icon="question" label="Lpara2" role="student" title="Title of this Question-Paragraph">Do you already know how to add an important paragraph?</paragraph>
+				<paragraph>Do you already know how to add an important paragraph?</paragraph>
 				<paragraph> The next paragraph is marked important.</paragraph>
-				<paragraph icon="important" label="Lpara3" role="student" title="Title of this Important-Paragraph">It is important to study this lesson carefully!</paragraph>
-				<paragraph> The icon attribute can also be used with other elements like the multimedia, the table or the box element (there are some more). <newLine space="long"/> If you want to write in two or three columns then you can use the column element. Below the column tag is used to create two columns. In the left column an unordered list is shown and in the right column an ordered list with a title and a reference to the bibliography (the right list is marked important). </paragraph>
-				<column label="LColumn1">
-					<columnLeft units="pixels" align="left">
-						<list label="LUlist1" listStyle="unordered">
+				<paragraph>It is important to study this lesson carefully!</paragraph>
+				<paragraph> The icon attribute can also be used with other elements like the multimedia, the table or the box element (there are some more). <newLine/> If you want to write in two or three columns then you can use the column element. Below the column tag is used to create two columns. In the left column an unordered list is shown and in the right column an ordered list with a title and a reference to the bibliography (the right list is marked important). </paragraph>
+				<elml:column label="LColumn1">
+					<elml:columnLeft units="pixels" align="left">
+						<list listStyle="unordered">
 							<item>an item</item>
 							<item>another item</item>
 						</list>
-					</columnLeft>
-					<columnRight align="left" units="pixels">
-						<list label="LOlist1" bibIDRef="b6" icon="important" listStyle="ordered" title="Title of this list">
+					</elml:columnLeft>
+					<elml:columnRight align="left" units="pixels">
+						<list listStyle="ordered">
 							<item>first item</item>
 							<item>second item</item>
 						</list>
-					</columnRight>
-				</column>
+					</elml:columnRight>
+				</elml:column>
 				<paragraph> It is also possible to have a three columns. This would look like this.</paragraph>
-				<column label="LColumn2">
-					<columnLeft units="pixels" align="left" width="150">
-						<list label="LUlist2" listStyle="unordered">
+				<elml:column label="LColumn2">
+					<elml:columnLeft units="pixels" align="left" width="150">
+						<list listStyle="unordered">
 							<item>an item</item>
 							<item>another item</item>
 						</list>
-					</columnLeft>
-					<columnMiddle align="middle" units="pixels" width="150"> Here we have a list within a list. <list label="Llist1" listStyle="ordered" title="Title of this list">
+					</elml:columnLeft>
+					<elml:columnMiddle align="middle" units="pixels" width="150"> Here we have a list within a list. <list listStyle="ordered">
 							<item>some text</item>
-							<item>another list <list label="Llist2" listStyle="unordered">
+							<item>another list <list listStyle="unordered">
 									<item>also text</item>
-									<item>or an image <multimedia src="test.jpg" mimeType="jpeg" height="10" width="10" units="pixels"/>
+									<item>or an image <multimedia src="test.jpg" mimeType="jpeg"/>
 									</item>
 								</list>
 							</item>
 							<item>some text</item>
 						</list>
-					</columnMiddle>
-					<columnRight align="left" units="pixels" width="150">
-						<list label="LOlist2" bibIDRef="b6" icon="important" listStyle="ordered" title="Title of this list">
+					</elml:columnMiddle>
+					<elml:columnRight align="left" units="pixels" width="150">
+						<list listStyle="ordered">
 							<item>first item</item>
 							<item>second item</item>
 						</list>
-					</columnRight>
-				</column>
+					</elml:columnRight>
+				</elml:column>
 				<paragraph> If you want to present a special paragraph (e.g a rule or something) with a border then use the element &lt;box&gt;. This might look like this:</paragraph>
-				<box label="Lbox" title="Title of this box">This content is presented within a box.</box>
+				<elml:box label="Lbox" title="Title of this box">This content is presented within a box.</elml:box>
 				<paragraph>It would be possible to set the attribute icon to remark, important or question. That would look like this (without a title):</paragraph>
-				<box icon="question" label="Lbox2">Can you see the difference?</box>
-			</clarify>
-			<look label="LLook1" title="Look Part of this Learning Object">
-				<paragraph> Sometimes we might want to have an of the <indexItem>glossary</indexItem> terms included in a lesson not only as a reference to the glossary but as paragraph itselves. In this case we can use the element &lt;term&gt; and set the attribute 'representation' to 'paragraph'. Then the term and its definition is directly included into the lesson.<newLine space="short"/> That might look like this:</paragraph>
-				<term glossRef="definition" icon="important"/>
+				<elml:box icon="question" label="Lbox2">Can you see the difference?</elml:box>
+			</elml:clarify>
+			<elml:look label="LLook1" title="Look Part of this Learning Object">
+				<paragraph> Sometimes we might want to have an of the <elml:indexItem>glossary</elml:indexItem> terms included in a lesson not only as a reference to the glossary but as paragraph itselves. In this case we can use the element &lt;term&gt; and set the attribute 'representation' to 'paragraph'. Then the term and its definition is directly included into the lesson.<newLine/> That might look like this:</paragraph>
+				<elml:term glossRef="definition" icon="important"/>
 				<paragraph> or another example without an icon</paragraph>
-				<term glossRef="glossary"/>
-				<paragraph role="student" title="Multimedia"> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" label="Limage" legend="Test-Image with act-icon" units="pixels" icon="important"/>
-				<multimedia src="Remember_Me.mp3" mimeType="mpeg" icon="important" legend="die ist ein MP3 file"/>
+				<elml:term glossRef="glossary" icon=""/>
+				<paragraph> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
+				<multimedia src="Remember_Me.mp3" mimeType=""/>
 				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
 				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
-				<multimedia src="testAnimation.swf" mimeType="flash" align="middle" bibIDRef="b18" height="200" width="300" units="pixels" thumbnail="testAnimation.gif" legend="That's an Animation"/>
+				<multimedia src="testAnimation.swf" mimeType=""/>
 				<paragraph> An interaction included in the lesson (without thumbnail) could look like this.</paragraph>
-				<multimedia src="testInteraction.swf" mimeType="flash" align="right" bibIDRef="b18" height="200" width="300" units="pixels" legend="That's an Interaction" icon="act"/>
-				<paragraph> With the element <indexItem>multimedia</indexItem> also sound can be included (this one is marked 'important').</paragraph>
+				<multimedia src="testInteraction.swf" mimeType=""/>
+				<paragraph> With the element <elml:indexItem>multimedia</elml:indexItem> also sound can be included (this one is marked 'important').</paragraph>
 				
-			</look>
-			<act label="labelAct1" title="Test" metaSetUpInfo="nothing">
+			</elml:look>
+			<elml:act label="labelAct1" title="Test" metaSetUpInfo="nothing">
 				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
-			</act>
-		</learningObject>
-		<learningObject label="LLearnOb2" title="This is the second learningObject - Just some more examples and explanations" navTitle="examples">
-			<clarify label="LClarify2" title="Clarify Part of this Learning Object">
+			</elml:act>
+		</elml:learningObject>
+		<elml:learningObject label="LLearnOb2" navTitle="examples" title="This is the second learningObject - Just some more examples and explanations">
+			<elml:clarify label="LClarify2" title="Clarify Part of this Learning Object">
 				<paragraph> Let's create a table.</paragraph>
-				<table label="labelTable1" width="400" units="pixels" icon="important" legend="This is a table" title="Title of this table" bibIDRef="b8">
+				<table width="400" label="labelTable1" units="pixels" icon="important" legend="This is a table" title="Title of this table" bibIDRef="b8">
 					<tablerow>
-						<tableheading colspan="2" align="left"> Tags allowed within simple text </tableheading>
+						<tableheading> Tags allowed within simple text </tableheading>
 					</tablerow>
 					<tablerow>
-						<tabledata width="150" units="pixels" align="left"> &lt;formatted&gt; </tabledata>
+						<tabledata> &lt;formatted&gt; </tabledata>
 						<tabledata>
 							<formatted style="bold">formatted 'bold'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="crossedOut">formatted 'crossed Out'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="italic">formatted 'italic'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="lowerCase">formatted 'lower Case'</formatted>
-							<newLine space="short"/>
-							<formatted style="underlined">formatted 'underlined'</formatted>
-							<newLine space="short"/>
+							<newLine/>
+							
+							<newLine/>
 							<formatted style="upperCase">formatted 'upper Case'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="code">formatted 'code'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="subscript">formatted 'subscript'</formatted>
-							<newLine space="short"/>
+							<newLine/>
 							<formatted style="superscript">formatted 'superscript'</formatted>
 							<paragraph>Formatted elements can also be nested. For example: <formatted style="bold">This text is bold and <formatted style="subscript">subscript</formatted>.</formatted></paragraph>
 						</tabledata>
 					</tablerow>
 					<tablerow>
-						<tabledata width="150" units="pixels" align="left"> &lt;newLine&gt; </tabledata>
-						<tabledata> &lt;newLine&gt; creates a line<newLine space="short"/>break. The attribute 'space' controls how big the distance to the next paragraph will be (values: short, long). </tabledata>
+						<tabledata> &lt;newLine&gt; </tabledata>
+						<tabledata> &lt;newLine&gt; creates a line<newLine/>break. The attribute 'space' controls how big the distance to the next paragraph will be (values: short, long). </tabledata>
 					</tablerow>
 					<tablerow>
-						<tabledata width="150" units="pixels" align="left"> &lt;glossaryTerm&gt; </tabledata>
-						<tabledata> The tag &lt;term&gt; is used to make a reference to the <term glossRef="glossary">glossary</term>. In this case the term 'glossary' should be explained in the glossary and the word itself is a link to the glossary. Do you know how a <term glossRef="definition">definition</term> is defined? </tabledata>
+						<tabledata> &lt;glossaryTerm&gt; </tabledata>
+						<tabledata> The tag &lt;term&gt; is used to make a reference to the <elml:term glossRef="glossary" icon=""/>. In this case the term 'glossary' should be explained in the glossary and the word itself is a link to the glossary. Do you know how a <elml:term glossRef="definition" icon=""/> is defined? </tabledata>
 					</tablerow>
 				</table>
 				<paragraph> In some cases you might not want to present all of your text to student from the beginning but the student has to click first to see additional information. Then you can use the element &lt;popup&gt;. This then look like that:</paragraph>
-				<popup label="Lpopup" title="Title of this popup">This content is only shown when first clicking on the link.</popup>
+				<elml:popup label="Lpopup" title="Title of this popup">This content is only shown when first clicking on the link.</elml:popup>
 				<paragraph>The element popup has an attribute icon which allows to define with which icon should be shown in front of it.</paragraph>
-			</clarify>
-			<look label="labelLook2" title="Look Part of this Learning Object">
-				<paragraph> This part describes the different uses of the element &lt;citation&gt;.<newLine space="long"/> 1.) It might be used to rewrite some writing of other authors in my own words but still reference the literature where the original writing comes from.<newLine space="short"/> … often there's written that XML would be easy to learn <citation bibIDRef="b18"/>. Therefore, ...<newLine space="long"/> 2.) It can be used to state something exactly as it is written in the literature referenced. In this case the page number where the statement comes from is needed.<newLine space="short"/> ... it is stated that <citation bibIDRef="b18" pageNr="15">XML is easy to learn</citation>. This means that ...<newLine space="long"/> 3.) If a statement is longer than a couple of words then we might wish to display it as separate paragraph.<newLine space="short"/> ... it is stated that </paragraph>
-				<citation bibIDRef="b18" pageNr="15">XML is easy to learn.</citation>
-				<paragraph>Sometimes you might want to state the name of the author in the text leading to the citation. In that case the citation reference should be the year of publication only. For example, Bleisch <citation bibIDRef="b18" yearOnly="yes"/> states that XML would be easy to learn.</paragraph>
-				<paragraph>When you would like to make the same citation using the original words you need a trick (use the element formatted) to make it show as expected. The example: Bleisch <citation bibIDRef="b18" yearOnly="yes" pageNr="15"/>states that ";<formatted style="italic">XML is easy to learn</formatted>".</paragraph>
+			</elml:clarify>
+			<elml:look label="labelLook2" title="Look Part of this Learning Object">
+				<paragraph> This part describes the different uses of the element &lt;citation&gt;.<newLine/> 1.) It might be used to rewrite some writing of other authors in my own words but still reference the literature where the original writing comes from.<newLine/> … often there's written that XML would be easy to learn <elml:citation bibIDRef="b18"/>. Therefore, ...<newLine/> 2.) It can be used to state something exactly as it is written in the literature referenced. In this case the page number where the statement comes from is needed.<newLine/> ... it is stated that <elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn</elml:citation>. This means that ...<newLine/> 3.) If a statement is longer than a couple of words then we might wish to display it as separate paragraph.<newLine/> ... it is stated that </paragraph>
+				<elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn.</elml:citation>
+				<paragraph>Sometimes you might want to state the name of the author in the text leading to the citation. In that case the citation reference should be the year of publication only. For example, Bleisch <elml:citation bibIDRef="b18" yearOnly="yes"/> states that XML would be easy to learn.</paragraph>
+				<paragraph>When you would like to make the same citation using the original words you need a trick (use the element formatted) to make it show as expected. The example: Bleisch <elml:citation bibIDRef="b18" yearOnly="yes" pageNr="15"/>states that ";".</paragraph>
 				<paragraph>If using the citation element as paragraph then it can contain the attribute icon set to remark, question or important. If the representation attribute is set to inline then the icon attribute is ignored. As almost every element this citation can contain the attribute label which allows to label it and to link to it from another place of the lesson.</paragraph>
-				<paragraph title="Links - and what you can do with them"> Another special type of element is the &lt;link&gt; tag. Using it and its attributes appropriately gives several possibilities to link inside the lesson or to outside resourced.</paragraph>
+				<paragraph> Another special type of element is the &lt;link&gt; tag. Using it and its attributes appropriately gives several possibilities to link inside the lesson or to outside resourced.</paragraph>
 				<paragraph> 1.) A simple link to another website (presented inline): <link uri="http://www.fhbb.ch/geomatik">Abteilung Vermessung und Geoinformation, FHBB</link>
-					<newLine space="long"/> 2.) A simple link to another website (presented as paragraph): </paragraph>
+					<newLine/> 2.) A simple link to another website (presented as paragraph): </paragraph>
 				<link uri="mailto:joel@fisler.ch">Joel Fisler</link>
 				<paragraph> 3.) A link to another lesson (presented inline, paragraph would also be possible): <link targetLesson="IntroToDBS">Lesson Introduction to Database Management Systems</link>
-					<newLine space="long"/> 4.) A link to a part within this lesson (presented as paragraph, inline would also be possible): </paragraph>
+					<newLine/> 4.) A link to a part within this lesson (presented as paragraph, inline would also be possible): </paragraph>
 				<link targetLabel="LColumn1">Link to the column above</link>
 				<paragraph> 5.) A link for downloading material (inline): <link uri="Remember_Me.mp3" size="5.5 MB" type="mp3" legend="might take a while to download this">Remember Me</link>
-					<newLine space="long"/> 6.) If a link is presented as paragraph then the attribute icon can be used to set one of the icons (important, remark or question).</paragraph>
+					<newLine/> 6.) If a link is presented as paragraph then the attribute icon can be used to set one of the icons (important, remark or question).</paragraph>
 				<paragraph>7.) If you add more then one link one after another, a table with link/download material is created:</paragraph>
 				<link uri="Remember_Me.mp3" size="1GB" type="exe" legend="a software archive">Office 2009</link>
 				<link uri="http://www.fhbb.ch/geomatik" legend="Click on this link">FHBB Website</link>
 				<link uri="Remember_Me.mp3" type="mp3" legend="might take a while to download this">Remember Me</link>
 				<link uri="Remember_Me.mp3" size="3 MB" type="pdf" legend="you need the acrobat viewer to view this">How to hack eLML?</link>
-				<paragraph title="Explanation of the Index Item">Just a few thoughts, why an <indexItem mainEntry="yes" affiliatedTo="index">index</indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
-				<paragraph>Within the above paragraph the word index is set to be an indexItem. That means that it can be included in a final index where this words are referenced back to paragraphs where they show up. Main entries are shown in bold other such as here, <indexItem affiliatedTo="index">indices</indexItem>, are not marked up specially.</paragraph>
-			</look>
-			<act label="labelAct2" title="Act Part of this Learning Object" metaSetUpInfo="nothing">
+				<paragraph>Just a few thoughts, why an <elml:indexItem mainEntry="yes" affiliatedTo="index">index</elml:indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
+				<paragraph>Within the above paragraph the word index is set to be an indexItem. That means that it can be included in a final index where this words are referenced back to paragraphs where they show up. Main entries are shown in bold other such as here, <elml:indexItem affiliatedTo="index">indices</elml:indexItem>, are not marked up specially.</paragraph>
+			</elml:look>
+			<elml:act label="labelAct2" title="Act Part of this Learning Object" metaSetUpInfo="nothing">
 				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
-			</act>
-		</learningObject>
-		<learningObject title="All about alignments" label="LOAlignments" navTitle="align">
-			<clarify>
-				<paragraph title="the following pictures are inline with text and without the newline tag">The first picture is inline and has the attribute align ="<formatted style="bold">right</formatted>". this is the text befor the picture . <multimedia src="test.jpg" mimeType="jpeg" align="right" height="100" width="150" label="Limage1" units="pixels"/> This is the text after the picture. the text is around the picture. text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text The second picture is inline and has the attribute align ="<formatted style="bold">left</formatted>". This is the text befor the picture <multimedia src="test.jpg" mimeType="jpeg" align="left" height="100" width="150" label="Limage2" units="pixels"/> This is the text after the picture. the text is around the picture. texttext text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
+			</elml:act>
+		</elml:learningObject>
+		<elml:learningObject label="LOAlignments" navTitle="align" title="All about alignments">
+			<elml:clarify>
+				<paragraph>The first picture is inline and has the attribute align ="". this is the text befor the picture . <multimedia src="test.jpg" mimeType="jpeg"/> This is the text after the picture. the text is around the picture. text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text The second picture is inline and has the attribute align ="". This is the text befor the picture <multimedia src="test.jpg" mimeType="jpeg"/> This is the text after the picture. the text is around the picture. texttext text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
 				</paragraph>
-				<paragraph title="pictures with and without text in a table"/>
+				<paragraph/>
 				<table>
 					<tablerow>
-						<tabledata width="50" units="percent">
-							<elml:multimedia legend="info" mimeType="gif" src="info.gif"/>
+						<tabledata>
+							<multimedia src="info.gif" mimeType="gif"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata width="50" units="percent">
+						<tabledata>
 							
-						</tabledata>
+						 </tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage52" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage62" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage53" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage63" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage54" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage64" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage55" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage65" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</tabledata>
 					</tablerow>
 					<tablerow>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage56" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
+							<multimedia src="test.jpg" mimeType="jpeg"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
 						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage66" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</tabledata>
 					</tablerow>
 				</table>
-				<paragraph title="pictures in a column tag, with and without text"/>
-				<column>
-					<columnLeft width="250">
-						<paragraph title="with text">
+				<paragraph/>
+				<elml:column>
+					<elml:columnLeft width="250">
+						<paragraph>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage31" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage32" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage33" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage34" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage35" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage36" units="pixels"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </paragraph>
-					</columnLeft>
-					<columnRight width="250">
-						<paragraph title="without text">
+							<multimedia src="test.jpg" mimeType="jpeg"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </paragraph>
+					</elml:columnLeft>
+					<elml:columnRight width="250">
+						<paragraph>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" legend="Alignment: left" label="Limage41" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" legend="Alignment: right" label="Limage42" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" legend="Alignment: center" label="Limage43" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" legend="Alignment: top" label="Limage44" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" legend="Alignment: bottom" label="Limage45" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" legend="Alignment: middle" label="Limage46" units="pixels"/>
+							<multimedia src="test.jpg" mimeType="jpeg"/>
 						</paragraph>
-					</columnRight>
-				</column>
-				<paragraph title="The following pictures are not inside a paragraph"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="center" bibIDRef="b18" height="100" width="150" label="Limage21" legend="center" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="100" width="150" label="Limage22" legend="right" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="left" bibIDRef="b18" height="100" width="150" label="Limage23" legend="left" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="middle" bibIDRef="b18" height="100" width="150" label="Limage24" legend="middle" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="bottom" bibIDRef="b18" height="100" width="150" label="Limage25" legend="bottom" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="top" bibIDRef="b18" height="100" width="150" label="Limage26" legend="top" units="pixels"/>
-				<multimedia src="test.jpg" mimeType="jpeg" align="right" bibIDRef="b18" height="200" width="300" legend="Test-Image" units="pixels" visible="print"/>
-			</clarify>
-		</learningObject>
-		<selfAssessment title="Titel of this SelfAssessment" label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'.">
+					</elml:columnRight>
+				</elml:column>
+				<paragraph/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+				<multimedia src="test.jpg" mimeType="jpeg"/>
+			</elml:clarify>
+		</elml:learningObject>
+		<elml:selfAssessment title="Titel of this SelfAssessment" label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'.">
 			<paragraph>This is a SelfAssessment part on unit level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on. The self assessment part might give the students the opportunity to figure out if they have understood the unit content. If not there should be some information where in the unit they find the relevant information to one of these self assessment part.</paragraph>
-		</selfAssessment>
-		<summary label="LSummaryx" title="Title of the summary">
+		</elml:selfAssessment>
+		<elml:summary label="LSummaryx" title="Title of the summary">
 			<paragraph>This is the more or less brief summary of the unit. It should mention all relevant aspects of the unit (of all the learning objects) and maybe give some hints of related themes.</paragraph>
-		</summary>
-		<furtherReading>
-			<resItem bibIDRef="zehnderDB">Especially chapter 4 and 7, pages u-x and y-z</resItem>
-		</furtherReading>
-	</unit>
-	<selfAssessment metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. In this case there should be written that the tutor needs to setup a discussion board topic with the title 'What is GIS'. This attribute will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Title of this SelfAssessment" label="Labelself" navTitle="Exercise">
-		<paragraph> This is a selfAssessment part on lesson level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on.<newLine space="short"/>E.g. explain the students that they have to do an internet research on the theme 'What is GIS' and they should summarise their findings and post them until a specific date on the discussion board under the topic 'What is GIS'. </paragraph>
-	</selfAssessment>
-	<selfAssessment title="Titel of this second SelfAssessment" label="LSelfAssess" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." navTitle="Exercise 2">
+		</elml:summary>
+		<elml:furtherReading>
+			<elml:resItem bibIDRef="zehnderDB">Especially chapter 4 and 7, pages u-x and y-z</elml:resItem>
+		</elml:furtherReading>
+	</elml:unit><elml:selfAssessment xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. In this case there should be written that the tutor needs to setup a discussion board topic with the title 'What is GIS'. This attribute will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Title of this SelfAssessment" label="Labelself" navTitle="Exercise">
+		<paragraph> This is a selfAssessment part on lesson level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on.<newLine/>E.g. explain the students that they have to do an internet research on the theme 'What is GIS' and they should summarise their findings and post them until a specific date on the discussion board under the topic 'What is GIS'. </paragraph>
+	</elml:selfAssessment><elml:selfAssessment xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" title="Titel of this second SelfAssessment" label="LSelfAssess" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." navTitle="Exercise 2">
 		<paragraph> This is a second selfassessment part on lesson level. You can add up to five selfassessments to a lesson. The selfassessment part might give the students the opportunity to figure out if they have understood the lesson content. If not there should be some information where in the lesson, units they find the relevant information to this selfassessment part. </paragraph>
-	</selfAssessment>
-	<summary label="LSummary" title="Title of the summary">
+	</elml:selfAssessment><elml:summary xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" label="LSummary" title="Title of the summary">
 		<paragraph> This is the more or less brief summary of the lesson. It should mention all relevant aspects of the lesson and maybe give some hints of related themes.</paragraph>
-	</summary>
-	<furtherReading>
-		<resItem bibIDRef="zehnderDB">Especially chapter 3 and 4</resItem>
-		<resItem bibIDRef="b1"/>
-	</furtherReading>
-	<glossary>
-		<definition term="glossary" bibIDRef="b17">An alphabetical list of terms peculiar to a field of knowledge with definitions or explanations.</definition>
-		<definition term="definition">1) a formal and concise statement of the meaning of a word, phrase, etc.; 2) the act of defining a word, phrase, etc.; 3) specification of the essential properties of something, or of the criteria which uniquely identify it; 4) the act of making clear or definite; 5) the state or condition of being clearly defined or definite; 6) a measure of the clarity of an optical, photographic, or television image as characterized by its sharpness and contrast</definition>
-	</glossary>
-	<bibliography>
-		<book bibID="zehnderDB" author="ZEHNDER, C.A." publicationPlace="Zürich" publicationYear="1998" publisher="vdf Hochschulverlag AG" title="Informationssysteme und Datenbanken" edition="6"/>
-		<contributionInBook bibID="b1" author="DITTRICH, K." editor="RECHENBERG, P., POMBERGER, G." pageNr="875-908" publicationPlace="Wien" publicationYear="1999" publisher="Carl Hanser Verlag" title="Informatik-Handbuch" titleOfContribution="Datenbanksysteme"/>
-		<journalArticle bibID="b2" author="TIEFENBACH, P." journalTitle="Geomatik Schweiz, Geoinformation und Landmanagement" pageNr="344" publicationYear="2003" title="3D-Visualisierung Regio-Klima" volumeNr="6"/>
-		<newspaperArticle bibID="b3" dayMonth="27. Januar" newspaperTitle="20 Minuten, Basel" pageNr="6" publicationYear="2004" title="Radioaktiver Müll im Alteisen entdeckt"/>
-		<newspaperArticle bibID="b16" dayMonth="28. Januar" newspaperTitle="Non-existent Newspaper" pageNr="10" publicationYear="2004" title="Some Title" author="BLEISCH, S."/>
-		<map bibID="b5" author="INTERGRAPH" publicationYear="2001" publicationPlace="Zürich" publisher="Orell Füssli, Kartographie AG" scale="1:350'000" title="Schweizerkarte"/>
-		<conferencePaper bibID="b6" author="CANTONI, R., VASSENA, G., LANZI, C." datePlace="September, 1-2, 2002, Corfu, Greece" editor="W. BOEHLER" pageNr="115" proceedingsTitle="Proceedings of the CIPA WG 6 International Workshop on Scanning for Cultural Heritage Recording" titleOfContribution="Digital Photogrammetry and Laser Scanning in Surveying the 'Nymphaea' in Pompeii" publicationPlace="Thessaloniki" publicationYear="2002" publisher="Publishing Ziti"/>
-		<publicationCorporateBody bibID="b7" author="UNESCO" publicationPlace="Paris" publicationYear="1993" publisher="Unesco" reportNr="PGI-93/WS/22" title="General information programme and UNISIST"/>
-		<thesis bibID="b8" author="ANNEN, A." designation="Thesis" institution="Fachhochschule beider Basel FHBB, Muttenz" publicationYear="2003" published="no" title="Geodatenmodellierung und -transfer – modellbasierte Datenkonvertierung zwischen INTERLIS-2 und GML-3" type="Diploma"/>
-		<patent bibID="b9" designation="European patent application 0021165 A1. 1981-01-07" author="PHILIP MORRIS INC." publicationYear="1981" title="Optical perforating apparatus and system"/>
-		<videoFilmBroadcast bibID="b10" designation="Video" author="Orson Welles" productionOrganisation="Harper Videos" productionPlace="London" publicationYear="1948" title="Birds in the Garden"/>
-		<websites bibID="b11" accessedDate="27 January 2004" author="ANON" publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB, Abteilung VGI" title="Abteilung Vermessung und Geoinformation" url="http://www.fhbb.ch/geomatik" edition="5"/>
-		<eJournals bibID="b12" accessedDate="27 January 2004" author="KLIGER, R., JOHANSSON, M., PERSTORPER, M., JOHANSSON, G." journalTitle="European Journal of Wood and Wood products" title="Distortion of Norway spruce timber Part 3: Modelling bow and spring" publicationYear="2003" url="http://www.metla.fi/info/vlib/Forestry/Category/Publications/Journals/" volumeNr="61 (4)"/>
-		<mailLists bibID="b13" accessedDate="17 June 2000" author="BRACK, E.V." dayMonthYear="2 May 2000" discussionList="Lis-link" subject="Re: Computing short courses" url="mailbase@mailbase.ac.uk"/>
-		<personalMail bibID="b14" author="BLEISCH, S." dayMonthYear="27 January 2004" emailRecipient="fisler@geo.unizh.ch" emailSender="s.bleisch@fhbb.ch" published="no" recipient="J. Fisler" subject="Bibliographic Referencing"/>
-		<cdRom bibID="b15" author="HAWKING, S.W." publicationYear="1994" publisher="Crunch Media" title="A brief history of time: An interactive adventure" accessedDate="28 January 2004" edition="4" publicationPlace="Hamburg" supplier="BGV"/>
-		<websites bibID="b17" accessedDate="28 January 2004" publicationPlace="Virginia, USA" author="KELLOGG, M." title="WordReference.com" url="http://www.wordreference.com/"/>
-		<book bibID="b18" author="BLEISCH, S." publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB" title="XML - An Overwiev"/>
-	</bibliography>
-	<metadata>
-		<organisation level="Basic" module="DM">
-			<creationPosition>
-				<posNumber>1</posNumber>
-			</creationPosition>
-		</organisation>
-		<prerequisites>
-			<preReqItem label="none" priority="Low"/>
-		</prerequisites>
-		<keywords>
-			<keywordItem>Testlesson</keywordItem>
-			<keywordItem>Demo Lesson</keywordItem>
-			<keywordItem>XML Tags</keywordItem>
-		</keywords>
-		<technical>
-			<technicalRequirement>
-				<type>PlugIn</type>
-				<name>Macromedia Flash</name>
-				<minimumVersion>5.0</minimumVersion>
-				<downloadURL>The URL where the student can download the PlugIn or whatever (could also be a textuell reference to WebCT when the software can be downloaded from there.</downloadURL>
-				<installationRemarks>Explanations how the software etc. is to install/handle. Where the student can get help (eg. help pages in the internet, email to tutor, etc.).</installationRemarks>
-			</technicalRequirement>
-		</technical>
-		<lessonInfo>
-			<language language="en" derived="no" originalLanguage="en"/>
-			<lifecycle>
-				<version creationDate="2003-05-31" modificationDate="2006-01-23">2</version>
-				<contribute>
-					<person responsible="Overall" name="Susanne Bleisch" email="s.bleisch@fhbb.ch" institute="FHBB" departement="VGI">Susanne has written all this text and also had the idea for this special lesson.</person>
-					<person responsible="Specials" name="Joel Fisler" email="fisler@geo.unizh.ch" institute="UNIZH" departement="GIUZ">Joel has given me the needed support to really do this special lesson :-)</person>
-				</contribute>
-				<commentsNextVersion>This is the first version but for a future version I could think that someone might write some better texts into the tags of this lesson and unit.</commentsNextVersion>
-			</lifecycle>
-			<educational>
-				<difficulty>Low</difficulty>
-				<typicalLearningTime>
-					<time>as long as you take</time>
-					<description>Here I might write how I got the time value written above eg. from student pre-test, my own idea how long it should take, or whatever</description>
-				</typicalLearningTime>
-			</educational>
-		</lessonInfo>
-		<rights>
-			<cost>no</cost>
-			<copyright>GITTA 2000-2005</copyright>
-			<description>Once there might be a decision if this lesson is freely available or not.</description>
-		</rights>
-	</metadata>
-</lesson>
+	</elml:summary><elml:furtherReading xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<elml:resItem bibIDRef="zehnderDB">Especially chapter 3 and 4</elml:resItem>
+		<elml:resItem bibIDRef="b1"/>
+	</elml:furtherReading><elml:glossary xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<elml:definition term="glossary" bibIDRef="b17">An alphabetical list of terms peculiar to a field of knowledge with definitions or explanations.</elml:definition>
+		<elml:definition term="definition">1) a formal and concise statement of the meaning of a word, phrase, etc.; 2) the act of defining a word, phrase, etc.; 3) specification of the essential properties of something, or of the criteria which uniquely identify it; 4) the act of making clear or definite; 5) the state or condition of being clearly defined or definite; 6) a measure of the clarity of an optical, photographic, or television image as characterized by its sharpness and contrast</elml:definition>
+	</elml:glossary><elml:bibliography xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<elml:book bibID="zehnderDB" author="ZEHNDER, C.A." publicationPlace="Zürich" publicationYear="1998" publisher="vdf Hochschulverlag AG" title="Informationssysteme und Datenbanken" edition="6"/>
+		<elml:contributionInBook bibID="b1" author="DITTRICH, K." editor="RECHENBERG, P., POMBERGER, G." pageNr="875-908" publicationPlace="Wien" publicationYear="1999" publisher="Carl Hanser Verlag" title="Informatik-Handbuch" titleOfContribution="Datenbanksysteme"/>
+		<elml:journalArticle bibID="b2" author="TIEFENBACH, P." journalTitle="Geomatik Schweiz, Geoinformation und Landmanagement" pageNr="344" publicationYear="2003" title="3D-Visualisierung Regio-Klima" volumeNr="6"/>
+		<elml:newspaperArticle bibID="b3" dayMonth="27. Januar" newspaperTitle="20 Minuten, Basel" pageNr="6" publicationYear="2004" title="Radioaktiver Müll im Alteisen entdeckt"/>
+		<elml:newspaperArticle bibID="b16" dayMonth="28. Januar" newspaperTitle="Non-existent Newspaper" pageNr="10" publicationYear="2004" title="Some Title" author="BLEISCH, S."/>
+		<elml:map bibID="b5" author="INTERGRAPH" publicationYear="2001" publicationPlace="Zürich" publisher="Orell Füssli, Kartographie AG" scale="1:350'000" title="Schweizerkarte"/>
+		<elml:conferencePaper bibID="b6" author="CANTONI, R., VASSENA, G., LANZI, C." datePlace="September, 1-2, 2002, Corfu, Greece" editor="W. BOEHLER" pageNr="115" proceedingsTitle="Proceedings of the CIPA WG 6 International Workshop on Scanning for Cultural Heritage Recording" titleOfContribution="Digital Photogrammetry and Laser Scanning in Surveying the 'Nymphaea' in Pompeii" publicationPlace="Thessaloniki" publicationYear="2002" publisher="Publishing Ziti"/>
+		<elml:publicationCorporateBody bibID="b7" author="UNESCO" publicationPlace="Paris" publicationYear="1993" publisher="Unesco" reportNr="PGI-93/WS/22" title="General information programme and UNISIST"/>
+		<elml:thesis bibID="b8" author="ANNEN, A." designation="Thesis" institution="Fachhochschule beider Basel FHBB, Muttenz" publicationYear="2003" published="no" title="Geodatenmodellierung und -transfer – modellbasierte Datenkonvertierung zwischen INTERLIS-2 und GML-3" type="Diploma"/>
+		<elml:patent bibID="b9" designation="European patent application 0021165 A1. 1981-01-07" author="PHILIP MORRIS INC." publicationYear="1981" title="Optical perforating apparatus and system"/>
+		<elml:videoFilmBroadcast bibID="b10" designation="Video" author="Orson Welles" productionOrganisation="Harper Videos" productionPlace="London" publicationYear="1948" title="Birds in the Garden"/>
+		<elml:websites bibID="b11" accessedDate="27 January 2004" author="ANON" publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB, Abteilung VGI" title="Abteilung Vermessung und Geoinformation" url="http://www.fhbb.ch/geomatik" edition="5"/>
+		<elml:eJournals bibID="b12" accessedDate="27 January 2004" author="KLIGER, R., JOHANSSON, M., PERSTORPER, M., JOHANSSON, G." journalTitle="European Journal of Wood and Wood products" title="Distortion of Norway spruce timber Part 3: Modelling bow and spring" publicationYear="2003" url="http://www.metla.fi/info/vlib/Forestry/Category/Publications/Journals/" volumeNr="61 (4)"/>
+		<elml:mailLists bibID="b13" accessedDate="17 June 2000" author="BRACK, E.V." dayMonthYear="2 May 2000" discussionList="Lis-link" subject="Re: Computing short courses" url="mailbase@mailbase.ac.uk"/>
+		<elml:personalMail bibID="b14" author="BLEISCH, S." dayMonthYear="27 January 2004" emailRecipient="fisler@geo.unizh.ch" emailSender="s.bleisch@fhbb.ch" published="no" recipient="J. Fisler" subject="Bibliographic Referencing"/>
+		<elml:cdRom bibID="b15" author="HAWKING, S.W." publicationYear="1994" publisher="Crunch Media" title="A brief history of time: An interactive adventure" accessedDate="28 January 2004" edition="4" publicationPlace="Hamburg" supplier="BGV"/>
+		<elml:websites bibID="b17" accessedDate="28 January 2004" publicationPlace="Virginia, USA" author="KELLOGG, M." title="WordReference.com" url="http://www.wordreference.com/"/>
+		<elml:book bibID="b18" author="BLEISCH, S." publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB" title="XML - An Overwiev"/>
+	</elml:bibliography></lesson>

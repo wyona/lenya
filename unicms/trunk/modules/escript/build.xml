@@ -142,6 +142,51 @@
       </fileset>
     </copy>
 
+    <!-- BXE integration -->
+    <echo>INFO: Copying files for BXE</echo>
+    <copy todir="${pubs.dir}/unizh/xslt/" overwrite="yes">
+       <fileset dir="xslt">
+        <include name="bxe-loadxml.xsl"/>
+        <include name="bxe-savexml.xsl"/>
+        <include name="elml-rng.xsl"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: Patching usecase-bxeng.xmap</echo>
+    <xslt
+      in="${pub.dir}/usecase-bxeng.xmap"
+      out="work/usecase-bxeng.xmap" style="ant/usecase-bxeng.xsl"
+      >
+    </xslt>
+    <copy todir="${pub.dir}" overwrite="yes">
+       <fileset dir="work">
+         <include name="usecase-bxeng.xmap"/>
+      </fileset>
+    </copy>
+ 
+    <echo>INFO: Patching publication-sitemap.xmap</echo>
+     <xslt
+      in="${pub.dir}/publication-sitemap.xmap"
+      out="work/publication-sitemap.xmap" style="ant/publication-sitemap.xsl"
+      >
+     </xslt>
+     <copy todir="${pub.dir}" overwrite="yes">
+       <fileset dir="work">
+         <include name="publication-sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: patching css file content-bxeng.xml</echo> 
+    <xslt
+      in="${pubs.dir}/unizh/resources/misc/bxeng/content-bxeng.xml"
+      out="work/content-bxeng.xml" style="ant/content-bxeng.xsl"
+      >
+    </xslt>
+    <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
+      <fileset dir="work">
+         <include name="content-bxeng.xml"/>
+      </fileset>
+    </copy>
     <antcall target="touch"/>
     <!-- <antcall target="cleanup"/> -->
 

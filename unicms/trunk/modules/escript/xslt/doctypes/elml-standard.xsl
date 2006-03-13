@@ -66,18 +66,18 @@
       <xsl:apply-templates select="*/unizh:contcol1"/>
     </div>
     <div class="contcol2">
-      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+      <div class="relatedbox">
          <xsl:comment/>
       </div>
       <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+            <div bxe_xpath="/elml:lesson/xhtml:h1">
+              <xsl:value-of select="/document/content/elml:lesson/elml:title"/>
             </div>
           </h1> 
-          <div bxe_xpath="/{$document-element-name}/xhtml:body">
+          <div bxe_xpath="/elml:lesson/elml:body">
             <xsl:apply-templates select="/document/content/elml:lesson"/> 
           </div> 
         </div>
@@ -86,5 +86,4 @@
     </div>
   </xsl:template>
 
-  
 </xsl:stylesheet>
