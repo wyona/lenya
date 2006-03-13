@@ -34,6 +34,9 @@
     <ref name="lenya.meta"/>
     <ref name="unizh.related-content"/>
     <element name="body">
+      <optional>
+        <ref name="unizh.lead"/>
+      </optional>
       <ref name="unizh.columns"/>
     </element>
   </element>
@@ -42,9 +45,6 @@
 
 <define name="unizh.columns">
   <element name="unizh:column">
-    <optional>
-      <ref name="unizh.lead"/>
-    </optional>
     <oneOrMore>
       <ref name="unizh.links"/>
     </oneOrMore>
@@ -62,9 +62,9 @@
     <optional>
       <ref name="object"/>
     </optional>
-    <element name="p">
-      <ref name="Inline.model"/>
-    </element>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
   </element>
 </define>
 
