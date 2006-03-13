@@ -1,0 +1,580 @@
+<grammar ns="http://unizh.ch/doctypes/elml/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         >
+
+
+<!-- Element Definitions -->
+
+<define name="bibliography">
+  <element name="bibliography">
+    <ref name="SortingImp"/>
+    <oneOrMore>
+      <choice>
+        <ref name="book"/>
+        <ref name="contributionInBook"/>
+        <ref name="journalArticle"/>
+        <ref name="newspaperArticle"/>
+        <ref name="map"/>
+        <ref name="conferencePaper"/>
+        <ref name="publicationCorporateBody"/>
+        <ref name="thesis"/>
+        <ref name="patent"/>
+        <ref name="videoFilmBroadcast"/>
+        <ref name="websites"/>
+        <ref name="eJournals"/> 
+        <ref name="mailLists"/>
+        <ref name="personalMail"/>
+        <ref name="cdRom"/> 
+      </choice>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="book">
+  <element name="book">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibEdition"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="contributionInBook">
+  <element name="contributionInBook">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitleOfContribution"/>
+    <ref name="BibEditor"/>
+    <ref name="BibTitle"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibPageNr"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+<define name="journalArticle">
+  <element name="journalArticle">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibJournalTitle"/>
+    <ref name="BibVolumeNr"/>
+    <ref name="BibPageNr"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+<define name="newspaperArticle">
+  <element name="newspaperArticle">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibNewspaperTitle"/>
+    <ref name="BibDayMonth"/>
+    <ref name="BibPageNr"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+<define name="map">
+  <element name="map">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibScale"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+<define name="conferencePaper">
+  <element name="conferencePaper">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitleOfContribution"/>
+    <ref name="BibEditor"/>
+    <ref name="BibProceedingsTitle"/>
+    <ref name="BibDatePlace"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibPageNr"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="publicationCorporateBody">
+  <element name="publicationCorporateBody">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibReportNr"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="thesis">
+  <element name="thesis">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibDesignation"/>
+    <ref name="BibType"/>
+    <ref name="BibInstitution"/>
+    <ref name="BibPublished"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="patent">
+  <element name="patent">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibDesignation"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="videoFilmBroadcast">
+  <element name="videoFilmBroadcast">
+    <ref name="BibIDReq"/>
+    <ref name="BibTitle"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibDesignation"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibProductionPlace"/>
+    <ref name="BibProductionOrganisation"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="websites">
+  <element name="websites">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibEdition"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibUrl"/>
+    <ref name="BibAccessedDate"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+<define name="eJournals">
+  <element name="eJournals">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibJournalTitle"/>
+    <ref name="BibVolumeNr"/>
+    <ref name="BibUrl"/>
+    <ref name="BibAccessedDate"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="mailLists">
+  <element name="mailLists">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibDayMonthYear"/>
+    <ref name="BibSubject"/>
+    <ref name="BibDiscussionList"/>
+    <ref name="BibUrl"/>
+    <ref name="BibAccessedDate"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="personalMail">
+  <element name="personalMail">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibEmailSender"/>
+    <ref name="BibDayMonthYear"/>
+    <ref name="BibSubject"/>
+    <ref name="BibRecipient"/>
+    <ref name="BibEmailRecipient"/>
+    <ref name="BibPublished"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+<define name="cdRom">
+  <element name="cdRom">
+    <ref name="BibIDReq"/>
+    <ref name="BibAuthor"/>
+    <ref name="BibPublicationYear"/>
+    <ref name="BibTitle"/>
+    <ref name="BibEdition"/>
+    <ref name="BibPublicationPlace"/>
+    <ref name="BibPublisher"/>
+    <ref name="BibSupplier"/>
+    <ref name="BibAccessedDate"/>
+    <ref name="BibDownloadUrl"/>
+    <text/>
+  </element>
+</define>
+
+
+
+
+
+<!-- Attributes definitions -->
+
+
+<define name="BibIDReq">
+  <attribute name="bibID">
+    <text/>
+  </attribute>
+</define>
+
+<define name="BibIDRefReq">
+  <attribute name="bibIDRef">
+    <text/>
+  </attribute>
+</define>
+
+<define name="BibIDRefImp">
+  <optional>
+    <attribute name="bibIDRef">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="SortingImp">
+  <optional>
+    <attribute name="sorting">
+      <text/><!-- on, off -->
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibAuthor">
+  <optional>
+    <attribute name="author">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibPublicationYear">
+  <optional>
+    <attribute name="publicationYear">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibTitle">
+  <optional>
+    <attribute name="title">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibEdition">
+  <optional>
+    <attribute name="edition">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibPublicationPlace">
+  <optional>
+    <attribute name="publicationPlace">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibPublisher">
+  <optional>
+    <attribute name="publisher">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibTitleOfContribution">
+  <optional>
+    <attribute name="titleOfContribution">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibEditor">
+  <optional>
+    <attribute name="editor">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibPageNr">
+  <optional>
+    <attribute name="pageNr">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibJournalTitle">
+  <optional>
+    <attribute name="journalTitle">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibVolumeNr">
+  <optional>
+    <attribute name="volumeNr">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibNewspaperTitle">
+  <optional>
+    <attribute name="newspaperTitle">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDayMonth">
+  <optional>
+    <attribute name="dayMonth">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibScale">
+  <optional>
+    <attribute name="scale">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibProceedingsTitle">
+  <optional>
+    <attribute name="proceedingsTitle">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDatePlace">
+  <optional>
+    <attribute name="datePlace">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibReportNr">
+  <optional>
+    <attribute name="reportNr">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDesignation">
+  <optional>
+    <attribute name="designation">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<define name="BibInstitution">
+  <optional>
+    <attribute name="institution">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibPublished">
+  <optional>
+    <attribute name="published">
+      <text/><!-- yes, no -->
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibProductionPlace">
+  <optional>
+    <attribute name="productionPlace">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibProductionOrganisation">
+  <optional>
+    <attribute name="productionOrganisation">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibUrl">
+  <optional>
+    <attribute name="url"><!-- built-in type url -->
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDownloadUrl">
+  <optional>
+    <attribute name="downloadUrl"><!-- built-in type url -->
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibAccessedDate">
+  <optional>
+    <attribute name="accessedDate">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDayMonthYear">
+  <optional>
+    <attribute name="dayMonthYear">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibSubject">
+  <optional>
+    <attribute name="subject">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibDiscussionList">
+  <optional>
+    <attribute name="discussionList">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibEmailSender">
+  <optional>
+    <attribute name="emailSender">
+      <ref name="EmailsType"/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibRecipient">
+  <optional>
+    <attribute name="recipient">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibEmailRecipient">
+  <optional>
+    <attribute name="emailRecipient">
+      <ref name="EmailsType"/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibSupplier">
+  <optional>
+    <attribute name="supplier">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+<define name="BibType">
+  <optional>
+    <attribute name="type">
+      <text/>
+    </attribute>
+  </optional>
+</define>
+
+
+<!-- Datatype definitions -->
+
+<define name="EmailsType">
+  <text/>
+</define>
+
+
+</grammar>

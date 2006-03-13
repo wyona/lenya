@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://unizh.ch/doctypes/elml/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+  <define name="lesson">
+    <element name="lesson">
+      <ref name="noNamespaceSchemaLocation"/>
+      <ref name="LessonLabelReq"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <attribute name="lenya:dummy"><text/></attribute>
+      <attribute name="dc:dummy"><text/></attribute>
+      <attribute name="dcterms:dummy"><text/></attribute>
+      <ref name="lenya.meta"/>
+      <oneOrMore>
+        <choice>
+          <ref name="entry"/>
+          <ref name="goals"/>
+        </choice>
+      </oneOrMore>
+      <oneOrMore>
+        <ref name="unit"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <choice>
+          <ref name="selfAssessment"/>
+          <ref name="summary"/>
+        </choice>
+      </zeroOrMore>
+      <optional>
+        <ref name="furtherReading"/>
+      </optional>
+      <optional>
+        <ref name="glossary"/>
+      </optional>
+      <optional>
+        <ref name="bibliography"/>
+      </optional>
+      <optional> 
+        <element name="metadata"> 
+          <ref name="MetaDataType"/>
+        </element> 
+      </optional>
+      <!-- Keys -->
+    </element>
+  </define>
+
+
+  <define name="unit">
+    <element name="unit">
+      <ref name="LabelReq"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <ref name="RoleImp"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="entry"/>
+          <ref name="goals"/>
+        </choice>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="learningObject"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <choice>
+          <ref name="selfAssessment"/>
+          <ref name="summary"/>
+        </choice>
+      </zeroOrMore>
+      <optional>
+        <ref name="furtherReading"/>
+      </optional>
+    </element>
+  </define>
+
+  <define name="learningObject">
+    <element name="learningObject">
+      <ref name="LabelImp"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <oneOrMore>
+        <choice>
+          <ref name="clarify"/>
+          <ref name="look"/>
+          <ref name="act"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+
+  <define name="entry">
+    <element name="entry"> 
+      <ref name="CLIIType"/> 
+    </element>
+  </define>
+
+
+  <define name="clarify">
+    <element name="clarify">
+      <ref name="CLType"/>
+    </element>
+  </define>
+
+  <define name="look">
+    <element name="look">
+      <ref name="CLType"/>
+    </element>
+  </define>
+
+
+  <define name="act">
+    <element name="act">
+      <ref name="SType"/>
+    </element>
+  </define>
+
+
+  <define name="goals">
+    <element name="goals">
+      <ref name="IntStatementImp"/>
+      <ref name="PresentationImp"/>
+      <oneOrMore>
+        <ref name="lObjective"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+
+  <define name="lObjective">
+    <element name="lObjective">
+      <ref name="RoleImp"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="selfAssessment">
+    <element name="selfAssessment">
+      <ref name="SIIType"/>
+    </element>
+  </define>
+
+  <define name="summary">
+    <element name="summary">
+      <ref name="CLIIType"/>
+    </element>
+  </define>
+
+  <define name="furtherReading">
+    <element name="furtherReading">
+      <ref name="SortingImp"/>
+      <oneOrMore>
+        <ref name="resItem"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="resItem">
+    <element name="resItem">
+      <ref name="BibIDRefReq"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="glossary">
+    <element name="glossary">
+      <oneOrMore>
+        <element name="definition">
+          <ref name="GlossaryReq"/>
+          <ref name="BibIDRefImp"/>
+          <zeroOrMore>
+            <choice>
+              <ref name="list"/>
+              <ref name="term"/>
+              <ref name="multimedia"/>
+              <ref name="formatted"/>
+              <ref name="link"/>
+              <ref name="citation"/>
+              <ref name="newLine"/>
+              <ref name="paragraph"/>
+              <ref name="indexItem"/>
+              <text/>
+            </choice>
+          </zeroOrMore>
+        </element>
+      </oneOrMore>
+      <empty/>
+    </element>
+  </define>
+
+
+  <define name="column">
+    <element name="column">
+      <ref name="LabelImp"/>
+      <ref name="columnLeft"/>
+      <optional>
+        <ref name="columnMiddle"/>
+      </optional>
+      <ref name="columnRight"/>
+    </element>
+  </define>
+
+  <define name="columnLeft">
+    <element name="columnLeft">
+      <ref name="ColumnType"/>
+    </element>
+  </define>
+
+  <define name="columnMiddle">
+    <element name="columnMiddle">
+      <ref name="ColumnType"/>
+    </element>
+  </define>
+
+  <define name="columnRight">
+    <element name="columnRight">
+      <ref name="ColumnType"/>
+    </element>
+  </define>
+
+  <define name="table">
+    <element name="table">
+      <ref name="LabelImp"/>
+      <ref name="TitleImp"/>
+      <ref name="IconImp"/>
+      <ref name="SizeImp"/>
+      <ref name="LegendImp"/>
+      <ref name="BibIDRefImp"/>
+      <oneOrMore>
+        <ref name="tablerow"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="tablerow">
+    <element name="tablerow">
+      <oneOrMore>
+        <choice>
+          <element name="tabledata">
+            <ref name="TableCellType"/>
+          </element>
+          <element name="tableheading">
+            <ref name="TableCellType"/>
+          </element>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="list">
+    <element name="list">
+      <ref name="LabelImp"/>
+      <ref name="TitleImp"/>
+      <ref name="IconImp"/>
+      <ref name="ListStyleImp"/>
+      <ref name="BibIDRefImp"/>
+      <oneOrMore>
+        <ref name="listItem"/>
+      </oneOrMore>    
+    </element>
+  </define>
+
+  <define name="listItem">
+    <element name="item">
+      <zeroOrMore>
+        <choice>
+          <ref name="list"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="formatted"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="newLine"/>
+          <ref name="paragraph"/>
+          <ref name="indexItem"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="box">
+    <element name="box">
+      <ref name="ParaType"/>
+    </element>
+  </define>
+
+  <define name="term"> <!-- Querreferenzen -->
+    <element name="term">
+      <ref name="GlossaryRefReq"/>
+      <ref name="IconImp"/>
+      <text/> 
+    </element>
+  </define>
+
+  <define name="indexItem">
+    <element name="indexItem">
+      <ref name="IndexAttImp"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="term"/>
+          <ref name="formatted"/>
+          <ref name="newLine"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define> 
+
+  <define name="multimedia">
+    <element name="multimedia">
+      <ref name="LabelImp"/>
+      <ref name="IconImp"/>
+      <ref name="SourceImp"/>
+      <ref name="MimeTypeReq"/>
+      <ref name="AlignmentImp"/>
+      <ref name="SizeImp"/>
+      <ref name="LegendImp"/>
+      <ref name="BibIDRefImp"/>
+      <ref name="Thumbnail"/>
+      <ref name="HTMLAttributesImp"/>
+      <ref name="VisibleImp"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="formatted">
+    <element name="formatted">
+      <ref name="StyleReq"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="formatted"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="popup">
+    <element name="popup">
+      <ref name="ParaType"/>
+    </element>
+  </define>
+
+  <define name="link">
+    <element name="link">
+      <ref name="UriImp"/>
+      <ref name="LegendImp"/>
+      <ref name="IconImp"/>
+      <optional>
+        <ref name="multimedia"/>
+      </optional>
+      <text/>
+    </element>
+  </define>
+
+  <define name="citation">
+    <element name="citation">
+      <ref name="BibIDRefReq"/>
+      <ref name="BibPageNr"/>
+      <ref name="IconImp"/>
+      <ref name="YearOnlyImp"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="term"/>
+          <ref name="formatted"/>
+          <ref name="newLine"/>
+          <ref name="indexItem"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="newLine">
+    <element name="newLine">
+      <ref name="NewLineImp"/>
+      <empty/>
+    </element>
+  </define>
+
+  <define name="paragraph">
+    <element name="paragraph">
+      <ref name="LabelImp"/>
+      <ref name="RoleImp"/>
+      <ref name="TitleImp"/>
+      <ref name="IconImp"/>
+      <ref name="VisibleImp"/>
+      <ref name="BlockType"/>
+    </element>
+  </define>
+
+
+  <!-- Type definitions -->
+
+
+  <define name="BlockType">
+    <zeroOrMore>
+        <choice>
+          <ref name="list"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="formatted"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="newLine"/>
+          <ref name="indexItem"/>
+          <text/>
+        </choice>
+      </zeroOrMore>
+  </define>
+
+
+  <define name="CLType">
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="column"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="box"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="popup"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+  <define name="CLIIType">
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <ref name="NavTitleImp"/> 
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="column"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="box"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="popup"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+  <define name="SType">
+    <ref name="MetaSetUpInfoReq"/>
+    <ref name="CLType"/>
+  </define>
+
+  <define name="SIIType">
+    <ref name="NavTitleImp"/>
+    <ref name="SType"/>
+  </define>
+
+  <define name="ColumnType">
+    <ref name="SizeImp"/>
+    <ref name="AlignmentImp"/>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="box"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="popup"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+  <define name="TableCellType">
+    <ref name="LabelImp"/>
+    <ref name="SizeImp"/>
+    <ref name="SpanImp"/>
+    <ref name="AlignmentImp"/>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="list"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="popup"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+  <define name="ParaType">
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <ref name="IconImp"/>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="column"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+  <define name="mdType">
+    <ref name="RoleImp"/>
+  </define>
+
+  <!-- Attributes -->
+
+
+ <define name="LabelReq">
+    <attribute name="label">
+      <text/>
+    </attribute>
+  </define>
+
+  <define name="LabelImp">
+    <optional>
+      <attribute name="label">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="TitleReq">
+    <attribute name="title">
+      <text/>
+    </attribute>
+  </define>
+
+  <define name="TitleImp">
+    <optional>
+      <attribute name="title">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="NavTitleImp">
+    <optional>
+      <attribute name="navTitle">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="IntStatementImp">
+    <optional>
+      <attribute name="intStatement">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="PresentationImp">
+     <optional>
+      <attribute name="presentation">
+        <text/><!-- list, table -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="LegendImp">
+    <optional>
+      <attribute name="legend">
+        <text/>
+      </attribute>
+    </optional>
+  </define> 
+
+  <define name="RoleImp">
+    <optional>
+      <attribute name="role">
+        <text/><!-- tutor, student -->
+      </attribute>
+    </optional>
+  </define> 
+
+  <define name="UriImp">
+    <optional>
+      <attribute name="uri">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="targetLesson">
+        <text/> <!-- PredefinedLabels -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="targetLabel">
+        <text/><!-- LabelType -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="type">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="size">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="target">
+        <text/><!-- _blank, _top -->
+      </attribute>
+    </optional>
+  </define> 
+
+  <define name="NewLineImp">
+    <optional>
+      <attribute name="space">
+        <text/><!-- short, long -->
+      </attribute>
+    </optional>
+  </define> 
+
+  <define name="MimeTypeReq">
+    <attribute name="mimeType">
+      <text/><!-- gif, jpeg, png, flash, svg, quicktime, mpeg, applet, vrml, x3d, realone, mathml, div -->
+    </attribute>
+  </define>
+
+  <define name="VisibleImp">
+    <optional>
+      <attribute name="visible">
+        <text/><!-- all, online, print -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="HTMLAttributesImp">
+    <optional>
+      <attribute name="HTMLAttributes">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="Thumbnail">
+    <optional>
+      <attribute name="thumbnail">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="SourceImp">
+    <optional>
+      <attribute name="src">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="AlignmentImp">
+    <optional>
+      <attribute name="align">
+        <text/><!-- left, center, right, top, middle, bottom -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="GlossaryRefReq">
+    <attribute name="glossRef">
+      <text/><!-- Querreferenz -->
+    </attribute>
+  </define>
+
+  <define name="GlossaryReq">
+    <attribute name="term">
+      <text/>
+    </attribute>
+  </define>
+
+  <define name="SizeImp">
+    <optional>
+      <attribute name="width">
+        <text/><!-- int -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="height">
+        <text/><!-- int -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="units">
+        <text/><!-- pixels, percent -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="SpanImp">
+    <optional>
+      <attribute name="rowspan">
+        <text/><!-- int -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="colspan">
+        <text/><!-- int -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="ListStyleImp">
+    <optional>
+      <attribute name="listStyle">
+        <text/><!-- ordered, unordered -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="MetaSetUpInfoReq">
+    <attribute name="metaSetUpInfo">
+      <text/>
+    </attribute>
+  </define>
+
+  <define name="StyleReq">
+    <attribute name="style">
+      <text/> <!-- bold, italic, underlined, crossedOut, upperCase, lowerCase, subscript, superscript, code -->
+    </attribute>
+  </define>
+
+  <define name="YearOnlyImp">
+    <optional>
+      <attribute name="yearOnly">
+        <text/><!-- YesNoType -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="IndexAttImp">
+    <optional>
+      <attribute name="mainEntry">
+        <text/><!-- YesNoType -->
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="affiliatedTo">
+        <text/><!-- String -->
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="noNamespaceSchemaLocation">
+    <optional>
+      <attribute name="xsi:noNamespaceSchemaLocation">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+
+</grammar>
