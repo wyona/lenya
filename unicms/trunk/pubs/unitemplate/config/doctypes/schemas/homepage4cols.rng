@@ -37,6 +37,9 @@
     <ref name="unizh.contcol1"/>
     <ref name="unizh.related-content"/>
     <element name="body">
+      <optional>
+        <ref name="unizh.lead"/>
+      </optional>
       <ref name="unizh.columns"/>
     </element>
   </element>
@@ -45,9 +48,6 @@
 
 <define name="unizh.columns">
   <element name="unizh:column">
-    <optional>
-      <ref name="unizh.lead"/>
-    </optional>
     <oneOrMore>
       <choice>
         <ref name="unizh.teaser"/>
@@ -71,9 +71,9 @@
     <zeroOrMore> <!-- FIXME: BXE. Should read optional -->
       <ref name="object"/>
     </zeroOrMore>
-    <element name="p">
-      <ref name="Inline.model"/>
-    </element>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
   </element>
 </define>
 
