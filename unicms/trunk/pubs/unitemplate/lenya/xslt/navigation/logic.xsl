@@ -83,11 +83,17 @@
               <xsl:when test="$homepage-basic-url = 'index'">
                 <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index')]"/>
               </xsl:when>
-              <xsl:otherwise>
+              <xsl:when test="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div">
                 <div class="home" href="{xhtml:div[@basic-url = 'index']/@href}">
                   <xsl:value-of select="xhtml:div[@basic-url = 'index']/text()"/>
                 </div>
                 <xsl:copy-of select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <div class="home" href="{xhtml:div[@basic-url = 'index']/@href}">
+                  <xsl:value-of select="xhtml:div[@basic-url = 'index']/text()"/>
+                </div>
+                <xsl:apply-templates select="xhtml:div"/>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:otherwise>
