@@ -168,6 +168,19 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:title[parent::unizh:links and $rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:if test="not(following-sibling::xhtml:object)">
+        <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">image</xsl:with-param>
+          <xsl:with-param name="insertWhere">after</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="unizh:contcol1[not(unizh:quicklinks) and not(xhtml:object) and $rendertype = 'imageupload']">
     <xsl:copy>    
       <xsl:apply-templates select="@*|node()"/>

@@ -298,6 +298,8 @@
       <li>
         <b><a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a></b>
       </li>
+      <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
+      <xsl:apply-templates select="xhtml:object"/>
       <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
       <xsl:for-each select="xhtml:a">
         <li>
@@ -319,6 +321,8 @@
     <div class="titel">
       <xsl:value-of select="unizh:title"/>
     </div>
+    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
+    <xsl:apply-templates select="xhtml:object"/>
     <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <ul class="linknav">
       <xsl:for-each select="xhtml:a">

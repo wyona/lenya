@@ -14,6 +14,14 @@
   <xsl:param name="rendertype"/>
 
 
+  <xsl:template match="xhtml:object[parent::unizh:links]">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">198</xsl:with-param>
+      <xsl:with-param name="height">64</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:object[@width != '']">
     <xsl:call-template name="object">
       <xsl:with-param name="width">
