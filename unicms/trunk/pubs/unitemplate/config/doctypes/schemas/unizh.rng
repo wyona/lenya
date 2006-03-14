@@ -107,23 +107,6 @@
 </define>
 
 
-<define name="unizh.links">
-  <element name="unizh:links">
-    <element name="unizh:title">
-      <optional>
-        <attribute name="href">
-          <text/>
-        </attribute>
-      </optional>
-      <text/>
-    </element>
-    <oneOrMore>
-      <ref name="a"/>
-    </oneOrMore>
-  </element>
-</define>
-
-
 <define name="unizh.teaser">
   <element name="unizh:teaser">
     <optional>

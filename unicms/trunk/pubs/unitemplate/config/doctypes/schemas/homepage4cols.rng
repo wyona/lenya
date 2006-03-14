@@ -46,6 +46,18 @@
 </define>
 
 
+<define name="unizh.lead">
+  <element name="unizh:lead">
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
+  </element>
+</define>
+
+
 <define name="unizh.columns">
   <element name="unizh:column">
     <oneOrMore>
@@ -66,14 +78,22 @@
 </define>
 
 
-<define name="unizh.lead">
-  <element name="unizh:lead">
-    <zeroOrMore> <!-- FIXME: BXE. Should read optional -->
-      <ref name="object"/>
-    </zeroOrMore>
+<define name="unizh.links">
+  <element name="unizh:links">
+    <element name="unizh:title">
+      <optional>
+        <attribute name="href">
+          <text/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
     <optional>
-      <ref name="teaser.p"/>
+      <ref name="object"/>
     </optional>
+    <oneOrMore>
+      <ref name="a"/>
+    </oneOrMore>
   </element>
 </define>
 
