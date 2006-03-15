@@ -269,7 +269,7 @@
 
       <menu name="Help" label="Debug">
 	<block>
-	  <item><xsp:attribute name="href"><xsp-request:get-context-path/>/docs-new/docs/index.html</xsp:attribute>User Documentation</item>
+	  <item><xsp:attribute name="href">http://wiki.apache.org/lenya/</xsp:attribute>User Documentation</item>
 	  <item>System Documentation</item>
 	  <item>Support</item>
 	</block>
