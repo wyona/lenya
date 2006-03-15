@@ -149,7 +149,7 @@
 
       <map:match pattern ="redirect-*-*/*/live/**.html">
         <map:act type="redirect">
-          <map:redirect-to global="true" uri="{request:contextPath}/{../3}/live/{href}"/>
+          <map:redirect-to global="true" uri="{href}"/>
         </map:act>
       </map:match>
 
