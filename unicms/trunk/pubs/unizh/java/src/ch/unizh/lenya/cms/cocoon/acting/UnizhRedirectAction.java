@@ -65,6 +65,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.PageEnvelope;
 import org.apache.lenya.cms.publication.PageEnvelopeFactory;
+import org.apache.lenya.cms.publication.Publication;
 import ch.unizh.lenya.cms.publication.UnizhImpl;
 
 import java.util.HashMap;
@@ -103,11 +104,20 @@ public class UnizhRedirectAction extends AbstractAction {
             // no file found or it's not a redirect document type or href attribute is missing
             if (value == null) {
                 return null;
+
             } else {
+                    Publication publication = document.getPublication();
+                    String context = "/lenya/" + publication.getId() + "/authoring/";
+                    String href = value;
+                    if (value.startsWith(context)) {
+                            href = value.substring(context.length());
+                    }
+
                     Map map = new HashMap();
-                    map.put("href", value);
+                    map.put("href", href);
                     return map;
             }
+
         } catch (Exception e) {
             throw new Exception(
                 "Obtaining attribute href for redirect failed: ",
