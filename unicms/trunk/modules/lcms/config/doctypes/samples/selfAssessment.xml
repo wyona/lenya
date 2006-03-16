@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><selfAssessment xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Test and Demo Lesson" label="TestLesson" metaSetUpInfo="Setup info"><lenya:meta>
+    <dc:title>Lesson </dc:title>
+    <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>UZH</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UZH</dc:rights>
+</lenya:meta>
+
+
+			<paragraph>This is a SelfAssessment part on unit level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on. The self assessment part might give the students the opportunity to figure out if they have understood the unit content. If not there should be some information where in the unit they find the relevant information to one of these self assessment part.</paragraph>
+
+
+
+
+</selfAssessment>

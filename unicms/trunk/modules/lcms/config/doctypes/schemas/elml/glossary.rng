@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://unizh.ch/doctypes/elml/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="config.rng"/>
+<include href="common.rng"/>
+<include href="bibliography/harvard.rng"/>
+
+ <define name="glossary">
+    <element name="glossary">
+      <attribute name="lenya:dummy"><text/></attribute>
+      <attribute name="dc:dummy"><text/></attribute>
+      <attribute name="dcterms:dummy"><text/></attribute>
+      <attribute name="elml:dummy"><text/></attribute>
+      <ref name="lenya.meta"/>
+      <oneOrMore>
+        <element name="definition">
+          <ref name="GlossaryReq"/>
+          <ref name="BibIDRefImp"/>
+          <zeroOrMore>
+            <choice>
+              <ref name="list"/>
+              <ref name="term"/>
+              <ref name="multimedia"/>
+              <ref name="formatted"/>
+              <ref name="link"/>
+              <ref name="citation"/>
+              <ref name="newLine"/>
+              <ref name="paragraph"/>
+              <ref name="indexItem"/>
+              <text/>
+            </choice>
+          </zeroOrMore>
+        </element>
+      </oneOrMore>
+      <empty/>
+    </element>
+  </define>
+
+</grammar>

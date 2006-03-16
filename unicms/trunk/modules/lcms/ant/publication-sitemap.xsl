@@ -4,19 +4,13 @@
 <xsl:output method="xml" indent="yes"/>
 
   <xsl:template match="map:match[@pattern='*/**.rng']">
-    <map:match pattern="authoring/elml.rng">
-      <map:generate src="config/doctypes/schemas/elml.rng"/>
-      <map:transform src="../unizh/xslt/elml-rng.xsl"/>
-      <map:serialize type="xml"/>
-    </map:match>
-    <map:match pattern="**/elml/**.rng">
-      <map:generate src="config/doctypes/schemas/elml/{{2}}.rng"/>
-      <map:transform src="../unizh/xslt/elml-rng.xsl"/>
+    <map:match pattern="authoring/elml/**.rng">
+      <map:generate src="config/doctypes/schemas/elml/{{1}}.rng"/>
+      <map:transform src="../unizh/xslt/bxe-rng.xsl"/>
       <map:serialize type="xml"/>
     </map:match>
     <xsl:copy-of select="."/>
   </xsl:template>
-
 
   <xsl:template match="@*|node()">
     <xsl:copy>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><glossary xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace"><lenya:meta>
+    <dc:title>Lesson </dc:title>
+    <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>UZH</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UZH</dc:rights>
+</lenya:meta>
+
+  <elml:definition term="glossary" bibIDRef="b17">An alphabetical list of terms peculiar to a field of knowledge with definitions or explanations.</elml:definition>
+  <elml:definition term="definition">1) a formal and concise statement of the meaning of a word, phrase, etc.; 2) the act of defining a word, phrase, etc.; 3) specification of the essential properties of something, or of the criteria which uniquely identify it; 4) the act of making clear or definite; 5) the state or condition of being clearly defined or definite; 6) a measure of the clarity of an optical, photographic, or television image as characterized by its sharpness and contrast</elml:definition>
+
+</glossary>

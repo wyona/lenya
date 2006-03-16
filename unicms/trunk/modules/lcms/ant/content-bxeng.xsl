@@ -8,6 +8,25 @@
       <xsl:apply-templates select="text()"/>
     /* elml */
 
+.lObjective {
+        display: list-item;
+        list-style-position: inside;
+}
+
+
+.definition {
+        display: block;
+}
+
+.definition .term {
+         color: #000;
+         font-weight: bold;
+}
+.definition .term:after {
+        content: ": ";
+}
+
+
 table.elml {
         border-width: 1px;
         border-spacing: 0px;

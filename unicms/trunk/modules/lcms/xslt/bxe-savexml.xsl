@@ -66,11 +66,13 @@
 </xsl:template>
 
 
-<xsl:template match="elml:lesson">
+<xsl:template match="elml:lesson | elml:unit">
   <xsl:copy>
     <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    
     <xsl:attribute name="title">
       <xsl:value-of select="xhtml:h1"/>
     </xsl:attribute>
@@ -81,8 +83,61 @@
   </xsl:copy>
 </xsl:template>
 
+<xsl:template match="elml:selfAssessment[not(parent::*)]">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:if test="xhtml:h1">
+      <xsl:attribute name="title">
+        <xsl:value-of select="xhtml:h1"/>
+      </xsl:attribute>
+    </xsl:if>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:apply-templates select="elml:body/*"/>
+  </xsl:copy>
+</xsl:template>
 
-<xsl:template match="elml:unit | elml:learningObject">
+<xsl:template match="elml:furtherReading">
+  <xsl:copy>
+    <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:apply-templates select="elml:body/*"/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="elml:glossary">
+  <xsl:copy>
+    <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:apply-templates select="elml:body/*"/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="elml:bibliography">
+  <xsl:copy>
+    <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:apply-templates select="elml:body/*"/>
+  </xsl:copy>
+</xsl:template>
+
+
+<xsl:template match="elml:learningObject | elml:entry">
   <xsl:copy>
     <xsl:apply-templates select="@*"/>
     <xsl:attribute name="title">
@@ -91,6 +146,18 @@
     <xsl:apply-templates select="node()"/>
   </xsl:copy>
 </xsl:template>
+
+
+<xsl:template match="elml:definition">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:attribute name="term">
+      <xsl:value-of select="elml:term"/>
+    </xsl:attribute>
+    <xsl:apply-templates select="elml:def/node()"/>
+  </xsl:copy>
+</xsl:template>
+
 
 <xsl:template match="xhtml:h1"/>
 <xsl:template match="xhtml:h2"/>

@@ -14,6 +14,10 @@
 
   <xsl:include href="../common/biblio_harvard.xsl"/> 
 
+
+  <xsl:template match="lenya:meta"/>
+  <xsl:template match="unizh:header"/>
+
   <xsl:template match="elml:lesson">
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
@@ -69,7 +73,6 @@
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
       </xsl:if>
-      <h2><xsl:value-of select="@title"/></h2>
       <xsl:apply-templates/>
     </div>
   </xsl:template>
@@ -132,7 +135,7 @@
       <xsl:if test="@title">
         <h2><xsl:value-of select="@title"/></h2>
       </xsl:if>
-      <xsl:apply-templates/> <!-- metaSetUpInfor in tutor view -->
+      <xsl:apply-templates/> <!-- metaSetUpInfo in tutor view -->
     </div>
   </xsl:template>
 
@@ -1061,7 +1064,6 @@
 
   <xsl:template match="elml:bibliography">
     <div>
-      <h2>Bibliography</h2><!-- FIXME: biblio Title? -->
       <xsl:apply-templates/>
     </div>
   </xsl:template>

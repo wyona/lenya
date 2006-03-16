@@ -5,7 +5,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://unizh.ch/doctypes/elml/1.0"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
     xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 >
@@ -22,31 +21,77 @@
 </xsl:template>
 
 
-<!-- add body element -->
+<xsl:template match="elml:lesson | elml:unit">
+  <xsl:copy>
+    <xsl:apply-templates select="@*[not(name() = 'title')]"/> 
+    <xsl:apply-templates select="lenya:meta"/>  
+    <xsl:if test="@title !=''">
+      <xhtml:h1><xsl:value-of select="@title"/></xhtml:h1> 
+    </xsl:if>
+    <body> 
+      <xsl:apply-templates select="*[not(self::lenya:meta or self::elml:metadata)]"/>
+    </body> 
+  </xsl:copy>
+</xsl:template>
 
-<xsl:template match="elml:lesson">
+
+<xsl:template match="elml:glossary | elml:bibliography">
   <xsl:copy>
     <xsl:apply-templates select="@*[not(name() = 'title')]"/>
     <xsl:apply-templates select="lenya:meta"/>
-    <xhtml:h1><xsl:value-of select="@title"/></xhtml:h1>
-    <elml:body> <!-- non-standard, needed for bxe editing area selection -->
-      <xsl:apply-templates select="*[not(self::lenya:meta or self::elml:metadata)]"/>
-    </elml:body>
-    <xsl:apply-templates select="elml:metadata"/>
+    <body>
+      <xsl:apply-templates select="*[not(self::lenya:meta)]"/>
+    </body>
   </xsl:copy>
 </xsl:template>
 
-<!-- move title from attribute to element for bxe preview -->
 
-<xsl:template match="elml:unit | elml:learningObject">
+<xsl:template match="elml:selfAssessment[not(parent::*)]">
   <xsl:copy>
     <xsl:apply-templates select="@*[not(name() = 'title')]"/>
-    <xhtml:h2>
-      <xsl:value-of select="@title"/>
-    </xhtml:h2>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:if test="@title !=''">
+      <xhtml:h1><xsl:value-of select="@title"/></xhtml:h1>
+    </xsl:if>
+    <body> 
+      <xsl:apply-templates select="*[not(self::lenya:meta)]"/>
+    </body> 
+  </xsl:copy>
+</xsl:template>
+
+
+<xsl:template match="elml:furtherReading[not(parent::*)]">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <body>
+      <xsl:apply-templates select="*[not(self::lenya:meta)]"/>
+    </body>
+  </xsl:copy>
+</xsl:template>
+
+
+<xsl:template match="elml:learningObject | elml:entry | elml:selfAssessment[parent::*]">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:if test="@title != ''">
+      <xhtml:h2>
+        <xsl:value-of select="@title"/>
+      </xhtml:h2>
+    </xsl:if>
     <xsl:apply-templates select="node()"/>
   </xsl:copy>
 </xsl:template>
+
+
+<xsl:template match="elml:definition">
+  <xsl:copy>
+    <xsl:apply-templates select="@*[not(name() = 'term')]"/>
+    <elml:term><xsl:value-of select="@term"/></elml:term>
+    <elml:def><xsl:apply-templates select="node()"/></elml:def> 
+  </xsl:copy> 
+</xsl:template>
+
 
 
 <!-- elml2xhtml mapping -->

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://unizh.ch/doctypes/elml/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="config.rng"/>
+<include href="common.rng"/>
+<include href="bibliography/harvard.rng"/>
+
+  <define name="unit">
+    <element name="unit">
+      <ref name="LabelReq"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <ref name="RoleImp"/>
+      <attribute name="lenya:dummy"><text/></attribute>
+      <attribute name="dc:dummy"><text/></attribute>
+      <attribute name="dcterms:dummy"><text/></attribute>
+      <attribute name="elml:dummy"><text/></attribute>
+      <ref name="lenya.meta"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="entry"/>
+          <ref name="goals"/>
+        </choice>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="learningObject"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <choice>
+          <ref name="selfAssessment"/>
+          <ref name="summary"/>
+        </choice>
+      </zeroOrMore>
+      <optional>
+        <ref name="furtherReading"/>
+      </optional>
+    </element>
+  </define>
+
+  <define name="learningObject">
+    <element name="learningObject">
+      <ref name="LabelImp"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <oneOrMore>
+        <choice>
+          <ref name="clarify"/>
+          <ref name="look"/>
+          <ref name="act"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="clarify">
+    <element name="clarify">
+      <ref name="CLType"/>
+    </element>
+  </define>
+
+  <define name="look">
+    <element name="look">
+      <ref name="CLType"/>
+    </element>
+  </define>
+
+
+  <define name="act">
+    <element name="act">
+      <ref name="SType"/>
+    </element>
+  </define>
+
+</grammar>

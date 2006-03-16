@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://unizh.ch/doctypes/elml/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="config.rng"/>
+<include href="common.rng"/>
+<include href="bibliography/harvard.rng">
+
+<define name="bibliography">
+  <element name="bibliography">
+    <attribute name="lenya:dummy"><text/></attribute>
+     <attribute name="dc:dummy"><text/></attribute>
+     <attribute name="dcterms:dummy"><text/></attribute>
+     <attribute name="elml:dummy"><text/></attribute>
+     <ref name="SortingImp"/>
+     <ref name="lenya.meta"/>
+    <oneOrMore>
+      <choice>
+        <ref name="book"/>
+        <ref name="contributionInBook"/>
+        <ref name="journalArticle"/>
+        <ref name="newspaperArticle"/>
+        <ref name="map"/>
+        <ref name="conferencePaper"/>
+        <ref name="publicationCorporateBody"/>
+        <ref name="thesis"/>
+        <ref name="patent"/>
+        <ref name="videoFilmBroadcast"/>
+        <ref name="websites"/>
+        <ref name="eJournals"/>
+        <ref name="mailLists"/>
+        <ref name="personalMail"/>
+        <ref name="cdRom"/>
+      </choice>
+    </oneOrMore>
+  </element>
+</define>
+
+</include>
+
+
+</grammar>

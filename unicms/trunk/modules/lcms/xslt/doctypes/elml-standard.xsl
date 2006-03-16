@@ -53,14 +53,14 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
-          <xsl:call-template name="lesson"/>
+          <xsl:call-template name="content"/>
         </div>
       </body>
     </html>
   </xsl:template>
 
 
-  <xsl:template name="lesson">
+  <xsl:template name="content">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
       <xsl:apply-templates select="*/unizh:contcol1"/>
@@ -73,12 +73,21 @@
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <h1>
-            <div bxe_xpath="/elml:lesson/xhtml:h1">
-              <xsl:value-of select="/document/content/elml:lesson/elml:title"/>
-            </div>
+            <xsl:choose>
+              <xsl:when test="/document/content/*/@title">
+                <div bxe_xpath="/*/xhtml:h1">
+                  <xsl:value-of select="/document/content/*/@title"/>
+                </div>
+              </xsl:when>
+              <xsl:otherwise>
+                <div bxe_xpath="/*/lenya:meta/dc:title">
+                  <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+                </div>
+              </xsl:otherwise>
+            </xsl:choose>
           </h1> 
-          <div bxe_xpath="/elml:lesson/elml:body">
-            <xsl:apply-templates select="/document/content/elml:lesson"/> 
+          <div bxe_xpath="/*/elml:body">
+            <xsl:apply-templates select="/document/content/*"/> 
           </div> 
         </div>
         <xsl:call-template name="footer"/> 

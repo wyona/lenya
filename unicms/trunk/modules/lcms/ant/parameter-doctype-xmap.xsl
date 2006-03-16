@@ -5,9 +5,29 @@
 
   <xsl:template match="map:components/map:actions/map:action">
     <xsl:copy>
-      <xsl:apply-templates select="@*|*"/>
-      <sourcetype name="elml">
+      <xsl:apply-templates select="@*|node()"/>
+      <sourcetype name="lesson">
         <document-element local-name="lesson"/>
+      </sourcetype>
+
+      <sourcetype name="unit">
+        <document-element local-name="unit"/>
+      </sourcetype>
+
+      <sourcetype name="selfAssessment">
+        <document-element local-name="selfAssessment"/>
+      </sourcetype>
+
+      <sourcetype name="furtherReading">
+        <document-element local-name="furtherReading"/>
+      </sourcetype>
+
+      <sourcetype name="glossary">
+        <document-element local-name="glossary"/>
+      </sourcetype>
+
+      <sourcetype name="bibliography">
+        <document-element local-name="bibliography"/>
       </sourcetype>
     </xsl:copy>
   </xsl:template>
@@ -15,14 +35,14 @@
   <xsl:template match="doc[@type = 'homepage']/children">
     <xsl:copy>
       <xsl:apply-templates/>
-        <doc type="elml"/>
+        <doc type="lesson"/>
     </xsl:copy>
   </xsl:template>
 
   <xsl:template match="doc[@type = 'xhtml']/children">
     <xsl:copy>
       <xsl:apply-templates/>
-        <doc type="elml"/>
+        <doc type="lesson"/>
     </xsl:copy>
   </xsl:template>
 
