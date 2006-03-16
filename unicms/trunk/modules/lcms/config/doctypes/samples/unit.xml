@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Test and Demo Unit" label="TestLesson"><lenya:meta>
-    <dc:title>Lesson </dc:title>
-    <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
+<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="TestLesson" lenya:dummy="FIXME:keepNamespace" title="Test and Demo Unit">
+<lenya:meta>
+    <dc:title xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">unit</dc:title>
+    <dc:description xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"> </dc:description>
+<dc:creator xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">admin1 (Administrator)</dc:creator>
     <dc:subject/>
-    <dc:publisher>UZH</dc:publisher>
-    <dcterms:created>date of creation</dcterms:created>
+    <dc:publisher xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Universität Zürich</dc:publisher>
+    <dcterms:created xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Thu Mar 16 15:46:41 CET 2006</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
-    <dc:language>de</dc:language>
-    <dc:rights>UZH</dc:rights>
+    <dc:language xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">de</dc:language>
+    <dc:rights xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Universität Zürich</dc:rights>
 </lenya:meta>
 
-<elml:entry label="Lunitentry" title="A short entry to this Test and Demo Unit" navTitle="Demo Entry">
+<elml:entry label="Lunitentry" navTitle="Demo Entry" title="A short entry to this Test and Demo Unit">
 			<paragraph> This unit shall give you an overview over all <elml:indexItem mainEntry="no">tags</elml:indexItem> within <elml:indexItem mainEntry="yes">GITTA</elml:indexItem> which are possible to use in a unit. Therefore all paragraph tags and all other tags like glossaryTerm will be used and as far as possible be explained within this unit.<newLine/>I hope you learn a lot and enjoy your learning! Good luck :-)!</paragraph>
 		</elml:entry>
 		<elml:goals>
@@ -26,7 +28,7 @@
 				<paragraph>It is important to study this lesson carefully!</paragraph>
 				<paragraph> The icon attribute can also be used with other elements like the multimedia, the table or the box element (there are some more). <newLine/> If you want to write in two or three columns then you can use the column element. Below the column tag is used to create two columns. In the left column an unordered list is shown and in the right column an ordered list with a title and a reference to the bibliography (the right list is marked important). </paragraph>
 				<elml:column label="LColumn1">
-					<elml:columnLeft units="pixels" align="left">
+					<elml:columnLeft align="left" units="pixels">
 						<list listStyle="unordered">
 							<item>an item</item>
 							<item>another item</item>
@@ -41,7 +43,7 @@
 				</elml:column>
 				<paragraph> It is also possible to have a three columns. This would look like this.</paragraph>
 				<elml:column label="LColumn2">
-					<elml:columnLeft units="pixels" align="left" width="150">
+					<elml:columnLeft align="left" units="pixels" width="150">
 						<list listStyle="unordered">
 							<item>an item</item>
 							<item>another item</item>
@@ -51,8 +53,6 @@
 							<item>some text</item>
 							<item>another list <list listStyle="unordered">
 									<item>also text</item>
-									<item>or an image <multimedia src="test.jpg" mimeType="jpeg"/>
-									</item>
 								</list>
 							</item>
 							<item>some text</item>
@@ -76,23 +76,23 @@
 				<paragraph> or another example without an icon</paragraph>
 				<elml:term glossRef="glossary" icon=""/>
 				<paragraph> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<multimedia src="Remember_Me.mp3" mimeType=""/>
+				<multimedia mimeType="" src="Remember_Me.mp3"/>
 				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
 				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
-				<multimedia src="testAnimation.swf" mimeType=""/>
+				<multimedia mimeType="" src="testAnimation.swf"/>
 				<paragraph> An interaction included in the lesson (without thumbnail) could look like this.</paragraph>
-				<multimedia src="testInteraction.swf" mimeType=""/>
+				<multimedia mimeType="" src="testInteraction.swf"/>
 				<paragraph> With the element <elml:indexItem>multimedia</elml:indexItem> also sound can be included (this one is marked 'important').</paragraph>
 				
 			</elml:look>
-			<elml:act label="labelAct1" title="Test" metaSetUpInfo="nothing">
+			<elml:act label="labelAct1" metaSetUpInfo="nothing" title="Test">
 				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
 			</elml:act>
 		</elml:learningObject>
 		<elml:learningObject label="LLearnOb2" navTitle="examples" title="This is the second learningObject - Just some more examples and explanations">
 			<elml:clarify label="LClarify2" title="Clarify Part of this Learning Object">
 				<paragraph> Let's create a table.</paragraph>
-				<table width="400" label="labelTable1" units="pixels" icon="important" legend="This is a table" title="Title of this table" bibIDRef="b8">
+				<table bibIDRef="b8" icon="important" label="labelTable1" legend="This is a table" title="Title of this table" units="pixels" width="400">
 					<tablerow>
 						<tableheading> Tags allowed within simple text </tableheading>
 					</tablerow>
@@ -116,7 +116,8 @@
 							<formatted style="subscript">formatted 'subscript'</formatted>
 							<newLine/>
 							<formatted style="superscript">formatted 'superscript'</formatted>
-							<paragraph>Formatted elements can also be nested. For example: <formatted style="bold">This text is bold and <formatted style="subscript">subscript</formatted>.</formatted></paragraph>
+							<paragraph>Formatted elements can also be nested. For example: <formatted style="bold">This text is bold and <formatted style="subscript">subscript</formatted>.</formatted>
+</paragraph>
 						</tabledata>
 					</tablerow>
 					<tablerow>
@@ -136,7 +137,7 @@
 				<paragraph> This part describes the different uses of the element &lt;citation&gt;.<newLine/> 1.) It might be used to rewrite some writing of other authors in my own words but still reference the literature where the original writing comes from.<newLine/> … often there's written that XML would be easy to learn <elml:citation bibIDRef="b18"/>. Therefore, ...<newLine/> 2.) It can be used to state something exactly as it is written in the literature referenced. In this case the page number where the statement comes from is needed.<newLine/> ... it is stated that <elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn</elml:citation>. This means that ...<newLine/> 3.) If a statement is longer than a couple of words then we might wish to display it as separate paragraph.<newLine/> ... it is stated that </paragraph>
 				<elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn.</elml:citation>
 				<paragraph>Sometimes you might want to state the name of the author in the text leading to the citation. In that case the citation reference should be the year of publication only. For example, Bleisch <elml:citation bibIDRef="b18" yearOnly="yes"/> states that XML would be easy to learn.</paragraph>
-				<paragraph>When you would like to make the same citation using the original words you need a trick (use the element formatted) to make it show as expected. The example: Bleisch <elml:citation bibIDRef="b18" yearOnly="yes" pageNr="15"/>states that ";".</paragraph>
+				<paragraph>When you would like to make the same citation using the original words you need a trick (use the element formatted) to make it show as expected. The example: Bleisch <elml:citation bibIDRef="b18" pageNr="15" yearOnly="yes"/>states that ";".</paragraph>
 				<paragraph>If using the citation element as paragraph then it can contain the attribute icon set to remark, question or important. If the representation attribute is set to inline then the icon attribute is ignored. As almost every element this citation can contain the attribute label which allows to label it and to link to it from another place of the lesson.</paragraph>
 				<paragraph> Another special type of element is the &lt;link&gt; tag. Using it and its attributes appropriately gives several possibilities to link inside the lesson or to outside resourced.</paragraph>
 				<paragraph> 1.) A simple link to another website (presented inline): <link uri="http://www.fhbb.ch/geomatik">Abteilung Vermessung und Geoinformation, FHBB</link>
@@ -145,119 +146,21 @@
 				<paragraph> 3.) A link to another lesson (presented inline, paragraph would also be possible): <link targetLesson="IntroToDBS">Lesson Introduction to Database Management Systems</link>
 					<newLine/> 4.) A link to a part within this lesson (presented as paragraph, inline would also be possible): </paragraph>
 				<link targetLabel="LColumn1">Link to the column above</link>
-				<paragraph> 5.) A link for downloading material (inline): <link uri="Remember_Me.mp3" size="5.5 MB" type="mp3" legend="might take a while to download this">Remember Me</link>
+				<paragraph> 5.) A link for downloading material (inline): <link legend="might take a while to download this" size="5.5 MB" type="mp3" uri="Remember_Me.mp3">Remember Me</link>
 					<newLine/> 6.) If a link is presented as paragraph then the attribute icon can be used to set one of the icons (important, remark or question).</paragraph>
 				<paragraph>7.) If you add more then one link one after another, a table with link/download material is created:</paragraph>
-				<link uri="Remember_Me.mp3" size="1GB" type="exe" legend="a software archive">Office 2009</link>
-				<link uri="http://www.fhbb.ch/geomatik" legend="Click on this link">FHBB Website</link>
-				<link uri="Remember_Me.mp3" type="mp3" legend="might take a while to download this">Remember Me</link>
-				<link uri="Remember_Me.mp3" size="3 MB" type="pdf" legend="you need the acrobat viewer to view this">How to hack eLML?</link>
-				<paragraph>Just a few thoughts, why an <elml:indexItem mainEntry="yes" affiliatedTo="index">index</elml:indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
+				<link legend="a software archive" size="1GB" type="exe" uri="Remember_Me.mp3">Office 2009</link>
+				<link legend="Click on this link" uri="http://www.fhbb.ch/geomatik">FHBB Website</link>
+				<link legend="might take a while to download this" type="mp3" uri="Remember_Me.mp3">Remember Me</link>
+				<link legend="you need the acrobat viewer to view this" size="3 MB" type="pdf" uri="Remember_Me.mp3">How to hack eLML?</link>
+				<paragraph>Just a few thoughts, why an <elml:indexItem affiliatedTo="index" mainEntry="yes">index</elml:indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
 				<paragraph>Within the above paragraph the word index is set to be an indexItem. That means that it can be included in a final index where this words are referenced back to paragraphs where they show up. Main entries are shown in bold other such as here, <elml:indexItem affiliatedTo="index">indices</elml:indexItem>, are not marked up specially.</paragraph>
 			</elml:look>
-			<elml:act label="labelAct2" title="Act Part of this Learning Object" metaSetUpInfo="nothing">
+			<elml:act label="labelAct2" metaSetUpInfo="nothing" title="Act Part of this Learning Object">
 				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
 			</elml:act>
 		</elml:learningObject>
-		<elml:learningObject label="LOAlignments" navTitle="align" title="All about alignments">
-			<elml:clarify>
-				<paragraph>The first picture is inline and has the attribute align ="". this is the text befor the picture . <multimedia src="test.jpg" mimeType="jpeg"/> This is the text after the picture. the text is around the picture. text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text The second picture is inline and has the attribute align ="". This is the text befor the picture <multimedia src="test.jpg" mimeType="jpeg"/> This is the text after the picture. the text is around the picture. texttext text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-				</paragraph>
-				<paragraph/>
-				<table>
-					<tablerow>
-						<tabledata>
-							<multimedia src="info.gif" mimeType="gif"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							
-						 </tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </tabledata>
-						<tabledata>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</tabledata>
-					</tablerow>
-				</table>
-				<paragraph/>
-				<elml:column>
-					<elml:columnLeft width="250">
-						<paragraph>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text <newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/> text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </paragraph>
-					</elml:columnLeft>
-					<elml:columnRight width="250">
-						<paragraph>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-							<newLine/>
-							<multimedia src="test.jpg" mimeType="jpeg"/>
-						</paragraph>
-					</elml:columnRight>
-				</elml:column>
-				<paragraph/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-				<multimedia src="test.jpg" mimeType="jpeg"/>
-			</elml:clarify>
-		</elml:learningObject>
-		<elml:selfAssessment title="Titel of this SelfAssessment" label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'.">
+		<elml:selfAssessment label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Titel of this SelfAssessment">
 			<paragraph>This is a SelfAssessment part on unit level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on. The self assessment part might give the students the opportunity to figure out if they have understood the unit content. If not there should be some information where in the unit they find the relevant information to one of these self assessment part.</paragraph>
 		</elml:selfAssessment>
 		<elml:summary label="LSummaryx" title="Title of the summary">

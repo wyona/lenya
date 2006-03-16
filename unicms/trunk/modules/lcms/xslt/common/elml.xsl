@@ -8,6 +8,7 @@
   xmlns="http://unizh.ch/doctypes/elml/1.0"
   xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+  xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0" 
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   >
 
@@ -157,13 +158,13 @@
         <xsl:variable name="id" select="@bibIDRef"/>
         <xsl:choose>
           <xsl:when test="@sorting='off'">
-            <xsl:apply-templates select="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]">
+            <xsl:apply-templates select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]">
               <xsl:with-param name="comment" select="text()"/>
               <xsl:with-param name="furtherReading" select="@bibIDRef"/>
             </xsl:apply-templates>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:apply-templates select="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]">
+            <xsl:apply-templates select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]">
               <xsl:with-param name="comment" select="text()"/>
                 <xsl:with-param name="furtherReading" select="@bibIDRef"/>
               <xsl:sort select="@author" order="ascending" lang="de"/>
@@ -192,18 +193,20 @@
 
   <xsl:template match="elml:term">
     <xsl:variable name="glossRef" select="@glossRef"/>
-    <xsl:if test="@icon">
+    <xsl:variable name="glossPageUrl" select="concat($contextprefix, /document/unizh:level/level:node[*/elml:glossary]/@href)"/>
+    <xsl:variable name="definition" select="/document/unizh:level/level:node/*/elml:glossary/elml:definition[@term = $glossRef]/text()"/>
+    <!-- <xsl:if test="@icon">
       <img src="{$imageprefix}/icons/{@icon}.gif"/>
-    </xsl:if>
+    </xsl:if> -->
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*[local-name() = 'paragraph'] or normalize-space(.) = ''">
+      <xsl:when test="preceding-sibling::*[1][text()]">
         <p>
-          <b><xsl:value-of select="//elml:definition[@term = $glossRef]/@term"/><xsl:comment/></b>:
-          <xsl:apply-templates select="//elml:definition[@term = $glossRef]/text()"/>
+          <b><xsl:value-of select="$glossRef"/><xsl:comment/></b>:
+          <xsl:apply-templates select="$definition"/>
         </p>
       </xsl:when>
       <xsl:otherwise>
-          <a href="#{$glossRef}" alt="{//elml:definition[@term = $glossRef]/text()}" title="{//elml:definition[@term = $glossRef]/text()}"><xsl:apply-templates/><xsl:comment/></a>
+          <a href="{concat($glossPageUrl, '#', $glossRef)}" alt="{$definition}" title="{$definition}"><xsl:value-of select="$glossRef"/></a>
       </xsl:otherwise>
     </xsl:choose> 
   </xsl:template>
@@ -1064,7 +1067,10 @@
 
   <xsl:template match="elml:bibliography">
     <div>
-      <xsl:apply-templates/>
+      <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
+        <a name="{position()}"><xsl:comment/></a>
+        <xsl:apply-templates select="."/>
+      </xsl:for-each>
     </div>
   </xsl:template>
 
@@ -1074,10 +1080,19 @@
 
     <xsl:if test="@bibIDRef">
       <xsl:variable name="id" select="@bibIDRef"/>
+      <xsl:variable name="bibNode" select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]"/>
+      <xsl:variable name="position">
+        <xsl:for-each select="$bibNode/../*">
+            <xsl:if test="@bibID = $id">
+              <xsl:value-of select="position() - 1"/>
+            </xsl:if>
+          </xsl:for-each>
+      </xsl:variable>
+
       <xsl:variable name="author">
         <xsl:choose>
-          <xsl:when test="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]/@author">
-            <xsl:value-of select="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]/@author"/>
+          <xsl:when test="$bibNode/@author">
+            <xsl:value-of select="$bibNode/@author"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="$name_anon"/>
@@ -1088,11 +1103,12 @@
       <xsl:if test="not(@yearOnly='yes')">
         <xsl:text>(</xsl:text>
       </xsl:if>
+
+
       <!-- FIXME: add link when pagebreak set to unit  -->
       <a target="_top" class="bibLink">
         <xsl:attribute name="href">
-          <xsl:text>#</xsl:text>
-            <xsl:value-of select="generate-id(/document/content/elml:lesson/elml:bibliography/*[@bibID=$id])"/>
+          <xsl:value-of select="concat($contextprefix, /document/unizh:level/level:node[*/elml:bibliography]/@href, '#', $position)"/>
         </xsl:attribute>
         <xsl:choose>
           <xsl:when test="contains($author, ',')">
@@ -1106,18 +1122,18 @@
           </xsl:otherwise>
         </xsl:choose>
       </a>
-      <xsl:if test="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr">
+      <xsl:if test="$bibNode/@publicationYear or @pageNr">
         <xsl:text> </xsl:text>
         <xsl:if test="@yearOnly='yes'">
           <xsl:text>(</xsl:text>
         </xsl:if>
-        <xsl:value-of select="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear"/>
+        <xsl:value-of select="$bibNode/@publicationYear"/>
         <xsl:if test="@pageNr">
           <xsl:text>, p. </xsl:text>
           <xsl:value-of select="@pageNr"/>
         </xsl:if>
       </xsl:if>
-      <xsl:if test="/document/content/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr or not(@yearOnly='yes')">
+      <xsl:if test="$bibNode/@publicationYear or @pageNr or not(@yearOnly='yes')">
         <xsl:text>)</xsl:text>
       </xsl:if>
     </xsl:if>

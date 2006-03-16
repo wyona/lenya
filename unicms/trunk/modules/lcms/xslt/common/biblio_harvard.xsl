@@ -11,16 +11,6 @@
     <xsl:param name="name_anon">unknown</xsl:param>
     <xsl:param name="name_download"/>
     <li> 
-      <xsl:if test="not($furtherReading)">
-        <a>
-          <xsl:attribute name="name">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute>
-          <xsl:attribute name="id">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute><xsl:comment/>
-        </a>
-      </xsl:if>
       <b class="bibAuthor">
         <xsl:choose>
           <xsl:when test="@author">
@@ -98,16 +88,6 @@
 
     <xsl:param name="furtherReading"/>
       <li>
-        <xsl:if test="not($furtherReading)">
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="id">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute><xsl:comment/>
-          </a>
-        </xsl:if>
         <b class="bibAuthor">
           <xsl:choose>
             <xsl:when test="@author">
@@ -199,16 +179,6 @@
        <xsl:param name="name_download"/>
 
        <li>
-         <xsl:if test="not($furtherReading)">
-           <a>
-             <xsl:attribute name="name">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute>
-             <xsl:attribute name="id">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute><xsl:comment/>
-           </a>
-         </xsl:if>
          <b class="bibAuthor">
            <xsl:choose>
              <xsl:when test="@author">
@@ -283,16 +253,6 @@
      <xsl:param name="name_download"/>
 
      <li>
-       <xsl:if test="not($furtherReading)">
-         <a>
-           <xsl:attribute name="name">
-             <xsl:value-of select="generate-id(.)"/>
-           </xsl:attribute>
-           <xsl:attribute name="id">
-             <xsl:value-of select="generate-id(.)"/>
-           </xsl:attribute><xsl:comment/>
-         </a>
-       </xsl:if>
        <b class="bibAuthor">
          <xsl:choose>
            <xsl:when test="@author">
@@ -367,16 +327,6 @@
       <xsl:param name="name_download"/>
       
       <li>
-        <xsl:if test="not($furtherReading)">
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="id">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute><xsl:comment/>
-          </a>
-         </xsl:if>
          <b class="bibAuthor">
            <xsl:choose>
              <xsl:when test="@author">
@@ -454,16 +404,6 @@
        <xsl:param name="name_download"/>
 
        <li>
-         <xsl:if test="not($furtherReading)">
-           <a>
-             <xsl:attribute name="name">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute>
-             <xsl:attribute name="id">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute><xsl:comment/>
-           </a>
-         </xsl:if>
          <b class="bibAuthor">
            <xsl:choose>
              <xsl:when test="@author">
@@ -559,16 +499,6 @@
       <xsl:param name="name_anon">unknown</xsl:param>
       <xsl:param name="name_download"/>
       <li>
-        <xsl:if test="not($furtherReading)">
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="id">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute><xsl:comment/>
-          </a>
-         </xsl:if>
          <b class="bibAuthor">
            <xsl:choose>
              <xsl:when test="@author">
@@ -649,16 +579,6 @@
  
      <xsl:param name="furtherReading"/>
        <li>
-         <xsl:if test="not($furtherReading)">
-           <a>
-             <xsl:attribute name="name">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute>
-             <xsl:attribute name="id">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute><xsl:comment/>
-           </a>
-         </xsl:if>
          <b class="bibAuthor">
            <xsl:choose>
              <xsl:when test="@author">
@@ -733,16 +653,6 @@
       <xsl:param name="name_download"/>      
 
       <li>
-        <xsl:if test="not($furtherReading)">
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="id">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute><xsl:comment/>
-          </a>
-        </xsl:if>
         <b class="bibAuthor">
           <xsl:choose>
             <xsl:when test="@author">
@@ -807,16 +717,6 @@
        <xsl:param name="name_download"/>
 
        <li> 
-         <xsl:if test="not($furtherReading)">
-           <a>
-             <xsl:attribute name="name">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute>
-             <xsl:attribute name="id">
-               <xsl:value-of select="generate-id(.)"/>
-             </xsl:attribute><xsl:comment/>
-           </a>
-         </xsl:if>
          <xsl:if test="@title">
            <i class="bibTitle">
              <xsl:value-of select="@title"/>
@@ -882,16 +782,6 @@
     <xsl:param name="name_download"/>
 
     <li>
-      <xsl:if test="not($furtherReading)">
-        <a>
-          <xsl:attribute name="name">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute>
-          <xsl:attribute name="id">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute><xsl:comment/>
-         </a>
-       </xsl:if>
        <b class="bibAuthor">
          <xsl:choose>
            <xsl:when test="@author">
@@ -987,16 +877,6 @@
       <xsl:param name="name_download"/>
 
       <li>
-        <xsl:if test="not($furtherReading)">
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="id">
-              <xsl:value-of select="generate-id(.)"/>
-            </xsl:attribute><xsl:comment/>
-          </a>
-        </xsl:if>
         <b class="bibAuthor">
           <xsl:choose>
             <xsl:when test="@author">
@@ -1085,16 +965,6 @@
      <xsl:param name="name_download"/>
 
      <li>
-       <xsl:if test="not($furtherReading)">
-         <a>
-           <xsl:attribute name="name">
-             <xsl:value-of select="generate-id(.)"/>
-           </xsl:attribute>
-           <xsl:attribute name="id">
-             <xsl:value-of select="generate-id(.)"/>
-           </xsl:attribute><xsl:comment/>
-         </a><xsl:comment/>
-       </xsl:if>
        <b class="bibAuthor">
          <xsl:choose>
            <xsl:when test="@author">
@@ -1170,16 +1040,6 @@
     <xsl:param name="name_download"/>
 
     <li>
-      <xsl:if test="not($furtherReading)">
-        <a>
-          <xsl:attribute name="name">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute>
-          <xsl:attribute name="id">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute><xsl:comment/>
-        </a>
-      </xsl:if>
       <b class="bibAuthor">
         <xsl:choose>
           <xsl:when test="@author">
@@ -1267,16 +1127,6 @@
     <xsl:param name="name_download"/>
 
     <li>
-      <xsl:if test="not($furtherReading)">
-        <a>
-          <xsl:attribute name="name">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute>
-          <xsl:attribute name="id">
-            <xsl:value-of select="generate-id(.)"/>
-          </xsl:attribute><xsl:comment/>
-        </a>
-       </xsl:if>
        <b class="bibAuthor">
          <xsl:choose>
            <xsl:when test="@author">

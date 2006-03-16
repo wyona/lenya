@@ -136,6 +136,19 @@
       </fileset>
     </copy>
 
+    <echo>INFO: Copying level includes</echo>
+    <copy todir="${pubs.dir}/unizh/xslt" overwrite="yes">
+       <fileset dir="xslt">
+        <include name="elml-level.xsl"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: Copying javascripts</echo>
+    <copy todir="${pubs.dir}/unizh/resources/shared/javascript" overwrite="yes">
+       <fileset dir="resources/shared/javascript">
+        <include name="elml.js"/>
+      </fileset>
+    </copy>
 
     <echo>INFO: Patching html-head to include javascripts</echo>
     <xslt
