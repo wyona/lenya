@@ -293,14 +293,17 @@
 
 
   <xsl:template match="unizh:links[unizh:title/@href != '']">
-    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <div class="solidlinemitmargin">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
+    <div class="kleintitel">
+      <a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a>
+    </div>
+    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
+    <xsl:apply-templates select="xhtml:object"/>
+    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <ul class="linknav">
-      <li>
-        <b><a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a></b>
-      </li>
-      <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-      <xsl:apply-templates select="xhtml:object"/>
-      <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
       <xsl:for-each select="xhtml:a">
         <li>
           <a href="{@href}">
@@ -317,10 +320,13 @@
 
 
   <xsl:template match="unizh:links">
-    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-    <div class="titel">
+    <div class="solidlinemitmargin">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
+    <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
+    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
     <xsl:apply-templates select="xhtml:object"/>
     <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
@@ -595,10 +601,14 @@
 
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
-    <div bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
-      <xsl:apply-templates/>
-      <div class="floatclear"/>
-    </div>
+    <xsl:choose>
+      <xsl:when test="xhtml:object or (p[not(text() ='')])">
+        <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
+          <xsl:apply-templates/>
+        </div>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>
   </xsl:template>
 
 

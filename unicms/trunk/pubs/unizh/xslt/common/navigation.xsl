@@ -10,19 +10,20 @@
   <xsl:template match="xhtml:div[@id = 'orthonav']">
     <xsl:if test="*">
       <div id="orthonav">
+       <span class="spacer"> </span>
         <xsl:variable name="itemNr" select="count(*)"/>
         <xsl:for-each select="*">
           <xsl:choose>
             <xsl:when test="@href">
-              <a href="{@href}" class="activ"><xsl:value-of select="."/></a>
+              <a href="{@href}"> <xsl:value-of select="."/> </a>
             </xsl:when>
             <xsl:otherwise>
               <xsl:choose>
                 <xsl:when test="@current = 'true'">
-                  <a href="#" class="current"><xsl:value-of select="."/></a>
+                  <a href="#" class="active"><xsl:value-of select="."/></a>
                 </xsl:when>
                 <xsl:otherwise>
-                  <span><xsl:value-of select="."/></span>
+                  <a class="inactive"> <xsl:value-of select="."/> </a>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:otherwise>
