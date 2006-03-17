@@ -3,9 +3,8 @@
 
 /*allgemeine Definition*/
 body {
-  	font-size: 12px;
-	font-family: Arial, sans-serif;
-	line-height: 18px;
+  	font: 78% Arial, sans-serif;
+	line-height: 150%;
 	color:#333;
 	margin:0px 20px;
 	padding:0px;
@@ -14,7 +13,7 @@ body {
 
 .bodywidth {
 	max-width:800px;
-	width:expression(document.body.clientWidth > 800  ? "802px": "auto");
+	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -25,7 +24,7 @@ h2, h3, h4, h5, h6{
 	margin-top: 0px;
 	margin-bottom: 9px;
 	padding-top: 9px;
-	line-height:18px;
+	line-height: 120%;
 }
 
 p {
@@ -38,21 +37,21 @@ p {
 }
 h1 {
 	padding: 0;
-	font-size: 16px;
-	line-height:20px;
+	font-size: 1.4em;
+	line-height: 120%;
 	margin-top: 0px;
 	margin-bottom: 9px;
 }
 h2 {
-	font-size: 12px;
+	font-size: 1.0em;
 }
 h3 {
-	font-size: 12px;
+	font-size: 1.0em;
 	font-style: italic;
 	font-weight:bold;
 }
 h4, h5, h6 {
-	font-size: 12px;
+	font-size: 1.0em;
 	font-style: italic;
 	font-weight:normal;
 }
@@ -64,16 +63,16 @@ h4, h5, h6 {
 	font-weight:normal;
 }
 .klein, .teasertext {
-	font-size: 11px;
-	line-height: 15px;
+	font-size: 0.9em;
+	line-height: 130%;
 }
 .kleintitel {
-	font-size: 11px;
+	font-size: 0.9em;
 	font-weight:bold;
 }
 .lead {
 	color:#999999;
-	font-size: 12px;
+	font-size: 1.0em;
 	font-weight:bold;
 }
 .urltext {
@@ -85,10 +84,10 @@ a {
 	color:#333399;  
 }
 a:hover {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 }
 .contentarea a:visited {
-	color:#999999; 
+	color:#666666; 
 }
 a.arrow {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
@@ -153,7 +152,6 @@ img.icon {
 	background-color: #666699;
 	height:90px;
 	min-width:600px;
-  width:expression(document.body.clientWidth &lt; 620? "600px": "auto");
 }
 .bodywidthnolimit #headerarea, .bodywidthnolimit .endheaderline, .bodywidthnolimit #primarnav, .bodywidthnolimit #toolnav {
 	width:800px;
@@ -175,8 +173,8 @@ img.icon {
 }
 #headerarea h1 {
 	color:#FFFFFF;
-	font-size: 20px;
-  	line-height: 26px;
+	font-size: 1.6em;
+  	line-height: 140%;
 	margin:0px;
 	padding:0px;
 }
@@ -189,8 +187,8 @@ img.icon {
 #headerarea h2 {
 	margin-left:1px;
 	margin-bottom:0px;
-	font-size: 11px;
-  	line-height: 16px;
+	font-size: 0.9em;
+  	line-height: 140%;
 	color:#FFFFFF;
 	font-weight:normal;
 	padding:0px;
@@ -210,9 +208,9 @@ img.icon {
 	margin-bottom:3px;
 	text-align: left;
 	color:#999; 
-  	line-height: 12px;
+  	line-height: 140%;
     font-family: Verdana, sans-serif;
-	font-size: 9px;
+	font-size: 0.7em;
  	height:30px;
 }
 #breadcrumbnav a {
@@ -227,10 +225,10 @@ img.icon {
 	margin-right:12px;
 	margin-bottom:0px;
 	padding-top:2px;
-	font-size: 9px;
+	font-size: 0.7em;
 	font-family: Verdana, sans-serif;
 	color:#ffffff;
-	line-height: 11px;
+	line-height: 150%;
 	display:block;
 	text-align: right;
 	height:39px;
@@ -239,10 +237,10 @@ img.icon {
 	padding:0px 2px;
 }
 #servicenavpos input {
-	line-height: 11px;
+	line-height: 150%;
 	border: 0px;
 	width: 100px;
-  	font-size: 9px;
+  	font-size: 0.9em;
   	font-family: Verdana, sans-serif;
 	margin-left:2px;
 	margin-right:2px;
@@ -259,9 +257,9 @@ img.icon {
 
 /*primar navigation*/
 #primarnav  {
-  	font-size: 11px;
+  	font-size: 0.9em;
   	font-family: Arial, sans-serif;
-	line-height: 21px;
+	line-height: 190%;
 	color:#666699; 
 	display:block;
 }
@@ -272,11 +270,11 @@ img.icon {
 	display:block;
 }
 #primarnav a:hover {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 }
 #primarnav a.activ {
 	padding:0px 7px;
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 }
 #primarnav .linkseparator {
 	color:#666699;
@@ -287,9 +285,9 @@ img.icon {
 #col1 {
 	width:165px;
 	float:left;
-	font-size: 11px;
+	font-size: 0.9em;
 	font-family: Arial, sans-serif;
-	line-height: 15px;
+	line-height: 130%;
 	margin-right:20px;
 }
 * html #col1 {
@@ -298,7 +296,7 @@ img.icon {
 
 /* Seconder navigation */
 #secnav {
-	line-height: 20px;
+	line-height: 180%;
 }
 .navup  {
 	margin-top:1px;
@@ -314,7 +312,7 @@ img.icon {
 .navup .lead {
 	padding-left: 7px;
 	font-weight:bold;
-	font-size: 12px;
+	font-size: 1.0em;
 	font-family: Arial, sans-serif;
 	color:#333399;
 }
@@ -327,10 +325,10 @@ img.icon {
 	display:block;
 }
 #secnav a:hover {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 }
 #secnav a.activ {
-  	background-color:#f0f0f5;
+  	background-color:#E9E9F0;
 }
 #secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
@@ -339,13 +337,13 @@ img.icon {
 	list-style-type:none;
 }
 #secnav li { 
-	line-height:20px;
+	line-height: 180%;
 }
 
 /*third navigation*/
 
 #secnav ul ul li a {
-	padding-left: 17px; /*20px*/
+	padding-left: 20px;
 	padding-right:0px;
 	width:145px;
 }
@@ -353,15 +351,15 @@ img.icon {
 /*forth navigation*/
 
 #secnav ul ul ul li a {
-	padding-left: 27px;  /*40px*/
+	padding-left: 40px;
 	padding-right:0px;
 	width:125px;
 }
 
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
-	font-size: 9px;
-	line-height: 11px;
+	font-size: 0.7em;
+	line-height: 150%;
 	font-family: Verdana, sans-serif;
 	width:171px;
 	height:51px;
@@ -378,35 +376,6 @@ img.icon {
 #toolnav a.active {
 	color:#999;
 }
-
-/*ortho navigation*/
-#orthonav  {
-  font-size: 11px;
-  font-family: Arial;
-  text-align:right;
-  margin-right:198px;
-  margin-bottom:20px;
-  display:block;
-}
-#orthonav a {
-  color:#333; 
-  padding:0px 5px;
-  border: 1px solid #ccccff;
-}
-#orthonav a:hover {
-  background-color:#eaecff; 
-}
-#orthonav a.current {
-  background-color:#eaecff; 
-}
-#orthonav a.activ {
-}
-#orthonav span {
-  color:#aaa; 
-  padding:0px 5px;
-  border: 1px solid #ccc;
-}
-
 .icontextpos {
 	width:171px;
 	height:18px;
@@ -414,12 +383,12 @@ img.icon {
 }
 #icontext {
 	color:#333; 
-	padding: 0 0 1px 3px;
-	line-height: 14px;
+	padding: 0 0 2px 3px;
+	line-height: 160%;
 
 }
 .icontextbg {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 }
 .icontextnobg {
 	background-color:#fff;
@@ -447,16 +416,41 @@ img.icon {
 }
 
 #quicklink .titel, .content2 .titel, .content1 .titel {
-	line-height:18px;
+	line-height: 150%;
 	font-weight:bold;
 }
-
+/*Ortho navigation*/
+#orthonav  {
+	text-align:right;
+	margin-bottom:20px;
+}
+#orthonav a {
+  color:#333399; 
+  padding:2px 6px;
+  background-color:#E9E9F0;
+  border-top: 1px solid #ccccff;
+  border-right: 1px solid #ccccff;
+  border-bottom: 1px solid #ccccff;
+  font-size: 0.9em;
+}
+#orthonav a.inactive {
+   color:#999;  
+}
+#orthonav a.active {
+  background-color:#ffffff;
+   color:#333;  
+   border-bottom: 1px solid #fff;
+}
+#orthonav .spacer {
+	padding-top:2px;
+	padding-bottom:3px;
+	border-right: 1px solid #ccccff;
+}
 /*Content*/
 .contcol2 {
 	min-width:400px;
-  width:expression(document.body.clientWidth &lt; 800? "400px": "auto");
 	float: none;
-	margin-left:183px;
+	margin-left:185px;
 }
 * html .contcol2 {
   height: 1%;
@@ -464,7 +458,6 @@ img.icon {
 }
 
 #col2_nolimit {
-	
 	margin-left:185px;
 	margin-top:0px;
 }
@@ -489,44 +482,61 @@ img.icon {
 
 .content1 {
 	width:198px;
-	font-size:11px;
+	float: left;
+	margin-right:20px;
+}
+.leadblock {
+	display:block;
+	font-weight:bold;
+}
+.leadimg {
+	margin-right: 20px;
+	margin-top:0px;
 	float: left;
 }
+.leadimg_mittopmargin {
+	margin-right: 20px;
+	margin-top:5px;
+	float: left;
+}
+
 * html .content1 {
   height: 1%;
   margin-right: 17px;
 }
 
 .content2 {
-	margin-left:218px;
-	font-size:11px;
+	float:left;
 	width:198px;
+	display:block;
 }
 * html .content2 {
   height: 1%;
   margin-left: 0px;
 }
 .content2 .klein {
-	line-height:15px;
+	line-height:130%;
 }
-
+.content2 .titel {
+	font-size:0.9em;
+}
 /*sitemap*/
 .navtitel a {
 	font-weight:bold;
-	line-height:20px;
+	line-height:180%;
 	display:block;
 	padding-left:7px;
-	font-size: 11px;
+	font-size: 0.9em;
 }
 ul.sitemap {
-	font-size: 11px;
+	font-size: 0.9em;
 	width:100%;
 	padding:0px;
 	margin:0px;
 	list-style-type:none;
 }
 ul.sitemap li { 
-	line-height:20px;
+	line-height:180%;
 }
 
 ul.sitemap li a {
@@ -552,7 +562,10 @@ ul.sitemap ul ul ul li a {
 }
 
 /*Related Box*/
-
+* html .relatedbox {
+	margin-left:16px;
+	padding-right:0px;
+}
 .relatedbox {
 	float:right;
 	width:178px;
@@ -560,12 +573,6 @@ ul.sitemap ul ul ul li a {
 	padding-right:2px;
 
 }
-
-* html .relatedbox {
-	margin-left:16px;
-	padding-right:0px;
-}
-
 .relatedboxborder {
 	width:178px;
 	border: 1px solid #ccccff;
@@ -573,8 +580,8 @@ ul.sitemap ul ul ul li a {
 }
 .relatedboxcont {
 	padding: 8px 11px 10px 11px;
-	line-height:15px;
-	font-size:11px;
+	line-height: 130%;
+	font-size:0.9em;
 }
 
 a.rss {
@@ -597,10 +604,10 @@ a.rss {
 }
 #footer {
 	margin-top:2px;
-	font-size: 9px;
+	font-size: 0.7em;
 	font-family: Verdana, sans-serif;
 	color:#999;
-	line-height: 11px;
+	line-height:140%;
 }
 .topnav {
 	text-align: right;
@@ -611,7 +618,7 @@ a.rss {
 	margin-right:7px;
 	background-repeat: no-repeat;
 	background-position:left;
-	font-size: 11px;
+	font-size: 0.9em;
 	padding-left:12px;
 }
 
@@ -631,15 +638,15 @@ ul.squarelist li {
 
 
 ul.linknav {
-	font-size:11px;
+	font-size:0.9em;
 }
 .content1 ul.linknav li a, .content2 ul.linknav li a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
 	background-position: left top;
-	padding-left:13px;
+	padding:3px 0 2px 13px;
 	background-repeat: no-repeat;
 	display:block;
-	line-height:18px;
+	line-height: 120%;
 	width: 185px;
 }
 
@@ -664,8 +671,8 @@ ol.list a {
 }
 /*linkliste*/
 .linktext {
-	font-size: 12px;
-	line-height:20px;
+	font-size: 1.0em;
+	line-height:160%;
 	float:left;
 	width:300px;
 }
@@ -676,8 +683,8 @@ ol.list a {
 .linkrow a {
 	background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
 	padding-left:13px;
-	font-size: 12px;
-	line-height:20px;
+	font-size: 1.0em;
+	line-height:160%;
 	background-repeat: no-repeat;
 	padding-right:2px;
 }
@@ -690,11 +697,11 @@ ol.list a {
 	margin:0px;
 }
 .legende {
-	font-size: 11px;
+	font-size: 0.9em;
 	font-style: italic;
 	padding-left:6px;
 	padding-bottom:18px;
-	line-height:15px;
+	line-height:130%;
 }
 
 .imgTextfluss .legende {
@@ -704,13 +711,13 @@ ol.list a {
 .imgTextfluss {
 	float: left;
 	margin-right:10px;
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 	display:block;
 	margin-top:5px;
 }
 
 .imgMitLegende {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 	margin-bottom:5px;
 	margin-top:5px;
 }
@@ -719,7 +726,7 @@ ol.list a {
 }
 
 .fullimgMitLegende {
-	background-color:#f0f0f5;
+	background-color:#E9E9F0;
 	margin:14px 0 5px 0;
 	width:415px;
 }
@@ -810,16 +817,16 @@ form {
 }
 
 form h2.subtitel {
-	line-height: 18px;
+	line-height: 150%;
 	padding-top:15px;
 	padding-bottom: 9px;
 	margin-bottom:0px;
-	font-size: 12px;
+	font-size: 1.0em;
 }
 form h3 {
-	line-height: 18px;
+	line-height: 150%;
 	padding-bottom: 4px;
-	font-size: 12px;
+	font-size: 1.0em;
 }
 
 .fieldarea {
@@ -827,7 +834,7 @@ form h3 {
 	border-bottom: 2px solid #fff;
 	display:block;
 	line-height: 28px;
-	font-size: 12px;
+	font-size: 1.0em;
 }
 
 * html .fieldarea {
@@ -838,7 +845,7 @@ form h3 {
 .fieldarea label {
 	display:block;
 	margin-left: 7px;	
-	line-height: 18px;
+	line-height: 150%;
 	margin-right:170px;
 	padding-top:6px;
 	padding-bottom: 4px;
@@ -847,9 +854,9 @@ form h3 {
 	float: right;
 	margin: 4px 6px 0 0;
 	width: 165px;
-  	font-size: 12px;
+  	font-size: 1.0em;
   	font-family: Arial, sans-serif;
-	line-height:18px;
+	line-height: 150%;
 	padding-left:2px;
 	border-top:1px solid #696969;
 	border-left:1px solid #696969;
@@ -864,9 +871,9 @@ form h3 {
 	margin-top:4px;
 	margin-right:6px;
 	width: 165px;
-  	font-size: 12px;
+  	font-size: 1.0em;
   	font-family: Arial, sans-serif;
-	line-height:18px;
+	line-height: 150%;
 	display:block;
 }
 input.optiontag {
@@ -883,8 +890,8 @@ input.optiontag {
 	text-align:center;
 	margin-top:13px;
 	padding:0px 5px;
-	line-height: 14px;
-	font-size: 11px;
+	line-height: 120%;
+	font-size: 0.9em;
 	font-family: Arial, sans-serif;
 	height:19px;
  	color:#555555;  
@@ -920,9 +927,9 @@ form .endheaderline {
 input.searchfield {
 	margin-right: 8px;
 	width: 290px;
-  	font-size: 12px;
+  	font-size: 1.0em;
   	font-family: Arial, sans-serif;
-	line-height:18px;
+	line-height: 150%;
 	padding-left:2px;
 	border-top:1px solid #696969;
 	border-left:1px solid #696969;
@@ -946,24 +953,24 @@ input.searchoption {
 }
 /*table*/
 .tablestyle1 {
-	font-size:11px;
+	font-size:0.9em;
 }
 .tablestyle2 {
-	font-size:11px;
+	font-size:0.9em;
 	border-bottom:1px solid #999;
 	border-left:1px solid #999;
 }
  .tabletitel1 {
 	height:30px;
 	font-weight:bold;
-	font-size:11px;
+	font-size:0.9em;
 	background-color: #f0f0f0;
 	padding-left:4px;
 }
  .tabletitel2 {
 	height:30px;
 	font-weight:bold;
-	font-size:11px;
+	font-size:0.9em;
 	background-color: #f0f0f0;
 	padding-left:4px;
 	border-top:1px solid #999;
@@ -1047,7 +1054,7 @@ th.width105 {
 	width:100%;
 	height:1px;
 	border:0px;
-	margin: 0 0 7px 0;
+	margin: 1px 0 7px 0;
 }
 .dotlinemitmargin {
 	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
@@ -1057,8 +1064,8 @@ th.width105 {
 	margin: 7px 0;
 }
 
-/* uni additions */
 
+/* uni additions */
 
 .attention {
         color: #cc3333;
