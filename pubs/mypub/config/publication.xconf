@@ -28,6 +28,11 @@
 <module name="cforms"/>
 <module name="homepage"/>
 
+<!-- Copy this file to local.publication.xconf and uncomment and customize the content-dir below! -->
+<!--
+<content-dir src="/home/michi/src/wyona-svn/wyona/employees/michi/private/lenya-data-mypub"/>
+-->
+
 <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
 
 <templates>
