@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPSRevisionControl xmlns="">
+<CheckIn>
+<Identity>lenya</Identity>
+<Time>1141849669971</Time>
+<Version>3</Version>
+<Backup/>
+</CheckIn>
+<CheckOut>
+<Identity>lenya</Identity>
+<Time>1141849669886</Time>
+</CheckOut>
+<CheckIn>
+<Identity>lenya</Identity>
+<Time>1141849626647</Time>
+<Version>2</Version>
+<Backup/>
+</CheckIn>
+<CheckOut>
+<Identity>lenya</Identity>
+<Time>1141849626453</Time>
+</CheckOut>
+<CheckIn>
+<Identity>System</Identity>
+<Time>0</Time>
+<Version>1</Version>
+</CheckIn>
+</XPSRevisionControl>
