@@ -206,10 +206,21 @@ public class Deactivate extends ResourceTask {
      * Deactivates a resource.
      * @param liveDocument The resource.
      */
-    protected void deactivate(Resource resource, String language, Resource rootNode, int numOfDocumentsToPublish) throws PublicationException,
+    protected void deactivate(Resource resource, String language, Resource rootNode, int numOfDocumentsToDeactivate) throws PublicationException,
             ExecutionException, IOException, ParameterException, WorkflowException,
             DocumentException {
 
+        // delete the cache but only if the last entry will be deactivated
+        try{ 
+            if (rootNode != null && numOfDocumentsToDeactivate == 1) {
+                Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage());
+                CacheHandler cacheHandler = new CacheHandler();
+                cacheHandler.deleteCache(treeVersion, true, TASK_NAME);
+            }
+        } catch (SiteTreeException e) {
+            throw new ExecutionException ("Unable to get sitetree.", e);
+        }
+        
         Version authoringVersion = getVersion(resource, Publication.AUTHORING_AREA, language);
         if (authoringVersion.canWorkflowFire(getEventName(), getSituation())) {
             Version liveVersion = getVersion(resource, Publication.LIVE_AREA, language);
@@ -238,17 +249,6 @@ public class Deactivate extends ResourceTask {
 
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
             
-        }
-        // If a subtree is deactivated, the cached docuemnt-tree should be deleted 
-        // only if the last document is deactivated otherwise conflicts might occur.
-        try{ 
-            if (rootNode != null && numOfDocumentsToPublish == 1) {
-                Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage()); 
-                CacheHandler cacheHandler = new CacheHandler();
-                cacheHandler.deleteCache(treeVersion, true, TASK_NAME);
-            }            
-        } catch (SiteTreeException e) {
-            throw new ExecutionException ("Unable to get sitetree.", e);
         }
 
     }
