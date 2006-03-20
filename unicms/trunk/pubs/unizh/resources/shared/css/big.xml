@@ -84,7 +84,7 @@ a:hover {
 	background-color:#000;
 	color:#FFF;
 }
-.contentarea a:visited, .content3 a:visited {
+.contentarea a:visited {
 	color:#999999; 
 }
 a.download {
@@ -305,7 +305,7 @@ a.back {
   	background-color:#000;
 	color:#FFF;
 }
-#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, .content3 ul, ul.squarelist, ul.linklist, ul.linknav  {
+#secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
 	width:100%;
 	padding:0px;
 	margin:0px;
@@ -428,9 +428,39 @@ a.back {
 #quicklink .dotline, .relatedbox .dotline {
 	margin: 7px 0;
 }
-#quicklink .titel, .content3 .titel, .content2 .titel, .content1 .titel {
+#quicklink .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
+}
+
+/*Ortho navigation*/
+#orthonav  {
+	text-align:right;
+	margin-bottom:20px;
+        margin-right:198px;
+}
+#orthonav a {
+  color:#333399; 
+  padding:2px 6px;
+  background-color:#E9E9F0;
+  border-top: 1px solid #ccccff;
+  border-right: 1px solid #ccccff;
+  border-bottom: 1px solid #ccccff;
+  border-left: 1px solid #ccccff;
+  font-size: 0.9em;
+}
+#orthonav a.inactive {
+   color:#999;  
+}
+#orthonav a.active {
+  background-color:#ffffff;
+   color:#333;  
+   border-bottom: 1px solid #fff;
+}
+#orthonav .spacer {
+	padding-top:2px;
+	padding-bottom:3px;
+	border-right: 1px solid #ccccff;
 }
 
 /*Content*/
@@ -469,7 +499,10 @@ a.back {
 }
 
 .content2 {
-	margin-left:218px;
+	float:left;
+	width:198px;
+	margin-left:20px;
+	display:block;
 	font-size:14px;
 }
 * html .content2 {
@@ -478,12 +511,6 @@ a.back {
 }
 .content2 .klein {
 	line-height:16px;
-}
-
-.content3 {
-	float:right;
-	width:179px;
-	margin-top:30px;
 }
 
 /*Related Box*/
@@ -582,16 +609,6 @@ ul.linknav {
 	display:block;
 	width:185;
 	line-height:18px;
-}
-
-.content3 ul.linknav li a {
-	background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
-	background-position: left top;
-	padding-left:13px;
-	background-repeat: no-repeat;
-	display:block;
-	line-height:18px;
-	width: 165px;
 }
 
 .listarrow {
@@ -843,7 +860,7 @@ input.optiontag {
 	margin:0px;
 	border:0px;
 }
-.content .solidline, .content3 .solidline {
+.content .solidline {
 	background-color: #cccccc;
 }
 .solidlinemitmargin {
