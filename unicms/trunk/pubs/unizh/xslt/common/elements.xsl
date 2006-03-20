@@ -276,12 +276,14 @@
     <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
-    <div class="dotline">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-    </div>
-    <xsl:if test="xhtml:object">
-      <xsl:apply-templates select="xhtml:object"/>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="xhtml:object">
+        <xsl:apply-templates select="xhtml:object"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:apply-templates select="xhtml:p"/>
     <xsl:for-each select="lenya:asset">
       <xsl:apply-templates select="."/>
@@ -302,10 +304,15 @@
     <div class="kleintitel">
       <a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a>
     </div>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-    <xsl:apply-templates select="xhtml:object"/>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <xsl:choose>
+      <xsl:when test="xhtml:object">
+        <xsl:apply-templates select="xhtml:object"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+      </xsl:otherwise>
+    </xsl:choose>
     <ul class="linknav">
       <xsl:for-each select="xhtml:a">
         <li>
@@ -328,10 +335,15 @@
     <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
     <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-    <xsl:apply-templates select="xhtml:object"/>
-    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+    <xsl:choose>
+      <xsl:when test="xhtml:object">
+        <xsl:apply-templates select="xhtml:object"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+      </xsl:otherwise>
+    </xsl:choose>
     <ul class="linknav">
       <xsl:for-each select="xhtml:a">
         <li>
@@ -603,7 +615,7 @@
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
-      <xsl:when test="xhtml:object or (xhtml:p[not(text() ='')])">
+      <xsl:when test="xhtml:object or (xhtml:p[text()])">
         <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
           <xsl:apply-templates/>
         </div>
