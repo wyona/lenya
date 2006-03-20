@@ -271,7 +271,7 @@
 
   <xsl:template match="unizh:teaser[parent::unizh:column]">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>
@@ -308,7 +308,7 @@
 
   <xsl:template match="unizh:links[unizh:title/@href != '']">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>
@@ -348,7 +348,7 @@
 
   <xsl:template match="unizh:links">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>

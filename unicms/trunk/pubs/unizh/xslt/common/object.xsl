@@ -28,7 +28,7 @@
     </xsl:variable>
 
     <div class="teaser64long">
-      <img src="{$src}" alt="{$alt}" width="198" class="teaser64long"/>
+      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
     </div>
   </xsl:template>
 
@@ -213,10 +213,21 @@
 
 
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]">
-    <xsl:call-template name="object">
-      <xsl:with-param name="width">198</xsl:with-param>
-      <xsl:with-param name="height">64</xsl:with-param>
-    </xsl:call-template>
+    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
+    <xsl:variable name="alt">
+      <xsl:choose>
+        <xsl:when test="@title != ''">
+          <xsl:value-of select="@title"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="dc:metadata/dc:title"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <div class="teaser64long">
+      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+    </div>
   </xsl:template>
 
 
