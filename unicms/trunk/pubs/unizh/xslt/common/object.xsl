@@ -15,10 +15,21 @@
 
 
   <xsl:template match="xhtml:object[parent::unizh:links]">
-    <xsl:call-template name="object">
-      <xsl:with-param name="width">198</xsl:with-param>
-      <xsl:with-param name="height">64</xsl:with-param>
-    </xsl:call-template>
+    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
+    <xsl:variable name="alt">
+      <xsl:choose>
+        <xsl:when test="@title != ''">
+          <xsl:value-of select="@title"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="dc:metadata/dc:title"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <div class="teaser64long">
+      <img src="{$src}" alt="{$alt}" width="198" class="teaser64long"/>
+    </div>
   </xsl:template>
 
 
@@ -230,31 +241,13 @@
     </xsl:variable>
 
     <xsl:choose>
-      <xsl:when test="not(following-sibling::xhtml:p) or (following-sibling::xhtml:p[not(text() ='')])">
+      <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p[text()])">
         <img src="{$src}" alt="{$alt}" width="413" class="leadimg_mittopmargin"/>
       </xsl:when>
       <xsl:otherwise>
         <img src="{$src}" alt="{$alt}" width="198" class="leadimg_mittopmargin"/>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[parent::unizh:column]">
-
-    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
-    <xsl:variable name="alt">
-      <xsl:choose>
-        <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <img src="{$src}" alt="{$alt}" width="198" class="teaser64long"/>
   </xsl:template>
 
 

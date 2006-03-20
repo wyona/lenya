@@ -269,11 +269,13 @@
 
 
   <xsl:template match="unizh:teaser[parent::unizh:column]">
-    <div class="solidline">
+    <div class="solidlinemitmargin">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
     </div>
-    <p class="titel"><xsl:value-of select="unizh:title"/></p>
-    <div class="dotlinelead">
+    <div class="kleintitel">
+      <xsl:value-of select="unizh:title"/>
+    </div>
+    <div class="dotline">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
     </div>
     <xsl:if test="xhtml:object">
@@ -315,7 +317,6 @@
         </li>
       </xsl:for-each>
     </ul>
-    <br/>
   </xsl:template>
 
 
@@ -342,7 +343,6 @@
         </li>
       </xsl:for-each>
     </ul>
-    <br/>
   </xsl:template>
 
 
@@ -602,7 +602,7 @@
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
-      <xsl:when test="xhtml:object or (p[not(text() ='')])">
+      <xsl:when test="xhtml:object or (xhtml:p[not(text() ='')])">
         <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
           <xsl:apply-templates/>
         </div>
