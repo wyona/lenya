@@ -270,9 +270,18 @@
 
 
   <xsl:template match="unizh:teaser[parent::unizh:column]">
-    <div class="solidlinemitmargin">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-    </div>
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::*">
+        <div class="solidlinemitmargin">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
@@ -298,9 +307,18 @@
 
 
   <xsl:template match="unizh:links[unizh:title/@href != '']">
-    <div class="solidlinemitmargin">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-    </div>
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::*">
+        <div class="solidlinemitmargin">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="kleintitel">
       <a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a>
     </div>
@@ -329,9 +347,18 @@
 
 
   <xsl:template match="unizh:links">
-    <div class="solidlinemitmargin">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-    </div>
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::*">
+        <div class="solidlinemitmargin">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
