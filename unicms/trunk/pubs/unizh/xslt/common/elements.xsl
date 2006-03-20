@@ -188,7 +188,7 @@
         </xsl:choose>
       </xsl:attribute>
       <xsl:copy-of select="@target"/>
-      <xsl:apply-templates/>
+      <xsl:apply-templates/><xsl:comment/>
     </a>
   </xsl:template>
 
@@ -197,6 +197,7 @@
     <a href="{@href}">
       <xsl:copy-of select="@target"/>
       <xsl:value-of select="text()"/>
+      <xsl:comment/>
     </a>
   </xsl:template>
 
