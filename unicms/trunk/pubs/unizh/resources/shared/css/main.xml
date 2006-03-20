@@ -13,7 +13,7 @@ body {
 
 .bodywidth {
 	max-width:800px;
-	width:expression(document.body.clientWidth > 800  ? "800px": "auto");
+	width:expression(document.body.clientWidth > 800  ? "802px": "auto");
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -1128,6 +1128,28 @@ a.namedanchor {
 .editview {
         background-color: #ccc;
         min-height: 80px;
+}
+
+ /*third navigation*/
+ 
+#secnav ul ul li a {
+ padding-left: 17px; /*20px*/
+}
+
+ /*forth navigation*/
+ 
+ #secnav ul ul ul li a {
+ padding-left: 27px;  /*40px*/
+}
+
+ /*Ortho navigation*/
+
+#orthonav  {
+  margin-right:198px;
+}
+
+#orthonav a {
+  border-left: 1px solid #ccccff;
 }
 
 </css>
