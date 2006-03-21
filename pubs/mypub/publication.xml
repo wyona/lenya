@@ -5,6 +5,10 @@
   <lenya:pub-version>1.0-dev</lenya:pub-version>
   <lenya:lenya-version>1.4-dev</lenya:lenya-version>
   <lenya:cocoon-version>2.1.8 or 2.1.9-dev</lenya:cocoon-version>
+  <lenya:modules>
+    <lenya:module href="https://svn.wyona.com/repos/wyona/lenya/trunk/modules/folder">folder</lenya:module>
+    <lenya:module href="https://svn.wyona.com/repos/public/lenya/modules/calendar">calendar</lenya:module>
+  </lenya:modules>
   <lenya:description>A personal publication</lenya:description>
   <lenya:credits>Special thanks to Michael Wechner</lenya:credits>
   <lenya:help/>
