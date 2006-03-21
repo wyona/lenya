@@ -226,6 +226,7 @@ public boolean authenticate(Request request) throws AccessControlException {
             Vector allGroups = getAcGroups(doc, webappUrl);
             Authorizer[] authorizers = getAuthorizers();
             int i = 0;
+            int ii = 0;
 
             File configDir = new File(configPath);
             String userName = request.getParameter("username");
@@ -233,34 +234,37 @@ public boolean authenticate(Request request) throws AccessControlException {
             if (hasAuthorizers() && doc.getArea().equals(Publication.LIVE_AREA)) {
                 while (i < authorizers.length) {
                     if (authorizers[i] instanceof PolicyAuthorizer) {
-
-                        if (allGroups.contains(this.LDAP_GROUP.toLowerCase())) {
-                            authenticated = this.authenticateLdapUser(request,
-                                    userName, configDir);
-                        } else if ((allGroups.contains(this.KOORD_GROUP
-                                .toLowerCase()))
-                                && (!authenticated)) {
-                            if (userIsInGroup(this.KOORD_GROUP, userName,
-                                    configDir)) {
-                                authenticated = this.authenticateLdapUser(
-                                        request, userName, configDir);
+                        
+                        while (ii < allGroups.size()) {
+                            if (allGroups.contains(this.LDAP_GROUP.toLowerCase())) {
+                                authenticated = this.authenticateLdapUser(request,
+                                        userName, configDir);
+                            } if ((allGroups.contains(this.KOORD_GROUP
+                                    .toLowerCase()))
+                                    && (!authenticated)) {
+                                if (userIsInGroup(this.KOORD_GROUP, userName,
+                                        configDir)) {
+                                    authenticated = this.authenticateLdapUser(
+                                            request, userName, configDir);
+                                }
+                            } if ((allGroups.contains(this.NETZ_KOORD
+                                    .toLowerCase()))
+                                    && (!authenticated)) {
+                                if (userIsInGroup(this.NETZ_KOORD, userName,
+                                        configDir)) {
+                                    authenticated = this.authenticateLdapUser(
+                                            request, userName, configDir);
+                                }
+                            } if ((allGroups.contains(this.WWWK_GROUP
+                                    .toLowerCase()))
+                                    && (!authenticated)) {
+                                if (userIsInGroup(this.WWWK_GROUP, userName,
+                                        configDir)) {
+                                    authenticated = this.authenticateLdapUser(
+                                            request, userName, configDir);
+                                }
                             }
-                        } else if ((allGroups.contains(this.NETZ_KOORD
-                                .toLowerCase()))
-                                && (!authenticated)) {
-                            if (userIsInGroup(this.NETZ_KOORD, userName,
-                                    configDir)) {
-                                authenticated = this.authenticateLdapUser(
-                                        request, userName, configDir);
-                            }
-                        } else if ((allGroups.contains(this.WWWK_GROUP
-                                .toLowerCase()))
-                                && (!authenticated)) {
-                            if (userIsInGroup(this.WWWK_GROUP, userName,
-                                    configDir)) {
-                                authenticated = this.authenticateLdapUser(
-                                        request, userName, configDir);
-                            }
+                            ii++;
                         }
                         if (authenticated) {
                             Session session = request.getSession(true);
