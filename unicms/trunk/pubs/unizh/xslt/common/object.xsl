@@ -252,7 +252,7 @@
     </xsl:variable>
 
     <xsl:choose>
-      <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p[text()])">
+      <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
         <img src="{$src}" alt="{$alt}" width="413" class="leadimg_mittopmargin"/>
       </xsl:when>
       <xsl:otherwise>

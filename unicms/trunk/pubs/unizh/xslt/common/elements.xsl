@@ -271,7 +271,7 @@
 
   <xsl:template match="unizh:teaser[parent::unizh:column]">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>
@@ -308,7 +308,7 @@
 
   <xsl:template match="unizh:links[unizh:title/@href != '']">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>
@@ -348,7 +348,7 @@
 
   <xsl:template match="unizh:links">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p[text()]">
+      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
         <div class="solidlinemitmargin">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
         </div>
@@ -642,7 +642,7 @@
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
-      <xsl:when test="xhtml:object or (xhtml:p[text()])">
+      <xsl:when test="xhtml:object or (xhtml:p/descendant-or-self::*[text()])">
         <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
           <xsl:apply-templates/>
         </div>
