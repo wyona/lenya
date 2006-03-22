@@ -11,6 +11,19 @@
     
   <xsl:param name="rendertype"/>
 
+  <xsl:variable name="content" select="/document/content/*"/>
+  
+  <xsl:variable name="document-element-name">
+    <xsl:choose>
+      <xsl:when test="name($content) = local-name($content)">
+        <xsl:value-of select="concat('xhtml:', name($content))"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="name($content)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
   <xsl:template name="compute-path">
     <xsl:if test="not(self::document | self::content)">
       <xsl:text>/</xsl:text>
@@ -171,7 +184,7 @@
   <xsl:template match="unizh:title[parent::unizh:links and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <xsl:if test="not(following-sibling::xhtml:object)">
+      <xsl:if test="not(following-sibling::xhtml:object) and ($document-element-name = 'unizh:homepage4cols')">
         <xsl:call-template name="asset-dot">
           <xsl:with-param name="insertWhat">image</xsl:with-param>
           <xsl:with-param name="insertWhere">after</xsl:with-param>
