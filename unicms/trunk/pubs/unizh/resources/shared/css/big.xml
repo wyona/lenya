@@ -348,32 +348,34 @@ a.back {
 	background-color: transparent;
 }
 
-/*ortho navigation*/
+/*Ortho navigation*/
 #orthonav  {
-  font-size: 11px;
-  font-family: Arial;
-  text-align:right;
-  margin-right:198px;
-  margin-bottom:20px;
-  display:block;
+	text-align:right;
+        margin-right:198px;
+	margin-bottom:20px;
 }
 #orthonav a {
-  color:#333; 
-  padding:0px 5px;
-  border: 1px solid #ccccff;
+  color:#333399; 
+  padding:2px 6px;
+  background-color:#E9E9F0;
+  border-top: 1px solid #ccccff;
+  border-right: 1px solid #ccccff;
+  border-bottom: 1px solid #ccccff;
+  border-left: 1px solid #ccccff;
+  font-size: 0.9em;
 }
-#orthonav a:hover {
-  background-color:#eaecff; 
+#orthonav a.inactive {
+   color:#999;  
 }
-#orthonav a.current {
-  background-color:#eaecff; 
+#orthonav a.active {
+  background-color:#ffffff;
+   color:#333;  
+   border-bottom: 1px solid #fff;
 }
-#orthonav a.activ {
-}
-#orthonav span {
-  color:#aaa; 
-  padding:0px 5px;
-  border: 1px solid #ccc;
+#orthonav .spacer {
+	padding-top:2px;
+	padding-bottom:3px;
+	border-right: 1px solid #ccccff;
 }
 
 .icontextpos {
