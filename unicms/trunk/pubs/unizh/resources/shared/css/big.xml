@@ -946,4 +946,8 @@ a.namedanchor {
 	margin-top: 5px;
 }
 
+ /* anchor */
+a.namedanchor {
+        color:#003;
+}
 </css>

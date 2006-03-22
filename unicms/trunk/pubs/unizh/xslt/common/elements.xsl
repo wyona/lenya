@@ -206,6 +206,16 @@
     <a name="{@name}" class="namedanchor"><xsl:comment/></a>
   </xsl:template>
 
+
+  <xsl:template match="xhtml:a[(@name != '') and (not(@href) or (@href = ''))]">
+    <xsl:copy>
+      <xsl:attribute name="class">
+        <xsl:text>namedanchor</xsl:text>
+      </xsl:attribute>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
   <!--
   <xsl:template match="xhtml:a[starts-with(@href, 'mailto:')]">
     <script language="javascript">
