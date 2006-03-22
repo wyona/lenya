@@ -203,7 +203,7 @@
 
 
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
-    <a name="{@name}"/><xsl:comment/>
+    <a name="{@name}"><xsl:comment/></a>
   </xsl:template>
 
   <!--
