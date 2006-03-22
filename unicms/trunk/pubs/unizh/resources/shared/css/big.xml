@@ -362,7 +362,7 @@ a.back {
   border-right: 1px solid #ccccff;
   border-bottom: 1px solid #ccccff;
   border-left: 1px solid #ccccff;
-  font-size: 0.9em;
+  font-size: 11px;
 }
 #orthonav a.inactive {
    color:#999;  
@@ -375,7 +375,7 @@ a.back {
 #orthonav .spacer {
 	padding-top:2px;
 	padding-bottom:3px;
-	border-right: 1px solid #ccccff;
+/*	border-right: 1px solid #ccccff;	please comment out!	*/
 }
 
 .icontextpos {
@@ -433,36 +433,6 @@ a.back {
 #quicklink .titel, .content2 .titel, .content1 .titel {
 	line-height:18px;
 	font-weight:bold;
-}
-
-/*Ortho navigation*/
-#orthonav  {
-	text-align:right;
-	margin-bottom:20px;
-        margin-right:198px;
-}
-#orthonav a {
-  color:#333399; 
-  padding:2px 6px;
-  background-color:#E9E9F0;
-  border-top: 1px solid #ccccff;
-  border-right: 1px solid #ccccff;
-  border-bottom: 1px solid #ccccff;
-  border-left: 1px solid #ccccff;
-  font-size: 0.9em;
-}
-#orthonav a.inactive {
-   color:#999;  
-}
-#orthonav a.active {
-  background-color:#ffffff;
-   color:#333;  
-   border-bottom: 1px solid #fff;
-}
-#orthonav .spacer {
-	padding-top:2px;
-	padding-bottom:3px;
-	border-right: 1px solid #ccccff;
 }
 
 /*Content*/

@@ -445,7 +445,7 @@ img.icon {
 #orthonav .spacer {
 	padding-top:2px;
 	padding-bottom:3px;
-	border-right: 1px solid #ccccff;
+/*	border-right: 1px solid #ccccff;	please comment out!	*/
 }
 /*Content*/
 .contcol2 {
@@ -1151,6 +1151,7 @@ a.namedanchor {
 
 #orthonav a {
   border-left: 1px solid #ccccff;
+  font-size: 11px;
 }
 
 /*image*/
