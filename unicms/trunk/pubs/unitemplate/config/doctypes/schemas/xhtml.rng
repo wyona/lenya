@@ -109,6 +109,14 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="align">
+        <choice>
+          <value>left</value>
+          <value>right</value>
+        </choice>
+      </attribute> 
+    </optional>
+    <optional>
       <attribute name="popup">
         <choice>
           <value>true</value>
