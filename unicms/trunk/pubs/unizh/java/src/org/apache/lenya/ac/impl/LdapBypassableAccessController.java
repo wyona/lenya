@@ -321,18 +321,31 @@ public boolean authenticate(Request request) throws AccessControlException {
     protected Vector getAcGroups(Document doc, String url) {
 
         Vector groups = new Vector();
-
+        int ii = 0;
+        
+        File parent = doc.getFile().getParentFile();
+        String parentPath = parent.getAbsolutePath();
+        String documentPath = parentPath.substring(parentPath.indexOf(doc.getArea()));
+        
+        while ((!documentPath.equalsIgnoreCase(doc.getArea())) && (ii < 10 )){
+            
             File policyDir = new File(doc.getPublication().getDirectory().getAbsolutePath()
                     + File.separator + "config/ac/policies");
 
             File policyFile = new File(policyDir, File.separator
-                    + doc.getArea() + doc.getId() + File.separator
-                    + SUBTREE_FILENAME);
+                    + documentPath + File.separator + SUBTREE_FILENAME);
             if (policyFile.exists()) {
                 LdapACHelper ldapAcHelper = new LdapACHelper();
                 groups = ldapAcHelper.getAcGroups(policyFile);
+                break;
+            } else {
+                parent = parent.getParentFile();
+                parentPath = parent.getAbsolutePath();
+                documentPath = parentPath.substring(parentPath.indexOf(doc.getArea()));
             }
-
+            ii++;
+        }
+        
         return groups;
     }
     
@@ -368,13 +381,13 @@ public boolean authenticate(Request request) throws AccessControlException {
     protected boolean isInAcLdapDir(Request request, Session session){
         
         Document doc = (Document) session.getAttribute(("DocId"));
-        
-        String webappUrl = request.getRequestURI().substring(
-                request.getContextPath().length());
-        String prefix = File.separator + doc.getPublication().getId() + File.separator + doc.getArea();
-        String canonicalUrl = webappUrl.substring(prefix.length());
-        
-        if (doc != null) {
+
+        if (doc != null) { 
+            String webappUrl = request.getRequestURI().substring(
+                    request.getContextPath().length());
+            String prefix = File.separator + doc.getPublication().getId() + File.separator + doc.getArea();
+            String canonicalUrl = webappUrl.substring(prefix.length());
+       
             if (canonicalUrl.startsWith(doc.getId())) {
                 return true;
             } else {
