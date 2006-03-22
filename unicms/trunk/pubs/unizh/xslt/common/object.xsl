@@ -119,7 +119,17 @@
 
 
   <xsl:template match="xhtml:object">
-    <div class="imgTextfluss">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@align = 'right'">
+            <xsl:text>imgTextflussLeft</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>imgTextfluss</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:call-template name="object">
          <xsl:with-param name="width">204</xsl:with-param> 
       </xsl:call-template>
@@ -137,7 +147,17 @@
 
 
   <xsl:template match="xhtml:object[@float = 'true']">
-    <div class="imgTextfluss">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@align = 'right'">
+            <xsl:text>imgTextflussLeft</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>imgTextfluss</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:call-template name="object">
         <xsl:with-param name="width">204</xsl:with-param>
       </xsl:call-template>
@@ -154,7 +174,17 @@
 
 
   <xsl:template match="xhtml:object[@popup = 'true' and not(@float = 'true')]">
-    <div class="imgTextfluss">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@align = 'right'">
+            <xsl:text>imgTextflussLeft</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>imgTextfluss</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:call-template name="object">
         <xsl:with-param name="width">204</xsl:with-param>
       </xsl:call-template>

@@ -1153,4 +1153,25 @@ a.namedanchor {
   border-left: 1px solid #ccccff;
 }
 
+/*image*/
+.imgTextflussLeft .legende {
+	display:block;
+	width:198px;
+}
+.imgTextflussLeft {
+	float: right;
+	margin-right:0px;
+	background-color:#E9E9F0;
+	display:block;
+	margin-top:5px;
+}
+.imgTextflussLeft a {
+	background-image:none;
+	padding:0px;
+	margin:0px;
+}
+.imgTextflussLeft .imgLupehalfImg {
+	margin-top: 5px;
+}
+
 </css>
