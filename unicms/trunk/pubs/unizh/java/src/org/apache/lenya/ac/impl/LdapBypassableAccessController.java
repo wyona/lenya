@@ -64,7 +64,7 @@ public class LdapBypassableAccessController extends DefaultAccessController {
 
     private String LDAP_GROUP = "allldap";
     private String KOORD_GROUP = "koord";
-    private String WWWK_GROUP = "wwwgenerated";
+    private String WWWK_GROUP = "wwwkoord";
     private String NETZ_KOORD = "netzkoord";
 
     protected static final String SUBTREE_FILENAME = "subtree-policy.acml";
