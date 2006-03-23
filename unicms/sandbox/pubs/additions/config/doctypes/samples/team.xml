@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:team xmlns="http://www.w3.org/1999/xhtml"  
+xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/"
+xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" unizh:columns="3"
+dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
+lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+
+  <lenya:meta>
+    <dc:title>Personenverzeichnis</dc:title>
+    <dc:description></dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject></dc:subject>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Titel</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <unizh:children/>
+    <p>Ausleitung, Anmerkungen.</p>
+  </body>
+</unizh:team>
+

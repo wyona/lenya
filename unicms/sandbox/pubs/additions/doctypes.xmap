@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+
+<!-- CVS: $Id: doctypes.xmap,v 1.3 2004/07/22 14:31:55 andreas Exp $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <map:components>
+    <map:generators default="file" />
+    <map:matchers default="wildcard"/>
+    <map:transformers default="xslt">
+      <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
+      <map:transformer name="sitemap" logger="lenya.sitemap.transformer.sitemap" src="ch.unizh.lenya.cms.cocoon.transformation.SitemapTransformer"/>
+    </map:transformers> 
+   <map:actions/>
+  </map:components>
+
+  <map:views/>
+
+  <map:resources>
+    
+    <map:resource name="transformation">
+        <map:transform src="../unizh/xslt/doctypes/{stylesheet}-{version}.xsl">
+          <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
+          <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+          <map:parameter name="area" value="{page-envelope:area}"/>
+          <map:parameter name="language" value="{page-envelope:document-language}"/>
+          <map:parameter name="languages" value="{page-envelope:document-languages-csv}"/>
+          <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
+          <map:parameter name="nodeid" value="{page-envelope:document-node-id}"/>
+          <map:parameter name="contextprefix" value="{request:contextPath}"/>
+          <map:parameter name="rendertype" value="{rendertype}"/>
+          <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+          <map:parameter name="querystring" value="{request:queryString}"/> 
+          <map:parameter name="creationdate" value="{page-envelope:document-dc-date-created}"/>
+        </map:transform>
+    </map:resource>
+    
+  </map:resources>
+
+  <map:pipelines>
+
+    <map:pipeline internal-only="true">
+    
+      <map:match type="regexp" pattern="^(\w|-)*/\.\./(.*).meta">
+        <map:generate src="cocoon:/{2}.meta"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match type="regexp" pattern="^(.*)/(\w|-)*/\.\./(.*).meta">
+        <map:generate src="cocoon:/{1}/{3}.meta"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="**.meta">
+        <map:generate src="resources/{page-envelope:area}/{1}.meta"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+    </map:pipeline>
+
+    <map:pipeline type="noncaching">
+ 
+      <!-- UniZH config -->
+      <map:match pattern="unizh.xconf">
+        <map:generate src="config/unizh/unizh.xconf"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+      <!-- load XML file for ancestors -->
+      <!-- pattern="xml/{area}/{doctype}/{document-path}" -->
+      <map:match pattern="xml/**/*.xml">       
+        <map:generate src="content/{1}/{2}.xml"/>
+        <map:serialize type="xml"/>   
+      </map:match>
+
+      <!-- load XML file -->
+      <!-- pattern="{area}/{doctype}/{document-path}" -->
+      <map:match pattern="xml">
+        
+        <!-- revision controller -->
+        <map:match type="step" pattern="view-revision">
+          <map:generate type="serverpages" src="../../content/rc/view.xsp">
+          </map:generate>
+          <map:transform src="../../xslt/rc/toDoc.xsl"/>
+          <map:serialize type="xml"/>
+        </map:match>
+        
+        <!-- standard xml -->
+        <map:generate src="content/{page-envelope:area}/{page-envelope:document-path}"/>
+
+        <map:serialize type="xml"/>
+        
+      </map:match>
+    
+       
+      <map:match pattern="include-rss/**.rss.xml">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+        <map:act type="language-exists">
+          <map:generate src="content/{page-envelope:area}/{../../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform type="index">
+            <map:parameter name="documentId" value="{../../1}"/>
+            <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+            <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+          </map:transform>
+          <map:transform type="cinclude"/>
+          <map:transform src="../unizh/xslt/common/rss-writer.xsl">
+            <map:parameter name="channelid" value="/{page-envelope:publication-id}/{page-envelope:area}{../../1}"/> 
+            <map:parameter name="servername" value="{request:serverName}"/>
+            <map:parameter name="serverport" value="{request:serverPort}"/>
+            <map:parameter name="contextprefix" value="{page-envelope:context-prefix}"/>
+          </map:transform>
+          <map:transform src="../../xslt/util/strip_namespaces.xsl"/> 
+          <map:serialize type="xml"/>
+        </map:act>
+        </map:act>
+        <map:generate src="cocoon:/xml"/>
+        <map:serialize type="xml"/>
+      </map:match> 
+ 
+
+      <map:match pattern="include-related/**.html">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
+          <map:generate src="content/{page-envelope:area}/{../1}/index_{page-envelope:document-language}.xml"/>
+          <map:transform src="../unizh/xslt/common/related-writer.xsl">
+            <map:parameter name="element" value="unizh:related-content"/>
+          </map:transform>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+
+      <map:match pattern="include-teaser/*/**.html">
+        <map:act type="resource-exists" src="content/{page-envelope:area}/{2}/index_{page-envelope:document-language}.xml">
+          <map:generate src="content/{page-envelope:area}/{../2}/index_{page-envelope:document-language}.xml"/>
+          <map:transform src="../unizh/xslt/common/related-writer.xsl">
+            <map:parameter name="element" value="unizh:teaser"/>
+            <map:parameter name="name" value="{../1}"/>
+          </map:transform>
+          <map:serialize type="xml"/>
+        </map:act>
+      </map:match>
+
+
+      <!-- This pipeline builds the page content (without header) for
+             - redirect pages
+        -->
+      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
+      <!--            1            2         3                      4             -->
+
+      <map:match pattern ="redirect-*-*/*/live/**.html">
+        <map:act type="redirect">
+          <map:redirect-to global="true" uri="{href}"/>
+        </map:act>
+      </map:match>
+
+
+      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
+      <!--            1            2         3                4     5             -->
+
+       <map:match pattern="search-*-*/*/*/**.html">
+        <map:aggregate element="document">
+          <map:part element="content" src="cocoon:/xml"/>
+          <map:part src="cocoon://{3}/search-live/lucene"/>
+          <map:part src="cocoon://navigation/{3}/{4}/breadcrumb/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/servicenav/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/toolnav/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/menu/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/tabs/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/footnav/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/simplenav/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/ancestors/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/parent/{5}.html.xml"/>
+          <map:part src="cocoon://navigation/{3}/{4}/allnodes/{5}.html.xml"/>
+          <map:part src="cocoon:/unizh.xconf"/>
+        </map:aggregate>
+
+
+        <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
+          <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+        </map:transform>
+
+        <map:transform src="../unizh/xslt/assetDots.xsl">
+          <map:parameter name="rendertype" value="{1}"/>
+        </map:transform>
+
+
+        <!-- Doctype / context specific navigation logic.  --> 
+        <map:transform src="../unizh/xslt/common/includeRelated.xsl">
+          <map:parameter name="area" value="authoring"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
+
+        <map:transform src="../unizh/xslt/common/rss.xsl"/>
+        <map:transform type="cinclude"/>
+        <map:transform src="lenya/xslt/navigation/header.xsl"/>
+        <map:transform src="lenya/xslt/navigation/logic.xsl">
+          <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+        </map:transform>
+
+        <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
+          <map:parameter name="version" value="{request-param:version}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}"/>
+        </map:transform>
+
+        <map:transform type="session"/>
+
+        <map:call resource="transformation">
+          <map:parameter name="publication-id" value="{3}"/>
+          <map:parameter name="area" value="{4}"/>
+          <map:parameter name="stylesheet" value="search"/>
+          <map:parameter name="rendertype" value="{1}"/>
+          <map:parameter name="version" value="{2}"/>
+        </map:call>
+
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <!-- This pipeline builds the page content (without header) for
+               - content documents
+               - homepage
+               
+           It aggregates all the navigational elements (breadcrumb, tabs, menu)
+           with the actual content of the document and renders it as XHTML.
+           
+           {rendertype}: "view" | "edit" | "imageupload" (with asset dots)
+           {version}: "standard" | "print"
+           -->
+
+      <!-- {doctype}-{rendertype}-{version}/{publication-id}/{area}{document-url} -->
+      <!--  1         2            3         4                5     6             -->
+      <map:match pattern="*-*-*/*/*/**.html">
+        <map:aggregate element="document">
+          <map:part element="content" src="cocoon:/xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/breadcrumb/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/servicenav/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/toolnav/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/menu/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/tabs/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/orthonav/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/footnav/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/simplenav/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/ancestors/{6}.html.xml"/> 
+          <map:part src="cocoon://navigation/{4}/{5}/parent/{6}.html.xml"/>
+          <map:part src="cocoon://navigation/{4}/{5}/allnodes/{6}.html.xml"/>
+          <map:part src="cocoon:/unizh.xconf"/>
+        </map:aggregate>
+
+        <map:transform type="index">
+          <map:parameter name="documentId" value="{page-envelope:document-id}"/>
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/> 
+        </map:transform>
+      
+        <map:transform type="sitemap">
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+        </map:transform>
+      
+        <map:transform type="level">
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+        </map:transform>
+ 
+        <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
+          <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+  	</map:transform>
+
+        <map:transform src="../unizh/xslt/assetDots.xsl">
+          <map:parameter name="rendertype" value="{2}"/>
+        </map:transform> 
+     
+        <map:transform src="../unizh/xslt/common/includeRelated.xsl">
+          <map:parameter name="area" value="authoring"/>
+        </map:transform>
+        <map:transform type="cinclude"/>
+        <map:transform src="../unizh/xslt/common/related-warning.xsl"/>
+
+        <map:transform src="lenya/xslt/navigation/header.xsl"/> 
+        <map:transform src="lenya/xslt/navigation/logic.xsl">
+          <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+        </map:transform> 
+
+        <map:transform src="../unizh/xslt/sessionSwitchView.xsl">
+          <map:parameter name="version" value="{request-param:version}"/>
+          <map:parameter name="fontsize" value="{request-param:fontsize}"/>
+        </map:transform> 
+        <map:transform type="session"/>
+
+        <map:call resource="transformation">
+          <map:parameter name="publication-id" value="{4}"/>
+          <map:parameter name="area" value="{5}"/>
+          <map:parameter name="stylesheet" value="xhtml"/>
+          <map:parameter name="rendertype" value="{2}"/>
+          <map:parameter name="version" value="{3}"/>
+        </map:call> 
+
+        <map:serialize type="xml"/>
+      </map:match>
+      
+    </map:pipeline>
+    
+  </map:pipelines>
+</map:sitemap>
