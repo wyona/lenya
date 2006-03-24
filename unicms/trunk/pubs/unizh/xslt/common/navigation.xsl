@@ -51,7 +51,7 @@
       </xsl:for-each>
       
       <xsl:choose>
-        <xsl:when test="$publicationid = 'unitemplate'">      
+        <xsl:when test="$publicationid = 'id'">      
           <label for="formsearch">Suchen:</label>  
           <form id="formsearch" action="http://www.id.unizh.ch/search/search.jsp" method="get">
              <div class="serviceform">
