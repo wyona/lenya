@@ -5,8 +5,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml" 
 >
-                
-
+  <xsl:param name="publicationid"/>
+  
   <xsl:template match="xhtml:div[@id = 'orthonav']">
     <xsl:if test="*">
       <div id="orthonav">
@@ -49,15 +49,31 @@
         </xsl:if>
        |
       </xsl:for-each>
-      <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
-      <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
-        <div class="serviceform">
-          <input type="text" titel="suchen" name="queryString" accesskey="5" />
-        </div>
-        <div class="serviceform">
-          <a href="javascript:document.forms['formsearch'].submit();">go!</a>
-        </div>
-      </form>
+      
+      <xsl:choose>
+        <xsl:when test="$publicationid = 'unitemplate'">      
+          <label for="formsearch">Suchen:</label>  
+          <form id="formsearch" action="http://www.id.unizh.ch/search/search.jsp" method="get">
+             <div class="serviceform">
+                <input type="text" titel="suchen" name="query" accesskey="5" />
+             </div>
+             <div class="serviceform">
+                <a href="javascript:document.forms['formsearch'].submit();">go!</a>
+             </div>
+          </form>
+        </xsl:when>
+        <xsl:otherwise>
+          <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
+          <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
+             <div class="serviceform">
+                <input type="text" titel="suchen" name="queryString" accesskey="5" />
+             </div>
+             <div class="serviceform">
+                <a href="javascript:document.forms['formsearch'].submit();">go!</a>
+             </div>
+          </form>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 
