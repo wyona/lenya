@@ -135,6 +135,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
       <xsl:if test="lenya:asset-dot">
+        <br class="floatclear"/>
         <hr/>
         <xsl:apply-templates select="lenya:asset-dot"/>
         <br/>
@@ -595,6 +596,14 @@
 
   <xsl:template match="xhtml:p[parent::unizh:short]">
     <xsl:apply-templates/>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:p[parent::xhtml:body and ($rendertype != 'imageupload')]">
+    <xsl:apply-templates/>
+    <xsl:if test="xhtml:object[@float = 'true'] or preceding-sibling::xhtml:object[@float = 'true']">
+      <br class="floatclear"/>
+    </xsl:if>
   </xsl:template>
 
 
