@@ -14,68 +14,89 @@
   <xsl:param name="rendertype"/>
 
 
-  <xsl:template match="xhtml:object[parent::unizh:links]">
-    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
-    <xsl:variable name="alt">
-      <xsl:choose>
-        <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
+  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(xhtml:div[@class = 'caption']) and not(@popup = 'true')]">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@align = 'right'">
+            <xsl:text>imgTextflussLeft</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>imgTextfluss</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
 
-    <div class="teaser64long">
-      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+      <xsl:call-template name="object">
+        <xsl:with-param name="width">
+          <xsl:choose>
+            <xsl:when test="not(@width) or (@width = '')">
+              <xsl:text>204</xsl:text>
+            </xsl:when>
+            <xsl:when test="(@float = 'true') and not(@align = 'right')">
+              <xsl:text>204</xsl:text>
+            </xsl:when>
+            <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
+              <xsl:choose>
+                <xsl:when test="@width > 800">
+                  <xsl:text>800</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="@width"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2">                  
+              <xsl:choose>
+                <xsl:when test="@width > 615">
+                  <xsl:text>615</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="@width"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="@width > 415">
+              <xsl:text>415</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@width"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+
     </div>
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[@width != '']">
-    <xsl:call-template name="object">
-      <xsl:with-param name="width">
+  <xsl:template match="xhtml:object[ancestor::xhtml:body and (xhtml:div[@class = 'caption'] or (@popup = 'true'))]">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
-            <xsl:choose>
-              <xsl:when test="@width > 800">
-                <xsl:text>800</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="@width"/>
-              </xsl:otherwise>
-            </xsl:choose>
+          <xsl:when test="@align = 'right'">
+            <xsl:text>imgRightMitLegende</xsl:text>
           </xsl:when>
-          <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2">                  
-            <xsl:choose>
-              <xsl:when test="@width > 615">
-                <xsl:text>615</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="@width"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:when>
-          <xsl:when test="@width > 415">
-            <xsl:text>415</xsl:text>
+          <xsl:when test="@popup = 'true'">
+            <xsl:text>imgTextfluss</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="@width"/>
+            <xsl:text>imgMitLegende</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:with-param>
-    </xsl:call-template>
-  </xsl:template>
+      </xsl:attribute>
 
-
-  <xsl:template match="xhtml:object[@width != '' and xhtml:div[@class = 'caption']]">
-    <table border="0" cellpadding="0" cellspacing="0" class="imgMitLegende">
       <tr>
         <td class="flexibleimage">
           <xsl:call-template name="object">
             <xsl:with-param name="width">
               <xsl:choose>
+                <xsl:when test="not(@width) or (@width = '')">
+                  <xsl:text>204</xsl:text>
+                </xsl:when>
+                <xsl:when test="(@float = 'true') and not(@align = 'right')">
+                  <xsl:text>204</xsl:text>
+                </xsl:when>
                 <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
                   <xsl:choose>
                     <xsl:when test="@width > 800">
@@ -111,89 +132,13 @@
         <td>
           <div class="legende">
             <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
+            <xsl:if test="@popup = 'true'">
+              <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+            </xsl:if>
           </div>
         </td>
       </tr>
     </table>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object">
-    <div>
-      <xsl:attribute name="class">
-        <xsl:choose>
-          <xsl:when test="@align = 'right'">
-            <xsl:text>imgTextflussLeft</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>imgTextfluss</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-      <xsl:call-template name="object">
-         <xsl:with-param name="width">204</xsl:with-param> 
-      </xsl:call-template>
-      <xsl:if test="xhtml:div[@class = 'caption']">
-        <div class="legende">
-          <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-          <xsl:if test="@popup = 'true'">
-            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-          </xsl:if>
-        </div>
-      </xsl:if>
-    </div>
-    <br class="floatclear"/>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[@float = 'true']">
-    <div>
-      <xsl:attribute name="class">
-        <xsl:choose>
-          <xsl:when test="@align = 'right'">
-            <xsl:text>imgTextflussLeft</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>imgTextfluss</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">204</xsl:with-param>
-      </xsl:call-template>
-      <xsl:if test="xhtml:div[@class = 'caption']">
-        <div class="legende">
-          <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-          <xsl:if test="@popup = 'true'">
-            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-          </xsl:if>
-        </div>
-      </xsl:if>
-    </div>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[@popup = 'true' and not(@float = 'true')]">
-    <div>
-      <xsl:attribute name="class">
-        <xsl:choose>
-          <xsl:when test="@align = 'right'">
-            <xsl:text>imgTextflussLeft</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>imgTextfluss</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">204</xsl:with-param>
-      </xsl:call-template>
-      <div class="legende">
-        <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
-        <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
-      </div>
-    </div>
-    <br class="floatclear"/>
   </xsl:template>
 
 
@@ -235,6 +180,13 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:object[parent::unizh:contcol1]">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">160</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:related-content]">
     <xsl:call-template name="object">
       <xsl:with-param name="width">160</xsl:with-param>
@@ -261,10 +213,22 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[parent::unizh:contcol1]">
-    <xsl:call-template name="object">
-      <xsl:with-param name="width">160</xsl:with-param>
-    </xsl:call-template>
+  <xsl:template match="xhtml:object[parent::unizh:links]">
+    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
+    <xsl:variable name="alt">
+      <xsl:choose>
+        <xsl:when test="@title != ''">
+          <xsl:value-of select="@title"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="dc:metadata/dc:title"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <div class="teaser64long">
+      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+    </div>
   </xsl:template>
 
 

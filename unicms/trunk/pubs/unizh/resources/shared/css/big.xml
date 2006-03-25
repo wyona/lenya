@@ -905,19 +905,17 @@ table.grid td {
         border-color: #999;
 }
 
-
 tr.strip {
         background-color: #f0f0f0;
 }
-
 
 table.imgMitLegende tr td img {
   padding: 0px;
 }
 
-
-a.namedanchor { 
-  background-image: none;
+a.namedanchor {
+        color:#003;
+        background-image: none;
 }
 
 .editview {
@@ -925,14 +923,13 @@ a.namedanchor {
         min-height: 80px;
 }
 
-/*image*/
+/* right-aligned image */
 .imgTextflussLeft .legende {
 	display:block;
-	width:198px;
 }
 .imgTextflussLeft {
 	float: right;
-	margin-right:0px;
+	margin-left:10px;
 	background-color:#E9E9F0;
 	display:block;
 	margin-top:5px;
@@ -946,8 +943,23 @@ a.namedanchor {
 	margin-top: 5px;
 }
 
- /* anchor */
-a.namedanchor {
-        color:#003;
+.imgRightMitLegende {
+	float: right;
+	background-color:#E9E9F0;
+	margin-bottom:5px;
+	margin-top:5px;
+	margin-left:10px;
 }
+.imgRightMitLegende a {
+	background-image:none;
+	padding:0px;
+	margin:0px;
+}
+*html .imgRightMitLegende {
+	margin-top:14px;
+}
+table.imgRightMitLegende tr td img {
+  padding: 0px;
+}
+
 </css>
