@@ -18,12 +18,13 @@
     <div>
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="@align = 'right'">
+          <xsl:when test="(@float = 'true') and (@align = 'right')">
             <xsl:text>imgTextflussLeft</xsl:text>
           </xsl:when>
-          <xsl:otherwise>
+          <xsl:when test="@float = 'true'">
             <xsl:text>imgTextfluss</xsl:text>
-          </xsl:otherwise>
+          </xsl:when>
+          <xsl:otherwise/>
         </xsl:choose>
       </xsl:attribute>
 
@@ -66,6 +67,9 @@
         </xsl:with-param>
       </xsl:call-template>
 
+      <xsl:if test="not(@float = 'true')">
+        <br class="floatclear"/>
+      </xsl:if>
     </div>
   </xsl:template>
 
@@ -74,10 +78,10 @@
     <table border="0" cellpadding="0" cellspacing="0">
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="@align = 'right'">
+          <xsl:when test="(@float = 'true') and (@align = 'right')">
             <xsl:text>imgRightMitLegende</xsl:text>
           </xsl:when>
-          <xsl:when test="@popup = 'true'">
+          <xsl:when test="@float = 'true'">
             <xsl:text>imgTextfluss</xsl:text>
           </xsl:when>
           <xsl:otherwise>
@@ -139,6 +143,10 @@
         </td>
       </tr>
     </table>
+
+    <xsl:if test="not(@float = 'true')">
+      <br class="floatclear"/>
+    </xsl:if>
   </xsl:template>
 
 
