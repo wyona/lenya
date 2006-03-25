@@ -67,9 +67,6 @@
         </xsl:with-param>
       </xsl:call-template>
 
-      <xsl:if test="not(@float = 'true')">
-        <br class="floatclear"/>
-      </xsl:if>
     </div>
   </xsl:template>
 
@@ -144,9 +141,6 @@
       </tr>
     </table>
 
-    <xsl:if test="not(@float = 'true')">
-      <br class="floatclear"/>
-    </xsl:if>
   </xsl:template>
 
 
