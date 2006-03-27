@@ -1,0 +1,162 @@
+Index: Authenticator.java
+===================================================================
+--- Authenticator.java	(revision 387857)
++++ Authenticator.java	(working copy)
+@@ -19,10 +19,11 @@
+ 
+ import org.apache.avalon.framework.component.Component;
+ import org.apache.cocoon.environment.Request;
++import org.apache.lenya.ac.User;
+ 
+ /**
+  * An authenticator.
+- * @version $Id: Authenticator.java,v 1.3 2004/08/16 16:21:22 andreas Exp $
++ * @version $Id$
+  */
+ public interface Authenticator extends Component {
+ 
+@@ -40,4 +41,8 @@
+      */
+     boolean authenticate(AccreditableManager accreditableManager, Request request)
+         throws AccessControlException;
++    
++    boolean authenticate(AccreditableManager accreditableManager, Request request, User user)
++    throws AccessControlException;
++
+ }
+Index: impl/UserAuthenticator.java
+===================================================================
+--- impl/UserAuthenticator.java	(revision 387857)
++++ impl/UserAuthenticator.java	(working copy)
+@@ -25,7 +25,7 @@
+ 
+ /**
+  * User authenticator.
+- * @version $Id: UserAuthenticator.java,v 1.6 2004/08/16 16:34:06 andreas Exp $
++ * @version $Id$
+  */
+ public class UserAuthenticator extends AbstractLogEnabled implements Authenticator {
+ 
+@@ -52,7 +52,26 @@
+         boolean authenticated = authenticate(accreditableManager, username, password, identity);
+         return authenticated;
+     }
++    
++    /**
++     * @see org.apache.lenya.ac.Authenticator#authenticate(org.apache.lenya.ac.AccreditableManager,
++     *      org.apache.cocoon.environment.Request)
++     */
++    public boolean authenticate(AccreditableManager accreditableManager, Request request, User user)
++            throws AccessControlException {
++        String username = request.getParameter("username");
++        String password = request.getParameter("password");
+ 
++        if (username == null || password == null) {
++            throw new AccessControlException("Username or password is null!");
++        }
++
++        Identity identity = (Identity) request.getSession(false).getAttribute(
++                Identity.class.getName());
++        boolean authenticated = authenticate(accreditableManager, username, password, identity, user);
++        return authenticated;
++    }
++
+     /**
+      * Authenticates a user with a given username and password. When the authentication is
+      * successful, the user is added to the identity.
+@@ -67,6 +86,23 @@
+             String password, Identity identity) throws AccessControlException {
+ 
+         User user = accreditableManager.getUserManager().getUser(username);
++
++        return authenticate(accreditableManager, username, password, identity, user);
++    }
++    
++    /**
++     * Authenticates a user with a given username and password. When the authentication is
++     * successful, the user is added to the identity.
++     * @param accreditableManager The accreditable manager.
++     * @param username The username.
++     * @param password The password.
++     * @param identity The identity to add the user to.
++     * @throws AccessControlException when something went wrong.
++     * @return <code>true</code> if the user was authenticated, <code>false</code> otherwise.
++     */
++    protected boolean authenticate(AccreditableManager accreditableManager, String username,
++            String password, Identity identity, User user) throws AccessControlException {
++
+         if (getLogger().isDebugEnabled()) {
+             getLogger().debug("Authenticating user: [" + user + "]");
+         }
+@@ -74,7 +110,7 @@
+         boolean authenticated = false;
+         if (user != null && user.authenticate(password)) {
+             if (getLogger().isDebugEnabled()) {
+-                getLogger().debug("User [" + user + "] authenticated.");
++                getLogger().error("User [" + user + "] authenticated.");
+             }
+ 
+             if (!identity.contains(user)) {
+@@ -93,11 +129,10 @@
+                 if (user == null) {
+                     getLogger().debug("No such user: [" + username + "]");
+                 }
+-                getLogger().debug("User [" + username + "] not authenticated.");
++                getLogger().error("User [" + username + "] not authenticated.");
+             }
+         }
+ 
+         return authenticated;
+     }
+-
+ }
+\ No newline at end of file
+Index: impl/DefaultAccessController.java
+===================================================================
+--- impl/DefaultAccessController.java	(revision 387857)
++++ impl/DefaultAccessController.java	(working copy)
+@@ -50,10 +50,11 @@
+ import org.apache.lenya.ac.ItemManagerListener;
+ import org.apache.lenya.ac.Machine;
+ import org.apache.lenya.ac.PolicyManager;
++import org.apache.lenya.ac.User;
+ 
+ /**
+  * Default access controller implementation.
+- * @version $Id: DefaultAccessController.java,v 1.9 2004/08/16 16:34:06 andreas Exp $
++ * @version $Id$
+  */
+ public class DefaultAccessController extends AbstractLogEnabled implements AccessController,
+         Configurable, Serviceable, Disposable, ItemManagerListener {
+@@ -85,6 +86,17 @@
+     }
+ 
+     /**
++     * @see org.apache.lenya.ac.AccessController#authenticate(org.apache.cocoon.environment.Request)
++     */
++    public boolean authenticate(Request request, User user) throws AccessControlException {
++        assert request != null;
++        boolean authenticated = getAuthenticator().authenticate(getAccreditableManager(), request, user);
++
++        return authenticated;
++    }
++
++
++    /**
+      * @see org.apache.lenya.ac.AccessController#authorize(org.apache.cocoon.environment.Request)
+      */
+     public boolean authorize(Request request) throws AccessControlException {
+Index: impl/AnonymousAuthenticator.java
+===================================================================
+--- impl/AnonymousAuthenticator.java	(revision 387857)
++++ impl/AnonymousAuthenticator.java	(working copy)
+@@ -78,4 +78,8 @@
+         }
+         return authenticated;
+     }
++
++    public boolean authenticate(AccreditableManager accreditableManager, Request request, User user){
++        return false;
++    }
+ }
+
