@@ -1,4 +1,4 @@
-/* $Id: UnizhRedirectAction.java 2005-09-13 ch.unizh.mike $
+/* $Id: UnizhRedirectAction.java 2006-03-27 ch.unizh.mike $
 <License>
 
  ============================================================================
@@ -57,7 +57,9 @@ package ch.unizh.lenya.cms.cocoon.acting;
 import org.apache.avalon.framework.parameters.Parameters;
 
 import org.apache.cocoon.acting.AbstractAction;
+import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
+import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 
 import org.apache.excalibur.source.Source;
@@ -92,6 +94,9 @@ public class UnizhRedirectAction extends AbstractAction {
         throws Exception {
 
         String value = null;
+        Request request = ObjectModelHelper.getRequest(objectModel);
+        String context = request.getContextPath();
+        String uri = request.getRequestURI();
 
         try {
             value = "";
@@ -101,16 +106,26 @@ public class UnizhRedirectAction extends AbstractAction {
                 UnizhImpl unizhImpl = new UnizhImpl(document);
                 value = unizhImpl.getRedirectURI();
             }
+
             // no file found or it's not a redirect document type or href attribute is missing
             if (value == null) {
                 return null;
-
             } else {
                     Publication publication = document.getPublication();
-                    String context = "/lenya/" + publication.getId() + "/authoring/";
+    
+                    String liveContext = context + "/" + publication.getId() + "/live/";
+                    int start = liveContext.length(), pos = 0;
+                    String rootLevel = "";
+                    while ( (pos = uri.indexOf("/", start)) >= 0 )
+                    {
+                            rootLevel = rootLevel + "../";
+                            start = pos + 1;
+                    }
+
+                    String authLenyaContext = "/lenya/" + publication.getId() + "/authoring/";
                     String href = value;
-                    if (value.startsWith(context)) {
-                            href = value.substring(context.length());
+                    if (value.startsWith(authLenyaContext)) {
+                            href = rootLevel + value.substring(authLenyaContext.length());
                     }
 
                     Map map = new HashMap();
