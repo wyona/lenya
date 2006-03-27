@@ -600,7 +600,9 @@
 
 
   <xsl:template match="xhtml:p[parent::xhtml:body and ($rendertype != 'imageupload')]">
-    <xsl:apply-templates/>
+    <xsl:copy>
+      <xsl:apply-templates/>
+    </xsl:copy>
     <xsl:if test="xhtml:object[@float = 'true'] or preceding-sibling::xhtml:object[@float = 'true']">
       <br class="floatclear"/>
     </xsl:if>
