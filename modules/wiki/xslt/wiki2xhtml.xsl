@@ -28,6 +28,7 @@
 <xsl:param name="nodeid"/>
 <xsl:param name="area"/>
 <xsl:param name="publication"/>
+<xsl:param name="contextprefix"/>
 
 <xsl:template match="/">
   <div id="body">
@@ -163,19 +164,19 @@
     
     <!-- internal links --> 
     <xsl:when test="@label and @type = 'internal' and @exists = 'false'">
-      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@label"/></a><img src="/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/> 
+      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@label"/></a><img src="{$contextprefix}/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/> 
     </xsl:when>
 
     <xsl:when test="@label and @type = 'internal'">
-      <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
+      <a href="{$contextprefix}/{$publication}/{$area}{@href}.html"><xsl:value-of select="@label"/></a>
     </xsl:when>
     
     <xsl:when test="@type = 'internal' and @exists = 'false'">
-      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a><img src="/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/>
+      <a href="?doctype=wiki&#38;lenya.usecase=site.create&#38;documentId={@href}"><xsl:value-of select="@href"/></a><img src="{$contextprefix}/{$publication}/{$area}/new.png?lenya.module=wiki" alt="create new document"/>
     </xsl:when>
     
     <xsl:otherwise>
-        <a href="/{$publication}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
+        <a href="{$contextprefix}/{$publication}/{$area}{@href}.html"><xsl:value-of select="@href"/></a>
     </xsl:otherwise>
 </xsl:choose>
 </xsl:template>
@@ -206,7 +207,7 @@
 
 <xsl:template name="emoticon">
   <xsl:param name="icon_name" select="none.png"/>
-  <img alt="{$icon_name}" src="/{$publication}/{$area}/{$icon_name}.png?lenya.module=wiki"/>
+  <img alt="{$icon_name}" src="{$contextprefix}/{$publication}/{$area}/{$icon_name}.png?lenya.module=wiki"/>
 </xsl:template>
 
 </xsl:stylesheet> 

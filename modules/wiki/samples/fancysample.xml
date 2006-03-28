@@ -1,5 +1,7 @@
-! Example Wikidocument
+<?xml version="1.0"?>
 
+<wikisample xmlns="http://apache.org/lenya/pubs/default/1.0">
+  <wikicontent>
 Here you can see a few Wiki elements %)
 
 * This is a list
@@ -27,4 +29,5 @@ public void helloWorld() {
     System.out.println("Hello World");
 }
 }}}
-
+  </wikicontent>
+</wikisample>
