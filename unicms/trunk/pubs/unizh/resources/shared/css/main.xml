@@ -1161,10 +1161,11 @@ a.namedanchor {
 }
 .imgTextflussLeft {
 	float: right;
-	margin-left:10px;
+	margin-left:20px;
 	background-color:#E9E9F0;
 	display:block;
-	margin-top:5px;
+	margin-top:4px;
+	margin-bottom:5px;
 }
 .imgTextflussLeft a {
 	background-image:none;
