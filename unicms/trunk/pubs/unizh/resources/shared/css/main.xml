@@ -1072,8 +1072,8 @@ th.width105 {
         color: #cc3333;
 }
 
-td {
-       vertical-align: top;
+tr {
+       vertical-align: top; 
 }
 
 table.grid {
@@ -1194,5 +1194,7 @@ a.namedanchor {
 table.imgRightMitLegende tr td img {
   padding: 0px;
 }
-
+#servicenavpos input {    /* zu kleine Schrift im Suchfeld koorrigiert*/
+  	font-size: 1.0em;
+}
 </css>
