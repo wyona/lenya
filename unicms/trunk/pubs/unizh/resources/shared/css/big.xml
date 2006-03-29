@@ -870,6 +870,10 @@ input.optiontag {
 
 /* uni additions */
 
+.content  {
+	overflow: hidden;
+}
+
 .attention {
         color: #cc3333;
 }
