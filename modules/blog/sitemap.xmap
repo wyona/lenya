@@ -288,7 +288,7 @@
       <map:match pattern="*/feeds/*/lenya-page-body.xml">
         <map:aggregate element="cmsbody">
           <map:part src="cocoon:/{1}/feeds/{2}/index.xml"/>
-          <map:part src="context://lenya/pubs/{page-envelope:publication-id}/content/{1}/sidebar.xml"/>
+          <map:part src="lenya://lenya/pubs/{page-envelope:publication-id}/content/{1}/sidebar.xml"/>
           <map:part src="cocoon:/{1}/overview?struct=23"/>
         </map:aggregate>
 
@@ -307,7 +307,7 @@
           <map:parameter name="contextprefix" value="{request:contextPath}"/>
         </map:transform>
 
-<!-- TODO: replace "newblog" by {page-envelope:publication-id} and replace the lenya protocol by context -->
+<!-- TODO: replace "newblog" by {page-envelope:publication-id} -->
 
         <!-- TODO: Menus need to be pulled from module blog -->
         <map:serialize type="xml"/>
