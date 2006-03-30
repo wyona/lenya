@@ -27,6 +27,10 @@
 <module name="opendocument"/>
 <module name="cforms"/>
 <module name="homepage"/>
+<module name="wiki"/>
+<!--
+<module name="calendar"/>
+-->
 
 <!-- Copy this file to local.publication.xconf and uncomment and customize the content-dir below! -->
 <!--
