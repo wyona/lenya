@@ -24,12 +24,6 @@
     </a>&#160;
   </xsl:template>
 
-   <xsl:template match="lenya:asset-dot[@class='image']">
-    <a href="{@href}">
-      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>
-    </a>&#160;
-  </xsl:template>
-
   <xsl:template match="lenya:asset-dot[@class='floatImage']">
     <a href="{@href}">
       float
@@ -132,16 +126,54 @@
 
 
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
-      <xsl:if test="lenya:asset-dot">
-        <br class="floatclear"/>
-        <hr/>
-        <xsl:apply-templates select="lenya:asset-dot"/>
-        <br/>
-        <br/>
-      </xsl:if>
-    </xsl:copy>
+
+    <xsl:choose>
+      <xsl:when test="xhtml:object[@float = 'true']">
+        <div class="upload_block">
+          <xsl:copy>
+            <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
+          </xsl:copy>
+          <xsl:if test="lenya:asset-dot">
+              <br class="floatclear"/>
+            <hr/>
+            <xsl:apply-templates select="lenya:asset-dot"/>
+            <br/>
+            <br/>
+          </xsl:if>
+        </div>
+      </xsl:when>
+
+      <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
+        <div class="upload_block">
+          <xsl:apply-templates select="preceding-sibling::*[1]" mode="preprocess"/>
+          <xsl:copy>
+            <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
+          </xsl:copy>
+          <xsl:if test="lenya:asset-dot">
+              <br class="floatclear"/>
+            <hr/>
+            <xsl:apply-templates select="lenya:asset-dot"/>
+            <br/>
+            <br/>
+          </xsl:if>
+        </div>
+      </xsl:when>
+
+      <xsl:otherwise>
+        <div class="upload_block">
+          <xsl:copy>
+            <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
+          </xsl:copy>
+          <xsl:if test="lenya:asset-dot">
+              <br class="floatclear"/>
+            <hr/>
+            <xsl:apply-templates select="lenya:asset-dot"/>
+            <br/>
+            <br/>
+          </xsl:if>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
@@ -600,12 +632,32 @@
 
 
   <xsl:template match="xhtml:p[parent::xhtml:body and ($rendertype != 'imageupload')]">
-    <xsl:copy>
-      <xsl:apply-templates/>
-    </xsl:copy>
-    <xsl:if test="xhtml:object[@float = 'true'] or preceding-sibling::xhtml:object[@float = 'true']">
-      <br class="floatclear"/>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="xhtml:object[@float = 'true']">
+        <div class="img_block">
+          <xsl:copy>
+            <xsl:apply-templates/>
+          </xsl:copy>
+          <br class="floatclear"/>
+        </div>
+      </xsl:when>
+
+      <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
+        <div class="img_block">
+          <xsl:apply-templates select="preceding-sibling::*[1]" mode="preprocess"/>
+          <xsl:copy>
+            <xsl:apply-templates/>
+          </xsl:copy>
+          <br class="floatclear"/>
+        </div>
+      </xsl:when>
+
+      <xsl:otherwise>
+          <xsl:copy>
+            <xsl:apply-templates/>
+          </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 

@@ -1068,10 +1068,6 @@ th.width105 {
 
 /* uni additions */
 
-.content  {
-	overflow: hidden;
-}
-
 .attention {
         color: #cc3333;
 }
@@ -1159,13 +1155,25 @@ a.namedanchor {
   font-size: 11px;
 }
 
+/* image upload */
+.upload_block {
+	overflow:hidden;
+	margin-bottom:20px
+}
+
+/* floating image */
+.img_block {
+	overflow:hidden;
+	margin-bottom:20px
+}
+
 /* right-aligned image */
 .imgTextflussLeft .legende {
 	display:block;
 }
 .imgTextflussLeft {
 	float: right;
-	margin-left:20px;
+	margin-left:10px;
 	background-color:#E9E9F0;
 	display:block;
 	margin-top:4px;

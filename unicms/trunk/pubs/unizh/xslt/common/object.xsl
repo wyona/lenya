@@ -14,7 +14,20 @@
   <xsl:param name="rendertype"/>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(xhtml:div[@class = 'caption']) and not(@popup = 'true')]">
+  <xsl:template match="xhtml:object" mode="preprocess">
+    <xsl:choose>
+      <xsl:when test="xhtml:div[@class = 'caption'] or (@popup = 'true')">
+        <xsl:apply-templates select="." mode="withCaption"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="." mode="plain"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object" mode="plain">
+
     <div>
       <xsl:attribute name="class">
         <xsl:choose>
@@ -71,7 +84,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and (xhtml:div[@class = 'caption'] or (@popup = 'true'))]">
+  <xsl:template match="xhtml:object" mode="withCaption">
     <table border="0" cellpadding="0" cellspacing="0">
       <xsl:attribute name="class">
         <xsl:choose>
@@ -146,7 +159,7 @@
 
   <xsl:template match="xhtml:object[ancestor::xhtml:table]">
     <xsl:choose>
-      <xsl:when test="xhtml:div[@class = 'caption']"> <!-- deprecated -->
+      <xsl:when test="xhtml:div[@class = 'caption']"> 
         <table width="100" border="0" cellpadding="0" cellspacing="0" class="imgMitLegende">
           <tr>
             <td class="flexibleimage">
@@ -318,6 +331,19 @@
         </xsl:choose>
       </xsl:otherwise>
     </xsl:choose> 
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object[ancestor::xhtml:body]">
+    <xsl:choose>
+      <xsl:when test="not(@float = 'true') or not(parent::xhtml:body)">
+        <xsl:apply-templates select="." mode="preprocess"/>
+      </xsl:when>
+      <xsl:when test="name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p'"/>
+      <xsl:otherwise>
+        <xsl:apply-templates select="." mode="preprocess"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
