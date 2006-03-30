@@ -288,23 +288,30 @@
       <map:match pattern="*/feeds/*/lenya-page-body.xml">
         <map:aggregate element="cmsbody">
           <map:part src="cocoon:/{1}/feeds/{2}/index.xml"/>
-          <map:part src="lenya://lenya/pubs/newblog/content/{1}/sidebar.xml"/>
+          <map:part src="context://lenya/pubs/{page-envelope:publication-id}/content/{1}/sidebar.xml"/>
           <map:part src="cocoon:/{1}/overview?struct=23"/>
         </map:aggregate>
+
         <map:transform src="xslt/links.xsl">
           <map:parameter name="area" value="{1}"/>
           <map:parameter name="relpath" value="."/>  	
         </map:transform>
         <map:serialize type="xml"/>
       </map:match>
+
+
       <map:match pattern="*/feeds/*/index.html">
         <map:generate src="cocoon:/{1}/feeds/{2}/lenya-page-body.xml"/>
         <map:transform type="xalan" src="xslt/feed/main-{1}.xsl">
           <map:parameter name="relative2root" value="../.."/>
           <map:parameter name="contextprefix" value="{request:contextPath}"/>
         </map:transform>
+
+<!-- TODO: replace "newblog" by {page-envelope:publication-id} and replace the lenya protocol by context -->
+
         <!-- TODO: Menus need to be pulled from module blog -->
         <map:serialize type="xml"/>
+
         <map:select type="browser">
           <map:when test="mozilla5DISABLED">
             <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{1}/feed.xml?uiml=xul"/>
