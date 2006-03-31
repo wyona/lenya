@@ -15,6 +15,7 @@
 
 <include href="lenya.rng"/>
 <include href="unizh.rng"/>
+<include href="sql.rng"/>
 
 
 <!-- include original XHTML schema -->
@@ -195,6 +196,7 @@
     <ref name="unizh.children"/>
     <ref name="iframe"/>
     <ref name="unizh.toplink"/>
+    <ref name="sql.execute-query"/>
   </choice>
 </define>
 
@@ -205,6 +207,5 @@
     <ref name="unizh.attention"/>
   </choice>
 </define>
-
 
 </grammar>

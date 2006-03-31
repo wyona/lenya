@@ -37,7 +37,7 @@
 <property name="export.server-port" value=""/>
 <property name="export.context-path" value=""/>
 <property name="export.dir" value="work/export/pending"/>
-<property name="export.expression" value="/lenya/unitemplate/live/"/>
+<property name="export.expression" value="/lenya/additions/live/"/>
 <property name="export.replacement" value="/"/>
 <property name="export.uris" value=""/>
 

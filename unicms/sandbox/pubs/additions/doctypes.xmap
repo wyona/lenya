@@ -149,7 +149,7 @@
 
       <map:match pattern ="redirect-*-*/*/live/**.html">
         <map:act type="redirect">
-          <map:redirect-to global="true" uri="{href}"/>
+          <map:redirect-to global="true" uri="{request:contextPath}/{../3}/live/{href}"/>
         </map:act>
       </map:match>
 
@@ -285,6 +285,15 @@
           <map:parameter name="fontsize" value="{request-param:fontsize}"/>
         </map:transform> 
         <map:transform type="session"/>
+
+<!-- SQLTransfomer starts here
+        <map:transform type="sql" label="raw">
+           <map:parameter name="dburl" value="jdbc:mysql://mysql.host:3306/database?autoReconnect=true"/>
+           <map:parameter name="username" value="name"/>
+           <map:parameter name="password" value="password"/>
+        </map:transform>
+        <map:transform src="lenya/xslt/databases/sql2html.xsl"/>
+-->
 
         <map:call resource="transformation">
           <map:parameter name="publication-id" value="{4}"/>

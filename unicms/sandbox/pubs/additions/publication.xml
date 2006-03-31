@@ -2,7 +2,7 @@
 <!-- $Id: publication.xml,v 1.6 2005/01/07 13:37:46 michi Exp $ -->
 
 <lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
-  <lenya:name>Unitemplate</lenya:name>
+  <lenya:name>UniCMS Additions</lenya:name>
   <lenya:pub-version>1.0.1-dev</lenya:pub-version>
   <lenya:lenya-version>1.2.3-dev</lenya:lenya-version>
   <lenya:cocoon-version>2.1.7</lenya:cocoon-version>
