@@ -105,7 +105,7 @@
           <xsl:call-template name="object">
             <xsl:with-param name="width">
               <xsl:choose>
-                <xsl:when test="not(@width) or (@width = '')">
+                <xsl:when test="not(@width) or (@width = '') or (@popup = 'true')">
                   <xsl:text>204</xsl:text>
                 </xsl:when>
                 <xsl:when test="(@float = 'true') and not(@align = 'right')">
@@ -334,7 +334,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body]">
+  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:links) and not(parent::unizh:lead)]">
     <xsl:choose>
       <xsl:when test="not(@float = 'true') or not(parent::xhtml:body)">
         <xsl:apply-templates select="." mode="preprocess"/>
