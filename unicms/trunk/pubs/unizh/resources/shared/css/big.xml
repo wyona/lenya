@@ -926,13 +926,11 @@ a.namedanchor {
 /* image upload */
 .upload_block {
 	overflow:hidden;
-	margin-bottom:20px
 }
 
 /* floating image */
 .img_block {
 	overflow:hidden;
-	margin-bottom:20px
 }
 
 /* right-aligned image */
