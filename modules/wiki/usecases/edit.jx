@@ -95,7 +95,7 @@
                  for deeper indentations.
 
 !, !!, !!!       Start a line with an exclamation mark (!) to make a heading.
-                 More exclamation marks mean bigger headings.
+                 More exclamation marks mean smaller headings.
 
 __text__         Makes text bold.
 ^^text^^         Makes text underline.
