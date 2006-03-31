@@ -3,14 +3,12 @@
 $Id: sitetree.xml,v 1.3 2004/11/24 11:48:44 jann Exp $
 -->
 <site xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" label="Authoring">
-	<node id="index">
-		<label xml:lang="de">UniTemplate</label>
-		<label xml:lang="en">UniTemplate</label>
-	</node>
-	
-	
+<node id="index">
+<label xml:lang="de">UniCMS Additions</label>
+<label xml:lang="en">UniCMS Additions</label>
+</node>
 
-	<node id="xhtml" visibleinnav="true">
+<node id="xhtml" visibleinnav="true">
 <label xml:lang="de">Allgemeine Dokumenttypen</label>
 <node id="1column" visibleinnav="true">
 <label xml:lang="de">1 Spalte</label>
@@ -58,5 +56,11 @@ $Id: sitetree.xml,v 1.3 2004/11/24 11:48:44 jann Exp $
 
 <node id="redirect" visibleinnav="true">
 <label xml:lang="de">Redirect</label>
+</node>
+<node id="newstuff" visibleinnav="true">
+<label xml:lang="de">newstuff</label>
+<node id="database" visibleinnav="true">
+<label xml:lang="de">database</label>
+</node>
 </node>
 </site>
