@@ -334,7 +334,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table)]">
+  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
     <xsl:choose>
       <xsl:when test="not(@float = 'true') or not(parent::xhtml:body)">
         <xsl:apply-templates select="." mode="preprocess"/>
