@@ -169,13 +169,14 @@ public class CacheHandler {
         String path=File.separator;
         
         String parentId = node.getAbsoluteParentId();
+        String documentId = node.getAbsoluteId();
         
         if (parentId.indexOf(File.separator) == -1){
             path = File.separator;
         } else  {
             path = parentId;
         }
-        // if (isLive && task.equals("publish")) path = documentId;
+        if (isLive && task.equals("publish")) path = documentId+"/index_de.xml";
         
         return path;
     }
