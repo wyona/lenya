@@ -14,22 +14,23 @@
       <div style="float:right;width:195px;">
         <div class="imgunilogo">
           <a href="http://www.unizh.ch">
-            <img src="{$localsharedresources}/images/logo_{$language}.gif" alt="unizh logo" width="180" height="45" border="0" />
+            <img src="{$localsharedresources}/images/logo_{$language}.gif" alt="unizh logo" width="180" height="45" />
           </a>
         </div>
         <div class="imginstitute">
-          <img src="{$localsharedresources}/images/key-visual.jpg" alt="institute's picture" width="180" height="45" border="0" />
+          <img src="{$localsharedresources}/images/key-visual.jpg" alt="institute's picture" width="180" height="45" />
         </div>
       </div>
       <div id="headertitelpos">
         <xsl:apply-templates select="/document/xhtml:div[@id = 'servicenav']"/>
         <xsl:choose>
           <xsl:when test="$document-element-name = 'unizh:homepage' or $document-element-name = 'unizh:homepage4cols'">
-            <h2>
-              <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:superscription">
+            <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:superscription">
+              <h2>
                 <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
-              </div>
-            </h2>
+              
+              </h2>
+            </div>
             <h1>
               <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:heading">
                 <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>

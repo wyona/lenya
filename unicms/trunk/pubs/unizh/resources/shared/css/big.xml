@@ -966,7 +966,7 @@ a.namedanchor {
 	padding:0px;
 	margin:0px;
 }
-*html .imgRightMitLegende {
+* html .imgRightMitLegende {
 	margin-top:14px;
 }
 table.imgRightMitLegende tr td img {

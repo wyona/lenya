@@ -722,7 +722,7 @@ ol.list a {
 	margin-bottom:5px;
 	margin-top:5px;
 }
-*html .imgMitLegende {
+* html .imgMitLegende {
 	margin-top:14px;
 }
 
@@ -766,7 +766,7 @@ ol.list a {
 .teaserImg {
 	margin-bottom:3px;
 }
-*html .teaserImg {
+* html .teaserImg {
 	margin-bottom:6px;
 }
 .teaser64long {
@@ -1198,7 +1198,7 @@ a.namedanchor {
 	padding:0px;
 	margin:0px;
 }
-*html .imgRightMitLegende {
+* html .imgRightMitLegende {
 	margin-top:14px;
 }
 table.imgRightMitLegende tr td img {
