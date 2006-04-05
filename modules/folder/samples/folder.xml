@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Media docu</title>
+  </head>
+  <body>
+    <div id="mediaTypeBXE">
+      <h2>Edit this</h2>
+      <p>Add more infos for the media file</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'folder']">
+
+  <component-instance name="folder" logger="lenya.resourcetypes.folder" class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+<!--
+    <schema language="http://relaxng.org/ns/structure/0.9" src="fallback://lenya/modules/folder/resources/schema/folder.rng"/>
+-->
+    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+      <sample-name>fallback://lenya/modules/folder/samples/folder.xml</sample-name>
+    </creator>
+    <format name="xhtml" uri="cocoon://modules/folder/xhtml.xml"/>
+
+<!--
+    <format name="luceneIndex" uri="cocoon://modules/xhtml/lucene-index.xml"/>
+    <format name="webdavGET" uri="cocoon://modules/xhtml/davget.xml"/>
+-->
+  </component-instance>
+
+</xconf>
