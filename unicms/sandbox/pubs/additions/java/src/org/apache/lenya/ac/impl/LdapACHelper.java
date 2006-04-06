@@ -50,7 +50,6 @@ public class LdapACHelper {
             // Create the builder and parse the file
             Document doc = factory.newDocumentBuilder().parse(
                     new File(filename));
-            System.out.println("DOM Doc created");
             return doc;
         } catch (SAXException e) {
             // A parsing error occurred; the xml input is not valid
