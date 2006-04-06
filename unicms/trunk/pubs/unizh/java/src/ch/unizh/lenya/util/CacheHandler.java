@@ -90,11 +90,12 @@ public class CacheHandler {
         Publication pub = liveVersion.getResource().getPublicationWrapper().getPublication();
         
         String area = liveVersion.getDocument().getArea();
+        String language = liveVersion.getDocument().getLanguage();
         siteTree = pub.getTree(area);
         SiteTreeNode node = siteTree.getNode(liveVersion.getDocument().getId());
         
         if (node != null) {
-            path = setPath(node, isLive, task);
+            path = setPath(node, isLive, task, language);
         
             File pubDir = pub.getDirectory();
             String pubId = pub.getId();
@@ -164,7 +165,7 @@ public class CacheHandler {
      * @return A String
      * 
      */  
-    protected String setPath(SiteTreeNode node, boolean isLive, String task) {
+    protected String setPath(SiteTreeNode node, boolean isLive, String task, String language) {
         
         String path=File.separator;
         
@@ -176,7 +177,7 @@ public class CacheHandler {
         } else  {
             path = parentId;
         }
-        if (isLive && task.equals("publish")) path = documentId+"/index_de.xml";
+        if (isLive && task.equals("publish")) path = documentId+"/index_" + language + ".xml";
         
         return path;
     }
