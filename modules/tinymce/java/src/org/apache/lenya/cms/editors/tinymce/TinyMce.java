@@ -71,16 +71,16 @@ public class TinyMce extends DocumentUsecase {
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doCheckPreconditions()
      */
     protected void doCheckPreconditions() throws Exception {
-        super.doCheckPreconditions();
-        if (!WorkflowUtil.canInvoke(this.manager,
-                getSession(),
-                getLogger(),
-                getSourceDocument(),
-                getEvent())) {
-            addErrorMessage("error-workflow-document", new String[] { getEvent(),
-                    getSourceDocument().getId() });
-        }
-    }
+      super.doCheckPreconditions();
+      if (!WorkflowUtil.canInvoke(this.manager,
+              getSession(),
+              getLogger(),
+              getSourceDocument(),
+              getEvent())) {
+          addErrorMessage("error-workflow-document", new String[] { getEvent(),
+                  getSourceDocument().getId() });
+      }
+  }
 
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doExecute()
@@ -97,10 +97,17 @@ public class TinyMce extends DocumentUsecase {
         // Aggregate content
         Request request = ContextHelper.getRequest(this.context);
         String encoding = request.getCharacterEncoding();
+        // TODO why is tinymce not outputting the html tag ??
         String content = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n"
-                + "<html " + namespaces + ">" + getParameterAsString("content") + "</html>";
-        // ToDo: set replacements in an properties file
-        content = content.replaceAll("&nbsp;","&#160;");
+                + "<html " + namespaces + "><head><title></title></head><body>" + getParameterAsString("content") + "</body></html>";
+        
+        // strip new lines, otherwise breaks tags
+        //content = content.replaceAll("[\r\n]", "");
+        
+        if (getLogger().isDebugEnabled()) {
+          getLogger().debug(content);
+        }
+
         saveDocument(encoding, content);
     }
 
@@ -133,7 +140,7 @@ public class TinyMce extends DocumentUsecase {
                 ResourceType resourceType = getSourceDocument().getResourceType();
                 Schema schema = resourceType.getSchema();
 
-                //FIXME ValidationUtil.validate(this.manager, xmlDoc, schema, new UsecaseErrorHandler(this));
+                ValidationUtil.validate(this.manager, xmlDoc, schema, new UsecaseErrorHandler(this));
 
                 if (!hasErrors()) {
                     WorkflowUtil.invoke(this.manager,
@@ -210,19 +217,8 @@ public class TinyMce extends DocumentUsecase {
         return ns;
     }
 
-    /**
-     * Add namespaces
-     * @param namespaces The namespaces to add
-     * @param content The content to add them to
-     * @return The content with the added namespaces
-     */
-    private String addNamespaces(String namespaces, String content) {
-        int i = content.indexOf(">");
-        return content.substring(0, i) + " " + namespaces + content.substring(i);
-    }
-
-    protected String getEvent() {
-        return "edit";
-    }
-
+  protected String getEvent() {
+      return "edit";
+  }
+  
 }
