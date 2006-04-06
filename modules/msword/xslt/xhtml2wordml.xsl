@@ -14,10 +14,6 @@
       <xsl:attribute name="xml:space">preserve</xsl:attribute>
       <xsl:copy-of select="$styles-element"/>
       <w:docPr>
-        <!-- This only works if you're using Word 2003 standalone or
-             Office 2003 Professional -->
-        <w:useXSLTWhenSaving/>
-        <w:saveThroughXSLT w:xslt="wordml2xhtml.xsl"/>
         <w:documentProtection w:formatting="on" w:enforcement="on"/>
       </w:docPr>
       <w:body>
