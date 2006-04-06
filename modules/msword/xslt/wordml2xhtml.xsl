@@ -12,9 +12,7 @@
   <xsl:template match="w:wordDocument">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0">
       <head>
-        <title>
-          <xsl:value-of select="o:DocumentProperties/o:Title"/>
-        </title>
+        <title>Title</title>
       </head>
       <body>
         <xsl:apply-templates/>
@@ -172,8 +170,5 @@
     <img alt="{v:shape/v:imagedata/@o:title}" src="{substring-after(v:shape/v:imagedata/@src, 'wordml://')}"/>
   </xsl:template>
  -->
-  <xsl:template match="@*|node()">
-    <xsl:apply-templates/>
-  </xsl:template>
 
 </xsl:stylesheet>
