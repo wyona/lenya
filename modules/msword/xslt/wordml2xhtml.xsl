@@ -1,14 +1,16 @@
 <xsl:stylesheet version="1.0"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
     xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint"
     xmlns:o="urn:schemas-microsoft-com:office:office"
-    exclude-result-prefixes="w wx o">
+    xmlns:v="urn:schemas-microsoft-com:vml"
+    exclude-result-prefixes="w wx o v">
 
   <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
   <xsl:template match="w:wordDocument">
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0">
       <head>
         <title>
           <xsl:value-of select="o:DocumentProperties/o:Title"/>
@@ -32,9 +34,18 @@
 
   <!-- Convert <w:p> paragraphs to <p> paragraphs -->
   <xsl:template match="w:p">
-    <p>
-      <xsl:apply-templates mode="p"/>
-    </p>
+    <xsl:choose>
+      <xsl:when test="w:pPr/w:listPr">
+        <xsl:if test="not(preceding-sibling::w:p[1]/w:pPr/w:listPr)">
+          <xsl:apply-templates select="." mode="list-begin"/>
+        </xsl:if>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>
+          <xsl:apply-templates mode="p"/>
+        </p>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- turn a run with the "Heading1" character style into <h1> -->
@@ -86,6 +97,7 @@
   <!-- default behavior for text runs; copy the text through -->
   <xsl:template match="w:r" mode="p">
     <xsl:copy-of select="w:t/text()"/>
+    <!-- <xsl:apply-templates select="w:pict"/> -->
   </xsl:template>
   
   <!-- turn a run with the "Emphasis" character style into <emphasis> -->
@@ -110,7 +122,56 @@
       <xsl:apply-templates mode="p"/>
     </a>
   </xsl:template>
+  
+  <!-- Tables -->
 
+  <xsl:template match="w:tbl">
+    <table>
+      <xsl:apply-templates select="w:tr"/>
+    </table>
+  </xsl:template>
+
+  <xsl:template match="w:tr">
+    <tr>
+      <xsl:apply-templates select="w:tc"/>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="w:tc">
+    <td>
+      <xsl:if test="w:tcPr/w:gridSpan/@w:val">
+        <xsl:attribute name="colspan">
+          <xsl:value-of select="w:tcPr/w:gridSpan/@w:val"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:apply-templates select="w:p"/>
+    </td>
+  </xsl:template>
+
+  <!-- Lists -->
+
+  <xsl:template match="w:p" mode="list-begin">
+    <ol>
+      <xsl:apply-templates select="." mode="list-item-next"/>
+    </ol>
+  </xsl:template>
+
+  <xsl:template match="w:p" mode="list-item-next">
+    <li>
+      <xsl:apply-templates mode="p"/>
+    </li>
+    <xsl:variable name="next" select="following-sibling::w:p[1]"/>
+    <xsl:if test="$next/w:pPr/w:listPr">
+      <xsl:apply-templates select="$next" mode="list-item-next"/>
+    </xsl:if>
+  </xsl:template>
+
+  <!-- Images -->
+<!-- 
+  <xsl:template match="w:pict">
+    <img alt="{v:shape/v:imagedata/@o:title}" src="{substring-after(v:shape/v:imagedata/@src, 'wordml://')}"/>
+  </xsl:template>
+ -->
   <xsl:template match="@*|node()">
     <xsl:apply-templates/>
   </xsl:template>
