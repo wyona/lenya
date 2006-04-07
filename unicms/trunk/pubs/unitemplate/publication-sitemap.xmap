@@ -27,7 +27,7 @@
     <map:selectors>
        <map:selector name="validate-cache" logger="sitemap.selector.validate-cache" src="org.apache.cocoon.selection.ValidateCacheSelector">
           <!-- define the expires value in s -->
-          <cache-expires>1800</cache-expires>
+          <cache-expires>86400</cache-expires>
        </map:selector>
     </map:selectors>
     
