@@ -283,11 +283,12 @@ public boolean authenticate(Request request) throws AccessControlException {
         authenticated = super.authenticate(request);
         return authenticated;
     }
+
     /**
-     * Returns the absolute path to the context
+     * Determines the publications from the url
      * 
-     * @param url
-     *            The webapp url.
+     * @param url: The webapp url.
+     * 
      */
     protected Publication getPublication(String url)
             throws AccessControlException {
@@ -317,7 +318,16 @@ public boolean authenticate(Request request) throws AccessControlException {
         }
         return publication;
     }
-
+    
+    /**
+     * Read policy files and put all occurring groups into a vector
+     * 
+     * @param doc: The Document belonging to the request
+     *        url: The respective url
+     * @return A vector containing all groups found in the policy file 
+     * 
+     * FIXME: hack! Use the lenya API to get the groups
+     */
     protected Vector getAcGroups(Document doc, String url) {
 
         Vector groups = new Vector();
@@ -325,9 +335,10 @@ public boolean authenticate(Request request) throws AccessControlException {
         
         File parent = doc.getFile().getParentFile();
         String parentPath = parent.getAbsolutePath();
-        String documentPath = parentPath.substring(parentPath.indexOf(doc.getArea()));
+        String areaPrefix = File.separator + doc.getArea();
+        String documentPath = parentPath.substring(parentPath.indexOf(areaPrefix));
         
-        while ((!documentPath.equalsIgnoreCase(doc.getArea())) && (ii < 10 )){
+        while ((!documentPath.equalsIgnoreCase(areaPrefix)) && (ii < 10 )){
             
             File policyDir = new File(doc.getPublication().getDirectory().getAbsolutePath()
                     + File.separator + "config/ac/policies");
@@ -341,7 +352,7 @@ public boolean authenticate(Request request) throws AccessControlException {
             } else {
                 parent = parent.getParentFile();
                 parentPath = parent.getAbsolutePath();
-                documentPath = parentPath.substring(parentPath.indexOf(doc.getArea()));
+                documentPath = parentPath.substring(parentPath.indexOf(areaPrefix));
             }
             ii++;
         }
@@ -349,8 +360,19 @@ public boolean authenticate(Request request) throws AccessControlException {
         return groups;
     }
     
+    /**
+     * Determines whether the user which tries to login is in the respective 
+     * 
+     * @param groupid: The groupid to check for a user
+     *        username: The username to check for
+     *        configdir: A File pointng to the AC-Directory 
+     * @return boolean  
+     * 
+     * TODO: The relation userTOgroup is stored in a file. It is hardcoded as .htgroup i.e. very
+     *       IT Service specific. Use a more generic approach....
+     */  
     protected boolean userIsInGroup (String groupId, String userName, File configDir){
-        
+ 
         Vector allIds = new Vector();
         if (configDir.exists()){
             String htGroupFile = configDir.getAbsolutePath() + File.separator + ".htgroup";
@@ -360,7 +382,19 @@ public boolean authenticate(Request request) throws AccessControlException {
         }
         return false;
     }
-    
+
+    /**
+     * Generate a LdapUser on the fly and use super.authenticate. 
+     * Note: that user does not occur in the system but only in 
+     * the Ldap Server.
+     * 
+     * @param reuest: 
+     *        username: The username to authenticate 
+     *        configdir: A File pointng to the AC-Directory 
+     * @return boolean  
+     * 
+     */  
+ 
     protected boolean authenticateLdapUser(Request request, String userName, File configDir) throws AccessControlException {
 
         boolean authenticated = false;
