@@ -3,6 +3,8 @@
   xmlns="http://www.w3.org/1999/xhtml" xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0">
 
   <xsl:param name="chosenlanguage"/>
+  <xsl:param name="context-prefix"/>
+  <xsl:param name="root"/>
 
   <xsl:template match="nav:fragment">
     <div id="body">
@@ -15,7 +17,9 @@
   <xsl:template match="nav:node">
     <li>
       <a>
-        <xsl:copy-of select="@href"/>
+        <xsl:attribute name="href">
+          <xsl:value-of select="$context-prefix"/><xsl:value-of select="$root"/>/<xsl:value-of select="@href"/>
+        </xsl:attribute>
         <xsl:apply-templates select="nav:label"/>
       </a>
     </li>
