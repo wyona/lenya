@@ -2,7 +2,7 @@
 
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
   <map:pipelines>
-
+    
     <map:pipeline>
       <!-- pattern="{rendertype}" -->
       <!-- pattern="modules/folder/xhtml.xml" -->
@@ -13,15 +13,22 @@
           <map:parameter name="documentid" value="{page-envelope:document-id}"/>
           <map:parameter name="initial" value="false"/>
         </map:generate>
-        <map:transform src="fallback://lenya/modules/sitetree/xslt/navigation/sitetree2nav.xsl">
+        <map:transform
+          src="fallback://lenya/modules/sitetree/xslt/navigation/sitetree2nav.xsl">
           <map:parameter name="url" value="{1}"/>
-          <map:parameter name="chosenlanguage" value="{page-envelope:document-language}"/>
-          <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
+          <map:parameter name="chosenlanguage"
+            value="{page-envelope:document-language}"/>
+          <map:parameter name="defaultlanguage"
+            value="{page-envelope:default-language}"/>
         </map:transform>
-        <map:transform src="fallback://lenya/modules/folder/xslt/folder2xhtml.xsl">
-          <map:parameter name="chosenlanguage" value="{page-envelope:document-language}"/>
-          <map:parameter name="context-prefix" value="{page-envelope:context-prefix}"/>
-          <map:parameter name="root" value="{base-url:{page-envelope:publication-id}:{page-envelope:area}}"/>
+        <map:transform
+          src="fallback://lenya/modules/folder/xslt/folder2xhtml.xsl">
+          <map:parameter name="chosenlanguage"
+            value="{page-envelope:document-language}"/>
+          <map:parameter name="context-prefix"
+            value="{page-envelope:context-prefix}"/>
+          <map:parameter name="root"
+            value="{base-url:{page-envelope:publication-id}:{page-envelope:area}}"/>
         </map:transform>
         <map:serialize type="xml"/>
       </map:match>
