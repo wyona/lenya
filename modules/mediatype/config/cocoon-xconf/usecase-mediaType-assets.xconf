@@ -22,6 +22,6 @@
 
   <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'create.media.assets']">
     <component-instance name="create.media.assets" logger="lenya.site" class="org.apache.lenya.cms.site.usecases.MediaAssets">
-      <view template="modules/mediaType/usecases/mediaType-assets.jx" menu="true"/>
+      <view template="modules/mediatype/usecases/mediatype-assets.jx" menu="true"/>
     </component-instance>
   </xconf>

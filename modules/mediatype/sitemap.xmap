@@ -48,7 +48,7 @@ limitations under the License.
           </map:generate>
           <map:transform src="fallback://lenya/xslt/rc/toDoc.xsl"/>
           <map:transform
-          src="fallback://lenya/modules/mediaType/xslt/mediaType2xhtml.xsl">
+          src="fallback://lenya/modules/mediatype/xslt/mediatype2xhtml.xsl">
           <map:parameter name="document-type" value="{page-envelope:document-type}"/>
           <map:parameter name="nodeid" value="{page-envelope:document-name}"/>
           <map:parameter name="language"
@@ -70,7 +70,7 @@ limitations under the License.
           <map:part src="cocoon:/lenyametadata.xml"/>
           </map:aggregate>
         <map:transform
-          src="fallback://lenya/modules/mediaType/xslt/mediaType2xhtml.xsl">
+          src="fallback://lenya/modules/mediatype/xslt/mediatype2xhtml.xsl">
           <map:parameter name="document-type" value="{page-envelope:document-type}"/>
           <map:parameter name="nodeId" value="{page-envelope:document-name}"/>
           <map:parameter name="documentId" value="{page-envelope:document-id}"/>

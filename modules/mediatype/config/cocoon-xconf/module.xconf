@@ -17,17 +17,17 @@
 
 <!-- $Id:$ -->
 
-<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'mediaType']">
+<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'mediatype']">
 
-  <component-instance name="mediaType"
-                      logger="lenya.resourcetypes.mediaType"
+  <component-instance name="mediatype"
+                      logger="lenya.resourcetypes.mediatype"
                       class="org.apache.lenya.cms.publication.ResourceTypeImpl">
-    <schema src="fallback://lenya/modules/mediaType/resources/schemas/mediaType.rng" language="http://relaxng.org/ns/structure/0.9"/>
+    <schema src="fallback://lenya/modules/mediatype/resources/schemas/mediatype.rng" language="http://relaxng.org/ns/structure/0.9"/>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/modules/mediaType/samples/mediaType.xml</sample-name>
+      <sample-name>fallback://lenya/modules/mediatype/samples/mediatype.xml</sample-name>
     </creator>
     <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
-    <format name="xhtml" uri="cocoon://modules/mediaType/xhtml.xml"/>
+    <format name="xhtml" uri="cocoon://modules/mediatype/xhtml.xml"/>
   </component-instance>
 
 </xconf>

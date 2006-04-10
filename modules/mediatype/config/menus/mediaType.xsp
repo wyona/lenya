@@ -38,13 +38,13 @@
     <menus>
       <menu i18n:attr="name" name="File">
         <block admin="false">
-          <item uc:usecase="create.media.assets" href="?doctype=mediaType"><i18n:text>New media type page</i18n:text></item>
+          <item uc:usecase="create.media.assets" href="?doctype=mediatype"><i18n:text>New media type page</i18n:text></item>
         </block>
       </menu>
       <menu i18n:attr="name" name="Edit">
           <xsp:logic>
             String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
-            if ("mediaType".equals(doctype)) {
+            if ("mediatype".equals(doctype)) {
                 <block info="false">
                   <item wf:event="edit" uc:usecase="edit.bxe" href="?"><i18n:text>With BXE</i18n:text></item>
                   <item wf:event="edit" uc:usecase="edit.oneform" href="?"><i18n:text>With one Form</i18n:text></item>
@@ -54,9 +54,9 @@
       </menu>
       <menu i18n:attr="name" name="Workflow">
         <xsp:logic>
-          if ("mediaType".equals(doctype)) {
+          if ("mediatype".equals(doctype)) {
             <block>
-              <item uc:usecase="mediaType.publish" wf:event="publish" href="?"><i18n:text>Publish mediaType</i18n:text></item>
+              <item uc:usecase="mediatype.publish" wf:event="publish" href="?"><i18n:text>Publish mediatype</i18n:text></item>
             </block>
           }
         </xsp:logic>

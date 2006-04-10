@@ -13,7 +13,7 @@
   xmlns:dcterms="http://purl.org/dc/terms/"
   exclude-result-prefixes="xhtml lenya mobi dc">
   
-  <xsl:import href="fallback://lenya/modules/mediaType/xslt/common/mimetype.xsl"/>
+  <xsl:import href="fallback://lenya/modules/mediatype/xslt/common/mimetype.xsl"/>
   <xsl:include href="fallback://lenya/modules/xhtml/xslt/helper-object.xsl"/>
   <xsl:param name="root"/> <!-- the URL up to (including) the area -->
   <xsl:param name="documentId"/>
@@ -23,7 +23,7 @@
   <xsl:param name="documentParent"/>
   <xsl:param name="title"/>
   <xsl:variable name="imageprefix"
-    select="concat($context-prefix,'/modules/mediaType')"/>
+    select="concat($context-prefix,'/modules/mediatype')"/>
   <xsl:variable name="nodeid"
     select="concat($context-prefix,$root,$documentParent)"/>
   
@@ -33,7 +33,7 @@
       <xsl:apply-templates select="//xhtml:body/*"/>
     </xhtml:div>
   </xsl:template>
-  <xsl:template match="*[@id='mediaTypeBXE']">
+  <xsl:template match="*[@id='mediatypeBXE']">
     <div>
       <xsl:attribute name="bxe_xpath">//*[@id = '<xsl:value-of select="@id"/>']</xsl:attribute>
       <xsl:copy-of select="@*"/>

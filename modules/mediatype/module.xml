@@ -3,7 +3,7 @@
 <!-- $Id: publication.xml 374687 2006-02-03 15:24:55Z michi $ -->
 
 <lenya:module xmlns:lenya="http://apache.org/lenya/module/1.0">
-  <lenya:id>org.wyona.lenya.modules.mediaType</lenya:id>
+  <lenya:id>org.wyona.lenya.modules.mediatype</lenya:id>
   <lenya:package>org.wyona.lenya.modules</lenya:package>
   <lenya:version>0.1-dev</lenya:version>
   <lenya:name>Media Type Module</lenya:name>
