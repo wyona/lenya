@@ -9,17 +9,19 @@
   >
   
   <xsl:template match="rss/channel">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <xsl:apply-templates select="item"></xsl:apply-templates>
+    <table style="font-size: 80%;" border="0" cellspacing="0" cellpadding="0" width="389">
+      <tr>
+        <xsl:apply-templates select="item[1]"></xsl:apply-templates>
+        <xsl:apply-templates select="item[2]"></xsl:apply-templates>
+      </tr>
     </table>
   </xsl:template>
 
+  
   <xsl:template match="image">
     <a>
-      <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
-      <img border="0">
-        <xsl:attribute name="width"><xsl:value-of select="width"/></xsl:attribute>
-        <xsl:attribute name="height"><xsl:value-of select="height"/></xsl:attribute>
+      <xsl:attribute name="href"><xsl:value-of select="../../link"/></xsl:attribute>
+      <img border="0" width="80" height="60">
         <xsl:attribute name="alt"><xsl:value-of select="title"/></xsl:attribute>
         <xsl:attribute name="src"><xsl:value-of select="url"/></xsl:attribute>
       </img>    
@@ -37,22 +39,19 @@
       </img>    
     </a>
   </xsl:template>
-
+  
   <xsl:template match="item">
-    <tr>
       <td>
         <xsl:apply-templates select="image"></xsl:apply-templates>
       </td>
       <td>&#160;</td>
-      <td>
+      <td widht="112">
         <a>
           <xsl:attribute name="href"><xsl:value-of select="../link"/></xsl:attribute>
           <span class="tsr-title"><xsl:value-of select="title"/></span>
         </a>
       </td>
       <td>&#160;</td>
-    </tr>
-    
   </xsl:template>
 
 </xsl:stylesheet>
