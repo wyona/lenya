@@ -17,13 +17,13 @@
   <resource-type workflow="fallback://config/workflow/workflow.xml" 
     name="links"/>
   <resource-type workflow="fallback://config/workflow/workflow.xml" 
-    name="mediaType"/>
+    name="mediatype"/>
   <resource-type workflow="fallback://config/workflow/workflow.xml" 
     name="folder"/>
   <module name="xhtml"/>
   <module name="links"/>
   <module name="opendocument"/>
-  <module name="mediaType"/>
+  <module name="mediatype"/>
   <module name="homepage"/>
   <module name="folder"/>
   <link-attribute 
