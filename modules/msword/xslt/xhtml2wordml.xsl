@@ -92,24 +92,24 @@
   <!-- Don't automatically copy text nodes. Do explicit value-of's instead -->
   <xsl:template match="text()"/>
 
-  <!-- For plain para or title text, just create a run of unformatted text -->
+  <!-- For plain p or heading text, just create a run of unformatted text -->
   <xsl:template match="xhtml:p/text() | xhtml:h1/text() | xhtml:h2/text() | xhtml:h3/text()
    | xhtml:h4/text() | xhtml:h5/text() | xhtml:h6/text()">
     <w:r>
       <w:t>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="normalize-space(.)"/>
       </w:t>
     </w:r>
   </xsl:template>
 
-  <!-- For text in <emphasis>, apply the "Emphasis" character style -->
+  <!-- For text in <em>, apply the "Emphasis" character style -->
   <xsl:template match="xhtml:em/text()">
     <w:r>
       <w:rPr>
         <w:rStyle w:val="Emphasis"/>
       </w:rPr>
       <w:t>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="normalize-space(.)"/>
       </w:t>
     </w:r>
   </xsl:template>
@@ -121,7 +121,7 @@
         <w:rStyle w:val="Strong"/>
       </w:rPr>
       <w:t>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="normalize-space(.)"/>
       </w:t>
     </w:r>
   </xsl:template>
@@ -140,7 +140,7 @@
         <w:rStyle w:val="Hyperlink"/>
       </w:rPr>
       <w:t>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="normalize-space(.)" />
       </w:t>
     </w:r>
   </xsl:template>
