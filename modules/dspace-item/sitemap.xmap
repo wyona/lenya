@@ -38,11 +38,8 @@
 
       <!-- pattern="{rendertype}", e.g. xhtml.xml -->
       <map:match pattern="*.xml">
-        <map:generate src="sitemap.xmap"/>
-<!--
         <map:generate src="lenya://lenya/pubs/{page-envelope:publication-id}/content/{page-envelope:area}{page-envelope:document-id}/index_{page-envelope:document-language}.xml"/>
-        <map:transform src="fallback://lenya/modules/akoma-ntoso/xslt/akoma-ntoso2xhtml.xsl"/>
--->
+        <map:transform src="fallback://lenya/modules/dspace-item/xslt/dspace-item2xhtml.xsl"/>
         <map:serialize type="xml"/>
       </map:match>
 
