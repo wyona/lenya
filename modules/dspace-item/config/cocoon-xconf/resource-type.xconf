@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'dspace-item']">
+
+  <component-instance name="dspace-item"
+                      logger="lenya.resourcetypes.dspace-item"
+                      class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+
+    <format name="xhtml" uri="cocoon://modules/dspace-item/xhtml.xml"/>
+
+<!--
+    <format name="webdavGET" uri="cocoon://modules/dspace-item/davget.xml"/>
+-->
+  </component-instance>
+
+</xconf>

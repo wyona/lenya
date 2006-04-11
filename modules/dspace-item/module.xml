@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lenya:module xmlns:lenya="http://apache.org/lenya/module/1.0">
+  <lenya:id>org.wyona.lenya.modules.dspace-item</lenya:id>
+  <lenya:package>org.wyona.lenya.modules</lenya:package>
+  <lenya:version>0.1-dev</lenya:version>
+  <lenya:name>DSpace Item Module</lenya:name>
+  <lenya:lenya-version>@lenya.version@</lenya:lenya-version>
+  <lenya:description>DSpace Item Resource Type</lenya:description>
+</lenya:module>
