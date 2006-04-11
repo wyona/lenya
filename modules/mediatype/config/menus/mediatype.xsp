@@ -38,7 +38,7 @@
     <menus>
       <menu i18n:attr="name" name="File">
         <block admin="false">
-          <item uc:usecase="create.media.assets" href="?doctype=mediatype"><i18n:text>New media type page</i18n:text></item>
+          <item uc:usecase="create.media.assets" href="?doctype=mediatype"><i18n:text>New Media Type</i18n:text></item>
         </block>
       </menu>
       <menu i18n:attr="name" name="Edit">
