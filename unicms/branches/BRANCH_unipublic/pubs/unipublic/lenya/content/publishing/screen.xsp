@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xsp:page
+       language="java"
+       xmlns:xsp="http://apache.org/xsp"
+       xmlns:input="http://apache.org/cocoon/xsp/input/1.0"
+       xmlns:usecase="http://apache.org/cocoon/lenya/usecase/1.0"
+       xmlns:not="http://apache.org/cocoon/lenya/notification/1.0"
+       xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+       >
+       
+  <xsp:structure>
+    <xsp:include>org.apache.lenya.ac.User</xsp:include>
+    <xsp:include>org.apache.lenya.ac.UserManager</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.DefaultDocumentBuilder</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.DocumentHelper</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.SiteTree</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.SiteTreeNode</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.xsp.DocumentReferencesHelper</xsp:include>
+    <xsp:include>org.apache.lenya.cms.workflow.CMSVersion</xsp:include>
+    <xsp:include>org.apache.lenya.cms.workflow.WorkflowFactory</xsp:include>
+    <xsp:include>org.apache.lenya.workflow.impl.History</xsp:include>
+    <xsp:include>org.apache.lenya.workflow.impl.Version</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Article</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.ArticleVersion</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Dossier</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.DossiersBox</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.DossiersBoxVersion</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Headlines</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.HeadlinesVersion</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Newsletter</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.NewsletterVersion</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.Section</xsp:include>
+    <xsp:include>ch.unizh.unipublic.lenya.cms.publication.UnipublicResourceIdentityMap</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.util.AreaFilter</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.util.ComposedFilter</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.util.LanguageFilter</xsp:include>
+  </xsp:structure>
+
+  <usecase:publish>
+    
+    <usecase:document-id><input:get-attribute module="page-envelope" name="document-id" as="string"/></usecase:document-id>
+    <usecase:document-language><input:get-attribute module="page-envelope" name="document-language" as="string"/></usecase:document-language>
+    <usecase:publication-id><input:get-attribute module="page-envelope" name="publication-id" as="string"/></usecase:publication-id>
+    <usecase:context-prefix><input:get-attribute module="page-envelope" name="context-prefix" as="string"/></usecase:context-prefix>
+    <usecase:referer><input:get-attribute module="request" name="requestURI" as="string"/></usecase:referer>
+    <usecase:workflow-event><input:get-attribute module="request-param" name="lenya.event" as="string"/></usecase:workflow-event>
+    <usecase:user-id><input:get-attribute module="access-control" name="user-id" as="string"/></usecase:user-id>
+    <usecase:ip-address><input:get-attribute module="access-control" name="ip-address" as="string"/></usecase:ip-address>
+    <usecase:role-ids><input:get-attribute module="access-control" name="role-ids" as="string"/></usecase:role-ids>
+
+    <usecase:source><input:get-attribute module="page-envelope" name="document-path" as="string"/></usecase:source>
+    
+    <usecase:task-id>publish</usecase:task-id>
+
+    <xsp:logic>
+      try {
+          Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+          Document document = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
+          Document liveDocument = publication.getAreaVersion(document, Publication.LIVE_AREA);
+
+	      boolean isHeadlines = Headlines.isHeadlinesDocument(document.getId());
+/*
+     	  boolean isArticle = Article.isArticleDocument(document.getId());
+	      boolean isDossier = Dossier.isDossierDocument(document.getId());
+
+          String documentUrl = liveDocument.getCompleteURL();
+          String urisParameter = <xsp-request:get-context-path/> + documentUrl;
+          if (isArticle || isDossier) {
+              Document liveYear = DocumentHelper.getParentDocument(liveDocument); 
+              String yearUrl = <xsp-request:get-context-path/> + liveYear.getCompleteURL();
+              Document liveSection = DocumentHelper.getParentDocument(liveYear);
+              String sectionUrl =  <xsp-request:get-context-path/> + liveSection.getCompleteURL();
+              urisParameter = yearUrl + "," + sectionUrl + "," + urisParameter; 
+          }
+*/
+          if (isHeadlines) {
+              String documentUrl = liveDocument.getCompleteURL();
+              int l = documentUrl.length() - liveDocument.getExtension().length();
+              String rssHtmlUrl = documentUrl.substring(0, l)+"rss."+liveDocument.getExtension();
+              String urisParameter = <xsp-request:get-context-path/> + rssHtmlUrl; 
+              <usecase:uris><xsp:expr>urisParameter</xsp:expr></usecase:uris>
+          }
+      }
+      catch (Exception e) {
+          throw new ProcessingException(e);
+      }
+    </xsp:logic>
+
+    <xsp:logic>
+      try {
+          Document document = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
+          Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+          
+          Document liveDocument = publication.getAreaVersion(document, Publication.LIVE_AREA);
+          Document liveParent = DocumentHelper.getParentDocument(liveDocument);
+
+          if (liveParent != null) {
+              SiteTree liveTree = publication.getTree(Publication.LIVE_AREA);
+              SiteTreeNode liveParentNode = liveTree.getNode(liveParent.getId());
+              if (liveParentNode == null) {
+                  <usecase:message id="parent-not-live"/>
+                  
+                  String url = null;
+                  String referer = <input:get-attribute module="request" name="requestURI" as="string"/>;
+                  String[] steps = referer.split("/");
+                  boolean info = false;
+                  if (steps[3].startsWith(Publication.INFO_AREA_PREFIX)){
+                      info = true;
+                  }
+                  DefaultDocumentBuilder builder = DefaultDocumentBuilder.getInstance();
+                  if (liveParent.getId().equals(Dossier.DOSSIERS_ID) || Section.isSectionDocument(liveParent.getId()) || info) {
+                      url = builder.buildCanonicalUrl(publication, Publication.INFO_AREA_PREFIX+
+                            document.getArea(), liveParent.getId(), document.getLanguage());
+                  } else {
+                      url = builder.buildCanonicalUrl(publication,
+                            document.getArea(), liveParent.getId(), document.getLanguage());
+                  }
+                  
+                  <usecase:parent>
+                    <xsp:attribute name="href"><xsp-request:get-context-path/><xsp:expr>url</xsp:expr></xsp:attribute>
+                    <xsp:attribute name="id"><xsp:expr>liveParent.getId()</xsp:expr></xsp:attribute>
+                    <xsp:attribute name="language"><xsp:expr>document.getLanguage()</xsp:expr></xsp:attribute>
+                  </usecase:parent>
+              }
+          }
+          
+      }
+      catch (Exception e) {
+          throw new ProcessingException(e);
+      }
+    </xsp:logic>
+    
+    <not:users>
+    <xsp:logic>
+      
+        try {
+        
+          Document document = (Document)
+            <input:get-attribute module="page-envelope" as="object" name="document"/>;
+          String userId = null;
+          
+          if (WorkflowFactory.newInstance().hasWorkflow(document)) {
+                History history = WorkflowFactory.getHistory(document);
+                Version[] versions = history.getVersions();
+                
+                int i = versions.length - 1;
+                while (userId == null &amp;&amp; i &gt;= 0) {
+                        if (versions[i].getEvent() != null &amp;&amp;
+                            versions[i].getEvent().getName().equals("submit")) {
+                                userId = ((CMSVersion) versions[i]).getUserId();
+                        }
+                        i--;
+                }
+          }
+        
+          if (userId != null) {
+                UserManager userManager = (UserManager)
+                    <input:get-attribute module="access-control" as="object" name="user-manager"/>;
+                User user = userManager.getUser(userId);
+                <not:user>
+                    <xsp:attribute name="id"><xsp:expr>user.getId()</xsp:expr></xsp:attribute>
+                    <xsp:attribute name="name"><xsp:expr>user.getName()</xsp:expr></xsp:attribute>
+                    <xsp:attribute name="email"><xsp:expr>user.getEmail()</xsp:expr></xsp:attribute>
+                </not:user>
+          }
+        }
+        catch (Exception e) {
+            throw new ProcessingException(e);
+        }
+        
+    </xsp:logic>
+    
+    </not:users>
+
+    <xsp:logic>
+	  DocumentReferencesHelper helper = new DocumentReferencesHelper(objectModel);
+	  Document[] references = helper.getInternalReferences();
+	  if (references.length &gt; 0) {
+        </xsp:logic><referenced-documents><xsp:logic>
+
+        for (int i = 0; i &lt; references.length; i++) {
+	      <referenced-document>
+	        <xsp:attribute name="href"><xsp-request:get-context-path/><xsp:expr>references[i].getCompleteURL()</xsp:expr></xsp:attribute>
+	        <xsp:expr>references[i].getId()</xsp:expr> [<xsp:expr>references[i].getLanguage()</xsp:expr>]
+	      </referenced-document>
+	    }  
+	    </xsp:logic></referenced-documents><xsp:logic>
+	  }
+      </xsp:logic>
+    
+    <xsp:logic>
+      Document document = (Document)<input:get-attribute module="page-envelope" as="object" name="document"/>;
+      Publication publication = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
+      String id = <input:get-attribute module="page-envelope" name="document-id" as="string"/>;    
+      String area = document.getArea();
+      String language = document.getLanguage();
+
+      String userId = <input:get-attribute module="access-control" name="user-id" as="string"/>;
+	  boolean isArticle = Article.isArticleDocument(id);
+	  boolean isDossier = Dossier.isDossierDocument(id);
+
+      UnipublicResourceIdentityMap identityMap = new UnipublicResourceIdentityMap(publication);
+
+      ComposedFilter filter = new ComposedFilter();
+      filter.add(new AreaFilter(area));
+      filter.add(new LanguageFilter(language));
+
+	  if (isArticle) {
+          try {
+         	  Article article = (Article) identityMap.get(id);
+              ArticleVersion articleVersion = (ArticleVersion)article.getVersions(filter)[0];         
+		      if (!articleVersion.canCheckOut(userId)) {
+                  <usecase:message id="not-check-out"/>
+                  <usecase:checkout><xsp:expr>articleVersion.getDocument().getCompleteURL()</xsp:expr></usecase:checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The headlines can not be checked out", e);
+          }
+          try {
+         	  Headlines headlines = (Headlines) identityMap.get(Headlines.HEADLINES_ID);
+              HeadlinesVersion headlinesVersion = (HeadlinesVersion)headlines.getVersions(filter)[0];         
+		      if (!headlinesVersion.canCheckOut(userId)) {
+                  <usecase:message id="not-check-out"/>
+                  <usecase:checkout><xsp:expr>headlinesVersion.getDocument().getCompleteURL()</xsp:expr></usecase:checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The headlines can not be checked out", e);
+          }
+          try {
+    		  Newsletter newsletter = (Newsletter) identityMap.get(Newsletter.NEWSLETTER_ID);
+              NewsletterVersion newsletterVersion = (NewsletterVersion) newsletter.getVersions(filter)[0];
+              if (!newsletterVersion.canCheckOut(userId)) {
+                  <usecase:message id="not-check-out"/>
+                  <usecase:checkout><xsp:expr>newsletterVersion.getDocument().getCompleteURL()</xsp:expr></usecase:checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The newsletter can not be checked out", e);
+          }
+          
+	  }
+	  if (isDossier) {
+          try {
+              DossiersBox box = (DossiersBox) identityMap.get(DossiersBox.DOSSIERSBOX_ID);
+              DossiersBoxVersion dossiersBoxVersion = (DossiersBoxVersion) box.getVersions(filter)[0];
+              if (!dossiersBoxVersion.canCheckOut(userId)) {
+                  <usecase:message id="not-check-out"/>
+                  <usecase:checkout><xsp:expr>dossiersBoxVersion.getDocument().getCompleteURL()</xsp:expr></usecase:checkout>  
+			  }
+          } catch (Exception e) {
+              throw new ProcessingException("The dossiers' box can not be checked out", e);
+          }
+	  }
+    </xsp:logic>
+  </usecase:publish>
+  
+</xsp:page>

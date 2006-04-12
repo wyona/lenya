@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" label="Authoring">
+<node id="index" visibleinnav="false">
+<label xml:lang="de">Unipublic</label>
+</node>
+
+<node id="newsletter" visibleinnav="false">
+<label xml:lang="de">Newsletter</label>
+</node>
+
+<node id="magazin">
+  <label xml:lang="de">Magazin</label>
+  <node id="gesundheit">
+    <label xml:lang="de">Gesundheit</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+  <node id="gesellschaft">
+    <label xml:lang="de">Gesellschaft</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+  <node id="umwelt">
+    <label xml:lang="de">Umwelt</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+  <node id="wirtschaft">
+    <label xml:lang="de">Wirtschaft</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+</node>
+<node id="campus">
+  <label xml:lang="de">Campus</label>
+  <node id="uni-news">
+    <label xml:lang="de">Uni-News</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+  <node id="portraits">
+    <label xml:lang="de">Portraits</label>
+    <node id="2005" visibleinnav="false">
+      <label xml:lang="de">2005</label>
+    </node>
+    <node id="2004" visibleinnav="false">
+      <label xml:lang="de">2004</label>
+    </node>
+    <node id="2003" visibleinnav="false">
+      <label xml:lang="de">2003</label>
+    </node>
+    <node id="2002" visibleinnav="false">
+      <label xml:lang="de">2002</label>
+    </node>
+  </node>
+</node>
+<node id="dossiers" visibleinnav="true">
+  <label xml:lang="de">Dossiers</label>
+  <node id="2005" visibleinnav="false">
+    <label xml:lang="de">2005</label>
+  </node>
+  <node id="2004" visibleinnav="false">
+    <label xml:lang="de">2004</label>
+  </node>
+  <node id="2003" visibleinnav="false">
+    <label xml:lang="de">2003</label>
+  </node>
+  <node id="2002" visibleinnav="false">
+    <label xml:lang="de">2002</label>
+  </node>
+</node>
+  
+</site>
