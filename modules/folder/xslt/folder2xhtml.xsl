@@ -16,10 +16,12 @@
   </xsl:template>
   
   <xsl:template match="nav:node">
+    <xsl:variable name="hrefClean"> <xsl:value-of 
+      select="$context-prefix"/><xsl:value-of select="$root"/>/<xsl:value-of 
+      select="@href"/> </xsl:variable>
     <li> <a>
       <xsl:attribute name="href">
-        <xsl:value-of select="$context-prefix"/><xsl:value-of select="$root"/>/
-          <xsl:value-of select="@href"/>
+        <xsl:value-of select="normalize-space($hrefClean)"/>
       </xsl:attribute>
       <xsl:apply-templates select="nav:label"/> </a>
     </li>
