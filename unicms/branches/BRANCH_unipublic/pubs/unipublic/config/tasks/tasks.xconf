@@ -2,6 +2,13 @@
 
 <tasks>
 
+  <task id="exportHTML" class="org.apache.lenya.cms.publishing.StaticHTMLExporter">
+    <parameter name="export-path" value="work/export/pending"/>
+    <parameter name="substitute-regexp" value="/lenya/default/live/"/>
+    <parameter name="substitute-replacement" value="/"/>
+    <parameter name="my-server-port" value="8080"/>
+  </task>
+
   <task id="assign-to-dossier" class="ch.unizh.unipublic.lenya.cms.task.AssignToDossier">
     <label>Assign to Dossier</label>
   </task>
@@ -144,7 +151,7 @@
     <label>Dispatch Newsletter</label>
     <task id="send" class="org.apache.lenya.cms.mail.MailTask">
       <parameter name="server" value="wyona.com"/>
-      <parameter name="from" value="edith@apache.org"/>
+      <parameter name="from" value="unipublic&#045;Universit&#228;t Z&#252;rich &#060;unipublic@unicom.unizh.ch&#062;"/>
     </task>
     <task id="clear" class="ch.unizh.unipublic.lenya.cms.task.ClearNewsletterTask"/>
   </task>
