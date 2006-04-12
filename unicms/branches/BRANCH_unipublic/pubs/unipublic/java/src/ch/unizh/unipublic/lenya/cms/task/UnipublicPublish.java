@@ -135,7 +135,8 @@ public class UnipublicPublish extends Publish {
                         "The checked in of the article failed", e);
             }
         }
-        super.publish(resource, language, null, 1);
+
+        super.publish(resource, language);
 
         if (workflowWillFire && areRequiredResourcesLive(resource) && isArticle) {
             Document doc = authoringVersion.getDocument();
