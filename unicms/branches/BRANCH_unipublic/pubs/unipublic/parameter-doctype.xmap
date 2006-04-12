@@ -4,7 +4,8 @@
   
   <map:components>
     <map:actions>
-      <map:action logger="sitemap.action.sourcetype" name="sourcetype" src="org.apache.forrest.components.sourcetype.SourceTypeAction">
+    
+      <map:action logger="sitemap.action.sourcetype" name="sourcetype" src="org.apache.cocoon.acting.sourcetype.SourceTypeAction">
         <sourcetype name="xhtml">
           <document-element local-name="html"/>
         </sourcetype>
