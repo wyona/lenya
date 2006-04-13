@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>elevateit</id>
+  <editor>
+    <name>Info</name>
+    <email>info@syslab.com</email>
+  </editor>
+  <system_name>elevateIT</system_name>
+  <description>elevateIT is an extension of proven ZOPE/Plone content management systems and serves the requirements of large decentralized organizations and enterprises.
+
+The elevateIT content management functionalities facilitate completely web browser based creation and administration of information. Via portal functionality the users can interact with the system and other users and personalize the contents and the illustration.
+
+elevateIT facilitates exchange of information between web servers. The goal is to provide relevant and latest information, which can be accessed across various web-sites. The metadata system and the personalization function facilitate aggregation, search and group specific information distribution even on a voluminous website.
+
+One of the key features of elevateIT is multilingualism. The surface and the content can be illustrated in various languages and the translators are assisted thru workflows to keep the contents consistent. elevateIT is platform neutral and can run parallel to existing information systems.
+  </description>
+  <main_url>http://www.elevateit.org/</main_url>
+  <license>
+    <license_name>GPL</license_name>
+    <license_url>http://www.elevateit.org/about/license_html</license_url>
+  </license>
+</system>
