@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="cms">
+  <id>dbprism</id>
+  <editor email="mochoa@ieee.org">Marcelo F. Ochoa<email>editor@apache.org</email>
+</editor>
+  <system_name>DBPrism CMS</system_name>
+<features>
+<feature>
+<title>Simple</title>
+<description>The core functionality of DBPrism CMS are included into 962 lines of java code which runs as Oracle Java Stored Procedure. Unlike other CMS systems such as Open CMS or Oracle's iFS is too quite simple.</description>
+</feature>
+<feature>
+<title>Powerful</title>
+<description>DBPrism CMS takes the best key technologies to provide powerful functionality, for example, xml indexing from Oracle Text (TM), repository management of XMLDB , portal content aggregation like My Yahoo (TM) functionality from Cocoon, and others.</description>
+</feature>
+<feature>
+<title>Dynamic and static content</title>
+<description>DBPrism CMS provides a simple way to generate on the fly content services in Java or PLSQL, look at the CMS Dynamic sections for more details.</description>
+</feature>
+<feature>
+<title>Multi-language</title>
+<description>DBPrism CMS includes attributes into his metamodel to provide multi-language support, including multilanguage indexing/quering. Also the Front End Application is localized by default into Spanish and English.</description>
+</feature>
+<feature>
+<title>Secure</title>
+<description>DBPrism CMS runs as a Java Stored Procedure so it uses the security layer provides by the Oracle Databases, that is, user and roles. For the content assets it uses WebDAV ACL provided by XMLDB.</description>
+</feature>
+<feature>
+<title>Concurrence control</title>
+<description>All the assets are stored into database tables which are controlled by the concurrence features of the database.</description>
+</feature>
+<feature>
+<title>Performance</title>
+<description>DBPrism CMS uses ESI invalidation protocol to provide a cache coherence between Cocoon internal cache system and the database assets.</description>
+</feature>
+<feature>
+<title>Separation of layout and content</title>
+<description>Content authors do not deal with layout concerns, they write documents using Apache document-v20.dtd syntax which is neutral, Web Designers write style sheets and CSS documents to provide the look and feel of the web site.</description>
+</feature>
+<feature>
+<title>Scheduling system</title>
+<description>Using DBMS_SCHEDULER package is possible to invoke any CMS task at an specific time or periodically. You can define the publishing time of any page using the Fron End for example.</description>
+</feature>
+<feature>
+<title>Import and Export content</title>
+<description>The content assets could be exported/imported directly using FTP or WebDAV clients, also using the Front End application there is an option for exporting/importing using zip format.</description>
+</feature>
+<feature>
+<title>Enterprise support</title>
+<description>Oracle Java Stored Procedure are ready to use enterprise services such as EJB or Web Services. Look at this page (http://www.oracle.com/technology/pub/articles/mensah_dws.html) for more information about the enterprise functionality which Oracle JVM provides.</description>
+</feature>
+<feature>
+<title>Native XML support</title>
+<description>DBPrism CMS uses native XML document complaint with Apache's documentv20.dtd with the addition of SVG images and Cocoon i18n tags.</description>
+</feature>
+<feature>
+<title>Editing tools</title>
+<description>Users can edit content assets using any XML-Aware editor with WebDAV support, such as XMLSpy. Also the Front End Application includes a wysiwyg editor based on HTMLArea.</description>
+</feature>
+<feature>
+<title>User Interface</title>
+<description>A simple Front End application has been added in this release, look at the Front End section . Also for complex re-organization of the repository you can use WebDAV clients such as Windows Web Folders, Linux Konqueror or KBear.</description>
+</feature>
+<feature>
+<title>Support for Creative Commons digital signature</title>
+<description>Using the Front End Application you can choose many of the CC licences types and the CMS will automatically put the RDF tags on the web page.</description>
+</feature>
+<feature>
+<title>Intelligent Not Found page</title>
+<description>Users who try to access to old links are automatically redirected to a Search page which shows the new location of similar pages to the old one.</description>
+</feature>
+</features>
+  <description>DBPrism is a database oriented CMS based on the XML publishing/application framework Cocoon from the Apache Software Foundation and DBPrism Servlet Engine. Hence it is totally based on XML, XSLT and other related open standards. It uses Oracle as XML enable database for storing the content assets.
+DBPrism CMS is the first Open Source CMS using all native implementation of Oracle XMLDB repository.</description>
+  <main_url>http://www.dbprism.com.ar/j2-CMS/index.html</main_url>
+  <license>
+    <license_name>Apache Software License</license_name>
+  </license>
+<demo href="http://demo.dbprism.com.ar/"/>
+<programming-language>Java, PLSQL, XSLT, CSS</programming-language>
+</system>
