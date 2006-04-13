@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system type="cms">
+  <id>zeitcms</id>
+  <editor>
+    <name>Peter M. Buhr</name>
+    <email>webmaster@zeit.de</email>
+  </editor>
+  <system_name>Zeit CMS</system_name>
+  <description>Zeit CMS is the CMS of the german newspaper Die Zeit. It is a mix of Zope, mod_dav, and a SQL database.</description>
+  <main_url>http://software.zeit.de</main_url>
+  <license>
+    <license_name>GPL</license_name>
+    <license_url/>
+  </license>
+</system>

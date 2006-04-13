@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system type="cms">
+  <id>backend</id>
+  <editor>
+    <name>Mike Gifford</name>
+    <email>mike@openconcept.ca</email>
+  </editor>
+  <system_name>Back-End</system_name>
+  <description>Back-End allows even the non-technical to manage any website easily, through a web browser, on any operating system. Fast, flexible and easy to understand, Back-End puts you in charge of your site, saving your organisation time and money in the process.
+  </description>
+  <main_url>http://www.back-end.org/</main_url>
+  <license>
+    <license_name>GPL</license_name>
+    <license_url>http://www.gnu.org/copyleft/gpl.html</license_url>
+  </license>
+<programming-language>PHP</programming-language>
+</system>
