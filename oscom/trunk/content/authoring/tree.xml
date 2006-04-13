@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Copyright 1999-2004 The Apache Software Foundation
 
@@ -13,11 +13,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
--->
-
-<!-- $Id: tree.xml 42703 2004-03-13 12:57:53Z gregor $ -->
-
-<tree>
+--><!-- $Id: tree.xml 42703 2004-03-13 12:57:53Z gregor $ --><tree>
   <branch relURI="" doctype="Home" menuName="Home">
     <branch relURI="editor-matrix" doctype="EditorOverview" menuName="Editor Overview">
       <leaf relURI="xopus" doctype="EditorProject" menuName="Xopus"/>
@@ -25,6 +21,6 @@
     <branch relURI="matrix" doctype="CMSFOverview" menuName="CMS/F Overview">
       <leaf relURI="lenya" doctype="CMSProject" menuName="Lenya"/>
       <leaf relURI="cocoon" doctype="CMFProject" menuName="Cocoon"/>
-    </branch>
+    <leaf relURI="jackrabbit" doctype="CMFProject" menuName="Apache Jackrabbit"/><leaf relURI="jlibrary" doctype="CMSProject" menuName="jLibrary"/><leaf relURI="syntax" doctype="CMSProject" menuName="Syntax CMS"/><leaf relURI="ferret" doctype="CMSProject" menuName="Ferret"/><leaf relURI="mombo" doctype="CMSProject" menuName="Mombo"/></branch>
   </branch>
 </tree>

@@ -1,40 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Copyright 1999-2004 The Apache Software Foundation
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
-<!-- $Id: lenya.xml 55195 2004-10-21 03:34:33Z gregor $ -->
-    
-<system type="cms">
+<?xml version="1.0" encoding="UTF-8"?><system type="cms">
   <id>lenya</id>
-  <editor homepage="http://www.wyona.com/people/michael-wechner/index.html">
+  <editor>
     <name>Michael Wechner</name>
-    <email>michi@apache.org</email>
+    <email>michael.wechner@wyona.com</email>
   </editor>
   <system_name>Apache Lenya</system_name>
   <description>Lenya is a CMS based on the XML publishing/application framework <a href="http://cocoon.apache.org">Cocoon</a> from the Apache Software Foundation.
 Hence it is totally based on XML, XSLT and other related open standards.
-Lenya supports browser based inline WYSIWYG editors, such as Xopus, Bitflux and Kupu.
+Lenya supports browser based inline WYSIWYG editors, such as Xopus, Bitflux and Epoz.
   </description>
-  <main_url>http://lenya.apache.org/</main_url>
+  <main_url>http://cocoon.apache.org/lenya/</main_url>
   <license>
     <license_name>Apache Software License</license_name>
-    <license_url>http://lenya.apache.org/project/license.html</license_url>
+    <license_url>http://cocoon.apache.org/lenya/project/license.html</license_url>
   </license>
   <programming-language>Java</programming-language>
-  <demo href="http://www.lenya.org"/>
   <related-info>
     <info-item>
       <title>OSDIR.com</title>
@@ -48,7 +28,7 @@ Lenya supports browser based inline WYSIWYG editors, such as Xopus, Bitflux and 
   <features>
     <feature>
       <title>WYSIWYG Editing</title>
-      <description>Xopus, Bitflux Edior and Kupu1.0.3 have been integrated into Lenya.</description>
+      <description>Xopus, BXE and Kupu have been integrated into Lenya.</description>
     </feature>
     <feature>
       <title>WYSIWYC areas</title>
