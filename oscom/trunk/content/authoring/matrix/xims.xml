@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>xims</id>
+  <editor>
+    <name>Michael Kröll</name>
+    <email>michael.kroell@uibk.ac.at</email>
+  </editor>
+  <system_name>XIMS</system_name>
+  <description>XIMS is an Open Source Information/Content Management System that primarily provides facilities to create and manage web sites. With XIMS it is possible to make use of a flexible recursive role and ACL system for securing content. Besides managing web pages, it is specifically designed to flexibly integrate into existing infrastructures and to be easily extensible with individual application modules.
+The XIMS User Interface and all XIMS content are XML based. The XIMS User Interface is skinnable using custom XSLT stylesheets, published content can be served in various output formats based on fine-grained transformation settings using Apache AxKit. 
+  </description>
+  <main_url>http://xims.info</main_url>
+  <license>
+    <license_name>Perl Artistic License/GPL</license_name>
+    <license_url>http://www.opensource.org/licenses/artistic-license.php</license_url>
+  </license>
+<programming-language>Perl</programming-language>
+</system>
