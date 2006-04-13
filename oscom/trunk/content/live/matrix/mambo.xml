@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+<id>mambo</id>
+<editor>
+<name>Shaiful Jahari</name>
+<email>shaifuljahari@yahoo.com</email>
+</editor>
+<system_name>Mambo</system_name>
+<description>Mambo Open Source is a dynamic web content management system (CMS), and is capable of building sites from several pages to several thousand. Mambo Open Source is famed for an easy to use administrator interface, WYSIWYG editing facilities and much more.</description>
+<main_url>http://www.mamboserver.com</main_url>
+<license>
+<license_name>GNU/GPL License</license_name>
+<license_url>http://www.gnu.org/copyleft/gpl.html</license_url>
+</license>
+<programming-language>PHP, JavaScript</programming-language>
+</system>
