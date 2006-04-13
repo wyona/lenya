@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>xoops</id>
+  <editor>
+    <name>Herko Coomans </name>
+    <email>herko@xoops.org</email>
+  </editor>
+  <system_name>XOOPS</system_name>
+  <description>XOOPS is a dynamic OO (Object Oriented) based open source portal script written in PHP. XOOPS is the ideal tool for developing small to large dynamic community websites, intra company portals, corporate portals, weblogs and much more.
+  </description>
+  <main_url>http://www.xoops.org</main_url>
+  <license>
+    <license_name>GNU GPL</license_name>
+    <license_url>http://www.gnu.org/licenses/licenses.html#GPL</license_url>
+  </license>
+<programming-language>PHP</programming-language>
+</system>

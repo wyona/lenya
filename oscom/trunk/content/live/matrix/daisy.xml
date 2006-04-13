@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="framework">
+  <id>daisy</id>
+  <editor>
+    <name>Steven Noels</name>
+    <email>stevenn@outerthought.org</email>
+  </editor>
+  <system_name>Daisy</system_name>
+
+<related-info>
+<info-item>
+<title>Feature overview</title>
+<uri>http://cocoondev.org/daisy/3</uri>
+</info-item>
+</related-info>
+  <description>Daisy is a comprehensive content management application framework, consisting of a standalone repository server (accessible through HTTP/XML and a high-level Java API), and an extensive browsing and editing web application.
+Daisy offers rich-text in-browser editing, configurable document types, a messaging subsystem and an easily skinnable Cocoon-based frontend.
+Daisy is licensed under the commercially-friendly Apache License 2.0.</description>
+  <main_url>http://cocoondev.org/daisy/</main_url>
+  <license>
+    <license_name>Apache Software License 2.0</license_name>
+    <license_url>http://cocoondev.org/daisy/44</license_url>
+  </license>
+<demo href="http://cocoondev.org/daisy/"/>
+<programming-language>Java</programming-language>
+</system>
