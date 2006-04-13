@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>invitocms</id>
+  <editor>
+    <name>Horst Rechner</name>
+    <email>Horst@Virtual-Horst.de</email>
+  </editor>
+  <system_name>InvitoCMS</system_name>
+  <description>InvitoCMS ist ein auf Apache Cocoon 2.0 basiertes, XML fundiertes Open Source Content Management System für Websites, das sich einfache und intuitive Bedienbarkeit auf die Fahnen geschrieben hat. 
+  </description>
+  <main_url>http://www.invitocms.com/tiki-index.php</main_url>
+  <license>
+    <license_name>GPL</license_name>
+    <license_url>http://gnu.vlsm.org/copyleft/gpl.html</license_url>
+  </license>
+<programming-language>Java</programming-language>
+</system>

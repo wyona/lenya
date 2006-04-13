@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>midgardcms</id>
+  <system_name>Midgard CMS</system_name>
+  <main_url>http://www.aegir-cms.org</main_url>
+  <license>
+    <license_name>LGPL</license_name>
+    <license_url>http://www.gnu.org/licenses/lgpl.html</license_url>
+  </license>
+</system>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="cms">
+  <id>jlibrary</id>
+  <editor>
+    <name>Martin Perez</name>
+    <email>mpermar@gmail.com</email>
+  </editor>
+  <system_name>jLibrary</system_name>
+  <description>jLibrary is a DMS (Document Management System), oriented for personal and enterprise use. This double approach make from jLibrary an unique product. With jLibrary, you can classify your -or your enterprise- documents, videos, or any other media type. You can export those contents to static web pages based on templates, search on those content, add comments, categorize it, etc.
+
+  </description>
+  <main_url>http://jlibrary.sourceforge.net/</main_url>
+  <license>
+    <license_name>BSD License</license_name>
+    <license_url>http://jlibrary.sourceforge.net/LICENSE</license_url>
+  </license>
+</system>

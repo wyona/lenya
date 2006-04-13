@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="cms">
+  <id>krang</id>
+  <editor>
+    <name>Perrin Harkins</name>
+    <email>perrin@elem.com</email>
+  </editor>
+  <system_name>Krang</system_name>
+  <description>Krang is an open-source content-management system designed to publish magazine websites. It is a Perl application which uses Apache/mod_perl and MySQL, as well as numerous CPAN modules.
+  </description>
+  <main_url>http://krang.sourceforge.net/</main_url>
+  <license>
+    <license_name>BSD</license_name>
+    <license_url>http://www.opensource.org/licenses/bsd-license.php</license_url>
+  </license>
+<programming-language>Perl</programming-language>
+</system>

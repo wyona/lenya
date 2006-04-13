@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="framework">
+  <id>jackrabbit</id>
+  <editor>
+    <name>Michael Wechner</name>
+    <email>michael.wechner@wyona.com</email>
+  </editor>
+  <system_name>Apache Jackrabbit</system_name>
+  <description>The Jackrabbit Project has been formed to develop an open source implementation of the Content Repository for Java Technology API (JCR), being specified within the Java Community Process as JSR-170. Day Software, the JSR-170 specification lead, has licensed an initial implementation of the JCR reference implementation for use as seed code for this project. JCR specifies an API for application developers (and application frameworks) to use for interaction with modern content repositories -- content management systems that provide content services such as versioning, transactions, indexing, workflow, etc.
+  </description>
+  <main_url>http://incubator.apache.org/jackrabbit/</main_url>
+  <license>
+    <license_name>Apache Software License</license_name>
+    <license_url>http://www.apache.org/licenses/LICENSE-2.0</license_url>
+  </license>
+</system>

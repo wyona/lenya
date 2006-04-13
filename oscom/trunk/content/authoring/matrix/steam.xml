@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system type="framework">
+  <id>steam</id>
+  <editor>
+    <name>Martin Bähr</name>
+    <email>mbaehr+oscom@iaeste.at</email>
+  </editor>
+  <system_name>sTeam</system_name>
+<features>
+
+</features>
+<related-info>
+<info-item>
+<title>pike homepage</title>
+<uri>http://pike.ida.liu.se/</uri>
+</info-item>
+</related-info>
+  <description>sTeam ist eine Open Source Umgebung für den Aufbau und die Pflege virtueller Wissensräume. Sie stellt eine Fülle unterschiedlicher Mechanismen zur Unterstützung von kommunikativen und kooperativen Lern- und Arbeitsprozessen zur Verfügung.</description>
+  <main_url>http://www.open-steam.org</main_url>
+  <license>
+    <license_name>GPL</license_name>
+    <license_url>http://www.open-steam.org/Download/license.html</license_url>
+  </license>
+<programming-language>pike, java</programming-language>
+</system>

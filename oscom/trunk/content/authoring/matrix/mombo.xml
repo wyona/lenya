@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="cms">
+  <id>mombo</id>
+  <editor>
+    <name>Sam Ruby</name>
+    
+  </editor>
+  <system_name>Mombo</system_name>
+  <description>A powerful content managment system for weblogs implemented in Python.
+  </description>
+  <main_url>http://sourceforge.net/projects/mombo/</main_url>
+  <license>
+    <license_name>?</license_name>
+    <license_url>?</license_url>
+  </license>
+<programming-language>Python</programming-language>
+</system>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><system type="cms">
+  <id>ferret</id>
+  <editor>
+    <name>Fernando Monera </name>
+    <email>fmonera@opensistemas.com</email>
+  </editor>
+  <system_name>Ferret</system_name>
+  <description>Ferret CMS provides a simple yet powerful Content Management System
+for creating small- to medium-sized websites.  The default configuration
+is designed to meet many of the specific needs of most corporate
+presentation sites.  It is easy to use for the non-technical user and
+simple to install and administer, while still being flexible and
+powerful for the developer.
+Ferret CMS is based on Zope (http://www.zope.org/).  It's main advantage
+over other content management systems available for Zope and in general
+is that the administration backend is simple and easy to use, and
+configuration is very simple.  A fully functional site (sans content)
+can be set up within five minutes and the visual configuration can be
+done by any developer with basic-to-intermediate knowledge of Zope
+programming.
+  </description>
+  <main_url>http://www.opensistemas.com/comunidad/ferret_cms/</main_url>
+  <license>
+    <license_name>TODO</license_name>
+    <license_url>TODO</license_url>
+  </license>
+<programming-language>Python</programming-language>
+</system>
