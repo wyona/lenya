@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<indexes>
+  <index id="mypub-live" analyzer="stopword_en" directory="lenya/pubs/mypub/work/lucene/index/live/index">
+    <structure>
+      <field id="url" type="keyword" />
+      <field id="title" type="text" storetext="true"/>
+      <field id="description" type="text" storetext="true"/>
+      <field id="subject" type="keyword" storetext="true" />
+      <field id="body" type="text" storetext="true"/>
+    </structure>
+  </index>
+
+  <index id="mypub-authoring" analyzer="stopword_en" directory="lenya/pubs/mypub/work/lucene/index/authoring/index">
+    <structure>
+      <field id="url" type="keyword" />
+      <field id="title" type="text" storetext="true"/>
+      <field id="description" type="text" storetext="true"/>
+      <field id="subject" type="keyword" storetext="true" />
+      <field id="body" type="text" storetext="true"/>
+    </structure>
+  </index>
+</indexes>
