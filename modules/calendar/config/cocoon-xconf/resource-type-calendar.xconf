@@ -6,11 +6,12 @@
 <!--
     <schema language="http://relaxng.org/ns/structure/0.9" src="fallback://lenya/modules/calendar/resources/schema/calendar.rng"/>
 -->
+
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>fallback://lenya/modules/calendar/templates/calendar.xml</sample-name>
     </creator>
-    <format name="xhtml" uri="cocoon://modules/calendar/xhtml.xml"/>
 
+    <format name="xhtml" uri="cocoon://modules/calendar/xhtml.xml"/>
 <!--
     <format name="luceneIndex" uri="cocoon://modules/xhtml/lucene-index.xml"/>
     <format name="webdavGET" uri="cocoon://modules/xhtml/davget.xml"/>
