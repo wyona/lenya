@@ -20,12 +20,21 @@
     name="mediatype"/>
   <resource-type workflow="fallback://config/workflow/workflow.xml" 
     name="folder"/>
+  <resource-type workflow="fallback://config/workflow/workflow.xml" 
+    name="entry"/>
+  <resource-type workflow="fallback://config/workflow/workflow.xml" 
+    name="feed"/>
+  <resource-type workflow="fallback://config/workflow/workflow.xml" 
+    name="sidebar"/>
   <module name="xhtml"/>
   <module name="links"/>
   <module name="opendocument"/>
   <module name="mediatype"/>
   <module name="homepage"/>
   <module name="folder"/>
+  <module name="entry"/>
+  <module name="feed"/>
+  <module name="sidebar"/>
   <link-attribute 
     xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
   <templates>
