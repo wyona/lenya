@@ -3,9 +3,11 @@
  */
 package org.apache.cocoon.generation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.service.ServiceException;
@@ -21,6 +23,7 @@ import org.apache.lenya.cms.publication.URLInformation;
 import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
+import org.apache.lenya.util.ServletHelper;
 import org.wyona.wiki.Node;
 import org.wyona.wiki.SimpleNode;
 import org.xml.sax.ContentHandler;
@@ -56,7 +59,7 @@ public class Tree2XML {
     SiteManager siteManager = null;
 
     Document[] documents;
-
+    Document currentDocument;
     /** Actions which will be grouped together into text() nodes */
     final static String[] textActions = { "Text", "PlainText" };
 
@@ -142,33 +145,68 @@ public class Tree2XML {
         if (node.toString().equals(linkNodeName[0])) {
 
             String href = (String) node.optionMap.get("href");
+            String label = (String) node.optionMap.get("label");
             
+        	if(label == null || label.equals("")){
+        		node.setOption("label", href);
+        	}
+        	
             if (documents == null) {
                 getAreaDocuments();
             }
             
             int i = 0;
             boolean found = false;
-
+            String protocol = "[\\w]+://.*";
+            String suffix = "[.].*";
+            String currentDocID = currentDocument.getId();
+            
+            if(Pattern.matches(protocol, href))
+            {
+               	node.setOption("type", "external");
+              	found = true;
+            }
+            
+            if(href.startsWith("../") && !found){
+                String urlSnippets[] = href.split("/"); 
+                String startId = currentDocID;
+                
+                for (int j = 0; j < urlSnippets.length; j++){
+                	if(urlSnippets[j].equals("..")){
+                		int lastSlashIndex = startId.lastIndexOf("/");
+                		startId = startId.substring(0, lastSlashIndex);
+                	}else {
+                		startId = startId+"/"+urlSnippets[j];
+                	}
+                }
+                href = startId;
+            }
+            
+            if(!href.startsWith("/") && !found){
+            	href = currentDocID+"/"+href;
+            	node.setOption("href", href);
+            }
+            if (!found) {
+            	href = href.replaceAll(suffix, "");
+            	node.setOption("href", href);
+            }
+                
             while (!found && i < documents.length) {
-
-                if (documents[i].getId().equals(href)) {
+            	if (documents[i].getId().equals(href)) {
                     node.setOption("type", "internal");
                     node.setOption("exists", "true");
                     found = true;
                 }
                 i++;
             }
-
             if (!found) {
-                if (href.startsWith("/")) {
-                    node.setOption("type", "internal");
-                    node.setOption("exists", "false");
-                } else {
-                    node.setOption("type", "external");
-                }
+            	node.setOption("exists", "false");
+            	node.setOption("type", "internal");
             }
-
+            
+            if(!found && !isCreatable(href)){
+            	node.setOption("valid", "false");
+            }
         }
     }
 
@@ -183,9 +221,11 @@ public class Tree2XML {
             selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE + "Selector");
             siteManager = (SiteManager) selector.select(publication.getSiteManagerHint());
 
-            URLInformation urlInfo = new URLInformation(request.getRequestURI());
+            String webappUri = ServletHelper.getWebappURI(request);
+            URLInformation urlInfo = new URLInformation(webappUri);
 
             documents = siteManager.getDocuments(identityMap, publication, urlInfo.getArea());
+            currentDocument = (Document) identityMap.getFromURL(webappUri);
             
         } catch (ServiceException e) {
             if (selector != null) {
@@ -197,7 +237,27 @@ public class Tree2XML {
             throw new RuntimeException(e);
         }
     }
-
+    
+    private boolean isCreatable(String documentId){
+    	
+    	int i = 0;
+    	boolean found = false;
+    	String seperator = "/";
+    	
+    	String pathElements[] = documentId.split(seperator);
+    	int lastSlashIndex = documentId.lastIndexOf("/");
+    	
+    	String parentId = documentId.substring(0, lastSlashIndex);
+    		
+        while (!found && i < documents.length) {
+        	if (documents[i].getId().equals(parentId)) {
+                found = true;
+           }
+           i++;
+        }
+        return found;
+    }
+    
     public boolean ignoreNode(Node node) {
         if (node.jjtGetParent() != null) {
             for (int i = 0; i < ignoreNestedActions.length; i++) {
