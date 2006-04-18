@@ -12,9 +12,26 @@
 <!-- TODO: The language does seem to be passed to this XSLT -->
 <xsl:param name="language" select="'HUGO'"/>
 
-<!-- TODO: Add esql querys for dspace -->
+<!-- TODO: Add dynamic esql queries for dspace -->
 <xsl:template match="dsi:dspace-item">
   <div id="body">
+	<esql:connection>
+		<esql:pool>Dspace-Item</esql:pool>
+		<esql:dburl>127.0.0.1</esql:dburl>
+		<esql:username>dspace</esql:username>
+		<esql:password>dspace</esql:password>
+		<esql:execute-query>
+			<esql:query>SELECT text_value from dcvalue where dc_value_id = 38</esql:query>
+			<esql:results>
+				<esql:row-results>
+					<esql:get-string column"text_value"/>
+				</esql:row-results>
+			</esql:results>
+		</esql:execute-query>
+		<esql:no-results>
+			Sorry, Dspace database is empty!
+		</esql:no-results>
+	</esql:connection>
     Hello DSpace Item (ID: <xsl:value-of select="@id"/>)
   <xsl:apply-templates/>
   </div>
