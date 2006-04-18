@@ -68,11 +68,8 @@ limitations under the License.
       <!-- parametrized doctype matcher -->
       <!-- pattern="{rendertype}" -->
       <map:match pattern="*.xml">
-        <map:aggregate element="cmsbody">
-          <map:part
-            src="lenyadoc:/{page-envelope:document-language}/{page-envelope:document-id}"/>
-          <map:part src="cocoon:/lenyametadata.xml"/>
-        </map:aggregate>
+        <map:generate
+          src="lenyadoc:/{page-envelope:document-language}/{page-envelope:document-id}"/>
         <map:transform src="fallback://lenya/modules/entry/xslt/entry2xhtml.xsl">
           <map:parameter name="document-type"
             value="{page-envelope:document-type}"/>
