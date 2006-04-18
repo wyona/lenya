@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Dokumenttypen</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>lenya (Levi Vanya)</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Wed Apr 05 14:49:45 CEST 2006</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <p>In diesem Bereich sind Beispiele aller Dokumenttypen, die das UniCMS anbietet, zusammengestellt. Die Seiten dienen zur Information für die Autoren und sollten daher nicht publiziert werden.</p><h2>Weitere Informationen</h2><p><a href="http://www.unicms.unizh.ch/docu/doku12.html" title="">Dokumentation UniCMS 1.2</a></p><p><a href="http://www.unicom.unizh.ch/cms/services/cd.html" title="">Corporate Design der Universität Zürich</a></p></body>
+</html>
