@@ -12,11 +12,11 @@
 <!-- TODO: The language does seem to be passed to this XSLT -->
 <xsl:param name="language" select="'HUGO'"/>
 
+<!-- TODO: Add esql querys for dspace -->
 <xsl:template match="dsi:dspace-item">
   <div id="body">
     Hello DSpace Item (ID: <xsl:value-of select="@id"/>)
-
-    <xsl:apply-templates/>
+  <xsl:apply-templates/>
   </div>
 </xsl:template>
 
