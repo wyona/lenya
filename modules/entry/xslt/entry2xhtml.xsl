@@ -29,29 +29,29 @@
   <xsl:template match="/">
     <xhtml:div id="body" bxe_xpath="//*[local-name()='entry']">
       <!--<xsl:apply-templates select="//lenya:meta" mode="media"/>-->
-      <xsl:apply-templates select="//echo:entry/*"/>
+      <xsl:apply-templates />
     </xhtml:div>
   </xsl:template>
   
 <xsl:template match="echo:entry">
-  <div class="dateline"><xsl:value-of select="echo:issued"/></div>
+  <xhtml:div class="dateline"><xsl:value-of select="echo:issued"/></xhtml:div>
   <xsl:apply-templates select="echo:title"><xsl:with-param name="id" select="echo:id"/></xsl:apply-templates>
   <xsl:apply-templates select="echo:summary"/>
   <xsl:apply-templates select="echo:content"/>
-  <br />
-  <p class="issued">
+  <xhtml:br />
+  <xhtml:p class="issued">
   <strong>Posted <xsl:apply-templates select="echo:author"/> at <xsl:value-of select="echo:issued"/>&#160;|&#160;<xsl:call-template name="permalink"><xsl:with-param name="id" select="echo:id"/></xsl:call-template></strong>
-  </p>
+  </xhtml:p>
 </xsl:template>
 
 
 <xsl:template match="echo:title">
-  <div class="title"><xsl:value-of select="."/></div>
+  <xhtml:div class="title"><xsl:value-of select="."/></xhtml:div>
 </xsl:template>
 
 
 <xsl:template match="echo:summary">
-  <em><xsl:copy-of select="node()"/></em>
+  <xhtml:em><xsl:copy-of select="node()"/></xhtml:em>
 </xsl:template>
 
 <xsl:template match="echo:content[@type='application/xhtml+xml']">
@@ -59,9 +59,9 @@
 </xsl:template>
 
 <xsl:template match="echo:content">
-<p>
+<xhtml:p>
   <xsl:apply-templates/>
-</p>
+</xhtml:p>
 </xsl:template>
 
 <xsl:template match="echo:author">
