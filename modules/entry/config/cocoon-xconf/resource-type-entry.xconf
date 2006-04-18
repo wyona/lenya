@@ -6,11 +6,13 @@
   <component-instance name="entry" logger="lenya.resourcetypes.entry"
     class="org.apache.lenya.cms.publication.ResourceTypeImpl">
     <schema language="http://relaxng.org/ns/structure/0.9"
-      src="fallback://lenya/resources/schemas/entry.rng"/>
+      src="fallback://lenya/modules/entry/resources/schemas/entry.rng"/>
     <creator src="org.wyona.lenya.cms.authoring.NewBlogEntryCreator">
       <sample-name>
         fallback://lenya/modules/entry/samples/entry.xml</sample-name>
     </creator>
+    <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
+    <format name="xhtml" uri="cocoon://modules/entry/xhtml.xml"/>
   </component-instance>
   
 </xconf>
