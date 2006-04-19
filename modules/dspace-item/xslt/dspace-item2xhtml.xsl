@@ -17,7 +17,8 @@
   <div id="body">
 	<esql:connection>
 		<esql:pool>Dspace-Item</esql:pool>
-		<esql:dburl>127.0.0.1</esql:dburl>
+		<esql:driver>org.postgresql.driver.jdbc</esql:driver>
+		<esql:dburl>jdbc:postgresql://127.0.0.1/dspace</esql:dburl>
 		<esql:username>dspace</esql:username>
 		<esql:password>dspace</esql:password>
 		<esql:execute-query>
