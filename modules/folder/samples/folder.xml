@@ -3,12 +3,12 @@
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Media docu</title>
+    <title>Folder docu</title>
   </head>
   <body>
-    <div id="mediaTypeBXE">
+    <div id="folderBXE">
       <h2>Edit this</h2>
-      <p>Add more infos for the media file</p>
+      <p>Add more infos for the folder</p>
     </div>
   </body>
 </html>
