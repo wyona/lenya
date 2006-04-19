@@ -64,6 +64,8 @@ public class CreateBlogEntry extends DocumentUsecase {
     
     protected static final String ATTRIBUTE_TYPE = "select";
     
+    private String parentId;
+    
     
     public void configure(Configuration config) throws ConfigurationException {
         super.configure(config);
@@ -112,7 +114,8 @@ public class CreateBlogEntry extends DocumentUsecase {
         super.initParameters();
 
         Document parent = getSourceDocument();
-        setParameter(PARENT_ID, parent.getId());
+        setParameter(PARENT_ID,parent.getId());
+        
     }
 
     /**
@@ -141,6 +144,7 @@ public class CreateBlogEntry extends DocumentUsecase {
 
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
+        this.parentId=parent.getId();
         String language = parent.getPublication().getDefaultLanguage();
         Map objectModel = ContextHelper.getObjectModel(getContext());
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -256,7 +260,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         String month = fmtMM.format(date);
         String day = fmtdd.format(date);
 
-        String documentId = "/entries/" + year + "/" + month + "/" + day + "/"
+        String documentId = this.parentId+"/" + year + "/" + month + "/" + day + "/"
                         + getNewDocumentName();
         return documentId;
     }
