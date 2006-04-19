@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+$Id: sitetree.xml,v 1.3 2004/11/24 11:48:44 jann Exp $
+-->
+<site xmlns="http://apache.org/cocoon/lenya/sitetree/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" label="Authoring">
+&#9;<node id="index">
+&#9;&#9;<label xml:lang="de">UniTemplate</label>
+&#9;&#9;<label xml:lang="en">UniTemplate</label>
+&#9;</node>
+&#9;
+&#9;
+
+&#9;
+
+<node id="impressum" visibleinnav="false">
+        <label xml:lang="de">Impressum</label>
+    </node>
+
+<node id="contact" visibleinnav="false">
+<label xml:lang="de">Kontakt</label>
+<label xml:lang="en">Contact</label>
+</node>
+<node id="sitemap" visibleinnav="false">
+<label xml:lang="de">Sitemap</label>
+<label xml:lang="en">Sitemap</label>
+</node>
+<node id="search" visibleinnav="false">
+<label xml:lang="de">Suche</label>
+</node>
+
+
+<node id="news" visibleinnav="true">
+<label xml:lang="de">News</label>
+<node id="1" visibleinnav="true">
+<label xml:lang="de">News Item 1</label>
+</node>
+</node>
+<node id="aboutus" visibleinnav="true">
+<label xml:lang="de">Über uns</label>
+
+<node id="team" visibleinnav="true">
+<label xml:lang="de">Personen</label>
+<node id="muster" visibleinnav="true">
+<label xml:lang="de">Gret Muster</label>
+</node>
+</node>
+<node id="mission" visibleinnav="true">
+<label xml:lang="de">Leitbild</label>
+</node>
+<node id="map" visibleinnav="true">
+<label xml:lang="de">Lageplan</label>
+</node>
+</node>
+<node id="research" visibleinnav="true">
+<label xml:lang="de">Forschung</label>
+</node>
+<node id="teaching" visibleinnav="true">
+<label xml:lang="de">Lehre</label>
+</node>
+<node id="services" visibleinnav="true">
+<label xml:lang="de">Dienstleistungen</label>
+<node id="download" visibleinnav="true">
+<label xml:lang="de">Download</label>
+
+</node>
+</node>
+<node id="departments" visibleinnav="true">
+<label xml:lang="de">Abteilungen</label>
+</node>
+<node id="doctypes" visibleinnav="true">
+<label xml:lang="de">Dokumenttypen</label>
+<node id="xhtml" visibleinnav="true">
+<label xml:lang="de">Allgemeine Dokumenttypen</label>
+<node id="1column" visibleinnav="true">
+<label xml:lang="de">1 Spalte</label>
+</node>
+<node id="2columns" visibleinnav="true">
+<label xml:lang="de">2 Spalten</label>
+</node>
+<node id="3columns" visibleinnav="true">
+<label xml:lang="de">3 Spalten</label>
+</node>
+</node>
+<node id="custom" visibleinnav="true">
+<label xml:lang="de">Strukt. Dokumenttypen</label>
+<node id="News" visibleinnav="true">
+<label xml:lang="de">News</label>
+<node id="EintragLang" visibleinnav="true">
+<label xml:lang="de">Lang</label>
+</node>
+<node id="Kurz" visibleinnav="true">
+<label xml:lang="de">Kurz</label>
+</node>
+</node>
+<node id="Team" visibleinnav="true">
+<label xml:lang="de">Team</label>
+<node id="Muster" visibleinnav="true">
+<label xml:lang="de">Gret Muster</label>
+</node>
+</node>
+</node>
+<node id="redirect" visibleinnav="true">
+<label xml:lang="de">Redirect</label>
+</node>
+</node>
+</site>

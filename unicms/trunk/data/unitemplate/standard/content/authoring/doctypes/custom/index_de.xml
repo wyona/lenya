@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Strukturierte Dokumenttypen</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>admin1 (Administrator)</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Wed Oct 19 14:31:09 CEST 2005</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <p>Für News und Personenverzeichnis stehen spezifische Dokumenttypen zur Verfügung. Diese verfügen über einen erweiterten Funktionsumfang, vereinheitlichen die Darstellung und vereinfachen die Erfassung bzw. Datenpflege.</p>
+  </body>
+</html>

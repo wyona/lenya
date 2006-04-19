@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="2" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Colophon</dc:title>
+    <dc:description>Impressum </dc:description>
+    <dc:creator>admin1 (Administrator)</dc:creator>
+    <dc:subject>Impressum</dc:subject>
+    <dc:publisher>University of Zurich</dc:publisher>
+    <dcterms:created>Wed Sep 14 13:21:27 CEST 2005</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>en</dc:language>
+    <dc:rights>University of Zurich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p></p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+  	<h2>Herausgeber</h2>
+<p>&lt;Gesamtverantwortlicher der Publikation, z.B. Abteilungs-  oder Institutsleiter&gt; </p>
+<h2>Redaktion</h2>
+<h3>Gesamtredaktion</h3>
+<p>&lt;Klara Muster&gt;</p>
+<h3>&lt;Bereich 1&gt;</h3>
+<p>&lt;Hans Müller&gt;</p>
+<h3>&lt;Bereich 2&gt;</h3>
+<p>&lt;Vreni Hasler&gt;</p>
+<h2>Webmaster</h2>
+<p>&lt;Administrator der Publikation&gt;</p>
+</body>
+</html>

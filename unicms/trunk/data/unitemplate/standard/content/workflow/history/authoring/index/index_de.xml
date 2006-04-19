@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wf:history xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0" workflow="2stage.xml">
+<wf:version date="21.10.2003 17:16:08" state="authoring">
+<wf:identity>
+</wf:identity>
+</wf:version>
+<wf:variable name="is_live" value="false"/>
+<wf:version date="2005-10-19 12:46:11" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 12:46:52" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 12:47:27" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 12:50:47" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 12:51:57" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 13:05:15" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 13:13:31" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 13:24:59" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 14:00:52" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 15:35:01" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2005-10-19 15:35:30" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="admin1"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+<wf:version date="2006-04-05 15:33:49" event="edit" state="authoring">
+<wf:identity>
+<wf:user id="lenya"/>
+<wf:machine ip-address="127.0.0.1"/>
+</wf:identity>
+</wf:version>
+</wf:history>
