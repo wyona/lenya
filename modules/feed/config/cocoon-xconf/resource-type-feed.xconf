@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 
-<xconf xpath="/cocoon/resource-types" unless="/cocoon/resource-types/component-instance[@name = 'feed']">
-
-  <component-instance name="feed"
-                      logger="lenya.resourcetypes.feed"
-                      class="org.apache.lenya.cms.publication.ResourceTypeImpl">
-    <schema language="http://relaxng.org/ns/structure/0.9" src="fallback://lenya/resources/schemas/feed.rng"/>
+<xconf xpath="/cocoon/resource-types"
+  unless="/cocoon/resource-types/component-instance[@name = 'feed']">
+  
+  <component-instance name="feed" logger="lenya.resourcetypes.feed"
+    class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+    <schema language="http://relaxng.org/ns/structure/0.9"
+      src="fallback://lenya/resources/schemas/feed.rng"/>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>fallback://lenya/resources/samples/feed.xml</sample-name>
     </creator>
   </component-instance>
-
+  
 </xconf>
