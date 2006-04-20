@@ -6,10 +6,11 @@
   <component-instance name="feed" logger="lenya.resourcetypes.feed"
     class="org.apache.lenya.cms.publication.ResourceTypeImpl">
     <schema language="http://relaxng.org/ns/structure/0.9"
-      src="fallback://lenya/resources/schemas/feed.rng"/>
+      src="fallback://lenya/modules/feed/resources/schemas/feed.rng"/>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/resources/samples/feed.xml</sample-name>
+      <sample-name>fallback://lenya/modules/feed/samples/feed.xml</sample-name>
     </creator>
+    <format name="xhtml" uri="cocoon://modules/entry/xhtml.xml"/>
   </component-instance>
   
 </xconf>
