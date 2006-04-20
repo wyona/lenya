@@ -17,8 +17,8 @@
   <div id="body">
 	<esql:connection>
 		<esql:pool>Dspace-Item</esql:pool>
-		<esql:driver>org.postgresql.driver.jdbc</esql:driver>
-		<esql:dburl>jdbc:postgresql://127.0.0.1/dspace</esql:dburl>
+		<esql:driver>org.postgresql.Driver</esql:driver>
+		<esql:dburl>jdbc:postgresql://192.168.100.115/dspace</esql:dburl>
 		<esql:username>dspace</esql:username>
 		<esql:password>dspace</esql:password>
 		<esql:execute-query>
@@ -26,6 +26,9 @@
 			<esql:results>
 				<esql:row-results>
 					<esql:get-string column"text_value"/>
+					<!-- Debug output -->
+					<esql:get-string column"text_lang"/>
+					<esql:get-string column"item_id"/>
 				</esql:row-results>
 			</esql:results>
 		</esql:execute-query>
