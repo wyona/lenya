@@ -163,9 +163,18 @@
         <table width="100" border="0" cellpadding="0" cellspacing="0" class="imgMitLegende">
           <tr>
             <td class="flexibleimage">
-              <xsl:call-template name="object">
-                <xsl:with-param name="width" select="@width"/>
-              </xsl:call-template>
+              <xsl:choose>
+                <xsl:when test="@width != ''">
+                  <xsl:call-template name="object">
+                    <xsl:with-param name="width" select="@width"/>
+                  </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:call-template name="object">
+                    <xsl:with-param name="width">100</xsl:with-param>
+                  </xsl:call-template>
+                </xsl:otherwise>
+              </xsl:choose>
             </td>
           </tr>
           <tr>
