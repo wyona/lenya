@@ -22,7 +22,7 @@
 		<esql:username>dspace</esql:username>
 		<esql:password>dspace</esql:password>
 		<esql:execute-query>
-			<esql:query>SELECT text_value from dcvalue where dc_value_id = 38</esql:query>
+			<esql:query>SELECT text_value from dcvalue where dc_value_id = <xsl:value-of select="@id"/></esql:query>
 			<esql:results>
 				<esql:row-results>
 					<esql:get-string column"text_value"/>
@@ -36,8 +36,6 @@
 			Sorry, Dspace database is empty!
 		</esql:no-results>
 	</esql:connection>
-    Hello DSpace Item (ID: <xsl:value-of select="@id"/>)
-  <xsl:apply-templates/>
   </div>
 </xsl:template>
 
