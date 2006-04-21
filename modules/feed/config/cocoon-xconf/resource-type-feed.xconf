@@ -10,7 +10,7 @@
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
       <sample-name>fallback://lenya/modules/feed/samples/feed.xml</sample-name>
     </creator>
-    <format name="xhtml" uri="cocoon://modules/entry/xhtml.xml"/>
+    <format name="xhtml" uri="cocoon://modules/feed/xhtml.xml"/>
   </component-instance>
   
 </xconf>
