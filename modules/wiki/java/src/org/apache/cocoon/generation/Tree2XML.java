@@ -158,44 +158,79 @@ public class Tree2XML {
             int i = 0;
             boolean found = false;
             String protocol = "[\\w]+://.*";
-            String suffix = "[.].*";
+            String suffixSeparator = ".";
             String currentDocID = currentDocument.getId();
+            String docId = href;
+            String suffix = null;
+            String parameter = null;
             
-            if(Pattern.matches(protocol, href))
-            {
-               	node.setOption("type", "external");
-              	found = true;
+
+            
+            if(Pattern.matches(protocol, href)) {
+                node.setOption("type", "external");
+                found = true;
+//                int firstSlash = 0;
+//                int k = 0;
+//                for( k=0; k<3; k++ ){
+//                    firstSlash = href.indexOf("/");
+//                    if (firstSlash > 0){
+//                        href = href.substring(firstSlash, href.length());
+//                    } 
+//                }
+                
             }
+
+            int firstQuerrySeparator = href.indexOf("?");
+            if (firstQuerrySeparator > 0){
+                parameter = href.substring(firstQuerrySeparator, href.length());
+                href = href.substring(0,firstQuerrySeparator);
+            }
+            
+
+            
+            //
+
             
             if(href.startsWith("../") && !found){
                 String urlSnippets[] = href.split("/"); 
                 String startId = currentDocID;
                 
                 for (int j = 0; j < urlSnippets.length; j++){
-                	if(urlSnippets[j].equals("..")){
-                		int lastSlashIndex = startId.lastIndexOf("/");
-                		startId = startId.substring(0, lastSlashIndex);
-                	}else {
-                		startId = startId+"/"+urlSnippets[j];
-                	}
+                    if(urlSnippets[j].equals("..")){
+                        int lastSlashIndex = startId.lastIndexOf("/");
+                        if(lastSlashIndex > 0) {
+                            startId = startId.substring(0, lastSlashIndex);
+                        }
+                    }else {
+                        startId = startId+"/"+urlSnippets[j];
+                    }
                 }
                 href = startId;
+            }            
+
+            int lastSuffixSeparator = href.lastIndexOf(".");
+            if (lastSuffixSeparator > 0){
+                suffix = href.substring(lastSuffixSeparator+1, href.length());
+                href = href.substring(0, lastSuffixSeparator);
+                
+            }
+            if(suffix != null){
+                node.setOption("suffix", suffix);
+            } else if (!found){
+                node.setOption("suffix", "html");
             }
             
             if(!href.startsWith("/") && !found){
             	href = currentDocID+"/"+href;
-            	node.setOption("href", href);
             }
-            if (!found) {
-            	href = href.replaceAll(suffix, "");
-            	node.setOption("href", href);
-            }
+            node.setOption("href", href);
                 
             while (!found && i < documents.length) {
             	if (documents[i].getId().equals(href)) {
-                    node.setOption("type", "internal");
-                    node.setOption("exists", "true");
-                    found = true;
+                        node.setOption("type", "internal");
+                        node.setOption("exists", "true");
+                        
+                        found = true;
                 }
                 i++;
             }

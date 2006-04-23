@@ -155,20 +155,27 @@
 <xsl:template match="wiki:Link">
 <xsl:choose>
     <!-- external links -->
+    
+    <xsl:when test="@type = 'internal' and (@suffix = 'gif' or @suffix = 'jpg' or @suffix = 'png')">
+        <img src="{$contextprefix}/{$publication}/{$area}{@href}.{@suffix}" alt="{@label}"/>
+    </xsl:when>
+    <xsl:when test="@type = 'external' and (@suffix = 'gif' or @suffix = 'jpg' or @suffix = 'png')">
+        <img src="{@href}.{@suffix}" alt="{@label}"/>
+    </xsl:when>
     <xsl:when test="@label and @type = 'external'">
-        <a href="{@href}"><xsl:value-of select="@label"/></a><img src="{$contextprefix}/{$publication}/{$area}/out.png?lenya.module=wiki" alt="external link"/>
+        <a href="{@href}.{@suffix}"><xsl:value-of select="@label"/></a><img src="{$contextprefix}/{$publication}/{$area}/out.png?lenya.module=wiki" alt="external link"/>
     </xsl:when>
     <xsl:when test="@type='external'">
-        <a href="{@href}"><xsl:value-of select="@href"/></a><img src="{$contextprefix}/{$publication}/{$area}/out.png?lenya.module=wiki" alt="external link"/>
+        <a href="{@href}.{@suffix}"><xsl:value-of select="@href"/></a><img src="{$contextprefix}/{$publication}/{$area}/out.png?lenya.module=wiki" alt="external link"/>
     </xsl:when>
     
     <!-- internal links --> 
     <xsl:when test="@label and @valid ='false'">
-      <a class="brokenlink"><xsl:value-of select="@label"/></a>
+      <a class="brokenlink" alt="Broken Link"><xsl:value-of select="@label"/></a>
     </xsl:when>
 
     <xsl:when test="@valid ='false'">
-      <a class="brokenlink"><xsl:value-of select="@href"/></a>
+      <a class="brokenlink" alt="Broken Link"><xsl:value-of select="@href"/></a>
     </xsl:when>
         
     <xsl:when test="@label and @type = 'internal' and @exists = 'false'">
