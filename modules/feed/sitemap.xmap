@@ -49,6 +49,8 @@ limitations under the License.
         <map:generate type="feed">
           <map:parameter name="docid" value="{page-envelope:document-id}"/>
           <map:parameter name="lang" value="{page-envelope:document-language}"/>
+          <!-- Changes the order [true|false]-->
+          <map:parameter name="ascending" value="true"/>
         </map:generate>
         <map:serialize type="xml"/>
       </map:match>

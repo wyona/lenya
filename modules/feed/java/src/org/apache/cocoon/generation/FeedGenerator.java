@@ -89,7 +89,7 @@ public class FeedGenerator extends ServiceableGenerator {
 
     protected static final String TITLE_ATTR_NAME = "title";
 
-    private String m_src;
+    protected static boolean ascending;
 
     /**
      * Convenience object, so we don't need to create an AttributesImpl for
@@ -191,6 +191,7 @@ public class FeedGenerator extends ServiceableGenerator {
             day = Integer.parseInt(param);
         else
             day = 0;
+        ascending = par.getParameterAsBoolean("ascending", false);
 
         try {
             prepareLenyaDoc(objectModel);
@@ -281,31 +282,10 @@ public class FeedGenerator extends ServiceableGenerator {
 
             selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE + "Selector");
             siteManager = (SiteManager) selector.select(pubHint);
-            // Besser machen
+            // NOTE: can be enhanced for performance by requesting only a
+            // fragment of the site!
             Document[] docs = siteManager.getDocuments(map, pub, area);
-            // Arrays.sort((Object[]) docs, new Comparator() {
-            // public int compare(Object o1, Object o2) {
-            // return ((Document) o2).getLastModified().compareTo(
-            // ((Document) o1).getLastModified());
-            // }
-            // });
             compute(docs);
-            // attributes.clear();
-            // attributes.addAttribute("", DOCID_ATTR_NAME, DOCID_ATTR_NAME,
-            // "CDATA", docs[i]
-            // .getId());
-            // attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME,
-            // "CDATA",
-            // String.valueOf(docs[i].getLastModified().getTime()));
-            //
-            // this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX +
-            // ':'
-            // + ENTRY_NODE_NAME, attributes);
-            // this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':'
-            // + ENTRY_NODE_NAME);
-            // }
-            // }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -341,7 +321,6 @@ public class FeedGenerator extends ServiceableGenerator {
                     eYear = Integer.parseInt(patterns[1]);
                     eMonth = Integer.parseInt(patterns[2]);
                     eDay = Integer.parseInt(patterns[3]);
-                    /* determine matching documents */
                     /* determine matching documents */
                     if (year > 0) {
                         if (year == eYear) {
@@ -416,34 +395,57 @@ public class FeedGenerator extends ServiceableGenerator {
                 year1 = Integer.parseInt(patterns[1]);
                 month1 = Integer.parseInt(patterns[2]);
                 day1 = Integer.parseInt(patterns[3]);
-                
+
                 String currentDoc2 = d2.getId();
                 currentDoc2 = currentDoc2.substring(docId.length(), currentDoc2.length());
                 patterns = currentDoc2.split("/");
-                
+
                 year2 = Integer.parseInt(patterns[1]);
                 month2 = Integer.parseInt(patterns[2]);
                 day2 = Integer.parseInt(patterns[3]);
 
-                if (year1 > year2) {
-                    return 1;
-                } else if (year1 == year2) {
-                    if (month1 > month2) {
-                        return 1;
-                    } else if (month1 == month2) {
-                        if (day1 > day2) {
+                if (ascending) {
+                    if (year1 > year2) {
+                        return -1;
+                    } else if (year1 == year2) {
+                        if (month1 > month2) {
+                            return -1;
+                        } else if (month1 == month2) {
+                            if (day1 > day2) {
+                                return -1;
+                            } else if (day1 == day2) {
+                                /* newest first */
+                                return d2.getLastModified().compareTo(d1.getLastModified());
+                            } else {
+                                return 1;
+                            }
+                        } else {
                             return 1;
-                        } else if (day1 == day2) {
-                            /* newest first */
-                            return d2.getLastModified().compareTo(d1.getLastModified());
+                        }
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    if (year1 > year2) {
+                        return 1;
+                    } else if (year1 == year2) {
+                        if (month1 > month2) {
+                            return 1;
+                        } else if (month1 == month2) {
+                            if (day1 > day2) {
+                                return 1;
+                            } else if (day1 == day2) {
+                                /* newest first */
+                                return d2.getLastModified().compareTo(d1.getLastModified());
+                            } else {
+                                return -1;
+                            }
                         } else {
                             return -1;
                         }
                     } else {
                         return -1;
                     }
-                } else {
-                    return -1;
                 }
             }
         });
@@ -530,7 +532,7 @@ public class FeedGenerator extends ServiceableGenerator {
             Element element = (Element) XPathAPI.selectSingleNode(parent,
                             "/*[local-name() = 'entry']/*[local-name() = 'title']");
             Element elementSummary = (Element) XPathAPI.selectSingleNode(parent,
-            "/*[local-name() = 'entry']/*[local-name() = 'summary']");
+                            "/*[local-name() = 'entry']/*[local-name() = 'summary']");
             attributes.addAttribute("", TITLE_ATTR_NAME, TITLE_ATTR_NAME, "CDATA", DocumentHelper
                             .getSimpleElementText(element));
             attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME, "CDATA", String
@@ -538,7 +540,7 @@ public class FeedGenerator extends ServiceableGenerator {
             String summary = DocumentHelper.getSimpleElementText(elementSummary);
             this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME,
                             attributes);
-            this.contentHandler.ignorableWhitespace(summary.toCharArray(),0,summary.length());
+            this.contentHandler.ignorableWhitespace(summary.toCharArray(), 0, summary.length());
             this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME);
         }
 
