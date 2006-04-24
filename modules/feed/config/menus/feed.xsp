@@ -36,11 +36,13 @@
 
   <menus>
     <menu i18n:attr="name" name="File">
-      <block info="false">
-        <item uc:usecase="site.create" href="?doctype=feed">Add&#160;new&#160;Feed</item>
-      </block>
       <xsp:logic>
         String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
+        if (!"entry".equals(doctype)) {
+          <block info="false">
+            <item uc:usecase="site.create" href="?doctype=feed">Add&#160;new&#160;Feed</item>
+          </block>
+        }
         if ("feed".equals(doctype)) {
           <block info="false">
             <item uc:usecase="entry.create" href="?">Add&#160;new&#160;Entry</item>
