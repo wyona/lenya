@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright 1999-2004 The Apache Software Foundation
+Copyright 1999-2006 The Apache Software Foundation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ limitations under the License.
         src="org.apache.lenya.cms.cocoon.generation.LenyaMetaDataGenerator"/>
       <map:generator logger="sitemap.generator.traversable" name="traversable"
         src="org.apache.cocoon.generation.TraversableGenerator"/>
+      <map:generator logger="sitemap.generator.feed" name="feed"
+        src="org.apache.cocoon.generation.FeedGenerator"/>
     </map:generators>
     <map:serializers default="xhtml">
       <map:serializer logger="sitemap.serializer.links" name="links"
@@ -36,6 +38,15 @@ limitations under the License.
     <map:pipeline>
       <map:match pattern="lenyametadata.xml">
         <map:generate type="lenyaMetaData">
+          <map:parameter name="docid" value="{page-envelope:document-id}"/>
+          <map:parameter name="lang" value="{page-envelope:document-language}"/>
+        </map:generate>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <map:match pattern="feed-overview.xml">
+        <map:generate type="feed">
           <map:parameter name="docid" value="{page-envelope:document-id}"/>
           <map:parameter name="lang" value="{page-envelope:document-language}"/>
         </map:generate>
@@ -89,11 +100,6 @@ limitations under the License.
           <map:parameter name="root"
             value="{base-url:{page-envelope:publication-id}:{page-envelope:area}}"/>
         </map:transform>
-        <map:serialize type="xml"/>
-      </map:match>
-      <map:match pattern="feed-overview.xml">
-        <map:generate type="traversable"
-          src="lenya://lenya/pubs/{page-envelope:publication-id}/content/{page-envelope:area}{page-envelope:document-id}"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>

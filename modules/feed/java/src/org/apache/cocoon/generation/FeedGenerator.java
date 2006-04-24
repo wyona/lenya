@@ -16,23 +16,44 @@
 package org.apache.cocoon.generation;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.apache.lenya.xml.DocumentHelper;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
+import org.apache.excalibur.source.SourceNotFoundException;
+import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.impl.validity.TimeStampValidity;
+import org.apache.excalibur.xml.dom.DOMParser;
+import org.apache.lenya.cms.cocoon.source.SourceUtil;
+import org.apache.lenya.cms.metadata.MetaDataManager;
 import org.apache.lenya.cms.publication.Document;
+import org.apache.lenya.cms.publication.DocumentBuildException;
+import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.publication.DocumentIdentityMap;
 import org.apache.lenya.cms.publication.Publication;
+import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
+import org.apache.lenya.cms.publication.URLInformation;
 import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
+import org.apache.lenya.util.ServletHelper;
+import org.apache.xpath.XPathAPI;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -48,13 +69,27 @@ public class FeedGenerator extends ServiceableGenerator {
     protected static final String PREFIX = "blog";
 
     /** Node and attribute names */
-    protected static final String BLOG_NODE_NAME = "blog";
+    protected static final String BLOG_NODE_NAME = "overview";
 
     protected static final String ENTRY_NODE_NAME = "entry";
 
     protected static final String DOCID_ATTR_NAME = "docid";
 
     protected static final String LASTMOD_ATTR_NAME = "lastModified";
+
+    protected static final String YEAR_NODE_NAME = "year";
+
+    protected static final String MONTH_NODE_NAME = "month";
+
+    protected static final String DAY_NODE_NAME = "day";
+
+    protected static final String ID_ATTR_NAME = "id";
+
+    protected static final String URL_ATTR_NAME = "url";
+
+    protected static final String TITLE_ATTR_NAME = "title";
+
+    private String m_src;
 
     /**
      * Convenience object, so we don't need to create an AttributesImpl for
@@ -67,13 +102,56 @@ public class FeedGenerator extends ServiceableGenerator {
      */
     protected String area;
 
-    protected boolean recent;
-    
+    /** Helper for lenya document retrival */
+    protected String publicationId = null;
+
+    protected String language = null;
+
+    protected String docId = null;
+
+    /** The corresponding lenya document */
+    protected Document document;
+
+    protected Publication pub;
+
+    protected DocumentIdentityMap map;
+
     /**
-     * Only generate the #numrecent entries
+     * Request parameters
      */
-    protected int numrecent; 
-    
+    protected int year;
+
+    protected int month;
+
+    protected int day;
+
+    /**
+     * Recycle this component. All instance variables are set to
+     * <code>null</code>.
+     */
+    public void recycle() {
+        this.document = null;
+        this.docId = null;
+        this.language = null;
+        this.area = null;
+        this.publicationId = null;
+        super.recycle();
+    }
+
+    /**
+     * Serviceable
+     * 
+     * @param manager
+     *            the ComponentManager
+     * 
+     * @throws ServiceException
+     *             in case a component could not be found
+     */
+    public void service(ServiceManager manager) throws ServiceException {
+        super.service(manager);
+        this.attributes = new AttributesImpl();
+    }
+
     /**
      * Set the request parameters. Must be called before the generate method.
      * 
@@ -86,20 +164,99 @@ public class FeedGenerator extends ServiceableGenerator {
      * @param par
      *            configuration parameters
      */
-    public void setup(SourceResolver resolver, Map objectModel, String src,
-            Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par)
+                    throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
+        docId = par.getParameter("docid", null);
+        if (this.docId == null) {
+            throw new ProcessingException(
+                            "The docid is not set! Please set like e.g. <map:parameter name='docid' value='{request-param:docid}'/>");
+        }
+        language = par.getParameter("lang", null);
+        if (language == null)
+            throw new ProcessingException("The 'lang' parameter is not set.");
 
-        area = par.getParameter("area", null);
-        if (area == null)
-            throw new ProcessingException("no area specified");               
-        if (area.equals(Publication.LIVE_AREA)) 
-            numrecent = 16;
-        else 
-            numrecent = 0;
-        
-        this.attributes = new AttributesImpl();
+        String param = par.getParameter("year", null);
+        if (param != null)
+            year = Integer.parseInt(param);
+        else
+            year = 0;
+        param = par.getParameter("month", null);
+        if (param != null)
+            month = Integer.parseInt(param);
+        else
+            month = 0;
+        param = par.getParameter("day", null);
+        if (param != null)
+            day = Integer.parseInt(param);
+        else
+            day = 0;
+
+        try {
+            prepareLenyaDoc(objectModel);
+        } catch (DocumentBuildException e) {
+            throw new ProcessingException(src + " threw DocumentBuildException: " + e);
+        }
+
+        // this.attributes = new AttributesImpl();
+    }
+
+    protected void prepareLenyaDoc(Map objectModel) throws DocumentBuildException,
+                    ProcessingException {
+
+        Request request = ObjectModelHelper.getRequest(objectModel);
+        Session session = RepositoryUtil.getSession(request, getLogger());
+
+        try {
+            this.pub = PublicationUtil.getPublication(this.manager, objectModel);
+        } catch (PublicationException e) {
+            throw new ProcessingException("Error geting publication id / area from page envelope",
+                            e);
+        }
+        if (pub != null && pub.exists()) {
+            this.publicationId = pub.getId();
+            String url = ServletHelper.getWebappURI(request);
+            this.area = new URLInformation(url).getArea();
+            if (this.language == null) {
+                this.language = pub.getDefaultLanguage();
+            }
+        }
+
+        this.map = new DocumentIdentityMap(session, this.manager, getLogger());
+        this.document = map.get(pub, area, docId, language);
+    }
+
+    /**
+     * Generate the unique key. This key must be unique inside the space of this
+     * component.
+     * 
+     * @return The generated key hashes the src
+     */
+    public Serializable getKey() {
+        return language + "$$" + docId;
+    }
+
+    /**
+     * Generate the validity object.
+     * 
+     * @return The generated validity object or <code>null</code> if the
+     *         component is currently not cacheable.
+     */
+    public SourceValidity getValidity() {
+        long lastModified = 0;
+        try {
+            MetaDataManager metaMgr = document.getMetaDataManager();
+            if (lastModified < metaMgr.getCustomMetaData().getLastModified())
+                lastModified = metaMgr.getCustomMetaData().getLastModified();
+            if (lastModified < metaMgr.getDublinCoreMetaData().getLastModified())
+                lastModified = metaMgr.getDublinCoreMetaData().getLastModified();
+            if (lastModified < metaMgr.getLenyaMetaData().getLastModified())
+                lastModified = metaMgr.getLenyaMetaData().getLastModified();
+        } catch (DocumentException e) {
+            getLogger().error("Error determining last modification date", e);
+            return null;
+        }
+        return new TimeStampValidity(lastModified);
     }
 
     /**
@@ -114,49 +271,40 @@ public class FeedGenerator extends ServiceableGenerator {
         this.contentHandler.startPrefixMapping(PREFIX, URI);
         attributes.clear();
 
-        this.contentHandler.startElement(URI, BLOG_NODE_NAME, PREFIX + ':'
-                + BLOG_NODE_NAME, attributes);
+        this.contentHandler.startElement(URI, BLOG_NODE_NAME, PREFIX + ':' + BLOG_NODE_NAME,
+                        attributes);
 
         ServiceSelector selector = null;
         SiteManager siteManager = null;
+        String pubHint = pub.getSiteManagerHint();
         try {
-            Request request = ObjectModelHelper.getRequest(this.objectModel);
-            Session session = RepositoryUtil.getSession(request, this
-                    .getLogger());
-            DocumentIdentityMap map = new DocumentIdentityMap(session,
-                    this.manager, this.getLogger());
-            Publication publication = PublicationUtil.getPublication(
-                    this.manager, request);
-                       
-            selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE
-                    + "Selector");
-            siteManager = (SiteManager) selector.select(publication
-                    .getSiteManagerHint());
 
-            Document[] docs = siteManager.getDocuments(map, publication, area);
-            Arrays.sort((Object[]) docs, new Comparator() {
-                public int compare(Object o1, Object o2) {
-                    return ((Document) o2).getLastModified().compareTo(
-                            ((Document) o1).getLastModified());
-                }
-            });
-
-            for (int i = 0; i < docs.length; i++) {                
-                if (numrecent > 0 && numrecent <= i)                     
-                    break;                
-                if (docs[i].getId().startsWith("/entries/")) {
-                    attributes.clear();
-                    attributes.addAttribute("", DOCID_ATTR_NAME,
-                            DOCID_ATTR_NAME, "CDATA", docs[i].getId());
-                    attributes.addAttribute("", LASTMOD_ATTR_NAME,
-                            LASTMOD_ATTR_NAME, "CDATA", String.valueOf(docs[i].getLastModified().getTime()));
-                    
-                    this.contentHandler.startElement(URI, ENTRY_NODE_NAME,
-                            PREFIX + ':' + ENTRY_NODE_NAME, attributes);
-                    this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX
-                            + ':' + ENTRY_NODE_NAME);
-                }
-            }
+            selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE + "Selector");
+            siteManager = (SiteManager) selector.select(pubHint);
+            // Besser machen
+            Document[] docs = siteManager.getDocuments(map, pub, area);
+            // Arrays.sort((Object[]) docs, new Comparator() {
+            // public int compare(Object o1, Object o2) {
+            // return ((Document) o2).getLastModified().compareTo(
+            // ((Document) o1).getLastModified());
+            // }
+            // });
+            compute(docs);
+            // attributes.clear();
+            // attributes.addAttribute("", DOCID_ATTR_NAME, DOCID_ATTR_NAME,
+            // "CDATA", docs[i]
+            // .getId());
+            // attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME,
+            // "CDATA",
+            // String.valueOf(docs[i].getLastModified().getTime()));
+            //
+            // this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX +
+            // ':'
+            // + ENTRY_NODE_NAME, attributes);
+            // this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':'
+            // + ENTRY_NODE_NAME);
+            // }
+            // }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -169,10 +317,239 @@ public class FeedGenerator extends ServiceableGenerator {
             }
         }
 
-        this.contentHandler.endElement(URI, BLOG_NODE_NAME, PREFIX + ':'
-                + BLOG_NODE_NAME);
+        this.contentHandler.endElement(URI, BLOG_NODE_NAME, PREFIX + ':' + BLOG_NODE_NAME);
 
         this.contentHandler.endPrefixMapping(PREFIX);
         this.contentHandler.endDocument();
+    }
+
+    private void compute(Document[] docs) throws NumberFormatException, SAXException,
+                    ServiceException, SourceNotFoundException, ParserConfigurationException,
+                    IOException, TransformerException {
+        ArrayList filteredDocs = new ArrayList(1);
+        for (int i = 0; i < docs.length; i++) {
+            String currentDoc = docs[i].getId();
+            if (currentDoc.startsWith(docId)) {
+                currentDoc = currentDoc.substring(docId.length(), currentDoc.length());
+                String[] patterns = currentDoc.split("/");
+                if (patterns.length > 4) {
+                    int eYear = 0;
+                    int eMonth = 0;
+                    int eDay = 0;
+                    boolean add = false;
+
+                    eYear = Integer.parseInt(patterns[1]);
+                    eMonth = Integer.parseInt(patterns[2]);
+                    eDay = Integer.parseInt(patterns[3]);
+                    /* determine matching documents */
+                    /* determine matching documents */
+                    if (year > 0) {
+                        if (year == eYear) {
+                            if (month > 0) {
+                                if (month == eMonth) {
+                                    if (day > 0) {
+                                        if (day == eDay) {
+                                            /* add */
+                                            add = true;
+                                        }
+                                    } else {
+                                        /* add */
+                                        add = true;
+                                    }
+                                }
+                            } else {
+                                if (day > 0) {
+                                    if (day == eDay) {
+                                        /* add */
+                                        add = true;
+                                    }
+                                } else {
+                                    /* add */
+                                    add = true;
+                                }
+                            }
+                        }
+                    } else if (month > 0l) {
+                        if (month == eMonth) {
+                            if (day > 0) {
+                                if (day == eDay) {
+                                    /* add */
+                                    add = true;
+                                }
+                            } else {
+                                /* add */
+                                add = true;
+                            }
+                        }
+                    } else {
+                        if (day > 0) {
+                            if (day == eDay) {
+                                /* add */
+                                add = true;
+                            }
+                        } else {
+                            /* add */
+                            add = true;
+                        }
+                    }
+                    if (add) {
+                        filteredDocs.add((Object) docs[i]);
+                    }
+                }
+            }
+        }
+
+        /* sort entries by year -> month -> day -> lastModified */
+        Object[] sortedList = filteredDocs.toArray();
+        Arrays.sort(sortedList, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                Document d1, d2;
+                int year1, month1, day1;
+                int year2, month2, day2;
+
+                d1 = (Document) o1;
+                d2 = (Document) o2;
+                String currentDoc1 = d1.getId();
+                currentDoc1 = currentDoc1.substring(docId.length(), currentDoc1.length());
+                String[] patterns = currentDoc1.split("/");
+
+                year1 = Integer.parseInt(patterns[1]);
+                month1 = Integer.parseInt(patterns[2]);
+                day1 = Integer.parseInt(patterns[3]);
+                
+                String currentDoc2 = d2.getId();
+                currentDoc2 = currentDoc2.substring(docId.length(), currentDoc2.length());
+                patterns = currentDoc2.split("/");
+                
+                year2 = Integer.parseInt(patterns[1]);
+                month2 = Integer.parseInt(patterns[2]);
+                day2 = Integer.parseInt(patterns[3]);
+
+                if (year1 > year2) {
+                    return 1;
+                } else if (year1 == year2) {
+                    if (month1 > month2) {
+                        return 1;
+                    } else if (month1 == month2) {
+                        if (day1 > day2) {
+                            return 1;
+                        } else if (day1 == day2) {
+                            /* newest first */
+                            return d2.getLastModified().compareTo(d1.getLastModified());
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        return -1;
+                    }
+                } else {
+                    return -1;
+                }
+            }
+        });
+
+        /* group entries by year -> month -> day */
+        /* works because the list is sorted =) */
+        int currentYear = 0;
+        int currentMonth = 0;
+        int currentDay = 0;
+        boolean yearOpen = false;
+        boolean monthOpen = false;
+        boolean dayOpen = false;
+        for (int i = 0; i < sortedList.length; i++) {
+            Document doc = ((Document) sortedList[i]);
+            String currentDoc = doc.getId();
+            currentDoc = currentDoc.substring(docId.length(), currentDoc.length());
+            String[] patterns = currentDoc.split("/");
+            int year = Integer.parseInt(patterns[1]);
+            int month = Integer.parseInt(patterns[2]);
+            int day = Integer.parseInt(patterns[3]);
+            if (year != currentYear) {
+                if (dayOpen) {
+                    dayOpen = false;
+                    this.contentHandler
+                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                }
+                if (monthOpen) {
+                    monthOpen = false;
+                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':'
+                                    + MONTH_NODE_NAME);
+                }
+                if (yearOpen) {
+                    this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX + ':'
+                                    + YEAR_NODE_NAME);
+                }
+                this.attributes.clear();
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
+                                .valueOf(year));
+                this.contentHandler.startElement(URI, YEAR_NODE_NAME,
+                                PREFIX + ':' + YEAR_NODE_NAME, attributes);
+                yearOpen = true;
+                currentYear = year;
+                currentMonth = 0;
+                currentDay = 0;
+            }
+            if (month != currentMonth) {
+                if (dayOpen) {
+                    dayOpen = false;
+                    this.contentHandler
+                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                }
+                if (monthOpen) {
+                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':'
+                                    + MONTH_NODE_NAME);
+                }
+                this.attributes.clear();
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
+                                .valueOf(month));
+                this.contentHandler.startElement(URI, MONTH_NODE_NAME, PREFIX + ':'
+                                + MONTH_NODE_NAME, attributes);
+                monthOpen = true;
+                currentMonth = month;
+                currentDay = 0;
+            }
+            if (day != currentDay) {
+                if (dayOpen) {
+                    this.contentHandler
+                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                }
+                this.attributes.clear();
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
+                                .valueOf(day));
+                this.contentHandler.startElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME,
+                                attributes);
+                dayOpen = true;
+                currentDay = day;
+            }
+            attributes.clear();
+            attributes.addAttribute("", DOCID_ATTR_NAME, DOCID_ATTR_NAME, "CDATA", doc.getId());
+            attributes.addAttribute("", URL_ATTR_NAME, URL_ATTR_NAME, "CDATA", doc
+                            .getCanonicalWebappURL());
+            org.w3c.dom.Document docDOM = SourceUtil.readDOM(doc.getSourceURI(), this.manager);
+            Element parent = docDOM.getDocumentElement();
+            Element element = (Element) XPathAPI.selectSingleNode(parent,
+                            "/*[local-name() = 'entry']/*[local-name() = 'title']");
+            Element elementSummary = (Element) XPathAPI.selectSingleNode(parent,
+            "/*[local-name() = 'entry']/*[local-name() = 'summary']");
+            attributes.addAttribute("", TITLE_ATTR_NAME, TITLE_ATTR_NAME, "CDATA", DocumentHelper
+                            .getSimpleElementText(element));
+            attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME, "CDATA", String
+                            .valueOf(doc.getLastModified().getTime()));
+            String summary = DocumentHelper.getSimpleElementText(elementSummary);
+            this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME,
+                            attributes);
+            this.contentHandler.ignorableWhitespace(summary.toCharArray(),0,summary.length());
+            this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME);
+        }
+
+        if (dayOpen) {
+            this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+        }
+        if (monthOpen) {
+            this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':' + MONTH_NODE_NAME);
+        }
+        if (yearOpen) {
+            this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX + ':' + YEAR_NODE_NAME);
+        }
     }
 }
