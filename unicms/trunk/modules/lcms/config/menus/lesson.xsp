@@ -104,6 +104,9 @@
 	    }
 	  </xsp:logic>
 	</block>
+        <block>
+          <item uc:usecase="exportlesson" uc:step="showscreen" href="?">Export Lesson</item>
+        </block>
 	<block>
 	  <item uc:usecase="userChangePasswordUser"><xsp:attribute name="href"><xsp-request:get-context-path/>/<input:get-attribute module="page-envelope" as="string" name="publication-id"/>/admin/users/<input:get-attribute module="access-control" as="string" name="user-id"/>.html</xsp:attribute>Change Password</item>
 	  <item uc:usecase="logout" href="?">Logout</item>
