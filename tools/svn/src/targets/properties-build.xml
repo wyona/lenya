@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2005 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!-- $Id: properties-build.xml 393762 2006-04-13 08:38:47Z michi $ -->
+
+<project name="lenya-properties">
+  
+  <description> Properties Targets
+  </description>
+  <property environment="env"/>
+  <property name="build.root" value="build/"/>
+  <property name="debug" value="on"/>
+  <property name="optimize" value="on"/>
+  <property name="deprecation" value="off"/>
+  <property name="nowarn" value="off"/>
+  <property name="target.vm" value="1.4"/>
+  
+  <!-- The libraries we use and which are not already included in the cocoon package -->
+  <property name="lib.dir" value="./lib"/>
+  
+  <!-- Compile SVN Command Line Tool -->
+  <target name="compile-svn-lenya" depends="clean"
+    description="Compile SVN command line tool after having cleaned it.">
+    
+    <!-- Set up classpath -->
+    <path id="svn.classpath">
+      <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
+      </fileset>
+    </path>
+    
+    <echo message="ANT_HOME is set to = ${env.ANT_HOME}"/>
+    
+    <!-- Create dir such that build process does not fail if build dir does not exist -->
+    <mkdir dir="${build.root}/classes"/>
+    <!-- Set up classpath -->
+    
+    <javac classpathref="svn.classpath" srcdir="src/java"
+      destdir="${build.root}/classes" debug="${debug}" optimize="{optimize}"
+      deprecation="${deprecation}" target="${target.vm}" nowarn="${nowarn}"
+      source="${target.vm}"/>
+  </target>
+  
+  
+  <!-- Cleans the Lenya build directory, with the exception of target.reset.excludes -->
+  <target name="clean" description="Cleans the build directories.">
+    <mkdir dir="${build.root}"/>
+    <!-- Create dir such that build process does not fail if build dir does not exist -->
+    <delete includeEmptyDirs="true">
+      <fileset dir="${build.root}"/>
+    </delete>
+  </target>
+</project>
