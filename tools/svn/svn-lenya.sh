@@ -95,22 +95,28 @@ JAVASVN_LIBS=$SCRIPT_ROOT/lib
 OLD_CLASSPATH="$CLASSPATH"
 unset CLASSPATH
 CLASSPATH=$SCRIPT_ROOT/build/classes
-CLASSPATH=$CLASSPATH:$LENYA_LIB:$ENDORSED_LIBS:$JAVASVN_LIBS
+CLASSPATH=$CLASSPATH${S}$LENYA_LIB${S}$ENDORSED_LIBS${S}$JAVASVN_LIBS
 export CLASSPATH
 echo "DEBUG: $CLASSPATH"
+LOADER=Loader
+LOADER_LIB="${LENYA_HOME}/tools/loader"
+
+CLI=-Dloader.main.class=org.apache.lenya.svn.LenyaSvnClient
+CLI_LIBRARIES="-Dloader.jar.repositories=$CLASSPATH"
 
 DEFAULT_UI_TYPE=cmd
-UI_TYPE=$1
-if [ "$UI_TYPE" = "" ];then
+#UI_TYPE=$1
+#if [ "$UI_TYPE" = "" ];then
   UI_TYPE=$DEFAULT_UI_TYPE
-fi
+#fi
 #echo "DEBUG: $UI_TYPE"
 
 
 PWD=`pwd`
 if [ "$UI_TYPE" = "cmd" ];then
  echo "DEBUG: CLI and pwd $PWD"
- java org.apache.lenya.svn.LenyaSvnClient "$@"
+ #ant
+ java -cp $LOADER_LIB $ENDORSED $CLI_LIBRARIES $CLI $LOADER "$@"
 else
   echo "ERROR: No such User Interface: $UI_TYPE"
   exit 1
