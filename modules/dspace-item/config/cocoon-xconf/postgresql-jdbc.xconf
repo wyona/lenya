@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/datasources" unless="/cocoon/datasources/jdbc[@name = 'dspace']">
+
+ <jdbc name="dspace">
+    <pool-controller max="100" min="5"/>
+    <driver>org.postgresql.Driver</driver>
+    <dburl>jdbc:postgresql://192.168.100.115/dspace</dburl>
+    <user>dspace</user>
+    <password>dspace</password>
+  </jdbc>
+
+</xconf>
