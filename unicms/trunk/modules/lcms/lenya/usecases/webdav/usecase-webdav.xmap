@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+<!-- =========================== Components ================================ -->
+
+  <map:components>
+    <map:matchers default="wildcard">
+      <map:matcher name="destination" src="org.apache.cocoon.matching.WildcardHeaderMatcher">
+        <header-name>Destination</header-name>
+      </map:matcher>
+    </map:matchers>
+
+    <map:readers default="resource">
+       <map:reader logger="sitemap.reader.requestreader" name="request" pool-max="16" src="org.apache.cocoon.reading.RequestReader"/>
+    </map:readers>
+  
+    <map:serializers default="webdav-request"> 
+      <map:serializer name="webdav-request" src="org.apache.cocoon.serialization.XMLSerializer" mime-type="text/xml">
+        <encoding>utf-8</encoding>
+        <omit-xml-declaration>yes</omit-xml-declaration>
+      </map:serializer>
+
+      <map:serializer name="xml" src="org.apache.cocoon.serialization.XMLSerializer" mime-type="text/xml">
+        <encoding>utf-8</encoding>
+      </map:serializer>
+
+    </map:serializers>
+
+  </map:components>
+
+<!-- ========================== Flowscript ================================= -->
+
+  <map:flow language="javascript">
+    <map:script src="webdav.js"/>
+  </map:flow>
+
+<!-- =========================== Views ===================================== -->
+
+
+  <map:views>    
+    <map:view name="content" from-label="content">
+      <map:serialize type="xml" />
+    </map:view>
+  </map:views>
+
+  <map:pipelines>
+    
+    <map:pipeline type="noncaching">
+
+      <!--  <map:match pattern="limitResponse.xsl">
+        <map:generate type="file" src="cocoon:/request/generate"/>
+        <map:transform src="xslt/limitResponse.xsl"/>
+        <map:serialize type="xml" status-code="200"/>
+      </map:match> -->
+    
+      <map:match pattern="lesson.jx">
+        <map:generate type="jx" src="jx/lesson.jx"/>
+        <map:transform src="xslt/removeLenyaMeta.xsl"/> 
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="putLesson.jx">
+        <map:generate type="jx" src="jx/putLesson.jx"/>
+        <map:transform src="xslt/putLesson.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+ 
+      <map:match pattern="*.jx">
+        <map:generate type="jx" src="jx/{1}.jx"/>
+        <map:transform type="i18n">
+          <map:parameter name="locale" value="{request:locale}"/>
+        </map:transform>
+        <!-- <map:transform type="xslt" src="xslt/NSclean.xsl"/> -->
+        <map:select type="request-method">
+          <map:when test="PROPFIND">
+            <!-- <map:transform src="cocoon:/limitResponse.xsl" /> -->
+            <map:serialize type="webdav-request" status-code="207"/>
+          </map:when>
+          <map:otherwise>
+            <map:serialize type="webdav-request" status-code="200"/>
+          </map:otherwise>
+        </map:select>
+      </map:match>
+
+    </map:pipeline> 
+<!-- ========================= Private Resources =========================== -->
+
+    <map:pipeline type="noncaching" internal-only="true">
+      
+      <map:match pattern="request/generate">
+        <!-- <map:generate type="file" src="module:request:inputStream"/> -->
+        <!-- <map:serialize type="xml" /> -->
+        <map:read type="request"/>
+      </map:match>
+      
+      <!--+ 
+          | If you need to check or change the XML that is being PUT
+          | you can do that here. This is the pipeline that will
+          | generate the input for the PUT method.
+          + -->
+     <!-- <map:match pattern="request/PUT/xml">
+        <map:generate type="stream">
+          <map:parameter name="defaultContentType" value="text/xml" />
+        </map:generate>
+        <map:serialize type="xml" />
+      </map:match> -->
+
+      <!-- Read the request for binaries PUT -->
+      <map:match pattern="request/PUT/*">
+        <map:read type="request"/>
+      </map:match>
+      
+    </map:pipeline>
+    
+<!-- ========================= Public Resources =========================== -->
+    
+    <map:pipeline type="noncaching">
+
+      <!-- Dav to lenya ns mapping.  -->
+
+      <map:match pattern="webdav">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/"/>
+          <map:parameter name="type" value="doc"/>
+        </map:call>
+      </map:match>
+
+
+      <map:match pattern="webdav/">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/"/>
+          <map:parameter name="type" value="doc"/>
+        </map:call>
+      </map:match>
+
+
+      <map:match pattern="webdav/**/doc-assets">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/>
+          <map:parameter name="type" value="assetdir"/>
+        </map:call>
+      </map:match>
+
+      <map:match pattern="webdav/**/doc-assets/">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/>
+          <map:parameter name="type" value="assetdir"/>
+        </map:call>
+      </map:match>
+
+      <map:match pattern="webdav/**/doc-assets/*">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/>
+          <map:parameter name="type" value="asset"/>
+          <map:parameter name="filename" value="{2}"/>
+        </map:call>
+      </map:match>
+
+
+      <map:match pattern="webdav/**/index_*.xml">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/>
+          <map:parameter name="language" value="{2}"/>
+          <map:parameter name="type" value="source"/>
+        </map:call>
+      </map:match>
+     
+      <map:match pattern="webdav/**/">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/> 
+          <map:parameter name="type" value="doc"/>
+        </map:call>
+      </map:match>
+    
+      <map:match pattern="webdav/**">
+        <map:call function="method">
+          <map:parameter name="documentId" value="/{1}"/> 
+          <map:parameter name="type" value="doc"/>
+        </map:call>
+      </map:match>
+
+
+      <!-- Methods -->
+
+      <map:match pattern="GET/lesson">
+        <map:call function="getLesson"/>
+      </map:match>
+
+      <map:match pattern="GET/**">
+        <map:call function="get"/>
+      </map:match>
+
+      <map:match pattern="PROPFIND/lesson">
+        <map:call function="propfindLesson"/>
+      </map:match>
+
+      <map:match pattern="PROPFIND/**">
+        <map:call function="propfind"/>
+      </map:match>
+
+      <map:match pattern="PUT/lesson">
+        <map:call function="putLesson" />
+      </map:match>
+
+      <map:match pattern="PUT/**">
+        <map:call function="put" />
+      </map:match>
+
+      <map:match pattern="LOCK/lesson">
+        <map:call function="lockLesson"/>
+      </map:match>
+
+      <map:match pattern="LOCK/**">
+        <map:call function="lock"/>
+      </map:match>
+
+      <map:match pattern="UNLOCK/lesson">
+        <map:call function="unlockLesson"/>
+      </map:match>
+
+      <map:match pattern="UNLOCK/**">
+        <map:call function="unlock"/>
+      </map:match>
+
+   
+      <!-- source requests -->
+      <!-- {doctype} {path} -->
+
+      <map:match pattern="xml/**">
+        <map:act type="resource-exists" src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{1}">
+          <map:generate src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{../1}"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        <map:generate src="context://lenya/content/util/empty.xml"/> 
+        <map:serialize status-code="404"/> 
+      </map:match> 
+
+      <map:match pattern="asset/**">
+        <map:act type="resource-exists" src="context://lenya/pubs/{page-envelope:publication-id}/resources/authoring/{flow-attribute:documentid}/{1}">
+          <map:read type="resource" src="context://lenya/pubs/{page-envelope:publication-id}/resources/authoring/{flow-attribute:documentid}/{../1}"/>
+        </map:act>
+        <map:generate src="context://lenya/content/util/empty.xml"/> 
+        <map:serialize status-code="404"/> 
+      </map:match>
+
+      
+      <map:match pattern="OPTIONS/**">
+        <map:call function="options">
+          <map:parameter name="uri" value="{request:requestURI}" />
+        </map:call>
+      </map:match>
+
+      <map:match pattern="HEAD/**.html">
+        <map:match pattern="HEAD/**_*.html">
+          <map:act type="resource-exists" src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{1}/index_{page-envelope:document-language}.xml">
+            <map:act type="set-header">
+              <map:parameter name="Last-Modified" value="{page-envelope:document-lastmodified}" />
+              <map:generate src="context://lenya/content/util/empty.xml"/>
+              <map:serialize status-code="200"/>
+            </map:act>
+          </map:act>
+        </map:match>      
+        <map:match pattern="HEAD/**.html">
+          <map:act type="resource-exists" src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{1}/index_{page-envelope:document-language}.xml">
+            <map:act type="set-header">
+              <map:parameter name="Last-Modified" value="{page-envelope:document-lastmodified}" />
+              <map:generate src="context://lenya/content/util/empty.xml"/>
+              <map:serialize status-code="200"/>
+            </map:act>
+          </map:act>
+        </map:match>
+        <!-- doesn't exist -->
+        <map:generate src="context://lenya/content/util/empty.xml"/>
+        <map:serialize status-code="404"/>
+      </map:match>
+      
+      <map:match pattern="HEAD/**">
+        <map:call function="propfind" />
+      </map:match>
+      
+    </map:pipeline>
+    
+    <map:pipeline type="noncaching">
+      
+      <map:match pattern="MKCOL/**">
+        <map:call function="mkcol" />
+      </map:match>
+            
+      <map:match pattern="DELETE/**">
+        <map:call function="remove" />
+      </map:match> 
+                        
+    </map:pipeline>
+
+  </map:pipelines>
+
+</map:sitemap>

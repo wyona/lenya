@@ -22,27 +22,43 @@
            xmlns="http://www.w3.org/1999/xhtml" 
            xmlns:i18n="http://apache.org/cocoon/i18n/2.1" >
            
-  <page:title><i18n:text>Export eLML Lesson</i18n:text></page:title>
+  <page:title><i18n:text>Import eLML Lesson</i18n:text></page:title>
   <page:body>
     <div class="lenya-box">
       <div class="lenya-box-title">
-          <i18n:text>Archive created</i18n:text>
+          <i18n:text>Select import options</i18n:text>
       </div>
       <div class="lenya-box-body">
-        <form enctype="multipart/form-data" method="post" id="form-upload">
+        <form method="post" id="form-options">
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-          <input type="hidden" name="lenya.step" value="exit"/>
+          <input type="hidden" name="lenya.step" value="create"/>
           <table class="lenya-table-noborder">
             <tr>
               <td>
-                Please download the exported lesson by clicking the following link:  
-                <a href="${url}">${filename}</a> (zip file: ${length})
+                <!-- <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/> -->
               </td>
             </tr>
             <tr>
               <td>
-                <input type="submit" name="submit" value="Done"/>
+               Archive uploaded. The following eLML source file(s) were found in the archive:
+               <ul>
+                 <li>${zipEntry.getName()}</li>
+               </ul>
+               The following document(s) will be created:
+                <ul>
+                  <li>Lesson:  #{dom/*/@title} (#{dom/*/@label})</li>
+                  <jx:forEach var="info" items="${partsInfo}"> 
+                    <li>${info.doctypeInfo}: ${info.title}  (${info.label})</li>
+                  </jx:forEach> 
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" name="submit" value="Create"/>
+                &#160;
+                <input type="submit" name="cancel" value="Cancel"/>
               </td>
             </tr>
           </table>

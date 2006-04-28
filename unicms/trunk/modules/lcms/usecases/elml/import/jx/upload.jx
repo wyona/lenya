@@ -22,27 +22,50 @@
            xmlns="http://www.w3.org/1999/xhtml" 
            xmlns:i18n="http://apache.org/cocoon/i18n/2.1" >
            
-  <page:title><i18n:text>Export eLML Lesson</i18n:text></page:title>
+  <page:title><i18n:text>Import eLML Lesson</i18n:text></page:title>
   <page:body>
     <div class="lenya-box">
       <div class="lenya-box-title">
-          <i18n:text>Archive created</i18n:text>
+          <i18n:text>Select file</i18n:text>
       </div>
       <div class="lenya-box-body">
         <form enctype="multipart/form-data" method="post" id="form-upload">
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-          <input type="hidden" name="lenya.step" value="exit"/>
+          <input type="hidden" name="lenya.step" value="upload"/>
           <table class="lenya-table-noborder">
             <tr>
               <td>
-                Please download the exported lesson by clicking the following link:  
-                <a href="${url}">${filename}</a> (zip file: ${length})
+                <!-- <jx:import uri="fallback://lenya/usecases/templates/messages.jx"/> -->
               </td>
             </tr>
             <tr>
               <td>
-                <input type="submit" name="submit" value="Done"/>
+               Please select an eLML archive locally and press upload.
+              </td>
+            </tr>
+            <tr>
+              <jx:if test="${not(empty(usecase.getParameter('inconsistentdocument')))}">
+                <td class="lenya-entry-caption">
+                  <span class="lenya-form-message-error"><i18n:text key="docs-have-links-to-doc"/>:</span>
+                </td>
+                <td valign="top">
+                  <jx:forEach var="item" items="${usecase.getParameter('inconsistentdocument')}">
+                    <a target="_blank" href="{@href}"><jx:out value="${item.id}"/><jx:out value="."/></a><br/>
+                  </jx:forEach>
+                </td>
+              </jx:if>
+            </tr>
+            <tr>
+              <td>
+               <input type="file" name="upload-file" value="Choose file..."/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" name="submit" value="Upload"/>
+                &#160;
+                <input type="submit" name="cancel" value="Cancel"/>
               </td>
             </tr>
           </table>

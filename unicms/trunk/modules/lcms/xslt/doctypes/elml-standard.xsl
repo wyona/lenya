@@ -66,10 +66,7 @@
       <xsl:apply-templates select="*/unizh:contcol1"/>
     </div>
     <div class="contcol2">
-      <div class="relatedbox">
-         <xsl:comment/>
-      </div>
-      <div class="contentarea">
+      <div class="content">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <h1>
