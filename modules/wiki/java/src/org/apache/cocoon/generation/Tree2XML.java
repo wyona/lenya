@@ -59,7 +59,9 @@ public class Tree2XML {
     SiteManager siteManager = null;
 
     Document[] documents;
+
     Document currentDocument;
+
     /** Actions which will be grouped together into text() nodes */
     final static String[] textActions = { "Text", "PlainText" };
 
@@ -72,7 +74,8 @@ public class Tree2XML {
 
     protected AttributesImpl attributes = new AttributesImpl();
 
-    public Tree2XML(ContentHandler ch, ServiceManager manager, Map objectModel, Request request, Logger logger) {
+    public Tree2XML(ContentHandler ch, ServiceManager manager, Map objectModel,
+            Request request, Logger logger) {
         contentHandler = ch;
         this.manager = manager;
         this.objectModel = objectModel;
@@ -96,7 +99,8 @@ public class Tree2XML {
      * @throws SAXException
      * @throws PublicationException
      */
-    public void traverseJJTree(SimpleNode node) throws SAXException, PublicationException {
+    public void traverseJJTree(SimpleNode node) throws SAXException,
+            PublicationException {
 
         attributes.clear();
         if (!node.optionMap.isEmpty()) {
@@ -105,10 +109,12 @@ public class Tree2XML {
             while (kit.hasNext()) {
                 Object option = kit.next();
                 Object value = node.optionMap.get(option);
-                attributes.addAttribute("", option.toString(), option.toString(), "CDATA", value.toString());
+                attributes.addAttribute("", option.toString(), option
+                        .toString(), "CDATA", value.toString());
             }
         }
-        contentHandler.startElement(URI, node.toString(), PREFIX + ':' + node.toString(), attributes);
+        contentHandler.startElement(URI, node.toString(), PREFIX + ':'
+                + node.toString(), attributes);
         if (node.jjtGetNumChildren() > 0) {
             for (int i = 0; i < node.jjtGetNumChildren(); i++) {
                 SimpleNode cn = (SimpleNode) node.jjtGetChild(i);
@@ -124,11 +130,12 @@ public class Tree2XML {
             }
             finalizeText();
         }
-        this.contentHandler.endElement(URI, node.toString(), PREFIX + ':' + node.toString());
-        
-        
-        /* release the sitemanager which could have been 
-         * initialized during tree processing 
+        this.contentHandler.endElement(URI, node.toString(), PREFIX + ':'
+                + node.toString());
+
+        /*
+         * release the sitemanager which could have been initialized during tree
+         * processing
          */
         if (documents != null) {
             if (selector != null) {
@@ -136,8 +143,8 @@ public class Tree2XML {
                     selector.release(siteManager);
                 }
                 this.manager.release(selector);
-            }            
-        }        
+            }
+        }
     }
 
     public void checkInternal(SimpleNode node) throws PublicationException {
@@ -146,15 +153,15 @@ public class Tree2XML {
 
             String href = (String) node.optionMap.get("href");
             String label = (String) node.optionMap.get("label");
-            
-        	if(label == null || label.equals("")){
-        		node.setOption("label", href);
-        	}
-        	
+
+            if (label == null || label.equals("")) {
+                node.setOption("label", href);
+            }
+
             if (documents == null) {
                 getAreaDocuments();
             }
-            
+
             int i = 0;
             boolean found = false;
             String protocol = "[\\w]+://.*";
@@ -163,105 +170,93 @@ public class Tree2XML {
             String docId = href;
             String suffix = null;
             String parameter = null;
-            
 
-            
-            if(Pattern.matches(protocol, href)) {
+            if (Pattern.matches(protocol, href)) {
                 node.setOption("type", "external");
                 found = true;
-//                int firstSlash = 0;
-//                int k = 0;
-//                for( k=0; k<3; k++ ){
-//                    firstSlash = href.indexOf("/");
-//                    if (firstSlash > 0){
-//                        href = href.substring(firstSlash, href.length());
-//                    } 
-//                }
-                
             }
 
             int firstQuerrySeparator = href.indexOf("?");
-            if (firstQuerrySeparator > 0){
+            if (firstQuerrySeparator > 0) {
                 parameter = href.substring(firstQuerrySeparator, href.length());
-                href = href.substring(0,firstQuerrySeparator);
+                href = href.substring(0, firstQuerrySeparator);
             }
-            
 
-            
-            //
-
-            
-            if(href.startsWith("../") && !found){
-                String urlSnippets[] = href.split("/"); 
+            if (href.startsWith("../") && !found) {
+                String urlSnippets[] = href.split("/");
                 String startId = currentDocID;
-                
-                for (int j = 0; j < urlSnippets.length; j++){
-                    if(urlSnippets[j].equals("..")){
+
+                for (int j = 0; j < urlSnippets.length; j++) {
+                    if (urlSnippets[j].equals("..")) {
                         int lastSlashIndex = startId.lastIndexOf("/");
-                        if(lastSlashIndex > 0) {
+                        if (lastSlashIndex > 0) {
                             startId = startId.substring(0, lastSlashIndex);
                         }
-                    }else {
-                        startId = startId+"/"+urlSnippets[j];
+                    } else {
+                        startId = startId + "/" + urlSnippets[j];
                     }
                 }
                 href = startId;
-            }            
+            }
 
             int lastSuffixSeparator = href.lastIndexOf(".");
-            if (lastSuffixSeparator > 0){
-                suffix = href.substring(lastSuffixSeparator+1, href.length());
+            if (lastSuffixSeparator > 0) {
+                suffix = href.substring(lastSuffixSeparator + 1, href.length());
                 href = href.substring(0, lastSuffixSeparator);
-                
+
             }
-            if(suffix != null){
+            if (suffix != null) {
                 node.setOption("suffix", suffix);
-            } else if (!found){
+            } else if (!found) {
                 node.setOption("suffix", "html");
             }
-            
-            if(!href.startsWith("/") && !found){
-            	href = currentDocID+"/"+href;
+
+            if (!href.startsWith("/") && !found) {
+                href = currentDocID + "/" + href;
             }
             node.setOption("href", href);
-                
+
             while (!found && i < documents.length) {
-            	if (documents[i].getId().equals(href)) {
-                        node.setOption("type", "internal");
-                        node.setOption("exists", "true");
-                        
-                        found = true;
+                if (documents[i].getId().equals(href)) {
+                    node.setOption("type", "internal");
+                    node.setOption("exists", "true");
+                    found = true;
                 }
                 i++;
             }
             if (!found) {
-            	node.setOption("exists", "false");
-            	node.setOption("type", "internal");
+                node.setOption("exists", "false");
+                node.setOption("type", "internal");
             }
-            
-            if(!found && !isCreatable(href)){
-            	node.setOption("valid", "false");
+
+            if (!found && !isCreatable(href)) {
+                node.setOption("valid", "false");
             }
         }
     }
 
     private void getAreaDocuments() throws PublicationException {
 
-        Publication publication = PublicationUtil.getPublication(this.manager, this.objectModel);
+        Publication publication = PublicationUtil.getPublication(this.manager,
+                this.objectModel);
         Session session = RepositoryUtil.getSession(this.request, this.logger);
-        DocumentIdentityMap identityMap = new DocumentIdentityMap(session, manager, logger);
+        DocumentIdentityMap identityMap = new DocumentIdentityMap(session,
+                manager, logger);
 
         try {
-            
-            selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE + "Selector");
-            siteManager = (SiteManager) selector.select(publication.getSiteManagerHint());
+
+            selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE
+                    + "Selector");
+            siteManager = (SiteManager) selector.select(publication
+                    .getSiteManagerHint());
 
             String webappUri = ServletHelper.getWebappURI(request);
             URLInformation urlInfo = new URLInformation(webappUri);
 
-            documents = siteManager.getDocuments(identityMap, publication, urlInfo.getArea());
+            documents = siteManager.getDocuments(identityMap, publication,
+                    urlInfo.getArea());
             currentDocument = (Document) identityMap.getFromURL(webappUri);
-            
+
         } catch (ServiceException e) {
             if (selector != null) {
                 if (siteManager != null) {
@@ -272,31 +267,32 @@ public class Tree2XML {
             throw new RuntimeException(e);
         }
     }
-    
-    private boolean isCreatable(String documentId){
-    	
-    	int i = 0;
-    	boolean found = false;
-    	String seperator = "/";
-    	
-    	String pathElements[] = documentId.split(seperator);
-    	int lastSlashIndex = documentId.lastIndexOf("/");
-    	
-    	String parentId = documentId.substring(0, lastSlashIndex);
-    		
+
+    private boolean isCreatable(String documentId) {
+
+        int i = 0;
+        boolean found = false;
+        String seperator = "/";
+
+        String pathElements[] = documentId.split(seperator);
+        int lastSlashIndex = documentId.lastIndexOf("/");
+
+        String parentId = documentId.substring(0, lastSlashIndex);
+
         while (!found && i < documents.length) {
-        	if (documents[i].getId().equals(parentId)) {
+            if (documents[i].getId().equals(parentId)) {
                 found = true;
-           }
-           i++;
+            }
+            i++;
         }
         return found;
     }
-    
+
     public boolean ignoreNode(Node node) {
         if (node.jjtGetParent() != null) {
             for (int i = 0; i < ignoreNestedActions.length; i++) {
-                if (node.jjtGetParent().toString().compareTo(ignoreNestedActions[i]) == 0) {
+                if (node.jjtGetParent().toString().compareTo(
+                        ignoreNestedActions[i]) == 0) {
                     return true;
                 }
             }
