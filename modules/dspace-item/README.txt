@@ -4,3 +4,7 @@ Enter host of client to
 DSpace URL:
 
 http://192.168.100.115:8080/dspace/
+
+Uncomment jdbc config within:
+
+config/cocoon-xconf/postgresql-jdbc.xconf

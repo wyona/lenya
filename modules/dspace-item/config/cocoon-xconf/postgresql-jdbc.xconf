@@ -2,6 +2,8 @@
 
 <xconf xpath="/cocoon/datasources" unless="/cocoon/datasources/jdbc[@name = 'dspace']">
 
+<!-- IMPORTANT: Do NOT uncomment this within SVN, because the app server (e.g. Jetty or Tomcat) might not get up anymore! -->
+<!--
  <jdbc name="dspace-jdbc">
     <pool-controller max="100" min="5"/>
     <driver>org.postgresql.Driver</driver>
@@ -9,5 +11,6 @@
     <user>dspace</user>
     <password>dspace</password>
   </jdbc>
+-->
 
 </xconf>
