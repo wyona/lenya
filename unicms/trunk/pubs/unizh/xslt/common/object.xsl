@@ -105,7 +105,17 @@
           <xsl:call-template name="object">
             <xsl:with-param name="width">
               <xsl:choose>
-                <xsl:when test="not(@width) or (@width = '') or (@popup = 'true')">
+                <xsl:when test="@popup = 'true'">
+                  <xsl:choose>
+                    <xsl:when test="@width > 0">
+                      <xsl:value-of select="@width" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:text>204</xsl:text>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:when>
+                <xsl:when test="not(@width) or (@width = '')">
                   <xsl:text>204</xsl:text>
                 </xsl:when>
                 <xsl:when test="(@float = 'true') and not(@align = 'right')">
@@ -147,7 +157,7 @@
           <div class="legende">
             <xsl:value-of select="xhtml:div[@class = 'caption']"/><xsl:comment/>
             <xsl:if test="@popup = 'true'">
-              <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={@width},height={@height}')">(+)</a>
+              <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={dc:metadata/lenya:meta/lenya:width},height={dc:metadata/lenya:meta/lenya:height}')">(+)</a>
             </xsl:if>
           </div>
         </td>
