@@ -1,5 +1,7 @@
 package org.apache.lenya.svn;
 
+import java.io.File;
+
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -10,9 +12,12 @@ import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
 import org.tmatesoft.svn.core.io.ISVNEditor;
+import org.tmatesoft.svn.core.io.ISVNReporterBaton;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNStatusClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+import org.tmatesoft.svn.cli.SVN;
 
 public class LenyaSvnClient {
 
@@ -21,6 +26,9 @@ public class LenyaSvnClient {
      */
     public static void main(String[] args) {
         welcomeMessage();
+        for (int i = 0; i < args.length; i++) {
+            System.out.println(i+" "+args[i]);
+        }
 //        if (args == null || args.length < 1) {
 //            System.err.println("usage: svn commandName commandArguments");
 //            System.exit(0);
@@ -103,6 +111,22 @@ public class LenyaSvnClient {
          */
         long latestRevision = repository.getLatestRevision();
         System.out.println("Repository latest revision (before committing): " + latestRevision);
+        
+        //DEBUG: cli
+        //System.out.println("CLI start");
+        //SVN.main(args);
+        //System.out.println("CLI stop");
+        
+        StatusHandler statusHandler = new StatusHandler(false);
+        SVNStatusClient status = new SVNStatusClient(authManager, null);
+        File test = new File("/home/thorsten/projects/wyona-public/lenya/tools/svn");
+        status.doStatus(test,true,false,false,false,statusHandler);
+        
+        
+        
+        //ISVNReporterBaton reporter;
+        
+        //repository.status(latestRevision,null,true,);
         
         /*
          * Gets an editor for committing the changes to  the  repository.  NOTE:
