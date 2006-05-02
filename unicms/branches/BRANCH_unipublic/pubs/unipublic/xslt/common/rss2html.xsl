@@ -45,7 +45,7 @@
         <xsl:apply-templates select="image"></xsl:apply-templates>
       </td>
       <td>&#160;</td>
-      <td widht="112">
+      <td width="112">
         <a>
           <xsl:attribute name="href"><xsl:value-of select="../link"/></xsl:attribute>
           <span class="tsr-title"><xsl:value-of select="title"/></span>
