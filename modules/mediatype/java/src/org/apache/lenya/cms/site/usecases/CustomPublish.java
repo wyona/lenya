@@ -34,7 +34,6 @@ public class CustomPublish extends Publish {
             super.publish(authoringDocument);
             // copy again (workaround for lenya bug)
             destinationDocument.getRepositoryNode().lock();
-            destinationDocument.getMetaDataManager().replaceMetaData(doc.getMetaDataManager());
             SourceUtil.copy(resolver, sourceUri, destinationDocument.getSourceURI());
             // replace the main extension with the media type extra information
             // extension
