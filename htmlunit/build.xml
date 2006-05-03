@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="htmlunit" default="htmlunit">
+
+  <property name="src.dir" value="./src" />
+  <property name="junit.dir" value="./junit-results" />
+  <property name="build.dir" value="./build" />
+  <property name="lib" value="./lib" />
+
+  <!-- The properties file can be specified with
+       ant -Dbuild.properties.file=my.build.properties
+       Default is build.properties
+  -->
+  <condition property="build.properties.file" value="build.properties">
+    <not>
+      <isset property="build.properties.file"/>
+    </not>
+  </condition>
+  <property file="${build.properties.file}"/>
+
+  <!-- set classpath-->
+  <path id="classpath">
+    <pathelement location="${build.dir}" />
+    <fileset dir="${lib}">
+      <include name="**.jar" />
+    </fileset>
+  </path>
+
+  <target name="init">
+    <delete dir="${build.dir}" />
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${junit.dir}" />
+  </target>
+
+  <target name="build" depends="init" description="build everything under ${src.dir}">
+    <javac srcdir="${src.dir}" destdir="${build.dir}">
+      <classpath refid="classpath" />
+    </javac>
+  </target>
+
+  <target name="clean" depends="init" description="Clean the build">
+    <echo>Clean ${build.dir}</echo>
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <!-- Define the Ant task for running JUnit:-->
+  <target name="htmlunit" depends="init, build">
+    <echo>NOTE: Running the tests might take a while. Thanks for your patience ...</echo>
+    <junit fork="yes" printsummary="yes" haltonfailure="no" failureproperty="tests.failed">
+      <test name="${test.class.name}" todir="${junit.dir}"/>
+      <formatter type="plain" usefile="false" />
+      <formatter type="xml" />
+      <classpath refid="classpath" />
+      <jvmarg value="-Dhtmlunit.config.file=${basedir}/${test.config.file}"/>
+    </junit>
+    <fail if="tests.failed"  message="One or more htmlunit tests failed."/>
+  </target>
+
+</project>

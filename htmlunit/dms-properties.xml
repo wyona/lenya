@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2005 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!-- This is the Html Test properties file for the Blog Publication -->
+<config>
+  <htmlunit>
+    <!--
+      Logging:
+       1. trace (the least serious)
+       2. debug
+       3. info
+       4. warn
+       5. error
+       6. fatal (the most serious)
+    -->
+    <debugLevel>6</debugLevel>
+    <baseUrl>http://localhost:9999/</baseUrl>
+    <language>en-us</language>
+  </htmlunit>
+  <lenya>
+    <pubid>dms</pubid>
+    <pubname>Document Management System</pubname>
+    <defaultUsername>lenya</defaultUsername>
+    <defaultPassword>levi</defaultPassword>
+    <tests>
+      <general>
+        <loginPageTitle> LOGIN to the DMS Publication</loginPageTitle>
+        <startPageContent>Welcome to the DMS Publication</startPageContent>
+      </general>
+      <site>
+        <create>
+          <folder>
+            <testName>Create Folder</testName>
+            <pageTitle>New Document</pageTitle>
+          </folder>
+          <mediaType>
+            <testName>Create mediaType</testName>
+            <pageTitle>Apache Lenya | dms | authoring | /index.html |</pageTitle>
+            <file>/home/thorsten/src/wyona/htmlunit/README.txt</file>
+          </mediaType>
+        </create>
+      </site>
+    </tests>
+  </lenya>
+</config>
