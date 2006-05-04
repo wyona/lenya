@@ -108,7 +108,9 @@
   padding-bottom:5pt;
   /*border: 1pt solid blue;*/
 }
-
+p.issued:before {
+  content: "";
+}
 
 .modified:before {
   background-color:   lightgray;
