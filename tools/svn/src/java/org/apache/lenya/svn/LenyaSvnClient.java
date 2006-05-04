@@ -1,13 +1,17 @@
 package org.apache.lenya.svn;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -17,9 +21,11 @@ import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.internal.wc.SVNFileUtil;
 import org.tmatesoft.svn.core.io.ISVNEditor;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.io.diff.SVNDeltaGenerator;
 import org.tmatesoft.svn.core.wc.SVNStatusClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
@@ -235,11 +241,13 @@ public class LenyaSvnClient {
             for (int i = 0; i < pass.length; i++) {
                 String passString = pass[i];
                 if (statusFile.equals(passString))
-                    commit(valueNode,br);
+                    commit(valueNode,br, localRep);
             }
         }
     }
-    private static void commit(StatusBean valueNode, BufferedReader br) throws SVNException {
+    
+    
+    private static void commit(StatusBean valueNode, BufferedReader br, String localRep) throws SVNException {
         /*
          * Gets an editor for committing the changes to  the  repository.  NOTE:
          * you  must not invoke methods of the SVNRepository until you close the
@@ -256,7 +264,7 @@ public class LenyaSvnClient {
         String logMessage = "Automated commit by LenyaSvnClient";
         /*
          * Do we want to override this?
-         */
+         *
         System.out.println(PROP_EXIT_MES);
         System.out.println("for the commitMessage (will be applied as a log message of the commit).\ncurrent value: "+logMessage);
         System.out.print(PROP_EXIT_OVERRIDE_EXT);
@@ -273,22 +281,73 @@ public class LenyaSvnClient {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        }
+        }*/
         
         if(debug)
             System.out.println("\nUsing "+logMessage);
         try {
             
-            // FIXME: this commit is not working yet 
-                        editor = 
-                repository.getCommitEditor(logMessage, new CommitMediator());
+                editor =  repository.getCommitEditor(logMessage, new CommitMediator());
                 editor.openRoot(valueNode.getWorkingRevision());
-                editor.closeDir();
+                //editor.openRoot(-1); //FIXME for a commit it doesn't matter what revision 
+                
+                if(debug) System.out.println("node path "+valueNode.getPath());
+                
+                //TODO find a nicer way, maybe store it in the bean
+                String relativePath = valueNode.getPath().replaceFirst(localRep,"");
+                if(debug) System.out.println("relativePath "+relativePath);
+                
+                editor.openFile(relativePath, valueNode.getWorkingRevision());
+                
+                File file = new File (valueNode.getPath());
+                String baseChecksum = SVNFileUtil.computeChecksum(file);
+                if(debug) System.out.println("checksum "+baseChecksum);
+                editor.applyTextDelta(relativePath, baseChecksum);
+                
+                /*
+                 * Use delta generator utility class to generate and send delta
+                 * 
+                 * Note that you may use only 'target' data to generate delta when there is no 
+                 * access to the 'base' (previous) version of the file. However, using 'base' 
+                 * data will result in smaller network overhead.
+                 * 
+                 * SVNDeltaGenerator will call editor.textDeltaChunk(...) method for each generated 
+                 * "diff window" and then editor.textDeltaEnd(...) in the end of delta transmission.  
+                 * Number of diff windows depends on the file size. 
+                 *  
+                 */
+                SVNDeltaGenerator deltaGenerator = new SVNDeltaGenerator();
+                
+                // get the byte data
+                ByteArrayInputStream data = null;
+                try {
+                  data = new ByteArrayInputStream(getBytesFromFile(file));
+                } catch (IOException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+                }
+                String changedChecksum = deltaGenerator.sendDelta(relativePath, data, editor, true);
+                if(debug) System.out.println("changedChecksum "+changedChecksum);
+ 
+                /*
+                 * Closes the file.
+                 */
+                editor.closeFile(relativePath, changedChecksum);
+
+                /*
+                 * This is the final point in all editor handling. Only now all that new
+                 * information previously described with the editor's methods is sent to
+                 * the server for committing. As a result the server sends the new
+                 * commit information.
+                 */
+                SVNCommitInfo commitInfo = editor.closeEdit();
+                System.out.println("Commit sucessful: " + commitInfo);
+
         } catch (SVNException svne) {
             throw new SVNException(svne.getErrorMessage());
-        }
-        
+        }        
     }
+
 
     /*
      * Initializes the library to work with a repository via 
@@ -309,5 +368,42 @@ public class LenyaSvnClient {
          */
         FSRepositoryFactory.setup();
     }
+    
+    // Returns the contents of the file in a byte array.
+    public static byte[] getBytesFromFile(File file) throws IOException {
+        InputStream is = new FileInputStream(file);
+    
+        // Get the size of the file
+        long length = file.length();
+    
+        // You cannot create an array using a long type.
+        // It needs to be an int type.
+        // Before converting to an int type, check
+        // to ensure that file is not larger than Integer.MAX_VALUE.
+        if (length > Integer.MAX_VALUE) {
+            // File is too large
+        }
+    
+        // Create the byte array to hold the data
+        byte[] bytes = new byte[(int)length];
+    
+        // Read in the bytes
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+               && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+            offset += numRead;
+        }
+    
+        // Ensure all the bytes have been read in
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file "+file.getName());
+        }
+    
+        // Close the input stream and return bytes
+        is.close();
+        return bytes;
+    }
+   
 
 }
