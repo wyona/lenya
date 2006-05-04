@@ -11,6 +11,9 @@ import java.util.Map;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.io.ISVNWorkspaceMediator;
 
+/**  This mediator is used for temporary file delta storage allocations.
+ *   see http://tmate.org/svn/kb/dev-guide-commit-operation.html
+ */
 public class CommitMediator implements ISVNWorkspaceMediator {
 
     private Map myTmpStorages = new HashMap();
