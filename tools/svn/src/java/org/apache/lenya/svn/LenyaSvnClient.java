@@ -25,6 +25,8 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 public class LenyaSvnClient {
     
+    private static SVNRepository repository;
+    
     private static final String PROP_EXIT_MES = "\nWARNING: Local configuration already exists";
     private static final String PROP_EXIT_OVERRIDE = "Do you want to overwrite (y/N)? ";
     private static boolean debug =false;
@@ -108,7 +110,7 @@ public class LenyaSvnClient {
          * These operations includes browsing, update and commit operations. See 
          * SVNRepository methods javadoc for more details.
          */
-        SVNRepository repository = SVNRepositoryFactory.create(url);
+        repository = SVNRepositoryFactory.create(url);
         
         /*
          * Credentials to use for authentication.
@@ -237,7 +239,7 @@ public class LenyaSvnClient {
             }
         }
     }
-    private static void commit(StatusBean valueNode, BufferedReader br) {
+    private static void commit(StatusBean valueNode, BufferedReader br) throws SVNException {
         /*
          * Gets an editor for committing the changes to  the  repository.  NOTE:
          * you  must not invoke methods of the SVNRepository until you close the
@@ -275,12 +277,16 @@ public class LenyaSvnClient {
         
         if(debug)
             System.out.println("\nUsing "+logMessage);
-//        try {
-//            editor = 
-//                repository.getCommitEditor(logMessage, new CommitMediator());
-//        } catch (SVNException svne) {
-//            throw new SVNException(svne.getErrorMessage());
-//        }
+        try {
+            
+            // FIXME: this commit is not working yet 
+                        editor = 
+                repository.getCommitEditor(logMessage, new CommitMediator());
+                editor.openRoot(valueNode.getWorkingRevision());
+                editor.closeDir();
+        } catch (SVNException svne) {
+            throw new SVNException(svne.getErrorMessage());
+        }
         
     }
 
