@@ -1,4 +1,6 @@
 package org.apache.lenya.svn;
+import java.util.HashMap;
+
 import org.tmatesoft.svn.core.SVNCancelException;
 import org.tmatesoft.svn.core.SVNLock;
 import org.tmatesoft.svn.core.wc.ISVNStatusHandler;
@@ -31,8 +33,13 @@ import org.tmatesoft.svn.core.wc.SVNEventAction;
  */
 public class StatusHandler implements ISVNStatusHandler, ISVNEventHandler {
     private boolean myIsRemote;
-    public StatusHandler(boolean isRemote) {
+    private HashMap beans;
+    private static boolean debug =false;
+    public static final String[] pass = {"M"};
+    public StatusHandler(boolean isRemote,boolean isDebug) {
         myIsRemote = isRemote;
+        debug = isDebug?true:false;
+        beans = new HashMap();
     }
     /*
      * This is  an  implementation  of ISVNStatusHandler.handleStatus(SVNStatus 
@@ -241,10 +248,24 @@ public class StatusHandler implements ISVNStatusHandler, ISVNEventHandler {
                 offset.length()
                         - (status.getAuthor() != null ? status.getAuthor()
                                 .length() : 1));
-        /*
+        
+        /** 
+         * setting bean to reflect the status. 
+         * This makes it possible to reuse the information  
+         * in the upcoming steps
+         */
+        StatusBean bean = new StatusBean();
+        bean.setLastChangedRevision(lastChangedRevision);
+        bean.setWorkingRevision(workingRevision);
+        bean.setStatus(pathChangeType);
+        bean.setPath(status.getFile().getPath());
+        beans.put(bean.getPath(),bean);
+        
+        /* DEBUG:
          * status is shown in the manner of the native Subversion command  line
          * client's command "svn status"
          */
+        if(debug)
         System.out.println(pathChangeType
                 + propertiesChangeType
                 + (isLocked ? "L" : " ")
@@ -291,6 +312,18 @@ public class StatusHandler implements ISVNStatusHandler, ISVNEventHandler {
      */
     public void checkCancelled() throws SVNCancelException {
     
+    }
+    /**
+     * @return Returns the beans.
+     */
+    public HashMap getBeans() {
+        return beans;
+    }
+    /**
+     * @param beans The beans to set.
+     */
+    public void setBeans(HashMap beans) {
+        this.beans = beans;
     }
     
 }
