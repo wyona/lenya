@@ -17,6 +17,18 @@
 <xsl:template match="dsi:dspace-item">
   <div id="body">
 
+
+	<esql:execute-query>
+			<!-- <esql:query>SELECT * from dcvalue</esql:query> -->
+			<!-- <esql:query>SELECT text_value from dcvalue where dc_value_id = <xsl:value-of select="@id"/></esql:query> -->
+			<esql:query>SELECT item_id from dcvalue</esql:query>
+			<esql:query>SELECT text_lang from dcvalue</esql:query>
+			<!-- <esql:query>SELECT text_id from dcvalue</esql:query> -->
+			<!-- <esql:query>SELECT place from dcvalue</esql:query> -->
+			<!-- <esql:query>SELECT source_id from dcvalue</esql:query> -->
+	</esql:execute-query>
+
+
 <!--
 	<esql:connection>
 		<esql:pool>dspace</esql:pool>
@@ -24,12 +36,6 @@
 		<esql:dburl>jdbc:postgresql://192.168.100.115/dspace</esql:dburl>
 		<esql:username>dspace</esql:username>
 		<esql:password>dspace</esql:password>
--->
-
-
-		<esql:execute-query>
-			<esql:query>SELECT text_value from dcvalue where dc_value_id = <xsl:value-of select="@id"/></esql:query>
-<!--
 			<esql:results>
 				<esql:row-results>
 					<esql:get-string column="text_value"/>
@@ -37,14 +43,9 @@
 					<esql:get-string column="item_id"/>
 				</esql:row-results>
 			</esql:results>
--->
-		</esql:execute-query>
-<!--
 		<esql:no-results>
 			Sorry, Dspace database is empty!
 		</esql:no-results>
--->
-<!--
 	</esql:connection>
 -->
   </div>
