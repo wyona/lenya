@@ -31,21 +31,12 @@ public class MetaDataWriter {
     } catch (Exception e) {
       throw new RuntimeException();
     } finally {
-      out.close();
-      
+      out.close();      
     }
   }
 
-  public void addMetaFile(File file_, String title_, String date_, String description_) {
-    this.title = this.subject =  removeNonAlphanumeric(title_);
-    this.date = date_;
-    this.description = description_;
-    addMetaFile(file_);
-  }
-
-  public void addMetaFile(File file_, String title_, String date_) {
-    this.title = this.subject =  removeNonAlphanumeric(title_);
-    this.date = date_;
+  public void addMetaFile(File file_, String ressourceType_) {
+    this.resourceType=  removeNonAlphanumeric(ressourceType_);
     addMetaFile(file_);
   }
 
@@ -54,7 +45,7 @@ public class MetaDataWriter {
 
     out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "        <!--\n"
-            + "          Copyright 1999-2005 The Apache Software Foundation\n\n"
+            + "          Copyright 1999-2006 The Apache Software Foundation\n\n"
             + "          Licensed under the Apache License, Version 2.0 (the \"License\");\n"
             + "          you may not use this file except in compliance with the License.\n"
             + "          You may obtain a copy of the License at\n\n"

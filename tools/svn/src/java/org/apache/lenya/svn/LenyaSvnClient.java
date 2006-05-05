@@ -74,6 +74,9 @@ public class LenyaSvnClient {
     }
     
     private static void doSvnCommand(String[] args, BufferedReader br) throws SVNException {
+      
+        // TODO before starting, we should update the local repository (reduces conflicts possibilities)      
+      
         /*
          * Initialize the library. It must be done before calling any 
          * method of the library.
@@ -83,6 +86,7 @@ public class LenyaSvnClient {
          * URL that points to repository. 
          */
         String urlRep = "http://svn.wyona.com/repos/public/lenya/tools/svn";
+        //String urlRep = "http://svn.wyona.com/repos/wyona/employees/renaud/svntest";
         
         
         /*
@@ -186,18 +190,11 @@ public class LenyaSvnClient {
          * Get exact value of the latest (HEAD) revision.
          */
         long latestRevision = repository.getLatestRevision();
-        if(debug)
-        System.out.println("Repository latest revision (before committing): " + latestRevision);
-        
-        //DEBUG: cli
-        //System.out.println("CLI start");
-        //SVN.main(args);
-        //System.out.println("CLI stop");
-        
-        StatusHandler statusHandler = new StatusHandler(false,debug);
-        SVNStatusClient status = new SVNStatusClient(authManager, null);
+        if(debug) System.out.println("Repository latest revision (before committing): " + latestRevision);
         
         String localRep="/home/thorsten/projects/wyona-public/lenya/tools/svn";
+        //String localRep="/home/ren/src/wyona/svn/wyona/employees/renaud/svntest";
+        
         /*
          * Do we want to override this?
          */
@@ -215,17 +212,14 @@ public class LenyaSvnClient {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
+
+        StatusHandler statusHandler = new StatusHandler(false,debug);
+        SVNStatusClient status = new SVNStatusClient(authManager, null);
         File test = new File(localRep);
         status.doStatus(test,true,false,false,false,statusHandler);
-        
-        if(debug)
-        System.out.println("DEBUG: trying beans.");
-        
         HashMap elementMap= statusHandler.getBeans();
         
-        if(debug)
-        System.out.println("Modified resources count "+elementMap.size());
+        if(debug) System.out.println("Modified resources count "+elementMap.size());
         Iterator iteratorMap = elementMap.entrySet().iterator();
         String[] pass = statusHandler.pass;
         while (iteratorMap.hasNext()){
@@ -233,20 +227,32 @@ public class LenyaSvnClient {
             StatusBean valueNode = (StatusBean) entry.getValue();
             String keyNode = (String) entry.getKey();
             String statusFile = valueNode.getStatus();
-            if(debug){
+            if(debug) {
                 System.out.println("Key/Path: ".concat(keyNode));
                 System.out.println("Status: ".concat(statusFile));
                 System.out.println("**************");
             }
+            
+            boolean sitetreeUpdated = false;
+            
             for (int i = 0; i < pass.length; i++) {
-                String passString = pass[i];
-                if (statusFile.equals(passString))
-                    commit(valueNode,br, localRep);
+                
+                // File modified
+                if (statusFile.equals("M")) {
+                  commit(valueNode,br, localRep);
+                } 
+                // File added
+                else if (statusFile.equals("?")) {
+                  sitetreeUpdated = true;
+                  commitNewNode(valueNode, br, localRep);
+                }
+            }
+            if (sitetreeUpdated) {
+              //TODO commit sitetree
             }
         }
-    }
-    
-    
+    }    
+
     private static void commit(StatusBean valueNode, BufferedReader br, String localRep) throws SVNException {
         /*
          * Gets an editor for committing the changes to  the  repository.  NOTE:
@@ -346,6 +352,38 @@ public class LenyaSvnClient {
         } catch (SVNException svne) {
             throw new SVNException(svne.getErrorMessage());
         }        
+    }
+    
+    private static void commitNewNode(StatusBean valueNode, BufferedReader br, String localRep) {
+
+      // Ask user for ressource type
+      String ressourceType = "xhtml";
+      System.out.println("Enter the ressource type for the file " + 
+          valueNode.getPath() + ".\ndefault value: "+ressourceType);
+      System.out.print(PROP_EXIT_OVERRIDE);
+      try {
+          String value = br.readLine();
+          if (value.equals("y")) {
+              System.out.println("Please define the new ressource type");
+              ressourceType=br.readLine();
+          } else {
+              System.out.println("Using default value " + ressourceType);
+          }
+      } catch (Exception e) {
+          System.err.println(e.getMessage());
+      }
+
+      //create metadata file
+      File meta = new File (valueNode.getPath() + ".meta");
+      MetaDataWriter metadatawriter = new MetaDataWriter();
+      metadatawriter.addMetaFile(meta, ressourceType);      
+      
+      //add file and metadata file to repository
+      // TODO    
+      // TODO    
+      // TODO    
+      // TODO    
+      
     }
 
 
