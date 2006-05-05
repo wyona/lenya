@@ -1,5 +1,7 @@
 package org.apache.lenya.svn;
 
+import java.io.File;
+
 public class StatusBean {
     private String status;
 
@@ -8,6 +10,8 @@ public class StatusBean {
     private long workingRevision;
 
     private long lastChangedRevision;
+    
+    private File file;
 
     /**
      * @return Returns the lastChangedRevision.
@@ -67,5 +71,13 @@ public class StatusBean {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    /**
+     * @param Returns the file
+     */
+    public File getFile(){
+      file = new File(path);
+      return file;
     }
 }
