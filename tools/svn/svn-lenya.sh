@@ -124,7 +124,7 @@ fi
 ERR=$?
 
 echo ""
-echo "NOTE: Nothing yet"
+#echo "NOTE: Nothing yet"
 
 # ----- Restore CLASSPATH
 CLASSPATH="$OLD_CLASSPATH"

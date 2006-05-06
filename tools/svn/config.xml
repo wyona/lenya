@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!--This is the default Lenya SVN client configuration file -->
+
+<config>
+    <lenyaSvn>
+
+        <!-- path to repositories, without slash at the end -->
+        <urlRep>http://svn.wyona.com/repos/wyona/employees/renaud/svntest</urlRep>
+        <localRep>/home/ren/src/wyona/svn/wyona/employees/renaud/svntest</localRep>
+
+        <userName>anonymous</userName>
+        <userPassword>anonymous</userPassword>
+
+        <defaultLogMessage>Automated commit by LenyaSvnClient</defaultLogMessage>
+        <defaultRessourceType>xhtml</defaultRessourceType>
+
+    </lenyaSvn>
+</config>
