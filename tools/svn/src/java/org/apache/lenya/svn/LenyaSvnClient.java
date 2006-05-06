@@ -1,15 +1,21 @@
 package org.apache.lenya.svn;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.impl.SimpleLog;
 
 import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNErrorCode;
@@ -21,15 +27,11 @@ import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
-import org.tmatesoft.svn.core.internal.wc.SVNFileUtil;
-import org.tmatesoft.svn.core.io.ISVNEditor;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
-import org.tmatesoft.svn.core.io.diff.SVNDeltaGenerator;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNStatusClient;
 import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
@@ -37,6 +39,11 @@ public class LenyaSvnClient {
     
     private static SVNRepository repository;
     private static SVNClientManager ourClientManager;
+    private static ISVNAuthenticationManager authManager;
+    private static ISVNOptions options;
+    private static String urlRep;
+    private static SVNURL svnUrl;
+    private static String localRep;
     
     private static final String PROP_EXIT_MES = "\nWARNING: Local configuration already exists";
     private static final String PROP_EXIT_OVERRIDE = "Do you want to overwrite (y/N)? ";
@@ -44,28 +51,24 @@ public class LenyaSvnClient {
     protected static final String DEBUG_STRING = "-v";
     private static final String PROP_EXIT_OVERRIDE_EXT = "Do you want to overwrite or extend or keep this (o/e/K)? ";
 
+    private static final String CONFIGURATION_FILE = "src/config/default-config.xml";
+    private static Configuration config;
+    private static BufferedReader br;
+    
     /**
      * @param args
      * @throws IOException 
      */
-    public static void main(String[] args) throws IOException {
-        welcomeMessage();
+    public static void main(String[] args) throws Exception {
         
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equals(DEBUG_STRING)){
-                debug=true;
-            }
-            if(debug)
-                System.out.println("args["+i+"] = "+args[i]);
-        }
-//      preparing io actions with the user
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        if (args == null || args.length < 1) {
-//            System.err.println("usage: svn commandName commandArguments");
-//            System.exit(0);
-//        }
+        System.out.println("LenyaSvnClient - simple svn client for lenya");
+        
+        setupConfiguration(args);
+        
         try {
+          
             doSvnCommand(args,br);
+
         } catch (SVNException e) {
             System.err.println(e.getMessage());
             System.exit(1);
@@ -74,177 +77,97 @@ public class LenyaSvnClient {
         }
     }
 
-    private static void welcomeMessage() {
-        System.out.println("LenyaSvnClient - simple svn client for lenya");
+    private static void setupConfiguration(String[] args) throws Exception {
+
+      for (int i = 0; i < args.length; i++) {
+        if (args[i].equals(DEBUG_STRING)){
+            debug=true;
+        }
+        if(debug)
+            System.out.println("args["+i+"] = "+args[i]);
+      }
+
+      br = new BufferedReader(new InputStreamReader(System.in));
+      
+      // read the config file
+      ConfigurationFactory factory = new ConfigurationFactory();
+      URL configURL = new File(CONFIGURATION_FILE).toURL();
+      
+      factory.setConfigurationURL(configURL);
+      config = factory.getConfiguration();
+
+      //SimpleLog log = new SimpleLog("lenya log");
+      //log.setLevel(Integer.parseInt(config.getString("lenyaSvn.debugLevel")));
+      //logger = log;
+
+      setupLibrary();
+
+      urlRep = config.getString("lenyaSvn.urlRep");
+      svnUrl = SVNURL.parseURIEncoded(urlRep);
+      repository = SVNRepositoryFactory.create(svnUrl);
+      if (debug)System.out.println("URL that points to repository: " + urlRep);
+
+      // Credentials to use for authentication.
+      String userName = config.getString("lenyaSvn.userName");
+      String userPassword = config.getString("lenyaSvn.userPassword");
+      /*/ Do we want to override this?
+      System.out.println(PROP_EXIT_MES);
+      System.out.println("for the Credentials to use for authentication.\ncurrent value:\nuserName: "+userName+"\nuserPassword "+userPassword);
+      System.out.print(PROP_EXIT_OVERRIDE);
+      try {
+          String value = br.readLine();
+          if (value.equals("y")) {
+              System.out.println("Please define a new userName");
+              userName=br.readLine();
+              System.out.println("Please define a new userPassword");
+              userPassword=br.readLine();
+          } else {
+              System.out.println("Local configuration has NOT been overwritten.");
+          }
+      } catch (Exception e) {
+          System.err.println(e.getMessage());
+      }*/
+      
+      localRep=config.getString("lenyaSvn.localRep");
+
+      ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(userName, userPassword);
+      repository.setAuthenticationManager(authManager);
+
+      /*
+       * Get type of the node located at URL we used to create SVNRepository.
+       * 
+       * "" (empty string) is path relative to that URL, 
+       * -1 is value that may be used to specify HEAD (latest) revision.
+       */
+      SVNNodeKind nodeKind = repository.checkPath("", -1);
+
+      /*
+       * Checks  up  if the current path really corresponds to a directory. If 
+       * it doesn't, the program exits. SVNNodeKind is that one who says  what
+       * is located at a path in a revision. 
+       */
+      if (nodeKind == SVNNodeKind.NONE) {
+          SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, "No entry at URL ''{0}''", svnUrl);
+          throw new SVNException(err);
+      } else if (nodeKind == SVNNodeKind.FILE) {
+          SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, "Entry at URL ''{0}'' is a file while directory was expected", svnUrl);
+          throw new SVNException(err);
+      }
+      
+      // Get exact value of the latest (HEAD) revision.
+      long latestRevision = repository.getLatestRevision();
+      if(debug) System.out.println("Repository latest revision (before committing): " + latestRevision);
+      
+      // setup client manager, create (update) status
+      ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
+      ourClientManager = SVNClientManager.newInstance(options, userName, userPassword);
+      
     }
     
     private static void doSvnCommand(String[] args, BufferedReader br) throws SVNException {
       
-      
-      
         // TODO before starting, we should update the local repository (reduces conflicts possibilities)      
-      
-        /*
-         * Initialize the library. It must be done before calling any 
-         * method of the library.
-         */
-        setupLibrary();
-        /*
-         * URL that points to repository. 
-         */
-        //String urlRep = "http://svn.wyona.com/repos/public/lenya/tools/svn";
-        String urlRep = "http://svn.wyona.com/repos/wyona/employees/renaud/svntest";
         
-        
-        /*
-         * Do we want to override this?
-         *
-        System.out.println(PROP_EXIT_MES);
-        System.out.println("for the URL that points to repository.\ncurrent value: "+urlRep);
-        System.out.print(PROP_EXIT_OVERRIDE);
-        try {
-            String value = br.readLine();
-            if (value.equals("y")) {
-                System.out.println("Please define a new url");
-                urlRep=br.readLine();
-            } else {
-                System.out.println("Local configuration has NOT been overwritten.");
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }*/
-        
-        /**
-         * Creating svnurl
-         */
-        if(debug)
-        System.out.println("\nUsing "+urlRep);
-        SVNURL url = SVNURL.parseURIEncoded(urlRep);
-        /*
-         * Create an instance of SVNRepository class. This class is the main entry point 
-         * for all "low-level" Subversion operations supported by Subversion protocol. 
-         * 
-         * These operations includes browsing, update and commit operations. See 
-         * SVNRepository methods javadoc for more details.
-         */
-        repository = SVNRepositoryFactory.create(url);
-        
-        /*
-         * Credentials to use for authentication.
-         */
-        String userName = "renaud";
-        String userPassword = "car0tte";
-        
-        /*
-         * Do we want to override this?
-         *
-        System.out.println(PROP_EXIT_MES);
-        System.out.println("for the Credentials to use for authentication.\ncurrent value:\nuserName: "+userName+"\nuserPassword "+userPassword);
-        System.out.print(PROP_EXIT_OVERRIDE);
-        try {
-            String value = br.readLine();
-            if (value.equals("y")) {
-                System.out.println("Please define a new userName");
-                userName=br.readLine();
-                System.out.println("Please define a new userPassword");
-                userPassword=br.readLine();
-            } else {
-                System.out.println("Local configuration has NOT been overwritten.");
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }*/
-        
-        /*
-         * User's authentication information (name/password) is provided via  an 
-         * ISVNAuthenticationManager  instance.  SVNWCUtil  creates  a   default 
-         * authentication manager given user's name and password.
-         * 
-         * Default authentication manager first attempts to use provided user name 
-         * and password and then falls back to the credentials stored in the 
-         * default Subversion credentials storage that is located in Subversion 
-         * configuration area. If you'd like to use provided user name and password 
-         * only you may use BasicAuthenticationManager class instead of default 
-         * authentication manager:
-         * 
-         *  authManager = new BasicAuthenticationsManager(userName, userPassword);
-         *  
-         * You may also skip this point - anonymous access will be used. 
-         */
-        ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(userName, userPassword);
-        repository.setAuthenticationManager(authManager);
-        /*
-         * Get type of the node located at URL we used to create SVNRepository.
-         * 
-         * "" (empty string) is path relative to that URL, 
-         * -1 is value that may be used to specify HEAD (latest) revision.
-         */
-        SVNNodeKind nodeKind = repository.checkPath("", -1);
- 
-        /*
-         * Checks  up  if the current path really corresponds to a directory. If 
-         * it doesn't, the program exits. SVNNodeKind is that one who says  what
-         * is located at a path in a revision. 
-         */
-        if (nodeKind == SVNNodeKind.NONE) {
-            SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, "No entry at URL ''{0}''", url);
-            throw new SVNException(err);
-        } else if (nodeKind == SVNNodeKind.FILE) {
-            SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, "Entry at URL ''{0}'' is a file while directory was expected", url);
-            throw new SVNException(err);
-        }
-        /*
-         * Get exact value of the latest (HEAD) revision.
-         */
-        long latestRevision = repository.getLatestRevision();
-        if(debug) System.out.println("Repository latest revision (before committing): " + latestRevision);
-        
-        //String localRep="/home/thorsten/projects/wyona-public/lenya/tools/svn";
-        String localRep="/home/ren/src/wyona/svn/wyona/employees/renaud/svntest";
-        
-        /*
-         * Do we want to override this?
-         *
-        System.out.println(PROP_EXIT_MES);
-        System.out.println("for the local checkout for the repository.\ncurrent value: "+localRep);
-        System.out.print(PROP_EXIT_OVERRIDE);
-        try {
-            String value = br.readLine();
-            if (value.equals("y")) {
-                System.out.println("Please define the new location of the rep (needs to be a directory!!!)");
-                localRep=br.readLine();
-            } else {
-                System.out.println("Local configuration has NOT been overwritten.");
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }*/
-        
-        String logMessage = "Automated commit by LenyaSvnClient";
-        /*
-         * Do we want to override this?
-         *
-         System.out.println(PROP_EXIT_MES);
-         System.out.println("for the commitMessage (will be applied as a log message of the commit).\ncurrent value: "+logMessage);
-         System.out.print(PROP_EXIT_OVERRIDE_EXT);
-         try {
-         String value = br.readLine();
-         if (value.equals("o")) {
-         System.out.println("Please define a *new* commitMessage");
-         logMessage=br.readLine();
-         } else if(value.equals("e")) {
-         System.out.println("Please extend the commitMessage");
-         logMessage=logMessage.concat("\n").concat(br.readLine());
-         }else {
-         System.out.println("Local configuration has NOT been overwritten.");
-         }
-         } catch (Exception e) {
-         System.err.println(e.getMessage());
-         }*/
-        
-        // setup client manager, create (update) status
-        ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        ourClientManager = SVNClientManager.newInstance(options, userName, userPassword);
         StatusHandler statusHandler = new StatusHandler(false,debug);
         ourClientManager.getCommitClient().setEventHandler(statusHandler);
         ourClientManager.getUpdateClient().setEventHandler(statusHandler);
@@ -294,11 +217,39 @@ public class LenyaSvnClient {
           }
       }
       
+      String logMessage = getLogmessage();  
+      System.out.println("sending commit ...");
       commit(lr,false,logMessage); // commit all local changes to the server 
       System.out.println("\n**************\n**************");
       System.out.println("commit successfull");
     }    
   
+    private static String getLogmessage() {
+      
+      String logMessage = config.getString("lenyaSvn.defaultLogMessage");
+      // Do we want to override this?
+
+       System.out.println(PROP_EXIT_MES);
+       System.out.println("for the commitMessage (will be applied as a log message of the commit).\ncurrent value: "+logMessage);
+       System.out.print(PROP_EXIT_OVERRIDE_EXT);
+       try {
+       String value = br.readLine();
+       if (value.equals("o")) {
+       System.out.println("Please define a *new* commitMessage");
+       logMessage=br.readLine();
+       } else if(value.equals("e")) {
+       System.out.println("Please extend the commitMessage");
+       logMessage=logMessage.concat("\n").concat(br.readLine());
+       }else {
+       System.out.println("Local configuration has NOT been overwritten.");
+       }
+       } catch (Exception e) {
+       System.err.println(e.getMessage());
+       }
+       
+      return logMessage;
+    }
+
     private static void commitAddedFile(StatusBean valueNode, BufferedReader br, String localRep) throws SVNException {
       
       // Ask user for ressource type
@@ -320,6 +271,7 @@ public class LenyaSvnClient {
       }
 
       // create metadata file
+      // TODO skip these steps if the file already exists
       
       File meta = new File (valueNode.getPath() + ".meta");
       MetaDataWriter metadatawriter = new MetaDataWriter();
