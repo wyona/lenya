@@ -62,8 +62,6 @@ public class LenyaSvnClient {
      */
     public static void main(String[] args) throws Exception {
         
-        System.out.println("LenyaSvnClient - simple svn client for lenya");
-        
         setupConfiguration(args);
         
         try {
@@ -93,13 +91,12 @@ public class LenyaSvnClient {
       // read the config file
       ConfigurationFactory factory = new ConfigurationFactory();
       URL configURL = new File(CONFIGURATION_FILE).toURL();
-      
       factory.setConfigurationURL(configURL);
       config = factory.getConfiguration();
 
-      //SimpleLog log = new SimpleLog("lenya log");
-      //log.setLevel(Integer.parseInt(config.getString("lenyaSvn.debugLevel")));
-      //logger = log;
+      System.out.println("\n*************************************************************");
+      System.out.println("*    LenyaSvnClient - simple SVN client for Apache Lenya    *");
+      System.out.println("*************************************************************\n");
 
       setupLibrary();
 
@@ -224,46 +221,48 @@ public class LenyaSvnClient {
       SitetreeUpdater.updateSitetree (localRep + "/sitetree.xml", addedNodeToSitetree, debug);
         
       String logMessage = getLogmessage();  
-      System.out.println("sending commit ...");
+
+      System.out.println("\nsending commit ...");
       commit(lr,false,logMessage); // commit all local changes to the server 
-      System.out.println("\n**************\n**************");
-      System.out.println("commit successfull");
+      System.out.println("commit successful");
     }    
   
     private static String getLogmessage() {
       
-      String logMessage = config.getString("lenyaSvn.defaultLogMessage");
-      // Do we want to override this?
+       String logMessage = config.getString("lenyaSvn.defaultLogMessage");
 
-       System.out.println(PROP_EXIT_MES);
-       System.out.println("for the commitMessage (will be applied as a log message of the commit).\ncurrent value: "+logMessage);
-       System.out.print(PROP_EXIT_OVERRIDE_EXT);
+       // Do we want to override this?
+       System.out.println("\n*************************************************************");
+       System.out.println("Please enter the log message for the commit.\nDefault value is: "+logMessage);
+       System.out.print(PROP_EXIT_OVERRIDE);
        try {
-       String value = br.readLine();
-       if (value.equals("o")) {
-       System.out.println("Please define a *new* commitMessage");
-       logMessage=br.readLine();
-       } else if(value.equals("e")) {
-       System.out.println("Please extend the commitMessage");
-       logMessage=logMessage.concat("\n").concat(br.readLine());
-       }else {
-       System.out.println("Local configuration has NOT been overwritten.");
-       }
+           String value = br.readLine();
+           if (value.equals("y")) {
+               System.out.println("Please define the new log message");
+               logMessage = br.readLine();
+           } else {
+               System.out.println("Using default value " + logMessage);
+           }
        } catch (Exception e) {
-       System.err.println(e.getMessage());
+           System.err.println(e.getMessage());
        }
        
       return logMessage;
     }
 
     private static void commitAddedFile(StatusBean valueNode, BufferedReader br, 
-        String localRep, ArrayList addedNodeToSitetree) throws SVNException {
+        String localRep, ArrayList addedNodeToSitetree) {
       
+      String relativeNodePath = valueNode.getPath().replaceFirst(localRep,"");
+      if(debug) System.out.println("relativePath "+relativeNodePath);
+
       // Ask user for ressource type
 
       String ressourceType = "xhtml";
-      System.out.println("Enter the ressource type for the file " + 
-          valueNode.getPath() + ".\ndefault value: "+ressourceType);
+      System.out.println("*************************************************************");
+      System.out.println("Adding file " + 
+          relativeNodePath);
+      System.out.println("Please enter the ressource type for this file. The default value is: "+ ressourceType); 
       System.out.print(PROP_EXIT_OVERRIDE);
       try {
           String value = br.readLine();
@@ -278,15 +277,18 @@ public class LenyaSvnClient {
       }
 
       // create metadata file
-      // TODO skip these steps if the file already exists
       File meta = new File (valueNode.getPath() + ".meta");
       MetaDataWriter metadatawriter = new MetaDataWriter();
       metadatawriter.addMetaFile(meta, ressourceType);      
-      String relativeNodePath = valueNode.getPath().replaceFirst(localRep,"");
-      if(debug) System.out.println("relativePath "+relativeNodePath);
       
       // add meta file to repository
-      addEntry(meta);
+      try {
+        addEntry(meta);
+      } catch (SVNException e) {
+        System.err.println("ERROR: could not add the file " +
+            meta.getAbsolutePath() + " to the repository, or it " +
+                    "already exists. Please contact your administrator" + e.getErrorMessage());
+      }
 
       addedNodeToSitetree.add(relativeNodePath);
     }
