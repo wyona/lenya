@@ -19,15 +19,26 @@
 
 
 	<esql:execute-query>
-			<!-- <esql:query>SELECT * from dcvalue</esql:query> -->
-			<!-- <esql:query>SELECT text_value from dcvalue where dc_value_id = <xsl:value-of select="@id"/></esql:query> -->
 			<esql:query>SELECT item_id from dcvalue</esql:query>
-			<esql:query>SELECT text_lang from dcvalue</esql:query>
-			<!-- <esql:query>SELECT text_id from dcvalue</esql:query> -->
-			<!-- <esql:query>SELECT place from dcvalue</esql:query> -->
-			<!-- <esql:query>SELECT source_id from dcvalue</esql:query> -->
 	</esql:execute-query>
-
+	<esql:execute-query>
+			<esql:query>SELECT text_lang from dcvalue</esql:query>
+	</esql:execute-query>
+	<esql:execute-query>
+			<esql:query>SELECT * from dcvalue</esql:query>
+	</esql:execute-query>
+	<esql:execute-query>
+			<esql:query>SELECT text_value from dcvalue where dc_value_id = <xsl:value-of select="@id"/></esql:query>
+	</esql:execute-query>
+	<esql:execute-query>
+			<esql:query>SELECT text_id from dcvalue</esql:query>
+	</esql:execute-query>
+	<esql:execute-query>
+			<esql:query>SELECT place from dcvalue</esql:query>
+	</esql:execute-query>
+	<esql:execute-query>
+			<esql:query>SELECT source_id from dcvalue</esql:query>
+	</esql:execute-query>
 
 <!--
 	<esql:connection>
