@@ -12,6 +12,16 @@
     <xsl:copy-of select="."/>
   </xsl:template>
 
+  <xsl:template match="map:pipeline[map:match[@pattern='*/**.html']]">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <map:match pattern="webdav/**">
+        <map:mount uri-prefix="" src="lenya/usecases/webdav/usecase-webdav.xmap" check-reload="true" reload-method="synchron"/>
+      </map:match>
+      <xsl:apply-templates select="node()"/>
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>

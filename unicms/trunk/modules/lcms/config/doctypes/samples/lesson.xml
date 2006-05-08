@@ -22,7 +22,7 @@
                 <paragraph> This lesson and the unit of it is only an example how it could be done. It doesn't mean that you have to do it exactly like this (but this might not be the worst way to do it :-)). Please forgive me all typos. If you think you have found something untrue or a major 'bug' please report it to me (Susanne Bleisch, s.bleisch@fhbb.ch). </paragraph>
                 <paragraph> This is additional information for the audience (role) specified. Here, I write that all the meta information about a lesson will not be displayed to the students but is only available when viewing the content in the authors view. The tutor of a lesson might decide that some of the meta information is important to the students and make that selected information available to them somewhere (e.g. on WebCT).</paragraph>
         </elml:entry><elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-        <elml:lObjective role="student">asdfasdf asdfadsf You get to know all the possible tags within a lesson and how they are displayed in HTML.</elml:lObjective>
+        <elml:lObjective role="student">You get to know all the possible tags within a lesson and how they are displayed in HTML.</elml:lObjective>
         <elml:lObjective role="student">This is the second learning objective.</elml:lObjective>
         <elml:lObjective role="student">This the third one. Write at least one, and up to ten learning objectives per lesson.</elml:lObjective>
    </elml:goals>

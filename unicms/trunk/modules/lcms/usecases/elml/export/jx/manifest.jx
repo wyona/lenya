@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<imscp:manifest xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" xmlns:imscp="http://www.imsglobal.org/xsd/imscp_v1p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="MANIFEST-XXX}" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.imsglobal.org/xsd/imsmd_v1p2 imsmd_v1p2p2.xsd" version ="${datetime}" xml:base="/">
+  <imscp:metadata>
+  </imscp:metadata>
+  <imscp:organizations>
+    <imscp:organization identifier="default" structure="hierarchical">
+      <imscp:title>${doc.getLabel()}</imscp:title>
+      <imscp:item identifier="item-${doc.getName()}" identifierref="${doc.getName()}">
+        <imscp:title>${doc.getLabel()}</imscp:title>
+        <jx:forEach var="item" items="${items}">
+          <imscp:item identifier="item-${item.getName()}" identifierref="${item.getName()}">
+            <imscp:title>${item.getLabel()}</imscp:title>
+          </imscp:item>           
+        </jx:forEach>
+      </imscp:item>
+    </imscp:organization>
+  </imscp:organizations>
+  <imscp:resources>
+    <imscp:resource identifier="${doc.getName()}" type="webcontent" href="${doc.getName()}.html"/>
+    <jx:forEach var="item" items="${items}">
+      <imscp:resource identifier="${item.getName()}" type="webcontent" href="${item.getName()}.html"/>
+    </jx:forEach>
+  </imscp:resources>
+</imscp:manifest>

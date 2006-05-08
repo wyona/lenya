@@ -7,6 +7,7 @@
   
   <target name="init">
     <property name="pub.prefix" value="unitemplate"/>
+    <property name="lenya.dir" value="/Developer/Java/cocoon-lenya"/>
     <property name="pubs.dir" value="../../pubs"/>
     <property name="pub.dir" value="${pubs.dir}/${pub.prefix}"/>
     <mkdir dir="work"/>
@@ -19,14 +20,30 @@
 
   <target name="install" description="Install module" depends="init">
     
-    <echo>INFO: Install module in publication ${$publication.prefix}</echo>
+    <echo>INFO: Setting up module for publication ${$publication.prefix}</echo>
 
-    <echo>INFO: Copying resources</echo>
-    <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
-      <fileset dir="resources/shared/images/icons"/>
+    <echo>INFO: Adding WebDAV support to core</echo>
+    <xslt
+      in="${lenya.dir}/src/webapp/sitemap.xmap"
+      out="work/sitemap.xmap" style="ant/sitemap-xmap.xsl"
+      >
+    </xslt>
+    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
+      <fileset dir="work">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy>
+    <copy todir="${lenya.dir}/src/java" overwrite="yes">
+      <fileset dir="core/java"/>
+    </copy> 
+
+    <echo>INFO: Copying WebDAV usecase</echo>
+    <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
+      <fileset dir="lenya/usecases/webdav"/>
     </copy>
 
-    <echo>INFO: Copying schemata</echo>
+
+    <echo>INFO: Copying schema files</echo>
     <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
       <fileset dir="config/doctypes/schemas"/>
     </copy>
@@ -41,7 +58,7 @@
       <fileset dir="config/doctypes/samples"/>
     </copy>
 
-    <echo>INFO: Copying views</echo>
+    <echo>INFO: Copying elml xslt's</echo>
 
     <copy todir="${pubs.dir}/unizh/xslt/doctypes" overwrite="yes">
       <fileset dir="xslt/doctypes"/>
@@ -51,8 +68,24 @@
       <fileset dir="xslt/common"/>
     </copy>
 
-    <echo>INFO: Patching doctypes.xmap to use views</echo>
+    <echo>INFO: Copying resources</echo>
+    <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
+      <fileset dir="resources/shared/images/icons"/>
+    </copy>
 
+    <echo>INFO: Patching publication-sitemap.xmap</echo>
+    <xslt
+      in="${pub.dir}/publication-sitemap.xmap"
+      out="work/publication-sitemap.xmap" style="ant/publication-sitemap.xsl"
+      >
+    </xslt>
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="work">
+        <include name="publication-sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: Patching doctypes.xmap</echo>
     <xslt
       in="${pub.dir}/doctypes.xmap"
       out="work/doctypes.xmap" style="ant/doctypes.xsl"
@@ -64,22 +97,37 @@
       </fileset>
     </copy>
 
-    <echo>INFO: Adding asset configuration files</echo>
-
+    <echo>INFO: Adding asset config files</echo>
     <copy todir="${pub.dir}/config/assets" overwrite="yes">
       <fileset dir="config/assets"/>
     </copy>
 
+    <echo>INFO: Adding import/export usecases</echo>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="">
+        <include name="usecase-importlesson.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="">
+        <include name="usecase-exportlesson.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/usecases/elml" overwrite="yes">
+      <fileset dir="usecases/elml"/>
+    </copy>
 
     <echo>INFO: Patching menu config files </echo>
-
-     <xslt
+    <xslt
       in="${pub.dir}/menus.xmap"
       out="work/menus.xmap" style="ant/menus-xmap.xsl"
       >
     </xslt>
-     <copy todir="${pub.dir}" overwrite="yes">
-       <fileset dir="work">
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="work">
         <include name="menus.xmap"/>
       </fileset>
     </copy>
@@ -89,10 +137,10 @@
       out="work/doctypes.xconf" style="ant/doctypes-xconf.xsl"
       >
     </xslt>
-     <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
-       <fileset dir="work">
+    <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
+      <fileset dir="work">
         <include name="doctypes.xconf"/>
-      </fileset>
+     </fileset>
     </copy>
 
     <xslt
@@ -108,7 +156,7 @@
 
     <xslt
       in="${pubs.dir}/unizh/config/menus/homepage.xsp"
-      out="work/homepage.xsp" style="ant/menus.xsl"
+      out="work/homepage.xsp" style="ant/menu-homepage.xsl"
       >
     </xslt>
     <mkdir dir="${pub.dir}/config/menus"/>
@@ -120,7 +168,7 @@
 
     <xslt
       in="${pubs.dir}/unizh/config/menus/xhtml.xsp"
-      out="work/xhtml.xsp" style="ant/menus.xsl"
+      out="work/xhtml.xsp" style="ant/menu-xhtml.xsl"
       >
     </xslt>
     <mkdir dir="${pub.dir}/config/menus"/>
@@ -143,14 +191,14 @@
       </fileset>
     </copy>
 
-    <echo>INFO: Copying javascripts</echo>
+    <echo>INFO: Copying javascript files</echo>
     <copy todir="${pubs.dir}/unizh/resources/shared/javascript" overwrite="yes">
        <fileset dir="resources/shared/javascript">
         <include name="elml.js"/>
       </fileset>
     </copy>
 
-    <echo>INFO: Patching html-head to include javascripts</echo>
+    <echo>INFO: Patching html-head to include javascript files</echo>
     <xslt
       in="${pubs.dir}/unizh/xslt/common/html-head.xsl"
       out="work/html-head.xsl" style="ant/html-head.xsl"
@@ -183,20 +231,8 @@
          <include name="usecase-bxeng.xmap"/>
       </fileset>
     </copy>
- 
-    <echo>INFO: Patching publication-sitemap.xmap</echo>
-     <xslt
-      in="${pub.dir}/publication-sitemap.xmap"
-      out="work/publication-sitemap.xmap" style="ant/publication-sitemap.xsl"
-      >
-     </xslt>
-     <copy todir="${pub.dir}" overwrite="yes">
-       <fileset dir="work">
-         <include name="publication-sitemap.xmap"/>
-      </fileset>
-    </copy>
 
-    <echo>INFO: patching css file content-bxeng.xml</echo> 
+    <echo>INFO: Patching css file content-bxeng.xml</echo> 
     <xslt
       in="${pubs.dir}/unizh/resources/misc/bxeng/content-bxeng.xml"
       out="work/content-bxeng.xml" style="ant/content-bxeng.xsl"
@@ -207,8 +243,11 @@
          <include name="content-bxeng.xml"/>
       </fileset>
     </copy>
+
+
     <antcall target="touch"/>
-    <!-- <antcall target="cleanup"/> -->
+
+    <antcall target="cleanup"/> 
 
   </target>
 

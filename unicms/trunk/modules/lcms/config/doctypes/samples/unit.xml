@@ -76,12 +76,9 @@
 				<paragraph> or another example without an icon</paragraph>
 				<elml:term glossRef="glossary" icon=""/>
 				<paragraph> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<multimedia mimeType="" src="Remember_Me.mp3"/>
 				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
 				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
-				<multimedia mimeType="" src="testAnimation.swf"/>
 				<paragraph> An interaction included in the lesson (without thumbnail) could look like this.</paragraph>
-				<multimedia mimeType="" src="testInteraction.swf"/>
 				<paragraph> With the element <elml:indexItem>multimedia</elml:indexItem> also sound can be included (this one is marked 'important').</paragraph>
 				
 			</elml:look>
