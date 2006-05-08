@@ -3,6 +3,9 @@ package org.apache.lenya.svn;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.ListIterator;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,6 +22,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -39,6 +43,9 @@ public class SitetreeUpdater {
 	    	  DocumentBuilder builder = factory.newDocumentBuilder();
 	    	  document = builder.parse( new File(pathToSitetree) );
 
+              // sort by lowest depth first
+              Collections.sort(newNodes, new DepthComparator());
+              
               ListIterator it = newNodes.listIterator();
               while (it.hasNext()) {
                 addNode((String)it.next());
@@ -62,6 +69,20 @@ public class SitetreeUpdater {
 	         ioe.printStackTrace();
 	      }
 	  } 
+
+  static class DepthComparator implements Comparator {
+
+    public int compare(Object o1, Object o2) {
+
+      String s1 = (String) o1;
+      String s2 = (String) o2;
+
+      String [] depth1 = s1.split("/");
+      String [] depth2 = s2.split("/");
+      
+      return (depth1.length - depth2.length);
+    }
+  }
   
   /**
    * @param newNode
@@ -69,48 +90,48 @@ public class SitetreeUpdater {
   private static void addNode(String newNode) {
     
     String [] nodePath = newNode.split("/");
-    Element root = document.getDocumentElement();
 
     String newNodeName = nodePath[nodePath.length - 2];
     if (debug) {
-      System.err.println("newNode " + newNode);
+      System.err.println("\naddNode(), newNode: " + newNode);
       System.err.println("newNodeName " + newNodeName);
       System.err.println("nodepathlengti " + nodePath.length);
     }
     
-    // is the new node a child of the root node ?
-    if (nodePath.length < 4) {
-      createNode(root, newNodeName);
-      
-    } else {
-      
-      // the name of the parent 
-      String newNodeParentName = nodePath[nodePath.length - 3];
+    Element current = document.getDocumentElement(); //start with root
+    
+    // iterate through all nodePath elements, mind the init and start values !
+    for (int i=1; i< nodePath.length -2; i++) {
+      if (debug) {
+        System.err.println("i  " + i + ", nodePath " + nodePath[i]);
+      }
+      NodeList children = current.getElementsByTagName("node");
 
-      //  Get a list of all elements in the document
-      NodeList list = document.getElementsByTagName("*");
-      for (int i=0; i<list.getLength(); i++) {
-
-        Element element = (Element)list.item(i);
+      for (int j = 0; j < children.getLength(); j++){
         
+        // one child <node>
+        Element currentChild = (Element)children.item(j);
         if (debug) {
-          System.err.println(i+ ": " + element.getNodeName().equals("node"));
-          System.err.println(element.getAttributeNode("id"));
+          System.err.println("j  " + j + ", currentChild " + currentChild);
+          System.err.println("currentChildid " + currentChild.getAttributeNode("id").getValue());
         }
         
-        if (element.getNodeName().equals("node") && element.getAttributeNode("id").getValue().equals(newNodeParentName)){
-          createNode(element, newNodeName);
-          break;
+        // <node> id ?= path id
+        if (currentChild.getAttributeNode("id").getValue().equals(nodePath[i])){
+          // this is the child on the nodePath, use it for next iteration
+          current = currentChild;
         }
       }
     }
+    // now we are at the parent of the new node to add, so add it.
+    createNode(current, newNodeName);
   }
 
   private static void createNode(Element parent, String newNodeName) {
     if (debug) {
       System.err.println("**** createNode ");
       System.err.println("newNodeName " + newNodeName);
-      System.err.println("root " + parent);
+      System.err.println("parent " + parent + ", id: " + parent.getAttributeNode("id").getValue() );
     }
     
     Element newNode = document.createElement("node");
