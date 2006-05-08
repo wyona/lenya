@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -182,6 +183,8 @@ public class LenyaSvnClient {
         if(debug) System.out.println("Modified resources count "+elementMap.size());
 
         Iterator iteratorMap = elementMap.entrySet().iterator();
+
+        ArrayList addedNodeToSitetree = new ArrayList();
         
         while (iteratorMap.hasNext()){
           Map.Entry entry = (Map.Entry) iteratorMap.next();
@@ -203,20 +206,23 @@ public class LenyaSvnClient {
           
           // File added
           else if (fileStatus.equals("A") && !(isDirectory)) {
-            //checkFileConsistency(valueNode);
-            commitAddedFile(valueNode, br, localRep);
+            checkFileConsistency(valueNode);
+            commitAddedFile(valueNode, br, localRep, addedNodeToSitetree);
           } 
           
           // Directory added
           else if (fileStatus.equals("A") && isDirectory) {
-            //checkDirConsistency(valueNode);
+            checkDirConsistency(valueNode);
           } 
           
           else {
             System.out.println("status \"" + fileStatus + "\" for file " + keyNode + " not supported");
           }
       }
-      
+
+      // update all new nodes in the sitetree  
+      SitetreeUpdater.updateSitetree (localRep + "/sitetree.xml", addedNodeToSitetree, debug);
+        
       String logMessage = getLogmessage();  
       System.out.println("sending commit ...");
       commit(lr,false,logMessage); // commit all local changes to the server 
@@ -250,7 +256,8 @@ public class LenyaSvnClient {
       return logMessage;
     }
 
-    private static void commitAddedFile(StatusBean valueNode, BufferedReader br, String localRep) throws SVNException {
+    private static void commitAddedFile(StatusBean valueNode, BufferedReader br, 
+        String localRep, ArrayList addedNodeToSitetree) throws SVNException {
       
       // Ask user for ressource type
 
@@ -272,28 +279,16 @@ public class LenyaSvnClient {
 
       // create metadata file
       // TODO skip these steps if the file already exists
-      
       File meta = new File (valueNode.getPath() + ".meta");
       MetaDataWriter metadatawriter = new MetaDataWriter();
       metadatawriter.addMetaFile(meta, ressourceType);      
-      
-      String relativePath = valueNode.getPath().replaceFirst(localRep,"");
-      if(debug) System.out.println("relativePath "+relativePath);
+      String relativeNodePath = valueNode.getPath().replaceFirst(localRep,"");
+      if(debug) System.out.println("relativePath "+relativeNodePath);
       
       // add meta file to repository
-
       addEntry(meta);
 
-      // update sitetree
-      
-      updateSitetree (valueNode, relativePath);
-      
-    }
-    
-    private static void updateSitetree(StatusBean valueNode, String relativePath) {
-      
-      // TODO 
-      
+      addedNodeToSitetree.add(relativeNodePath);
     }
     
     /** Primitive test to ensure that the dir has at least a child called index_en.xml
