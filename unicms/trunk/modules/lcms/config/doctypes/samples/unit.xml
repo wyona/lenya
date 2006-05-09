@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="TestLesson" lenya:dummy="FIXME:keepNamespace" title="Test and Demo Unit">
+<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="Lerneinheit" lenya:dummy="FIXME:keepNamespace" title="Lerneinheit (Unit)">
 <lenya:meta>
     <dc:title xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">unit</dc:title>
     <dc:description xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"> </dc:description>
@@ -11,160 +11,33 @@
     <dc:rights xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Universität Zürich</dc:rights>
 </lenya:meta>
 
-<elml:entry label="Lunitentry" navTitle="Demo Entry" title="A short entry to this Test and Demo Unit">
-			<paragraph> This unit shall give you an overview over all <elml:indexItem mainEntry="no">tags</elml:indexItem> within <elml:indexItem mainEntry="yes">GITTA</elml:indexItem> which are possible to use in a unit. Therefore all paragraph tags and all other tags like glossaryTerm will be used and as far as possible be explained within this unit.<newLine/>I hope you learn a lot and enjoy your learning! Good luck :-)!</paragraph>
+<elml:entry label="Lunitentry" navTitle="Einleitung" title="Einleitung">
+			<paragraph>Die Lerneinheit (Unit) ist der zentrale Baustein einer Lektion. Eine Lektion kann mehrere Lerneinheiten enthalten. Diese wiederum beinhalten ein oder mehrere zu vermittelnde Sachverhalte (learning objects).</paragraph>
 		</elml:entry>
 		<elml:goals>
-			<elml:lObjective role="tutor">This is the first facultative learning objective of this unit. Visible only for tutors</elml:lObjective>
-			<elml:lObjective role="student">This is the second facultative learning objective of this unit. Visible for students</elml:lObjective>
+	       	<elml:lObjective role="tutor">Erstes Lernziel dieser Lerneinheit.</elml:lObjective>
+		<elml:lObjective role="student">Zweites Lernziel dieser Lerneinheit</elml:lObjective>
 		</elml:goals>
-		<elml:learningObject label="LLearnOb1" navTitle="paragraph and formatting" title="This is the first learningObject - the structure, paragraph and formatting elements">
-			<elml:clarify label="LClarify1" title="Clarify">
-				<paragraph> This clarify uses all structure, paragraph and formatting elements possible within a GITTA unit. As GITTA authors often do not know which tags they can use and how these tags are displayed, I am writting this demo lesson. With the help of it and the Schema documentation the authors should be able to understand the XML structure of GITTA lessons and units much better. With these the also have an example at which they can have a look when in trouble with the XML structure of their own units and lessons.<newLine/>The special tags useable within a paragraph are shown in the second learningObject 'Specials'. The text your are reading just now is simple text written directly inside the clarify tag.<newLine/>If you want to write a remark then add a paragraph and set the attribute icon to 'remark'.</paragraph>
-				<paragraph>The remark paragraph has got a special icon. Use it if you want to add something to your writing (eg. similiar problem but not the same context) which gives a deeper insight to the problem but is not actually part of the problem itselfs.</paragraph>
-				<paragraph> The same happens if you want to add a question or mark a paragraph as important. Just add a new paragraph and set the attribute icon to 'question' or 'important'.</paragraph>
-				<paragraph>Do you already know how to add an important paragraph?</paragraph>
-				<paragraph> The next paragraph is marked important.</paragraph>
-				<paragraph>It is important to study this lesson carefully!</paragraph>
-				<paragraph> The icon attribute can also be used with other elements like the multimedia, the table or the box element (there are some more). <newLine/> If you want to write in two or three columns then you can use the column element. Below the column tag is used to create two columns. In the left column an unordered list is shown and in the right column an ordered list with a title and a reference to the bibliography (the right list is marked important). </paragraph>
-				<elml:column label="LColumn1">
-					<elml:columnLeft align="left" units="pixels">
-						<list listStyle="unordered">
-							<item>an item</item>
-							<item>another item</item>
-						</list>
-					</elml:columnLeft>
-					<elml:columnRight align="left" units="pixels">
-						<list listStyle="ordered">
-							<item>first item</item>
-							<item>second item</item>
-						</list>
-					</elml:columnRight>
-				</elml:column>
-				<paragraph> It is also possible to have a three columns. This would look like this.</paragraph>
-				<elml:column label="LColumn2">
-					<elml:columnLeft align="left" units="pixels" width="150">
-						<list listStyle="unordered">
-							<item>an item</item>
-							<item>another item</item>
-						</list>
-					</elml:columnLeft>
-					<elml:columnMiddle align="middle" units="pixels" width="150"> Here we have a list within a list. <list listStyle="ordered">
-							<item>some text</item>
-							<item>another list <list listStyle="unordered">
-									<item>also text</item>
-								</list>
-							</item>
-							<item>some text</item>
-						</list>
-					</elml:columnMiddle>
-					<elml:columnRight align="left" units="pixels" width="150">
-						<list listStyle="ordered">
-							<item>first item</item>
-							<item>second item</item>
-						</list>
-					</elml:columnRight>
-				</elml:column>
-				<paragraph> If you want to present a special paragraph (e.g a rule or something) with a border then use the element &lt;box&gt;. This might look like this:</paragraph>
-				<elml:box label="Lbox" title="Title of this box">This content is presented within a box.</elml:box>
-				<paragraph>It would be possible to set the attribute icon to remark, important or question. That would look like this (without a title):</paragraph>
-				<elml:box icon="question" label="Lbox2">Can you see the difference?</elml:box>
+		<elml:learningObject label="LLearnOb1" navTitle="paragraph and formatting" title="Erster Gegenstand (learning object)">
+			<elml:clarify label="LClarify1" title="Erklaerung">
+				<paragraph>Abschnitt mit einer einleitenden Erklaerung des Sachverhalts (Clarify).</paragraph>
+				<paragraph>Weiterer Abschnitt mit der einleitenden Erlklaerung des Sachverhalts.</paragraph>
 			</elml:clarify>
-			<elml:look label="LLook1" title="Look Part of this Learning Object">
-				<paragraph> Sometimes we might want to have an of the <elml:indexItem>glossary</elml:indexItem> terms included in a lesson not only as a reference to the glossary but as paragraph itselves. In this case we can use the element &lt;term&gt; and set the attribute 'representation' to 'paragraph'. Then the term and its definition is directly included into the lesson.<newLine/> That might look like this:</paragraph>
-				<elml:term glossRef="definition" icon="important"/>
-				<paragraph> or another example without an icon</paragraph>
-				<elml:term glossRef="glossary" icon=""/>
-				<paragraph> An elearning lesson can also contain multimedia objects - images, flash, svg graphics, sound, video, etc. These objects are included with the element &lt;multimedia&gt;.</paragraph>
-				<link targetLabel="LOAlignments">Check the separate Learning Object about aligments!</link>
-				<paragraph> The element multimedia also allows to set the attribute icon or to have thumbnails. In this case a small image (url defined in the attribute thumbnail) is shown in the lesson and the original image opens in a new window when clicking on the small image. This is especially useful for bigger flash animations. Look at the following example.</paragraph>
-				<paragraph> An interaction included in the lesson (without thumbnail) could look like this.</paragraph>
-				<paragraph> With the element <elml:indexItem>multimedia</elml:indexItem> also sound can be included (this one is marked 'important').</paragraph>
-				
+			<elml:look label="LLook1" title="Praktisches Beispiel">
+				<paragraph>Abschnitt mit einem praktischen Beispiel (Look)</paragraph> 
 			</elml:look>
-			<elml:act label="labelAct1" metaSetUpInfo="nothing" title="Test">
-				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
+			<elml:act label="labelAct1" metaSetUpInfo="nothing" title="Konkrete Anwendung des Gelernten (act)">
+				<paragraph>Abschnitt mit einer konkreten Anwendung des Gelernten durch die Studierenden.</paragraph>
 			</elml:act>
 		</elml:learningObject>
-		<elml:learningObject label="LLearnOb2" navTitle="examples" title="This is the second learningObject - Just some more examples and explanations">
-			<elml:clarify label="LClarify2" title="Clarify Part of this Learning Object">
-				<paragraph> Let's create a table.</paragraph>
-				<table bibIDRef="b8" icon="important" label="labelTable1" legend="This is a table" title="Title of this table" units="pixels" width="400">
-					<tablerow>
-						<tableheading> Tags allowed within simple text </tableheading>
-					</tablerow>
-					<tablerow>
-						<tabledata> &lt;formatted&gt; </tabledata>
-						<tabledata>
-							<formatted style="bold">formatted 'bold'</formatted>
-							<newLine/>
-							<formatted style="crossedOut">formatted 'crossed Out'</formatted>
-							<newLine/>
-							<formatted style="italic">formatted 'italic'</formatted>
-							<newLine/>
-							<formatted style="lowerCase">formatted 'lower Case'</formatted>
-							<newLine/>
-							
-							<newLine/>
-							<formatted style="upperCase">formatted 'upper Case'</formatted>
-							<newLine/>
-							<formatted style="code">formatted 'code'</formatted>
-							<newLine/>
-							<formatted style="subscript">formatted 'subscript'</formatted>
-							<newLine/>
-							<formatted style="superscript">formatted 'superscript'</formatted>
-							<paragraph>Formatted elements can also be nested. For example: <formatted style="bold">This text is bold and <formatted style="subscript">subscript</formatted>.</formatted>
-</paragraph>
-						</tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata> &lt;newLine&gt; </tabledata>
-						<tabledata> &lt;newLine&gt; creates a line<newLine/>break. The attribute 'space' controls how big the distance to the next paragraph will be (values: short, long). </tabledata>
-					</tablerow>
-					<tablerow>
-						<tabledata> &lt;glossaryTerm&gt; </tabledata>
-						<tabledata> The tag &lt;term&gt; is used to make a reference to the <elml:term glossRef="glossary" icon=""/>. In this case the term 'glossary' should be explained in the glossary and the word itself is a link to the glossary. Do you know how a <elml:term glossRef="definition" icon=""/> is defined? </tabledata>
-					</tablerow>
-				</table>
-				<paragraph> In some cases you might not want to present all of your text to student from the beginning but the student has to click first to see additional information. Then you can use the element &lt;popup&gt;. This then look like that:</paragraph>
-				<elml:popup label="Lpopup" title="Title of this popup">This content is only shown when first clicking on the link.</elml:popup>
-				<paragraph>The element popup has an attribute icon which allows to define with which icon should be shown in front of it.</paragraph>
-			</elml:clarify>
-			<elml:look label="labelLook2" title="Look Part of this Learning Object">
-				<paragraph> This part describes the different uses of the element &lt;citation&gt;.<newLine/> 1.) It might be used to rewrite some writing of other authors in my own words but still reference the literature where the original writing comes from.<newLine/> … often there's written that XML would be easy to learn <elml:citation bibIDRef="b18"/>. Therefore, ...<newLine/> 2.) It can be used to state something exactly as it is written in the literature referenced. In this case the page number where the statement comes from is needed.<newLine/> ... it is stated that <elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn</elml:citation>. This means that ...<newLine/> 3.) If a statement is longer than a couple of words then we might wish to display it as separate paragraph.<newLine/> ... it is stated that </paragraph>
-				<elml:citation bibIDRef="b18" pageNr="15">XML is easy to learn.</elml:citation>
-				<paragraph>Sometimes you might want to state the name of the author in the text leading to the citation. In that case the citation reference should be the year of publication only. For example, Bleisch <elml:citation bibIDRef="b18" yearOnly="yes"/> states that XML would be easy to learn.</paragraph>
-				<paragraph>When you would like to make the same citation using the original words you need a trick (use the element formatted) to make it show as expected. The example: Bleisch <elml:citation bibIDRef="b18" pageNr="15" yearOnly="yes"/>states that ";".</paragraph>
-				<paragraph>If using the citation element as paragraph then it can contain the attribute icon set to remark, question or important. If the representation attribute is set to inline then the icon attribute is ignored. As almost every element this citation can contain the attribute label which allows to label it and to link to it from another place of the lesson.</paragraph>
-				<paragraph> Another special type of element is the &lt;link&gt; tag. Using it and its attributes appropriately gives several possibilities to link inside the lesson or to outside resourced.</paragraph>
-				<paragraph> 1.) A simple link to another website (presented inline): <link uri="http://www.fhbb.ch/geomatik">Abteilung Vermessung und Geoinformation, FHBB</link>
-					<newLine/> 2.) A simple link to another website (presented as paragraph): </paragraph>
-				<link uri="mailto:joel@fisler.ch">Joel Fisler</link>
-				<paragraph> 3.) A link to another lesson (presented inline, paragraph would also be possible): <link targetLesson="IntroToDBS">Lesson Introduction to Database Management Systems</link>
-					<newLine/> 4.) A link to a part within this lesson (presented as paragraph, inline would also be possible): </paragraph>
-				<link targetLabel="LColumn1">Link to the column above</link>
-				<paragraph> 5.) A link for downloading material (inline): <link legend="might take a while to download this" size="5.5 MB" type="mp3" uri="Remember_Me.mp3">Remember Me</link>
-					<newLine/> 6.) If a link is presented as paragraph then the attribute icon can be used to set one of the icons (important, remark or question).</paragraph>
-				<paragraph>7.) If you add more then one link one after another, a table with link/download material is created:</paragraph>
-				<link legend="a software archive" size="1GB" type="exe" uri="Remember_Me.mp3">Office 2009</link>
-				<link legend="Click on this link" uri="http://www.fhbb.ch/geomatik">FHBB Website</link>
-				<link legend="might take a while to download this" type="mp3" uri="Remember_Me.mp3">Remember Me</link>
-				<link legend="you need the acrobat viewer to view this" size="3 MB" type="pdf" uri="Remember_Me.mp3">How to hack eLML?</link>
-				<paragraph>Just a few thoughts, why an <elml:indexItem affiliatedTo="index" mainEntry="yes">index</elml:indexItem> would be a benefit for elml: It offers a means to structure a text, both for authors and learners: Authors would be attentive to their clearness of writing, i.e. it becomes obvious when they blur concepts over the text. On the other hand, learners see what they can expect from the text at a glance, and are guided through it. I agree that authors are probably not feeling happy to tag keywords - but it's up to them to use this feature.</paragraph>
-				<paragraph>Within the above paragraph the word index is set to be an indexItem. That means that it can be included in a final index where this words are referenced back to paragraphs where they show up. Main entries are shown in bold other such as here, <elml:indexItem affiliatedTo="index">indices</elml:indexItem>, are not marked up specially.</paragraph>
-			</elml:look>
-			<elml:act label="labelAct2" metaSetUpInfo="nothing" title="Act Part of this Learning Object">
-				<paragraph> For this lesson there is nothing to do but to study it carefully :-)</paragraph>
-			</elml:act>
-		</elml:learningObject>
-		<elml:selfAssessment label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Titel of this SelfAssessment">
-			<paragraph>This is a SelfAssessment part on unit level. Add textuell links to WebCT where the students can do a quiz or add flashs or other animations/interactions into this part. Also add an explanation what the student is expected to do here and how he should handle the animation/interaction. What the student is supposed to do if he doesn't understand the content and so on. The self assessment part might give the students the opportunity to figure out if they have understood the unit content. If not there should be some information where in the unit they find the relevant information to one of these self assessment part.</paragraph>
+		<elml:selfAssessment label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Uebungen (selfAssessment)">
+			<paragraph>Abschnitt mit Uebungen.</paragraph>
 		</elml:selfAssessment>
-		<elml:summary label="LSummaryx" title="Title of the summary">
-			<paragraph>This is the more or less brief summary of the unit. It should mention all relevant aspects of the unit (of all the learning objects) and maybe give some hints of related themes.</paragraph>
+		<elml:summary label="LSummaryx" title="Zusammenfassung (summary)">
+			<paragraph>Abschnitt mit einer Zusammenfassung des Gegenstandes.</paragraph>
 		</elml:summary>
 		<elml:furtherReading>
-			<elml:resItem bibIDRef="zehnderDB">Especially chapter 4 and 7, pages u-x and y-z</elml:resItem>
+			<elml:resItem bibIDRef="zehnderDB">Vor allem Kapitel 4 und 7, Seiten u-x and y-z</elml:resItem>
 		</elml:furtherReading>
 
 </unit>

@@ -1,9 +1,6 @@
 ==============
 ESCRIPT MODULE
 
-To add eScripting doctypes to a lenya 1.2. publication 
-1. cd to directory escript
+To add lcms doctypes to any lenya 1.2. publication 
+1. cd to directory lcms (you might be already there)
 2. type ant install -Dpub.prefix=yourPubName
-
-
-
