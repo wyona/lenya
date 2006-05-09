@@ -9,23 +9,5 @@
     <dc:rights>UZH</dc:rights>
 </lenya:meta>
 
-		<elml:book bibID="zehnderDB" author="ZEHNDER, C.A." publicationPlace="Zürich" publicationYear="1998" publisher="vdf Hochschulverlag AG" title="Informationssysteme und Datenbanken" edition="6"/>
-		<elml:contributionInBook bibID="b1" author="DITTRICH, K." editor="RECHENBERG, P., POMBERGER, G." pageNr="875-908" publicationPlace="Wien" publicationYear="1999" publisher="Carl Hanser Verlag" title="Informatik-Handbuch" titleOfContribution="Datenbanksysteme"/>
-		<elml:journalArticle bibID="b2" author="TIEFENBACH, P." journalTitle="Geomatik Schweiz, Geoinformation und Landmanagement" pageNr="344" publicationYear="2003" title="3D-Visualisierung Regio-Klima" volumeNr="6"/>
-		<elml:newspaperArticle bibID="b3" dayMonth="27. Januar" newspaperTitle="20 Minuten, Basel" pageNr="6" publicationYear="2004" title="Radioaktiver Müll im Alteisen entdeckt"/>
-		<elml:newspaperArticle bibID="b16" dayMonth="28. Januar" newspaperTitle="Non-existent Newspaper" pageNr="10" publicationYear="2004" title="Some Title" author="BLEISCH, S."/>
-		<elml:map bibID="b5" author="INTERGRAPH" publicationYear="2001" publicationPlace="Zürich" publisher="Orell Füssli, Kartographie AG" scale="1:350'000" title="Schweizerkarte"/>
-		<elml:conferencePaper bibID="b6" author="CANTONI, R., VASSENA, G., LANZI, C." datePlace="September, 1-2, 2002, Corfu, Greece" editor="W. BOEHLER" pageNr="115" proceedingsTitle="Proceedings of the CIPA WG 6 International Workshop on Scanning for Cultural Heritage Recording" titleOfContribution="Digital Photogrammetry and Laser Scanning in Surveying the 'Nymphaea' in Pompeii" publicationPlace="Thessaloniki" publicationYear="2002" publisher="Publishing Ziti"/>
-		<elml:publicationCorporateBody bibID="b7" author="UNESCO" publicationPlace="Paris" publicationYear="1993" publisher="Unesco" reportNr="PGI-93/WS/22" title="General information programme and UNISIST"/>
-		<elml:thesis bibID="b8" author="ANNEN, A." designation="Thesis" institution="Fachhochschule beider Basel FHBB, Muttenz" publicationYear="2003" published="no" title="Geodatenmodellierung und -transfer – modellbasierte Datenkonvertierung zwischen INTERLIS-2 und GML-3" type="Diploma"/>
-		<elml:patent bibID="b9" designation="European patent application 0021165 A1. 1981-01-07" author="PHILIP MORRIS INC." publicationYear="1981" title="Optical perforating apparatus and system"/>
-		<elml:videoFilmBroadcast bibID="b10" designation="Video" author="Orson Welles" productionOrganisation="Harper Videos" productionPlace="London" publicationYear="1948" title="Birds in the Garden"/>
-		<elml:websites bibID="b11" accessedDate="27 January 2004" author="ANON" publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB, Abteilung VGI" title="Abteilung Vermessung und Geoinformation" url="http://www.fhbb.ch/geomatik" edition="5"/>
-		<elml:eJournals bibID="b12" accessedDate="27 January 2004" author="KLIGER, R., JOHANSSON, M., PERSTORPER, M., JOHANSSON, G." journalTitle="European Journal of Wood and Wood products" title="Distortion of Norway spruce timber Part 3: Modelling bow and spring" publicationYear="2003" url="http://www.metla.fi/info/vlib/Forestry/Category/Publications/Journals/" volumeNr="61 (4)"/>
-		<elml:mailLists bibID="b13" accessedDate="17 June 2000" author="BRACK, E.V." dayMonthYear="2 May 2000" discussionList="Lis-link" subject="Re: Computing short courses" url="mailbase@mailbase.ac.uk"/>
-		<elml:personalMail bibID="b14" author="BLEISCH, S." dayMonthYear="27 January 2004" emailRecipient="fisler@geo.unizh.ch" emailSender="s.bleisch@fhbb.ch" published="no" recipient="J. Fisler" subject="Bibliographic Referencing"/>
-		<elml:cdRom bibID="b15" author="HAWKING, S.W." publicationYear="1994" publisher="Crunch Media" title="A brief history of time: An interactive adventure" accessedDate="28 January 2004" edition="4" publicationPlace="Hamburg" supplier="BGV"/>
-		<elml:websites bibID="b17" accessedDate="28 January 2004" publicationPlace="Virginia, USA" author="KELLOGG, M." title="WordReference.com" url="http://www.wordreference.com/"/>
-		<elml:book bibID="b18" author="BLEISCH, S." publicationPlace="Muttenz" publicationYear="2004" publisher="FHBB" title="XML - An Overwiev"/>
-
+		<elml:book bibID="bidId" author="Anonymous, A." publicationPlace="Zuerich" publicationYear="2000" publisher="Beispielverlag" title="Beispieltitel" edition="1"/>
 </bibliography>

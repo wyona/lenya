@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="eLML Lektion" label="Label"><lenya:meta>
-      <dc:title>eLML Lektion</dc:title>
+<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Lektion" label="Label"><lenya:meta>
+      <dc:title>Lektion</dc:title>
       <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
       <dc:subject/>
       <dc:publisher>UZH</dc:publisher>
@@ -18,10 +18,10 @@
   </elml:metadata>
   -->
    <elml:entry xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" label="LEntryLesson" title="Einleitung" navTitle="Intro">
-                <paragraph>Mit eLML (eLearning Markup Language) lassen sich Lerninhalte im UniCMS erfassen und verwalten. Einmal erfasst lassen sich Lektionen in ein LMS (Learning Management System, z.B. OLAT) exportierten. Ausserhalb von UniCMS erfasste Lektionen koennen via Import-Funktion (Menu "Datei") einfach ins UniCMS integriert werden. Bausteine fuer die Lektion finden sich unter dem Menupunkt "File". </paragraph>
+                <paragraph>Paragraph</paragraph>
         </elml:entry>
         <elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-          <elml:lObjective role="student">Ein Lerziel.</elml:lObjective>
-          <elml:lObjective role="student">Ein zweites Lernziel.</elml:lObjective>
+          <elml:lObjective role="student">Lerziel</elml:lObjective>
+          <elml:lObjective role="student">Lernziel</elml:lObjective>
         </elml:goals>
 </lesson>

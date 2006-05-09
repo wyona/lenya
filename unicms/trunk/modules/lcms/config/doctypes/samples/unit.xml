@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://unizh.ch/doctypes/elml/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://unizh.ch/doctypes/elml/1.0" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="Lerneinheit" lenya:dummy="FIXME:keepNamespace" title="Lerneinheit (Unit)">
 <lenya:meta>
-    <dc:title xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">unit</dc:title>
-    <dc:description xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"> </dc:description>
-<dc:creator xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">admin1 (Administrator)</dc:creator>
+    <dc:title>unit</dc:title>
+    <dc:description> </dc:description>
+<dc:creator>admin1 (Administrator)</dc:creator>
     <dc:subject/>
-    <dc:publisher xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Universität Zürich</dc:publisher>
-    <dcterms:created xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Thu Mar 16 15:46:41 CET 2006</dcterms:created>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Thu Mar 16 15:46:41 CET 2006</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
-    <dc:language xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">de</dc:language>
-    <dc:rights xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">Universität Zürich</dc:rights>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
 </lenya:meta>
 
 <elml:entry label="Lunitentry" navTitle="Einleitung" title="Einleitung">
-			<paragraph>Die Lerneinheit (Unit) ist der zentrale Baustein einer Lektion. Eine Lektion kann mehrere Lerneinheiten enthalten. Diese wiederum beinhalten ein oder mehrere zu vermittelnde Sachverhalte (learning objects).</paragraph>
+			<paragraph>Paragraph</paragraph>
 		</elml:entry>
 		<elml:goals>
-	       	<elml:lObjective role="tutor">Erstes Lernziel dieser Lerneinheit.</elml:lObjective>
-		<elml:lObjective role="student">Zweites Lernziel dieser Lerneinheit</elml:lObjective>
+	       	<elml:lObjective role="tutor">Lernziel</elml:lObjective>
+		<elml:lObjective role="student">Lernziel</elml:lObjective>
 		</elml:goals>
-		<elml:learningObject label="LLearnOb1" navTitle="paragraph and formatting" title="Erster Gegenstand (learning object)">
-			<elml:clarify label="LClarify1" title="Erklaerung">
-				<paragraph>Abschnitt mit einer einleitenden Erklaerung des Sachverhalts (Clarify).</paragraph>
-				<paragraph>Weiterer Abschnitt mit der einleitenden Erlklaerung des Sachverhalts.</paragraph>
+		<elml:learningObject label="LLearnOb1" navTitle="paragraph and formatting" title="Gegenstand (Learning Object)">
+			<elml:clarify label="LClarify1" title="Begriffsklaerung (Clarify)">
+				<paragraph>Paragraph</paragraph>
 			</elml:clarify>
-			<elml:look label="LLook1" title="Praktisches Beispiel">
-				<paragraph>Abschnitt mit einem praktischen Beispiel (Look)</paragraph> 
+			<elml:look label="LLook1" title="Beispiel (Look)">
+				<paragraph>Paragraph</paragraph> 
 			</elml:look>
-			<elml:act label="labelAct1" metaSetUpInfo="nothing" title="Konkrete Anwendung des Gelernten (act)">
-				<paragraph>Abschnitt mit einer konkreten Anwendung des Gelernten durch die Studierenden.</paragraph>
+			<elml:act label="labelAct1" metaSetUpInfo="nothing" title="Anwendung (Act)">
+				<paragraph>Paragraph</paragraph>
 			</elml:act>
 		</elml:learningObject>
-		<elml:selfAssessment label="LselfAssess4" metaSetUpInfo="Here you can describe (in plain text) what the tutor who is using this lesson has to do to make the lesson useable. There might be written that the tutor has to setup a quiz in WebCT or that they have to look if a certain website is still online (if not they have to find another one or write an alternative link into the course information :-)). This tag will be queryable in some or the other way so that the tutor creating a course out of different lessons doesn't need to browse through all lessons to find what is needed but only gets a list of all 'metaSetUpInfo'. This tag is mandatory. If there is no need to write something into it then write 'none'." title="Uebungen (selfAssessment)">
-			<paragraph>Abschnitt mit Uebungen.</paragraph>
+		<elml:selfAssessment label="LselfAssess4" metaSetUpInfo="" title="Uebungen (Self Assessment)">
+			<paragraph>Paragraph</paragraph>
 		</elml:selfAssessment>
-		<elml:summary label="LSummaryx" title="Zusammenfassung (summary)">
-			<paragraph>Abschnitt mit einer Zusammenfassung des Gegenstandes.</paragraph>
+		<elml:summary label="LSummaryx" title="Zusammenfassung (Summary)">
+			<paragraph>Paragraph</paragraph>
 		</elml:summary>
-		<elml:furtherReading>
-			<elml:resItem bibIDRef="zehnderDB">Vor allem Kapitel 4 und 7, Seiten u-x and y-z</elml:resItem>
-		</elml:furtherReading>
-
 </unit>
