@@ -26,11 +26,17 @@
   <lenya:description>sitetreeextended Module to pass the ressourcetype of 
   every node to the generated navigation menu tree. Allows for example to 
   display a small icon in front of specific ressource types in the left menu.
+  See a screenshot: /resources/example_defaultpub/Screenshot-sitetreeextended.png
   </lenya:description>
+  <lenya:author>Wyona Inc.</lenya:author>
   <lenya:install>
-    -modify in your pub/sitemap.xmap: map:part src="cocoon://modules/sitetreeextended/{2}/{3}/menu/{5}.xml"/
-    -copy resources/images in your pub/resources/shared/images
-    -adapt your page.css (e.g. to render .folder)
+    -register this module in your pub/config/publication.xconf  
+    -modify in your pub/sitemap.xmap: 
+     map:part src="cocoon://modules/sitetreeextended/{2}/{3}/menu/{5}.xml"/
+    -copy resources/example_defaultpub/images in your pub/resources/shared/images
+    -adapt your page.css (e.g. to render .xhtml). there is an example in 
+     resources/example_defaultpub/page.css that you can copy in the default pub 
+     (pub/resources/shared/css).
   </lenya:install>
   <lenya:depends>
       <lenya:module>sitetree</lenya:module>
