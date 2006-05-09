@@ -46,6 +46,16 @@
           </td>
         </tr>
         <tr>
+          <td>Add users:</td>
+          <td>
+            <form method="GET" id="form-add_user">
+              <input type="hidden" name="lenya.usecase" value="admin.addNewsletterUsers" />
+              <input type="hidden" name="newsletter" value="${usecase.getParameter('newsletter')}" />
+              <input type="submit" name="submit" value="Newsletter Users"/>
+            </form>
+          </td>
+        </tr>
+        <tr>
           <td>
             <br/>
           </td>
