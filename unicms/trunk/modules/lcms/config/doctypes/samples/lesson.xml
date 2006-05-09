@@ -21,7 +21,7 @@
                 <paragraph>Paragraph</paragraph>
         </elml:entry>
         <elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-          <elml:lObjective role="student">Lerziel</elml:lObjective>
+          <elml:lObjective role="student">Lernziel</elml:lObjective>
           <elml:lObjective role="student">Lernziel</elml:lObjective>
         </elml:goals>
 </lesson>
