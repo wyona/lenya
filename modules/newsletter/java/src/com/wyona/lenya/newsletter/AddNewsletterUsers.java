@@ -9,7 +9,7 @@ import com.wyona.lenya.rmi.RMIException;
 import com.wyona.lenya.rmi.RMIProvider;
 
 /**
- * Usecase to add one user to a newsletter repository
+ * Usecase to add multiple users via csv to a newsletter repository
  * 
  * @author Gregor Imboden
  */
