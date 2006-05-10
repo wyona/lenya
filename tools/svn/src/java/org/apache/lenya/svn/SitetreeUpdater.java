@@ -161,7 +161,11 @@ public class SitetreeUpdater {
           Transformer xformer = TransformerFactory.newInstance().newTransformer();
           xformer.transform(source, result);
       } catch (TransformerConfigurationException e) {
+    	  System.err.println("Could not write to sitetree.xml");
+    	  System.exit(1);
       } catch (TransformerException e) {
+    	  System.err.println("Could not write to sitetree.xml");
+    	  System.exit(1);
       }
   }
 }
