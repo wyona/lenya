@@ -20,6 +20,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.tmatesoft.svn.core.SVNErrorCode;
+import org.tmatesoft.svn.core.SVNErrorMessage;
+import org.tmatesoft.svn.core.SVNException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,16 +35,25 @@ public class SitetreeUpdater {
   static Document document;
   static boolean debug;
   
-  /** receive sitetree.xml location, path of new file, title of new file updateSitetree */
-  public static void updateSitetree (String pathToSitetree, ArrayList newNodes, boolean debug_)
+  /** receive sitetree.xml location, path of new file, title of new file updateSitetree 
+   * @throws SVNException */
+  public static void updateSitetree (String pathToSitetree, ArrayList newNodes, boolean debug_) throws SVNException
 	  {
 	      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
           debug = debug_;
           
 	      try {
 	    	  
+              File sitetree = new File(pathToSitetree);              
+              if (!sitetree.exists()) {
+                SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, 
+                    "Could not find sitetree.xml, make sure your repositories point" +
+                    "to the authoring of a Lenya repository");
+                throw new SVNException(err);
+              }
+              
 	    	  DocumentBuilder builder = factory.newDocumentBuilder();
-	    	  document = builder.parse( new File(pathToSitetree) );
+	    	  document = builder.parse(sitetree);
 
               // sort by lowest depth first
               Collections.sort(newNodes, new DepthComparator());
