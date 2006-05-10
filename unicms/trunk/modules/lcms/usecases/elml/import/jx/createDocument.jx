@@ -14,6 +14,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<jx:template xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" xmlns="http://unizh.ch/doctypes/elml/1.0">
+<jx:template xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" xmlns="http://www.elml.ch">
   #{dom}
 </jx:template>

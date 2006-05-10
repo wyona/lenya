@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
-  xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
-  xmlns="http://unizh.ch/doctypes/elml/1.0" 
+  xmlns:elml="http://www.elml.ch"
+  xmlns="http://www.elml.ch" 
   xmlns:dcterms="http://purl.org/dc/terms/" 
   xmlns:dc="http://purl.org/dc/elements/1.1/" 
 >

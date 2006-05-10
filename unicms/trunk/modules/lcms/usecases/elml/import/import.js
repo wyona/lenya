@@ -259,7 +259,7 @@ function createAssets(zip, dom, doc, rewriteLinks) {
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
   var assetNodes = dom.getElementsByTagName("multimedia");
-  var assetNodesNS = dom.getElementsByTagNameNS("http://unizh.ch/doctypes/elml/1.0", "multimedia");
+  var assetNodesNS = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
   
   for (var i = 0; i < assetNodes.length; i++) {
     var node = assetNodes.item(i);

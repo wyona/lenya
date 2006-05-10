@@ -3,9 +3,9 @@
 
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns="http://unizh.ch/doctypes/elml/1.0"
+    xmlns="http://www.elml.ch"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+    xmlns:elml="http://www.elml.ch"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 >
 

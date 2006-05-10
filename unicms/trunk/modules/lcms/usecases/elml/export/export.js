@@ -59,7 +59,7 @@ function exportELML(doc) {
   var resMgr = new ResourcesManager(doc);
   var assetsPath = resMgr.getPath().getAbsolutePath();
 
-  var assetNodes = dom.getElementsByTagNameNS("http://unizh.ch/doctypes/elml/1.0", "multimedia");
+  var assetNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
 
   for (var i = 0; i < assetNodes.length; i++) {
     var assetNode = assetNodes.item(i);
@@ -80,7 +80,7 @@ function exportELML(doc) {
     var resMgr = new ResourcesManager(children.get(i));
     var assetsPath = resMgr.getPath().getAbsolutePath();
 
-    var assetNodes = partDOM.getElementsByTagNameNS("http://unizh.ch/doctypes/elml/1.0", "multimedia");
+    var assetNodes = partDOM.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
     cocoon.log.error("Node count: " + assetNodes.length);
   
     for (var j = 0; j < assetNodes.length; j++) {

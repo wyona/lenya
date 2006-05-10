@@ -222,7 +222,7 @@ function putLesson() {
         cocoon.log.error("Building document from fragment");
         var frgDOM = builder.newDocument();
         var clonedNode = frgDOM.importNode(node, true);
-        // var ns = "http://unizh.ch/doctypes/elml/1.0";
+        // var ns = "http://www.elml.ch";
         // clonedNode.setAttribute("xmlns", ns);
         frgDOM.appendChild(clonedNode);
         fragments.add(frgDOM);

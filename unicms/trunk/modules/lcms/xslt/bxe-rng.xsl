@@ -10,9 +10,9 @@
 
 
 <xsl:template match="rng:grammar">
-  <grammar ns="http://unizh.ch/doctypes/elml/1.0"
+  <grammar ns="http://www.elml.ch"
          xmlns="http://relaxng.org/ns/structure/1.0"
-         xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+         xmlns:elml="http://www.elml.ch"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"

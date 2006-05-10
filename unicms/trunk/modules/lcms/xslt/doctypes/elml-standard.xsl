@@ -12,7 +12,7 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
-  xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+  xmlns:elml="http://www.elml.ch"
   >
   
   <xsl:param name="root"/>

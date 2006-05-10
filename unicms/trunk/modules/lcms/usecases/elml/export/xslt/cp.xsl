@@ -10,7 +10,7 @@
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
-  xmlns:elml="http://unizh.ch/doctypes/elml/1.0"
+  xmlns:elml="http://www.elml.ch"
   >
 
   <xsl:param name="contextprefix"/>
