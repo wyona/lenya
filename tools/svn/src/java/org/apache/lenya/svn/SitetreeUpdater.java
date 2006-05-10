@@ -59,14 +59,17 @@ public class SitetreeUpdater {
 	         if (sxe.getException() != null)
 	             x = sxe.getException();
 	         x.printStackTrace();
+	         System.exit(1);
 
 	      } catch (ParserConfigurationException pce) {
 	         // Parser with specified options can't be built
 	         pce.printStackTrace();
+	         System.exit(1);
 
 	      } catch (IOException ioe) {
 	         // I/O error
 	         ioe.printStackTrace();
+	         System.exit(1);
 	      }
 	  } 
 
