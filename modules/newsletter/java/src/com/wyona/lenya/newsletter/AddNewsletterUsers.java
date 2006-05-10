@@ -37,33 +37,38 @@ public class AddNewsletterUsers extends AbstractUsecase {
         String[] users = this.getParameterAsString(USERS_PARAM_NAME).split(";");
 
         try {
-            rmiProvider = (RMIProvider) this.manager.lookup(RMIProvider.ROLE);
-            this.newsletterManager = (NewsletterManager) rmiProvider
-                    .getRMIObject(NEWSLETTER_MANAGER_NAME);
-            String newsletter = this
-                    .getParameterAsString(NEWSLETTER_PARAM_NAME);
-            if (newsletter == null) {
-                this.addErrorMessage("No newsletter repository specified");
-            } else if (!this.newsletterManager.setRepository(newsletter)) {
-                this
-                        .addErrorMessage("No newsletter repository found with that name");
+            if (!this.getParameterAsString(USERS_PARAM_NAME).matches("([^,;]*,[^;,]*;)*")) {
+                this.addErrorMessage("The provided data does not seem to be valid csv. Please use at least one time name,name@organisation.org;");
             }
+            else {
+                rmiProvider = (RMIProvider) this.manager.lookup(RMIProvider.ROLE);
+                this.newsletterManager = (NewsletterManager) rmiProvider
+                        .getRMIObject(NEWSLETTER_MANAGER_NAME);
+                String newsletter = this
+                        .getParameterAsString(NEWSLETTER_PARAM_NAME);
+                if (newsletter == null) {
+                    this.addErrorMessage("No newsletter repository specified");
+                } else if (!this.newsletterManager.setRepository(newsletter)) {
+                    this
+                            .addErrorMessage("No newsletter repository found with that name");
+                }
 
-            for (int i = 0; i < users.length; i++) {
+                for (int i = 0; i < users.length; i++) {
                 String[] personalnemail = users[i].split(",");
-                String personal = personalnemail[0].trim();
-                String emailAddress = personalnemail[1].trim();
-                if (personal == null || personal.length() == 0) {
-                    String[] personalmail = emailAddress.split("@");
-                    personal = personalmail[0];
-                }
-                if (!isValidEmailAddress(emailAddress)) {
-                    this.addErrorMessage("Invalid email address");
-                }
-                if (!this.hasErrors()) {
-                    if (!this.newsletterManager.addUser(emailAddress, personal)) {
-                        this.addErrorMessage("Newsletter User already exists: "
-                                + emailAddress);
+                    String personal = personalnemail[0].trim();
+                    String emailAddress = personalnemail[1].trim();
+                    if (personal == null || personal.length() == 0) {
+                        String[] personalmail = emailAddress.split("@");
+                        personal = personalmail[0];
+                    }
+                    if (!isValidEmailAddress(emailAddress)) {
+                        this.addErrorMessage("Invalid email address");
+                    }
+                    if (!this.hasErrors()) {
+                        if (!this.newsletterManager.addUser(emailAddress, personal)) {
+                                this.addErrorMessage("Newsletter User already exists: "
+                                        + emailAddress);
+                        }
                     }
                 }
             }
