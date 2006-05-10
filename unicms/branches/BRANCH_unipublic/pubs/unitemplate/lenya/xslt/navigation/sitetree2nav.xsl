@@ -15,24 +15,26 @@
   limitations under the License.
 -->
 
-<!-- $Id: sitetree2nav.xsl,v 1.2 2005/01/07 15:15:26 jann Exp $ -->
+<!-- $Id: sitetree2nav.xsl 158907 2005-03-24 10:19:14Z michi $ -->
 
 <xsl:stylesheet
     version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tree="http://apache.org/cocoon/lenya/sitetree/1.0"
     xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
     exclude-result-prefixes="tree"
     >
 
 <xsl:param name="url"/>
+<xsl:param name="root"/>
 <xsl:param name="chosenlanguage"/>
 <xsl:param name="defaultlanguage"/>
-<xsl:param name="root"/>
     
-<!--
 <xsl:variable name="path-to-context"><xsl:call-template name="create-path-to-context"/></xsl:variable>
-<xsl:variable name="root" select="$path-to-context"/>
+<!--
+  <xsl:variable name="root" select="$path-to-context"/>
+-->
   
 <xsl:template name="create-path-to-context">
   <xsl:param name="local-url" select="$url"/>
@@ -42,7 +44,23 @@
     </xsl:call-template>
   </xsl:if>
 </xsl:template>
--->
+
+<xsl:template match="tree:fragment">
+  <nav:fragment>
+    <xsl:copy-of select="@*"/> 
+    <xsl:choose>
+      <xsl:when test="@base">
+         <xsl:apply-templates>
+          <xsl:with-param name="previous-url" select="concat(substring-after(@base, '/'), '/')"/>
+        </xsl:apply-templates>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </nav:fragment>
+</xsl:template>
+
 
 <xsl:template match="tree:site">
 
@@ -66,6 +84,14 @@ the default language.
   </xsl:choose>
 </xsl:template>
 
+<xsl:template name="other-languages">
+  <xsl:attribute name="other-languages">
+    <xsl:for-each select="tree:label[@xml:lang != $chosenlanguage]/@xml:lang">
+      <xsl:value-of select="."/>
+      <xsl:if test="position() != last()">,</xsl:if>
+    </xsl:for-each>
+  </xsl:attribute>
+</xsl:template>
 
 
 <!--
@@ -85,6 +111,7 @@ Apply nodes recursively
     <xsl:copy-of select="@id"/>
     <xsl:copy-of select="@visibleinnav"/>
     <xsl:copy-of select="@protected"/>
+    <xsl:copy-of select="@folder"/>
   
     <!-- basic url - for all nodes -->
   
@@ -99,7 +126,9 @@ Apply nodes recursively
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>  
-    
+
+    <xsl:call-template name="other-languages"/>
+
     <xsl:variable name="language-suffix">
       <xsl:text>_</xsl:text><xsl:value-of select="$existinglanguage"/>
     </xsl:variable>
@@ -187,11 +216,10 @@ Apply nodes recursively
 
 <xsl:template match="tree:label">
   <nav:label>
-  	<xsl:copy-of select="@*"/>
+    <xsl:copy-of select="@*"/>
     <xsl:apply-templates/>
   </nav:label>
 </xsl:template>
-
 
 <xsl:template match="@*|node()" priority="-1">
   <xsl:copy>
