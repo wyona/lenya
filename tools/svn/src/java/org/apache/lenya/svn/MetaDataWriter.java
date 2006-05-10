@@ -14,7 +14,7 @@ public class MetaDataWriter {
   String creator = "lenya";
   String subject = "";
   String description = "";
-  String publisher = "University of Sheffield";
+  String publisher = "SETME";
   String date = "2006-01-31";
 
   /**
@@ -35,8 +35,10 @@ public class MetaDataWriter {
     }
   }
 
-  public void addMetaFile(File file_, String ressourceType_) {
+  public void addMetaFile(File file_, String ressourceType_, String title_, String publisher_) {
     this.resourceType=  removeNonAlphanumeric(ressourceType_);
+    this.title=  removeNonAlphanumeric(title_);
+    this.publisher=  removeNonAlphanumeric(publisher_);
     addMetaFile(file_);
   }
 

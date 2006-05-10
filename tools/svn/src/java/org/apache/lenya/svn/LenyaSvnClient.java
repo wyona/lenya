@@ -283,11 +283,32 @@ public class LenyaSvnClient {
       } catch (Exception e) {
           System.err.println(e.getMessage());
       }
+      
+      // Ask user for title
+
+      String title = "Title";
+      System.out.println("*************************************************************");
+      System.out.println("Please enter the title for this file. The default value is: "+ title); 
+      System.out.print(PROP_EXIT_OVERRIDE);
+      try {
+          String value = br.readLine();
+          if (value.equals("y")) {
+              System.out.println("Please define the new title");
+              title=br.readLine();
+          } else {
+              System.out.println("Using default value " + title);
+          }
+      } catch (Exception e) {
+          System.err.println(e.getMessage());
+      }
+      
+      // Get default publisher from config
+      String publisher = config.getString("lenyaSvn.defaultPublisher");
 
       // create metadata file
       File meta = new File (valueNode.getPath() + ".meta");
       MetaDataWriter metadatawriter = new MetaDataWriter();
-      metadatawriter.addMetaFile(meta, ressourceType);      
+      metadatawriter.addMetaFile(meta, ressourceType, title, publisher);      
       
       // add meta file to repository
       try {
