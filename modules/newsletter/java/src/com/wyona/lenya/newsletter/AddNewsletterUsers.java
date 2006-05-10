@@ -31,6 +31,8 @@ public class AddNewsletterUsers extends AbstractUsecase {
 
     protected void doExecute() throws Exception {
         super.doExecute();
+        
+        this.setExitParameter(NEWSLETTER_PARAM_NAME, this.getParameterAsString(NEWSLETTER_PARAM_NAME));
         RMIProvider rmiProvider = null;
         String[] users = this.getParameterAsString(USERS_PARAM_NAME).split(";");
 

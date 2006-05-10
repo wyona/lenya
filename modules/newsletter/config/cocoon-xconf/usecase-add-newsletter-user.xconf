@@ -6,7 +6,7 @@
       <view template="modules/newsletter/usecases/admin/addNewsletterUser.jx" menu="true">
         <tab group="admin" name="newsletters"/>
       </view>
-      <exit usecase="admin.newsletters"/>
+      <exit usecase="admin.newsletter"/>
     </component-instance>
 
   </xconf>

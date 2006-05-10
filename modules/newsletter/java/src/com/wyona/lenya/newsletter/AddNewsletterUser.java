@@ -27,7 +27,8 @@ public class AddNewsletterUser extends AbstractUsecase {
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doExecute()
      */
     protected void doExecute() throws Exception {
-        super.doExecute();       
+        super.doExecute();     
+        this.setExitParameter(NEWSLETTER_PARAM_NAME, this.getParameterAsString(NEWSLETTER_PARAM_NAME));
         RMIProvider rmiProvider = null;        
         try {
             rmiProvider = (RMIProvider) this.manager.lookup(RMIProvider.ROLE);
