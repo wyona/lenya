@@ -108,26 +108,8 @@ public class LenyaSvnClient {
       // Credentials to use for authentication.
       String userName = config.getString("lenyaSvn.userName");
       String userPassword = config.getString("lenyaSvn.userPassword");
-      /*/ Do we want to override this?
-      System.out.println(PROP_EXIT_MES);
-      System.out.println("for the Credentials to use for authentication.\ncurrent value:\nuserName: "+userName+"\nuserPassword "+userPassword);
-      System.out.print(PROP_EXIT_OVERRIDE);
-      try {
-          String value = br.readLine();
-          if (value.equals("y")) {
-              System.out.println("Please define a new userName");
-              userName=br.readLine();
-              System.out.println("Please define a new userPassword");
-              userPassword=br.readLine();
-          } else {
-              System.out.println("Local configuration has NOT been overwritten.");
-          }
-      } catch (Exception e) {
-          System.err.println(e.getMessage());
-      }*/
       
       localRep=config.getString("lenyaSvn.localRep");
-
       ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(userName, userPassword);
       repository.setAuthenticationManager(authManager);
 
@@ -174,7 +156,7 @@ public class LenyaSvnClient {
         
         HashMap elementMap= statusHandler.getBeans();
         if (elementMap.size() == 0) {
-          System.out.println("No local changes, the script will terminate");
+          System.out.println("\nNo local changes, the script will terminate");
           return;
         }
         if(debug) System.out.println("Modified resources count "+elementMap.size());
@@ -208,7 +190,6 @@ public class LenyaSvnClient {
           
           // File added
           else if (fileStatus.equals("A") && !(isDirectory)) {
-            checkFileConsistency(valueNode);
             commitAddedFile(valueNode, br, localRep, addedNodeToSitetree);
           } 
           
@@ -259,67 +240,78 @@ public class LenyaSvnClient {
     }
 
     private static void commitAddedFile(StatusBean valueNode, BufferedReader br, 
-        String localRep, ArrayList addedNodeToSitetree) {
-      
+        String localRep, ArrayList addedNodeToSitetree) throws SVNException {
+
       String relativeNodePath = valueNode.getPath().replaceFirst(localRep,"");
       if(debug) System.out.println("relativePath "+relativeNodePath);
+      
+      String filename = valueNode.getFile().getName();
+      
+      if (filename.equals("index_en.xml")) {
+        
+        File meta = new File (valueNode.getPath() + ".meta");
 
-      // Ask user for ressource type
-
-      String ressourceType = "xhtml";
-      System.out.println("*************************************************************");
-      System.out.println("Adding file " + 
-          relativeNodePath);
-      System.out.println("Please enter the ressource type for this file. The default value is: "+ ressourceType); 
-      System.out.print(PROP_EXIT_OVERRIDE);
-      try {
-          String value = br.readLine();
-          if (value.equals("y")) {
+        if (!meta.exists()) {
+          
+          // Ask user for ressource type
+          String ressourceType = "xhtml";
+          System.out.println("*************************************************************");
+          System.out.println("Adding file " + 
+              relativeNodePath);
+          System.out.println("Please enter the ressource type for this file. The default value is: "+ ressourceType); 
+          System.out.print(PROP_EXIT_OVERRIDE);
+          try {
+            String value = br.readLine();
+            if (value.equals("y")) {
               System.out.println("Please define the new ressource type");
               ressourceType=br.readLine();
-          } else {
+            } else {
               System.out.println("Using default value " + ressourceType);
+            }
+          } catch (Exception e) {
+            System.err.println(e.getMessage());
           }
-      } catch (Exception e) {
-          System.err.println(e.getMessage());
-      }
-      
-      // Ask user for title
-
-      String title = "Title";
-      System.out.println("*************************************************************");
-      System.out.println("Please enter the title for this file. The default value is: "+ title); 
-      System.out.print(PROP_EXIT_OVERRIDE);
-      try {
-          String value = br.readLine();
-          if (value.equals("y")) {
+          
+          // Ask user for title
+          String title = "Title";
+          System.out.println("*************************************************************");
+          System.out.println("Please enter the title for this file. The default value is: "+ title); 
+          System.out.print(PROP_EXIT_OVERRIDE);
+          try {
+            String value = br.readLine();
+            if (value.equals("y")) {
               System.out.println("Please define the new title");
               title=br.readLine();
-          } else {
+            } else {
               System.out.println("Using default value " + title);
+            }
+          } catch (Exception e) {
+            System.err.println(e.getMessage());
           }
-      } catch (Exception e) {
-          System.err.println(e.getMessage());
-      }
-      
-      // Get default publisher from config
-      String publisher = config.getString("lenyaSvn.defaultPublisher");
+          
+          // Get default publisher from config
+          String publisher = config.getString("lenyaSvn.defaultPublisher");
 
-      // create metadata file
-      File meta = new File (valueNode.getPath() + ".meta");
-      MetaDataWriter metadatawriter = new MetaDataWriter();
-      metadatawriter.addMetaFile(meta, ressourceType, title, publisher);      
+          // create metadata file
+          MetaDataWriter metadatawriter = new MetaDataWriter();
+          metadatawriter.addMetaFile(meta, ressourceType, title, publisher);      
+          
+          // add meta file to repository
+          addEntry(meta);
+        }
+  
+        addedNodeToSitetree.add(relativeNodePath);
+  
+      }      
+      else if (filename.equals("index_en.xml.meta")) {
+        // meta file already exists
       
-      // add meta file to repository
-      try {
-        addEntry(meta);
-      } catch (SVNException e) {
-        System.err.println("ERROR: could not add the file " +
-            meta.getAbsolutePath() + " to the repository, or it " +
-                    "already exists. Please contact your administrator" + e.getErrorMessage());
-      }
-
-      addedNodeToSitetree.add(relativeNodePath);
+      } else {
+        SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, 
+            "Cannot commit local changes: the file "+ valueNode.getPath() + 
+        "\n has no valid name, only index_en.xml or index_en.xml.meta accepted");
+        throw new SVNException(err);
+      }      
     }
     
     /** Primitive test to ensure that the dir has at least a child called index_en.xml
@@ -338,20 +330,6 @@ public class LenyaSvnClient {
           valueNode.getPath() + " must contain a file named index_en.xml");
       throw new SVNException(err);
     }
-
-    /** Primitive test to ensure that the file has the right name 
-     * @throws SVNException 
-     */
-    private static void checkFileConsistency(StatusBean valueNode) throws SVNException {
-      
-      if (!valueNode.getFile().getName().equals("index_en.xml")) {
-        SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, 
-            "Cannot commit local changes: the file "+ valueNode.getPath() + 
-            "\n has no valid name, only index_en.xml accepted");
-        throw new SVNException(err);
-      }      
-    }
-   
     
     //*******************************************************
     // methods copied from WorkingCopy.java
