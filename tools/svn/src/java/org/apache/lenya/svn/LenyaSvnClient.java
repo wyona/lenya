@@ -200,6 +200,11 @@ public class LenyaSvnClient {
           if (fileStatus.equals("M")) {
             // do nothing
           } 
+
+          // File not added yet
+          else if (fileStatus.equals("?")) {
+            //do nothing
+          } 
           
           // File added
           else if (fileStatus.equals("A") && !(isDirectory)) {
@@ -211,9 +216,12 @@ public class LenyaSvnClient {
           else if (fileStatus.equals("A") && isDirectory) {
             checkDirConsistency(valueNode);
           } 
-          
-          else {
-            System.out.println("status \"" + fileStatus + "\" for file " + keyNode + " not supported");
+
+          else {            
+            SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, 
+                "Operation " + fileStatus  + " not supported (file " + keyNode + 
+            "), please clean your svn repository manually");
+            throw new SVNException(err);
           }
       }
 
