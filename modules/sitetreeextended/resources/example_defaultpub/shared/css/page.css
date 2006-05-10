@@ -17,14 +17,15 @@
 
 /* render xhtml ressources type in the menu with a small icon in front */
 .xhtml a {
-   background-image: url(/default/authoring/images/file.gif);
+   background-image: url(/default/live/images/file.gif);
    background-repeat: no-repeat;
    background-position: 0em;
    margin-left:-17px; 
    padding-left:17px;  
 }
 
-/* content below this is a copy of the default page.css */
+/* content below this is a copy of the default page.css 
+except for l 120 .menublock-1 .menublock-2 { display: none; } */
 
 
 
@@ -116,7 +117,7 @@ td.tab-post-separator {
 .menublock-1 a { }
 .menublock-1 a:visited { }
 
-.menublock-1 .menublock-2 { display: none; }
+//.menublock-1 .menublock-2 { display: none; }
 
 .menublock-selected-1 .menuitem-1 { background-color: #FFEEEE; }
 .menublock-1          .menuitem-1 { }

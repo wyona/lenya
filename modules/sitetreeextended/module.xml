@@ -30,7 +30,6 @@
   </lenya:description>
   <lenya:author>Wyona Inc.</lenya:author>
   <lenya:install>
-    -register this module in your pub/config/publication.xconf  
     -modify in your pub/sitemap.xmap: 
      map:part src="cocoon://modules/sitetreeextended/{2}/{3}/menu/{5}.xml"/
     -copy resources/example_defaultpub/images in your pub/resources/shared/images
