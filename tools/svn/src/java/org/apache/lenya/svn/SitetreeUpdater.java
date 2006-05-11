@@ -47,8 +47,8 @@ public class SitetreeUpdater {
               File sitetree = new File(pathToSitetree);              
               if (!sitetree.exists()) {
                 SVNErrorMessage err = SVNErrorMessage.create(SVNErrorCode.UNKNOWN, 
-                    "Could not find sitetree.xml, make sure your repositories point" +
-                    "to the authoring of a Lenya repository");
+                    "Could not find sitetree.xml, make sure your repository " +  
+                    "(urlRep and localRep) point to the authoring/live dir of a Lenya repository");
                 throw new SVNException(err);
               }
               
