@@ -58,33 +58,34 @@ if [ "$JAVA_OPTIONS" = "" ] ; then
   JAVA_OPTIONS='-Xms32M -Xmx512M'
 fi
 
-if [ "$LENYA_HOME" = "" ] ; then
-  echo "LENYA_HOME is not set. Please define LENYA_HOME."
-  exit 1
-fi
-    
-if [ "$LENYA_WEBAPP_HOME" = "" ] ; then
-  STANDALONE_WEBAPP=../webapp
-  if [ -d $STANDALONE_WEBAPP ] ; then
-    # for standalone-webapp setup
-    LENYA_WEBAPP_HOME=$STANDALONE_WEBAPP
-  else
-    # when in the build environment
-    LENYA_WEBAPP_HOME="$LENYA_HOME/build/lenya/webapp"
-  fi
-fi
+#script does not rely on Lenya
+#if [ "$LENYA_HOME" = "" ] ; then
+#  echo "LENYA_HOME is not set. Please define LENYA_HOME."
+#  exit 1
+#fi
+#    
+#if [ "$LENYA_WEBAPP_HOME" = "" ] ; then
+#  STANDALONE_WEBAPP=../webapp
+#  if [ -d $STANDALONE_WEBAPP ] ; then
+#    # for standalone-webapp setup
+#    LENYA_WEBAPP_HOME=$STANDALONE_WEBAPP
+#  else
+#    # when in the build environment
+#    LENYA_WEBAPP_HOME="$LENYA_HOME/build/lenya/webapp"
+#  fi
+#fi
 
-echo "$0: using $LENYA_WEBAPP_HOME as the webapp directory"
-echo ""
-echo "Make sure you did a build (ant) before! "
-echo ""
+#echo "$0: using $LENYA_WEBAPP_HOME as the webapp directory"
+#echo ""
+#echo "Make sure you did a build (ant) before! "
+#echo ""
 
-if [ "$LENYA_LIB" = "" ] ; then
-  LENYA_LIB="$LENYA_WEBAPP_HOME/WEB-INF/lib"
-fi
+#if [ "$LENYA_LIB" = "" ] ; then
+#  LENYA_LIB="$LENYA_WEBAPP_HOME/WEB-INF/lib"
+#fi
 
-ENDORSED_LIBS="$LENYA_LIB/endorsed"
-ENDORSED="-Djava.endorsed.dirs=$ENDORSED_LIBS"
+#ENDORSED_LIBS="$LENYA_LIB/endorsed"
+#ENDORSED="-Djava.endorsed.dirs=$ENDORSED_LIBS"
 
 SCRIPT_ROOT=`dirname $0`
 SCRIPT_ROOT=`cd "$SCRIPT_ROOT" ; pwd`
@@ -95,11 +96,13 @@ JAVASVN_LIBS=$SCRIPT_ROOT/lib
 OLD_CLASSPATH="$CLASSPATH"
 unset CLASSPATH
 CLASSPATH=$SCRIPT_ROOT/build/classes
-CLASSPATH=$CLASSPATH${S}$LENYA_LIB${S}$ENDORSED_LIBS${S}$JAVASVN_LIBS
+#CLASSPATH=$CLASSPATH${S}$LENYA_LIB${S}$ENDORSED_LIBS${S}$JAVASVN_LIBS
+CLASSPATH=$CLASSPATH${S}$JAVASVN_LIBS
 export CLASSPATH
 echo "DEBUG: $CLASSPATH"
 LOADER=Loader
-LOADER_LIB="${LENYA_HOME}/tools/loader"
+#LOADER_LIB="${LENYA_HOME}/tools/loader"
+LOADER_LIB="${SCRIPT_ROOT}/loader"
 
 CLI=-Dloader.main.class=org.apache.lenya.svn.LenyaSvnClient
 CLI_LIBRARIES="-Dloader.jar.repositories=$CLASSPATH"
@@ -111,12 +114,12 @@ DEFAULT_UI_TYPE=cmd
 #fi
 #echo "DEBUG: $UI_TYPE"
 
-
 PWD=`pwd`
 if [ "$UI_TYPE" = "cmd" ];then
- echo "DEBUG: CLI and pwd $PWD"
+ #echo "DEBUG: CLI and pwd $PWD"
  #ant
- java -cp $LOADER_LIB $ENDORSED $CLI_LIBRARIES $CLI $LOADER "$@"
+ #java -cp $LOADER_LIB $ENDORSED $CLI_LIBRARIES $CLI $LOADER "$@"
+ java -cp $LOADER_LIB $CLI_LIBRARIES $CLI $LOADER "$@"
 else
   echo "ERROR: No such User Interface: $UI_TYPE"
   exit 1
