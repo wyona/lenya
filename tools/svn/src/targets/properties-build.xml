@@ -56,7 +56,7 @@
   </target>
   
   
-  <!-- Cleans the Lenya build directory, with the exception of target.reset.excludes -->
+  <!-- Cleans the build directory -->
   <target name="clean" description="Cleans the build directories.">
     <mkdir dir="${build.root}"/>
     <!-- Create dir such that build process does not fail if build dir does not exist -->
