@@ -686,6 +686,7 @@ ul.sitemap ul ul ul li a {
 }
 
 * html .relatedbox {
+  height: 100px;
 	margin-left:16px;
 	padding-right:0px;
 }
