@@ -350,6 +350,7 @@ img.icon {
 }
 
 * html #col1 {
+  height:100px; /*damit ein leerer div auch von IE erkannt wird*/
   margin-right: 17px;
  }
 
@@ -391,6 +392,10 @@ img.icon {
 	display:block;
 }
 
+#secnav a {
+	display:block;
+}
+
 #secnav a:hover {
 	background-color:#E9E9F0;
 }
@@ -412,19 +417,13 @@ img.icon {
 
 /*third navigation*/
 #secnav ul ul li a {
-	padding-left: 17px;
-	padding-right:0px;
-  padding-bottom: 4px;
-	padding-top: 4px;
+  padding: 4px 0px 4px 17px;
 	width:148px;
 }
 
 /*forth navigation*/
 #secnav ul ul ul li a {
-	padding-left: 27px;
-	padding-right:0px;
-  padding-bottom: 4px;
-	padding-top: 4px;
+  padding: 4px 0px 4px 27px;
 	width:138px;
 }
 
