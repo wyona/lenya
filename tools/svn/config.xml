@@ -7,15 +7,16 @@
 
         <!-- path to the Apache Lenya content repository. Point to the 
         content/authoring folder, without slash at the end -->
-        <urlRep>http://svn.wyona.com/repos/wyona/employees/renaud/svntest</urlRep>
-        <localRep>/mnt/hda6/src/clients/svntest</localRep>
+        <urlRep>http://svn.yoursite.com/path_to_your_snv_repos</urlRep>
+        <localRep>/home/yourname/path_to_your_local_snv_repos</localRep>
 
         <userName>anonymous</userName>
         <userPassword>anonymous</userPassword>
 
         <defaultLogMessage>Automated commit by LenyaSvnClient</defaultLogMessage>
         <defaultRessourceType>xhtml</defaultRessourceType>
-        <defaultPublisher>University of Sheffield</defaultPublisher>
+        <!-- defaut publisher, e.g. <defaultPublisher>Wyona Inc.</defaultPublisher> -->
+        <defaultPublisher>Publisher</defaultPublisher>
 
     </lenyaSvn>
 </config>
