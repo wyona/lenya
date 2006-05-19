@@ -247,7 +247,7 @@ public class LenyaSvnClient {
       
       String filename = valueNode.getFile().getName();
       
-      if (filename.equals("index_en.xml")) {
+      if ((filename.equals("index_en.xml")) | (filename.equals("index_en")) ) {
         
         File meta = new File (valueNode.getPath() + ".meta");
 
@@ -321,7 +321,8 @@ public class LenyaSvnClient {
       File child [] = valueNode.getFile().listFiles();
       
       for (int i = 0; i < child.length; i++) {
-        if (child[i].getName().equals("index_en.xml")) {
+        String n = child[i].getName();
+        if (n.equals("index_en") | n.equals("index_en.xml")) {
           return;
         }      
       }
