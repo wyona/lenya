@@ -15,11 +15,13 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.environment.Request;
 import org.apache.lenya.cms.publication.Document;
-import org.apache.lenya.cms.publication.DocumentIdentityMap;
+import org.apache.lenya.cms.publication.DocumentFactory;
+import org.apache.lenya.cms.publication.DocumentUtil;
 import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
 import org.apache.lenya.cms.publication.URLInformation;
+import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
@@ -98,9 +100,10 @@ public class Tree2XML {
      * @param root
      * @throws SAXException
      * @throws PublicationException
+     * @throws RepositoryException 
      */
     public void traverseJJTree(SimpleNode node) throws SAXException,
-            PublicationException {
+            PublicationException, RepositoryException {
 
         attributes.clear();
         if (!node.optionMap.isEmpty()) {
@@ -147,7 +150,7 @@ public class Tree2XML {
         }
     }
 
-    public void checkInternal(SimpleNode node) throws PublicationException {
+    public void checkInternal(SimpleNode node) throws PublicationException, RepositoryException {
 
         if (node.toString().equals(linkNodeName[0])) {
 
@@ -235,13 +238,15 @@ public class Tree2XML {
         }
     }
 
-    private void getAreaDocuments() throws PublicationException {
+    private void getAreaDocuments() throws PublicationException, RepositoryException {
 
         Publication publication = PublicationUtil.getPublication(this.manager,
                 this.objectModel);
-        Session session = RepositoryUtil.getSession(this.request, this.logger);
-        DocumentIdentityMap identityMap = new DocumentIdentityMap(session,
-                manager, logger);
+        Session session = RepositoryUtil.getSession(this.manager, this.request);
+        DocumentFactory identityMap = DocumentUtil.createDocumentIdentityMap(this.manager, session);
+        
+        //    DocumentFactory identityMap = new DocumentFactory(session,
+          //      manager, logger);
 
         try {
 
