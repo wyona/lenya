@@ -43,11 +43,13 @@ import org.apache.lenya.cms.metadata.MetaDataManager;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentBuildException;
 import org.apache.lenya.cms.publication.DocumentException;
-import org.apache.lenya.cms.publication.DocumentIdentityMap;
+import org.apache.lenya.cms.publication.DocumentFactory;
+import org.apache.lenya.cms.publication.DocumentUtil;
 import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
 import org.apache.lenya.cms.publication.URLInformation;
+import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
@@ -114,7 +116,7 @@ public class FeedGenerator extends ServiceableGenerator {
 
     protected Publication pub;
 
-    protected DocumentIdentityMap map;
+    protected DocumentFactory map;
 
     /**
      * Request parameters
@@ -163,6 +165,7 @@ public class FeedGenerator extends ServiceableGenerator {
      *            the source URI (ignored)
      * @param par
      *            configuration parameters
+     * @throws RepositoryException 
      */
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par)
                     throws ProcessingException, SAXException, IOException {
@@ -197,16 +200,18 @@ public class FeedGenerator extends ServiceableGenerator {
             prepareLenyaDoc(objectModel);
         } catch (DocumentBuildException e) {
             throw new ProcessingException(src + " threw DocumentBuildException: " + e);
+        } catch (RepositoryException e) {
+          throw new ProcessingException(src + " threw RepositoryException: " + e);
         }
 
         // this.attributes = new AttributesImpl();
     }
 
     protected void prepareLenyaDoc(Map objectModel) throws DocumentBuildException,
-                    ProcessingException {
+                    ProcessingException, RepositoryException {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
-        Session session = RepositoryUtil.getSession(request, getLogger());
+        Session session = RepositoryUtil.getSession(this.manager, request);
 
         try {
             this.pub = PublicationUtil.getPublication(this.manager, objectModel);
@@ -223,7 +228,7 @@ public class FeedGenerator extends ServiceableGenerator {
             }
         }
 
-        this.map = new DocumentIdentityMap(session, this.manager, getLogger());
+        this.map = DocumentUtil.createDocumentIdentityMap(this.manager, session);
         this.document = map.get(pub, area, docId, language);
     }
 
