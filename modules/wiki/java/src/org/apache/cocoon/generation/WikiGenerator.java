@@ -19,12 +19,8 @@ package org.apache.cocoon.generation;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.source.SourceUtil;
@@ -33,20 +29,11 @@ import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
-import org.apache.lenya.cms.publication.Document;
-import org.apache.lenya.cms.publication.DocumentIdentityMap;
-import org.apache.lenya.cms.publication.Publication;
-import org.apache.lenya.cms.publication.PublicationUtil;
-import org.apache.lenya.cms.repository.RepositoryUtil;
-import org.apache.lenya.cms.repository.Session;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
-
-import org.wyona.wiki.ParseException;
 import org.wyona.wiki.SimpleCharStream;
 import org.wyona.wiki.SimpleNode;
 import org.wyona.wiki.WikiParser;
 import org.wyona.wiki.WikiParserTokenManager;
+import org.xml.sax.SAXException;
 
 /**
  * Wiki generator
