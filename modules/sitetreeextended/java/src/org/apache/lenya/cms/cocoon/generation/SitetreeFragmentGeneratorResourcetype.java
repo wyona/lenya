@@ -48,8 +48,7 @@ public class SitetreeFragmentGeneratorResourcetype extends SitetreeFragmentGener
           String hint = this.publication.getDocumentBuilderHint();
           builder = (DocumentBuilder) selector.select(hint);
           String lang = node.getLabels()[0].getLanguage();
-          DocumentIdentifier identifier = new DocumentIdentifier(this.publication, this.area, node.getAbsoluteId(), lang);
-          Document document = builder.buildDocument(this.identityMap, identifier);
+          Document document = this.identityMap.get(this.publication, this.area, node.getAbsoluteId(), lang);
           String resourcetype = document.getResourceType().getName();
           return resourcetype;
           
