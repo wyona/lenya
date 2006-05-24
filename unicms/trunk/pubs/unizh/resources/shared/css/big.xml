@@ -48,7 +48,7 @@ p {
 h1 {
 	padding: 0;
 	font-size: 1.3em;
-	line-height: 1.3em;
+	/*line-height: 1.3em;*/
 	margin-top: 0px;
 	margin-bottom: 0.65em;
 }
@@ -113,13 +113,13 @@ a {
 	color:#339;  
 }
 
-a:hover {
-	background-color:#000;
-  	color:#fff;
-}
-
 .contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
 	color:#666; 
+}
+
+a:hover, .contentarea a:hover, .contcol2 a:hover, .contentarea1col a:hover {
+	color:#fff;
+  background-color:#333;
 }
 
 a.arrow {
@@ -215,7 +215,7 @@ img.icon {
 }
 
 #headerarea h1 {
-	color:#FFFFFF;
+	color:#fff;
 	font-size: 1.4em;
   	line-height: 1.2em;
 	margin:0px;
@@ -223,13 +223,13 @@ img.icon {
 }
 
 #headerarea a {
-	color:#FFFFFF;
+	color:#fff;
 }
 
 #headerarea a:hover {
 	/*background-color:transparent;*/
   	color:#fff;
-	background-color:#000;
+	background-color:#333;
 }
 
 #headerarea h2 {
@@ -259,7 +259,7 @@ img.icon {
 	text-align: left;
 	color:#666; 
   	line-height: 1.4em;
-    font-family: Verdana, sans-serif;
+  font-family: Verdana, sans-serif;
 	font-size: 0.75em;
  	height:30px;
 }
@@ -270,7 +270,7 @@ img.icon {
 
 #breadcrumbnav a:hover {
 	color:#fff;
-	background-color:#000;
+	background-color:#333;
 }
 
 /*service navigation zB. home, sitemap, search */
@@ -280,7 +280,7 @@ img.icon {
 	padding-top:2px;
 	font-size: 0.75em;
 	font-family: Verdana, sans-serif;
-	color:#ffffff;
+	color:#fff;
   background-color: transparent;
 	line-height: 1.5em;
 	display:block;
@@ -290,12 +290,11 @@ img.icon {
 
 #servicenavpos a {
 	padding:0px 2px;
-  
 }
 
 #servicenavpos a:hover {
 	color:#fff;
-  background-color:#000;
+  background-color:#333;
 }
 
 #servicenavpos input {
@@ -340,7 +339,7 @@ img.icon {
 
 #primarnav a:hover {
 	color:#fff;
- 	background-color:#000;
+ 	background-color:#333;
 }
 
 
@@ -413,7 +412,7 @@ img.icon {
 
 #secnav a:hover {
 	color:#fff;
-  background-color:#000;
+  background-color:#333;
 }
 
 #secnav ul, #secnav ul ul, #secnav ul ul ul, .content1 ul, .content2 ul, ul.squarelist, ul.linklist, ul.linknav  {
@@ -445,7 +444,7 @@ img.icon {
 	line-height: 1.5em;
 	font-family: Verdana, sans-serif;
 	width:171px;
-	height:51px;
+	height:5em;
 	color:#666;
 	float:right;
 }
@@ -464,19 +463,19 @@ img.icon {
 }
 
 .icontextpos {
-	width:171px;
-	height:18px;
+	width:13em;
+	height:2em;
 	margin-top:8px;
 }
 
 #icontext {
 	color:#fff; 
-  	padding: 0 0 2px 3px;
-	line-height: 1.6em;
+  	padding: 4px 0 4px 2px;
+	line-height: 1.0em;
 }
 
 .icontextbg {
-	background-color:#000;
+	background-color:#333;
 }
 
 .icontextnobg {
