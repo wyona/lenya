@@ -1,5 +1,5 @@
 /*
- * Copyright  1999-2005 The Apache Software Foundation
+ * Copyright  1999-2006 The Apache Software Foundation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,11 +19,8 @@ package org.wyona.lenya.cms.site.usecases;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.components.ContextHelper;
@@ -31,78 +28,46 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.lenya.ac.Identity;
+import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.metadata.dublincore.DublinCore;
 import org.apache.lenya.cms.publication.Document;
-import org.apache.lenya.cms.publication.DocumentIdentityMap;
+import org.apache.lenya.cms.publication.DocumentFactory;
 import org.apache.lenya.cms.publication.DocumentManager;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.repository.Node;
+import org.apache.lenya.cms.site.SiteException;
 import org.apache.lenya.cms.site.SiteStructure;
 import org.apache.lenya.cms.site.SiteUtil;
 import org.apache.lenya.cms.usecase.DocumentUsecase;
 import org.apache.lenya.cms.usecase.UsecaseException;
+import org.apache.lenya.xml.DocumentHelper;
+import org.apache.xpath.XPathAPI;
+import org.w3c.dom.Element;
 
 /**
  * Usecase to create a Blog entry.
  * 
- * @version $Id: CreateBlogEntry.java 384556 2006-03-09 16:56:01Z andreas $
+ * @version $Id: CreateBlogEntry.java 408702 2006-05-22 16:03:49Z andreas $
  */
 public class CreateBlogEntry extends DocumentUsecase {
 
     protected static final String PARENT_ID = "parentId";
-
     protected static final String DOCUMENT_TYPE = "doctype";
-
     protected static final String DOCUMENT_ID = "documentId";
-    
+
     protected static String DEFAULT_RESOURCE_TYPE = "xhtml";
-    
     protected static final String DEFAULT_EXTENSION = "xml";
-    
-    protected static final String ELEMENT_ROOT = "resource-type";
-    
-    protected static final String ATTRIBUTE_TYPE = "select";
-    
-    private String parentId;
-    
-    
-    public void configure(Configuration config) throws ConfigurationException {
-        super.configure(config);
-        Configuration resourceTypeConfig = config.getChild(ELEMENT_ROOT, false);
-        if (resourceTypeConfig != null) {
-            DEFAULT_RESOURCE_TYPE=resourceTypeConfig.getAttribute(ATTRIBUTE_TYPE);
-        }
-      }
 
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#getNodesToLock()
      */
     protected Node[] getNodesToLock() throws UsecaseException {
-        Document parent = getSourceDocument();
-        String language = parent.getPublication().getDefaultLanguage();
         try {
             SiteStructure structure = SiteUtil.getSiteStructure(this.manager, getSourceDocument());
-
-            DocumentIdentityMap map = getDocumentIdentityMap();
-
-            DateFormat fmtyyyy = new SimpleDateFormat("yyyy");
-            DateFormat fmtMM = new SimpleDateFormat("MM");
-            DateFormat fmtdd = new SimpleDateFormat("dd");
-            Date date = new Date();
-
-            String year = fmtyyyy.format(date);
-            String month = fmtMM.format(date);
-            String day = fmtdd.format(date);
-
-            String documentId = "/entries/" + year + "/" + month + "/" + day;
-
-            Document document = map.get(getSourceDocument().getPublication(), getSourceDocument()
-                            .getArea(), documentId, language);
-            document.getRepositoryNode().lock();
             Node[] nodes = { structure.getRepositoryNode() };
             return nodes;
-        } catch (Exception e) {
+        } catch (SiteException e) {
             throw new UsecaseException(e);
         }
     }
@@ -114,8 +79,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         super.initParameters();
 
         Document parent = getSourceDocument();
-        setParameter(PARENT_ID,parent.getId());
-        
+        setParameter(PARENT_ID, parent.getId());
     }
 
     /**
@@ -144,14 +108,7 @@ public class CreateBlogEntry extends DocumentUsecase {
 
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
-        this.parentId=parent.getId();
         String language = parent.getPublication().getDefaultLanguage();
-        Map objectModel = ContextHelper.getObjectModel(getContext());
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        Session session = request.getSession(false);
-        HashMap allParameters = new HashMap();
-        allParameters.put(Identity.class.getName(), session.getAttribute(Identity.class.getName()));
-        allParameters.put("title", getParameterAsString(DublinCore.ELEMENT_TITLE));
 
         // create new document
         // implementation note: since blog does not have a hierarchy,
@@ -160,6 +117,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         DocumentManager documentManager = null;
         ServiceSelector selector = null;
         ResourceType resourceType = null;
+
         try {
             createParentDocs(parent);
             selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
@@ -167,15 +125,21 @@ public class CreateBlogEntry extends DocumentUsecase {
 
             documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
 
-            DocumentIdentityMap map = getDocumentIdentityMap();
+            DocumentFactory map = getDocumentIdentityMap();
 
             String documentId = getDocumentID();
-            Document document = map.get(getSourceDocument().getPublication(), getSourceDocument()
-                            .getArea(), documentId, language);
-            document.getRepositoryNode().lock();
+            Document document = map.get(getSourceDocument().getPublication(),
+                    getSourceDocument().getArea(),
+                    documentId,
+                    language);
 
-            documentManager.add(document, resourceType, "xml",
-                            getParameterAsString(DublinCore.ELEMENT_TITLE), true, allParameters);
+            documentManager.add(document,
+                    resourceType,
+                    "xml",
+                    getParameterAsString(DublinCore.ELEMENT_TITLE),
+                    true);
+
+            transformXML(document);
         } finally {
             if (documentManager != null) {
                 this.manager.release(documentManager);
@@ -188,45 +152,44 @@ public class CreateBlogEntry extends DocumentUsecase {
             }
         }
     }
-
+    
     protected void createParentDocs(Document doc) throws ServiceException, PublicationException {
-        DocumentIdentityMap map = getDocumentIdentityMap();
-        String[] pathId = getDocumentID().split("/");
-        String docRoot = "";
-        for (int i = 0; i < pathId.length-1; i++) {
-            String currentDoc = pathId[i];
-            if (currentDoc.length() >= 1) {
-                docRoot = docRoot+"/" + currentDoc;
-                Document document = map.get(doc.getPublication(), doc.getArea(), docRoot, doc
-                                .getLanguage());
-                if (!document.exists()) {
-                    DocumentManager documentManager = null;
-                    ServiceSelector selector = null;
-                    ResourceType resourceType = null;
-                    try {
-                        selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
-                        documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
-                        resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
-                        documentManager.add(document, resourceType, DEFAULT_EXTENSION, currentDoc, true, null);
-                    } finally {
-                        if (documentManager != null) {
-                            this.manager.release(documentManager);
-                        }
-                        if (selector != null) {
-                            if (resourceType != null) {
-                                selector.release(resourceType);
-                            }
-                            this.manager.release(selector);
-                        }
-                    }
-                }
-            }
-        }
+      DocumentFactory map = getDocumentIdentityMap();
+      String[] pathId = getDocumentID().split("/");
+      String docRoot = "";
+      for (int i = 0; i < pathId.length-1; i++) {
+          String currentDoc = pathId[i];
+          if (currentDoc.length() >= 1) {
+              docRoot = docRoot+"/" + currentDoc;
+              Document document = map.get(doc.getPublication(), doc.getArea(), docRoot, doc
+                              .getLanguage());
+              if (!document.exists()) {
+                  DocumentManager documentManager = null;
+                  ServiceSelector selector = null;
+                  ResourceType resourceType = null;
+                  try {
+                      selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
+                      documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
+                      resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
+                      documentManager.add(document, resourceType, DEFAULT_EXTENSION, currentDoc, true);
+                  } finally {
+                      if (documentManager != null) {
+                          this.manager.release(documentManager);
+                      }
+                      if (selector != null) {
+                          if (resourceType != null) {
+                              selector.release(resourceType);
+                          }
+                          this.manager.release(selector);
+                      }
+                  }
+              }
+          }
+      }
     }
 
     /**
-     * The blog publication has a specific site structuring: it groups nodes by
-     * date.
+     * The blog publication has a specific site structuring: it groups nodes by date.
      * 
      * <p>
      * Example structuring of blog entries:
@@ -260,8 +223,8 @@ public class CreateBlogEntry extends DocumentUsecase {
         String month = fmtMM.format(date);
         String day = fmtdd.format(date);
 
-        String documentId = this.parentId+"/" + year + "/" + month + "/" + day + "/"
-                        + getNewDocumentName();
+        String documentId = "/entries/" + year + "/" + month + "/" + day + "/"
+                + getNewDocumentName() + "/index";
         return documentId;
     }
 
@@ -279,5 +242,80 @@ public class CreateBlogEntry extends DocumentUsecase {
      */
     protected String getDocumentTypeName() {
         return getParameterAsString(DOCUMENT_TYPE);
+    }
+
+    protected void transformXML(Document document) throws Exception {
+
+        Map objectModel = ContextHelper.getObjectModel(getContext());
+        Request request = ObjectModelHelper.getRequest(objectModel);
+        Session session = request.getSession(false);
+        Identity identity = (Identity) session.getAttribute(Identity.class.getName());
+        String title = getParameterAsString(DublinCore.ELEMENT_TITLE);
+
+        org.w3c.dom.Document xmlDoc = SourceUtil.readDOM(document.getSourceURI(), this.manager);
+
+        Element parent = xmlDoc.getDocumentElement();
+
+        if (getLogger().isDebugEnabled())
+            getLogger().debug("NewBlogEntryCreator.transformXML(): " + document);
+
+        String[] steps = document.getId().split("/");
+        String nodeId = steps[5];
+
+        // Replace id
+        Element element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'id']");
+
+        String year = steps[2];
+        String month = steps[3];
+        String day = steps[4];
+
+        DocumentHelper.setSimpleElementText(element, year + "/" + month + "/" + day + "/" + nodeId);
+
+        // Replace title
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'title']");
+        DocumentHelper.setSimpleElementText(element, title);
+
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'link']");
+        element.setAttribute("rel", "alternate");
+        element.setAttribute("href", "");
+        element.setAttribute("type", "text/xml");
+
+        // Replace Summary
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'summary']");
+        DocumentHelper.setSimpleElementText(element, "Summary");
+
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'author']/*[local-name() = 'name']");
+
+        if (element == null) {
+            throw new RuntimeException("Element entry/author/name not found.");
+        }
+
+        DocumentHelper.setSimpleElementText(element, identity.getUser().getId());
+
+        // Replace date created, issued and modified
+        DateFormat datefmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        DateFormat ofsfmt = new SimpleDateFormat("Z");
+        Date date = new Date();
+
+        String dateofs = ofsfmt.format(date);
+        String datestr = datefmt.format(date) + dateofs.substring(0, 3) + ":"
+                + dateofs.substring(3, 5);
+
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'created']");
+        DocumentHelper.setSimpleElementText(element, datestr);
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'issued']");
+        DocumentHelper.setSimpleElementText(element, datestr);
+        element = (Element) XPathAPI.selectSingleNode(parent,
+                "/*[local-name() = 'entry']/*[local-name() = 'modified']");
+        DocumentHelper.setSimpleElementText(element, datestr);
+
+        SourceUtil.writeDOM(xmlDoc, document.getSourceURI(), this.manager);
     }
 }
