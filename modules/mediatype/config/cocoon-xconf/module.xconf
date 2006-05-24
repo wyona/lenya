@@ -23,9 +23,7 @@
                       logger="lenya.resourcetypes.mediatype"
                       class="org.apache.lenya.cms.publication.ResourceTypeImpl">
     <schema src="fallback://lenya/modules/mediatype/resources/schemas/mediatype.rng" language="http://relaxng.org/ns/structure/0.9"/>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/modules/mediatype/samples/mediatype.xml</sample-name>
-    </creator>
+    <sample-name>fallback://lenya/modules/mediatype/samples/mediatype.xml</sample-name>
     <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
     <format name="xhtml" uri="cocoon://modules/mediatype/xhtml.xml"/>
   </component-instance>

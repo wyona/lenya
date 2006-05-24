@@ -89,7 +89,7 @@ public class MediaAssets extends CreateDocument {
     	Document document = getNewDocument();
 		String uri= document.getSourceURI();
 		int lastDotIndex = uri.lastIndexOf(".");
-        String destination = uri.substring(0,lastDotIndex).concat("."+MEDIA_FILE_EXTENSION);
+        String destination = uri;//.substring(0,lastDotIndex).concat("."+MEDIA_FILE_EXTENSION);
         String sourceUri=resourceType.getSampleURI();
         try {
 			SourceUtil.copy(resolver, sourceUri, destination);
