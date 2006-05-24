@@ -8,9 +8,8 @@
 <!--
     <schema language="http://relaxng.org/ns/structure/0.9" src="fallback://lenya/modules/aurl/resources/schemas/aurl.rng"/>
 -->
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/modules/aurl/templates/aurl.xml</sample-name>
-    </creator>
+
+    <sample-name>fallback://lenya/modules/aurl/templates/aurl.xml</sample-name>
 
 <!--
     <format name="xhtml" uri="cocoon://modules/xhtml/xhtml.xml"/>

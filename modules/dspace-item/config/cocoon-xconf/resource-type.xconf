@@ -6,9 +6,7 @@
                       logger="lenya.resourcetypes.dspace-item"
                       class="org.apache.lenya.cms.publication.ResourceTypeImpl">
 
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/modules/dspace-item/templates/template.xml</sample-name>
-    </creator>
+    <sample-name>fallback://lenya/modules/dspace-item/templates/template.xml</sample-name>
 
     <format name="xhtml" uri="cocoon://modules/dspace-item/xhtml.xml"/>
 
