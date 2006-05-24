@@ -48,14 +48,13 @@ p {
 h1 {
 	padding: 0;
 	font-size: 1.3em;
-	/*line-height: 1.3em;*/
+	line-height: 1.3em;
 	margin-top: 0px;
-	margin-bottom: 0.2em;
+	margin-bottom: 0.65em;
 }
 
 h2 {
 	font-size: 1.0em;
-  /*margin-bottom: 0.2em;*/
 }
 
 h3 {
@@ -68,7 +67,6 @@ h4, h5, h6 {
 	font-size: 1.0em;
 	font-style: italic;
 	font-weight:normal;
-  /*margin-bottom: 0.2em;*/
 }
 
 code {
@@ -117,7 +115,7 @@ a {
 
 a:hover {
 	background-color:#000;
-  color:#fff;
+  	color:#fff;
 }
 
 .contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
@@ -230,7 +228,7 @@ img.icon {
 
 #headerarea a:hover {
 	/*background-color:transparent;*/
-  color:#fff;
+  	color:#fff;
 	background-color:#000;
 }
 
@@ -337,15 +335,13 @@ img.icon {
 }
 
 #primarnav a.activ {
-	padding:0px 7px;
 	background-color:#E9E9F0;
 }
 
 #primarnav a:hover {
 	color:#fff;
-  background-color:#000;
+ 	background-color:#000;
 }
-
 
 
 #primarnav .linkseparator {
@@ -371,7 +367,7 @@ img.icon {
 
 /* Second navigation */
 #secnav {
-	line-height: 1.1em;  /alt: *1.85em*/
+	line-height: 1.1em;  /* alt: 1.85em*/
 }
 
 .navup  {
@@ -475,8 +471,7 @@ img.icon {
 
 #icontext {
 	color:#fff; 
-  
-	padding: 0 0 2px 3px;
+  	padding: 0 0 2px 3px;
 	line-height: 1.6em;
 }
 
@@ -579,9 +574,6 @@ img.icon {
 }
 
 .content  {
-}
-
-.contentarea1col {
 }
 
 .contentnolimit {
