@@ -117,7 +117,7 @@ a:hover {
 	background-color:#E9E9F0;
 }
 
-.contentarea a:visited {
+.contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
 	color:#666666; 
 }
 
@@ -240,7 +240,7 @@ img.icon {
 }
 
 .endheaderline {
-	background-image: url(../img/dot_line66.gif);
+	background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
 	margin-bottom:0px;
 	height:1px;
 }
@@ -324,12 +324,17 @@ img.icon {
 	display:block;
 }
 
+/*
+* html a.namedanchor {
+	padding:0px;
+}
+*/
+
 #primarnav a:hover {
 	background-color:#E9E9F0;
 }
 
 #primarnav a.activ {
-	padding:0px 7px;
 	background-color:#E9E9F0;
 }
 
@@ -356,7 +361,7 @@ img.icon {
 
 /* Second navigation */
 #secnav {
-	line-height: 1.1em;  /*1.85em*/
+	line-height: 1.1em;  /* alt: 1.85em*/
 }
 
 .navup  {
