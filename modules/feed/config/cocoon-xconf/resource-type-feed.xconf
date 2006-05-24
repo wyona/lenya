@@ -7,9 +7,7 @@
     class="org.apache.lenya.cms.publication.ResourceTypeImpl">
     <schema language="http://relaxng.org/ns/structure/0.9"
       src="fallback://lenya/modules/feed/resources/schemas/feed.rng"/>
-    <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-      <sample-name>fallback://lenya/modules/feed/samples/feed.xml</sample-name>
-    </creator>
+    <sample-name>fallback://lenya/modules/feed/samples/feed.xml</sample-name>
     <format name="xhtml" uri="cocoon://modules/feed/xhtml.xml"/>
   </component-instance>
   
