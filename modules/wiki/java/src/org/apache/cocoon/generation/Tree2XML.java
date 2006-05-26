@@ -3,7 +3,6 @@
  */
 package org.apache.cocoon.generation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -245,9 +244,6 @@ public class Tree2XML {
         Session session = RepositoryUtil.getSession(this.manager, this.request);
         DocumentFactory identityMap = DocumentUtil.createDocumentIdentityMap(this.manager, session);
         
-        //    DocumentFactory identityMap = new DocumentFactory(session,
-          //      manager, logger);
-
         try {
 
             selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE
