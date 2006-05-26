@@ -21,12 +21,11 @@ old.publication.name=Unitemplate
 new.publication.name=Physikalisches Institut
 
 #------------------------------------------------------------------------------------
-# The name of the section the publication belongs to
-# (the following sections exist: 
-#      forschung, studium, services, info, fakultaet, admin, leben) 
+# Does the new publication contain the standard university pages, or is it empty?
+# (the following values exist: 
+#      plain, standard) 
 
-new.publication.section=forschung
-
+new.publication.content=plain
 
 #------------------------------------------------------------------------------------
 # The email address of the publication master

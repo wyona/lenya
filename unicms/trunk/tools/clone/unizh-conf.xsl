@@ -14,13 +14,6 @@
   </publication>
 </xsl:template>
 
-<xsl:template match="foo:section">
-  <section xmlns="http://unizh.ch">      <!-- namespace prevents empty attribute xmlns='' -->
-    <xsl:apply-templates select="@*"/>
-    <xsl:value-of select="$publicationSection"/>
-  </section>
-</xsl:template>
-
 <xsl:template match="@*|node()">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>

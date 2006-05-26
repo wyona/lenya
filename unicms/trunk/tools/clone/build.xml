@@ -11,19 +11,27 @@
     <property name="new.publication.name" value="unizh publication"/>
     <!-- /Dummy arguments -->
     
+    <property name="new.publication.content" value="plain"/>
     <property name="pubs.dir" value="../../pubs"/>
     <property name="source.dir" value="${pubs.dir}/${old.publication.prefix}"/>
+    <property name="stdpub.source.dir" value="../../data/unitemplate/standard"/>
     <property name="destination.dir" value="${pubs.dir}/${new.publication.prefix}"/>
+
+    <condition property="empty-pub">
+      <equals arg1="${new.publication.content}" arg2="plain" />
+    </condition>
+
+    <condition property="std-pub">
+      <equals arg1="${new.publication.content}" arg2="standard" />
+    </condition>
+
   </target>
+
 
   <target name="clone" description="Clone publication" depends="init">
     
     <echo>INFO: Clone publication</echo>
     <mkdir dir="${destination.dir}"/>
-    
-    <echo>INFO: Create skeleton dirs</echo>
-    <mkdir dir="${destination.dir}/content/authoring"/>
-    <mkdir dir="${destination.dir}/resources/authoring"/>
     
     <echo>INFO: Copy Sitemaps</echo>
     <copy todir="${destination.dir}" overwrite="yes">
@@ -173,7 +181,6 @@
       out="${destination.dir}/config/unizh/unizh.xconf" style="unizh-conf.xsl">
       <outputproperty name="encoding" value="ISO-8859-1"/>
       <param name="publicationName" expression="${new.publication.name}"/>
-      <param name="publicationSection" expression="${new.publication.section}"/>
     </xslt>
 
     <echo>INFO: Change publication configuration</echo>
@@ -185,6 +192,33 @@
 
     <echo>INFO: Finished Creating Config</echo>
 
+    <echo>INFO: Copy lenya replacments</echo>
+    <mkdir dir="${destination.dir}/lenya"/>
+    <copy todir="${destination.dir}/lenya" overwrite="yes">
+      <fileset dir="${source.dir}/lenya"/>
+    </copy>
+    
+    <antcall target="plain-pub"/>
+    <antcall target="standard-pub"/>
+    
+    <echo>INFO: Name new Publication ${source.dir}</echo>
+    <xslt 
+      in="${source.dir}/publication.xml" 
+      out="${destination.dir}/publication.xml" style="publication-xml.xsl">
+      <param name="publicationName" expression="${new.publication.name}"/>
+    </xslt>
+    
+    <antcall target="touch"/>
+
+  </target>
+
+
+  <target name="plain-pub" description="Make an empty pub with only basic content" if="empty-pub">
+    
+    <echo>INFO: Create skeleton dirs</echo>
+    <mkdir dir="${destination.dir}/content/authoring"/>
+    <mkdir dir="${destination.dir}/resources/authoring"/>
+    
     <echo>INFO: Copy Content</echo>
     <copy todir="${destination.dir}/content">
       <fileset dir="${source.dir}/content">
@@ -210,13 +244,7 @@
       <param name="publicationName" expression="${new.publication.name}"/>
     </xslt>
     
-    <echo>INFO: Finished Creating Content</echo>
-    
-    <echo>INFO: Copy lenya replacments</echo>
-    <mkdir dir="${destination.dir}/lenya"/>
-    <copy todir="${destination.dir}/lenya" overwrite="yes">
-      <fileset dir="${source.dir}/lenya"/>
-    </copy>
+    <echo>INFO: Finished Creating Empty Publication</echo>
     
     <echo>INFO: Copy resources</echo>
     <mkdir dir="${destination.dir}/resources"/>
@@ -224,16 +252,50 @@
       <fileset dir="${source.dir}/resources"/>
     </copy>
     
-    <echo>INFO: Name new Publication ${source.dir}</echo>
+  </target>
+
+
+  <target name="standard-pub" description="Take the standard unizh pub's content" if="std-pub">
+    
+    <echo>INFO: Create skeleton dirs</echo>
+    <mkdir dir="${destination.dir}/content/authoring"/>
+    <mkdir dir="${destination.dir}/resources/authoring"/>
+    
+    <echo>INFO: Copy Content</echo>
+    <copy todir="${destination.dir}/content">
+      <fileset dir="${stdpub.source.dir}/content">
+	<exclude name="authoring/sitetree.xml"/>
+	<exclude name="authoring/index/index_de.xml"/>
+      </fileset>
+    </copy>
+  
+    <echo>INFO: Change sitetree.xml</echo>
     <xslt 
-      in="${source.dir}/publication.xml" 
-      out="${destination.dir}/publication.xml" style="publication-xml.xsl">
+      in="${stdpub.source.dir}/content/authoring/sitetree.xml" 
+      out="${destination.dir}/content/authoring/sitetree.xml" style="sitetree.xsl">
+      <outputproperty name="indent" value="yes"/>
+      <param name="publicationName" expression="${new.publication.name}"/>
+      <param name="templateName" expression="${old.publication.name}"/>
+    </xslt>
+    
+    <echo>INFO: Create Homepages</echo>
+    <xslt 
+      in="${stdpub.source.dir}/content/authoring/index/index_de.xml" 
+      out="${destination.dir}/content/authoring/index/index_de.xml" style="index.xsl">
+      <outputproperty name="indent" value="yes"/>
       <param name="publicationName" expression="${new.publication.name}"/>
     </xslt>
     
-    <antcall target="touch"/>
-
+    <echo>INFO: Finished Creating Standard Content</echo>
+    
+    <echo>INFO: Copy resources</echo>
+    <mkdir dir="${destination.dir}/resources"/>
+    <copy todir="${destination.dir}/resources" overwrite="yes">
+      <fileset dir="${stdpub.source.dir}/resources"/>
+    </copy>
+    
   </target>
+
 
   <target name="touch" depends="init" description="touch all source files within new publication">
     <echo>Touch all files within ${new.publication.source.dir}</echo>
