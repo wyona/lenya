@@ -9,7 +9,7 @@
 </xsl:template>
 
 <xsl:template match="lenya:description">
-  <lenya:description>No description of this publication yet.</lenya:description>
+  <lenya:description>Institute or Departement Website</lenya:description>
 </xsl:template>
 
 <xsl:template match="@*|node()">
