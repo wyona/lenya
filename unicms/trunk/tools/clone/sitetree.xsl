@@ -14,7 +14,6 @@
   </label>
 </xsl:template>
 
-<xsl:template match="*[@id='doctypes']"/>
 
 <!--
 <xsl:stylesheet version="1.0"
