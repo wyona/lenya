@@ -8,7 +8,7 @@
   <target name="init">
     <property name="pub.prefix" value="unitemplate"/>
     <property name="lenya.dir" value="/Developer/Java/cocoon-lenya"/>
-    <property name="pubs.dir" value="../../pubs"/>
+    <property name="pubs.dir" value="/Developer/Java/unicms/trunk/pubs"/>
     <property name="pub.dir" value="${pubs.dir}/${pub.prefix}"/>
     <mkdir dir="work"/>
   </target>
@@ -25,7 +25,7 @@
     <echo>INFO: Adding WebDAV support to core</echo>
     <xslt
       in="${lenya.dir}/src/webapp/sitemap.xmap"
-      out="work/sitemap.xmap" style="ant/sitemap-xmap.xsl"
+      out="work/sitemap.xmap" style="elml/install/sitemap-xmap.xsl"
       >
     </xslt>
     <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
@@ -34,49 +34,49 @@
       </fileset>
     </copy>
     <copy todir="${lenya.dir}/src/java" overwrite="yes">
-      <fileset dir="core/java"/>
+      <fileset dir="elml/core/java"/>
     </copy> 
 
     <echo>INFO: Copying WebDAV usecase</echo>
     <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
-      <fileset dir="lenya/usecases/webdav"/>
+      <fileset dir="elml/lenya/usecases/webdav"/>
     </copy>
 
 
     <echo>INFO: Copying schema files</echo>
     <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
-      <fileset dir="config/doctypes/schemas"/>
+      <fileset dir="elml/config/doctypes/schemas"/>
     </copy>
 
     <mkdir dir="${pub.dir}/config/doctypes/schemas/elml"/>
     <copy todir="${pub.dir}/config/doctypes/schemas/elml" overwrite="yes">
-      <fileset dir="config/doctypes/schemas/elml"/>
+      <fileset dir="elml/config/doctypes/schemas/elml"/>
     </copy>
 
     <echo>INFO: Copying sample files</echo>
     <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes">
-      <fileset dir="config/doctypes/samples"/>
+      <fileset dir="elml/config/doctypes/samples"/>
     </copy>
 
     <echo>INFO: Copying elml xslt's</echo>
 
     <copy todir="${pubs.dir}/unizh/xslt/doctypes" overwrite="yes">
-      <fileset dir="xslt/doctypes"/>
+      <fileset dir="elml/xslt/doctypes"/>
     </copy>
      
     <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
-      <fileset dir="xslt/common"/>
+      <fileset dir="elml/xslt/common"/>
     </copy>
 
     <echo>INFO: Copying resources</echo>
     <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
-      <fileset dir="resources/shared/images/icons"/>
+      <fileset dir="elml/resources/shared/images/icons"/>
     </copy>
 
     <echo>INFO: Patching publication-sitemap.xmap</echo>
     <xslt
       in="${pub.dir}/publication-sitemap.xmap"
-      out="work/publication-sitemap.xmap" style="ant/publication-sitemap.xsl"
+      out="work/publication-sitemap.xmap" style="elml/install/publication-sitemap.xsl"
       >
     </xslt>
     <copy todir="${pub.dir}" overwrite="yes">
@@ -88,7 +88,7 @@
     <echo>INFO: Patching doctypes.xmap</echo>
     <xslt
       in="${pub.dir}/doctypes.xmap"
-      out="work/doctypes.xmap" style="ant/doctypes.xsl"
+      out="work/doctypes.xmap" style="elml/install/doctypes.xsl"
       >
     </xslt>
      <copy todir="${pub.dir}" overwrite="yes">
@@ -99,31 +99,31 @@
 
     <echo>INFO: Adding asset config files</echo>
     <copy todir="${pub.dir}/config/assets" overwrite="yes">
-      <fileset dir="config/assets"/>
+      <fileset dir="elml/config/assets"/>
     </copy>
 
     <echo>INFO: Adding import/export usecases</echo>
 
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="">
-        <include name="usecase-importlesson.xmap"/>
+        <include name="elml/usecase-importlesson.xmap"/>
       </fileset>
     </copy>
 
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="">
-        <include name="usecase-exportlesson.xmap"/>
+        <include name="elml/usecase-exportlesson.xmap"/>
       </fileset>
     </copy>
 
     <copy todir="${pub.dir}/usecases/elml" overwrite="yes">
-      <fileset dir="usecases/elml"/>
+      <fileset dir="elml/usecases/elml"/>
     </copy>
 
     <echo>INFO: Patching menu config files </echo>
     <xslt
       in="${pub.dir}/menus.xmap"
-      out="work/menus.xmap" style="ant/menus-xmap.xsl"
+      out="work/menus.xmap" style="elml/install/menus-xmap.xsl"
       >
     </xslt>
     <copy todir="${pub.dir}" overwrite="yes">
@@ -134,7 +134,7 @@
 
     <xslt
       in="${pub.dir}/config/doctypes/doctypes.xconf"
-      out="work/doctypes.xconf" style="ant/doctypes-xconf.xsl"
+      out="work/doctypes.xconf" style="elml/install/doctypes-xconf.xsl"
       >
     </xslt>
     <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
@@ -145,7 +145,7 @@
 
     <xslt
       in="${pub.dir}/parameter-doctype.xmap"
-      out="work/parameter-doctype.xmap" style="ant/parameter-doctype-xmap.xsl"
+      out="work/parameter-doctype.xmap" style="elml/install/parameter-doctype-xmap.xsl"
       >
     </xslt>
      <copy todir="${pub.dir}" overwrite="yes">
@@ -156,7 +156,7 @@
 
     <xslt
       in="${pubs.dir}/unizh/config/menus/homepage.xsp"
-      out="work/homepage.xsp" style="ant/menu-homepage.xsl"
+      out="work/homepage.xsp" style="elml/install/menu-homepage.xsl"
       >
     </xslt>
     <mkdir dir="${pub.dir}/config/menus"/>
@@ -168,7 +168,7 @@
 
     <xslt
       in="${pubs.dir}/unizh/config/menus/xhtml.xsp"
-      out="work/xhtml.xsp" style="ant/menu-xhtml.xsl"
+      out="work/xhtml.xsp" style="elml/install/menu-xhtml.xsl"
       >
     </xslt>
     <mkdir dir="${pub.dir}/config/menus"/>
@@ -179,21 +179,21 @@
     </copy>
 
     <copy todir="${pub.dir}/config/menus" overwrite="yes">
-       <fileset dir="config/menus">
+       <fileset dir="elml/config/menus">
         <include name="lesson.xsp"/>
       </fileset>
     </copy>
 
     <echo>INFO: Copying level includes</echo>
     <copy todir="${pubs.dir}/unizh/xslt" overwrite="yes">
-       <fileset dir="xslt">
+       <fileset dir="elml/xslt">
         <include name="elml-level.xsl"/>
       </fileset>
     </copy>
 
     <echo>INFO: Copying javascript files</echo>
     <copy todir="${pubs.dir}/unizh/resources/shared/javascript" overwrite="yes">
-       <fileset dir="resources/shared/javascript">
+       <fileset dir="elml/resources/shared/javascript">
         <include name="elml.js"/>
       </fileset>
     </copy>
@@ -201,7 +201,7 @@
     <echo>INFO: Patching html-head to include javascript files</echo>
     <xslt
       in="${pubs.dir}/unizh/xslt/common/html-head.xsl"
-      out="work/html-head.xsl" style="ant/html-head.xsl"
+      out="work/html-head.xsl" style="elml/install/html-head.xsl"
       >
     </xslt>
     <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
@@ -213,7 +213,7 @@
     <!-- BXE integration -->
     <echo>INFO: Copying files for BXE</echo>
     <copy todir="${pubs.dir}/unizh/xslt/" overwrite="yes">
-       <fileset dir="xslt">
+       <fileset dir="elml/xslt">
         <include name="bxe-loadxml.xsl"/>
         <include name="bxe-savexml.xsl"/>
         <include name="bxe-rng.xsl"/>
@@ -223,7 +223,7 @@
     <echo>INFO: Patching usecase-bxeng.xmap</echo>
     <xslt
       in="${pub.dir}/usecase-bxeng.xmap"
-      out="work/usecase-bxeng.xmap" style="ant/usecase-bxeng.xsl"
+      out="work/usecase-bxeng.xmap" style="elml/install/usecase-bxeng.xsl"
       >
     </xslt>
     <copy todir="${pub.dir}" overwrite="yes">
@@ -235,7 +235,7 @@
     <echo>INFO: Patching css file content-bxeng.xml</echo> 
     <xslt
       in="${pubs.dir}/unizh/resources/misc/bxeng/content-bxeng.xml"
-      out="work/content-bxeng.xml" style="ant/content-bxeng.xsl"
+      out="work/content-bxeng.xml" style="elml/install/content-bxeng.xsl"
       >
     </xslt>
     <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
