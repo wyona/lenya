@@ -1,6 +1,6 @@
-==============
-ESCRIPT MODULE
+===================
+UniCMS eLML Support
 
-To add lcms doctypes to any lenya 1.2. publication 
-1. cd to directory lcms (you might be already there)
-2. type ant install -Dpub.prefix=yourPubName
+To add eLML Support to any lenya 1.2. publication 
+1. cd to directory modules/elml (you might be already there)
+2. type ant install -Dpub.prefix={pubname} -Dlenya.dir={lenya installation} -Dpubs.dir={unicms pubsdir}
