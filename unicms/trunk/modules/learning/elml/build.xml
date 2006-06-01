@@ -28,11 +28,7 @@
       out="work/sitemap.xmap" style="elml/install/sitemap-xmap.xsl"
       >
     </xslt>
-    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
-      <fileset dir="work">
-         <include name="sitemap.xmap"/>
-      </fileset>
-    </copy>
+    
     <copy todir="${lenya.dir}/src/java" overwrite="yes">
       <fileset dir="elml/core/java"/>
     </copy> 
@@ -79,11 +75,6 @@
       out="work/publication-sitemap.xmap" style="elml/install/publication-sitemap.xsl"
       >
     </xslt>
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="work">
-        <include name="publication-sitemap.xmap"/>
-      </fileset>
-    </copy>
 
     <echo>INFO: Patching doctypes.xmap</echo>
     <xslt
@@ -91,11 +82,6 @@
       out="work/doctypes.xmap" style="elml/install/doctypes.xsl"
       >
     </xslt>
-     <copy todir="${pub.dir}" overwrite="yes">
-       <fileset dir="work">
-        <include name="doctypes.xmap"/>
-      </fileset>
-    </copy>
 
     <echo>INFO: Adding asset config files</echo>
     <copy todir="${pub.dir}/config/assets" overwrite="yes">
@@ -126,31 +112,24 @@
       out="work/menus.xmap" style="elml/install/menus-xmap.xsl"
       >
     </xslt>
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="work">
-        <include name="menus.xmap"/>
-      </fileset>
-    </copy>
 
     <xslt
       in="${pub.dir}/config/doctypes/doctypes.xconf"
       out="work/doctypes.xconf" style="elml/install/doctypes-xconf.xsl"
       >
     </xslt>
-    <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
-      <fileset dir="work">
-        <include name="doctypes.xconf"/>
-     </fileset>
-    </copy>
 
     <xslt
       in="${pub.dir}/parameter-doctype.xmap"
       out="work/parameter-doctype.xmap" style="elml/install/parameter-doctype-xmap.xsl"
       >
     </xslt>
-     <copy todir="${pub.dir}" overwrite="yes">
-       <fileset dir="work">
-        <include name="parameter-doctype.xmap"/>
+
+    <mkdir dir="${pub.dir}/config/menus"/>
+
+    <copy todir="${pub.dir}/config/menus" overwrite="yes">
+       <fileset dir="elml/config/menus">
+        <include name="lesson.xsp"/>
       </fileset>
     </copy>
 
@@ -159,30 +138,12 @@
       out="work/homepage.xsp" style="elml/install/menu-homepage.xsl"
       >
     </xslt>
-    <mkdir dir="${pub.dir}/config/menus"/>
-    <copy todir="${pub.dir}/config/menus" overwrite="yes">
-       <fileset dir="work">
-        <include name="homepage.xsp"/>
-      </fileset>
-    </copy>
 
     <xslt
       in="${pubs.dir}/unizh/config/menus/xhtml.xsp"
       out="work/xhtml.xsp" style="elml/install/menu-xhtml.xsl"
       >
     </xslt>
-    <mkdir dir="${pub.dir}/config/menus"/>
-    <copy todir="${pub.dir}/config/menus" overwrite="yes">
-       <fileset dir="work">
-        <include name="xhtml.xsp"/>
-      </fileset>
-    </copy>
-
-    <copy todir="${pub.dir}/config/menus" overwrite="yes">
-       <fileset dir="elml/config/menus">
-        <include name="lesson.xsp"/>
-      </fileset>
-    </copy>
 
     <echo>INFO: Copying level includes</echo>
     <copy todir="${pubs.dir}/unizh/xslt" overwrite="yes">
@@ -204,11 +165,6 @@
       out="work/html-head.xsl" style="elml/install/html-head.xsl"
       >
     </xslt>
-    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
-       <fileset dir="work">
-        <include name="html-head.xsl"/>
-      </fileset>
-    </copy>
 
     <!-- BXE integration -->
     <echo>INFO: Copying files for BXE</echo>
@@ -226,11 +182,6 @@
       out="work/usecase-bxeng.xmap" style="elml/install/usecase-bxeng.xsl"
       >
     </xslt>
-    <copy todir="${pub.dir}" overwrite="yes">
-       <fileset dir="work">
-         <include name="usecase-bxeng.xmap"/>
-      </fileset>
-    </copy>
 
     <echo>INFO: Patching css file content-bxeng.xml</echo> 
     <xslt
@@ -238,6 +189,44 @@
       out="work/content-bxeng.xml" style="elml/install/content-bxeng.xsl"
       >
     </xslt>
+
+    <echo>INFO: Copying patched files to destination directories</echo>
+
+    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
+      <fileset dir="work">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="work">
+        <include name="publication-sitemap.xmap"/>
+        <include name="doctypes.xmap"/>
+        <include name="menus.xmap"/>
+        <include name="parameter-doctype.xmap"/>
+        <include name="usecase-bxeng.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
+      <fileset dir="work">
+        <include name="doctypes.xconf"/>
+     </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/config/menus" overwrite="yes">
+       <fileset dir="work">
+        <include name="homepage.xsp"/>
+        <include name="xhtml.xsp"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
+       <fileset dir="work">
+        <include name="html-head.xsl"/>
+      </fileset>
+    </copy>
+
     <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
       <fileset dir="work">
          <include name="content-bxeng.xml"/>
