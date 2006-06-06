@@ -58,10 +58,17 @@
     <xsl:copy>
       <xsl:choose>
         <xsl:when test="$querystring">
-	  <xsl:attribute name="src"><xsl:value-of select="@src"/>?<xsl:value-of select="$querystring"/></xsl:attribute>
+          <xsl:choose>
+            <xsl:when test="contains(@src,'?')">
+              <xsl:attribute name="src"><xsl:value-of select="@src"/>&amp;<xsl:value-of select="$querystring"/></xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="src"><xsl:value-of select="@src"/>?<xsl:value-of select="$querystring"/></xsl:attribute>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-	  <xsl:attribute name="src"><xsl:value-of select="@src"/></xsl:attribute>
+          <xsl:attribute name="src"><xsl:value-of select="@src"/></xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="@*[name() != 'src']"/>
