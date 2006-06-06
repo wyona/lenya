@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<!-- $Id: build.xml,v 1.16 2005/09/16 ch.unizh.mike Exp $ -->
+<!-- $Id: build.xml,v 1.16 2006/06/01 tc Exp $ -->
+
+<!-- +- UniCMS e-Learning add-ons: elml support. Install/Uninstall script.
+     +- -->
 
 <project default="install" basedir=".">
-  
-  <property file="install.properties"/>
   
   <target name="init">
     <property name="pub.prefix" value="unitemplate"/>
@@ -17,10 +18,12 @@
     <delete dir="work"/>
   </target>
 
-
   <target name="install" description="Install module" depends="init">
     
     <echo>INFO: Setting up module for publication ${$publication.prefix}</echo>
+
+    <echo>INFO: Creating backup directory</echo>
+    <mkdir dir="backup"/>
 
     <echo>INFO: Adding WebDAV support to core</echo>
     <xslt
@@ -31,13 +34,25 @@
     
     <copy todir="${lenya.dir}/src/java" overwrite="yes">
       <fileset dir="elml/core/java"/>
+    </copy>
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/ac/impl">
+        <include name="UserAuthenticator.java"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/cms/publication">
+        <include name="AbstractPublication.java"/>
+        <include name="Publication.java"/>
+      </fileset>
     </copy> 
 
     <echo>INFO: Copying WebDAV usecase</echo>
     <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
       <fileset dir="elml/lenya/usecases/webdav"/>
     </copy>
-
 
     <echo>INFO: Copying schema files</echo>
     <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
@@ -190,7 +205,51 @@
       >
     </xslt>
 
-    <echo>INFO: Copying patched files to destination directories</echo>
+    <echo>INFO: Backing up files</echo>
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/webapp">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy> 
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pub.dir}">
+        <include name="publication-sitemap.xmap"/>
+        <include name="doctypes.xmap"/>
+        <include name="menus.xmap"/>
+        <include name="parameter-doctype.xmap"/>
+        <include name="usecase-bxeng.xmap"/>
+      </fileset>
+    </copy>
+
+     <copy todir="backup" overwrite="yes">
+      <fileset dir="${pub.dir}/config/doctypes">
+        <include name="doctypes.xconf"/>
+     </fileset>
+    </copy>
+
+    <copy todir="backup" overwrite="yes">
+       <fileset dir="${pub.dir}/config/menus">
+        <include name="homepage.xsp"/>
+        <include name="xhtml.xsp"/>
+      </fileset>
+    </copy>
+
+    <copy todir="backup" overwrite="yes">
+       <fileset dir="${pubs.dir}/unizh/xslt/common">
+        <include name="html-head.xsl"/>
+      </fileset>
+    </copy>
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unizh/resources/misc/bxeng">
+         <include name="content-bxeng.xml"/>
+      </fileset>
+    </copy>
+
+
+    <echo>INFO: Installing patched files</echo>
 
     <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
       <fileset dir="work">
@@ -233,10 +292,139 @@
       </fileset>
     </copy>
 
-
     <antcall target="touch"/>
 
     <antcall target="cleanup"/> 
+
+  </target>
+
+
+  <target name="uninstall" depends="init" description="uninstall">
+
+    <echo>Removing elml installation</echo>
+
+    <delete dir="${lenya.dir}/src/java/org/apache/cocoon/reading"/>
+
+    <copy todir="${lenya.dir}/src/java/org/apache/lenya/ac/impl" overwrite="yes">
+      <fileset dir="backup">
+        <include name="UserAuthenticator.java"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="${lenya.dir}/src/java/org/apache/lenya/cms/publication" overwrite="yes">
+      <fileset dir="backup">
+        <include name="AbstractPublication.java"/>
+        <include name="Publication.java"/>
+      </fileset>
+    </copy>
+
+    <delete dir="${pub.dir}/lenya/usecases/webdav"/>
+
+    <delete dir="${pub.dir}/config/doctypes/schemas/elml"/>
+    <delete>
+      <fileset dir="${pub.dir}/config/doctypes/schemas">
+        <include name="elml.rng"/>
+        <include name="lesson.rng"/>
+        <include name="unit.rng"/> 
+        <include name="furtherReading.rng"/>
+        <include name="selfAssessment.rng"/>
+        <include name="glossary.rng"/>
+        <include name="bibliography.rng"/>
+      </fileset>
+    </delete> 
+
+    <delete>
+      <fileset dir="${pub.dir}/config/doctypes/samples">
+        <include name="lesson.xml"/>
+        <include name="unit.xml"/>
+        <include name="furtherReading.xml"/>
+        <include name="selfAssessment.xml"/>
+        <include name="glossary.xml"/>
+        <include name="bibliography.xml"/>
+      </fileset>
+    </delete>
+
+    <delete>
+      <fileset dir="${pubs.dir}/unizh/xslt/doctypes">
+        <include name="elml-standard.xsl"/>
+      </fileset>
+    </delete> 
+
+    <delete> 
+      <fileset dir="${pubs.dir}/unizh/xslt/common">
+        <include name="elml.xsl"/>
+        <include name="biblio_harvard.xsl"/>
+      </fileset>
+    </delete> 
+
+    <delete>
+      <fileset dir="${pubs.dir}/unizh/resources/shared/images/icons">
+        <include name="glossary.gif"/>
+        <include name="help.gif"/>
+        <include name="important.gif"/>
+        <include name="pdf.gif"/>
+        <include name="question.gif"/>
+        <include name="term.gif"/>
+        <include name="act.gif"/>
+        <include name="glossary.png"/>
+        <include name="help.png"/>
+        <include name="look.gif"/>
+        <include name="pdf.png"/>
+        <include name="remark.gif"/>
+      </fileset>
+    </delete>
+
+    <delete file="${pub.dir}/config/assets/insertMultimedia.xml"/>
+    <delete file="${pub.dir}/usecase-importlesson.xmap"/>
+    <delete file="${pub.dir}/usecase-exportlesson.xmap"/>
+    <delete dir="${pub.dir}/usecases/elml"/>
+    <delete dir="${pub.dir}/config/menus"/>
+    <delete file="${pubs.dir}/unizh/xslt/elml-level.xsl"/>
+    <delete file="${pubs.dir}/unizh/resources/shared/javascript/elml.js"/>
+    <delete file="${pubs.dir}/unizh/xslt/bxe-loadxml.xsl"/>
+    <delete file="${pubs.dir}/unizh/xslt/bxe-savexml.xsl"/>
+    <delete file="${pubs.dir}/unizh/xslt/bxe-rng.xsl"/>
+
+    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
+      <fileset dir="backup">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="backup">
+        <include name="publication-sitemap.xmap"/>
+        <include name="doctypes.xmap"/>
+        <include name="menus.xmap"/>
+        <include name="parameter-doctype.xmap"/>
+        <include name="usecase-bxeng.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/config/doctypes" overwrite="yes">
+      <fileset dir="backup">
+        <include name="doctypes.xconf"/>
+     </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/config/menus" overwrite="yes">
+       <fileset dir="backup">
+        <include name="homepage.xsp"/>
+        <include name="xhtml.xsp"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
+       <fileset dir="backup">
+        <include name="html-head.xsl"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
+      <fileset dir="backup">
+         <include name="content-bxeng.xml"/>
+      </fileset>
+    </copy>
 
   </target>
 
