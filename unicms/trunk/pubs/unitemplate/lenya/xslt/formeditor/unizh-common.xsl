@@ -91,7 +91,7 @@
   <xsl:variable name="nsunizh">namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;</xsl:variable>
   <insert-after select="{$path}[@tagID='{@tagID}']">
     <element name="New Teaser" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:teaser&quot; namespace=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;&lt;unizh:title xmlns:unizh=&quot;http://unizh.ch/doctypes/elements/1.0&quot;&gt;New title&lt;/unizh:title&gt;&lt;xhtml:p xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot;&gt;New content&lt;/xhtml:p&gt;&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
-   <element name="New RSS-Feed" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:rss-reader&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;image&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;items&quot;&gt;3&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;url&quot;&gt;empty&lt;/xupdate:attribute&gt;#rss-reader&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
+   <element name="New RSS Reader" xupdate="&lt;xupdate:insert-after select=&quot;{$path}[@tagID='{@tagID}']&quot;&gt;&lt;xupdate:element name=&quot;unizh:rss-reader&quot; {$nsunizh}&gt;&lt;xupdate:attribute name=&quot;image&quot;&gt;false&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;items&quot;&gt;3&lt;/xupdate:attribute&gt;&lt;xupdate:attribute name=&quot;url&quot;&gt;empty&lt;/xupdate:attribute&gt;#rss-reader&lt;/xupdate:element&gt;&lt;/xupdate:insert-after&gt;"/>
   </insert-after>
 </xsl:template>
 
