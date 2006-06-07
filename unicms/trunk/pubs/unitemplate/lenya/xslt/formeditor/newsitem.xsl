@@ -70,6 +70,7 @@
       </node>
     </xsl:otherwise>
   </xsl:choose>
+  <xsl:call-template name="insertmenu"><xsl:with-param name="path">/*/xhtml:body/xhtml:p</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="unizh:short">
