@@ -296,8 +296,8 @@
     
   </target>
 
-
-  <target name="touch" depends="init" description="touch all source files within new publication">
+  <available file="${new.publication.source.dir}" property="pub-exists"/>
+  <target name="touch" depends="init" description="touch all source files within new publication" if="pub-exists">
     <echo>Touch all files within ${new.publication.source.dir}</echo>
     <touch>
       <fileset dir="${new.publication.source.dir}"/>
