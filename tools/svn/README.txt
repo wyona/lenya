@@ -1,12 +1,18 @@
 SVN-LENYA client
 ****************
-Goals:
-  o For version control and off-line edit.
-  o The Lenya content shall be based on a local SVN workspace
-  o the CMS does not query the repository for every request, 
+
+For version control and off-line edit of Lenya content repository, using a local SVN workspace
+
+Features:
+  o Shell script to wrap the Java implementation
+  o Creates Lenya meta files automagically
+  o Adds new nodes to the sitetree.xml file
+
+Roadmap (proposal):
+  o The CMS does not query the repository for every request, 
     but has a background process which does SVN updates according to a queue (not implemented yet)
-  o client processes can intervene to push a part of the document space to the front of the queue (not implemented yet)
-  o when updates are pulled from the SVN repository the CMS regenerates dependent files 
+  o Client processes can intervene to push a part of the document space to the front of the queue (not implemented yet)
+  o When updates are pulled from the SVN repository the CMS regenerates dependent files 
     (e.g. HTML and PDF from wiki syntax) (not implemented yet)
   o Notification/Observer: The CMS is observing or being notified by the SVN server (not implemented yet)
 
