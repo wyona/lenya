@@ -32,9 +32,11 @@
               </h2>
             </div>
             <h1>
-              <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:heading">
-                <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
-              </div>
+              <span bxe_xpath="/{$document-element-name}/unizh:header/unizh:heading">
+                <a href="{/document/xhtml:div[@id = 'servicenav']/xhtml:div[@id = 'home']/@href}">
+                  <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
+                </a>
+              </span>
             </h1>
           </xsl:when>
           <xsl:otherwise>
