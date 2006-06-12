@@ -13,6 +13,52 @@
   <xsl:param name="contextprefix"/>
   <xsl:param name="rendertype"/>
 
+  <xsl:template name="width-attribute">
+    <xsl:choose>
+      <xsl:when test="@popup = 'true'">
+        <xsl:choose>
+          <xsl:when test="@width > 0">
+            <xsl:value-of select="@width" />
+          </xsl:when>
+          <xsl:otherwise>
+             <xsl:text>204</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:when test="not(@width) or (@width = '')">
+        <xsl:text>204</xsl:text>
+      </xsl:when>
+      <xsl:when test="(@float = 'true') and not(@align = 'right')">
+        <xsl:text>204</xsl:text>
+      </xsl:when>
+      <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
+        <xsl:choose>
+          <xsl:when test="@width > 800">
+            <xsl:text>800</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="@width"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2"> 
+        <xsl:choose>
+          <xsl:when test="@width > 615">
+            <xsl:text>615</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="@width"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:when test="@width > 415">
+        <xsl:text>415</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="@width"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
   <xsl:template match="xhtml:object" mode="preprocess">
     <xsl:choose>
@@ -43,40 +89,7 @@
 
       <xsl:call-template name="object">
         <xsl:with-param name="width">
-          <xsl:choose>
-            <xsl:when test="not(@width) or (@width = '')">
-              <xsl:text>204</xsl:text>
-            </xsl:when>
-            <xsl:when test="(@float = 'true') and not(@align = 'right')">
-              <xsl:text>204</xsl:text>
-            </xsl:when>
-            <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
-              <xsl:choose>
-                <xsl:when test="@width > 800">
-                  <xsl:text>800</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="@width"/>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:when>
-            <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2">                  
-              <xsl:choose>
-                <xsl:when test="@width > 615">
-                  <xsl:text>615</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="@width"/>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:when>
-            <xsl:when test="@width > 415">
-              <xsl:text>415</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@width"/>
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:call-template name="width-attribute" />
         </xsl:with-param>
       </xsl:call-template>
 
@@ -85,7 +98,12 @@
 
 
   <xsl:template match="xhtml:object" mode="withCaption">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <xsl:variable name="width">
+      <xsl:call-template name="width-attribute" />
+    </xsl:variable>
+    
+    
+    <table border="0" cellpadding="0" cellspacing="0" width="{$width}">
       <xsl:attribute name="class">
         <xsl:choose>
           <xsl:when test="(@float = 'true') and (@align = 'right')">
@@ -99,55 +117,12 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
-
+      
       <tr>
         <td class="flexibleimage">
           <xsl:call-template name="object">
             <xsl:with-param name="width">
-              <xsl:choose>
-                <xsl:when test="@popup = 'true'">
-                  <xsl:choose>
-                    <xsl:when test="@width > 0">
-                      <xsl:value-of select="@width" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:text>204</xsl:text>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:when>
-                <xsl:when test="not(@width) or (@width = '')">
-                  <xsl:text>204</xsl:text>
-                </xsl:when>
-                <xsl:when test="(@float = 'true') and not(@align = 'right')">
-                  <xsl:text>204</xsl:text>
-                </xsl:when>
-                <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
-                  <xsl:choose>
-                    <xsl:when test="@width > 800">
-                      <xsl:text>800</xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:value-of select="@width"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:when>
-                <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2"> 
-                  <xsl:choose>
-                    <xsl:when test="@width > 615">
-                      <xsl:text>615</xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:value-of select="@width"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:when>
-                <xsl:when test="@width > 415">
-                  <xsl:text>415</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="@width"/>
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:value-of select="$width"/>
             </xsl:with-param>
           </xsl:call-template>
         </td>
