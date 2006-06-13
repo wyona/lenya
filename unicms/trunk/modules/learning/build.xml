@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- $Id: build.xml,v 1.16 2006/06/01 tc Exp $ -->
+
+ <!-- +- UniCMS e-learning add-ons installation script. Works with UniCMS 1.2.X
+      +-  -->
+
+<project default="install" basedir=".">
+  <import file="elml/build.xml" />
+</project>

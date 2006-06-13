@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<!-- $Id: build.xml,v 1.16 2006/06/01 tc Exp $ -->
+<!-- $Id$ -->
 
 <!-- +- UniCMS e-Learning add-ons: elml support. Install/Uninstall script.
      +- -->
@@ -24,30 +24,6 @@
 
     <echo>INFO: Creating backup directory</echo>
     <mkdir dir="backup"/>
-
-    <echo>INFO: Adding WebDAV support to core</echo>
-    <xslt
-      in="${lenya.dir}/src/webapp/sitemap.xmap"
-      out="work/sitemap.xmap" style="elml/install/sitemap-xmap.xsl"
-      >
-    </xslt>
-    
-    <copy todir="${lenya.dir}/src/java" overwrite="yes">
-      <fileset dir="elml/core/java"/>
-    </copy>
-
-    <copy todir="backup" overwrite="yes">
-      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/ac/impl">
-        <include name="UserAuthenticator.java"/>
-      </fileset>
-    </copy>
-    
-    <copy todir="backup" overwrite="yes">
-      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/cms/publication">
-        <include name="AbstractPublication.java"/>
-        <include name="Publication.java"/>
-      </fileset>
-    </copy> 
 
     <echo>INFO: Copying WebDAV usecase</echo>
     <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
