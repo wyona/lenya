@@ -114,7 +114,7 @@
          </xsl:when>
       </xsl:choose>
       <div class="solidline">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
+        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
       </div>
       <ul>
         <xsl:choose>
@@ -148,7 +148,7 @@
       </xsl:if>
       <xsl:if test="parent::xhtml:div[@id = 'menu']">
         <div class="dotline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" border="0" />
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
         </div>
       </xsl:if>
     </li>
