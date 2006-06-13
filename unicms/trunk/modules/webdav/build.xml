@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- $Id: build.xml 14016 2006-06-08 20:45:39Z thomas $ -->
+
+<!-- +- UniCMS WebDAV support. Install/Uninstall script.
+     +- -->
+
+<project default="install" basedir=".">
+  
+  <target name="init">
+    <property name="pub.prefix" value="unitemplate"/>
+    <property name="lenya.dir" value="/Developer/Java/cocoon-lenya"/>
+    <property name="pubs.dir" value="/Developer/Java/unicms/trunk/pubs"/>
+    <mkdir dir="work"/>
+  </target>
+
+  <target name="cleanup">
+    <delete dir="work"/>
+  </target>
+
+  <target name="install" description="Install module" depends="init">
+    
+    <echo>INFO: Adding UniCMS WebDAV Support</echo>
+
+    <echo>INFO: Creating backup directory</echo>
+    <mkdir dir="backup"/>
+
+    <echo>INFO: Adding WebDAV support to core</echo>
+    <xslt
+      in="${lenya.dir}/src/webapp/sitemap.xmap"
+      out="work/sitemap.xmap" style="install/sitemap-xmap.xsl"
+      >
+    </xslt>
+    
+    <copy todir="${lenya.dir}/src/java" overwrite="yes">
+      <fileset dir="java"/>
+    </copy>
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/ac/impl">
+        <include name="UserAuthenticator.java"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/java/org/apache/lenya/cms/publication">
+        <include name="AbstractPublication.java"/>
+        <include name="Publication.java"/>
+      </fileset>
+    </copy> 
+
+    <echo>INFO: Backing up files</echo>
+
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${lenya.dir}/src/webapp">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy> 
+
+    <echo>INFO: Installing patched files</echo>
+
+    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
+      <fileset dir="work">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+
+    <antcall target="touch"/>
+
+    <antcall target="cleanup"/> 
+
+  </target>
+
+
+  <target name="uninstall" depends="init" description="uninstall">
+
+    <echo>Removing UniCMS WebDAV support</echo>
+
+    <delete dir="${lenya.dir}/src/java/org/apache/cocoon/reading"/>
+
+    <copy todir="${lenya.dir}/src/java/org/apache/lenya/ac/impl" overwrite="yes">
+      <fileset dir="backup">
+        <include name="UserAuthenticator.java"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="${lenya.dir}/src/java/org/apache/lenya/cms/publication" overwrite="yes">
+      <fileset dir="backup">
+        <include name="AbstractPublication.java"/>
+        <include name="Publication.java"/>
+      </fileset>
+    </copy>
+
+    <delete dir="${pub.dir}/lenya/usecases/webdav"/>
+
+    <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
+      <fileset dir="backup">
+         <include name="sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="backup">
+        <include name="publication-sitemap.xmap"/>
+      </fileset>
+    </copy>
+
+  </target>
+
+  <target name="touch" depends="init" description="touch all within publication directory ">
+    <echo>Touch all files within ${pub.dir}</echo>
+    <touch>
+      <fileset dir="${pub.dir}"/>
+    </touch>
+  </target>
+  
+</project>
