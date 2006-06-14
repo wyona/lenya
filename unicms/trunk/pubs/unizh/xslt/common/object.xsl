@@ -265,7 +265,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::unizh:news]">
+  <xsl:template match="xhtml:object[ancestor::unizh:news and not(parent::unizh:teaser)]">
     <div class="imgTextfluss">
       <xsl:call-template name="object">
         <xsl:with-param name="width">204</xsl:with-param>
