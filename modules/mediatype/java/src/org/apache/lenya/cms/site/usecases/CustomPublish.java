@@ -37,8 +37,10 @@ public class CustomPublish extends Publish {
             SourceUtil.copy(resolver, sourceUri, destinationDocument.getSourceURI());
             // replace the main extension with the media type extra information
             // extension
-            sourceUri = sourceUri.substring(0, sourceUri.lastIndexOf(".") + 1).concat(
-                            MediaAssets.MEDIA_FILE_EXTENSION);
+            
+            /*sourceUri = sourceUri.substring(0, sourceUri.lastIndexOf(".") + 1).concat(
+                            MediaAssets.MEDIA_FILE_EXTENSION);*/
+            
             authoringOccurence = sourceUri.indexOf(Publication.AUTHORING_AREA);
             // replace "authoring" with "live"
             destination = sourceUri.substring(0, authoringOccurence).concat(Publication.LIVE_AREA);

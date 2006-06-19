@@ -30,6 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.excalibur.source.ModifiableSource;
 import org.apache.excalibur.source.SourceResolver;
+import org.apache.lenya.cms.cocoon.source.RepositorySource;
 import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.metadata.LenyaMetaData;
 import org.apache.lenya.cms.metadata.MetaData;
@@ -37,12 +38,13 @@ import org.apache.lenya.cms.publication.DefaultResourcesManager;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.publication.ResourceType;
+import org.apache.lenya.cms.repository.Node;
+import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.usecase.UsecaseException;
 
 public class MediaAssets extends CreateDocument {
     // A media type document is an aggregation of different files.
-    // The describtion file has following default extension
-    public static final String MEDIA_FILE_EXTENSION="xml";
+
     /**
      * Validates the request parameters.
      * 
@@ -86,11 +88,8 @@ public class MediaAssets extends CreateDocument {
     	selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
     	resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
         resourceType = (ResourceType) selector.select(getDocumentTypeName());
-    	Document document = getNewDocument();
-		String uri= document.getSourceURI();
-		int lastDotIndex = uri.lastIndexOf(".");
-        String destination = uri;//.substring(0,lastDotIndex).concat("."+MEDIA_FILE_EXTENSION);
-        String sourceUri=resourceType.getSampleURI();
+    	String destination = getNewDocument().getSourceURI();
+		String sourceUri=resourceType.getSampleURI();
         try {
 			SourceUtil.copy(resolver, sourceUri, destination);
 		} catch (Exception e) {
@@ -147,12 +146,23 @@ public class MediaAssets extends CreateDocument {
             customMeta = document.getMetaDataManager().getCustomMetaData();
             addAssetMeta(file,customMeta);
             resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
-            source = (ModifiableSource) resolver.resolveURI(document.getSourceURI());
+            
+            // create a new source with the file extentsion, eg index_en.pdf
+            String uri= document.getSourceURI();
+            String extension = getSourceExtension();
+            String destination = uri + "." + extension;
+            source = (ModifiableSource) resolver.resolveURI(destination);
+            
+            // now that the source is determined, lock involved nodes
+            Node node = getRepositoryNode(destination);
+            node.lock();
+            
             destOutputStream = source.getOutputStream();
-
             final ByteArrayOutputStream sourceBos = new ByteArrayOutputStream();
             IOUtils.copy(inputStream, sourceBos);
             IOUtils.write(sourceBos.toByteArray(), destOutputStream);
+        } catch (RepositoryException e) {
+            throw new RuntimeException(e);
         } finally {
             if (destOutputStream != null) {
                 destOutputStream.flush();
@@ -200,5 +210,31 @@ public class MediaAssets extends CreateDocument {
               customMeta.addValue("media-"+LenyaMetaData.ELEMENT_WIDTH, width);
             }
         }
+    }
+    
+    /**
+     * @return The repository node that represents the document identified by the destination string.
+     */
+    public Node getRepositoryNode(String destination) {
+        Node node = null;
+        SourceResolver resolver = null;
+        RepositorySource documentSource = null;
+        try {
+            resolver = (SourceResolver) this.manager
+                            .lookup(SourceResolver.ROLE);
+            documentSource = (RepositorySource) resolver
+                            .resolveURI(destination);
+            node = documentSource.getNode();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resolver != null) {
+                if (documentSource != null) {
+                    resolver.release(documentSource);
+                }
+                this.manager.release(resolver);
+            }
+        }
+        return node;
     }
 }
