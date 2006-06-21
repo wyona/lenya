@@ -37,8 +37,6 @@
      resources/example_defaultpub/page.css that you can copy in the default pub 
      (pub/resources/shared/css).
   </lenya:install>
-  <lenya:depends>
-      <lenya:module>sitetree</lenya:module>
-  </lenya:depends>
+  <lenya:depends module="org.apache.lenya.modules.sitetree"/>
   
 </lenya:module>
