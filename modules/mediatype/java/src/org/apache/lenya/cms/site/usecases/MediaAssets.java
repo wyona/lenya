@@ -82,19 +82,19 @@ public class MediaAssets extends CreateDocument {
     }
 
     private void addDoc() throws Exception {
-    	ResourceType resourceType = null;
-    	ServiceSelector selector = null;
-    	SourceResolver resolver = null;
-    	selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
-    	resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
+        ResourceType resourceType = null;
+        ServiceSelector selector = null;
+        SourceResolver resolver = null;
+        selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
+        resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
         resourceType = (ResourceType) selector.select(getDocumentTypeName());
-    	String destination = getNewDocument().getSourceURI();
-		String sourceUri=resourceType.getSampleURI();
+        String destination = getNewDocument().getSourceURI();
+        String sourceUri = resourceType.getSampleURI();
         try {
-			SourceUtil.copy(resolver, sourceUri, destination);
-		} catch (Exception e) {
-			throw new Exception(e);
-		}finally {
+            SourceUtil.copy(resolver, sourceUri, destination);
+        } catch (Exception e) {
+            throw new Exception(e);
+        } finally {
             if (selector != null) {
                 if (resourceType != null) {
                     selector.release(resourceType);
@@ -103,13 +103,13 @@ public class MediaAssets extends CreateDocument {
             this.manager.release(selector);
             this.manager.release(resolver);
         }
-	}
+    }
 
-	/**
+    /**
      * Adds an asset. If asset upload is not enabled, an error message is added.
-     * @throws IOException 
-     * @throws ServiceException 
-     * @throws DocumentException 
+     * @throws IOException
+     * @throws ServiceException
+     * @throws DocumentException
      */
     protected void addAsset() throws ServiceException, IOException, DocumentException {
 
@@ -130,9 +130,9 @@ public class MediaAssets extends CreateDocument {
      * Adds an asset.
      * 
      * @param file The part.
-     * @throws IOException 
-     * @throws ServiceException 
-     * @throws DocumentException 
+     * @throws IOException
+     * @throws ServiceException
+     * @throws DocumentException
      */
     protected void addAsset(Part file) throws IOException, ServiceException, DocumentException {
         Document document = getNewDocument();
@@ -144,19 +144,19 @@ public class MediaAssets extends CreateDocument {
         InputStream inputStream = file.getInputStream();
         try {
             customMeta = document.getMetaDataManager().getCustomMetaData();
-            addAssetMeta(file,customMeta);
+            addAssetMeta(file, customMeta);
             resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
-            
+
             // create a new source with the file extentsion, eg index_en.pdf
-            String uri= document.getSourceURI();
+            String uri = document.getSourceURI();
             String extension = getSourceExtension();
             String destination = uri + "." + extension;
             source = (ModifiableSource) resolver.resolveURI(destination);
-            
+
             // now that the source is determined, lock involved nodes
             Node node = getRepositoryNode(destination);
             node.lock();
-            
+
             destOutputStream = source.getOutputStream();
             final ByteArrayOutputStream sourceBos = new ByteArrayOutputStream();
             IOUtils.copy(inputStream, sourceBos);
@@ -179,51 +179,50 @@ public class MediaAssets extends CreateDocument {
 
     protected String getSourceExtension() {
         String extension = "";
-        
+
         Part file = getPart("file");
         String fileName = file.getFileName();
         int lastDotIndex = fileName.lastIndexOf(".");
         if (lastDotIndex > -1) {
             extension = fileName.substring(lastDotIndex + 1);
-        }
-        else {
+        } else {
             addErrorMessage("Please upload a file with an extension.");
         }
         return extension;
     }
 
-    protected void addAssetMeta (Part part, MetaData customMeta) throws DocumentException, IOException{
+    protected void addAssetMeta(Part part, MetaData customMeta) throws DocumentException,
+            IOException {
         String fileName = part.getFileName();
         String mimeType = part.getMimeType();
         int fileSize = part.getSize();
-        if(customMeta!=null){
+        if (customMeta != null) {
             customMeta.addValue("media-filename", fileName);
             customMeta.addValue("media-format", mimeType);
             customMeta.addValue("media-extent", Integer.toString(fileSize));
-          }
+        }
         if (DefaultResourcesManager.canReadMimeType(mimeType)) {
             BufferedImage input = ImageIO.read(part.getInputStream());
             String width = Integer.toString(input.getWidth());
             String height = Integer.toString(input.getHeight());
-            if(customMeta!=null){
-              customMeta.addValue("media-"+LenyaMetaData.ELEMENTE_HEIGHT, height);
-              customMeta.addValue("media-"+LenyaMetaData.ELEMENT_WIDTH, width);
+            if (customMeta != null) {
+                customMeta.addValue("media-" + LenyaMetaData.ELEMENTE_HEIGHT, height);
+                customMeta.addValue("media-" + LenyaMetaData.ELEMENT_WIDTH, width);
             }
         }
     }
-    
+
     /**
-     * @return The repository node that represents the document identified by the destination string.
+     * @return The repository node that represents the document identified by the destination
+     *         string.
      */
     public Node getRepositoryNode(String destination) {
         Node node = null;
         SourceResolver resolver = null;
         RepositorySource documentSource = null;
         try {
-            resolver = (SourceResolver) this.manager
-                            .lookup(SourceResolver.ROLE);
-            documentSource = (RepositorySource) resolver
-                            .resolveURI(destination);
+            resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
+            documentSource = (RepositorySource) resolver.resolveURI(destination);
             node = documentSource.getNode();
         } catch (Exception e) {
             throw new RuntimeException(e);
