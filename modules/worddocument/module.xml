@@ -21,7 +21,7 @@
   <lenya:id>org.apache.lenya.modules.worddocument</lenya:id>
   <lenya:package>org.apache.lenya.modules</lenya:package>
   <lenya:version>0.1-dev</lenya:version>
-  <lenya:name>ODF Module</lenya:name>
+  <lenya:name>Word Document Module</lenya:name>
   <lenya:lenya-version>@lenya.version@</lenya:lenya-version>
   <lenya:description>Word Document Module</lenya:description>
 </lenya:module>

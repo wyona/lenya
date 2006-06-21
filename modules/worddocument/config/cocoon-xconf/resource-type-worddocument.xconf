@@ -22,12 +22,10 @@
   <component-instance name="worddocument"
                       logger="lenya.resourcetypes.worddocument"
                       class="org.apache.lenya.cms.publication.ResourceTypeImpl">
-
     <sample-name>fallback://lenya/modules/worddocument/samples/helloworld.doc</sample-name>
-
     <!-- NOTE: Will be matched within sitemap of this module (modules/worddocument/sitemap.xmap) -->
     <format name="xhtml" uri="cocoon://modules/worddocument/xhtml.xml"/>
-    <format name="webdavGETdoc" uri="cocoon://modules/worddocument/davget.doc"/>
+    <format name="webdavGET" uri="cocoon://modules/worddocument/davget.xml"/>
   </component-instance>
 
 </xconf>

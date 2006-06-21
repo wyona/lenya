@@ -36,17 +36,17 @@
       </map:match>
 
       <!-- webdav GET matcher -->
-      <map:match pattern="davget.doc">
+      <map:match pattern="davget.xml">
         <map:act type="set-header">
           <map:parameter name="Last-Modified" value="{date-iso8601-rfc822:{page-envelope:document-lastmodified}}" />
-          <map:read src="lenyadoc://{page-envelope:publication-id}/{page-envelope:area}/{page-envelope:document-language}/{page-envelope:document-id}" mime-type="application/msword"/>
+          <map:read src="lenyadoc:/{page-envelope:document-language}/{page-envelope:document-id}" mime-type="application/msword"/>
         </map:act>
       </map:match>
 
       <!-- parametrized doctype matcher -->
       <!-- pattern="{rendertype}" -->
 
-<!-- TODO: The path of the doc file should be get with the input module, like for the xml file.
+      <!-- TODO: The path of the doc file should be get with the input module, like for the xml file.
  Write a special DocumentIdToPathMapper, permit a Resource to have its own Mapper-->
       <map:match pattern="*.xml">
         <!-- TODO: Replace placeholder empty.xml with .doc content extracted with POI -->

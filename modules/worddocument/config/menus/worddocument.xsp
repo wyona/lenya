@@ -43,20 +43,28 @@
       </menu>
       <menu i18n:attr="name" name="Edit">
           <xsp:logic>
-            String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
-            String requestURI = <input:get-attribute module="request" as="string" name="requestURI"/>;
-            String moduleURI = requestURI.substring(0,requestURI.lastIndexOf(".html")).concat(".doc?lenya.module=worddocument");
-            if ("worddocument".equals(doctype)) {
-                <block info="false">
-                  <item>
-                    <xsp:attribute name="href">
-                      <xsp:expr>moduleURI</xsp:expr>
-                    </xsp:attribute>
-                    <i18n:text>Download Word Document</i18n:text></item>
-                </block>
-                <block info="false">
-                  <item uc:usecase="module.doc.upload" href="?"><i18n:text>Upload Word Document</i18n:text></item>
-                </block>
+            try {
+                Object doc = <input:get-attribute module="page-envelope" as="object" name="document"/>;
+                if (doc instanceof Document &amp;&amp; ((Document) doc).exists()) {
+                    String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
+                    String requestURI = <input:get-attribute module="request" as="string" name="requestURI"/>;
+                    String moduleURI = requestURI.substring(0,requestURI.lastIndexOf(".html")).concat(".doc?lenya.module=worddocument");
+                    if ("opendocument".equals(doctype)) {
+                        <block info="false">
+                          <item>
+                            <xsp:attribute name="href">
+                              <xsp:expr>moduleURI</xsp:expr>
+                            </xsp:attribute>
+                            <i18n:text>Download Word Document</i18n:text></item>
+                        </block>
+                        <block info="false">
+                          <item uc:usecase="module.doc.upload" href="?"><i18n:text>Upload Word Document</i18n:text></item>
+                        </block>
+                    }
+                }
+            }
+            catch (Exception e) {
+                throw new ProcessingException("Error during menu generation: ", e);
             }
           </xsp:logic>
       </menu>
