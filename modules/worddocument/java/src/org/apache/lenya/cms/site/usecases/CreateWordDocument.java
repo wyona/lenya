@@ -37,7 +37,6 @@ import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
 import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.repository.Node;
-import org.apache.lenya.cms.repository.SourceNode;
 import org.apache.lenya.cms.site.SiteManager;
 import org.apache.lenya.cms.cocoon.source.SourceUtil;
 
@@ -49,25 +48,21 @@ import org.apache.lenya.cms.cocoon.source.SourceUtil;
 public class CreateWordDocument extends Create {
 
     protected static final String PARENT_ID = "parentId";
-
     protected static final String DOCUMENT_TYPE = "doctype";
-
     protected static final String RELATION = "relation";
-
     protected static final String RELATIONS = "relations";
-
     protected static final String RELATION_CHILD = "child";
-
     protected static final String RELATION_BEFORE = "sibling before";
-
     protected static final String RELATION_AFTER = "sibling after";
-
     protected static final String DOCUMENT_ID_PROVIDED = "documentIdProvided";
-
     protected static final String DOC_EXTENSION = ".doc";
-
     protected static final String DEFAULT_INDEX = "index";
 
+    protected static final String FILE_PREFIX = "file:/";
+    protected static final String CONTEXT_PREFIX = "context://";
+    protected static final String LENYA_META_SUFFIX = "meta";
+    
+    
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
@@ -212,15 +207,15 @@ public class CreateWordDocument extends Create {
             String urlID = "content/" + document.getArea() + document.getId() + "/" + DEFAULT_INDEX
                     + "_" + document.getLanguage() + DOC_EXTENSION;
             if (contentDir == null) {
-                destination = SourceNode.CONTEXT_PREFIX + Publication.PUBLICATION_PREFIX_URI + "/"
+                destination = CONTEXT_PREFIX + Publication.PUBLICATION_PREFIX_URI + "/"
                         + publicationId + "/" + urlID;
             } else {
                 if (new File(contentDir).isAbsolute()) {
                     // Absolute
-                    destination = SourceNode.FILE_PREFIX + contentDir + File.separator + urlID;
+                    destination = FILE_PREFIX + contentDir + File.separator + urlID;
                 } else {
                     // Relative
-                    destination = SourceNode.CONTEXT_PREFIX + contentDir + File.separator + urlID;
+                    destination = CONTEXT_PREFIX + contentDir + File.separator + urlID;
                 }
             }
             SourceUtil.copy(resolver, sourceUri, destination);
