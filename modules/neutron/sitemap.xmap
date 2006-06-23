@@ -21,15 +21,30 @@
   <map:components/>
 
   <map:pipelines>
+      
+    <!-- Introspection -->
+  <map:pipeline>
+    <map:match pattern="*/**/introspection.xml">
+      <map:generate src="context:/lenya/content/util/empty.xml"/>
+      <map:transform src="context:/lenya/modules/neutron/xslt/introspection.xsl">
+        <map:parameter name="context" value="{page-envelope:context-prefix}"/>
+        <map:parameter name="publication" value="{page-envelope:publication-id}"/>
+        <map:parameter name="area" value="{1}"/>
+        <map:parameter name="page-id" value="{2}"/>
+      </map:transform>
+      <map:serialize type="xml"/>
+    </map:match>
+  </map:pipeline>
+  
     <map:pipeline>
       <map:match pattern="neutron" type="usecase">
         <map:match pattern="checkout" type="step">
-          <map:generate src="fallback://lenya/modules/neutron/sitemap.xmap"/>
+          <map:generate src="context://lenya/content/util/empty.xml"/>
           <map:serialize type="xml"/>
         </map:match>
 
         <map:match pattern="checkin" type="step">
-          <map:generate src="fallback://lenya/modules/neutron/sitemap.xmap"/>
+          <map:generate src="context://lenya/content/util/empty.xml"/>
           <map:serialize type="xml"/>
         </map:match>
       </map:match>
