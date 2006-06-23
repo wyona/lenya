@@ -19,4 +19,9 @@
 
 <module xmlns="http://apache.org/lenya/module/1.0">
   <id>org.wyona.lenya.modules.tinymce</id>
+  <package>org.apache.lenya.modules</package>
+  <version>0.01-dev</version>
+  <name>TinyMCE Module</name>
+  <lenya-version>@lenya.version@</lenya-version>
+  <description>Module for the TinyMCE WYSIWYG XHTML editor. Work in progress</description>
 </module>

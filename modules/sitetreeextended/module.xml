@@ -19,6 +19,7 @@
 
 <lenya:module xmlns:lenya="http://apache.org/lenya/module/1.0">
   <lenya:id>org.apache.lenya.modules.sitetreeextended</lenya:id>
+  <lenya:depends module="org.apache.lenya.modules.sitetree"/>
   <lenya:package>org.apache.lenya.modules</lenya:package>
   <lenya:version>0.1-dev</lenya:version>
   <lenya:name>sitetreeextended Module</lenya:name>
@@ -28,15 +29,13 @@
   display a small icon in front of specific ressource types in the left menu.
   See a screenshot: /resources/example_defaultpub/Screenshot-sitetreeextended.png
   </lenya:description>
-  <lenya:author>Wyona Inc.</lenya:author>
-  <lenya:install>
+  <lenya:creator>Wyona Inc.</lenya:creator>
+  <lenya:installation>
     -modify in your pub/sitemap.xmap: 
      map:part src="cocoon://modules/sitetreeextended/{2}/{3}/menu/{5}.xml"/
     -copy resources/example_defaultpub/images in your pub/resources/shared/images
     -adapt your page.css (e.g. to render .xhtml). there is an example in 
      resources/example_defaultpub/page.css that you can copy in the default pub 
      (pub/resources/shared/css).
-  </lenya:install>
-  <lenya:depends module="org.apache.lenya.modules.sitetree"/>
-  
+  </lenya:installation>
 </lenya:module>
