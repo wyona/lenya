@@ -4,6 +4,7 @@
 
 <lenya:module xmlns:lenya="http://apache.org/lenya/module/1.0">
   <lenya:id>org.wyona.lenya.modules.mediatype</lenya:id>
+  <lenya:depends module="org.apache.lenya.modules.usecase"/>
   <lenya:depends module="org.apache.lenya.modules.defaultusecases"/>
   <lenya:depends module="org.apache.lenya.modules.sitemanagement"/>
   <lenya:package>org.wyona.lenya.modules</lenya:package>
