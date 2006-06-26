@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<D:multistatus xmlns:D="DAV:" xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"
+  xmlns:collection="http://apache.org/cocoon/collection/1.0">
+  <jx:set var="dateFormat" value="MMM/yyyy"/>
+  <jx:set var="moddate" value="Wed 12 04 12"/>
+  <jx:set var="defaultLang" value="de"/>
+
+    <D:response>
+      <jx:choose>
+        <jx:when test="${doc.getId() == '/'}">
+          <D:href>/lenya/unitemplate/webdav${doc.getId()}</D:href>
+        </jx:when>
+        <jx:otherwise>
+          <D:href>/lenya/unitemplate/webdav${doc.getId()}/</D:href>
+        </jx:otherwise>
+      </jx:choose>
+      <D:propstat>
+        <D:prop>
+          <D:displayname>doc:property:name</D:displayname>
+          <D:getlastmodified></D:getlastmodified>
+          <D:creationdate>${creationdate}</D:creationdate>
+          <D:resourcetype><D:collection/></D:resourcetype>
+          <D:getcontenttype>application/xml</D:getcontenttype>
+          <D:getcontentlength></D:getcontentlength>
+          <D:lockdiscovery/>
+        </D:prop>
+        <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+    </D:response>
+
+<jx:if test="${depth != '0'}">
+
+  <jx:forEach var="source" items="${sources}">
+    <D:response>
+      <D:href>${source.doc.getDocumentURL()}</D:href>
+      <D:propstat>
+        <D:prop>
+          <D:displayname>${doc.getLabel()} (Source)</D:displayname>
+          <D:getlastmodified><jx:formatDate value="${doc.getLastModified()}" pattern="d. MMMM yyyy H:m"/></D:getlastmodified>
+          <D:creationdate>${creationdate}</D:creationdate>
+          <D:resourcetype/>
+          <D:getcontenttype>application/xml</D:getcontenttype>
+          <D:getcontentlength>${doc.getFile().length()}</D:getcontentlength>
+          <D:lockdiscovery>
+            <jx:if test="${source.rcmlEntry.getType() == 0}">
+              <D:activelock>
+                <D:locktype><D:write/></D:locktype>
+                <D:lockscope><D:exclusive/></D:lockscope>
+                <D:depth>0</D:depth>
+                <D:owner>
+                  <D:href>${source.rcmlEntry.getIdentity()}</D:href>
+                  </D:owner>
+                <D:timeout>Infinite</D:timeout>
+                <D:locktoken>
+                  <D:href>${doc.getCompleteURL()}</D:href>
+                </D:locktoken>
+              </D:activelock>
+            </jx:if>
+          </D:lockdiscovery>
+        </D:prop>
+        <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+    </D:response>
+  </jx:forEach> 
+
+  <jx:if test="${assetsDir != null}">
+    <D:response>
+      <D:href>/lenya/${doc.getPublication().getId()}/webdav${doc.getId()}/${assetsDir}/</D:href>
+      <D:propstat>
+        <D:prop>
+          <D:displayname>${assetsDir}</D:displayname>
+          <D:getlastmodified></D:getlastmodified>
+          <D:creationdate>${creationdate}</D:creationdate>
+          <D:resourcetype><D:collection/></D:resourcetype>
+          <D:getcontenttype>application/xml</D:getcontenttype>
+          <D:lockdiscovery/>
+        </D:prop>
+        <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+      <D:propstat>
+        <D:prop>
+          <D:getlastmodified><D:status>HTTP/1.1 404</D:status></D:getlastmodified>
+          <D:getcontentlength><D:status>HTTP/1.1 404</D:status></D:getcontentlength>
+        </D:prop>
+      </D:propstat>
+    </D:response>
+  </jx:if>
+
+  <jx:forEach var="mbr" items="${members}">
+    <D:response>
+      <D:href>/lenya/unitemplate/webdav${mbr.getId()}/</D:href>
+      <D:propstat>
+        <D:prop>
+          <D:displayname>${mbr.getLabel()}</D:displayname>
+          <D:getlastmodified><jx:formatDate value="${mbr.getLastModified()}" pattern="d. MMMM yyyy H:m"/></D:getlastmodified>
+          <D:creationdate></D:creationdate>
+          <D:resourcetype>
+            <D:collection/>
+          </D:resourcetype>
+          <D:getcontenttype>httpd/unix-directory</D:getcontenttype>
+          <D:getcontentlength>${mbr.getFile().length()}</D:getcontentlength>
+          <D:lockdiscovery/>
+        </D:prop>
+        <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+    </D:response>
+  </jx:forEach>
+
+  <jx:forEach var="info" items="${assetInfos}"> 
+    <D:response>
+      <D:href>${info.url}</D:href>
+      <D:propstat>
+        <D:prop>
+          <D:displayname>${info.name}</D:displayname>
+          <D:getlastmodified></D:getlastmodified>
+          <D:creationdate/>
+          <D:getcontenttype></D:getcontenttype>
+          <D:getcontentlength>${info.length}</D:getcontentlength>
+          <D:resourcetype/>
+          <D:lockdiscovery>
+             <jx:if test="${info.rcmlEntry.getType() == 0}">
+              <D:activelock>
+                <D:locktype><D:write/></D:locktype>
+                <D:lockscope><D:exclusive/></D:lockscope>
+                <D:depth>0</D:depth>
+                <D:owner>
+                  <D:href>${info.rcmlEntry.getIdentity()}</D:href>
+                  </D:owner>
+                <D:timeout>Infinite</D:timeout>
+                <D:locktoken>
+                  <D:href>${doc.getCompleteURL()}</D:href>
+                </D:locktoken>
+              </D:activelock>
+            </jx:if>
+          </D:lockdiscovery>
+        </D:prop>
+        <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+    </D:response>
+  </jx:forEach> 
+
+</jx:if>
+</D:multistatus>
