@@ -19,7 +19,7 @@
 
   <target name="install" description="Install module" depends="init">
     
-    <echo>INFO: Adding UniCMS WebDAV Support</echo>
+    <echo>INFO: Adding Lenya WebDAV Support</echo>
 
     <echo>INFO: Creating backup directory</echo>
     <mkdir dir="backup"/>
@@ -47,7 +47,12 @@
         <include name="Publication.java"/>
       </fileset>
     </copy> 
-
+ 
+    <echo>INFO: Copying usecase</echo>
+    <copy todir="${lenya.dir}/src/webapp/lenya/usecases/webdav" overwrite="yes">
+      <fileset dir="lenya/usecases/webdav"/>
+    </copy>
+ 
     <echo>INFO: Backing up files</echo>
 
     <copy todir="backup" overwrite="yes">
@@ -64,9 +69,6 @@
       </fileset>
     </copy>
 
-
-    <antcall target="touch"/>
-
     <antcall target="cleanup"/> 
 
   </target>
@@ -74,7 +76,7 @@
 
   <target name="uninstall" depends="init" description="uninstall">
 
-    <echo>Removing UniCMS WebDAV support</echo>
+    <echo>Removing Lenya WebDAV support</echo>
 
     <delete dir="${lenya.dir}/src/java/org/apache/cocoon/reading"/>
 
@@ -91,7 +93,7 @@
       </fileset>
     </copy>
 
-    <delete dir="${pub.dir}/lenya/usecases/webdav"/>
+    <delete dir="${lenya.dir}/src/webapp/lenya/usecases/webdav"/>
 
     <copy todir="${lenya.dir}/src/webapp" overwrite="yes">
       <fileset dir="backup">
@@ -99,19 +101,6 @@
       </fileset>
     </copy>
 
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="backup">
-        <include name="publication-sitemap.xmap"/>
-      </fileset>
-    </copy>
-
-  </target>
-
-  <target name="touch" depends="init" description="touch all within publication directory ">
-    <echo>Touch all files within ${pub.dir}</echo>
-    <touch>
-      <fileset dir="${pub.dir}"/>
-    </touch>
   </target>
   
 </project>
