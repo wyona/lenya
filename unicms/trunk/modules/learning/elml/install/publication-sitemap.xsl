@@ -12,7 +12,7 @@
     <xsl:copy-of select="."/>
   </xsl:template>
 
-  <xsl:template match="map:pipeline[map:match[@pattern='*/**.html']]">
+  <!-- <xsl:template match="map:pipeline[map:match[@pattern='*/**.html']]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <map:match pattern="webdav/**">
@@ -20,7 +20,7 @@
       </map:match>
       <xsl:apply-templates select="node()"/>
     </xsl:copy>
-  </xsl:template>
+  </xsl:template> -->
 
   <xsl:template match="@*|node()">
     <xsl:copy>
