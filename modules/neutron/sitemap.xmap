@@ -47,6 +47,7 @@
               <map:serialize type="xml"  status-code="423"/>
             </map:act>
             <map:generate src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{page-envelope:document-path}"/>
+            <map:transform src="fallback://lenya/xslt/util/strip_namespaces.xsl" />
             <map:serialize type="xml" status-code="200" />
           </map:when>
           <map:otherwise>
