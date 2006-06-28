@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><unizh:homepage xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:tabs="false" xhtml:dummy="FIXME:keepNamespace">
+&#9;
+  <lenya:meta>
+    <dc:title>Willkommen!</dc:title>
+    <dc:description>Abstract</dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject>Keywords</dc:subject>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:header>
+    <unizh:superscription>Universität Zürich</unizh:superscription>
+    <unizh:heading>Titel der Publikation</unizh:heading>
+  </unizh:header>
+  <unizh:contcol1>
+    <unizh:quicklinks label="Quick Links">
+      <unizh:quicklink>
+        <p>Thema</p>
+        <a href="#">Link</a>
+      </unizh:quicklink>
+    </unizh:quicklinks>
+  </unizh:contcol1>
+  <unizh:related-content>
+    <unizh:teaser name="Beispiel">
+      <unizh:title>Beispiel-Teaser</unizh:title>
+      <p>Beispiel für einen Teaser.</p><a href="#" title="Teaser Link">Link</a>
+    </unizh:teaser><unizh:rss-reader url="http://www.unipublic.unizh.ch/index.rss.xml" items="1">Unipublic</unizh:rss-reader><unizh:rss-reader url="http://www.unizh.ch/news/rss/cms/ibis_rss.php" items="5">Ibis</unizh:rss-reader>
+  </unizh:related-content>
+  <body>
+    <p>
+UniCMS, das Content Management System der Universität Zürich, steht allen Institutionen der 
+Universität Zürich zur Verfügung, um dezentral und browserbasiert Webseiten zu erstellen 
+und bewirtschaften.
+    </p>
+
+<h3>Dokumentation:</h3>
+<p>
+Ausführliche Informationen zur Erstellung und Wartung einer UniCMS-Publikation finden Sie in der <a href="http://www.unicms.unizh.ch/docu.html">UniCMS Online-Dokumentation</a>.<br/>
+</p><unizh:rss-reader url="/doctypes/custom/News.rss.xml" items="3">Beispiel RSS-News (intern)</unizh:rss-reader>
+  </body>
+</unizh:homepage>
