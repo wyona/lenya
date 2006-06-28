@@ -20,7 +20,7 @@
  
   <xsl:template match="lenya:asset-dot[@class='image']">
     <a href="{@href}"> 
-      <img alt="Insert Identity" border="0" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>  
+      <img alt="Insert Identity" src="{$contextprefix}/lenya/images/util/uploadimage.gif"/>  
     </a>&#160;
   </xsl:template>
 
@@ -33,13 +33,13 @@
 
   <xsl:template match="lenya:asset-dot[@class='delete']">
     <a href="{@href}">
-      <img alt="Insert Identity" border="0" src="{$imageprefix}/icons/delete.gif"/>
+      <img alt="Insert Identity" src="{$imageprefix}/icons/delete.gif"/>
     </a>&#160;
   </xsl:template>
 
   <xsl:template match="lenya:asset-dot[@class='asset']">
     <a href="{@href}">
-      <img alt="Insert Asset" border="0" src="{$contextprefix}/lenya/images/util/uploadasset.gif"/>
+      <img alt="Insert Asset" src="{$contextprefix}/lenya/images/util/uploadasset.gif"/>
     </a>&#160; 
   </xsl:template>
  
@@ -537,7 +537,7 @@
           <a class="download" href="{$nodeid}/{@src}">
             <xsl:value-of select="text()"/><xsl:comment/>
           </a>
-          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" alt="{text()}" title="{text()}" border="0"/>)
+          (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" alt="{text()}" title="{text()}"/>)
         </div>
         <xsl:if test="parent::xhtml:body and not(following-sibling::*[1][name() = 'lenya:asset'])">
           <br/>
