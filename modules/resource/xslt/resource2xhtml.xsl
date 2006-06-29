@@ -51,7 +51,7 @@
       </xsl:choose>
     </xsl:variable>
     
-    <table width="500" cellpadding="2" cellspacing="10" border="0" bgcolor="#f2f2f2"
+    <table width="500" cellpadding="2" cellspacing="0" border="0" bgcolor="#f2f2f2"
       style="border-width:1pt;border-color:#d6d6d6;border-style:line">
       <tr>
         <td> <a href="{$mediaURI}" target="_new">
@@ -61,7 +61,7 @@
             <xsl:with-param name="imageprefix" select="$imageprefix"/>
           </xsl:call-template> </a>
         </td>
-        <td><h3><i18n:text>Resource Document</i18n:text></h3></td>
+        <td><h1><i18n:text>Resource Document</i18n:text></h1></td>
       </tr>
       <tr>
         <td><i><i18n:text>Title</i18n:text>:</i></td>
@@ -69,7 +69,7 @@
       </tr>
       <tr>
         <td><i><i18n:text>Description</i18n:text>:</i></td>
-        <td><p><xsl:value-of select="lenya:dc/dc:description"/></p></td>
+        <td><xsl:value-of select="lenya:dc/dc:description"/></td>
       </tr>
       <tr>
         <td><i><i18n:text>Content</i18n:text>:</i></td>
@@ -91,7 +91,19 @@
             <xsl:value-of select="lenya:custom/lenya:media-height"/></td>
         </tr>
       </xsl:if>
+      <tr>
+        <td colspan="2"><i><i18n:text>Preview</i18n:text>:</i><br/><br/>
+        <div align="center">
+          <xsl:call-template name="preview">
+            <xsl:with-param name="mimetype"
+              select="lenya:custom/lenya:media-format"/>
+            <xsl:with-param name="mediaURI" select="$mediaURI"/>
+          </xsl:call-template><br/><br/>
+        </div>
+        </td>
+      </tr>
     </table>
+
   </xsl:template>
   
   <xsl:template match="@*|node()" priority="-1">
