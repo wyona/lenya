@@ -13,7 +13,7 @@
   xmlns:dcterms="http://purl.org/dc/terms/"
   exclude-result-prefixes="xhtml lenya mobi dc">
   
-  <xsl:import href="fallback://lenya/modules/mediatype/xslt/common/mimetype.xsl"/>
+  <xsl:import href="fallback://lenya/modules/resource/xslt/common/mimetype.xsl"/>
   <xsl:include href="fallback://lenya/modules/xhtml/xslt/helper-object.xsl"/>
   <xsl:param name="root"/> <!-- the URL up to (including) the area -->
   <xsl:param name="documentId"/>
