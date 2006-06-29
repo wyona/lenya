@@ -105,22 +105,14 @@
 	    <a accesskey="1" name="navigation"><xsl:comment/></a>
 	  </xsl:if>
       <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
-      <xsl:choose>
-        <xsl:when test="$level > 2 and $current/xhtml:div">
-          <a href="{$descendants[$level - 2]/@href}">[...] <xsl:value-of select="$descendants[$level - 2]/text()"/></a>
-        </xsl:when>
-        <xsl:when test="$level > 3">
-          <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
-         </xsl:when>
-      </xsl:choose>
+      <xsl:if test="$level > 3">
+        <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
+       </xsl:if>
       <div class="solidline">
         <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
       </div>
       <ul>
         <xsl:choose>
-          <xsl:when test="$level > 2 and $current/xhtml:div"> 
-            <xsl:apply-templates select="$descendants[$level - 1]"/>
-          </xsl:when>
           <xsl:when test="$level > 3">
             <xsl:apply-templates select="$descendants[$level - 2]"/>
           </xsl:when>

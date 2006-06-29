@@ -438,6 +438,12 @@ img.icon {
 	width:138px;
 }
 
+/*fifth navigation*/
+#secnav ul ul ul ul li a {
+  padding: 4px 0px 4px 37px;
+	width:128px;
+}
+
 /*tool navigation zB. language,print,lupe*/
 #toolnav  {
 	font-size: 0.75em;
