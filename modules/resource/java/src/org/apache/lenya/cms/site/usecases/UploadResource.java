@@ -45,10 +45,6 @@ import org.apache.lenya.cms.usecase.DocumentUsecase;
  */
 public class UploadResource extends DocumentUsecase {
 
-    protected static final String ODT_EXTENSION = ".odt";
-
-    protected static final String ODT_MIME_TYPE = "application/vnd.oasis.opendocument.text";
-
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
@@ -84,17 +80,14 @@ public class UploadResource extends DocumentUsecase {
     protected void saveResource(Part file) throws IOException, ServiceException, DocumentException {
         Document document = getSourceDocument();
         String destination = document.getSourceURI();
-        MetaData customMeta = null;
-
+        
         SourceResolver resolver = null;
         ModifiableSource source = null;
         OutputStream destOutputStream = null;
         InputStream inputStream = file.getInputStream();
         try {
-            customMeta = document.getMetaDataManager().getCustomMetaData();
-            addResourceMeta(file, customMeta);
+            
             resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
-
             source = (ModifiableSource) resolver.resolveURI(destination);
 
             // now that the source is determined, lock involved nodes
@@ -116,6 +109,13 @@ public class UploadResource extends DocumentUsecase {
                 inputStream.close();
             }
         }
+        
+        MetaData customMeta = document.getMetaDataManager().getCustomMetaData();
+        updateResourceMeta(file, customMeta);
+        
+        // update <lenya:extension>
+        MetaData internalMeta = document.getMetaDataManager().getLenyaMetaData();
+        internalMeta.setValue("extension", getSourceExtension());
 
         if (getLogger().isDebugEnabled())
             getLogger().debug("Resource::addResource() done.");
@@ -135,7 +135,7 @@ public class UploadResource extends DocumentUsecase {
         return extension;
     }
 
-    protected void addResourceMeta(Part part, MetaData customMeta) throws DocumentException,
+    protected void updateResourceMeta(Part part, MetaData customMeta) throws DocumentException,
             IOException {
         String fileName = part.getFileName();
         String mimeType = part.getMimeType();
