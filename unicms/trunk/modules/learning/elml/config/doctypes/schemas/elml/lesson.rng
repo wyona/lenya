@@ -5,7 +5,7 @@
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
          >
-
+ 
   <include href="metadata/metadata.rng"/>
   <include href="config.rng"/>
   <include href="common.rng"/>
@@ -14,7 +14,7 @@
 
   <define name="lesson">
     <element name="lesson">
-      <ref name="noNamespaceSchemaLocation"/>
+      <ref name="SchemaLocation"/>
       <ref name="LessonLabelReq"/>
       <ref name="TitleReq"/>
       <ref name="NavTitleImp"/>

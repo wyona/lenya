@@ -43,13 +43,6 @@
                 Import completed. You can find the newly created lesson at <a href="${url}">${url}</a>
               </td>
             </tr>
-            <tr>
-              <td>
-                <input type="submit" name="submit" value="Ok"/>
-                &#160;
-                <input type="submit" name="cancel" value="Cancel"/>
-              </td>
-            </tr>
           </table>
         </form>
       </div>

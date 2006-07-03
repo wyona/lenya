@@ -16,7 +16,7 @@
 
   <define name="lesson">
     <element name="lesson">
-      <ref name="noNamespaceSchemaLocation"/>
+      <ref name="SchemaLocation"/>
       <ref name="LessonLabelReq"/>
       <ref name="TitleReq"/>
       <ref name="NavTitleImp"/>

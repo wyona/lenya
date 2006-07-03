@@ -664,9 +664,9 @@
     </optional>
   </define>
 
-  <define name="noNamespaceSchemaLocation">
+  <define name="SchemaLocation">
     <optional>
-      <attribute name="xsi:noNamespaceSchemaLocation">
+      <attribute name="xsi:schemaLocation">
         <text/>
       </attribute>
     </optional>
