@@ -87,6 +87,17 @@
       <map:serialize type="xml"/>
     </map:match>
 
+    <map:match pattern="summary-*-*/*/*/**.html">
+      <map:call resource="elml-page">
+        <map:parameter value="{{1}}" name="rendertype"/>
+        <map:parameter value="{{2}}" name="version"/>
+        <map:parameter value="{{3}}" name="publication-id"/>
+        <map:parameter value="{{4}}" name="area"/>
+        <map:parameter value="{{5}}" name="document-id"/>
+      </map:call>
+      <map:serialize type="xml"/>
+    </map:match>
+
     <map:match pattern="furtherReading-*-*/*/*/**.html">
       <map:call resource="elml-page">
         <map:parameter value="{{1}}" name="rendertype"/>

@@ -27,10 +27,27 @@ importClass(Packages.java.io.FileOutputStream);
 
 function importLesson() {
 
+  cocoon.log.info("Entering eLML Import usecase");
+
+  cocoon.log.info("Sending upload screen");
   cocoon.sendPageAndWait("upload.jx");
 
+  if (cocoon.request.get("submit") == "Cancel") {
+    cocoon.sendPage("/");
+    return; 
+  }
+
+  cocoon.log.info("Validating submission");
+  if (cocoon.request.get("upload-file") == null) {
+    cocoon.log.info("No data provided - displaying upload form again");
+    importLesson();
+  } 
+
+  cocoon.log.info("Processing uploaded archive");
   var uploadHelper = new UploadHelper("/tmp");
-  var builder = Packages.javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
+  var factory = Packages.javax.xml.parsers.DocumentBuilderFactory.newInstance();
+  factory.setNamespaceAware(true);
+  var builder = factory.newDocumentBuilder(); 
   var dom = null;
   var zip = null;
 
@@ -39,20 +56,41 @@ function importLesson() {
     zip = new ZipFile(file);
     var entries = zip.entries();
 
+    if (!entries.hasMoreElements()) {
+      var msg = "Zip archive empty";
+      cocoon.log.warning(msg);
+      cocoon.sendPage("error.jx", {"msg" : msg});  
+      return;
+    }
+
+    /** Extracting and parsing lesson source files. FIXME: currently the first language gets imported. Should provide an option to choose language version **/
+
+    cocoon.log.info("Looking for Lesson file(s) within archive");
     for (entries; entries.hasMoreElements();) {
       var entry = entries.nextElement();
       if (!entry.isDirectory() && entry.getName().indexOf(".xml") == entry.getName().length() - 4) {
         var is = zip.getInputStream(entry);
         try {
           var tmp = builder.parse(is);
-          if (tmp.documentElement.nodeName.indexOf("lesson") > -1) dom = tmp;
+          if (tmp.documentElement.nodeName == "lesson" && tmp.documentElement.namespaceURI == "http://www.elml.ch") {
+            dom = tmp;
+            cocoon.log.info("Parsed Lesson");
+          } else {
+            cocoon.log.warning("Archive does not contain eLML lesson");
+            var msg = "Archive does not contain eLML lesson. Please check that eLML source files are provided and eventually check namespace definitions (should read: xmlns=\"http://www.elml.ch\")";
+            cocoon.sendPage("error.jx", {"msg" : msg});  
+            return; 
+          }
         } catch (e) {
-          cocoon.log.error("Cant parse document");
+          cocoon.log.error(e);
         } finally {
           is.close();
         }
       }
     }
+
+
+    cocoon.log.info("Building documents from lesson");
 
     var parts = new ArrayList();
     var partsInfo = new ArrayList();
@@ -60,23 +98,18 @@ function importLesson() {
 
     for (var i = 0; i < nodes.length; i++) {
       var node = nodes.item(i);
-      cocoon.log.error("Current node name: " + node.nodeName);
+      cocoon.log.debug("Current node name: " + node.nodeName);
 
-      // FIXME: handle metadata 
+      // FIXME: Add custom metadata handling
       if (node.nodeName.indexOf("metadata") > -1) {
-        dom.documentElement.removeChild(node);
-        i--;
-        continue;
-      }
-      // FIXME: add summary doctype
-      if (node.nodeName.indexOf("summary") > -1) { 
         dom.documentElement.removeChild(node);
         i--;
         continue;
       }
 
       if (!(node.nodeName.indexOf("entry") > -1 || node.nodeName.indexOf("goals") > -1) && node.nodeType == 1) {
-        cocoon.log.error("Building document from fragment");
+
+        cocoon.log.info("Building document from lesson fragment");
         var frgDOM = builder.newDocument();
         var clonedNode = frgDOM.importNode(node, true);
 
@@ -96,7 +129,7 @@ function importLesson() {
         var frCount = 0;
         var currentCount = 0;
        
-        cocoon.log.error("Collecting infos");
+        cocoon.log.debug("Collecting confirmation info");
         if (documentElement.nodeName.indexOf("unit") > -1) {
           doctypeInfo = "Unit";
           doctype = "unit";
@@ -157,7 +190,7 @@ function importLesson() {
             title = doctypeInfo;
           }
         }
-        cocoon.log.error("Adding infos..");
+
         partsInfo.add({
                     "doctypeInfo" : doctypeInfo,
                     "label" : label,
@@ -172,16 +205,19 @@ function importLesson() {
 
   } catch (e) {
     cocoon.log.error(e);
-    cocoon.sendPage("error.jx");
+    cocoon.sendPage("error.jx", {"msg" : e});
+    return;
   }
 
+  cocoon.log.info("Sending confirmation page");
 
-  cocoon.log.error("Sending page and wait.");
   cocoon.sendPageAndWait("create.jx", {"zipEntry" : entry, "dom" : dom, "partsInfo" : partsInfo});
-  cocoon.log.error("Creating documents");
+
+  cocoon.log.info("Creating documents");
 
   var authoringDir = "content" + File.separator + "authoring";
-  cocoon.log.error("authoring dir" + authoringDir);
+  cocoon.log.debug("authoring dir" + authoringDir);
+
   var flowHelper = new FlowHelper();
   var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
   var documentHelper = flowHelper.getDocumentHelper(cocoon);
@@ -210,9 +246,19 @@ function importLesson() {
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
 
-  documentCreator.create(publication, authoringDirectory, "authoring", doc.getId(), lessonId, lessonTitle , "leaf", "lesson", "de", true);
+  if (doc.getId() == "/index") {
+    var parentId = "/";
+    var delimiter = "";
+  } else {
+    var parentId = doc.getId();
+    var delimiter = "/";
+  }
 
-  var createdDoc = buildDocument(doc.getId() + "/" + lessonId, "de"); 
+  cocoon.log.info("ParentId: " + parentId);
+
+  documentCreator.create(publication, authoringDirectory, "authoring", parentId, lessonId, lessonTitle , "leaf", "lesson", "de", true);
+
+  var createdDoc = buildDocument(parentId + delimiter + lessonId, "de"); 
   var url = documentHelper.getSourceUri(createdDoc);
   var lessonURL = pageEnvelope.getContext() + createdDoc.getCompleteURL();
   cocoon.log.error("Created doc url: " + url);
@@ -234,9 +280,9 @@ function importLesson() {
    var partId = label.replaceAll("\\s+", "");
    cocoon.log.error("Creating part document with id: " + partId + " and Doctype: " + doctype);
   
-   documentCreator.create(publication, authoringDirectory, "authoring", doc.getId() + "/" + lessonId, partId, title, "leaf", doctype, "de", true); 
+   documentCreator.create(publication, authoringDirectory, "authoring", parentId + delimiter + lessonId, partId, title, "leaf", doctype, "de", true); 
 
-   var partDocumentId = doc.getId() + "/" + lessonId + "/" + partId;
+   var partDocumentId = parentId + delimiter + lessonId + "/" + partId;
    var createdDoc = buildDocument(partDocumentId, "de");
    var url = documentHelper.getSourceUri(createdDoc);
    cocoon.log.error("Created part url: " + url);

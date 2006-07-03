@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: variables.xsl,v 1.5 2004/06/18 16:30:28 jann Exp $ -->
+<!-- $Id$ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -551,16 +551,16 @@
         </xsl:if>
       </xsl:attribute>
     </xsl:if>
-    <xsl:if test="(@mimeType='quicktime' or @mimeType='mpeg' or @mimeType='realone') and  not(@width)">
+    <xsl:if test="(@type='quicktime' or @type='mpeg' or @type='realone') and  not(@width)">
       <xsl:attribute name="width">128</xsl:attribute>
     </xsl:if>
     <xsl:choose>
-      <xsl:when test="(@mimeType='quicktime' or @mimeType='mpeg' or @mimeType='realone') and     not(@height)">
+      <xsl:when test="(@type='quicktime' or @type='mpeg' or @type='realone') and not(@height)">
         <xsl:attribute name="height">
           <xsl:value-of select="16"/>
         </xsl:attribute>
       </xsl:when>
-      <xsl:when test="(@mimeType='quicktime' or @mimeType='mpeg' or @mimeType='realone') and     @height">
+      <xsl:when test="(@type='quicktime' or @type='mpeg' or @type='realone') and @height">
         <xsl:if test="not(@units='percent')">
           <xsl:attribute name="height">
             <xsl:value-of select="number(@height) + 16"/>
@@ -670,75 +670,75 @@
         </xsl:call-template>
        </a>
      </xsl:when>
-     <xsl:when test="@mimeType">
+     <xsl:when test="@type">
        <xsl:choose>
-         <xsl:when test="@mimeType='gif' or @mimeType='jpeg' or @mimeType='png'">
+         <xsl:when test="@type='gif' or @type='jpeg' or @type='png'">
            <xsl:call-template name="Image">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='flash'">
+         <xsl:when test="@type='flash'">
            <xsl:call-template name="Flash">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='quicktime'">
+         <xsl:when test="@type='quicktime'">
            <xsl:call-template name="Quicktime">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='mpeg'">
+         <xsl:when test="@type='mpeg'">
            <xsl:call-template name="MPEG">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='svg'">
+         <xsl:when test="@type='svg'">
            <xsl:call-template name="SVG">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='applet'">
+         <xsl:when test="@type='applet'">
            <xsl:call-template name="Applet">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='vrml'">
+         <xsl:when test="@type='vrml'">
            <xsl:call-template name="VRML">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='x3d'">
+         <xsl:when test="@type='x3d'">
            <xsl:call-template name="X3D">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='realone'">
+         <xsl:when test="@type='realone'">
            <xsl:call-template name="RealOne">
              <xsl:with-param name="pathMultimedia">
                <xsl:value-of select="$pathMultimedia"/>
              </xsl:with-param>
            </xsl:call-template>
          </xsl:when>
-         <xsl:when test="@mimeType='mathml'">
+         <xsl:when test="@type='mathml'">
            <xsl:copy-of select="child::*"/>
          </xsl:when>
-         <xsl:when test="@mimeType='div'">
+         <xsl:when test="@type='div'">
            <xsl:copy-of select="."/>
          </xsl:when>
        </xsl:choose>

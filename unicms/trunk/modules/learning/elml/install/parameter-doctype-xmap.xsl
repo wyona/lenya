@@ -22,6 +22,10 @@
         <document-element local-name="furtherReading"/>
       </sourcetype>
 
+      <sourcetype name="summary">
+        <document-element local-name="summary"/>
+      </sourcetype>
+
       <sourcetype name="glossary">
         <document-element local-name="glossary"/>
       </sourcetype>

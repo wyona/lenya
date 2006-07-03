@@ -88,6 +88,7 @@
         <map:call function="method">
           <map:parameter name="mapto" value="assetdir"/>
           <map:parameter name="docid" value="/{1}"/>
+          <map:parameter name="location" value="{request:requestURI}/"/>
         </map:call>
       </map:match>
 
@@ -125,7 +126,8 @@
       <map:match pattern="webdav/**">
         <map:call function="method">
           <map:parameter name="mapto" value="document"/>
-          <map:parameter name="docid" value="/{1}"/> 
+          <map:parameter name="docid" value="/{1}"/>
+          <map:parameter name="location" value="{request:requestURI}/"/> 
         </map:call>
       </map:match>
 

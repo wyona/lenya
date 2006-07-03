@@ -19,6 +19,11 @@
         <map:serialize type="xml"/>
       </map:match>
 
+      <map:match type="doctype" pattern="summary">
+        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
       <map:match type="doctype" pattern="furtherReading">
         <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
         <map:serialize type="xml"/>

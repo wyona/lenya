@@ -11,6 +11,7 @@
           <doc type="introduction"/>
           <doc type="unit"/>
           <doc type="selfAssessment"/>
+          <doc type="summary"/>
           <doc type="furtherReading"/>
           <doc type="glossary"/>
           <doc type="bibliography"/>
@@ -31,6 +32,13 @@
       <doc type="selfAssessment">
         <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
           <sample-name>selfAssessment.xml</sample-name>
+        </creator>
+        <workflow src="2stage.xml"/>
+      </doc>
+
+      <doc type="summary">
+        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
+          <sample-name>summary.xml</sample-name>
         </creator>
         <workflow src="2stage.xml"/>
       </doc>

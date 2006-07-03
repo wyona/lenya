@@ -65,6 +65,7 @@
         else {
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=unit">New Unit</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=selfAssessment">New SelfAssessment</item>
+          <item uc:usecase="create" uc:step="showscreen" href="?doctype=summary">New Summary</item>   
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=furtherReading">New FurtherReading</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=glossary">New Glossary</item>
           <item uc:usecase="create" uc:step="showscreen" href="?doctype=bibliography">New Bibliography</item>

@@ -20,7 +20,7 @@
 
   <target name="install" description="Install module" depends="init">
     
-    <echo>INFO: Setting up module for publication ${$publication.prefix}</echo>
+    <echo>INFO: Setting up module for publication ${pub.prefix}</echo>
 
     <echo>INFO: Creating backup directory</echo>
     <mkdir dir="backup"/>
@@ -77,14 +77,14 @@
     <echo>INFO: Adding import/export usecases</echo>
 
     <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="">
-        <include name="elml/usecase-importlesson.xmap"/>
+      <fileset dir="elml">
+        <include name="usecase-importlesson.xmap"/>
       </fileset>
     </copy>
 
     <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="">
-        <include name="elml/usecase-exportlesson.xmap"/>
+      <fileset dir="elml">
+        <include name="usecase-exportlesson.xmap"/>
       </fileset>
     </copy>
 

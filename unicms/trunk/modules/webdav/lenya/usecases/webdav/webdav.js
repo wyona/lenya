@@ -23,9 +23,11 @@ importClass(Packages.org.apache.lenya.cms.cocoon.flow.FlowHelper);
 importClass(Packages.org.apache.lenya.ac.Identity);
 importClass(Packages.org.apache.lenya.cms.publication.DefaultDocument);
 importClass(Packages.org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper);
-   
-var DAV_PREFIX = "webdav";
-var ASSETS_DIR = "doc-assets";
+importClass(Packages.org.safehaus.uuid.UUIDGenerator);
+
+ 
+const DAV_PREFIX = "webdav";
+const ASSETS_DIR = "doc-assets";
 
 
 function method() {
@@ -42,6 +44,10 @@ function method() {
   if (!docid.equals("/")) {
     doctype = getDoctype(doc);
   } 
+
+  if (cocoon.parameters.location) {
+    cocoon.response.addHeader("content-location", cocoon.parameters.location);
+  }
 
   cocoon.context.setAttribute("mapto", cocoon.parameters.mapto);
   cocoon.context.setAttribute("doc", doc);
@@ -172,7 +178,7 @@ function lock() {
 
   if (checkout(ident, doc)) {
     if (mapto.equals("source")) {
-      uri = doc.getCompleteURL();
+      uri = doc.getCompleteURL(); 
     } else {
       var asset = cocoon.context.getAttribute("asset");
       uri = "/lenya/unitemplate/authoring/resources" + doc.getId() + "/" + asset;
