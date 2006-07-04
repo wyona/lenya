@@ -264,13 +264,18 @@
         <xsl:value-of select="/document/uz:unizh/uz:section"/>
       </div>
     </xsl:if>
-    <xsl:apply-templates select="xhtml:div[@basic-url = 'index']"/>
+    <xsl:apply-templates select="xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@basic-url]"/>
     <xsl:choose>
       <xsl:when test="$isHomepage = 'true'">
-        <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index' or following-sibling::xhtml:div[@current = 'true'])]"/>
+        <xsl:if test="not($index)">
+          <xsl:apply-templates select="xhtml:div[@current = 'true']"/>
+        </xsl:if>
+      </xsl:when>
+      <xsl:when test="$homepage-basic-url = 'index'">
+          <xsl:apply-templates select="xhtml:div[@basic-url != 'index']"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates select="xhtml:div[not(@basic-url = 'index' or following-sibling::xhtml:div[@basic-url = $homepage-basic-url])]"/>
+        <xsl:apply-templates select="xhtml:div[starts-with(@basic-url, concat($homepage-basic-url, '/'))]"/>
       </xsl:otherwise>
     </xsl:choose>
   </div>
