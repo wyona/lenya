@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><summary xmlns="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace"><lenya:meta>
+    <dc:title>Glossar</dc:title>
+    <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>UZH</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UZH</dc:rights>
+</lenya:meta>
+<paragraph>Enter summary here.</paragraph>
+</summary>
