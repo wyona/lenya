@@ -1056,7 +1056,7 @@
       <xsl:text>*</xsl:text>
       <xsl:if test="name() != 'html' and name() != 'xhtml:html'">
         <xsl:text>[</xsl:text>
-        <xsl:value-of select="1+count(preceding-sibling::*[not(self::lenya:meta or self::unizh:header)])"/>
+        <xsl:value-of select="1+count(preceding-sibling::*[not(self::unizh:header)])"/>
         <xsl:text>]</xsl:text>
       </xsl:if>
     </xsl:if>

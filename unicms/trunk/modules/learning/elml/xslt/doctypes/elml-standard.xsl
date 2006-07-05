@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
+<!-- $Id$ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -66,7 +66,10 @@
       <xsl:apply-templates select="*/unizh:contcol1"/>
     </div>
     <div class="contcol2">
-      <div class="content">
+      <div class="relatedbox">
+        <xsl:comment/>&#160;
+      </div>
+      <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <h1>

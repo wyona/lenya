@@ -9,62 +9,60 @@
   <template>
     <xsl:choose>
       <xsl:when test="substring-after($data, '.') = 'png'">
-        <elml:multimedia src="{$data}" mimeType="png" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="png" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'gif'">
-        <elml:multimedia src="{$data}" mimeType="gif" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="gif" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'jpeg'">
-        <elml:multimedia src="{$data}" mimeType="jpeg" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="jpeg" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'jpg'">
-        <elml:multimedia src="{$data}" mimeType="jpeg" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="jpeg" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'swf'">
-        <elml:multimedia src="{$data}" mimeType="flash" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="flash" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'rm'">
-        <elml:multimedia src="{$data}" mimeType="realone" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="realone" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'svg'">
-        <elml:multimedia src="{$data}" mimeType="svg" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="svg" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'mov'">
-        <elml:multimedia src="{$data}" mimeType="quicktime" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="quicktime" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'mpg'">
-        <elml:multimedia src="{$data}" mimeType="mpeg" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="mpeg" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'mpeg'">
-        <elml:multimedia src="{$data}" mimeType="mpeg" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="mpeg" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'jar'">
-        <elml:multimedia src="{$data}" mimeType="applet" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="applet" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'class'">
-        <elml:multimedia src="{$data}" mimeType="applet" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="applet" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'vrml'">
-        <elml:multimedia src="{$data}" mimeType="vrml" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="vrml" legend="{$title}"/>
       </xsl:when>
       <xsl:when test="substring-after($data, '.') = 'x3d'">
-        <elml:multimedia src="{$data}" mimeType="x3d" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="x3d" legend="{$title}"/>
       </xsl:when>
 
-
-
       <xsl:otherwise>
-        <elml:multimedia src="{$data}" mimeType="" legend="{$title}"/>
+        <elml:multimedia src="{$data}" type="" legend="{$title}"/>
       </xsl:otherwise>
     </xsl:choose>
 
-    <!-- <xsl:variable name="mimeType">
+    <!-- <xsl:variable name="type">
        <xsl:choose>
          <xsl:when test="$suffix = 'jpg' or $suffix = 'jpeg' or $suffix = 'gif'">
            <xsl:text><xsl:value-of select="$suffix"/></xsl:text>
          </xsl:when>
        </xsl:choose>
     </xsl:variable> 
-    <elml:multimedia src="{$data}" mimeType="gif" legend="{$title}"/> -->
+    <elml:multimedia src="{$data}" type="gif" legend="{$title}"/> -->
   </template>
   </insert>

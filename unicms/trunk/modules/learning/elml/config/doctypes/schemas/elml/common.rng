@@ -16,6 +16,14 @@
 
 
 
+  <define name="CSSClassImp">
+    <optional>
+      <attribute name="cssClass">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
   <define name="entry">
     <element name="entry">
       <ref name="CLIIType"/>
@@ -67,10 +75,10 @@
     </element>
   </define>
 
-
-  <define name="column">
+ <define name="column">
     <element name="column">
       <ref name="LabelImp"/>
+      <ref name="CSSClassImp"/>
       <ref name="columnLeft"/>
       <optional>
         <ref name="columnMiddle"/>
@@ -105,6 +113,9 @@
       <ref name="SizeImp"/>
       <ref name="LegendImp"/>
       <ref name="BibIDRefImp"/>
+      <ref name="RoleImp"/>
+      <ref name="VisibleImp"/>
+      <ref name="CSSClassImp"/>
       <oneOrMore>
         <ref name="tablerow"/>
       </oneOrMore>
@@ -133,6 +144,7 @@
       <ref name="IconImp"/>
       <ref name="ListStyleImp"/>
       <ref name="BibIDRefImp"/>
+      <ref name="CSSClassImp"/>
       <oneOrMore>
         <ref name="listItem"/>
       </oneOrMore>    
@@ -141,6 +153,7 @@
 
   <define name="listItem">
     <element name="item">
+      <ref name="CSSClassImp"/>
       <zeroOrMore>
         <choice>
           <ref name="list"/>
@@ -168,6 +181,7 @@
     <element name="term">
       <ref name="GlossaryRefReq"/>
       <ref name="IconImp"/>
+      <ref name="CSSClassImp"/>
       <text/> 
     </element>
   </define>
@@ -175,6 +189,7 @@
   <define name="indexItem">
     <element name="indexItem">
       <ref name="IndexAttImp"/>
+      <ref name="CSSClassImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -191,7 +206,7 @@
       <ref name="LabelImp"/>
       <ref name="IconImp"/>
       <ref name="SourceImp"/>
-      <ref name="MimeTypeReq"/>
+      <ref name="TypeReq"/>
       <ref name="AlignmentImp"/>
       <ref name="SizeImp"/>
       <ref name="LegendImp"/>
@@ -199,13 +214,39 @@
       <ref name="Thumbnail"/>
       <ref name="HTMLAttributesImp"/>
       <ref name="VisibleImp"/>
-      <text/>
+      <ref name="CSSClassImp"/>
+      <optional>
+        <text/>
+      </optional>
+      <!-- can't support inline elements because bxe crashes on anyname!
+      <zeroOrMore>
+        <choice>
+          <ref name="anyElement"/>
+          <text/>
+        </choice>
+      </zeroOrMore> -->
     </element>
   </define>
+
+  <!-- <define name="anyElement">
+    <element>
+      <anyName/>
+      <zeroOrMore>
+        <choice>
+          <attribute>
+            <anyName/>
+          </attribute>
+          <text/>
+          <ref name="anyElement"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define> -->
 
   <define name="formatted">
     <element name="formatted">
       <ref name="StyleReq"/>
+      <ref name="CSSClassImp"/>
       <zeroOrMore>
         <choice>
           <ref name="formatted"/>
@@ -226,10 +267,16 @@
       <ref name="UriImp"/>
       <ref name="LegendImp"/>
       <ref name="IconImp"/>
-      <optional>
-        <ref name="multimedia"/>
-      </optional>
-      <text/>
+      <ref name="RoleImp"/>
+      <ref name="CSSClassImp"/>
+      <zeroOrMore>
+        <choice>
+          <optional>
+            <ref name="multimedia"/>
+          </optional>
+          <text/>
+        </choice>
+      </zeroOrMore>
     </element>
   </define>
 
@@ -239,6 +286,7 @@
       <ref name="BibPageNr"/>
       <ref name="IconImp"/>
       <ref name="YearOnlyImp"/>
+      <ref name="CSSClassImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -265,18 +313,9 @@
       <ref name="TitleImp"/>
       <ref name="IconImp"/>
       <ref name="VisibleImp"/>
-      <ref name="BlockType"/>
-    </element>
-  </define>
-
-
-  <!-- Type definitions -->
-
-
-  <define name="BlockType">
-    <zeroOrMore>
+      <ref name="CSSClassImp"/>
+      <zeroOrMore>
         <choice>
-          <ref name="list"/>
           <ref name="term"/>
           <ref name="multimedia"/>
           <ref name="formatted"/>
@@ -287,7 +326,11 @@
           <text/>
         </choice>
       </zeroOrMore>
+    </element>
   </define>
+
+
+  <!-- Type definitions -->
 
 
   <define name="CLType">
@@ -302,14 +345,10 @@
         <ref name="box"/>
         <ref name="term"/>
         <ref name="multimedia"/>
-        <ref name="formatted"/>
         <ref name="popup"/>
         <ref name="link"/>
         <ref name="citation"/>
-        <ref name="newLine"/>
         <ref name="paragraph"/>
-        <ref name="indexItem"/>
-        <text/>
       </choice>
     </zeroOrMore>
   </define>
@@ -327,14 +366,10 @@
         <ref name="box"/>
         <ref name="term"/>
         <ref name="multimedia"/>
-        <ref name="formatted"/>
         <ref name="popup"/>
         <ref name="link"/>
         <ref name="citation"/>
-        <ref name="newLine"/>
         <ref name="paragraph"/>
-        <ref name="indexItem"/>
-        <text/>
       </choice>
     </zeroOrMore>
   </define>
@@ -352,6 +387,8 @@
   <define name="ColumnType">
     <ref name="SizeImp"/>
     <ref name="AlignmentImp"/>
+    <ref name="vAlignmentImp"/>
+    <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
         <ref name="lenya.asset"/>
@@ -377,6 +414,8 @@
     <ref name="SizeImp"/>
     <ref name="SpanImp"/>
     <ref name="AlignmentImp"/>
+    <ref name="vAlignmentImp"/>
+    <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
         <ref name="lenya.asset"/>
@@ -387,6 +426,7 @@
         <ref name="link"/>
         <ref name="citation"/>
         <ref name="popup"/>
+        <ref name="box"/>
         <ref name="newLine"/>
         <ref name="paragraph"/>
         <ref name="indexItem"/>
@@ -399,6 +439,7 @@
     <ref name="LabelImp"/>
     <ref name="TitleImp"/>
     <ref name="IconImp"/>
+    <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
         <ref name="lenya.asset"/>
@@ -534,8 +575,8 @@
     </optional>
   </define> 
 
-  <define name="MimeTypeReq">
-    <attribute name="mimeType">
+  <define name="TypeReq">
+    <attribute name="type">
       <text/><!-- gif, jpeg, png, flash, svg, quicktime, mpeg, applet, vrml, x3d, realone, mathml, div -->
     </attribute>
   </define>
