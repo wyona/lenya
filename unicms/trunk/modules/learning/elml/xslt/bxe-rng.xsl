@@ -35,7 +35,7 @@
 <xsl:template match="rng:element[@name = 'lesson']">
 
   <element name="lesson">
-    <ref name="noNamespaceSchemaLocation"/>
+    <ref name="schemaLocation"/>
     <ref name="LessonLabelReq"/>
     <ref name="NavTitleImp"/>
     <attribute name="lenya:dummy"><text/></attribute>
@@ -46,12 +46,14 @@
       <text/>
     </element>
     <element name="body">
-      <oneOrMore>
-        <choice>
+      <interleave>
+        <optional>
           <ref name="entry"/>
+        </optional>
+        <optional>
           <ref name="goals"/>
-        </choice>
-      </oneOrMore>
+        </optional>
+      </interleave>
     </element>
     <optional>
       <element name="metadata">
@@ -73,12 +75,14 @@
     <ref name="lenya.meta"/>
     <element name="xhtml:h1"><text/></element>
     <element name="body">
-      <zeroOrMore>
-        <choice>
+      <interleave>
+        <optional>
           <ref name="entry"/>
+        </optional>
+        <optional>
           <ref name="goals"/>
-        </choice>
-      </zeroOrMore>
+        </optional>
+      </interleave>
       <oneOrMore>
         <ref name="learningObject"/>
       </oneOrMore>
@@ -165,14 +169,10 @@
         <ref name="box"/>
         <ref name="term"/>
         <ref name="multimedia"/>
-        <ref name="formatted"/>
         <ref name="popup"/>
         <ref name="link"/>
         <ref name="citation"/>
-        <ref name="newLine"/>
         <ref name="paragraph"/>
-        <ref name="indexItem"/>
-        <text/>
       </choice>
     </zeroOrMore>
   </element>
@@ -197,14 +197,10 @@
         <ref name="box"/>
         <ref name="term"/>
         <ref name="multimedia"/>
-        <ref name="formatted"/>
         <ref name="popup"/>
         <ref name="link"/>
         <ref name="citation"/>
-        <ref name="newLine"/>
         <ref name="paragraph"/>
-        <ref name="indexItem"/>
-        <text/>
       </choice>
     </zeroOrMore>
   </element>
@@ -302,12 +298,6 @@
     </element>
   </element>
 </xsl:template> 
-
-
-
-
-
-
 
 
 <xsl:template match="rng:group">  <!-- unsupported group node -->

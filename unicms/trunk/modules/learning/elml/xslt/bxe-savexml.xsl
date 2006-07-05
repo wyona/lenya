@@ -55,6 +55,7 @@
       <xsl:when test="name() = 'originallanguage'">originalLanguage</xsl:when>
       <xsl:when test="name() = 'creationdate'">creationDate</xsl:when>
       <xsl:when test="name() = 'modificationdate'">modificationDate</xsl:when>
+      <xsl:when test="name() = 'cssclassimp'">CSSClassImp</xsl:when>
       <xsl:otherwise>
          <xsl:value-of select="name()"/>
       </xsl:otherwise>
@@ -292,7 +293,7 @@
  
 <xsl:template match="xhtml:object">
   <multimedia src="{@data}">
-    <xsl:attribute name="mimeType">
+    <xsl:attribute name="type">
       <xsl:choose>
         <xsl:when test="@type = 'image/jpeg'">
           <xsl:text>jpeg</xsl:text>

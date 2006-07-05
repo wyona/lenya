@@ -15,6 +15,17 @@
          >
 
 
+  <define name="vAlignmentImp">
+    <optional>
+      <attribute name="valign">
+        <choice>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
 
   <define name="CSSClassImp">
     <optional>

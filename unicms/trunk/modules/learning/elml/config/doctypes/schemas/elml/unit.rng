@@ -29,21 +29,25 @@
       <attribute name="dcterms:dummy"><text/></attribute>
       <attribute name="elml:dummy"><text/></attribute>
       <ref name="lenya.meta"/>
-      <zeroOrMore>
-        <choice>
+      <interleave>
+        <optional>
           <ref name="entry"/>
+        </optional>
+        <optional>
           <ref name="goals"/>
-        </choice>
-      </zeroOrMore>
+        </optional>
+      </interleave>
       <oneOrMore>
         <ref name="learningObject"/>
       </oneOrMore>
-      <zeroOrMore>
-        <choice>
+      <interleave>
+        <optional>
           <ref name="selfAssessment"/>
+        </optional>
+        <optional>
           <ref name="summary"/>
-        </choice>
-      </zeroOrMore>
+        </optional>
+      </interleave>
       <optional>
         <ref name="furtherReading"/>
       </optional>

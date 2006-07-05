@@ -21,6 +21,8 @@
 </xsl:template>
 
 
+<!-- synchronize metadata with title attributes -->
+
 <xsl:template match="elml:lesson | elml:unit">
   <xsl:copy>
     <xsl:apply-templates select="@*[not(name() = 'title')]"/> 
@@ -196,10 +198,10 @@
   <xhtml:object data="{$nodeid}/{@src}">
     <xsl:attribute name="type">
       <xsl:choose>
-        <xsl:when test="@mimeType = 'jpeg'">
+        <xsl:when test="@type = 'jpeg'">
           <xsl:text>image/jpeg</xsl:text>
         </xsl:when>
-        <xsl:when test="@mimeType = 'gif'">
+        <xsl:when test="@type = 'gif'">
           <xsl:text>image/gif</xsl:text>
         </xsl:when>
       </xsl:choose>
@@ -214,8 +216,6 @@
     <xsl:value-of select="@glossRef"/>
   </elml:term>
 </xsl:template>
-
-
 
 <xsl:template match="node()">
   <xsl:copy>
