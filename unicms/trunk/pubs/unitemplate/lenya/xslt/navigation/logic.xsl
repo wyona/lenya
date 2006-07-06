@@ -65,7 +65,7 @@
           </xsl:choose>
         </div>
       </xsl:if>
-
+<!--
       <xsl:if test="($tabs = 'true') and not($index)">
         <div id="menu">
           <div class="home" href="{descendant::xhtml:div[@basic-url = $homepage-basic-url]/@href}">
@@ -73,7 +73,7 @@
           </div>
         </div>
       </xsl:if>
-
+-->
     </xsl:when>
     <xsl:otherwise>   <!-- $isHomepage != 'true' -->
 
@@ -85,9 +85,11 @@
                 <xsl:apply-templates select="*/*"/>
               </xsl:when>
               <xsl:otherwise>
+<!--
                 <div class="home" href="{descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/@href}">
                   <xsl:value-of select="descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/text()"/>
                 </div>
+-->
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/*/*"/>
               </xsl:otherwise>
             </xsl:choose>
