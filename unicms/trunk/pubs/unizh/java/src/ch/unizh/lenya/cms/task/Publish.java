@@ -70,10 +70,11 @@ import ch.unizh.lenya.util.CacheHandler;
 public class Publish extends ResourceTask {
 
     private static final Category log = Category.getInstance(Publish.class);
-
+    
     public static final String PARAMETER_LANGUAGE = "document-language";
     public static final String TASK_NAME = "publish";
 
+    
     /**
      * @see org.apache.lenya.cms.task.Task#execute(java.lang.String)
      */
@@ -173,17 +174,16 @@ public class Publish extends ResourceTask {
      */
     protected void publish(Resource resource)
         throws PublicationException, ExecutionException, ParameterException, WorkflowException {
-        publish(resource, getLanguage(), null, 1);
+        publish(resource, getLanguage());
     }
 
     /**
      * Publishes a certain language version of a resource.
      * @param resource The resource.
      * @param language The language.
-     * @param rootNode only if a subtree should be published otherwise null
      * @numOfDocumentsToPublish Number of Documenst to publish. Usually > 1 if a subtree is published
      */
-    protected void publish(Resource resource, String language, Resource rootNode, int numOfDocumentsToPublish)
+    protected void publish(Resource resource, String language)
         throws ParameterException, ExecutionException, PublicationException, WorkflowException {
         
         Version authoringVersion = getVersion(resource, Publication.AUTHORING_AREA, language);
@@ -192,34 +192,19 @@ public class Publish extends ResourceTask {
             && areRequiredResourcesLive(resource)) {
             Version liveVersion = getVersion(resource, Publication.LIVE_AREA, getLanguage());
             boolean isLive = isNodeLive(liveVersion);
-
+            
             resource.getPublicationWrapper().copy(authoringVersion, liveVersion);
             copyResources(authoringVersion.getDocument(), liveVersion.getDocument());
 
             authoringVersion.triggerWorkflow(getEventName(), getSituation());
             
             try {
-                if (rootNode == null){
-                    CacheHandler cacheHandler = new CacheHandler();
-                    cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
-                }
+                CacheHandler cacheHandler = new CacheHandler();
+                cacheHandler.deleteCache(liveVersion, isLive, TASK_NAME);
             } catch (SiteTreeException e) {
                 throw new ExecutionException ("Unable to get sitetree.", e);
             }
         }
-        // If a subtree is published, the cached docuemnt-tree should be deleted 
-        // only if the last document is published otherwise conflicts might occur.
-        try{ 
-            if (rootNode != null && numOfDocumentsToPublish == 1) {
-                Version treeVersion = getVersion(rootNode, Publication.LIVE_AREA, getLanguage()); 
-                boolean isLive = isNodeLive(treeVersion);
-                CacheHandler cacheHandler = new CacheHandler();
-                cacheHandler.deleteCache(treeVersion, isLive, TASK_NAME);
-            }            
-        } catch (SiteTreeException e) {
-            throw new ExecutionException ("Unable to get sitetree.", e);
-        }
-
     }
     
 

@@ -64,8 +64,6 @@ import org.apache.log4j.Category;
  */
 public class PublishTree extends Publish implements ResourceVisitor {
 
-    private Resource rootNode = null;
-    private int numOfDocuments = 1;
     private static final Category log = Category.getInstance(PublishTree.class);
 
     /**
@@ -81,10 +79,6 @@ public class PublishTree extends Publish implements ResourceVisitor {
 
         SiteManager manager = resource.getPublicationWrapper().getSiteManager();
         Resource[] ancestors = manager.getRequiringResources(resource, Publication.AUTHORING_AREA);
-        if (ancestors.length > 0 ) {
-            numOfDocuments = ancestors.length + 1;
-            rootNode = resource;
-        }
 
         OrderedResourceSet set = new OrderedResourceSet(ancestors);
         set.add(resource);
@@ -128,12 +122,11 @@ public class PublishTree extends Publish implements ResourceVisitor {
             PublicationException,
             ExecutionException {
 
-        int numOfDocumentsToPublish = this.numOfDocuments--;
         String[] languages = getPublication().getLanguages();
         for (int i = 0; i < languages.length; i++) {
             Version version = getVersion(resource, Publication.AUTHORING_AREA, languages[i]);
             if (version.getDocument().exists()) {
-                publish(resource, languages[i], this.rootNode, numOfDocumentsToPublish);
+                publish(resource, languages[i]);
             }
         }
 
