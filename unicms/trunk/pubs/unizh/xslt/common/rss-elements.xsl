@@ -12,11 +12,25 @@
 <!--  <xsl:template match="unizh:rss-reader[parent::unizh:related-content]"> -->
   <xsl:template match="unizh:rss-reader">
     <xsl:variable name="items" select="@items"/>
+    <xsl:variable name="is-external" select="@is-external"/>
 
     <div class="relatedboxborder">
       <div class="relatedboxcont">
          <xsl:choose>
            <xsl:when test="rss/channel">
+
+    <script language="javascript">
+      <xsl:comment>
+           var newwindow;
+           <![CDATA[
+function open_rss_window(url)
+{
+	newwindow=window.open(url,'rsswindow','left=0,top=100');
+	if (window.focus) {newwindow.focus()};
+}
+           ]]>
+      </xsl:comment>
+    </script>
 
              <xsl:if test="@image = 'true' and rss/channel/image">
                <xsl:variable name="imageheight">
@@ -43,7 +57,14 @@
              <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
              <xsl:for-each select="rss/channel/item">
                <xsl:if test="$items = '' or position() &lt;= $items">
-                 <a class="rss" href="{link}"><xsl:value-of select="title"/></a>
+                 <xsl:choose>
+                   <xsl:when test="$is-external = 'true'">
+                     <a class="rss" href="{link}" onclick="javascript:open_rss_window('{link}'); return false;"><xsl:value-of select="title"/></a>
+                   </xsl:when>
+                   <xsl:otherwise>
+                     <a class="rss" href="{link}"><xsl:value-of select="title"/></a>
+                   </xsl:otherwise>
+                 </xsl:choose>
                  <xsl:if test="position() &lt; $items">
                    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
                  </xsl:if>

@@ -56,6 +56,12 @@
 
 <xsl:template match="unizh:rss-reader">
   <unizh:rss-reader items="{@items}" description="{@descriptions}" image="{@image}">
+    <xsl:attribute name="is-external">
+      <xsl:choose>
+        <xsl:when test="starts-with(@url, 'http://')">true</xsl:when>
+        <xsl:otherwise>false</xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
     <title><xsl:value-of select="."/></title>
     <cinclude:includexml ignoreErrors="true">
       <xsl:choose>
