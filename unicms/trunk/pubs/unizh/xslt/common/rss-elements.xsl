@@ -65,7 +65,7 @@ function open_rss_window(url)
                      <a class="rss" href="{link}"><xsl:value-of select="title"/></a>
                    </xsl:otherwise>
                  </xsl:choose>
-                 <xsl:if test="position() &lt; $items">
+                 <xsl:if test="(position() &lt; $items) and (position() != last())">
                    <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
                  </xsl:if>
                </xsl:if>
