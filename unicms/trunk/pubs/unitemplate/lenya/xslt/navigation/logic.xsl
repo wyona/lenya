@@ -77,24 +77,32 @@
     </xsl:when>
     <xsl:otherwise>   <!-- $isHomepage != 'true' -->
 
-      <div id="menu">
-        <xsl:choose>
-          <xsl:when test="$tabs = 'true'">
-            <xsl:choose>
-              <xsl:when test="$homepage-basic-url = 'index'">
+      <xsl:choose>
+        <xsl:when test="$tabs = 'true'">
+
+          <xsl:choose>
+            <xsl:when test="$homepage-basic-url = 'index'">
+              <div id="menu">
                 <xsl:apply-templates select="*/*"/>
-              </xsl:when>
-              <xsl:otherwise>
+              </div>
+            </xsl:when>
+            <xsl:when test="descendant::xhtml:div[@basic-url = $homepage-basic-url]/*/*">
+              <div id="menu">
 <!--
                 <div class="home" href="{descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/@href}">
                   <xsl:value-of select="descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/text()"/>
                 </div>
 -->
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/*/*"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:when>
-          <xsl:otherwise>
+              </div>
+            </xsl:when>
+            <xsl:otherwise/>
+          </xsl:choose>
+
+        </xsl:when>
+        <xsl:otherwise>
+
+          <div id="menu">
             <xsl:choose>
               <xsl:when test="$homepage-basic-url = 'index'">
                 <xsl:apply-templates select="xhtml:div[@basic-url != 'index']"/>
@@ -106,9 +114,10 @@
                 <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/xhtml:div"/>
               </xsl:otherwise>
             </xsl:choose>
-          </xsl:otherwise>
-        </xsl:choose>
-      </div>
+          </div>
+
+        </xsl:otherwise>
+      </xsl:choose>
 
     </xsl:otherwise>
   </xsl:choose>
