@@ -12,7 +12,7 @@
 <!--  <xsl:template match="unizh:rss-reader[parent::unizh:related-content]"> -->
   <xsl:template match="unizh:rss-reader">
     <xsl:variable name="items" select="@items"/>
-    <xsl:variable name="is-external" select="@is-external"/>
+    <xsl:variable name="url" select="@url"/>
 
     <div class="relatedboxborder">
       <div class="relatedboxcont">
@@ -58,7 +58,7 @@ function open_rss_window(url)
              <xsl:for-each select="rss/channel/item">
                <xsl:if test="$items = '' or position() &lt;= $items">
                  <xsl:choose>
-                   <xsl:when test="$is-external = 'true'">
+                   <xsl:when test="starts-with($url, 'http://')">
                      <a class="rss" href="{link}" onclick="javascript:open_rss_window('{link}'); return false;"><xsl:value-of select="title"/></a>
                    </xsl:when>
                    <xsl:otherwise>
