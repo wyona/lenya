@@ -7,9 +7,7 @@
 <project default="install" basedir=".">
   
   <target name="init">
-    <property name="pub.prefix" value="unitemplate"/>
-    <property name="lenya.dir" value="/Developer/Java/cocoon-lenya"/>
-    <property name="pubs.dir" value="/Developer/Java/unicms/trunk/pubs"/>
+    <property file="local.build.properties"/>
     <property name="pub.dir" value="${pubs.dir}/${pub.prefix}"/>
     <mkdir dir="work"/>
   </target>
