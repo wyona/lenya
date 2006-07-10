@@ -84,6 +84,20 @@
   </xsl:copy>
 </xsl:template>
 
+<xsl:template match="dc:title">
+  <xsl:choose>
+    <xsl:when test="/*/xhtml:h1">
+      <dc:title>
+        <xsl:value-of select="/*/xhtml:h1"/>
+      </dc:title>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy-of select="."/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+
 <xsl:template match="elml:selfAssessment[not(parent::*)]">
   <xsl:copy>
     <xsl:apply-templates select="@*"/>
@@ -100,6 +114,18 @@
     <xsl:apply-templates select="elml:body/*"/>
   </xsl:copy>
 </xsl:template>
+
+<xsl:template match="elml:summary">
+  <xsl:copy>
+    <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:apply-templates select="elml:body/*"/>
+  </xsl:copy>
+</xsl:template> 
 
 <xsl:template match="elml:furtherReading">
   <xsl:copy>

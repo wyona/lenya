@@ -114,6 +114,7 @@
   </element>
 </xsl:template>
 
+
 <xsl:template match="rng:element[@name = 'selfAssessment' and ancestor::rng:include]">
   <element name="selfAssessment">
     <ref name="NavTitleImp"/>
@@ -137,19 +138,50 @@
           <ref name="box"/>
           <ref name="term"/>
           <ref name="multimedia"/>
-          <ref name="formatted"/>
           <ref name="popup"/>
           <ref name="link"/>
           <ref name="citation"/>
-          <ref name="newLine"/>
           <ref name="paragraph"/>
-          <ref name="indexItem"/>
-          <text/>
         </choice>
       </zeroOrMore>
     </element>
   </element>
 </xsl:template>
+
+
+<xsl:template match="rng:element[@name = 'summary' and ancestor::rng:include]">
+  <element name="summary">
+    <ref name="NavTitleImp"/>
+    <ref name="MetaSetUpInfoReq"/>
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <attribute name="lenya:dummy"><text/></attribute>
+    <attribute name="dc:dummy"><text/></attribute>
+    <attribute name="dcterms:dummy"><text/></attribute>
+    <ref name="lenya.meta"/>
+    <optional>
+      <element name="xhtml:h1"><text/></element>
+    </optional>
+    <element name="body">
+      <zeroOrMore>
+        <choice>
+          <ref name="lenya.asset"/>
+          <ref name="column"/>
+          <ref name="table"/>
+          <ref name="list"/>
+          <ref name="box"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="popup"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="paragraph"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </element>
+</xsl:template>
+
 
 <xsl:template match="rng:element[@name = 'selfAssessment' and not(ancestor::rng:include)]">
   <element name="selfAssessment">
@@ -234,35 +266,29 @@
     <ref name="lenya.meta"/>
     <element name="body">
       <oneOrMore>
-        <ref name="definition"/>
+        <element name="definition">
+          <ref name="BibIDRefImp"/>
+          <element name="term">
+            <text/>
+          </element>
+          <element name="def">
+            <zeroOrMore>
+              <choice>
+                <ref name="list"/>
+                <ref name="term"/>
+                <ref name="multimedia"/>
+                <ref name="formatted"/>
+                <ref name="link"/>
+                <ref name="citation"/>
+                <ref name="newLine"/>
+                <ref name="paragraph"/>
+                <ref name="indexItem"/>
+                <text/>
+              </choice>
+            </zeroOrMore>
+          </element>
+        </element>        
       </oneOrMore>
-      <empty/>
-    </element>
-  </element>
-</xsl:template>
-
-
-<xsl:template match="rng:element[@name = 'definition']">
-  <element name="definition">
-    <ref name="BibIDRefImp"/>
-    <element name="term">
-      <text/>
-    </element>
-    <element name="def">
-      <zeroOrMore>
-        <choice>
-          <ref name="list"/>
-          <ref name="term"/>
-          <ref name="multimedia"/>
-          <ref name="formatted"/>
-          <ref name="link"/>
-          <ref name="citation"/>
-          <ref name="newLine"/>
-          <ref name="paragraph"/>
-          <ref name="indexItem"/>
-          <text/>
-        </choice>
-      </zeroOrMore>
     </element>
   </element>
 </xsl:template>
