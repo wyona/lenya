@@ -115,19 +115,24 @@
   </xsl:copy>
 </xsl:template>
 
-<xsl:template match="elml:summary">
+<xsl:template match="elml:summary[not(parent::*)]">
   <xsl:copy>
+    <xsl:apply-templates select="@*"/>
     <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
-    <xsl:apply-templates select="@*"/>
+    <xsl:if test="xhtml:h1">
+      <xsl:attribute name="title"> 
+        <xsl:value-of select="xhtml:h1"/>
+      </xsl:attribute>
+    </xsl:if>
     <xsl:apply-templates select="lenya:meta"/>
     <xsl:apply-templates select="elml:body/*"/>
   </xsl:copy>
 </xsl:template> 
 
-<xsl:template match="elml:furtherReading">
+<xsl:template match="elml:furtherReading[not(parent::*)]">
   <xsl:copy>
     <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
     <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
@@ -164,12 +169,14 @@
 </xsl:template>
 
 
-<xsl:template match="elml:learningObject | elml:entry">
+<xsl:template match="elml:learningObject | elml:entry | elml:clarify | elml:look | elml:act | elml:selfAssessment[parent::*] | elml:summary[parent::*]">
   <xsl:copy>
     <xsl:apply-templates select="@*"/>
-    <xsl:attribute name="title">
-      <xsl:value-of select="xhtml:h2"/>
-    </xsl:attribute>
+    <xsl:if test="xhtml:h2">
+      <xsl:attribute name="title">
+        <xsl:value-of select="xhtml:h2"/>
+      </xsl:attribute>
+    </xsl:if>
     <xsl:apply-templates select="node()"/>
   </xsl:copy>
 </xsl:template>

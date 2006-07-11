@@ -133,7 +133,7 @@
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
       </xsl:if>
-      <xsl:if test="@title">
+      <xsl:if test="@title and parent::elml:unit">
         <h2><xsl:value-of select="@title"/></h2>
       </xsl:if>
       <xsl:apply-templates/> <!-- metaSetUpInfo in tutor view -->
@@ -145,7 +145,7 @@
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
       </xsl:if>
-      <xsl:if test="@title">
+      <xsl:if test="@title and parent::elml:unit">
         <h2><xsl:value-of select="@title"/></h2>
       </xsl:if>
       <xsl:apply-templates/>

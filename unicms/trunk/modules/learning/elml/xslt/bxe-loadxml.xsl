@@ -7,6 +7,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:elml="http://www.elml.ch"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
 >
 
 
@@ -73,7 +74,26 @@
 </xsl:template>
 
 
-<xsl:template match="elml:learningObject | elml:entry | elml:selfAssessment[parent::*]">
+<xsl:template match="elml:summary[not(parent::*)]">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="lenya:meta"/>
+    <xsl:choose>
+      <xsl:when test="@title !=''">
+        <xhtml:h1><xsl:value-of select="@title"/></xhtml:h1>
+      </xsl:when>
+      <xsl:otherwise>
+        <xhtml:h1><xsl:value-of select="lenya:meta/dc:title"/></xhtml:h1>
+      </xsl:otherwise>
+    </xsl:choose>
+    <body>
+      <xsl:apply-templates select="*[not(self::lenya:meta)]"/>
+    </body>
+  </xsl:copy>
+</xsl:template>
+
+
+<xsl:template match="elml:learningObject | elml:entry | elml:clarify | elml:look | elml:act | elml:selfAssessment[parent::*] | elml:summary[parent::*]">
   <xsl:copy>
     <xsl:apply-templates select="@*"/>
     <xsl:if test="@title != ''">

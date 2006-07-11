@@ -210,6 +210,35 @@
   </element>
 </xsl:template>
 
+
+
+<xsl:template match="rng:element[@name = 'summary' and not(ancestor::rng:include)]">
+  <element name="summary">
+    <ref name="NavTitleImp"/>
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <optional>
+      <element name="xhtml:h2"><text/></element>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="column"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="box"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="popup"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="paragraph"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</xsl:template>
+
+
 <xsl:template match="rng:element[@name = 'entry']">
   <element name="entry">
     <ref name="LabelImp"/>
