@@ -372,7 +372,7 @@ img.icon {
 
 .navup a {
 	display:block;
-	background-image:url(<context-prefix/>/unizh/authoring/images/icon_arrow_up.gif);
+	background-image:url(<context-prefix/>/unizh/authoring/images/icon_arrow_up12.gif);
 	padding-left:20px;
 	background-repeat: no-repeat;
 }
