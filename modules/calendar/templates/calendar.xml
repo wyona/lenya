@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 
-<calendar user="USER">
+<!--
+<?xml-stylesheet type="text/xsl" href="../xslt/calendar2xhtml.xsl"?>
+-->
 
-<year value="YYYY">
+<calendar user="michi">
+
+<year value="2006">
 
 <month name="January">
-<entry day="DD" name="NAME" hour="HH:MM" public="true">
-...
+<entry day="1" name="Sunday" hour="13:35" public="true">
+Hello World
 </entry>
 </month>
 
