@@ -8,12 +8,23 @@ Wiki Module Installation (default Publication) BETA
 
    OR
 
-   patch the default publication build/lenya/webapp/lenya/pubs/default/sitemap.xmap
+   - patch the default publication build/lenya/webapp/lenya/pubs/default/sitemap.xmap
+     - Uncomment Line 111: <map:part src="cocoon://modules/{page-envelope:document-type}/{1}.xml"/>
+     - Comment Line 113: <map:part src="{resource-type:format-xhtml}"/>
 
-    - Uncomment Line 111: <map:part src="cocoon://modules/{page-envelope:document-type}/{1}.xml"/>
-    - Comment Line 113: <map:part src="{resource-type:format-xhtml}"/>
-
-    - Add <module name="wiki"/> to config/publication.xconf
+   - Add <module name="wiki"/> to config/publication.xconf
+   
+   - Add the following usecases to {yourpub}/config/ac/usecase-policies.xml
+		        
+		    <usecase id="wiki.create">
+		      <role id="admin"/>
+		      <role id="edit"/>
+		    </usecase>  
+		
+		    <usecase id="wiki.edit">
+		      <role id="admin"/>
+		      <role id="edit"/>
+		    </usecase>  
 
 3) Build Lenya
 
