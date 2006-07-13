@@ -108,7 +108,7 @@
       <edit>
         <oneform>
           <pageTitle>Edit</pageTitle>
-          <pageContent>Welcome to the default Lenya publication</pageContent>
+          <pageContent>Here comes the text of your new document</pageContent>
           <lockError>The operation cannot be executed because one ore more of the involved objects are checked out</lockError>
         </oneform>
       </edit>
