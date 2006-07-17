@@ -119,6 +119,7 @@
   <xsl:template name="two-columns">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
@@ -170,6 +171,7 @@
   <xsl:template name="overview">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -244,6 +246,7 @@
   <xsl:template name="newsitem">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -293,6 +296,7 @@
   <xsl:template name="person">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <!-- <div class="relatedbox">
@@ -366,6 +370,7 @@
   <xsl:template name="redirect">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <div class="contentarea">
