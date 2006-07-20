@@ -32,7 +32,6 @@ import org.apache.excalibur.source.SourceResolver;
 import org.apache.lenya.cms.cocoon.source.RepositorySource;
 import org.apache.lenya.cms.metadata.LenyaMetaData;
 import org.apache.lenya.cms.metadata.MetaData;
-import org.apache.lenya.cms.publication.DefaultResourcesManager;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.repository.Node;
@@ -145,13 +144,13 @@ public class UploadResource extends DocumentUsecase {
             customMeta.addValue("media-format", mimeType);
             customMeta.addValue("media-extent", Integer.toString(fileSize));
         }
-        if (DefaultResourcesManager.canReadMimeType(mimeType)) {
+        if (CreateResource.canReadMimeType(mimeType)) {
             BufferedImage input = ImageIO.read(part.getInputStream());
             String width = Integer.toString(input.getWidth());
             String height = Integer.toString(input.getHeight());
             if (customMeta != null) {
-                customMeta.addValue("media-" + LenyaMetaData.ELEMENTE_HEIGHT, height);
-                customMeta.addValue("media-" + LenyaMetaData.ELEMENT_WIDTH, width);
+                customMeta.addValue("media-height", height);
+                customMeta.addValue("media-width", width);
             }
         }
     }

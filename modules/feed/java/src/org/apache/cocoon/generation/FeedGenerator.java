@@ -254,8 +254,6 @@ public class FeedGenerator extends ServiceableGenerator {
             MetaDataManager metaMgr = document.getMetaDataManager();
             if (lastModified < metaMgr.getCustomMetaData().getLastModified())
                 lastModified = metaMgr.getCustomMetaData().getLastModified();
-            if (lastModified < metaMgr.getDublinCoreMetaData().getLastModified())
-                lastModified = metaMgr.getDublinCoreMetaData().getLastModified();
             if (lastModified < metaMgr.getLenyaMetaData().getLastModified())
                 lastModified = metaMgr.getLenyaMetaData().getLastModified();
         } catch (DocumentException e) {
