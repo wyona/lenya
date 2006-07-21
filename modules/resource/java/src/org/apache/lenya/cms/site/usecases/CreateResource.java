@@ -25,21 +25,17 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.servlet.multipart.Part;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.excalibur.source.ModifiableSource;
 import org.apache.excalibur.source.SourceResolver;
 import org.apache.lenya.cms.cocoon.source.RepositorySource;
-import org.apache.lenya.cms.cocoon.source.SourceUtil;
-import org.apache.lenya.cms.metadata.LenyaMetaData;
 import org.apache.lenya.cms.metadata.MetaData;
+import org.apache.lenya.cms.metadata.MetaDataException;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentException;
-import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.repository.Node;
-import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.usecase.UsecaseException;
 
 public class CreateResource extends CreateDocument {
@@ -111,15 +107,15 @@ public class CreateResource extends CreateDocument {
      */
     protected void addResource(Part file) throws IOException, ServiceException, DocumentException {
         Document document = getNewDocument();
-        MetaData customMeta = null;
+        MetaData mediaMeta = null;
 
         SourceResolver resolver = null;
         ModifiableSource source = null;
         OutputStream destOutputStream = null;
         InputStream inputStream = file.getInputStream();
         try {
-            customMeta = document.getMetaDataManager().getCustomMetaData();
-            addResourceMeta(file, customMeta);
+            mediaMeta = document.getMetaData("http://apache.org/lenya/metadata/media/1.0");
+            addResourceMeta(file, mediaMeta);
             resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
 
             String destination = getNewDocument().getSourceURI();
@@ -133,7 +129,7 @@ public class CreateResource extends CreateDocument {
             final ByteArrayOutputStream sourceBos = new ByteArrayOutputStream();
             IOUtils.copy(inputStream, sourceBos);
             IOUtils.write(sourceBos.toByteArray(), destOutputStream);
-        } catch (RepositoryException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
             if (destOutputStream != null) {
@@ -163,23 +159,23 @@ public class CreateResource extends CreateDocument {
         return extension;
     }
 
-    protected void addResourceMeta(Part part, MetaData customMeta) throws DocumentException,
+    protected void addResourceMeta(Part part, MetaData customMeta) throws MetaDataException,
             IOException {
         String fileName = part.getFileName();
         String mimeType = part.getMimeType();
         int fileSize = part.getSize();
         if (customMeta != null) {
-            customMeta.addValue("media-filename", fileName);
-            customMeta.addValue("media-format", mimeType);
-            customMeta.addValue("media-extent", Integer.toString(fileSize));
+            customMeta.setValue("filename", fileName);
+            customMeta.setValue("format", mimeType);
+            customMeta.setValue("extent", Integer.toString(fileSize));
         }
         if (canReadMimeType(mimeType)) {
             BufferedImage input = ImageIO.read(part.getInputStream());
             String width = Integer.toString(input.getWidth());
             String height = Integer.toString(input.getHeight());
             if (customMeta != null) {
-                customMeta.addValue("media-height", height);
-                customMeta.addValue("media-width", width);
+                customMeta.setValue("height", height);
+                customMeta.setValue("width", width);
             }
         }
     }

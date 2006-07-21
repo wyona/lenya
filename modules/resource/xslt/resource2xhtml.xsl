@@ -4,14 +4,14 @@
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:meta="http://apache.org/cocoon/lenya/metadata/1.0"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:mobi="http://mobi.ch/homepage/1.0"
   xmlns:media="http://apache.org/lenya/pubs/default/media/1.0"
+  xmlns:mediameta="http://apache.org/lenya/metadata/media/1.0"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
   xmlns:dcterms="http://purl.org/dc/terms/"
-  exclude-result-prefixes="xhtml lenya mobi dc">
+  exclude-result-prefixes="xhtml meta dc">
   
   <xsl:import href="fallback://lenya/modules/resource/xslt/common/mimetype.xsl"/>
   <xsl:include href="fallback://lenya/modules/xhtml/xslt/helper-object.xsl"/>
@@ -29,13 +29,13 @@
   
   <xsl:template match="/">
     <xhtml:div id="body">
-      <xsl:apply-templates select="//lenya:meta" mode="media"/>
+      <xsl:apply-templates select="//meta:metadata" mode="media"/>
     </xhtml:div>
   </xsl:template>
     
-  <xsl:template match="lenya:meta" mode="media">
+  <xsl:template match="meta:metadata" mode="media">
     
-    <xsl:variable name="mediaName" select="concat($documentId, '.', lenya:internal/lenya:extension)"/>
+    <xsl:variable name="mediaName" select="concat($documentId, '.', mediameta:elements/mediameta:filename)"/>
     
     <xsl:variable name="mediaURI">
       <xsl:value-of select="$root"/>
@@ -44,9 +44,9 @@
     
     <xsl:variable name="size">
       <xsl:choose>
-        <xsl:when test="lenya:custom/lenya:media-extent = ''">??</xsl:when>
+        <xsl:when test="mediameta:elements/mediameta:extent = ''">??</xsl:when>
         <xsl:otherwise><xsl:value-of
-            select="format-number(lenya:custom/lenya:media-extent div 1024, '#,###.##')"/>
+          select="format-number(mediameta:elements/mediameta:extent div 1024, '#,###.##')"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -57,7 +57,7 @@
         <td> <a href="{$mediaURI}" target="_new">
           <xsl:call-template name="icon">
             <xsl:with-param name="mimetype"
-              select="lenya:custom/lenya:media-format"/>
+              select="mediameta:elements/mediameta:format"/>
             <xsl:with-param name="imageprefix" select="$imageprefix"/>
           </xsl:call-template> </a>
         </td>
@@ -65,11 +65,11 @@
       </tr>
       <tr>
         <td><i><i18n:text>Title</i18n:text>:</i></td>
-        <td><strong><xsl:value-of select="lenya:dc/dc:title"/></strong></td>
+        <td><strong><xsl:value-of select="dc:elements/dc:title"/></strong></td>
       </tr>
       <tr>
         <td><i><i18n:text>Description</i18n:text>:</i></td>
-        <td><xsl:value-of select="lenya:dc/dc:description"/></td>
+        <td><xsl:value-of select="dc:elements/dc:description"/></td>
       </tr>
       <tr>
         <td><i><i18n:text>Content</i18n:text>:</i></td>
@@ -82,13 +82,13 @@
       </tr>
       <tr>
         <td><i><i18n:text>MimeType</i18n:text>:</i></td>
-        <td><xsl:value-of select="lenya:custom/lenya:media-format"/></td>
+        <td><xsl:value-of select="mediameta:elements/mediameta:format"/></td>
       </tr>
-      <xsl:if test="lenya:custom/lenya:media-width != ''">
+      <xsl:if test="mediameta:elements/mediameta:width != ''">
         <tr>
           <td><i><i18n:text>Dimension</i18n:text>:</i></td>
-          <td><xsl:value-of select="lenya:custom/lenya:media-width"/>x
-            <xsl:value-of select="lenya:custom/lenya:media-height"/></td>
+          <td><xsl:value-of select="mediameta:elements/mediameta:width"/>x
+            <xsl:value-of select="mediameta:elements/mediameta:height"/></td>
         </tr>
       </xsl:if>
       <tr>
@@ -96,7 +96,7 @@
         <div align="center">
           <xsl:call-template name="preview">
             <xsl:with-param name="mimetype"
-              select="lenya:custom/lenya:media-format"/>
+              select="mediameta:elements/mediameta:format"/>
             <xsl:with-param name="mediaURI" select="$mediaURI"/>
           </xsl:call-template><br/><br/>
         </div>

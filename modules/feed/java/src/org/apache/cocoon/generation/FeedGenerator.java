@@ -25,7 +25,6 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.apache.lenya.xml.DocumentHelper;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -37,12 +36,9 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.TimeStampValidity;
-import org.apache.excalibur.xml.dom.DOMParser;
 import org.apache.lenya.cms.cocoon.source.SourceUtil;
-import org.apache.lenya.cms.metadata.MetaDataManager;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentBuildException;
-import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.publication.DocumentFactory;
 import org.apache.lenya.cms.publication.DocumentUtil;
 import org.apache.lenya.cms.publication.Publication;
@@ -54,6 +50,7 @@ import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
 import org.apache.lenya.util.ServletHelper;
+import org.apache.lenya.xml.DocumentHelper;
 import org.apache.xpath.XPathAPI;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -249,17 +246,7 @@ public class FeedGenerator extends ServiceableGenerator {
      *         component is currently not cacheable.
      */
     public SourceValidity getValidity() {
-        long lastModified = 0;
-        try {
-            MetaDataManager metaMgr = document.getMetaDataManager();
-            if (lastModified < metaMgr.getCustomMetaData().getLastModified())
-                lastModified = metaMgr.getCustomMetaData().getLastModified();
-            if (lastModified < metaMgr.getLenyaMetaData().getLastModified())
-                lastModified = metaMgr.getLenyaMetaData().getLastModified();
-        } catch (DocumentException e) {
-            getLogger().error("Error determining last modification date", e);
-            return null;
-        }
+        long lastModified = document.getLastModified().getTime();
         return new TimeStampValidity(lastModified);
     }
 

@@ -30,8 +30,8 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.excalibur.source.ModifiableSource;
 import org.apache.excalibur.source.SourceResolver;
 import org.apache.lenya.cms.cocoon.source.RepositorySource;
-import org.apache.lenya.cms.metadata.LenyaMetaData;
 import org.apache.lenya.cms.metadata.MetaData;
+import org.apache.lenya.cms.metadata.MetaDataException;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.repository.Node;
@@ -75,17 +75,19 @@ public class UploadResource extends DocumentUsecase {
      * @throws IOException
      * @throws ServiceException
      * @throws DocumentException
+     * @throws MetaDataException
      */
-    protected void saveResource(Part file) throws IOException, ServiceException, DocumentException {
+    protected void saveResource(Part file) throws IOException, ServiceException, DocumentException,
+            MetaDataException {
         Document document = getSourceDocument();
         String destination = document.getSourceURI();
-        
+
         SourceResolver resolver = null;
         ModifiableSource source = null;
         OutputStream destOutputStream = null;
         InputStream inputStream = file.getInputStream();
         try {
-            
+
             resolver = (SourceResolver) this.manager.lookup(SourceResolver.ROLE);
             source = (ModifiableSource) resolver.resolveURI(destination);
 
@@ -108,12 +110,12 @@ public class UploadResource extends DocumentUsecase {
                 inputStream.close();
             }
         }
-        
-        MetaData customMeta = document.getMetaDataManager().getCustomMetaData();
+
+        MetaData customMeta = document.getMetaData("http://apache.org/lenya/metadata/media/1.0");
         updateResourceMeta(file, customMeta);
-        
+
         // update <lenya:extension>
-        MetaData internalMeta = document.getMetaDataManager().getLenyaMetaData();
+        MetaData internalMeta = document.getMetaData("http://apache.org/lenya/metadata/document/1.0");
         internalMeta.setValue("extension", getSourceExtension());
 
         if (getLogger().isDebugEnabled())
@@ -134,7 +136,7 @@ public class UploadResource extends DocumentUsecase {
         return extension;
     }
 
-    protected void updateResourceMeta(Part part, MetaData customMeta) throws DocumentException,
+    protected void updateResourceMeta(Part part, MetaData customMeta) throws MetaDataException,
             IOException {
         String fileName = part.getFileName();
         String mimeType = part.getMimeType();
