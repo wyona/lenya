@@ -9,7 +9,7 @@
 
 
   <xsl:template match="/">
-    <xsl:processing-instruction name="xml-stylesheet">type="text/xsl" href="rss/default_rss.xsl"</xsl:processing-instruction>
+    <xsl:processing-instruction name="xml-stylesheet">type="text/xsl" href="/lenya/unipublic/authoring/xsl/default_rss.xsl"</xsl:processing-instruction>
     <rss version="2.0">
       <xsl:apply-templates select="atom:feed"/> 
     </rss>
