@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Main build file for Apache Ant.
+    Generation with XSL the buildgenerated.xml.
+    Other tasks have to be done at this points because of the GUI.
+-->
+<project name="testing-init" default="init" basedir=".">
+    <xmlproperty file="projects.xml" semanticAttributes="true"/>
+    
+    <target name="init" description="init target which creates the buildgenerated.xml">
+        <!-- making sure that already generated files are gone -->
+        <delete file="buildgenerated.xml"/>
+        <xslt in="projects.xml" out="buildgenerated.xml" extension=".xml" style="xslt/xml2build.xslt">
+            <outputproperty name="method" value="xml"/>
+            <outputproperty name="standalone" value="yes"/>
+            <outputproperty name="indent" value="yes"/>
+        </xslt>
+        <!-- Create junit reports dir -->
+        <mkdir dir="junit" />
+        <!-- Clear junit reports dir -->
+        <delete> 
+            <fileset dir="junit" includes="*.xml" />
+        </delete>
+        <echo message="" />
+        <echo message="**************************************" />
+        <echo message="Usage: ant -f buildgenerated.xml [targets]" />
+        <echo message="**************************************" />
+
+    </target>
+    
+</project>

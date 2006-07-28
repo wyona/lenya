@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Default tests.xml for Lenya JUNIT Tests, please put this file to
+$LENYA_HOME/src/test/tests.xml
+-->
+<tests xmlns="http://apache.org/lenya/test/1.0">
+
+    <classpath>
+          <fileset dir="/home/oli/workspace/lenya_1_4_x/lib">
+            <include name="*.jar"/>
+          </fileset>
+          <fileset dir="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib">
+            <include name="*.jar"/>
+          </fileset>
+          <fileset dir="/home/oli/workspace/lenya_1_4_x/tools/jetty/lib">
+            <include name="servlet-*.jar"/>
+          </fileset>
+          <fileset dir="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib">
+            <include name="*.jar"/>
+            <include name="endorsed/*.jar"/>
+          </fileset>
+          <pathelement path="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/classes" />
+          <pathelement path="/home/oli/workspace/lenya_1_4_x/build/test" />
+    </classpath>
+
+    <test location="src/test" />
+    <test file="org.apache.lenya.ac.impl.IdentityTest" />
+    <test file="org.apache.lenya.ac.impl.AccessControllerTest" />
+    <test file="org.apache.lenya.cms.publication.TestPageEnvelope" />
+
+    <junit-args>
+      <jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+      <jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+      <sysproperty key="junit.test.loglevel" value="6"/>
+      <sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+      <sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+    </junit-args>
+</tests>

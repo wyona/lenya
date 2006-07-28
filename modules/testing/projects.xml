@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Project definition File.
+    Projects will point to the directory where a tests.xml have to be.
+    Definition of Project Name and Path.
+-->
+
+<!-- Projects comes here -->
+<projects xmlns="http://apache.org/lenya/test/1.0">
+    
+   <project name="lenyatests">
+        <path>/home/oli/workspace/lenya_1_4_x/src/impl/test</path>
+    </project>
+    
+   <!--
+   <project name="moreProject">
+       <path>/to/more/project</path>
+   </project> -->
+   
+</projects>

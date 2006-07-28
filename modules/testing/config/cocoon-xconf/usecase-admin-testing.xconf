@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+  <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'admin.testing']">
+
+    <component-instance name="admin.testing" logger="lenya.admin" class="com.wyona.lenya.testing.RunSelected">
+      <view template="modules/testing/usecases/admin/testing.jx" menu="true">
+        <tab group="admin" name="testing"/>
+      </view>
+      <exit usecase="admin.testlogs"/>
+    </component-instance>
+
+  </xconf>

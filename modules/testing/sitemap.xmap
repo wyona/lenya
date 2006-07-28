@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cocoon Sitemap for the Testingmodule which has two pipelines -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <!-- General components not all needed -->  
+  <map:components>
+    <map:transformer name="cinclude" src="org.apache.cocoon.transformation.CIncludeTransformer"/>
+  </map:components>
+  
+  <map:pipelines>
+    
+    <!--Matches test and generates one xml from all tests.xml defined in projects xml. 
+    This Pipeline is called in the testing.jx template -->
+    <map:pipeline>  
+      <map:match pattern="test">
+        <!-- we generate direct from the projects.xml where we find the path to all tests.xml -->
+        <map:generate src="projects.xml"/>
+        <map:transform src="xslt/projects2cinclude.xslt"/>
+        <map:transform type="cinclude"/>
+        <map:transform src="xslt/cinclude2xhtml.xslt"/>
+        <map:serialize type="xml"/>
+      </map:match>  
+    </map:pipeline>
+    
+    <!-- Matches testlog and generates formatted log output to the view.
+    This Pipeline is called in the testlogs.jx template -->
+    <map:pipeline>
+      <map:match pattern="testlog">
+        <!-- Directory generator includes all xml's in the specified directory -->
+        <map:generate type="directory" src="junit" />        
+        <map:transform src="xslt/directory2cinclude.xslt" />
+        <map:transform type="cinclude" />
+        <map:transform src="xslt/cinclude2logview.xslt"/>
+        <map:serialize type="xhtml" />
+      </map:match>     
+    </map:pipeline>    
+  </map:pipelines>
+  
+</map:sitemap>

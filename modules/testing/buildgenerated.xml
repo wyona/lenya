@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+    Generated build file to run all tests. Targets are generated automatically.
+    Targets:
+    
+    - projectname (all tests from a project)
+    - projectname:testname (one test from a project)
+    - run (all tests from all projects)
+    - clean (deletes created files/folders)      
+    -->
+<project basedir="." default="run" name="testing">
+<path id="cp-lenyatests">
+<fileset dir="/home/oli/workspace/lenya_1_4_x/lib">
+            <include name="*.jar"/>
+          </fileset>
+<fileset dir="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib">
+            <include name="*.jar"/>
+          </fileset>
+<fileset dir="/home/oli/workspace/lenya_1_4_x/tools/jetty/lib">
+            <include name="servlet-*.jar"/>
+          </fileset>
+<fileset dir="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib">
+            <include name="*.jar"/>
+            <include name="endorsed/*.jar"/>
+          </fileset>
+<pathelement path="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/classes"/>
+<pathelement path="/home/oli/workspace/lenya_1_4_x/build/test"/>
+</path>
+<path id="cp-another"/>
+<target name="setup">
+<mkdir dir="/home/oli/workspace/lenya_1_4_x/src/test/build"/>
+<mkdir dir="/home/oli/workspace/another/build"/>
+</target>
+<target description="compiles all projects" name="compile">
+<javac source="1.4" debug="on" destdir="/home/oli/workspace/lenya_1_4_x/src/test/build" srcdir="/home/oli/workspace/lenya_1_4_x/src/test">
+<classpath refid="cp-lenyatests"/>
+</javac>
+<javac source="1.4" debug="on" destdir="/home/oli/workspace/another/build" srcdir="/home/oli/workspace/another">
+<classpath refid="cp-another"/>
+</javac>
+</target>
+<!--Target will run the tests for all projects, this is default target-->
+<target description="will run all tests from all projects" depends="setup,compile" name="run">
+<echo message="Selected tests for: lenyatests running..."/>
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+<jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+<sysproperty key="junit.test.loglevel" value="6"/>
+<sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+<sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-lenyatests"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.IdentityTest"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.AccessControllerTest"/>
+<test todir="junit" name="org.apache.lenya.cms.publication.TestPageEnvelope"/>
+</junit>
+<echo message="Done!"/>
+<echo message=""/>
+<echo message="Selected tests for: another running..."/>
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Andy"/>
+<test todir="junit" name="org.wyona.mytests.Bobby"/>
+<test todir="junit" name="org.wyona.mytests.Flo"/>
+<test todir="junit" name="org.wyona.mytests.Mike"/>
+<test todir="junit" name="org.wyona.mytests.Simon"/>
+</junit>
+<echo message="Done!"/>
+<echo message=""/>
+</target>
+<!--Target to run all tests by a project-->
+<target description="Runs all Tests of lenyatests" depends="setup,compile" name="lenyatests">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+<jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+<sysproperty key="junit.test.loglevel" value="6"/>
+<sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+<sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-lenyatests"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.IdentityTest"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.AccessControllerTest"/>
+<test todir="junit" name="org.apache.lenya.cms.publication.TestPageEnvelope"/>
+</junit>
+</target>
+<!--Target to run all tests by a project-->
+<target description="Runs all Tests of another" depends="setup,compile" name="another">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Andy"/>
+<test todir="junit" name="org.wyona.mytests.Bobby"/>
+<test todir="junit" name="org.wyona.mytests.Flo"/>
+<test todir="junit" name="org.wyona.mytests.Mike"/>
+<test todir="junit" name="org.wyona.mytests.Simon"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just IdentityTest" depends="setup,compile" name="lenyatests:IdentityTest">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+<jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+<sysproperty key="junit.test.loglevel" value="6"/>
+<sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+<sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-lenyatests"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.IdentityTest"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just AccessControllerTest" depends="setup,compile" name="lenyatests:AccessControllerTest">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+<jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+<sysproperty key="junit.test.loglevel" value="6"/>
+<sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+<sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-lenyatests"/>
+<test todir="junit" name="org.apache.lenya.ac.impl.AccessControllerTest"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just TestPageEnvelope" depends="setup,compile" name="lenyatests:TestPageEnvelope">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<jvmarg value="-Djava.endorsed.dirs=/home/oli/workspace/lenya_1_4_x/build/lenya/webapp/WEB-INF/lib/endorsed"/>
+<jvmarg value="-Dorg.xml.sax.parser=org.apache.xerces.parsers.SAXParser"/>
+<sysproperty key="junit.test.loglevel" value="6"/>
+<sysproperty key="contextRoot" value="/home/oli/workspace/lenya_1_4_x/build/lenya/webapp"/>
+<sysproperty key="tempDir" value="/home/oli/workspace/lenya_1_4_x/build/lenya/temp"/>
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-lenyatests"/>
+<test todir="junit" name="org.apache.lenya.cms.publication.TestPageEnvelope"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just Andy" depends="setup,compile" name="another:Andy">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Andy"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just Bobby" depends="setup,compile" name="another:Bobby">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Bobby"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just Flo" depends="setup,compile" name="another:Flo">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Flo"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just Mike" depends="setup,compile" name="another:Mike">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Mike"/>
+</junit>
+</target>
+<!--Targets to run just one test by name!-->
+<target description="Runs just Simon" depends="setup,compile" name="another:Simon">
+<junit fork="true" haltonfailure="off" haltonerror="off" showoutput="true" printsummary="yes">
+<formatter usefile="false" type="plain"/>
+<formatter type="xml"/>
+<classpath refid="cp-another"/>
+<test todir="junit" name="org.wyona.mytests.Simon"/>
+</junit>
+</target>
+<target description="This will delete all created build folders" name="clean">
+<!--Deleting all created build dirs-->
+<delete dir="/home/oli/workspace/lenya_1_4_x/src/test/build"/>
+<delete dir="/home/oli/workspace/another/build"/>
+</target>
+</project>
