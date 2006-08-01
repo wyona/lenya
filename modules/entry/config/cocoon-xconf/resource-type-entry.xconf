@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
 <xconf xpath="/cocoon/resource-types"
-  unless="/cocoon/resource-types/component-instance[@name = 'entry']">
+  unless="/cocoon/resource-types/component-instance[@name = 'entryModule']">
   
-  <component-instance name="entry" logger="lenya.resourcetypes.entry"
+  <component-instance name="entryModule" logger="lenya.resourcetypes.entry"
     class="org.apache.lenya.cms.publication.ResourceTypeImpl">
     <schema language="http://relaxng.org/ns/structure/0.9"
       src="fallback://lenya/modules/entry/resources/schemas/entry.rng"/>
