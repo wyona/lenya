@@ -38,7 +38,7 @@
     <menu i18n:attr="name" name="File">
       <xsp:logic>
         String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
-        if (!"entryModule".equals(doctype)) {
+        if (!"blogentry".equals(doctype)) {
           <block info="false">
             <item uc:usecase="site.create" href="?doctype=feedModule">Add&#160;new&#160;Feed</item>
           </block>

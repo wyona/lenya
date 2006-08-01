@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/resource-types"
+  unless="/cocoon/resource-types/component-instance[@name = 'blogentry']">
+  
+  <component-instance name="blogentry" logger="lenya.resourcetypes.entry"
+    class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+    <schema language="http://relaxng.org/ns/structure/0.9"
+      src="fallback://lenya/modules/blogentry/resources/schemas/entry.rng"/>
+    <sample-name>fallback://lenya/modules/blogentry/samples/entry.xml</sample-name>
+    <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
+    <format name="xhtml" uri="cocoon://modules/blogentry/xhtml.xml"/>
+  </component-instance>
+  
+</xconf>

@@ -20,7 +20,7 @@
 <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'entry.create']">
   <component-instance name="entry.create" logger="lenya.site"
     class="org.wyona.lenya.cms.site.usecases.CreateBlogEntry">
-    <view template="modules/entry/usecases/site/create.jx"/>
+    <view template="modules/blogentry/usecases/site/create.jx"/>
     <resource-type select="folder"/>
   </component-instance>
 </xconf>

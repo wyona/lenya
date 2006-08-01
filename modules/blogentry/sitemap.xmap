@@ -49,7 +49,7 @@ limitations under the License.
           </map:generate>
           <map:transform src="fallback://lenya/xslt/rc/toDoc.xsl"/>
           <map:transform
-            src="fallback://lenya/modules/entry/xslt/entry2xhtml.xsl">
+            src="fallback://lenya/modules/blogentry/xslt/entry2xhtml.xsl">
             <map:parameter name="document-type"
               value="{page-envelope:document-type}"/>
             <map:parameter name="nodeid" value="{page-envelope:document-name}"/>
@@ -70,7 +70,7 @@ limitations under the License.
       <map:match pattern="*.xml">
         <map:generate
           src="lenyadoc:/{page-envelope:document-language}/{page-envelope:document-id}"/>
-        <map:transform src="fallback://lenya/modules/entry/xslt/entry2xhtml.xsl">
+        <map:transform src="fallback://lenya/modules/blogentry/xslt/entry2xhtml.xsl">
           <map:parameter name="document-type"
             value="{page-envelope:document-type}"/>
           <map:parameter name="nodeId" value="{page-envelope:document-name}"/>
