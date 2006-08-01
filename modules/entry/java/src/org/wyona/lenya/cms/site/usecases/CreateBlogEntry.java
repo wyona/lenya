@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.components.ContextHelper;
@@ -58,7 +60,21 @@ public class CreateBlogEntry extends DocumentUsecase {
 
     protected static String DEFAULT_RESOURCE_TYPE = "xhtml";
     protected static final String DEFAULT_EXTENSION = "xml";
+    
+    protected static final String ELEMENT_ROOT = "resource-type";
+    protected static final String ATTRIBUTE_TYPE = "select";
+    
+    private String parentId;
 
+       public void configure(Configuration config) throws ConfigurationException {
+               super.configure(config);
+               Configuration resourceTypeConfig = config.getChild(ELEMENT_ROOT, false);
+               if (resourceTypeConfig != null) {
+                   DEFAULT_RESOURCE_TYPE=resourceTypeConfig.getAttribute(ATTRIBUTE_TYPE);
+               }
+             }
+
+    
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#getNodesToLock()
      */
@@ -109,6 +125,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
         String language = parent.getPublication().getDefaultLanguage();
+        this.parentId=parent.getId();
 
         // create new document
         // implementation note: since blog does not have a hierarchy,
@@ -125,7 +142,7 @@ public class CreateBlogEntry extends DocumentUsecase {
 
             documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
 
-            DocumentFactory map = getDocumentIdentityMap();
+            DocumentFactory map = getDocumentFactory();
 
             String documentId = getDocumentID();
             Document document = map.get(getSourceDocument().getPublication(),
@@ -154,7 +171,7 @@ public class CreateBlogEntry extends DocumentUsecase {
     }
     
     protected void createParentDocs(Document doc) throws ServiceException, PublicationException {
-      DocumentFactory map = getDocumentIdentityMap();
+      DocumentFactory map = getDocumentFactory();
       String[] pathId = getDocumentID().split("/");
       String docRoot = "";
       for (int i = 0; i < pathId.length-1; i++) {
@@ -222,9 +239,10 @@ public class CreateBlogEntry extends DocumentUsecase {
         String year = fmtyyyy.format(date);
         String month = fmtMM.format(date);
         String day = fmtdd.format(date);
+        Document parent = getSourceDocument();
 
-        String documentId = "/entries/" + year + "/" + month + "/" + day + "/"
-                + getNewDocumentName() + "/index";
+        String documentId = this.parentId+"/" + year + "/" + month + "/" + day + "/"
+                + getNewDocumentName();
         return documentId;
     }
 
