@@ -34,7 +34,7 @@
       <menu i18n:attr="name" name="Edit">
           <xsp:logic>
             String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
-            if ("entry".equals(doctype)) {
+            if ("entryModule".equals(doctype)) {
                 <block info="false">
                   <item wf:event="edit" uc:usecase="edit.bxe" href="?"><i18n:text>With BXE</i18n:text></item>
                   <item wf:event="edit" uc:usecase="edit.oneform" href="?"><i18n:text>With one Form</i18n:text></item>
