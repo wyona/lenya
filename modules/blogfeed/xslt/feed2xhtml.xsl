@@ -43,7 +43,19 @@
     <div class="overview">
       <xsl:choose>
         <xsl:when test="not(*)">No entries yet.</xsl:when>
-        <xsl:otherwise><xsl:apply-templates mode="overview"/></xsl:otherwise>
+        <xsl:otherwise>
+          <div class="feedbox">
+            <span class="feedcaption">Feeds:</span> 
+            <span class="feedlinks"> <a
+                href="{concat($context-prefix,$root,$documentId,'.atom?lenya.module=blogfeed')}">
+              atom</a><xsl:text> |
+              </xsl:text><a
+                href="{concat($context-prefix,$root,$documentId,'.rss?lenya.module=blogfeed')}">
+              rss</a>
+            </span>
+          </div>
+          <xsl:apply-templates mode="overview"/>
+        </xsl:otherwise>
       </xsl:choose>
     </div>
   </xsl:template>
@@ -51,22 +63,22 @@
   <xsl:template match="blog:year" mode="overview">
     <div class="overview-year">
       <i18n:text>Year</i18n:text>: <xsl:value-of select="@id"/>
+      <xsl:apply-templates mode="overview"/>
     </div>
-    <xsl:apply-templates mode="overview"/>
   </xsl:template>
   
   <xsl:template match="blog:month" mode="overview">
     <div class="overview-month">
       <i18n:text>Month</i18n:text>: <xsl:value-of select="@id"/>
+      <xsl:apply-templates mode="overview"/>
     </div>
-    <xsl:apply-templates mode="overview"/>
   </xsl:template>
   
   <xsl:template match="blog:day" mode="overview">
     <div class="overview-day">
       <i18n:text>Day</i18n:text>: <xsl:value-of select="@id"/>
+      <xsl:apply-templates mode="overview"/>
     </div>
-    <xsl:apply-templates mode="overview"/>
   </xsl:template>
   
   <xsl:template match="blog:entry" mode="overview">

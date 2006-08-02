@@ -104,6 +104,37 @@ limitations under the License.
         </map:transform>
         <map:serialize type="xml"/>
       </map:match>
+      
+      <!-- Atom Feed -->
+      <map:match pattern="**.atom">
+        <map:generate src="cocoon:/feed-overview.xml"/>
+        <!--<map:transform src="fallback://lenya/modules/blogfeed/xslt/feed2atom.xsl">
+          <!-#- FIXME: We need to find a way to set this dynamically.
+            By this I think about a online form to set this. 
+            In the blog pub we have here {global:blog-url}
+            but this to be defined in a sitemap, but using pub
+            templating you do not need a sitemap for a pub.-#->
+          <map:parameter name="url" value="http://bob.blog"/>
+        </map:transform>
+        <map:transform type="xinclude"/>-->
+        <map:serialize type="xml"/>
+      </map:match>
+      
+      <!-- RSS Feed -->
+      <map:match pattern="**.rss">
+        <map:generate src="cocoon:/{1}.atom"/>
+        <map:transform src="fallback://lenya/modules/blogfeed/xslt/atom2other.xsl">
+          <map:parameter name="type" value="rss"/>
+          <!-- FIXME: We need to find a way to set this dynamically.
+            By this I think about a online form to set this. 
+            In the blog pub we have here {global:blog-url}
+            but this to be defined in a sitemap, but using pub
+            templating you do not need a sitemap for a pub.-->
+          <map:parameter name="url" value="http://bob.blog"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+      </map:match>
+      
     </map:pipeline>
     
   </map:pipelines>

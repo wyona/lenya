@@ -298,7 +298,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         element = (Element) XPathAPI.selectSingleNode(parent,
                 "/*[local-name() = 'entry']/*[local-name() = 'link']");
         element.setAttribute("rel", "alternate");
-        element.setAttribute("href", "");
+        element.setAttribute("href", document.getCanonicalWebappURL());
         element.setAttribute("type", "text/xml");
 
         // Replace Summary

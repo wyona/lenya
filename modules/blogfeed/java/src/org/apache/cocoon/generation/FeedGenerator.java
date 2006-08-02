@@ -69,6 +69,10 @@ public class FeedGenerator extends ServiceableGenerator {
 
     /** Node and attribute names */
     protected static final String BLOG_NODE_NAME = "overview";
+    
+    protected static final String BLOG_ATTR_TITLE = "title";
+    
+    protected static final String BLOG_ATTR_MODIFIED = "modified";
 
     protected static final String ENTRY_NODE_NAME = "entry";
 
@@ -168,12 +172,12 @@ public class FeedGenerator extends ServiceableGenerator {
                     throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         docId = par.getParameter("docid", null);
-        if (this.docId == null) {
+        if (this.docId == null || this.docId.equals("")) {
             throw new ProcessingException(
                             "The docid is not set! Please set like e.g. <map:parameter name='docid' value='{request-param:docid}'/>");
         }
         language = par.getParameter("lang", null);
-        if (language == null)
+        if (language == null||language.equals(""))
             throw new ProcessingException("The 'lang' parameter is not set.");
 
         String param = par.getParameter("year", null);
@@ -261,6 +265,13 @@ public class FeedGenerator extends ServiceableGenerator {
         this.contentHandler.startDocument();
         this.contentHandler.startPrefixMapping(PREFIX, URI);
         attributes.clear();
+        try {
+            attributes.addAttribute("", BLOG_ATTR_TITLE, BLOG_ATTR_TITLE, "CDATA", this.document.getLabel());
+            attributes.addAttribute("", BLOG_ATTR_MODIFIED, BLOG_ATTR_MODIFIED, "CDATA", this.document.getLastModified().toGMTString());
+        } catch (Exception e) {
+            throw new ProcessingException("Error processing feed ",
+                    e);
+        }
 
         this.contentHandler.startElement(URI, BLOG_NODE_NAME, PREFIX + ':' + BLOG_NODE_NAME,
                         attributes);
