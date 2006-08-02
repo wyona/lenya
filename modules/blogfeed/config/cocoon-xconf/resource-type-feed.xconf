@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/cocoon/resource-types"
+  unless="/cocoon/resource-types/component-instance[@name = 'blogfeed']">
+  
+  <component-instance name="blogfeed" logger="lenya.resourcetypes.feed"
+    class="org.apache.lenya.cms.publication.ResourceTypeImpl">
+    <schema language="http://relaxng.org/ns/structure/0.9"
+      src="fallback://lenya/modules/blogfeed/resources/schemas/feed.rng"/>
+    <sample-name>fallback://lenya/modules/blogfeed/samples/feed.xml</sample-name>
+    <format name="xhtml" uri="cocoon://modules/blogfeed/xhtml.xml"/>
+  </component-instance>
+  
+</xconf>

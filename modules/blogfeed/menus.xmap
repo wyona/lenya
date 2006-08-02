@@ -24,7 +24,7 @@ limitations under the License.
     <map:pipeline>
       
       <map:match pattern="**">
-        <map:generate type="serverpages" src="fallback://lenya/modules/feed/config/menus/feed.xsp"/>
+        <map:generate type="serverpages" src="fallback://lenya/modules/blogfeed/config/menus/feed.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
       

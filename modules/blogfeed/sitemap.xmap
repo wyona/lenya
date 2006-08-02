@@ -87,7 +87,7 @@ limitations under the License.
           <map:part src="lenyadoc:/{page-envelope:document-language}/{page-envelope:document-id}"/>
           <map:part src="cocoon:/feed-overview.xml"/>
         </map:aggregate>
-        <map:transform src="fallback://lenya/modules/feed/xslt/feed2xhtml.xsl">
+        <map:transform src="fallback://lenya/modules/blogfeed/xslt/feed2xhtml.xsl">
           <map:parameter name="document-type"
             value="{page-envelope:document-type}"/>
           <map:parameter name="nodeId" value="{page-envelope:document-name}"/>

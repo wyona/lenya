@@ -40,10 +40,10 @@
         String doctype = <input:get-attribute module="page-envelope" as="string" name="document-type"/>;
         if (!"blogentry".equals(doctype)) {
           <block info="false">
-            <item uc:usecase="site.create" href="?doctype=feedModule">Add&#160;new&#160;Feed</item>
+            <item uc:usecase="site.create" href="?doctype=blogfeed">Add&#160;new&#160;Feed</item>
           </block>
         }
-        if ("feedModule".equals(doctype)) {
+        if ("blogfeed".equals(doctype)) {
           <block info="false">
             <item uc:usecase="entry.create" href="?">Add&#160;new&#160;Entry</item>
           </block>
