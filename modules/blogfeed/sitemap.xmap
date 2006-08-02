@@ -108,15 +108,15 @@ limitations under the License.
       <!-- Atom Feed -->
       <map:match pattern="**.atom">
         <map:generate src="cocoon:/feed-overview.xml"/>
-        <!--<map:transform src="fallback://lenya/modules/blogfeed/xslt/feed2atom.xsl">
-          <!-#- FIXME: We need to find a way to set this dynamically.
+        <map:transform src="fallback://lenya/modules/blogfeed/xslt/feed2atom.xsl">
+          <!-- FIXME: We need to find a way to set this dynamically.
             By this I think about a online form to set this. 
             In the blog pub we have here {global:blog-url}
             but this to be defined in a sitemap, but using pub
-            templating you do not need a sitemap for a pub.-#->
+            templating you do not need a sitemap for a pub.-->
           <map:parameter name="url" value="http://bob.blog"/>
         </map:transform>
-        <map:transform type="xinclude"/>-->
+        <map:transform type="xinclude"/>
         <map:serialize type="xml"/>
       </map:match>
       
