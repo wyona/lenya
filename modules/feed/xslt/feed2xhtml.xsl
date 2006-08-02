@@ -41,7 +41,10 @@
   <xsl:template match="blog:overview" mode="overview">
     <h2>Archive</h2>
     <div class="overview">
-      <xsl:apply-templates mode="overview"/>
+      <xsl:choose>
+        <xsl:when test="not(*)">No entries yet.</xsl:when>
+        <xsl:otherwise><xsl:apply-templates mode="overview"/></xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
   
