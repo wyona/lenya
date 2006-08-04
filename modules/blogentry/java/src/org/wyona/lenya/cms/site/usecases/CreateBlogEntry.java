@@ -34,6 +34,7 @@ import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.metadata.dublincore.DublinCore;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentFactory;
+import org.apache.lenya.cms.publication.DocumentLocator;
 import org.apache.lenya.cms.publication.DocumentManager;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.ResourceType;
@@ -125,7 +126,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
         String language = parent.getPublication().getDefaultLanguage();
-        this.parentId=parent.getId();
+        this.parentId=parent.getLocator().getPath();
 
         // create new document
         // implementation note: since blog does not have a hierarchy,
@@ -136,6 +137,9 @@ public class CreateBlogEntry extends DocumentUsecase {
         ResourceType resourceType = null;
 
         try {
+            String documentId = getDocumentID();
+            DocumentLocator locator = DocumentLocator.getLocator(
+                    parent.getPublication().getId(),parent.getArea(),documentId,language);
             createParentDocs(parent);
             selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
             resourceType = (ResourceType) selector.select(getDocumentTypeName());
@@ -144,17 +148,12 @@ public class CreateBlogEntry extends DocumentUsecase {
 
             DocumentFactory map = getDocumentFactory();
 
-            String documentId = getDocumentID();
-            Document document = map.get(getSourceDocument().getPublication(),
-                    getSourceDocument().getArea(),
-                    documentId,
-                    language);
-
-            documentManager.add(document,
+            Document document = documentManager.add(map,locator,
                     resourceType,
                     "xml",
                     getParameterAsString(DublinCore.ELEMENT_TITLE),
                     true);
+
 
             transformXML(document);
         } finally {
@@ -188,7 +187,9 @@ public class CreateBlogEntry extends DocumentUsecase {
                       selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
                       documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
                       resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
-                      documentManager.add(document, resourceType, DEFAULT_EXTENSION, currentDoc, true);
+                      DocumentLocator locator = DocumentLocator.getLocator(
+                              doc.getPublication().getId(),doc.getArea(),docRoot,doc.getPublication().getDefaultLanguage());
+                      documentManager.add(map,locator, resourceType, DEFAULT_EXTENSION, currentDoc, true);
                   } finally {
                       if (documentManager != null) {
                           this.manager.release(documentManager);
@@ -239,7 +240,6 @@ public class CreateBlogEntry extends DocumentUsecase {
         String year = fmtyyyy.format(date);
         String month = fmtMM.format(date);
         String day = fmtdd.format(date);
-        Document parent = getSourceDocument();
 
         String documentId = this.parentId+"/" + year + "/" + month + "/" + day + "/"
                 + getNewDocumentName();
@@ -277,16 +277,17 @@ public class CreateBlogEntry extends DocumentUsecase {
         if (getLogger().isDebugEnabled())
             getLogger().debug("NewBlogEntryCreator.transformXML(): " + document);
 
-        String[] steps = document.getId().split("/");
-        String nodeId = steps[5];
+        String[] steps = document.getLocator().getPath().split("/");
+        int depth=steps.length-1;
+        String nodeId = steps[depth];
 
         // Replace id
         Element element = (Element) XPathAPI.selectSingleNode(parent,
                 "/*[local-name() = 'entry']/*[local-name() = 'id']");
 
-        String year = steps[2];
-        String month = steps[3];
-        String day = steps[4];
+        String year = steps[depth-3];
+        String month = steps[depth-2];
+        String day = steps[depth-1];
 
         DocumentHelper.setSimpleElementText(element, year + "/" + month + "/" + day + "/" + nodeId);
 

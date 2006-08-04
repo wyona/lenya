@@ -47,7 +47,7 @@ limitations under the License.
     <map:pipeline>
       <map:match pattern="feed-overview.xml">
         <map:generate type="feed">
-          <map:parameter name="docid" value="{page-envelope:document-id}"/>
+          <map:parameter name="uuid" value="{page-envelope:document-uuid}"/>
           <map:parameter name="lang" value="{page-envelope:document-language}"/>
           <!-- Changes the order [true|false]-->
           <map:parameter name="ascending" value="true"/>

@@ -40,15 +40,18 @@ import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentBuildException;
 import org.apache.lenya.cms.publication.DocumentFactory;
+import org.apache.lenya.cms.publication.DocumentManager;
 import org.apache.lenya.cms.publication.DocumentUtil;
 import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
 import org.apache.lenya.cms.publication.URLInformation;
+import org.apache.lenya.cms.publication.util.DocumentSet;
 import org.apache.lenya.cms.repository.RepositoryException;
 import org.apache.lenya.cms.repository.RepositoryUtil;
 import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
+import org.apache.lenya.cms.site.SiteUtil;
 import org.apache.lenya.util.ServletHelper;
 import org.apache.lenya.xml.DocumentHelper;
 import org.apache.xpath.XPathAPI;
@@ -69,9 +72,9 @@ public class FeedGenerator extends ServiceableGenerator {
 
     /** Node and attribute names */
     protected static final String BLOG_NODE_NAME = "overview";
-    
+
     protected static final String BLOG_ATTR_TITLE = "title";
-    
+
     protected static final String BLOG_ATTR_MODIFIED = "modified";
 
     protected static final String ENTRY_NODE_NAME = "entry";
@@ -110,7 +113,9 @@ public class FeedGenerator extends ServiceableGenerator {
 
     protected String language = null;
 
-    protected String docId = null;
+    protected String docPath = null;
+
+    protected String uuid = null;
 
     /** The corresponding lenya document */
     protected Document document;
@@ -134,7 +139,7 @@ public class FeedGenerator extends ServiceableGenerator {
      */
     public void recycle() {
         this.document = null;
-        this.docId = null;
+        this.docPath = null;
         this.language = null;
         this.area = null;
         this.publicationId = null;
@@ -166,18 +171,19 @@ public class FeedGenerator extends ServiceableGenerator {
      *            the source URI (ignored)
      * @param par
      *            configuration parameters
-     * @throws RepositoryException 
+     * @throws RepositoryException
      */
-    public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par)
-                    throws ProcessingException, SAXException, IOException {
+    public void setup(SourceResolver resolver, Map objectModel, String src,
+            Parameters par) throws ProcessingException, SAXException,
+            IOException {
         super.setup(resolver, objectModel, src, par);
-        docId = par.getParameter("docid", null);
-        if (this.docId == null || this.docId.equals("")) {
+        uuid = par.getParameter("uuid", null);
+        if (this.uuid == null || this.uuid.equals("")) {
             throw new ProcessingException(
-                            "The docid is not set! Please set like e.g. <map:parameter name='docid' value='{request-param:docid}'/>");
+                    "The uuid is not set! Please set like e.g. <map:parameter name='uuid' value='{page-envelope:document-uuid}'/>");
         }
         language = par.getParameter("lang", null);
-        if (language == null||language.equals(""))
+        if (language == null || language.equals(""))
             throw new ProcessingException("The 'lang' parameter is not set.");
 
         String param = par.getParameter("year", null);
@@ -200,25 +206,30 @@ public class FeedGenerator extends ServiceableGenerator {
         try {
             prepareLenyaDoc(objectModel);
         } catch (DocumentBuildException e) {
-            throw new ProcessingException(src + " threw DocumentBuildException: " + e);
+            throw new ProcessingException(src
+                    + " threw DocumentBuildException: " + e);
         } catch (RepositoryException e) {
-          throw new ProcessingException(src + " threw RepositoryException: " + e);
+            throw new ProcessingException(src + " threw RepositoryException: "
+                    + e);
         }
 
         // this.attributes = new AttributesImpl();
     }
 
-    protected void prepareLenyaDoc(Map objectModel) throws DocumentBuildException,
-                    ProcessingException, RepositoryException {
+    protected void prepareLenyaDoc(Map objectModel)
+            throws DocumentBuildException, ProcessingException,
+            RepositoryException {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
         Session session = RepositoryUtil.getSession(this.manager, request);
+        DocumentManager documentManager = null;
 
         try {
-            this.pub = PublicationUtil.getPublication(this.manager, objectModel);
+            this.pub = PublicationUtil
+                    .getPublication(this.manager, objectModel);
         } catch (PublicationException e) {
-            throw new ProcessingException("Error geting publication id / area from page envelope",
-                            e);
+            throw new ProcessingException(
+                    "Error geting publication id / area from page envelope", e);
         }
         if (pub != null && pub.exists()) {
             this.publicationId = pub.getId();
@@ -229,8 +240,16 @@ public class FeedGenerator extends ServiceableGenerator {
             }
         }
 
-        this.map = DocumentUtil.createDocumentIdentityMap(this.manager, session);
-        this.document = map.get(pub, area, docId, language);
+        this.map = DocumentUtil
+                .createDocumentIdentityMap(this.manager, session);
+        try {
+            documentManager = (DocumentManager) this.manager
+                    .lookup(DocumentManager.ROLE);
+        } catch (ServiceException e) {
+            throw new ProcessingException("Error geting documentManager.", e);
+        }
+        this.document = map.get(pub, area, uuid, language);
+        this.docPath = document.getLocator().getPath();
     }
 
     /**
@@ -240,7 +259,7 @@ public class FeedGenerator extends ServiceableGenerator {
      * @return The generated key hashes the src
      */
     public Serializable getKey() {
-        return language + "$$" + docId;
+        return language + "$$" + docPath;
     }
 
     /**
@@ -266,25 +285,24 @@ public class FeedGenerator extends ServiceableGenerator {
         this.contentHandler.startPrefixMapping(PREFIX, URI);
         attributes.clear();
         try {
-            attributes.addAttribute("", BLOG_ATTR_TITLE, BLOG_ATTR_TITLE, "CDATA", this.document.getLabel());
-            attributes.addAttribute("", BLOG_ATTR_MODIFIED, BLOG_ATTR_MODIFIED, "CDATA", this.document.getLastModified().toGMTString());
+            attributes.addAttribute("", BLOG_ATTR_TITLE, BLOG_ATTR_TITLE,
+                    "CDATA", this.document.getLabel());
+            attributes.addAttribute("", BLOG_ATTR_MODIFIED, BLOG_ATTR_MODIFIED,
+                    "CDATA", this.document.getLastModified().toGMTString());
         } catch (Exception e) {
-            throw new ProcessingException("Error processing feed ",
-                    e);
+            throw new ProcessingException("Error processing feed ", e);
         }
 
-        this.contentHandler.startElement(URI, BLOG_NODE_NAME, PREFIX + ':' + BLOG_NODE_NAME,
-                        attributes);
+        this.contentHandler.startElement(URI, BLOG_NODE_NAME, PREFIX + ':'
+                + BLOG_NODE_NAME, attributes);
 
         ServiceSelector selector = null;
         SiteManager siteManager = null;
         String pubHint = pub.getSiteManagerHint();
         try {
-
             selector = (ServiceSelector) this.manager.lookup(SiteManager.ROLE + "Selector");
             siteManager = (SiteManager) selector.select(pubHint);
-            // NOTE: can be enhanced for performance by requesting only a
-            // fragment of the site!
+
             Document[] docs = siteManager.getDocuments(map, pub, area);
             compute(docs);
         } catch (Exception e) {
@@ -298,20 +316,22 @@ public class FeedGenerator extends ServiceableGenerator {
             }
         }
 
-        this.contentHandler.endElement(URI, BLOG_NODE_NAME, PREFIX + ':' + BLOG_NODE_NAME);
+        this.contentHandler.endElement(URI, BLOG_NODE_NAME, PREFIX + ':'
+                + BLOG_NODE_NAME);
 
         this.contentHandler.endPrefixMapping(PREFIX);
         this.contentHandler.endDocument();
     }
 
-    private void compute(Document[] docs) throws NumberFormatException, SAXException,
-                    ServiceException, SourceNotFoundException, ParserConfigurationException,
-                    IOException, TransformerException {
+    private void compute(Document[] docs) throws NumberFormatException,
+            SAXException, ServiceException, SourceNotFoundException,
+            ParserConfigurationException, IOException, TransformerException {
         ArrayList filteredDocs = new ArrayList(1);
         for (int i = 0; i < docs.length; i++) {
-            String currentDoc = docs[i].getId();
-            if (currentDoc.startsWith(docId)) {
-                currentDoc = currentDoc.substring(docId.length(), currentDoc.length());
+            String currentDoc = docs[i].getLocator().getPath();
+            if (currentDoc.startsWith(docPath)) {
+                currentDoc = currentDoc.substring(docPath.length(), currentDoc
+                        .length());
                 String[] patterns = currentDoc.split("/");
                 if (patterns.length > 4) {
                     int eYear = 0;
@@ -389,16 +409,18 @@ public class FeedGenerator extends ServiceableGenerator {
 
                 d1 = (Document) o1;
                 d2 = (Document) o2;
-                String currentDoc1 = d1.getId();
-                currentDoc1 = currentDoc1.substring(docId.length(), currentDoc1.length());
+                String currentDoc1 = d1.getLocator().getPath();
+                currentDoc1 = currentDoc1.substring(docPath.length(),
+                        currentDoc1.length());
                 String[] patterns = currentDoc1.split("/");
 
                 year1 = Integer.parseInt(patterns[1]);
                 month1 = Integer.parseInt(patterns[2]);
                 day1 = Integer.parseInt(patterns[3]);
 
-                String currentDoc2 = d2.getId();
-                currentDoc2 = currentDoc2.substring(docId.length(), currentDoc2.length());
+                String currentDoc2 = d2.getLocator().getPath();
+                currentDoc2 = currentDoc2.substring(docPath.length(),
+                        currentDoc2.length());
                 patterns = currentDoc2.split("/");
 
                 year2 = Integer.parseInt(patterns[1]);
@@ -416,7 +438,8 @@ public class FeedGenerator extends ServiceableGenerator {
                                 return -1;
                             } else if (day1 == day2) {
                                 /* newest first */
-                                return d2.getLastModified().compareTo(d1.getLastModified());
+                                return d2.getLastModified().compareTo(
+                                        d1.getLastModified());
                             } else {
                                 return 1;
                             }
@@ -437,7 +460,8 @@ public class FeedGenerator extends ServiceableGenerator {
                                 return 1;
                             } else if (day1 == day2) {
                                 /* newest first */
-                                return d2.getLastModified().compareTo(d1.getLastModified());
+                                return d2.getLastModified().compareTo(
+                                        d1.getLastModified());
                             } else {
                                 return -1;
                             }
@@ -461,8 +485,9 @@ public class FeedGenerator extends ServiceableGenerator {
         boolean dayOpen = false;
         for (int i = 0; i < sortedList.length; i++) {
             Document doc = ((Document) sortedList[i]);
-            String currentDoc = doc.getId();
-            currentDoc = currentDoc.substring(docId.length(), currentDoc.length());
+            String currentDoc = doc.getLocator().getPath();
+            currentDoc = currentDoc.substring(docPath.length(), currentDoc
+                    .length());
             String[] patterns = currentDoc.split("/");
             int year = Integer.parseInt(patterns[1]);
             int month = Integer.parseInt(patterns[2]);
@@ -470,23 +495,23 @@ public class FeedGenerator extends ServiceableGenerator {
             if (year != currentYear) {
                 if (dayOpen) {
                     dayOpen = false;
-                    this.contentHandler
-                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                    this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX
+                            + ':' + DAY_NODE_NAME);
                 }
                 if (monthOpen) {
                     monthOpen = false;
-                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':'
-                                    + MONTH_NODE_NAME);
+                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX
+                            + ':' + MONTH_NODE_NAME);
                 }
                 if (yearOpen) {
-                    this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX + ':'
-                                    + YEAR_NODE_NAME);
+                    this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX
+                            + ':' + YEAR_NODE_NAME);
                 }
                 this.attributes.clear();
-                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
-                                .valueOf(year));
-                this.contentHandler.startElement(URI, YEAR_NODE_NAME,
-                                PREFIX + ':' + YEAR_NODE_NAME, attributes);
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME,
+                        "CDATA", String.valueOf(year));
+                this.contentHandler.startElement(URI, YEAR_NODE_NAME, PREFIX
+                        + ':' + YEAR_NODE_NAME, attributes);
                 yearOpen = true;
                 currentYear = year;
                 currentMonth = 0;
@@ -495,64 +520,73 @@ public class FeedGenerator extends ServiceableGenerator {
             if (month != currentMonth) {
                 if (dayOpen) {
                     dayOpen = false;
-                    this.contentHandler
-                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                    this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX
+                            + ':' + DAY_NODE_NAME);
                 }
                 if (monthOpen) {
-                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':'
-                                    + MONTH_NODE_NAME);
+                    this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX
+                            + ':' + MONTH_NODE_NAME);
                 }
                 this.attributes.clear();
-                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
-                                .valueOf(month));
-                this.contentHandler.startElement(URI, MONTH_NODE_NAME, PREFIX + ':'
-                                + MONTH_NODE_NAME, attributes);
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME,
+                        "CDATA", String.valueOf(month));
+                this.contentHandler.startElement(URI, MONTH_NODE_NAME, PREFIX
+                        + ':' + MONTH_NODE_NAME, attributes);
                 monthOpen = true;
                 currentMonth = month;
                 currentDay = 0;
             }
             if (day != currentDay) {
                 if (dayOpen) {
-                    this.contentHandler
-                                    .endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+                    this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX
+                            + ':' + DAY_NODE_NAME);
                 }
                 this.attributes.clear();
-                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME, "CDATA", String
-                                .valueOf(day));
-                this.contentHandler.startElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME,
-                                attributes);
+                attributes.addAttribute("", ID_ATTR_NAME, ID_ATTR_NAME,
+                        "CDATA", String.valueOf(day));
+                this.contentHandler.startElement(URI, DAY_NODE_NAME, PREFIX
+                        + ':' + DAY_NODE_NAME, attributes);
                 dayOpen = true;
                 currentDay = day;
             }
             attributes.clear();
-            attributes.addAttribute("", DOCID_ATTR_NAME, DOCID_ATTR_NAME, "CDATA", doc.getId());
-            attributes.addAttribute("", URL_ATTR_NAME, URL_ATTR_NAME, "CDATA", doc
-                            .getCanonicalWebappURL());
-            org.w3c.dom.Document docDOM = SourceUtil.readDOM(doc.getSourceURI(), this.manager);
+            attributes.addAttribute("", DOCID_ATTR_NAME, DOCID_ATTR_NAME,
+                    "CDATA", doc.getLocator().getPath());
+            attributes.addAttribute("", URL_ATTR_NAME, URL_ATTR_NAME, "CDATA",
+                    doc.getCanonicalWebappURL());
+            org.w3c.dom.Document docDOM = SourceUtil.readDOM(
+                    doc.getSourceURI(), this.manager);
             Element parent = docDOM.getDocumentElement();
             Element element = (Element) XPathAPI.selectSingleNode(parent,
-                            "/*[local-name() = 'entry']/*[local-name() = 'title']");
-            Element elementSummary = (Element) XPathAPI.selectSingleNode(parent,
-                            "/*[local-name() = 'entry']/*[local-name() = 'summary']");
-            attributes.addAttribute("", TITLE_ATTR_NAME, TITLE_ATTR_NAME, "CDATA", DocumentHelper
-                            .getSimpleElementText(element));
-            attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME, "CDATA", String
-                            .valueOf(doc.getLastModified().getTime()));
-            String summary = DocumentHelper.getSimpleElementText(elementSummary);
-            this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME,
-                            attributes);
-            this.contentHandler.ignorableWhitespace(summary.toCharArray(), 0, summary.length());
-            this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':' + ENTRY_NODE_NAME);
+                    "/*[local-name() = 'entry']/*[local-name() = 'title']");
+            Element elementSummary = (Element) XPathAPI.selectSingleNode(
+                    parent,
+                    "/*[local-name() = 'entry']/*[local-name() = 'summary']");
+            attributes.addAttribute("", TITLE_ATTR_NAME, TITLE_ATTR_NAME,
+                    "CDATA", DocumentHelper.getSimpleElementText(element));
+            attributes.addAttribute("", LASTMOD_ATTR_NAME, LASTMOD_ATTR_NAME,
+                    "CDATA", String.valueOf(doc.getLastModified().getTime()));
+            String summary = DocumentHelper
+                    .getSimpleElementText(elementSummary);
+            this.contentHandler.startElement(URI, ENTRY_NODE_NAME, PREFIX + ':'
+                    + ENTRY_NODE_NAME, attributes);
+            this.contentHandler.ignorableWhitespace(summary.toCharArray(), 0,
+                    summary.length());
+            this.contentHandler.endElement(URI, ENTRY_NODE_NAME, PREFIX + ':'
+                    + ENTRY_NODE_NAME);
         }
 
         if (dayOpen) {
-            this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX + ':' + DAY_NODE_NAME);
+            this.contentHandler.endElement(URI, DAY_NODE_NAME, PREFIX + ':'
+                    + DAY_NODE_NAME);
         }
         if (monthOpen) {
-            this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':' + MONTH_NODE_NAME);
+            this.contentHandler.endElement(URI, MONTH_NODE_NAME, PREFIX + ':'
+                    + MONTH_NODE_NAME);
         }
         if (yearOpen) {
-            this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX + ':' + YEAR_NODE_NAME);
+            this.contentHandler.endElement(URI, YEAR_NODE_NAME, PREFIX + ':'
+                    + YEAR_NODE_NAME);
         }
     }
 }
