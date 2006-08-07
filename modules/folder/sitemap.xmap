@@ -10,7 +10,7 @@
         <map:generate type="sitetree-fragment">
           <map:parameter name="areas" value="{page-envelope:area}"/>
           <map:parameter name="area" value="{page-envelope:area}"/>
-          <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+          <map:parameter name="uuid" value="{page-envelope:document-uuid}"/>
           <map:parameter name="initial" value="false"/>
         </map:generate>
         <map:transform
