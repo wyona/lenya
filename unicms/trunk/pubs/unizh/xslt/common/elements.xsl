@@ -688,7 +688,7 @@
                 <br/>
                 <xsl:value-of select="*/unizh:person/unizh:position"/><br/>
                 Mail: <xsl:value-of select="*/unizh:person/unizh:email"/><br/>
-                <a href="{$contextprefix}{@href}">Mehr...</a>
+                <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </p>
             </div>
             <div class="floatleftclear"><xsl:comment/></div>
@@ -709,16 +709,17 @@
   <xsl:template match="unizh:children">
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
-  
+
+<!--  
    <xsl:template match="index:child[descendant::unizh:newsitem]">
     <h3>
       <xsl:apply-templates select="descendant::lenya:meta/dc:title"/>
     </h3>
     <br/>
     <xsl:apply-templates mode="collection" select="descendant::unizh:lead"/>
-    <a href="{$contextprefix}{@href}">Mehr...</a>
+    <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
-
+-->
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
