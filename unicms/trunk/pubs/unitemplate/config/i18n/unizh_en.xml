@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <catalogue xml:lang="de">
   <!-- <message key="key">Value</message> -->
+  <message key="more">More...</message>
 </catalogue>
