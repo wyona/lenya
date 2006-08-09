@@ -11,8 +11,25 @@
   <xsl:param name="lenya.usecase" select="'create'"/>
   
   <xsl:template match="/">
+
+    <xsl:variable name="doctype" select="/parent-child/doctype"/>
+
     <page:page xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0">
-      <page:title>Create Document</page:title>
+      <page:title>
+        <xsl:choose>
+          <xsl:when test="$doctype = 'xhtml'">Create Document</xsl:when>
+          <xsl:when test="$doctype = 'homepage'">Create Homepage</xsl:when>
+          <xsl:when test="$doctype = 'homepage4cols'">Create Overview Homepage</xsl:when>
+          <xsl:when test="$doctype = 'overview'">Create Overview Page</xsl:when>
+          <xsl:when test="$doctype = 'news'">Create RSS News Feed</xsl:when>
+          <xsl:when test="$doctype = 'newsitem'">Create News Item</xsl:when>
+          <xsl:when test="$doctype = 'team'">Create Team Page</xsl:when>
+          <xsl:when test="$doctype = 'person'">Create Persons Description</xsl:when>
+          <xsl:when test="$doctype = 'search'">Create Search Page</xsl:when>
+          <xsl:when test="$doctype = 'redirect'">Create Redirect Page</xsl:when>
+          <xsl:otherwise>Create Document</xsl:otherwise>
+        </xsl:choose>
+      </page:title>
       <page:body>
         <xsl:apply-templates/>
       </page:body>
@@ -119,6 +136,16 @@ function validateForm(theForm)
                 </xsl:when>
                 <xsl:otherwise/>
               </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="$doctype = 'newsitem'">
+                  <tr>
+                    <td class="lenya-form-caption">News Item Type:</td><td><select class="lenya-form-element" name="properties.create.docsubtype"><option>summary only</option><option>summary and link</option><option selected="true">summary and details</option></select></td>
+                  </tr>
+                </xsl:when>
+                <xsl:otherwise>
+                  <input type="hidden" name="properties.create.docsubtype" value=""/>
+                </xsl:otherwise>
+              </xsl:choose>
               <tr>
                 <td class="lenya-form-caption">Subject (Keywords):</td><td><input class="lenya-form-element" type="text" name="properties.create.subject"/></td>
               </tr>
@@ -136,9 +163,6 @@ function validateForm(theForm)
                   <tr>
                     <td class="lenya-form-caption">Number of Columns:</td><td><select class="lenya-form-element" name="properties.create.columns"><option>1</option><option>2</option><option selected="true">3</option></select></td>
                   </tr>
-                </xsl:when>
-                <xsl:when test="$doctype = 'section'">
-                  <input type="hidden" name="properties.create.columns" value="1"/>
                 </xsl:when>
                 <xsl:otherwise/>
               </xsl:choose>

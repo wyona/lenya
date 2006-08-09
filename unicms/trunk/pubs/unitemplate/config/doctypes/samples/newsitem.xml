@@ -29,6 +29,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <p>
     Kurzfassung Newseitrag.
     </p>
+    <a href="#">(Setzen Sie im href-Attribut die Adresse der beschriebenen Seite ein.)</a>
   </unizh:short>
   <body>
     <p>Paragraph</p>

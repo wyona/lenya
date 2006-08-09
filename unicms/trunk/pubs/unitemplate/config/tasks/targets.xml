@@ -133,6 +133,7 @@
     <property name="create.doctype" value=""/>
     <property name="create.language" value=""/>
     <property name="create.title" value=""/>
+    <property name="create.docsubtype" value=""/>
     <property name="create.creator" value=""/>
     <property name="create.description" value=""/>
     <property name="create.subject" value=""/>
@@ -189,6 +190,7 @@
       <param name="subject" expression="${create.subject}"/>
       <param name="description" expression="${create.description}"/>
       <param name="language" expression="${create.language}"/>
+      <param name="docsubtype" expression="${create.docsubtype}"/>
       <param name="publisher" expression="${create.publisher}"/>
       <param name="date" expression="${create.date}"/>
       <param name="rights" expression="${create.rights}"/>
