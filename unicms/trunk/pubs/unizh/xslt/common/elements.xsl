@@ -608,18 +608,18 @@
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
+            <br/>
+            <xsl:if test="$area = 'authoring'">
+              <a class="arrow_right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
+            </xsl:if>
             <xsl:choose>
-              <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
-                <a class="arrow" href="{$contextprefix}{@href}">Weiter</a>
+              <xsl:when test="*/*/unizh:short/xhtml:a">
+                <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}"><i18n:text>more</i18n:text></a>
               </xsl:when>
-              <xsl:otherwise>
-                <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}">
-                  <xsl:value-of select="*/*/unizh:short/xhtml:a"/><xsl:comment/>
-                </a>
-                <xsl:if test="$area = 'authoring'">
-                  |  <a class="arrow" href="{$contextprefix}{@href}">Edit View...</a>
-                </xsl:if>
-              </xsl:otherwise>
+              <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
+                <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
+              </xsl:when>
+              <xsl:otherwise/>
             </xsl:choose>
             <br/>
           </p>

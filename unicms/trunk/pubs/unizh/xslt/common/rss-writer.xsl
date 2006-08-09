@@ -47,12 +47,13 @@
             <title><xsl:value-of select="*/unizh:newsitem/lenya:meta/dc:title"/></title>
             <link>
               <xsl:choose><!-- BXE keeps paragraph and &#160; as placeholders -->
-                <xsl:when test="*/unizh:newsitem/xhtml:body/xhtml:p != '&#160;'">
-                 <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
+                <xsl:when test="*/unizh:newsitem/unizh:short/xhtml:a">
+                  <xsl:value-of select="*/unizh:newsitem/unizh:short/xhtml:a/@href"/>
                 </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$channelhome"/>
-                </xsl:otherwise>
+                <xsl:when test="*/unizh:newsitem/xhtml:body/xhtml:p != '&#160;'">
+                  <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
+                </xsl:when>
+                <xsl:otherwise/>
               </xsl:choose> 
             </link>
             <description><xsl:apply-templates select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>

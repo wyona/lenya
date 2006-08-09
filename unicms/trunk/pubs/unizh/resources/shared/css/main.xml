@@ -3,11 +3,11 @@
 
 /*allgemeine Definition*/
 
-/*Für IE*/
+/*Fuer IE*/
 html {font-size:100%;}
 *html body { font-size:0.75em; }
 
-/* Für andere Browser */
+/* Fuer andere Browser */
 html > body {font-size:12px}
 
 body {
@@ -124,6 +124,16 @@ a:hover {
 a.arrow {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	background-position:left top;
+	padding-left:13px;
+	background-repeat: no-repeat;
+	padding-right:2px;
+	margin-left:2px;
+}
+
+a.arrow_right_aligned {
+	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+	background-position:left top;
+	float:right;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
