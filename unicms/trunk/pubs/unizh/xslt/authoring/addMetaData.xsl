@@ -18,6 +18,7 @@ $Id: addMetaData.xsl,v 1.6 2004/02/04 14:41:17 gregor Exp $
   <xsl:param name="description"/>
   <xsl:param name="subject"/>
   <xsl:param name="language"/>
+  <xsl:param name="docsubtype"/>
   <xsl:param name="publisher"/>
   <xsl:param name="date"/>
   <xsl:param name="rights"/>
@@ -84,6 +85,30 @@ $Id: addMetaData.xsl,v 1.6 2004/02/04 14:41:17 gregor Exp $
     <dc:rights>
       <xsl:value-of select="$rights"/>
     </dc:rights>
+  </xsl:template>  
+
+  <xsl:template match="unizh:newsitem/xhtml:body/xhtml:p">
+    <xsl:choose>
+      <xsl:when test="($docsubtype = 'summary only') or($docsubtype = 'summary and link')">
+        <p>&#160;</p>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy>
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>  
+
+  <xsl:template match="unizh:newsitem/unizh:short/xhtml:a">
+    <xsl:choose>
+      <xsl:when test="($docsubtype = 'summary only') or($docsubtype = 'summary and details')"/>
+      <xsl:otherwise>
+        <xsl:copy>
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>  
 
   <!-- Identity transformation -->
