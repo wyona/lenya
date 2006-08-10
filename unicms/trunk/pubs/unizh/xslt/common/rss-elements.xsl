@@ -3,7 +3,8 @@
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:i18n="http://apache.org/cocoon/i18n/2.1">
  
   <xsl:param name="contextprefix"/>
  
@@ -88,7 +89,8 @@ function open_rss_window(url)
            <h2><xsl:value-of select="title"/>&#160;
            <span class="lead"><xsl:value-of select="pubDate"/></span></h2>
            <p><xsl:apply-templates select="description"/>
-           <a class="arrow" href="{link}">Weiter</a><br/>
+           <br/>
+           <a class="arrow" href="{link}"><i18n:text>more</i18n:text></a><br/>
            </p>
          </xsl:if>
        </xsl:for-each>

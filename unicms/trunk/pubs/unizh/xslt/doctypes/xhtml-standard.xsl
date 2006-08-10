@@ -278,6 +278,10 @@
               <xsl:apply-templates select="unizh:newsitem/unizh:short/*"/>
             </div>
             <br class="floatclear"/>
+            <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and (unizh:newsitem/xhtml:body/xhtml:p != '&#160;')">
+              <h3> <i18n:text>error_newsitem</i18n:text> </h3>
+              <br/>
+            </xsl:if>
           </xsl:if>
           <div bxe_xpath="/{$document-element-name}/xhtml:body">
             <xsl:apply-templates select="*/xhtml:body/*"/>

@@ -621,7 +621,6 @@
               </xsl:when>
               <xsl:otherwise/>
             </xsl:choose>
-            <br/>
           </p>
         </xsl:for-each>
       </xsl:when>
@@ -635,6 +634,12 @@
 
   <xsl:template match="xhtml:p[parent::unizh:short]">
     <xsl:apply-templates/>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:a[parent::unizh:short]">
+    <br/>
+    <a class="arrow" href="{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
 
 

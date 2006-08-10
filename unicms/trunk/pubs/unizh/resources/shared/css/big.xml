@@ -135,6 +135,7 @@ a.arrow_right_aligned {
 	background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
 	background-position:left top;
 	float:right;
+	line-height: 1.2em;
 	padding-left:13px;
 	background-repeat: no-repeat;
 	padding-right:2px;
