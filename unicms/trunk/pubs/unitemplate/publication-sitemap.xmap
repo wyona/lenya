@@ -80,6 +80,7 @@
       <map:transform src="../unizh/xslt/common/rss-elements.xsl">
         <map:parameter name="contextprefix" value="{request:contextPath}"/>
       </map:transform>
+      <map:transform type="i18n"/>
     </map:resource>
 
   </map:resources>

@@ -2,5 +2,6 @@
 <catalogue xml:lang="de">
   <!-- <message key="key">Value</message> -->
   <message key="edit_item">Edit Item</message>
+  <message key="error_newsitem">ERROR: Skip the text in the following paragraph (leaving a single space) or the a element in the summary (short). It's not possible to have both.</message>
   <message key="more">More...</message>
 </catalogue>

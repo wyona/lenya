@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <catalogue xml:lang="de">
   <!-- <message key="key">Value</message> -->
-  <message key="edit_item">Ändern</message>
+  <message key="edit_item">Bearbeiten</message>
+  <message key="error_newsitem">FEHLER: Löschen Sie den Text im folgenden Paragraphen (bis auf ein Leerzeichen) oder das a-Element im Summary (short). Man kann nicht beides haben.</message>
   <message key="more">Mehr...</message>
 </catalogue>
