@@ -2,6 +2,6 @@
 <catalogue xml:lang="de">
   <!-- <message key="key">Value</message> -->
   <message key="edit_item">Bearbeiten</message>
-  <message key="error_newsitem">FEHLER: Löschen Sie den Text im folgenden Paragraphen (bis auf ein Leerzeichen) oder das a-Element im Summary (short). Man kann nicht beides haben.</message>
+  <message key="error_newsitem">FEHLER: Löschen Sie entweder den Text im folgenden Paragraphen (vorzugsweise mit dem BXE-Editor!) oder den Link in obenstehender Zusammenfassung (Element 'a'). Ein News-Item kann nur eines von beidem enthalten.</message>
   <message key="more">Mehr...</message>
 </catalogue>

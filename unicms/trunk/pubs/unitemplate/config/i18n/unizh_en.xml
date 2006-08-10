@@ -2,6 +2,6 @@
 <catalogue xml:lang="de">
   <!-- <message key="key">Value</message> -->
   <message key="edit_item">Edit Item</message>
-  <message key="error_newsitem">ERROR: Skip the text in the following paragraph (leaving a single space) or the a element in the summary (short). It's not possible to have both.</message>
+  <message key="error_newsitem">ERROR: Skip either the text in the following paragraph (use the BXE editor!) or the hyperlink in the summary (element 'a'). A news item cannot contain both at the same time.</message>
   <message key="more">More...</message>
 </catalogue>
