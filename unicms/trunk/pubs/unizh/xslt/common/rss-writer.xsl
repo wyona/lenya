@@ -46,11 +46,12 @@
           <item>
             <title><xsl:value-of select="*/unizh:newsitem/lenya:meta/dc:title"/></title>
             <link>
+              <xsl:variable name="fulltext" select="normalize-space(*/unizh:newsitem/xhtml:body/xhtml:p)"/>
               <xsl:choose><!-- BXE keeps paragraph and &#160; as placeholders -->
                 <xsl:when test="*/unizh:newsitem/unizh:short/xhtml:a">
                   <xsl:value-of select="*/unizh:newsitem/unizh:short/xhtml:a/@href"/>
                 </xsl:when>
-                <xsl:when test="*/unizh:newsitem/xhtml:body/xhtml:p != '&#160;'">
+                <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
                   <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
                 </xsl:when>
                 <xsl:otherwise/>

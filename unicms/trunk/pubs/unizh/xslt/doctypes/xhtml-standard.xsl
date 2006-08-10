@@ -278,7 +278,8 @@
               <xsl:apply-templates select="unizh:newsitem/unizh:short/*"/>
             </div>
             <br class="floatclear"/>
-            <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and (unizh:newsitem/xhtml:body/xhtml:p != '&#160;')">
+            <xsl:variable name="fulltext" select="normalize-space(unizh:newsitem/xhtml:body/xhtml:p)"/>
+            <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and not(($fulltext = '') or ($fulltext = '&#160;'))">
               <h3> <i18n:text>error_newsitem</i18n:text> </h3>
               <br/>
             </xsl:if>

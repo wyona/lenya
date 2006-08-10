@@ -134,7 +134,14 @@
 
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
 
+    <xsl:variable name="fulltext" select="normalize-space(.)"/>
     <xsl:choose>
+      <xsl:when test="ancestor::unizh:newsitem and (($fulltext = '') or ($fulltext = '&#160;'))">
+          <xsl:copy>
+            <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
+          </xsl:copy>
+      </xsl:when>
+
       <xsl:when test="xhtml:object[@float = 'true']">
         <div class="upload_block">
           <xsl:copy>
@@ -612,11 +619,12 @@
             <xsl:if test="$area = 'authoring'">
               <a class="arrow_right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
             </xsl:if>
+            <xsl:variable name="fulltext" select="normalize-space(*/*/xhtml:body/xhtml:p)"/>
             <xsl:choose>
               <xsl:when test="*/*/unizh:short/xhtml:a">
                 <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}"><i18n:text>more</i18n:text></a>
               </xsl:when>
-              <xsl:when test="*/*/xhtml:body/xhtml:p != '&#160;'">
+              <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
                 <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </xsl:when>
               <xsl:otherwise/>

@@ -89,8 +89,10 @@ function open_rss_window(url)
            <h2><xsl:value-of select="title"/>&#160;
            <span class="lead"><xsl:value-of select="pubDate"/></span></h2>
            <p><xsl:apply-templates select="description"/>
-           <br/>
-           <a class="arrow" href="{link}"><i18n:text>more</i18n:text></a><br/>
+           <xsl:if test="link != ''">
+             <br/>
+             <a class="arrow" href="{link}"><i18n:text>more</i18n:text></a><br/>
+           </xsl:if>
            </p>
          </xsl:if>
        </xsl:for-each>
