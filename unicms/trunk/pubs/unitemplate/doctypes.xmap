@@ -94,7 +94,7 @@
         
       </map:match>
     
-       
+<!--
       <map:match pattern="include-rss/**.rss.xml">
         <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
         <map:act type="language-exists">
@@ -118,7 +118,7 @@
         <map:generate src="cocoon:/xml"/>
         <map:serialize type="xml"/>
       </map:match> 
- 
+-->
 
       <map:match pattern="include-related/**.html">
         <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
