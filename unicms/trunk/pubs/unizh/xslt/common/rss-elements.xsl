@@ -26,7 +26,7 @@
            <![CDATA[
 function open_rss_window(url)
 {
-	newwindow=window.open(url,'rsswindow','left=0,top=100');
+	newwindow=window.open(url,'rsswindow','left=0,top=100,scrollbars=yes');
 	if (window.focus) {newwindow.focus()};
 }
            ]]>
