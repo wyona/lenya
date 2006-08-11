@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project name="modules">
+  
+  <property name="lenya.projectDescription.name" value="Lenya 1.4-dev"/>
+  
+  <property name="build.temp" value="build/temp"/>
+  
+  <!-- Build the Eclipse projects files -->
+  <target name="eclipse-project" description="Generate the Eclipse project files">
+
+    <echo message="Building Eclipse Project Files"/>
+
+    <!-- prepare the various paths that will form the project -->
+    <path id="srcs">
+      <dirset dir=".">
+        <include name="*/java/src"/>
+        <include name="*/java/test"/>
+      </dirset>
+    </path>
+
+    <path id="libs">
+      <dirset dir=".">
+        <include name="*/java/lib/*.jar"/>
+      </dirset>
+    </path>
+
+    <!-- convert paths to properties -->
+    <property name="srcs" refid="srcs"/>
+    <property name="libs" refid="libs"/>
+    
+    <property name="tools.eclipse" value="tools/eclipse"/>
+
+    <!-- expand properties in the template file -->
+    <copy file="${tools.eclipse}/classpath-tmpl.xml"
+          tofile="${build.temp}/classpath-temp.xml"
+          filtering="yes"
+          overwrite="yes">
+      <filterset>
+        <filter token="SRC_DIRS" value="${srcs}"/>
+        <filter token="LIBS" value="${libs}"/>
+        <filter token="OUTPUT_DIR" value="${ide.eclipse.outputdir}"/>
+      </filterset>
+    </copy>
+
+    <!-- split the path in 'item' XML elements -->
+    <replace file="${build.temp}/classpath-temp.xml"
+             token="${path.separator}" value="&lt;/item&gt;&#xA; &lt;item&gt;"/>
+    <!-- relativize file names by removing the current directory -->
+    <replace file="${build.temp}/classpath-temp.xml"
+             token="${user}${file.separator}" value=""/>
+    <!-- and in case that fails, remove the base directory -->
+    <replace file="${build.temp}/classpath-temp.xml"
+             token="${basedir}${file.separator}" value=""/>
+
+    <!-- replace platform-dependent path separator by '/' -->
+    <replace file="${build.temp}/classpath-temp.xml"
+             token="${file.separator}" value="/"/>
+
+    <!-- now build the .classpath file -->
+    <xslt in="${build.temp}/classpath-temp.xml" out="${basedir}/.classpath"
+          processor="trax"
+          style="${tools.eclipse}/make-classpath.xsl">
+       <param name="exportlib" expression="${ide.eclipse.export.libs}"/>
+       <param name="lenyaProjectName" expression="${lenya.projectDescription.name}"/>
+    </xslt>
+
+    <!-- copy the project file (expand version) -->
+    <copy file="${tools.eclipse}/project"
+          tofile="${basedir}/.project"
+          filtering="yes"
+          overwrite="yes">
+      <filterset>
+        <filter token="LENYA_PROJECT" value="${lenya.projectDescription.name}"/>
+        <filter token="VERSION" value="${version}"/>
+      </filterset>
+    </copy>
+  </target>
+
+</project>

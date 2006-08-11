@@ -242,7 +242,7 @@ public class Tree2XML {
         Publication publication = PublicationUtil.getPublication(this.manager,
                 this.objectModel);
         Session session = RepositoryUtil.getSession(this.manager, this.request);
-        DocumentFactory identityMap = DocumentUtil.createDocumentIdentityMap(this.manager, session);
+        DocumentFactory identityMap = DocumentUtil.createDocumentFactory(this.manager, session);
         
         try {
 
