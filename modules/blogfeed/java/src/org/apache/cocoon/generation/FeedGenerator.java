@@ -40,18 +40,13 @@ import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentBuildException;
 import org.apache.lenya.cms.publication.DocumentFactory;
-import org.apache.lenya.cms.publication.DocumentManager;
 import org.apache.lenya.cms.publication.DocumentUtil;
 import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.PublicationUtil;
 import org.apache.lenya.cms.publication.URLInformation;
-import org.apache.lenya.cms.publication.util.DocumentSet;
 import org.apache.lenya.cms.repository.RepositoryException;
-import org.apache.lenya.cms.repository.RepositoryUtil;
-import org.apache.lenya.cms.repository.Session;
 import org.apache.lenya.cms.site.SiteManager;
-import org.apache.lenya.cms.site.SiteUtil;
 import org.apache.lenya.util.ServletHelper;
 import org.apache.lenya.xml.DocumentHelper;
 import org.apache.xpath.XPathAPI;
@@ -221,8 +216,6 @@ public class FeedGenerator extends ServiceableGenerator {
             RepositoryException {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
-        Session session = RepositoryUtil.getSession(this.manager, request);
-        DocumentManager documentManager = null;
 
         try {
             this.pub = PublicationUtil
@@ -240,14 +233,7 @@ public class FeedGenerator extends ServiceableGenerator {
             }
         }
 
-        this.map = DocumentUtil
-                .createDocumentIdentityMap(this.manager, session);
-        try {
-            documentManager = (DocumentManager) this.manager
-                    .lookup(DocumentManager.ROLE);
-        } catch (ServiceException e) {
-            throw new ProcessingException("Error geting documentManager.", e);
-        }
+        this.map = DocumentUtil.getDocumentFactory(this.manager, request);
         this.document = map.get(pub, area, uuid, language);
         this.docPath = document.getLocator().getPath();
     }
@@ -286,7 +272,7 @@ public class FeedGenerator extends ServiceableGenerator {
         attributes.clear();
         try {
             attributes.addAttribute("", BLOG_ATTR_TITLE, BLOG_ATTR_TITLE,
-                    "CDATA", this.document.getLabel());
+                    "CDATA", this.document.getLink().getLabel());
             attributes.addAttribute("", BLOG_ATTR_MODIFIED, BLOG_ATTR_MODIFIED,
                     "CDATA", this.document.getLastModified().toGMTString());
         } catch (Exception e) {

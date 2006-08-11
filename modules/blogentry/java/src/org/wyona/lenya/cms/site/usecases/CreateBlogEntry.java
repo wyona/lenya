@@ -33,6 +33,7 @@ import org.apache.lenya.ac.Identity;
 import org.apache.lenya.cms.cocoon.source.SourceUtil;
 import org.apache.lenya.cms.metadata.dublincore.DublinCore;
 import org.apache.lenya.cms.publication.Document;
+import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.publication.DocumentFactory;
 import org.apache.lenya.cms.publication.DocumentLocator;
 import org.apache.lenya.cms.publication.DocumentManager;
@@ -61,21 +62,20 @@ public class CreateBlogEntry extends DocumentUsecase {
 
     protected static String DEFAULT_RESOURCE_TYPE = "xhtml";
     protected static final String DEFAULT_EXTENSION = "xml";
-    
+
     protected static final String ELEMENT_ROOT = "resource-type";
     protected static final String ATTRIBUTE_TYPE = "select";
-    
+
     private String parentId;
 
-       public void configure(Configuration config) throws ConfigurationException {
-               super.configure(config);
-               Configuration resourceTypeConfig = config.getChild(ELEMENT_ROOT, false);
-               if (resourceTypeConfig != null) {
-                   DEFAULT_RESOURCE_TYPE=resourceTypeConfig.getAttribute(ATTRIBUTE_TYPE);
-               }
-             }
+    public void configure(Configuration config) throws ConfigurationException {
+        super.configure(config);
+        Configuration resourceTypeConfig = config.getChild(ELEMENT_ROOT, false);
+        if (resourceTypeConfig != null) {
+            DEFAULT_RESOURCE_TYPE = resourceTypeConfig.getAttribute(ATTRIBUTE_TYPE);
+        }
+    }
 
-    
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#getNodesToLock()
      */
@@ -96,7 +96,11 @@ public class CreateBlogEntry extends DocumentUsecase {
         super.initParameters();
 
         Document parent = getSourceDocument();
-        setParameter(PARENT_ID, parent.getId());
+        try {
+            setParameter(PARENT_ID, parent.getPath());
+        } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -126,7 +130,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
         String language = parent.getPublication().getDefaultLanguage();
-        this.parentId=parent.getLocator().getPath();
+        this.parentId = parent.getLocator().getPath();
 
         // create new document
         // implementation note: since blog does not have a hierarchy,
@@ -138,8 +142,10 @@ public class CreateBlogEntry extends DocumentUsecase {
 
         try {
             String documentId = getDocumentID();
-            DocumentLocator locator = DocumentLocator.getLocator(
-                    parent.getPublication().getId(),parent.getArea(),documentId,language);
+            DocumentLocator locator = DocumentLocator.getLocator(parent.getPublication().getId(),
+                    parent.getArea(),
+                    documentId,
+                    language);
             createParentDocs(parent);
             selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
             resourceType = (ResourceType) selector.select(getDocumentTypeName());
@@ -147,13 +153,17 @@ public class CreateBlogEntry extends DocumentUsecase {
             documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
 
             DocumentFactory map = getDocumentFactory();
-
-            Document document = documentManager.add(map,locator,
+            String contentUri = resourceType.getSampleURI(resourceType.getSampleNames()[0]);
+            Document document = documentManager.add(map,
                     resourceType,
+                    contentUri,
+                    getSourceDocument().getPublication(),
+                    locator.getArea(),
+                    locator.getPath(),
+                    locator.getLanguage(),
                     "xml",
                     getParameterAsString(DublinCore.ELEMENT_TITLE),
                     true);
-
 
             transformXML(document);
         } finally {
@@ -168,42 +178,56 @@ public class CreateBlogEntry extends DocumentUsecase {
             }
         }
     }
-    
+
     protected void createParentDocs(Document doc) throws ServiceException, PublicationException {
-      DocumentFactory map = getDocumentFactory();
-      String[] pathId = getDocumentID().split("/");
-      String docRoot = "";
-      for (int i = 0; i < pathId.length-1; i++) {
-          String currentDoc = pathId[i];
-          if (currentDoc.length() >= 1) {
-              docRoot = docRoot+"/" + currentDoc;
-              Document document = map.get(doc.getPublication(), doc.getArea(), docRoot, doc
-                              .getLanguage());
-              if (!document.exists()) {
-                  DocumentManager documentManager = null;
-                  ServiceSelector selector = null;
-                  ResourceType resourceType = null;
-                  try {
-                      selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
-                      documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
-                      resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
-                      DocumentLocator locator = DocumentLocator.getLocator(
-                              doc.getPublication().getId(),doc.getArea(),docRoot,doc.getPublication().getDefaultLanguage());
-                      documentManager.add(map,locator, resourceType, DEFAULT_EXTENSION, currentDoc, true);
-                  } finally {
-                      if (documentManager != null) {
-                          this.manager.release(documentManager);
-                      }
-                      if (selector != null) {
-                          if (resourceType != null) {
-                              selector.release(resourceType);
-                          }
-                          this.manager.release(selector);
-                      }
-                  }
-              }
-          }
-      }
+        DocumentFactory map = getDocumentFactory();
+        String[] pathId = getDocumentID().split("/");
+        String docRoot = "";
+        for (int i = 0; i < pathId.length - 1; i++) {
+            String currentDoc = pathId[i];
+            if (currentDoc.length() >= 1) {
+                docRoot = docRoot + "/" + currentDoc;
+                Document document = map.get(doc.getPublication(),
+                        doc.getArea(),
+                        docRoot,
+                        doc.getLanguage());
+                if (!document.exists()) {
+                    DocumentManager documentManager = null;
+                    ServiceSelector selector = null;
+                    ResourceType resourceType = null;
+                    try {
+                        selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE
+                                + "Selector");
+                        documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
+                        resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
+                        DocumentLocator locator = DocumentLocator.getLocator(doc.getPublication()
+                                .getId(), doc.getArea(), docRoot, doc.getPublication()
+                                .getDefaultLanguage());
+                        String sampleUri = resourceType.getSampleURI(resourceType.getSampleNames()[0]);
+                        documentManager.add(map,
+                                resourceType,
+                                sampleUri,
+                                getSourceDocument().getPublication(),
+                                locator.getArea(),
+                                locator.getPath(),
+                                locator.getLanguage(),
+                                DEFAULT_EXTENSION,
+                                currentDoc,
+                                true);
+                    } finally {
+                        if (documentManager != null) {
+                            this.manager.release(documentManager);
+                        }
+                        if (selector != null) {
+                            if (resourceType != null) {
+                                selector.release(resourceType);
+                            }
+                            this.manager.release(selector);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -241,7 +265,7 @@ public class CreateBlogEntry extends DocumentUsecase {
         String month = fmtMM.format(date);
         String day = fmtdd.format(date);
 
-        String documentId = this.parentId+"/" + year + "/" + month + "/" + day + "/"
+        String documentId = this.parentId + "/" + year + "/" + month + "/" + day + "/"
                 + getNewDocumentName();
         return documentId;
     }
@@ -278,16 +302,16 @@ public class CreateBlogEntry extends DocumentUsecase {
             getLogger().debug("NewBlogEntryCreator.transformXML(): " + document);
 
         String[] steps = document.getLocator().getPath().split("/");
-        int depth=steps.length-1;
+        int depth = steps.length - 1;
         String nodeId = steps[depth];
 
         // Replace id
         Element element = (Element) XPathAPI.selectSingleNode(parent,
                 "/*[local-name() = 'entry']/*[local-name() = 'id']");
 
-        String year = steps[depth-3];
-        String month = steps[depth-2];
-        String day = steps[depth-1];
+        String year = steps[depth - 3];
+        String month = steps[depth - 2];
+        String day = steps[depth - 1];
 
         DocumentHelper.setSimpleElementText(element, year + "/" + month + "/" + day + "/" + nodeId);
 

@@ -21,7 +21,6 @@ package org.apache.lenya.cms.cocoon.generation;
 
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.lenya.cms.publication.DocumentBuilder;
-import org.apache.lenya.cms.publication.DocumentIdentifier;
 import org.apache.lenya.cms.site.tree.SiteTreeNode;
 import org.xml.sax.SAXException;
 import org.apache.lenya.cms.publication.Document;
@@ -47,8 +46,8 @@ public class SitetreeFragmentGeneratorResourcetype extends SitetreeFragmentGener
           selector = (ServiceSelector) this.manager.lookup(DocumentBuilder.ROLE + "Selector");
           String hint = this.publication.getDocumentBuilderHint();
           builder = (DocumentBuilder) selector.select(hint);
-          String lang = node.getLabels()[0].getLanguage();
-          Document document = this.identityMap.get(this.publication, this.area, node.getAbsoluteId(), lang);
+          String lang = node.getLanguages()[0];
+          Document document = this.identityMap.get(this.publication, this.area, node.getPath(), lang);
           String resourcetype = document.getResourceType().getName();
           return resourcetype;
           
