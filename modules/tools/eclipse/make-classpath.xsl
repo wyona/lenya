@@ -50,9 +50,7 @@
         <xsl:sort select="concat(substring-after(substring-after(substring-after(substring-after(., '/'), '/'), '/'), '/'),
                                                  substring-after(substring-after(substring-after(., '/'), '/'), '/'),
                                                                  substring-after(substring-after(., '/'), '/'))"/>
-        <!--
         <classpathentry exported="{$exportlib}" kind="lib" path="{.}"/>
-        -->
       </xsl:for-each>
 
       <!-- 3. JRE runtime -->

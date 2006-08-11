@@ -34,9 +34,9 @@
     </path>
 
     <path id="libs">
-      <dirset dir=".">
+      <fileset dir=".">
         <include name="*/java/lib/*.jar"/>
-      </dirset>
+      </fileset>
     </path>
 
     <!-- convert paths to properties -->
