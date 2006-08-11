@@ -51,10 +51,9 @@
                 <xsl:when test="*/unizh:newsitem/unizh:short/xhtml:a">
                   <xsl:value-of select="*/unizh:newsitem/unizh:short/xhtml:a/@href"/>
                 </xsl:when>
-                <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
+                <xsl:otherwise>
                   <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
-                </xsl:when>
-                <xsl:otherwise/>
+                </xsl:otherwise>
               </xsl:choose> 
             </link>
             <description><xsl:apply-templates select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
