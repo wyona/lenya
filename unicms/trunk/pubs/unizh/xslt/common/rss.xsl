@@ -7,7 +7,7 @@
 
 
   <xsl:template match="unizh:rss-reader">
-    <unizh:rss-reader items="{@items}" description="{@descriptions}" image="{@image}">
+    <unizh:rss-reader items="{@items}" url="{@url}" description="{@descriptions}" image="{@image}">
       <title><xsl:value-of select="."/></title>
       <cinclude:includexml ignoreErrors="true">
         <xsl:choose>
