@@ -19,65 +19,52 @@
 
 package org.apache.lenya.cms.cocoon.generation;
 
-import org.apache.avalon.framework.service.ServiceSelector;
-import org.apache.lenya.cms.publication.DocumentBuilder;
+import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.site.tree.SiteTreeNode;
 import org.xml.sax.SAXException;
-import org.apache.lenya.cms.publication.Document;
 
 /**
- * Generates a fragment of the navigation XML from the sitetree, corresponding to a given node. 
+ * Generates a fragment of the navigation XML from the sitetree, corresponding to a given node.
  */
 public class SitetreeFragmentGeneratorResourcetype extends SitetreeFragmentGenerator {
-  
-  protected static final String ATTR_RESOURCETYPE = "resourcetype";
-  
-  /**
-   * Returns the doctype of the document.
-   * @param node
-   * @param doctype1
-   * @return
-   */
-  protected String getResourceType(SiteTreeNode node) {
-    
-      ServiceSelector selector = null;
-      DocumentBuilder builder = null;
-      try {
-          selector = (ServiceSelector) this.manager.lookup(DocumentBuilder.ROLE + "Selector");
-          String hint = this.publication.getDocumentBuilderHint();
-          builder = (DocumentBuilder) selector.select(hint);
-          String lang = node.getLanguages()[0];
-          Document document = this.identityMap.get(this.publication, this.area, node.getPath(), lang);
-          String resourcetype = document.getResourceType().getName();
-          return resourcetype;
-          
-      } catch (Exception e) {
-          throw new RuntimeException(e);
-      } finally {
-          if (selector != null) {
-              if (builder != null) {
-                  selector.release(builder);
-              }
-              this.manager.release(selector);
-          }
-      }
-  }  
- 
+
+    protected static final String ATTR_RESOURCETYPE = "resourcetype";
+
+    /**
+     * Returns the doctype of the document.
+     * @param node
+     * @param doctype1
+     * @return A resource type name.
+     */
+    protected String getResourceType(SiteTreeNode node) {
+        String lang = node.getLanguages()[0];
+        try {
+            Document document = node.getLink(lang).getDocument();
+            return document.getResourceType().getName();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Calls super and sets the attributes for resourcetype.
      * @param node
      * @throws SAXException if an error occurs while setting the attributes
      */
     protected void setNodeAttributes(SiteTreeNode node) throws SAXException {
-        
+
         super.setNodeAttributes(node);
-                
+
         String resourceType = getResourceType(node);
 
         if (this.getLogger().isDebugEnabled()) {
             this.getLogger().debug("adding attribute resourcetype: " + resourceType);
         }
-        
-        this.attributes.addAttribute("", ATTR_RESOURCETYPE, ATTR_RESOURCETYPE, "CDATA", resourceType);
+
+        this.attributes.addAttribute("",
+                ATTR_RESOURCETYPE,
+                ATTR_RESOURCETYPE,
+                "CDATA",
+                resourceType);
     }
 }
