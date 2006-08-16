@@ -37,6 +37,7 @@ import org.apache.lenya.cms.publication.DocumentException;
 import org.apache.lenya.cms.publication.DocumentFactory;
 import org.apache.lenya.cms.publication.DocumentLocator;
 import org.apache.lenya.cms.publication.DocumentManager;
+import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationException;
 import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.repository.Node;
@@ -183,15 +184,14 @@ public class CreateBlogEntry extends DocumentUsecase {
         DocumentFactory map = getDocumentFactory();
         String[] pathId = getDocumentID().split("/");
         String docRoot = "";
+        String pubId = doc.getPublication().getId(), area = doc.getArea(), lang=doc.getLanguage();
+        Publication pub= doc.getPublication();
         for (int i = 0; i < pathId.length - 1; i++) {
             String currentDoc = pathId[i];
             if (currentDoc.length() >= 1) {
                 docRoot = docRoot + "/" + currentDoc;
-                Document document = map.get(doc.getPublication(),
-                        doc.getArea(),
-                        docRoot,
-                        doc.getLanguage());
-                if (!document.exists()) {
+                boolean exists = SiteUtil.contains(manager, map, pub, area, docRoot);
+                if (!exists) {
                     DocumentManager documentManager = null;
                     ServiceSelector selector = null;
                     ResourceType resourceType = null;
@@ -200,9 +200,8 @@ public class CreateBlogEntry extends DocumentUsecase {
                                 + "Selector");
                         documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
                         resourceType = (ResourceType) selector.select(DEFAULT_RESOURCE_TYPE);
-                        DocumentLocator locator = DocumentLocator.getLocator(doc.getPublication()
-                                .getId(), doc.getArea(), docRoot, doc.getPublication()
-                                .getDefaultLanguage());
+                        DocumentLocator locator = DocumentLocator.getLocator(pubId
+                                , area, docRoot, lang);
                         String sampleUri = resourceType.getSampleURI(resourceType.getSampleNames()[0]);
                         documentManager.add(map,
                                 resourceType,
