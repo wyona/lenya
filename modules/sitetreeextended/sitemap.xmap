@@ -30,11 +30,11 @@ This sitemap creates the extended navigation elements
       <!-- creates menu element -->  
       <!-- pattern: {pub-id}/{area}/menu/{url}.xml -->
       <!-- FIXME: remove .html in matcher -->
-      <map:match pattern="*/*/menu/**.html.xml">
+      <map:match pattern="*/*/menu/**.xml">
         <map:generate type="sitetree-fragment-resourcetype">
           <map:parameter name="areas" value="{2}"/>
           <map:parameter name="area" value="{2}"/>
-          <map:parameter name="documentid" value="/{3}"/>
+          <map:parameter name="path" value="/{3}"/>
           <map:parameter name="initial" value="true"/>
         </map:generate>
         <!-- <map:call resource="i18n"/> -->
