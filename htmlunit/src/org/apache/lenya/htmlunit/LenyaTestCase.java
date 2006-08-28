@@ -159,7 +159,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0); 
 
         HtmlTextInput inputDocId = (HtmlTextInput) form
-                .getInputByName("documentId");
+                .getInputByName("nodeName");
         inputDocId.setValueAttribute(newNodeID);
 
         HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("title");
