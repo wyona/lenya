@@ -85,20 +85,20 @@ public class MetaDataTest extends LenyaTestCase {
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0);
         
         HtmlTextInput inputTitle = (HtmlTextInput) form
-                .getInputByName("meta.dc.title");
+                .getInputByName("ns2.title");
         inputTitle.setValueAttribute(title);
 
         HtmlTextInput inputSubject = (HtmlTextInput) form
-                .getInputByName("meta.dc.subject");
+                .getInputByName("ns2.subject");
         inputSubject.setValueAttribute(subject);
 
-        HtmlTextArea areaDescription = (HtmlTextArea) form.getTextAreasByName("meta.dc.description").get(0);
-        areaDescription.setText(description);
+        HtmlTextInput inputDescription = (HtmlTextInput) form.getInputByName("ns2.description");
+        inputDescription.setValueAttribute(description);
 
-        HtmlTextInput inputPublisher = (HtmlTextInput) form.getInputByName("meta.dc.publisher");
+        HtmlTextInput inputPublisher = (HtmlTextInput) form.getInputByName("ns2.publisher");
         inputPublisher.setValueAttribute(publisher);
 
-        HtmlTextInput inputRights = (HtmlTextInput) form.getInputByName("meta.dc.rights");
+        HtmlTextInput inputRights = (HtmlTextInput) form.getInputByName("ns2.rights");
         inputRights.setValueAttribute(rights);
 
         // Now submit the form by clicking the button
@@ -108,19 +108,19 @@ public class MetaDataTest extends LenyaTestCase {
 
         form = (HtmlForm) this.currentPage.getForms().get(0);
         
-        inputTitle = (HtmlTextInput) form.getInputByName("meta.dc.title");
+        inputTitle = (HtmlTextInput) form.getInputByName("ns2.title");
         assertEquals("Edited meta data not saved correctly", title, inputTitle.getValueAttribute());
 
-        inputSubject = (HtmlTextInput) form.getInputByName("meta.dc.subject");
+        inputSubject = (HtmlTextInput) form.getInputByName("ns2.subject");
         assertEquals("Edited meta data not saved correctly", subject, inputSubject.getValueAttribute());
 
-        areaDescription = (HtmlTextArea) form.getTextAreasByName("meta.dc.description").get(0);
-        assertEquals("Edited meta data not saved correctly", description, areaDescription.getText());
+        inputDescription = (HtmlTextInput) form.getInputByName("ns2.description");
+        assertEquals("Edited meta data not saved correctly", description, inputDescription.getValueAttribute());
 
-        inputPublisher = (HtmlTextInput) form.getInputByName("meta.dc.publisher");
+        inputPublisher = (HtmlTextInput) form.getInputByName("ns2.publisher");
         assertEquals("Edited meta data not saved correctly", publisher, inputPublisher.getValueAttribute());
 
-        inputRights = (HtmlTextInput) form.getInputByName("meta.dc.rights");
+        inputRights = (HtmlTextInput) form.getInputByName("ns2.rights");
         assertEquals("Edited meta data not saved correctly", rights, inputRights.getValueAttribute());
     }
 }
