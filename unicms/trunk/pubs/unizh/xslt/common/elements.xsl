@@ -558,7 +558,16 @@
     <p>
       <xsl:for-each select="../*">
         <xsl:if test="self::xhtml:h2">
-          <a class="arrow" href="#{position()}"><xsl:value-of select="."/></a><br/>
+          <xsl:choose>
+            <xsl:when test="self::xhtml:h2/unizh:attention">
+              <a class="arrow" href="#{position()}">
+                 <xsl:apply-templates select="self::xhtml:h2/*|self::xhtml:h2/text()"/>
+              </a><br/>
+            </xsl:when>
+            <xsl:otherwise>
+              <a class="arrow" href="#{position()}"><xsl:value-of select="."/></a><br/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:if>
       </xsl:for-each>
     </p>
