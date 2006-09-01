@@ -79,6 +79,12 @@
       </optional>
       <text/>
     </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
     <oneOrMore>
       <ref name="a"/>
     </oneOrMore>
