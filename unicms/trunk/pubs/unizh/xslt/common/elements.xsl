@@ -363,47 +363,6 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:links[unizh:title/@href != '']">
-    <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
-        <div class="solidlinemitmargin">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <div class="kleintitel">
-      <a href="{unizh:title/@href}"><xsl:value-of select="unizh:title"/></a>
-    </div>
-    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-    <xsl:choose>
-      <xsl:when test="xhtml:object">
-        <xsl:apply-templates select="xhtml:object"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:apply-templates select="xhtml:p"/>
-    <ul class="linknav">
-      <xsl:for-each select="xhtml:a">
-        <li>
-          <a href="{@href}">
-            <xsl:value-of select="."/>
-          </a>
-          <div class="dotline">
-            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-          </div>
-        </li>
-      </xsl:for-each>
-    </ul>
-  </xsl:template>
-
-
   <xsl:template match="unizh:links">
     <xsl:choose>
       <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">

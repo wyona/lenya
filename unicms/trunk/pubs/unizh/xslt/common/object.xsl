@@ -217,7 +217,16 @@
     </xsl:variable>
 
     <div class="teaser64long">
-      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+      <xsl:choose>
+        <xsl:when test="@href != ''">
+          <a href="{@href}">
+            <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+          </a>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 
@@ -337,7 +346,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
+  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
     <xsl:choose>
       <xsl:when test="not(@float = 'true') or not(parent::xhtml:body)">
         <xsl:apply-templates select="." mode="preprocess"/>
