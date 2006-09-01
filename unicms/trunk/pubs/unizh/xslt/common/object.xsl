@@ -236,7 +236,16 @@
     </xsl:variable>
 
     <div class="teaser64long">
-      <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+      <xsl:choose>
+        <xsl:when test="@href != ''">
+          <a href="{@href}">
+            <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+          </a>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 

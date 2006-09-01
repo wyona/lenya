@@ -298,6 +298,7 @@
           <br/>
         </xsl:if>
         <b><xsl:value-of select="unizh:title"/><xsl:comment/></b><br/>
+        <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
         <xsl:apply-templates select="xhtml:p"/>
         <xsl:for-each select="lenya:asset">
           <xsl:apply-templates select="."/>
@@ -320,7 +321,6 @@
           <br/>
         </xsl:for-each> 
         <xsl:apply-templates select="lenya:asset-dot"/>
-        <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
       </div> 
     </div>
   </xsl:template>
@@ -342,6 +342,7 @@
     <div class="kleintitel">
       <xsl:value-of select="unizh:title"/>
     </div>
+    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
     <xsl:choose>
       <xsl:when test="xhtml:object">
         <xsl:apply-templates select="xhtml:object"/>
@@ -358,7 +359,6 @@
       <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
     </xsl:for-each>
     <xsl:apply-templates select="lenya:asset-dot"/>
-    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
     <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
   </xsl:template>
 
@@ -388,6 +388,7 @@
         <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
       </xsl:otherwise>
     </xsl:choose>
+    <xsl:apply-templates select="xhtml:p"/>
     <ul class="linknav">
       <xsl:for-each select="xhtml:a">
         <li>
@@ -428,6 +429,7 @@
         <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
       </xsl:otherwise>
     </xsl:choose>
+    <xsl:apply-templates select="xhtml:p"/>
     <ul class="linknav">
       <xsl:for-each select="xhtml:a">
         <li>
