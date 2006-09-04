@@ -170,7 +170,9 @@
 
   <xsl:template name="overview">
     <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:if test="unizh:overview[@unizh:menu = 'true']">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      </xsl:if>
       <xsl:comment/>
     </div>
     <div class="contcol2">
@@ -224,8 +226,11 @@
  
   <xsl:template name="homepage4columns">
     <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:if test="unizh:homepage4cols[@unizh:menu = 'true']">
+        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      </xsl:if>
       <xsl:apply-templates select="*/unizh:contcol1"/>
+      <xsl:comment/>
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
