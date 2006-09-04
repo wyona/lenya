@@ -23,6 +23,7 @@
     <ref name="XHTML.version.attrib"/>
     <ref name="I18n.attrib"/>
     <ref name="unizh.tabs.attrib"/>
+    <ref name="unizh.menu.attrib"/>
     <ref name="dummy.attlist"/>
   </define>
 

@@ -129,7 +129,7 @@ function validateForm(theForm)
                 <td class="lenya-form-caption">Language:</td><td><input class="lenya-form-element" type="hidden" name="properties.create.language" value="{/parent-child/dc:language}"/><xsl:value-of select="/parent-child/dc:language"/></td>
               </tr>
               <xsl:choose>
-                <xsl:when test="$doctype = 'homepage'">
+                <xsl:when test="($doctype = 'homepage') or ($doctype = 'homepage4cols')">
                   <tr>
                     <td class="lenya-form-caption">Tabs in Page Header:</td><td><select class="lenya-form-element" name="properties.create.tabs"><option>true</option><option selected="true">false</option></select></td>
                   </tr>

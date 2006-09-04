@@ -22,6 +22,7 @@
   <define name="html.attlist">
     <ref name="XHTML.version.attrib"/>
     <ref name="I18n.attrib"/>
+    <ref name="unizh.menu.attrib"/>
     <ref name="dummy.attlist"/>
   </define>
 

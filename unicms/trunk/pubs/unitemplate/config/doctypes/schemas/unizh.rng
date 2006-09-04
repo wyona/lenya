@@ -50,6 +50,16 @@
   </attribute>
 </define>
 
+<define name="unizh.menu.attrib">
+  <attribute name="unizh:menu">
+    <choice>
+      <value type="string">true</value>
+      <value type="string">false</value>
+    </choice>
+  </attribute>
+</define>
+
+
 <define name="unizh.columns.attrib">
   <attribute name="unizh:columns">
     <ref name="Number.datatype"/>
