@@ -78,19 +78,6 @@ public class CreateBlogEntry extends DocumentUsecase {
     }
 
     /**
-     * @see org.apache.lenya.cms.usecase.AbstractUsecase#getNodesToLock()
-     */
-    protected Node[] getNodesToLock() throws UsecaseException {
-        try {
-            SiteStructure structure = SiteUtil.getSiteStructure(this.manager, getSourceDocument());
-            Node[] nodes = { structure.getRepositoryNode() };
-            return nodes;
-        } catch (SiteException e) {
-            throw new UsecaseException(e);
-        }
-    }
-
-    /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
     protected void initParameters() {
