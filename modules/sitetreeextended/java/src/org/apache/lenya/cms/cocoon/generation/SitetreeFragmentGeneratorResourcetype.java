@@ -20,6 +20,7 @@
 package org.apache.lenya.cms.cocoon.generation;
 
 import org.apache.lenya.cms.publication.Document;
+import org.apache.lenya.cms.site.SiteException;
 import org.apache.lenya.cms.site.tree.SiteTreeNode;
 import org.xml.sax.SAXException;
 
@@ -51,7 +52,7 @@ public class SitetreeFragmentGeneratorResourcetype extends SitetreeFragmentGener
      * @param node
      * @throws SAXException if an error occurs while setting the attributes
      */
-    protected void setNodeAttributes(SiteTreeNode node) throws SAXException {
+    protected void setNodeAttributes(SiteTreeNode node) throws SAXException, SiteException {
 
         super.setNodeAttributes(node);
 
