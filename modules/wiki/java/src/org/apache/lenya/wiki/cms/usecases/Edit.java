@@ -92,21 +92,6 @@ public class Edit extends DocumentUsecase {
         }
     }
 
-    /**
-     * @see org.apache.lenya.cms.usecase.AbstractUsecase#getNodesToLock()
-     */
-    protected Node[] getNodesToLock() throws UsecaseException {
-        Node docNode = getSourceDocument().getRepositoryNode();
-        Node siteNode;
-        try {
-            siteNode = SiteUtil.getSiteStructure(this.manager, getSourceDocument()).getRepositoryNode();
-        } catch (SiteException e) {
-            throw new UsecaseException(e);
-        }
-        Node[] nodes = { docNode, siteNode };
-        return nodes;
-    }
-    
     protected void doCheckExecutionConditions() throws Exception {        
         super.doCheckExecutionConditions();
         Request request = ContextHelper.getRequest(this.context);
