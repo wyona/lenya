@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:uz="http://unizh.ch"
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+  xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
+  xmlns:xi="http://www.w3.org/2003/XInclude" 
+  >
+  <content>
+    <xi:include href="#"/>
+  </content>
+  <div label="Universität Zürich" root="http://www.unizh.ch" id="breadcrumb">
+    <div href="/unitemplate/authoring/index.html" basic-url="index" current="true">UniTemplate</div>
+  </div>
+  <div id="servicenav">
+    <div id="home" href="/unitemplate/authoring/index.html">Home</div>
+    <div id="contact" href="/unitemplate/authoring/contact.html">Kontakt</div>
+    <div id="sitemap" href="/unitemplate/authoring/sitemap.html">Sitemap</div>
+    <div href="/unitemplate/authoring/search.html" id="search">Suche</div>
+  </div>
+  <div id="toolnav">
+    <div class="language" href="/unitemplate/authoring/index_en.html">en</div>
+    <div href="index_de.print.html" id="print">Diese Seite drucken</div>
+    <div id="fontsize">Schrift grösser/kleiner</div>
+    <div id="simpleview" href="#">PDA-optimierte Ansicht</div>
+  </div>
+  <div id="menu">
+    <xhtml:div href="/unitemplate/authoring/xhtml.html" basic-url="xhtml">Allgemeine Dokumenttypen</xhtml:div>
+    <xhtml:div href="/unitemplate/authoring/custom.html" basic-url="custom">Strukt. Dokumenttypen</xhtml:div>
+    <xhtml:div href="/unitemplate/authoring/redirect.html" basic-url="redirect">Redirect</xhtml:div>
+  </div>
+  <div id="footnav">
+    <div id="impressum" href="/unitemplate/authoring/impressum.html">Impressum</div>
+  </div>
+  <unizh xmlns="http://unizh.ch">
+    <university breadcrumb="true" href="http://www.unizh.ch">university_zurich</university>
+    <publication breadcrumb="true">Unitemplate</publication>
+  </unizh>
+</document>
+
+

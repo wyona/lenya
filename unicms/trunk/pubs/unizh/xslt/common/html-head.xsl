@@ -12,6 +12,7 @@
   <head>
     <title>UZH - <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/> - <xsl:value-of select="*/lenya:meta/dc:title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&#38;lenya.step=introspect"/>
     <style type="text/css">
     <!--
       <xsl:comment>

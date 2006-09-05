@@ -122,6 +122,18 @@
 	<map:serialize type="text" mime-type="text/css"/>
       </map:match>  
     </map:pipeline>
+
+
+    <!-- NEUTRON css. FIXME: deprecate by using absolute paths in css -->  
+    <map:pipeline>
+      <map:match pattern="**/content-neutron.css">
+        <map:generate src="../unizh/resources/shared/css/main.xml"/>
+        <map:transform src="../../resources/css/css.xsl">
+          <map:parameter name="contextprefix" value="http://localhost:8888{request:contextPath}"/>
+        </map:transform>
+        <map:serialize type="text" mime-type="text/css"/>
+      </map:match>  
+    </map:pipeline>
     
     <map:pipeline>
       <!-- mounting doctypes.xmap -->

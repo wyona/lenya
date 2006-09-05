@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: neutron.xmap 344359 2005-11-15 12:44:22Z thomas $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+<!-- ========================== Pipelines ================================== -->
+
+  <map:pipelines>
+        
+    <map:pipeline>
+   
+     <!-- Usecase matcher -->
+
+     <map:match type="usecase" pattern="neutron">
+        
+        <map:match type="step" pattern="xsl">
+          <map:generate src="../../../../unizh/xslt/neutron/{page-envelope:document-type}-neutron.xsl"/>
+          
+          <map:transform type="xinclude"/>
+          
+          <map:transform src="../../../../unizh/xslt/neutron/neutron-params.xsl">  
+            <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
+            <map:parameter name="publicationid" value="{page-envelope:publication-id}"/>
+            <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+            <map:parameter name="area" value="{page-envelope:area}"/>
+            <map:parameter name="language" value="{page-envelope:document-language}"/>
+            <map:parameter name="languages" value="{page-envelope:document-languages-csv}"/>
+            <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
+            <map:parameter name="nodeid" value="{page-envelope:document-node-id}"/>
+            <map:parameter name="contextprefix" value="{request:contextPath}"/>
+            <map:parameter name="rendertype" value="{rendertype}"/>
+            <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
+            <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+            <map:parameter name="querystring" value="{request:queryString}"/>
+            <map:parameter name="creationdate" value="{page-envelope:document-dc-date-created}"/>
+          </map:transform>
+          
+          <map:transform src="../../../../unizh/xslt/neutron/neutron-paths.xsl">
+            <map:parameter name="root" value="http://{request:serverName}:{request:serverPort}/"/>
+            <map:parameter name="publication-id" value="{page-envelope:publication-id}"/>
+          </map:transform> 
+          <map:serialize type="xml"/>
+        </map:match>
+
+
+        <map:match type="step" pattern="template">
+          <map:generate src="../../../../unizh/xslt/neutron/template.xml"/>
+          <map:serialize type="xml"/>
+        </map:match>
+
+     
+      </map:match>
+      
+    </map:pipeline>
+
+  </map:pipelines>
+
+</map:sitemap>
