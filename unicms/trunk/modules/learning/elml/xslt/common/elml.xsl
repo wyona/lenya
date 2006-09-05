@@ -5,16 +5,12 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
-  xmlns="http://www.elml.ch"
+  xmlns="http://www.w3.org/1999/xhtml"
   xmlns:elml="http://www.elml.ch"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0" 
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   >
-
-
-  <xsl:include href="../common/biblio_harvard.xsl"/> 
-
 
   <xsl:template match="lenya:meta"/>
   <xsl:template match="unizh:header"/>
@@ -508,21 +504,25 @@
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
-    <p>
+    
       <xsl:choose>
         <xsl:when test="@icon">
+          <p>
           <table border="0">
             <tr>
               <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
               <td><xsl:apply-templates/></td>
             </tr>
           </table>
+          </p>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates/>
+          <p>
+            <xsl:apply-templates/>
+          </p>
         </xsl:otherwise>
       </xsl:choose>
-    </p>
+    
   </xsl:template>
 
 

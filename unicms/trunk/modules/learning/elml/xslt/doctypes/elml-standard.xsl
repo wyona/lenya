@@ -35,7 +35,7 @@
   <xsl:include href="../common/object.xsl"/> 
 
   <xsl:include href="../common/elml.xsl"/>
-
+  <xsl:include href="../common/biblio_harvard.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>

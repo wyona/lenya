@@ -8,6 +8,7 @@
   
   <target name="init">
     <property file="local.build.properties"/>
+    <property file="build.properties"/>
     <property name="pub.dir" value="${pubs.dir}/${pub.prefix}"/>
     <mkdir dir="work"/>
   </target>
