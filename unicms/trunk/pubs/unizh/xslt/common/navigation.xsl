@@ -101,26 +101,29 @@
     <xsl:variable name="level" select="count($descendants)"/>
 
     <div id="secnav">
-	  <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
-	    <a accesskey="1" name="navigation"><xsl:comment/></a>
-	  </xsl:if>
+      <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
+        <a accesskey="1" name="navigation"><xsl:comment/></a>
+      </xsl:if>
       <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:if test="$level > 3">
         <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
        </xsl:if>
-      <div class="solidline">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-      </div>
-      <ul>
-        <xsl:choose>
-          <xsl:when test="$level > 3">
-            <xsl:apply-templates select="$descendants[$level - 2]"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:apply-templates select="xhtml:div[not(@class = 'home')]"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </ul>
+      <xsl:if test="(descendant::xhtml:div[@current = 'true']) or ($hideChildren != 'true')">
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
+        </div>
+        <ul>
+          <xsl:choose>
+            <xsl:when test="$level > 3">
+              <xsl:apply-templates select="$descendants[$level - 2]"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="xhtml:div[not(@class = 'home')]"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </ul>
+      </xsl:if>
+      <xsl:comment/>
     </div>
   </xsl:template>
 
@@ -133,7 +136,7 @@
         </xsl:if>
         <xsl:value-of select="text()"/>
       </a>
-      <xsl:if test="xhtml:div">
+      <xsl:if test="xhtml:div and not((@current = 'true') and ($hideChildren = 'true'))">
         <ul>
           <xsl:apply-templates select="xhtml:div"/>
         </ul>

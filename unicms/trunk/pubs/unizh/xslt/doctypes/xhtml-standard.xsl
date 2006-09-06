@@ -33,6 +33,20 @@
   <xsl:include href="../common/elements.xsl"/> 
   <xsl:include href="../common/object.xsl"/> 
 
+  <xsl:variable name="hideChildren">
+    <xsl:choose>
+      <xsl:when test="$document-element-name = 'unizh:overview'">
+        <xsl:value-of select="/document/content/unizh:overview/@unizh:hideChildren"/>
+      </xsl:when>
+      <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
+        <xsl:value-of select="/document/content/unizh:homepage4cols/@unizh:hideChildren"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>false</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
@@ -170,9 +184,7 @@
 
   <xsl:template name="overview">
     <div id="col1">
-      <xsl:if test="unizh:overview[@unizh:menu = 'true']">
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-      </xsl:if>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
       <xsl:comment/>
     </div>
     <div class="contcol2">
@@ -226,9 +238,7 @@
  
   <xsl:template name="homepage4columns">
     <div id="col1">
-      <xsl:if test="unizh:homepage4cols[@unizh:menu = 'true']">
-        <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-      </xsl:if>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
       <xsl:apply-templates select="*/unizh:contcol1"/>
       <xsl:comment/>
     </div>
