@@ -50,8 +50,8 @@
   </attribute>
 </define>
 
-<define name="unizh.menu.attrib">
-  <attribute name="unizh:menu">
+<define name="unizh.hideChildren.attrib">
+  <attribute name="unizh:hideChildren">
     <choice>
       <value type="string">true</value>
       <value type="string">false</value>
