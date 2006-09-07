@@ -9,6 +9,7 @@
   xmlns:elml="http://www.elml.ch"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0" 
+  xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   >
 
@@ -476,12 +477,28 @@
   </xsl:template>
 
   <xsl:template match="elml:link">
+    <xsl:variable name="targetLabel" select="@targetLabel"/>
+    <xsl:variable name="url">
+      <xsl:choose>
+        <xsl:when test="/document/content/*[local-name() = 'lesson']">
+          <xsl:value-of select="concat($contextprefix, /document/unizh:children/index:child[descendant::*[@label = $targetLabel]]/@href)"/>  
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:if test="/document/unizh:level/level:node[descendant::*[@label = $targetLabel]]">
+            <xsl:value-of select="concat($contextprefix, /document/unizh:level/level:node[descendant::*[@label = $targetLabel]]/@href)"/>
+          </xsl:if>
+          <xsl:if test="/document/unizh:ancestors/unizh:ancestor[descendant::*[@label = $targetLabel]]">
+            <xsl:value-of select="concat($contextprefix, /document/unizh:ancestors/unizh:ancestor[descendant::*[@label = $targetLabel]/@href])"/>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>      
+    </xsl:variable>
     <xsl:choose>
       <xsl:when test="@uri">
         <a href="{@uri}"><xsl:apply-templates/></a>
       </xsl:when>
       <xsl:otherwise>
-        <a href="#{@targetLabel}"><xsl:apply-templates/><xsl:comment/></a>
+        <a href="{$url}#{@targetLabel}"><xsl:apply-templates/><xsl:comment/></a>
       </xsl:otherwise> 
     </xsl:choose> 
   </xsl:template>

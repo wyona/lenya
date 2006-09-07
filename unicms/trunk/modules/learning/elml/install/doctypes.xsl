@@ -23,6 +23,11 @@
           <map:part src="cocoon:/unizh.xconf"/>
         </map:aggregate>
         <map:transform src="../unizh/xslt/elml-level.xsl"/>
+        <map:transform type="index">
+          <map:parameter name="documentId" value="{{page-envelope:document-id}}"/>
+          <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+          <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+        </map:transform>
         <map:transform type="level">
           <map:parameter value="http://unizh.ch/doctypes/elements/1.0" name="namespace"/>
           <map:parameter value="http://apache.org/cocoon/include/1.0" name="cIncludeNamespace"/>

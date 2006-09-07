@@ -49,10 +49,20 @@
       <fileset dir="elml/xslt/common"/>
     </copy>
 
+    <copy todir="${pubs.dir}/unizh/xslt/neutron" overwrite="yes">
+      <fileset dir="elml/xslt/neutron"/>
+    </copy> 
+
+
     <echo>INFO: Copying resources</echo>
     <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
       <fileset dir="elml/resources/shared/images/icons"/>
     </copy>
+
+     <copy todir="${pubs.dir}/unizh/resources/shared/css" overwrite="yes">
+      <fileset dir="elml/resources/shared/css"/>
+    </copy>
+
 
     <echo>INFO: Patching publication-sitemap.xmap</echo>
     <xslt
@@ -318,6 +328,12 @@
         <include name="look.gif"/>
         <include name="pdf.png"/>
         <include name="remark.gif"/>
+      </fileset>
+    </delete>
+
+    <delete>
+      <fileset dir="${pubs.dir}/unizh/resources/shared/css">
+        <include name="elml.xml"/>
       </fileset>
     </delete>
 

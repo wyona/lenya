@@ -161,6 +161,11 @@ function put() {
 }
 
 
+
+
+
+
+
 function lock() {
   
   var doc = cocoon.context.getAttribute("doc");

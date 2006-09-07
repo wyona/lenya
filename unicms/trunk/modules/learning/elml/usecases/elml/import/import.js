@@ -25,25 +25,44 @@ importClass(Packages.org.apache.lenya.cms.publication.ResourcesManager);
 importClass(Packages.java.io.FileOutputStream);
 
 
+var referer;
+
+/** Import usecase for eLML lessons. See http://www.elml.ch for information about eLML (e-Learning markup language). 
+** @author Thomas Comiotto
+**/
+
 function importLesson() {
 
   cocoon.log.info("Entering eLML Import usecase");
 
-  cocoon.log.info("Sending upload screen");
-  cocoon.sendPageAndWait("upload.jx");
+  referer = cocoon.request.getHeader("referer");
 
-  if (cocoon.request.get("submit") == "Cancel") {
-    cocoon.sendPage("/");
+  /** Display upload dialog **/ 
+
+  cocoon.log.info("Displaying upload dialog");
+  
+  cocoon.sendPageAndWait("upload.jx");
+  
+  /* Test for cancel operation and redirect to the page the usecase was executed */
+  if (cocoon.request.get("submit") == "cancel") {
+    cocoon.redirectTo(referer);
     return; 
   }
-
-  cocoon.log.info("Validating submission");
+  
+  /* Validate the upload form submission */
+  cocoon.log.info("Validating upload form submission");
   if (cocoon.request.get("upload-file") == null) {
     cocoon.log.info("No data provided - displaying upload form again");
     importLesson();
   } 
 
-  cocoon.log.info("Processing uploaded archive");
+
+  /* Archive introspection code. Introspects an uploaded archive for lesson 
+  * data and creates a lesson if possible. 
+  */
+  
+  cocoon.log.info("Introspecting archive");
+  
   var uploadHelper = new UploadHelper("/tmp");
   var factory = Packages.javax.xml.parsers.DocumentBuilderFactory.newInstance();
   factory.setNamespaceAware(true);
@@ -52,20 +71,30 @@ function importLesson() {
   var zip = null;
 
   try {
+  
+    /* Create zip object from uploaded data */
     var file = uploadHelper.save(cocoon.request, "upload-file");
     zip = new ZipFile(file);
     var entries = zip.entries();
 
     if (!entries.hasMoreElements()) {
+    
+      /* Emtpy archive uploaded. Send error screen. */
       var msg = "Zip archive empty";
       cocoon.log.warning(msg);
       cocoon.sendPage("error.jx", {"msg" : msg});  
       return;
     }
 
-    /** Extracting and parsing lesson source files. FIXME: currently the first language gets imported. Should provide an option to choose language version **/
+    /** Parsing zip for eLML source files by looking at the document root element.
+    ** FIXME: currently the first language gets imported. Should provide an option to choose 
+    ** language version 
+    */
 
-    cocoon.log.info("Looking for Lesson file(s) within archive");
+    cocoon.log.info("Looking for eLML source files within archive");
+    
+    var hasLesson = false;
+    
     for (entries; entries.hasMoreElements();) {
       var entry = entries.nextElement();
       if (!entry.isDirectory() && entry.getName().indexOf(".xml") == entry.getName().length() - 4) {
@@ -74,13 +103,10 @@ function importLesson() {
           var tmp = builder.parse(is);
           if (tmp.documentElement.nodeName == "lesson" && tmp.documentElement.namespaceURI == "http://www.elml.ch") {
             dom = tmp;
-            cocoon.log.info("Parsed Lesson");
-          } else {
-            cocoon.log.warning("Archive does not contain eLML lesson");
-            var msg = "Archive does not contain eLML lesson. Please check that eLML source files are provided and eventually check namespace definitions (should read: xmlns=\"http://www.elml.ch\")";
-            cocoon.sendPage("error.jx", {"msg" : msg});  
-            return; 
-          }
+            cocoon.log.info("Found lesson document.");
+            hasLesson = true;
+            break;
+          } 
         } catch (e) {
           cocoon.log.error(e);
         } finally {
@@ -88,18 +114,30 @@ function importLesson() {
         }
       }
     }
+    
+    /* Send error page if no lesson data found */
+    if (!hasLesson) {      
+      cocoon.log.warning("Archive does not contain eLML lesson");
+      var msg = "Archive does not contain eLML lesson. Please check that eLML source files are provided and eventually check namespace definitions (should read: xmlns=\"http://www.elml.ch\")";
+      cocoon.sendPage("error.jx", {"msg" : msg});  
+      return; 
+    }
 
 
-    cocoon.log.info("Building documents from lesson");
+    /** Building lenya documents based on lesson data. Note that the eLML lesson is split into seperate  
+    ** documents of type unit | selfAssessement | furtherReading | glossary | bibliography. 
+    **/
+    
+    cocoon.log.info("Building documents from lesson uploaded lesson data");
 
     var parts = new ArrayList();
     var partsInfo = new ArrayList();
     var nodes = dom.documentElement.childNodes;
 
+    /* Extract document fragments contained in lesson childNodes */
     for (var i = 0; i < nodes.length; i++) {
       var node = nodes.item(i);
-      cocoon.log.debug("Current node name: " + node.nodeName);
-
+      
       // FIXME: Add custom metadata handling
       if (node.nodeName.indexOf("metadata") > -1) {
         dom.documentElement.removeChild(node);
@@ -107,9 +145,13 @@ function importLesson() {
         continue;
       }
 
+      /* Extract lesson fragments that will be converted to lenya documents and display confirmation screen 
+      ** with information about the fragments. 
+      ** Note: elml:entry and elml:goals are kept within the lesson document. 
+      */
       if (!(node.nodeName.indexOf("entry") > -1 || node.nodeName.indexOf("goals") > -1) && node.nodeType == 1) {
 
-        cocoon.log.info("Building document from lesson fragment");
+        cocoon.log.info("Build document from lesson fragment");
         var frgDOM = builder.newDocument();
         var clonedNode = frgDOM.importNode(node, true);
 
@@ -128,8 +170,9 @@ function importLesson() {
         var bibCount = 0;
         var frCount = 0;
         var currentCount = 0;
-       
-        cocoon.log.debug("Collecting confirmation info");
+
+        /* Gathering information about the current fragment for the confirmation screen */ 
+        /** FIXME: test for node.nodeName && node.namespaceURI **/
         if (documentElement.nodeName.indexOf("unit") > -1) {
           doctypeInfo = "Unit";
           doctype = "unit";
@@ -209,23 +252,37 @@ function importLesson() {
     return;
   }
 
+
+  /** Send a confirmation screen with information about the to be created documents **/
   cocoon.log.info("Sending confirmation page");
 
   cocoon.sendPageAndWait("create.jx", {"zipEntry" : entry, "dom" : dom, "partsInfo" : partsInfo});
 
-  cocoon.log.info("Creating documents");
+  /* Test for cancel operation and redirect to the page the usecase was executed */
+  if (cocoon.request.get("submit") == "cancel") {
+    cocoon.redirectTo(referer);
+    return; 
+  }
+  
 
-  var authoringDir = "content" + File.separator + "authoring";
-  cocoon.log.debug("authoring dir" + authoringDir);
+  /** Creating lenya documents from lesson fragments **/
+
+  cocoon.log.info("Creating documents");
 
   var flowHelper = new FlowHelper();
   var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
   var documentHelper = flowHelper.getDocumentHelper(cocoon);
   var doc = pageEnvelope.getDocument();
   var publication = pageEnvelope.getPublication();
+  var authoringDir = "content" + File.separator + "authoring";
   var authoringDirectory =  new File(publication.getDirectory(), authoringDir);
-
   var documentCreator = new DocumentCreator();  
+ 
+  var domToDocumentMap = new Array();
+ 
+ 
+  /* Create documents and add them to domToDocumentMap for later processing */ 
+ 
   var lessonId = null;
   var lessonTitle = null;
   if (dom.documentElement.hasAttribute("label")) {
@@ -254,48 +311,51 @@ function importLesson() {
     var delimiter = "/";
   }
 
-  cocoon.log.info("ParentId: " + parentId);
-
+ 
   documentCreator.create(publication, authoringDirectory, "authoring", parentId, lessonId, lessonTitle , "leaf", "lesson", "de", true);
-
+  
   var createdDoc = buildDocument(parentId + delimiter + lessonId, "de"); 
-  var url = documentHelper.getSourceUri(createdDoc);
   var lessonURL = pageEnvelope.getContext() + createdDoc.getCompleteURL();
-  cocoon.log.error("Created doc url: " + url);
 
-  createAssets(zip, dom, createdDoc, true); // FIXME: move confirmation info to options page
-
-  var source = resolver.resolveURI(url); 
-  var out = source.getOutputStream();
-  cocoon.log.error("Processing pipeline to: " + out);
-  cocoon.processPipelineTo("createdocument",  {"dom" : dom} , out);  
-  out.close();
-
+  // Add lesson dom and document to domToDocumentMap 
+  domToDocumentMap.push (new Array(dom, createdDoc));
 
   for (var i = 0; i < partsInfo.size(); i++) {
-   var label = new Packages.java.lang.String(partsInfo.get(i).label);
-   var title = partsInfo.get(i).title;
-   var doctype = partsInfo.get(i).doctype;
+     var label = new Packages.java.lang.String(partsInfo.get(i).label);
+     var title = partsInfo.get(i).title;
+     var doctype = partsInfo.get(i).doctype;
 
-   var partId = label.replaceAll("\\s+", "");
-   cocoon.log.error("Creating part document with id: " + partId + " and Doctype: " + doctype);
+     var partId = label.replaceAll("\\s+", "");
+     cocoon.log.debug("Creating document with id: " + partId + " and Doctype: " + doctype);
   
-   documentCreator.create(publication, authoringDirectory, "authoring", parentId + delimiter + lessonId, partId, title, "leaf", doctype, "de", true); 
+     documentCreator.create(publication, authoringDirectory, "authoring", parentId + delimiter + lessonId, partId, title, "leaf", doctype, "de", true); 
 
-   var partDocumentId = parentId + delimiter + lessonId + "/" + partId;
-   var createdDoc = buildDocument(partDocumentId, "de");
-   var url = documentHelper.getSourceUri(createdDoc);
-   cocoon.log.error("Created part url: " + url);
+     var partDocumentId = parentId + delimiter + lessonId + "/" + partId;
+     var createdDoc = buildDocument(partDocumentId, "de");
+     domToDocumentMap.push (new Array(parts.get(i), createdDoc));
+  }
+  
+  /** Pre-Processing: process dom fragments before serializing to documents **/
+  
+  for (var i=0; i < domToDocumentMap.length; i++) {
+    // do preprocessing here.
+  }
+  
+  for (var i=0; i < domToDocumentMap.length; i++) {
+    
+    var dom = domToDocumentMap[i][0];
+    var document = domToDocumentMap[i][1];
+    
+    createAssets(zip, dom, document, true); // FIXME: add assets to confirmation page
+    
+    var sourceUri = documentHelper.getSourceUri(document);  
+    var source = resolver.resolveURI(sourceUri); 
+    var out = source.getOutputStream();
+    cocoon.log.error("Serializing dom to: " + out);
+    cocoon.processPipelineTo("createdocument",  {"dom" : dom} , out);  
+    out.close();  
+  }
 
-   createAssets(zip, parts.get(i), createdDoc, true);
-
-   var source = resolver.resolveURI(url);
-   var out = source.getOutputStream();
-   cocoon.log.error("Processing pipline to: " + out);
-   cocoon.processPipelineTo("createdocument", {"dom" : parts.get(i)}, out);
-   out.close();
-  } 
- 
   cocoon.sendPage("confirmation.jx", {"url" : lessonURL});
 }
 
@@ -362,9 +422,6 @@ function createAssets(zip, dom, doc, rewriteLinks) {
     } 
   }
 
-  for (var i = 0; i < assetNodesNS.length; i++) {
-
-  } 
 }
 
 function buildDocument(id, lang) {

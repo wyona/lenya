@@ -16,6 +16,12 @@
   </xsl:copy>
 </xsl:template>
 
+<xsl:template match="/document[content/*[local-name() = 'lesson']]">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+    <unizh:children/>
+  </xsl:copy>
+</xsl:template>
 
 
 <xsl:template match="@*|node()">

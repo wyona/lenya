@@ -8,6 +8,7 @@
   
   <target name="init">
     <property file="local.build.properties"/>
+    <property file="build.properties"/>
     <mkdir dir="work"/>
   </target>
 
