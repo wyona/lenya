@@ -36,4 +36,19 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
+
+   <xsl:variable name="hideChildren">
+    <xsl:choose>
+      <xsl:when test="$document-element-name = 'unizh:overview'">
+        <xsl:value-of select="/document/content/unizh:overview/@unizh:hideChildren"/>
+      </xsl:when>
+      <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
+        <xsl:value-of select="/document/content/unizh:homepage4cols/@unizh:hideChildren"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>false</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
 </xsl:stylesheet>
