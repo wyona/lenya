@@ -58,7 +58,7 @@
       <!-- parametrized doctype matcher -->
       <!-- pattern="{rendertype}" -->
       <map:match pattern="*.xml">
-        <map:generate type="wiki" src="lenya://lenya/pubs/{page-envelope:publication-id}/content/{page-envelope:area}/{page-envelope:document-id}/index_{page-envelope:document-language}"/>
+        <map:generate type="wiki" src="lenya://lenya/pubs/{page-envelope:publication-id}/content/{page-envelope:area}/{page-envelope:document-id}/{page-envelope:document-language}"/>
 	        <map:transform src="fallback://lenya/modules/wiki/xslt/wiki2xhtml.xsl">
             <map:parameter name="rendertype" value="{request-param:rendertype}"/>
             <map:parameter name="nodeid" value="{page-envelope:document-name}"/>
