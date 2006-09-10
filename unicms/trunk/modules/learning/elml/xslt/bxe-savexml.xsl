@@ -55,7 +55,7 @@
       <xsl:when test="name() = 'originallanguage'">originalLanguage</xsl:when>
       <xsl:when test="name() = 'creationdate'">creationDate</xsl:when>
       <xsl:when test="name() = 'modificationdate'">modificationDate</xsl:when>
-      <xsl:when test="name() = 'cssclassimp'">CSSClassImp</xsl:when>
+      <xsl:when test="name() = 'cssclass'">cssClass</xsl:when> 
       <xsl:otherwise>
          <xsl:value-of select="name()"/>
       </xsl:otherwise>
@@ -195,10 +195,23 @@
 
 <xsl:template match="xhtml:h1"/>
 <xsl:template match="xhtml:h2"/>
+<xsl:template match="xhtml:h3"/>
 
 <xsl:template match="xhtml:p">
   <paragraph>
-    <xsl:apply-templates/>
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::*[name() = 'xhtml:h3' and position() = 1]">
+        <xsl:attribute name="title">
+          <xsl:value-of select="preceding-sibling::*[name() ='xhtml:h3' and position() = 1]"/>
+        </xsl:attribute>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="@title">
+          <xsl:copy-of select="@title"/>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates select="@*|node()"/>
   </paragraph>
 </xsl:template>
 
@@ -276,19 +289,19 @@
 
 <xsl:template match="xhtml:tr">
   <tablerow>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </tablerow>
 </xsl:template>
 
 <xsl:template match="xhtml:td">
   <tabledata>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </tabledata>
 </xsl:template>
 
 <xsl:template match="xhtml:th">
   <tableheading>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </tableheading>
 </xsl:template>
 
@@ -312,33 +325,11 @@
   </item>
 </xsl:template>
 
-<xsl:template match="xhtml:a">
-  <link>
-    <xsl:apply-templates select="@*|node()"/>
-  </link>
-</xsl:template>
-
 
 <xsl:template match="elml:term">
   <elml:term icon="{@icon}" glossRef="{.}"/>
 </xsl:template>
 
- 
-<xsl:template match="xhtml:object">
-  <multimedia src="{@data}">
-    <xsl:attribute name="type">
-      <xsl:choose>
-        <xsl:when test="@type = 'image/jpeg'">
-          <xsl:text>jpeg</xsl:text>
-        </xsl:when>
-        <xsl:when test="@type = 'image/gif'">
-          <xsl:text>gif</xsl:text>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:attribute>
-    <xsl:apply-templates/>
-  </multimedia>
-</xsl:template>
 
 
 <xsl:template match="node()">

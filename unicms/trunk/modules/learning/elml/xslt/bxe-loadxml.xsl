@@ -119,8 +119,11 @@
 <!-- elml2xhtml mapping -->
 
 <xsl:template match="elml:paragraph">
+  <xsl:if test="@title">
+    <xhtml:h3><xsl:value-of select="@title"/></xhtml:h3>
+  </xsl:if>
   <xhtml:p>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </xhtml:p>
 </xsl:template> 
 
@@ -169,19 +172,19 @@
 
 <xsl:template match="elml:tablerow">
   <xhtml:tr>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </xhtml:tr>
 </xsl:template>
 
 <xsl:template match="elml:tabledata">
   <xhtml:td>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </xhtml:td>
 </xsl:template>
 
 <xsl:template match="elml:tableheading">
   <xhtml:th>
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="@*|node()"/>
   </xhtml:th>
 </xsl:template>
 
@@ -205,29 +208,6 @@
     <xsl:apply-templates/>
   </xhtml:li>
 </xsl:template>
-
-
-<xsl:template match="elml:link">
-  <xhtml:a>
-    <xsl:apply-templates select="@*|node()"/>
-  </xhtml:a>
-</xsl:template>
-
-
-<xsl:template match="elml:multimedia">
-  <xhtml:object data="{$nodeid}/{@src}">
-    <xsl:attribute name="type">
-      <xsl:choose>
-        <xsl:when test="@type = 'jpeg'">
-          <xsl:text>image/jpeg</xsl:text>
-        </xsl:when>
-        <xsl:when test="@type = 'gif'">
-          <xsl:text>image/gif</xsl:text>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:attribute>
-  </xhtml:object>
-</xsl:template> 
 
 
 <xsl:template match="elml:term">

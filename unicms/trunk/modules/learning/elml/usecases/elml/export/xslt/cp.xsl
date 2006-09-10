@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
+<!-- $Id:cp.xsl 14018 2006-06-08 20:54:03Z thomas $ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -13,18 +13,25 @@
   xmlns:elml="http://www.elml.ch"
   >
 
-  <xsl:param name="contextprefix"/>
-  <xsl:param name="nodeid"/>
-  <xsl:param name="rendertype"/>
   <xsl:param name="root"/>
+  <xsl:param name="contextprefix"/>
   <xsl:param name="area"/>
-  <xsl:param name="language">de</xsl:param>
+  <xsl:param name="rendertype"/>
+  <xsl:param name="defaultlanguage"/>
+  <xsl:param name="language"/>
+  <xsl:param name="nodeid"/>
+  <xsl:param name="fontsize"/>
+  <xsl:param name="querystring"/>
+  <xsl:param name="creationdate"/>
   <xsl:param name="superscription"/>
   <xsl:param name="heading"/>
 
   <xsl:variable name="imageprefix" select="concat($contextprefix, '/unizh/authoring/images')"/>
   <xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'authoring')"/>
+  <xsl:include href="../../../../../unizh/xslt/doctypes/variables.xsl"/>
   <xsl:include href="../../../../../unizh/xslt/common/elml.xsl"/>
+  <xsl:include href="../../../../../unizh/xslt/common/elements.xsl"/>
+  <xsl:include href="../../../../../unizh/xslt/common/elml-object.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>

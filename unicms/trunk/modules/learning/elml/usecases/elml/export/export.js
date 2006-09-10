@@ -24,6 +24,12 @@ importClass(Packages.java.util.zip.ZipOutputStream);
 importClass(Packages.org.apache.lenya.cms.publication.ResourcesManager);
 importClass(Packages.org.apache.lenya.cms.publication.PublicationHelper);
 
+
+/** Exports a eLML lesson to a eLML source package or to IMS CP format. 
+**  @author Thomas Comiotto
+**/
+
+
 function showscreen() {
 
   var flowHelper = new FlowHelper();
@@ -46,6 +52,8 @@ function showscreen() {
 
 
 
+/** Export to eLML Source **/
+
 function exportELML(doc) {
 
   var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
@@ -53,9 +61,12 @@ function exportELML(doc) {
   var children = getChildren(doc);
   var assetPaths = new ArrayList();
 
+  /* Parse dom from lesson document */
+
   var path = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
   var dom = pipelineUtil.processToDOM("xml/" + path, null);
 
+  /* Collect document assets and rewrite asset links */
   var resMgr = new ResourcesManager(doc);
   var assetsPath = resMgr.getPath().getAbsolutePath();
 
@@ -67,16 +78,19 @@ function exportELML(doc) {
     var dir = getAssetExportDir(assetName);
 
     assetPaths.add({"src" : assetsPath + assetNode.getAttribute("src"), "dest" : dir + "/" + assetName});
-    cocoon.log.error("Added path: " + assetsPath + assetNode.getAttribute("src"));
+    cocoon.log.debug("Added path: " + assetsPath + assetNode.getAttribute("src"));
 
     assetNode.setAttribute("src", "../" + dir + "/" + assetName); // FIXME: path configuration
   }
 
+  /* Parse dom from lesson parts  */
   
   for (var i = 0; i < children.size(); i++) {
     var path = children.get(i).getId() + "/index_" + doc.getLanguage() + ".xml";
     var partDOM = pipelineUtil.processToDOM("xml/" + path, null);
 
+
+    /* Collect assets and rewrite asset links */
     var resMgr = new ResourcesManager(children.get(i));
     var assetsPath = resMgr.getPath().getAbsolutePath();
 
@@ -94,11 +108,16 @@ function exportELML(doc) {
       assetNode.setAttribute("src", "../" + dir + "/" + assetName);
     }
 
+     /* Add fragment to lesson dom */
      var cloned = dom.importNode(partDOM.documentElement, true);
      dom.documentElement.appendChild(cloned);
    }
 
+
+   /* Create archive of gathered stuff */
+
    var filename = doc.getName() + ".zip";
+   
    var resManager = new ResourcesManager(doc);
    var path = resManager.getPath().getAbsolutePath() + "/" + filename;
    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
@@ -107,7 +126,11 @@ function exportELML(doc) {
    var out = new ZipOutputStream(source.getOutputStream());
    var zipEntry = new ZipEntry(doc.getName() + "/" + doc.getLanguage() + "/text/" + doc.getName() + ".xml");
    out.putNextEntry(zipEntry);
+   
+   /* Serialize lesson to string */
    cocoon.processPipelineTo("dom.jx", {"dom": dom}, out);
+   
+   /* Copy assets */
 
    for (var i = 0; i < assetPaths.size(); i++) {
      var src = assetPaths.get(i).src;
@@ -129,12 +152,16 @@ function exportELML(doc) {
 
    out.close();
 
+   /* Provide download location for created archive  */
+
    var url = doc.getName() + "/" + filename;
    var size = Math.round(new File(path).length() / 1024) + " KB";
    cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
 
 }
 
+
+/** Export to IMS Content Package format **/
 
 function exportCP(doc) {
 
@@ -152,17 +179,29 @@ function exportCP(doc) {
    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
    var source = resolver.resolveURI(path);
 
+   /* Create the archive file */
+
    var out = new ZipOutputStream(source.getOutputStream());
+   
+   /* Create the IMS manifest zip entry */
+   
    var zipEntry = new ZipEntry("imsmanifest.xml");
    out.putNextEntry(zipEntry);
    var children = getChildren(doc);
+   cocoon.log.error("Serializing manifest for : " + doc + " " + children); 
    cocoon.processPipelineTo("manifest.jx", {"doc" : doc, "items" : children}, out);
 
+   /* Serialize lesson to xhtml files and add to archive */
+
+   // Serialize lesson document
    var sourceUri = documentHelper.getSourceUri(doc);
    zipEntry = new ZipEntry(doc.getName() + ".html");
    out.putNextEntry(zipEntry);
+   cocoon.log.error("Serializing lesson document: " + doc.getName() + " " + sourceUri + " " + superscription + " " + heading);
+  
    cocoon.processPipelineTo("xhtml/cp", {"nodeid": doc.getName(), "sourceUri": sourceUri, "superscription" : superscription, "heading" : heading, "cssdir" : "css", "jsdir" : "js", "imgdir" : "images"}, out);
 
+   // Serialize lesson fragments 
    for (var i = 0; i < children.size(); i++) {
      var child = children.get(i);
      sourceUri = documentHelper.getSourceUri(child);
@@ -172,8 +211,9 @@ function exportCP(doc) {
      cocoon.processPipelineTo("xhtml/cp", {"nodeid": child.getName(), "sourceUri": sourceUri, "superscription" : superscription, "heading" : heading, "cssdir" : "css", "jsdir" : "js", "imgdir" : "images", "assetdir" : "resources"}, out);
    }
 
-   // Document resources
+   /* Add assets to archive */
 
+   // Add lesson assets
    var resManager = new ResourcesManager(doc);
    var assets = resManager.getResources();
    for (var i = 0; i < assets.length; i++) {
@@ -200,6 +240,8 @@ function exportCP(doc) {
      is.close(); 
    }
 
+
+   // Add assets of lesson fragments
    for (var i = 0; i < children.size(); i++) {
      var resManager = new ResourcesManager(children.get(i));
      var assets = resManager.getResources();
@@ -226,7 +268,7 @@ function exportCP(doc) {
      }
    }
 
-   // Static resources
+   /* Add static resources (images, css) used by document layout to the archive */
 
    var imgPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/images";
    var dir = new File(imgPath);
@@ -293,7 +335,7 @@ function exportCP(doc) {
 
 }
 
-
+/** returns a directory name for asset storage **/
 
 function getAssetExportDir(assetName) {
   // FIXME: use metadata to obtain mimeType. Define constants for dir names.

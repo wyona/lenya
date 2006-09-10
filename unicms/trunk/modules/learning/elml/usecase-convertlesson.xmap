@@ -15,16 +15,14 @@
   limitations under the License.
 -->
 
-<!-- $Id:usecase-exportlesson.xmap 14018 2006-06-08 20:54:03Z thomas $ -->
+<!-- $Id:usecase-importlesson.xmap 14018 2006-06-08 20:54:03Z thomas $ -->
 
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
   
   <!-- =========================== Components ================================ -->
   <map:components>
       <map:generators default="file"/>
-      <map:transformers default="xslt">
-        <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
-      </map:transformers>
+      <map:transformers default="xalan"/>
       <map:readers default="resource"/>
       <map:serializers default="xhtml"/>
       <map:matchers default="wildcard"/>
@@ -35,7 +33,7 @@
 <!-- ========================== Flowscript ================================= -->
 
   <map:flow language="javascript">
-    <map:script src="usecases/elml/export/export.js"/>
+    <map:script src="usecases/elml/convert/convert.js"/>
   </map:flow>
 
 <!-- =========================== Views ===================================== -->
@@ -71,69 +69,31 @@
 
      <map:pipeline type="noncaching">
 
-       <map:match pattern="dom.jx">
-         <map:generate type="jx" src="usecases/elml/export/jx/dom.jx"/>
-         <map:transform src="usecases/elml/export/xslt/dom.xsl"/> 
-         <map:serialize type="xml"/>
-       </map:match>
-
-       <map:match pattern="manifest.jx">
-         <map:generate type="jx" src="usecases/elml/export/jx/manifest.jx"/>
-         <map:serialize type="xml"/>
-       </map:match>
-
        <map:match pattern="*.jx">
-         <map:generate type="jx" src="usecases/elml/export/jx/{1}.jx"/>
+         <map:generate type="jx" src="usecases/elml/convert/jx/{1}.jx"/>
          <map:call resource="style-cms-page"/>
          <map:serialize type="xhtml"/>
        </map:match>
-
 
        <map:match pattern="xml/**">
         <map:generate src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{1}"/>
         <map:serialize type="xml"/>
        </map:match>
 
-
-       <map:match pattern="xhtml/cp">
-         <map:aggregate element="document">
-           <map:part element="content" src="{flow-attribute:sourceUri}"/>
-         </map:aggregate>
-         <map:transform src="usecases/elml/export/xslt/level.xsl"/>
-         <!-- <map:transform type="level">
-           <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
-           <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
-         </map:transform> 
-         <map:transform type="cinclude"/> -->
-         <map:transform src="usecases/elml/export/xslt/cp.xsl">
-           <map:parameter name="contextprefix" value="{request:contextPath}"/>
-           <map:parameter name="nodeid" value="{flow-attribute:nodeid}"/>
-           <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
-           <map:parameter name="area" value="authoring"/>
-           <map:parameter name="superscription" value="{flow-attribute:superscription}"/>
-           <map:parameter name="heading" value="{flow-attribute:heading}"/>
-         </map:transform>
-         <map:transform src="usecases/elml/export/xslt/rewrite.xsl">
-           <map:parameter name="cssdir" value="{flow-attribute:cssdir}"/>
-           <map:parameter name="jsdir" value="{flow-attribute:jsdir}"/>
-           <map:parameter name="imgdir" value="{flow-attribute:imgdir}"/>
-           <map:parameter name="assetdir" value="{flow-attribute:assetdir}"/>
-         </map:transform> 
-         <map:serialize type="html"/>
+       <map:match pattern="createdocument">
+         <map:generate type="jx" src="usecases/elml/convert/jx/createDocument.jx"/>
+         <map:transform src="usecases/elml/import/xslt/createDocument.xsl"/>
+         <map:serialize type="xml"/>
        </map:match>
 
-
-       <map:match pattern="exportlesson" type="usecase">
+       <map:match pattern="convertlesson" type="usecase">
          <map:select type="request-parameter">
            <map:parameter name="parameter-name" value="lenya.step"/>
-           <map:when test="create">
-             <map:call continuation="{request-param:lenya.continuation}"/>
-           </map:when>
-           <map:when test="exit">
+           <map:when test="convert">
              <map:call continuation="{request-param:lenya.continuation}"/>
            </map:when>
            <map:otherwise>
-             <map:call function="showscreen"/>
+             <map:call function="convertLesson"/>
            </map:otherwise>
          </map:select>
        </map:match>

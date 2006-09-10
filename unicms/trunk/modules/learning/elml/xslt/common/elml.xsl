@@ -521,24 +521,26 @@
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
-    
-      <xsl:choose>
-        <xsl:when test="@icon">
-          <p>
-          <table border="0">
-            <tr>
-              <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
-              <td><xsl:apply-templates/></td>
-            </tr>
-          </table>
-          </p>
-        </xsl:when>
-        <xsl:otherwise>
-          <p>
-            <xsl:apply-templates/>
-          </p>
-        </xsl:otherwise>
-      </xsl:choose>
+    <xsl:if test="@title">
+      <h3><xsl:value-of select="@title"/></h3>
+    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="@icon">
+        <p>
+        <table border="0">
+          <tr>
+            <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
+            <td><xsl:apply-templates/></td>
+          </tr>
+        </table>
+        </p>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>
+          <xsl:apply-templates/>
+        </p>
+      </xsl:otherwise>
+    </xsl:choose>
     
   </xsl:template>
 

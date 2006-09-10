@@ -83,7 +83,7 @@
       <fileset dir="elml/config/assets"/>
     </copy>
 
-    <echo>INFO: Adding import/export usecases</echo>
+    <echo>INFO: Adding import/export/convert usecases</echo>
 
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="elml">
@@ -96,6 +96,13 @@
         <include name="usecase-exportlesson.xmap"/>
       </fileset>
     </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="elml"> 
+        <include name="usecase-convertlesson.xmap"/>
+      </fileset>
+    </copy>
+
 
     <copy todir="${pub.dir}/usecases/elml" overwrite="yes">
       <fileset dir="elml/usecases/elml"/>
@@ -298,6 +305,7 @@
         <include name="selfAssessment.xml"/>
         <include name="glossary.xml"/>
         <include name="bibliography.xml"/>
+        <include name="summary.xml"/>
       </fileset>
     </delete>
 
@@ -310,9 +318,22 @@
     <delete> 
       <fileset dir="${pubs.dir}/unizh/xslt/common">
         <include name="elml.xsl"/>
+        <include name="elml-html-head.xsl"/>
+        <include name="elml-object.xsl"/>
         <include name="biblio_harvard.xsl"/>
       </fileset>
     </delete> 
+
+    <delete>
+      <fileset dir="${pubs.dir}/unizh/xslt/neutron">
+        <include name="summary-neutron.xsl"/>
+        <include name="selfAssessment-neutron.xsl"/>
+        <include name="lesson-neutron.xsl"/>
+        <include name="elml-page.xsl"/>
+        <include name="bibliography-neutron.xsl"/>
+        <include name="unit-neutron.xsl"/>
+      </fileset>
+    </delete>
 
     <delete>
       <fileset dir="${pubs.dir}/unizh/resources/shared/images/icons">
@@ -340,6 +361,7 @@
     <delete file="${pub.dir}/config/assets/insertMultimedia.xml"/>
     <delete file="${pub.dir}/usecase-importlesson.xmap"/>
     <delete file="${pub.dir}/usecase-exportlesson.xmap"/>
+    <delete file="${pub.dir}/usecase-convertlesson.xmap"/>
     <delete dir="${pub.dir}/usecases/elml"/>
     <delete dir="${pub.dir}/config/menus"/>
     <delete file="${pubs.dir}/unizh/xslt/elml-level.xsl"/>

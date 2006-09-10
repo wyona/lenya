@@ -337,9 +337,115 @@ function importLesson() {
   
   /** Pre-Processing: process dom fragments before serializing to documents **/
   
-  for (var i=0; i < domToDocumentMap.length; i++) {
-    // do preprocessing here.
+  /* Rewrite links */
+ 
+  cocoon.log.info("Starting Link rewrite process...");
+  
+  var labelToURIMap = new Array();
+  
+  for (var i = 0; i < domToDocumentMap.length; i++) {
+      
+    var dom = domToDocumentMap[i][0];
+    var document = domToDocumentMap[i][1];
+    
+    var elements = dom.getElementsByTagName("*");
+    for (var j = 0; j < elements.length; j++) {
+      if (elements.item(j).hasAttribute("label")) {
+        var label = elements.item(j).getAttribute("label");
+        var uri = pageEnvelope.getContext() + document.getCompleteURL() + "#" + label;
+        labelToURIMap.push (new Array(label, uri));
+      }
+    }
+  }  
+  
+  for (var i = 0; i < domToDocumentMap.length; i++) {
+      
+    var dom = domToDocumentMap[i][0];
+    
+    while (dom.getElementsByTagName("link").length > 0) {
+    
+      var link = dom.getElementsByTagName("link").item(0); 
+      var uri = null;
+      
+      if (link.hasAttribute("targetLabel")) {
+        var targetLabel = link.getAttribute("targetLabel");
+        
+        for (var z = 0; z < labelToURIMap.length; z++) {
+          var label = labelToURIMap[z][0];
+          if (label.equals(targetLabel)) {
+              var uri = labelToURIMap[z][1];
+              // j--; // might be platform dependant. 
+          }
+        }
+      } else {
+        uri = link.getAttribute("uri");
+      }
+      
+      var anchor = dom.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:a");
+      anchor.setAttribute("href", uri);
+      var childNodes = link.childNodes;
+      
+      for (var y = 0; y < childNodes.length; y++) {
+        var node = childNodes.item(y);
+        var clone = node.cloneNode(true);
+        anchor.appendChild(clone);
+      }
+              
+      link.parentNode.replaceChild(anchor, link);
+      
+    }
   }
+      
+  /* Convert elml:multimedia to lenya:asset or xhtml:object*/
+      
+  cocoon.log.info("Starting conversion elml:multimedia -> lenya:asset or xhtml:object");
+    
+  for (var i = 0; i < domToDocumentMap.length; i++) {
+      
+    var dom = domToDocumentMap[i][0];
+    
+    while (dom.getElementsByTagName("multimedia").length > 0) {
+    
+      var multimedia = dom.getElementsByTagName("multimedia").item(0); 
+      
+      if (multimedia.hasAttribute("src")) {
+        var src = multimedia.getAttribute("src");
+        var type = multimedia.getAttribute("type");
+        
+        if (type == "gif" || type == "jpeg" || type == "png") {
+        
+          var object = dom.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:object");
+          cocoon.log.error("Replacing : " + multimedia + " by " + object);    
+          object.setAttribute("data", src.substr(src.lastIndexOf("/") + 1));
+          if (multimedia.hasAttribute("width")) {
+            object.setAttribute("width", multimedia.getAttribute("width"));
+          }
+          if (multimedia.hasAttribute("height")) {
+            object.setAttribute("height", multimedia.getAttribute("height"));
+          }
+          
+          cocoon.log.error("Object src attribute: " + object.getAttribute("data"));       
+          multimedia.parentNode.replaceChild(object, multimedia);
+          
+        } else {
+        
+          var asset = dom.createElementNS("http://apache.org/cocoon/lenya/page-envelope/1.0", "lenya:asset"); 
+          cocoon.log.error("Replacing : " + multimedia + " by " + asset);    
+          asset.setAttribute("src", src.substr(src.lastIndexOf("/") + 1));
+          asset.setAttribute("type", multimedia.getAttribute("type"));
+          asset.setAttribute("size", "");
+          cocoon.log.error("Asset src attribute: " + asset.getAttribute("src"));       
+          multimedia.parentNode.replaceChild(asset, multimedia);
+          
+        }
+      } else {
+        multimedia.parentNode.removeChild(multimedia);
+      }
+    }
+  }    
+      
+      
+  /* Serialize DOM fragments to documents */
   
   for (var i=0; i < domToDocumentMap.length; i++) {
     
@@ -347,6 +453,7 @@ function importLesson() {
     var document = domToDocumentMap[i][1];
     
     createAssets(zip, dom, document, true); // FIXME: add assets to confirmation page
+    createObjects(zip, dom, document, true); // FIXME: add objects to confirmation page
     
     var sourceUri = documentHelper.getSourceUri(document);  
     var source = resolver.resolveURI(sourceUri); 
@@ -360,19 +467,56 @@ function importLesson() {
 }
 
 
+function createObjects(zip, dom, doc, rewriteLinks) {
+
+  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
+  var objectNodes = dom.getElementsByTagName("xhtml:object");
+ 
+  for (var i = 0; i < objectNodes.length; i++) {
+    var node = objectNodes.item(i);
+    var data = node.getAttribute("data");
+    var objectName = data;
+    cocoon.log.error("Object name is: " + objectName);
+   
+    var entries = zip.entries();
+
+    for (entries; entries.hasMoreElements();) {
+      var entry = entries.nextElement();
+      if (entry.getName().indexOf(objectName) > -1) {
+        var is = zip.getInputStream(entry);  // FIXME: eventually use zipSource 
+        var resManager = new ResourcesManager(doc);
+        var dir = resManager.getPath();
+        var path = dir +  File.separator + objectName;
+        var source = resolver.resolveURI(path);
+        var out = source.getOutputStream();
+
+        var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+        var len;
+
+        while((len = is.read(buffer)) >= 0)
+          out.write(buffer, 0, len);
+
+        is.close();
+        out.close();
+        
+      }
+    }
+  }
+}
+
 
 function createAssets(zip, dom, doc, rewriteLinks) {
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-  var assetNodes = dom.getElementsByTagName("multimedia");
-  var assetNodesNS = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-  
+  var assetNodes = dom.getElementsByTagName("lenya:asset");
+  // var assetNodesNS = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+
   for (var i = 0; i < assetNodes.length; i++) {
     var node = assetNodes.item(i);
     var src = node.getAttribute("src");
-    var assetName = src.substring(src.lastIndexOf("/") + 1);
-    node.setAttribute("src", assetName);
-    cocoon.log.error("src was: " + src + " rewritten to: " + node.getAttribute("src"));
+    var assetName = src;
+    cocoon.log.error("Asset name is: " + assetName);
+   
     var entries = zip.entries();
 
     for (entries; entries.hasMoreElements();) {
