@@ -110,15 +110,15 @@ code {
 /*link*/
 a { 
 	text-decoration: none;
-	color:#333399;  
+	color:#993333;  
 }
 
 a:hover {
-	background-color:#E9E9F0;
+	background-color:#E9E9D2;
 }
 
 .contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
-	color:#666666; 
+	color:#CC9999; 
 }
 
 a.arrow {
@@ -197,7 +197,7 @@ img.icon {
 #headerarea {
 	width:100%;
 	display:block;
-	background-color: #666699;
+	background-color: #CCCC99;
 	height:90px;
 	min-width:600px;
 	width:expression(document.body.clientWidth &lt; 600  ? "600px": "auto");
@@ -219,7 +219,7 @@ img.icon {
 }
 
 .imginstitute {
-	background-color: #666699;
+	background-color: #CCCC99;
 	padding-left:15px;
 	height:45px;
 }
@@ -1423,4 +1423,5 @@ table.imgRightMitLegende tr td img {
 #servicenavpos input {    /* zu kleine Schrift im Suchfeld koorrigiert*/
   	font-size: 1.0em;
 }
+
 </css>
