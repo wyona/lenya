@@ -162,7 +162,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
                 .getInputByName("nodeName");
         inputDocId.setValueAttribute(newNodeID);
 
-        HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("title");
+        HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("dublincore.title");
         inputTitle.setValueAttribute(title);
 
         // Now submit the form by clicking the button
@@ -240,7 +240,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
                     .getInputByName("documentId");
             inputDocId.setValueAttribute(NodeIDpure);
 
-            HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("title");
+            HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("dublincore.title");
             inputTitle.setValueAttribute(title);
             
             HtmlRadioButtonInput inputRelation = (HtmlRadioButtonInput) form.getInputByValue("sibling after");

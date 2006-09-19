@@ -94,7 +94,7 @@ public class LanguageVersionTest extends LenyaTestCase {
         // fill out the form
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0);
         
-        HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("title");
+        HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("dublincore.title");
         inputTitle.setValueAttribute("htmlunit "+language);
         
         // Now submit the form by clicking the button
