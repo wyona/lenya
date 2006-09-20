@@ -15,6 +15,11 @@ This publication implements a repository for XML-based slides in various output 
 
 <lenya:readme>
 
+<h3>ZFU 2006, Thalwil, Switzerland</h3>
+<a href="slideml/zfu-2006.html">HTML</a>
+<br />
+<a href="slideml/zfu-2006.pdf">PDF</a> (1: slideset2fo.xsl, 2:slideset2fo-2slidesPerPage.xsl)
+
 <h3>Software Libre 2006, Malaga, Spain</h3>
 <a href="slideml/libre-malaga2006.html">HTML</a>
 <br />
