@@ -169,77 +169,103 @@
 </s:content>
 </s:slide>
 
-<s:slide id="incubator" status="wip">
+<s:slide id="incubator" status="ready">
 <s:title>ASF Incubator</s:title>
 <s:content>
 <p>
 <ol>
-  <li>Border</li>
+  <li>Filtering the creation of new (sub-)projects</li>
+  <li>Help on operational infrastructure</li>
+  <li>Supervise and mentor the incubated community</li>
+  <li>Quality assurance resp. evaluation of maturity</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="sustainability" status="wip">
+<s:slide id="sustainability" status="ready">
 <s:title>Sustainability</s:title>
 <s:content>
 <p>
 <ol>
-  <li>Self-Sustainability</li>
+  <li>Self-Regulation</li>
   <li>Critical Mass</li>
-  <li>Scalability</li>
+  <li>Socialization is not enough</li>
+  <li>Guidelines/Bylaws, whereas the reasons are more important</li>
+  <li>Knowing the reasons for "collaboration"</li>
+  <li>Transparency</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="companies" status="wip">
-<s:title>Companies</s:title>
+<s:slide id="morepriciples" status="ready">
+<s:title>More Principles (Lessons learned ...)</s:title>
 <s:content>
 <p>
 <ol>
-  <li>Employees (Paying Salaries)</li>
-  <li>Shareholders (Profit)</li>
-  <li>Strategy conflicts with Open Development</li>
-  <li>Marketing power</li>
+  <li>Eat your own dogfood</li>
+  <li>Continuous integration</li>
+  <li>Simplicity/Out-of-the-box</li>
+  <li>Performance/Scalability/Redundancy</li>
+  <li>Down/Upgradeability</li>
+  <li>Forwards/Backwards Compatibility</li>
+  <li>...</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="opensourcedevelopment" status="wip">
+<s:slide id="companies" status="ready">
+<s:title>Companies running OS projects</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Employees (Salaries)</li>
+  <li>Shareholders (Profit)</li>
+  <li>Business instead Development driven</li>
+  <li>Conflicts of Interests re Open Development</li>
+<!--
+  <li>Marketing power</li>
+-->
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="opensourcedevelopment" status="ready">
 <s:title>Open Source "versus" Open Development</s:title>
 <s:content>
 <p>
 <ol>
-  <li>License (OSI)</li>
-  <li>Bylaws (?)</li>
+  <li>Open Source: License "authorized" by OSI (Open Source Initiative)</li>
+  <li>Open Development: Bylaws "authorized" by nobody yet!</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="richardandbruce" status="wip">
+<s:slide id="richardandbruce" status="ready">
 <s:title>It's about freedom</s:title>
 <s:content>
 <p>
 <ol>
   <li>What freedom?</li>
-  <li>It's time to talk again about free software</li>
-  <li>Richard Stallman and Bruce Perens</li>
+  <li>Who cares?</li>
+  <li>Bruce Perens: It's time to talk again about free software</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="pesimistic" status="wip">
+<s:slide id="pesimistic" status="ready">
 <s:title>Being Pesimistic</s:title>
 <s:content>
 <p>
 <ol>
   <li>The monopoly is dead, long live the monopoly</li>
   <li>The revolution is dead, long live the revolution</li>
-  <li>Media</li>
+  <li>Media can be very misleading ...</li>
   <li>The summer of love</li>
   <li>Volunteer Fatigue</li>
 </ol>
@@ -247,7 +273,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="optimistic" status="wip">
+<s:slide id="optimistic" status="ready">
 <s:title>Being Optimistic</s:title>
 <s:content>
 <p>
