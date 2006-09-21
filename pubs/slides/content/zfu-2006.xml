@@ -28,7 +28,7 @@
 				<s:start>2006-02-15</s:start>
 				<s:end>2006-02-17</s:end>
 			</s:confdates> 
-  			<s:conftitle>ZFU: Open Source - Chancen nutzen - Risiken minimieren, Thalwil, 2006</s:conftitle> 
+  			<s:conftitle>ZfU: Open Source - Chancen nutzen - Risiken minimieren, Thalwil, Switzerland, 2006</s:conftitle> 
   			<s:address>
                         ZfU-Campus Orangerie in Thalwil, Switzerland
 			</s:address> 
@@ -55,44 +55,91 @@
   <li>Co-Founder Wyona</li>
   <li>Co-Founder and former president of OSCOM</li>
   <li>Original Creator of Apache Lenya and ASF member</li>
-  <li>Director of documentary movie FUD - Fear Uncertainty Doubt</li>
+  <li>Director of documentary movie "FUD - Fear Uncertainty Doubt"</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="lenya" status="wip">
+<s:slide id="lenya" status="ready">
 <s:title>Apache Lenya</s:title>
 <s:content>
 <p>
 <ol>
   <li>Open Source Content Management Framework/System</li>
   <li>Wired News (Lycos), Atlantic Media Company, NZZ, Mobiliar, University of Zurich, ...</li>
-  <li>Everything XML ... no vendor lock-in</li>
-  <li>...</li>
+  <li>Everything XML</li>
+  <li>No vendor lock-in</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="history" status="wip">
+<s:slide id="history" status="ready">
 <s:title>History of Apache Lenya</s:title>
 <s:content>
 <p>
 <ol>
-  <li>1998/1999: Journal of Pattern Formation</li>
-  <li>2000/2001: NZZ</li>
+  <li>1998/1999: "Physics": Journal of Pattern Formation</li>
+  <li>2000/2001: NZZ (Neue Z&#252;rcher Zeitung)</li>
   <li>2003: Incubator of Apache Software Foundation</li>
   <li>2004: Top Level Project of Apache Software Foundation</li>
   <li>2006: Release 1.4</li>
-  <li>2007: Yanel/Yulup (Leaving the room ...)?</li>
+  <li>2007: Yanel/Yulup (Leaving the room ...?)</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="classical" status="wip">
-<s:title>"Classical" FOSS community</s:title>
+<s:slide id="asf" status="ready">
+<s:title>Apache Software Foundation</s:title>
+<s:content>
+<p>
+<ol>
+  <li>1995: To develop a HTTP server</li>
+  <li>1999: Incorporated as 501(c)(3) (non-profit)</li>
+  <li>Provide a foundation for open collaborative software development</li>
+  <li>Provide a legal entity</li>
+  <li>Provide a shelter from legal suits</li>
+  <li>Protect the Apache brand</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="numbers" status="ready">
+<s:title>Some ASF numbers (2006)</s:title>
+<s:content>
+<p>
+<ol>
+  <li>approx. 1000 ASF committers</li>
+  <li>approx. 200 ASF members</li>
+  <li>9 board members</li>
+  <li>approx. 34 top level projects</li>
+  <li>approx. 34 incubator projects</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="philosophy" status="ready">
+<s:title>ASF philosophy</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Collaborative software development</li>
+  <li>Commercial-friendly standard license</li>
+  <li>Consistently high quality software</li>
+  <li>Respectful, honest, technical-based interaction</li>
+  <li>Faithful implementation of standards</li>
+  <li>Security as a mandatory feature</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="classical" status="ready">
+<s:title>"Classical" FOSS project/community</s:title>
 <s:content>
 <p>
 <ol>
@@ -105,30 +152,42 @@
 </s:content>
 </s:slide>
 
-<s:slide id="asf" status="wip">
-<s:title>Apache Software Foundation</s:title>
+<s:slide id="hierarchy" status="ready">
+<s:title>ASF Hierarchy</s:title>
 <s:content>
 <p>
 <ol>
   <li>User</li>
   <li>Contributor</li>
-  <li>Committer</li>
-  <li>ProjectMC member</li>
-  <li>ASF member</li>
+  <li>Committer (contract to be signed)</li>
+  <li>Project Management Committee member</li>
+  <li>ASF member (owner, contract to be signed)</li>
   <li>ASF board member</li>
   <li>ASF chairman/president</li>
-  <li>Scalability: Incubator</li>
 </ol>
 </p>
 </s:content>
 </s:slide>
 
-<s:slide id="criticalmass" status="wip">
-<s:title>Critical Mass</s:title>
+<s:slide id="incubator" status="wip">
+<s:title>ASF Incubator</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Border</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="sustainability" status="wip">
+<s:title>Sustainability</s:title>
 <s:content>
 <p>
 <ol>
   <li>Self-Sustainability</li>
+  <li>Critical Mass</li>
+  <li>Scalability</li>
 </ol>
 </p>
 </s:content>
