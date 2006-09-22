@@ -71,8 +71,8 @@ public class ChangeNodeIDTest extends LenyaTestCase {
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID
-                + ".html?lenya.usecase=site.changeNodeID");
-        assertTitleContains(this.config.getString("lenya.tests.site.changeNodeID.pageTitle"));
+                + ".html?lenya.usecase=sitemanagement.changeNodeID");
+        assertTitleContains(this.config.getString("lenya.tests.sitemanagement.changeNodeID.pageTitle"));
         
         // fill out the form
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0);

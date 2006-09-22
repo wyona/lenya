@@ -58,30 +58,30 @@ public class OneFormLockTest extends LenyaTestCase {
         String url = this.pubid + "/" + AUTHORING_AREA + startDocID + "/" + newNodeID;
         
         // load one form editor
-        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=edit.oneform");
-        assertTitleContains(this.config.getString("lenya.tests.edit.oneform.pageTitle"));
+        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=editors.oneform");
+        assertTitleContains(this.config.getString("lenya.tests.editors.oneform.pageTitle"));
         // don't submit the form, just log out
         logout();
         
         // login as alice and load the form editor
         login(this.config.getString("lenya.reviewerUsername"), this.config.getString("lenya.reviewerPassword"));
-        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=edit.oneform");
+        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=editors.oneform");
         // the document should be locked
-        assertPageContainsText(this.config.getString("lenya.tests.edit.oneform.lockError"));
+        assertPageContainsText(this.config.getString("lenya.tests.editors.oneform.lockError"));
         logout();
         
         // now log in again as lenya user and cancel the edit
         loginAsDefaultUser();
-        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=edit.oneform");
-        assertTitleContains(this.config.getString("lenya.tests.edit.oneform.pageTitle"));
+        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=editors.oneform");
+        assertTitleContains(this.config.getString("lenya.tests.editors.oneform.pageTitle"));
         clickButton("cancel");
         logout();
         
         // login again as alice and load the form editor
         login(this.config.getString("lenya.reviewerUsername"), this.config.getString("lenya.reviewerPassword"));
-        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=edit.oneform");
+        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=editors.oneform");
         // the document should not be locked anymore
-        assertTitleContains(this.config.getString("lenya.tests.edit.oneform.pageTitle"));
+        assertTitleContains(this.config.getString("lenya.tests.editors.oneform.pageTitle"));
         clickButton("cancel");
         logout();
     }

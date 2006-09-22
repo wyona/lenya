@@ -33,8 +33,8 @@ public class CreateManyTest extends LenyaTestCase {
     protected void setUp() throws Exception {
         this.testName = "Create Many Documents";
         super.setUp();
-        this.maxChildren = this.config.getInt("lenya.tests.site.createMany.maxChildren");
-        this.nofDocuments = this.config.getInt("lenya.tests.site.createMany.nofDocuments");
+        this.maxChildren = this.config.getInt("lenya.tests.sitemanagement.createMany.maxChildren");
+        this.nofDocuments = this.config.getInt("lenya.tests.sitemanagement.createMany.nofDocuments");
     }
 
     /**

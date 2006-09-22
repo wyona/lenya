@@ -44,7 +44,7 @@ public class LanguageVersionTest extends LenyaTestCase {
         loginAsDefaultUser();
 
         String startDocID = this.config.getString("lenya.tests.general.startDocID");
-        String language = this.config.getString("lenya.tests.site.createLanguage.language");
+        String language = this.config.getString("lenya.tests.sitemanagement.createLanguage.language");
         String newNodeID = createTestNodeID();
         
         createNewDocument(startDocID, newNodeID,
@@ -65,7 +65,7 @@ public class LanguageVersionTest extends LenyaTestCase {
 
         String startDocID = this.config.getString("lenya.tests.general.startDocID");
         String newNodeID = createTestNodeID();
-        String language = this.config.getString("lenya.tests.site.createLanguage.language");
+        String language = this.config.getString("lenya.tests.sitemanagement.createLanguage.language");
         
         createNewDocument(startDocID, newNodeID,
                 "htmlunit test document", "xhtml");
@@ -88,8 +88,8 @@ public class LanguageVersionTest extends LenyaTestCase {
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID
-                + ".html?lenya.usecase=site.createLanguage");
-        assertTitleContains(this.config.getString("lenya.tests.site.create.pageTitle"));
+                + ".html?lenya.usecase=sitemanagement.createLanguage");
+        assertTitleContains(this.config.getString("lenya.tests.sitemanagement.create.pageTitle"));
         
         // fill out the form
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0);
@@ -114,8 +114,8 @@ public class LanguageVersionTest extends LenyaTestCase {
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID
-                + "_" + language + ".html?lenya.usecase=site.deleteLanguage");
-        assertTitleContains(this.config.getString("lenya.tests.site.deleteLanguage.pageTitle"));
+                + "_" + language + ".html?lenya.usecase=sitemanagement.deleteLanguage");
+        assertTitleContains(this.config.getString("lenya.tests.sitemanagement.deleteLanguage.pageTitle"));
         
         // Now submit the form by clicking the button
         clickButton("submit");

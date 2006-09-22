@@ -70,14 +70,14 @@ public class CopyPasteTest extends LenyaTestCase {
 
     public void copypaste(String docID, String newParentID) throws Exception {
         this.logger.info("Copying " + docID + " and pasting it at " + newParentID + ".");
-        executeSimpleUsecase(docID, "site.copy");
-        executeSimpleUsecase(newParentID, "site.paste");
+        executeSimpleUsecase(docID, "sitemanagement.copy");
+        executeSimpleUsecase(newParentID, "sitemanagement.paste");
     }
 
     public void cutpaste(String docID, String newParentID) throws Exception {
         this.logger.info("Cutting " + docID + " and pasting it at " + newParentID + ".");
-        executeSimpleUsecase(docID, "site.cut");
-        executeSimpleUsecase(newParentID, "site.paste");
+        executeSimpleUsecase(docID, "sitemanagement.cut");
+        executeSimpleUsecase(newParentID, "sitemanagement.paste");
     }
 
     public void executeSimpleUsecase(String docID, String usecase) throws Exception {

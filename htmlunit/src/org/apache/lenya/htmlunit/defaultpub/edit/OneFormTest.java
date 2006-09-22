@@ -74,8 +74,8 @@ public class OneFormTest extends LenyaTestCase {
         String url = this.pubid + "/" + AUTHORING_AREA + docID;
         
         // load one form editor
-        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=edit.oneform");
-        assertTitleContains(this.config.getString("lenya.tests.edit.oneform.pageTitle"));
+        loadHtmlPage(url + "?&lenya.event=edit&lenya.usecase=editors.oneform");
+        assertTitleContains(this.config.getString("lenya.tests.editors.oneform.pageTitle"));
 
         // get the form, but it has no name :(
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0);
@@ -84,7 +84,7 @@ public class OneFormTest extends LenyaTestCase {
         String content = areaContent.getText();
         
         // edit the page by replacing a string:
-        String sampleString = this.config.getString("lenya.tests.edit.oneform.pageContent");
+        String sampleString = this.config.getString("lenya.tests.editors.oneform.pageContent");
         String replacementString = "one form test";
         
         content = content.replaceFirst(sampleString, replacementString);

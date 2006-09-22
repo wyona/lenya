@@ -54,7 +54,7 @@
         <startPageContent>Welcome to the Default Publication</startPageContent>
         <samplePageContent>Welcome to the Default Publication</samplePageContent>
       </general>
-      <site>
+      <sitemanagement>
         <create>
           <pageTitle>New Document</pageTitle>
         </create>
@@ -89,7 +89,7 @@
         <archive>
           <pageTitle>Archive Document</pageTitle>
         </archive>
-      </site>
+      </sitemanagement>
       <workflow>
         <submit>
           <pageTitle>Submit Document</pageTitle>
@@ -105,13 +105,13 @@
           <pageTitle>Reject</pageTitle>
         </reject>
       </workflow>
-      <edit>
+      <editors>
         <oneform>
           <pageTitle>Edit</pageTitle>
           <pageContent>Here comes the text of your new document</pageContent>
           <lockError>The operation cannot be executed because one ore more of the involved objects are checked out</lockError>
         </oneform>
-      </edit>
+      </editors>
       <odt>
           <documentPath>/doctypes/opendocument</documentPath>
           <pageTitle>OpenDocument</pageTitle>

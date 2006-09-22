@@ -75,7 +75,7 @@ public class DeleteArchiveRestoreTest extends LenyaTestCase {
      */
     public void delete(String docID) throws Exception {
         this.logger.info("Deleting " + docID + ".");
-        String usecase = "site.delete";
+        String usecase = "sitemanagement.delete";
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID + ".html?lenya.usecase=tab.overview");
@@ -95,7 +95,7 @@ public class DeleteArchiveRestoreTest extends LenyaTestCase {
      */
     protected void archive(String docID) throws Exception {
         this.logger.info("Archiving " + docID + ".");
-        String usecase = "site.archive";
+        String usecase = "sitemanagement.archive";
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID + ".html?lenya.usecase=tab.overview");
@@ -115,7 +115,7 @@ public class DeleteArchiveRestoreTest extends LenyaTestCase {
      */
     protected void restore(String docID, String area) throws Exception {
         this.logger.info("Restoring " + docID + " from " + area + ".");
-        String usecase = "site.restore";
+        String usecase = "sitemanagement.restore";
         
         // call the usecase
         loadHtmlPage(this.pubid + "/" + area + docID + ".html?lenya.usecase="+usecase);

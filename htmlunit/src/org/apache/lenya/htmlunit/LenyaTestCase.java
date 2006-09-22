@@ -152,8 +152,8 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
 
         // attempt to create the new document:
         loadHtmlPage(prefix + ".html?doctype=" + doctype
-                + "&lenya.usecase=site.create");
-        assertTitleContains(this.config.getString("lenya.tests.site.create.pageTitle"));
+                + "&lenya.usecase=sitemanagement.create");
+        assertTitleContains(this.config.getString("lenya.tests.sitemanagement.create.pageTitle"));
 
         // fill out the form, it has no name :(
         HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0); 
@@ -230,8 +230,8 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
     		String prefix = this.pubid + "/" + AUTHORING_AREA + "/index.html";
             // attempt to create the new document:
             loadHtmlPage(prefix + ".html?doctype=" + doctype
-                    + "&lenya.usecase=site.create");
-            assertTitleContains(this.config.getString("lenya.tests.site.create.pageTitle"));
+                    + "&lenya.usecase=sitemanagement.create");
+            assertTitleContains(this.config.getString("lenya.tests.sitemanagement.create.pageTitle"));
 
             // fill out the form, it has no name :(
             HtmlForm form = (HtmlForm) this.currentPage.getForms().get(0); 
@@ -272,8 +272,8 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
     protected void createSubFolder(String prefix, String rendertype)
             throws Exception {
         loadHtmlPage(prefix
-                + ".html?doctype=folder&lenya.usecase=site.create&lenya.exitUsecase=tab.overview&");
-        assertTitleContains(this.config.getString("lenya.tests.site.create.folder.pageTitle"));
+                + ".html?doctype=folder&lenya.usecase=sitemanagement.create&lenya.exitUsecase=tab.overview&");
+        assertTitleContains(this.config.getString("lenya.tests.sitemanagement.create.folder.pageTitle"));
         HtmlForm form;
         form = (HtmlForm) this.currentPage.getForms().get(0);
         form.getInputByName("documentId").setValueAttribute(rendertype);
