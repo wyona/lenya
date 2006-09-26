@@ -87,8 +87,8 @@ function importLesson() {
     }
 
     /** Parsing zip for eLML source files by looking at the document root element.
-    ** FIXME: currently the first language gets imported. Should provide an option to choose 
-    ** language version 
+    ** FIXME: currently the first language is imported. Choosing from  
+    ** different language versions should be supported 
     */
 
     cocoon.log.info("Looking for eLML source files within archive");
@@ -128,7 +128,7 @@ function importLesson() {
     ** documents of type unit | selfAssessement | furtherReading | glossary | bibliography. 
     **/
     
-    cocoon.log.info("Building documents from lesson uploaded lesson data");
+    cocoon.log.info("Building documents from uploaded lesson data");
 
     var parts = new ArrayList();
     var partsInfo = new ArrayList();
@@ -145,7 +145,7 @@ function importLesson() {
         continue;
       }
 
-      /* Extract lesson fragments that will be converted to lenya documents and display confirmation screen 
+      /* Extract lesson fragments that will be converted to lenya documents. Display confirmation screen 
       ** with information about the fragments. 
       ** Note: elml:entry and elml:goals are kept within the lesson document. 
       */
@@ -216,6 +216,12 @@ function importLesson() {
 
         if (documentElement.hasAttribute("label")) {
           label = documentElement.getAttribute("label");
+          
+          // remove special characters in document names/labels 
+          var jslabel = new String(label);
+          label = jslabel.replace(/[^a-zA-Z0-9]/g, "");
+          documentElement.setAttribute("label", label);
+          
         } else {
           if (currentCount > 1) {
             label = doctypeInfo + " " + currentCount;
@@ -287,8 +293,20 @@ function importLesson() {
   var lessonTitle = null;
   if (dom.documentElement.hasAttribute("label")) {
     lessonId = dom.documentElement.getAttribute("label");
+      
+    // remove special characters in document names/labels 
+    var jslabel = new String(lessonId);
+    lessonId = jslabel.replace(/[^a-zA-Z0-9]/g, "");
+    dom.documentElement.setAttribute("label", jslabel);
+    
   } else if (dom.documentElement.hasAttribute("title")) {
     lessonId = dom.documentElement.getAttribute("title");
+    
+    // remove special characters in document names/labels 
+    var jslabel = new String(lessonId);
+    lessonId = jslabel.replace(/[^a-zA-Z0-9]/g, "");
+    dom.documentElement.setAttribute("label", jslabel);
+    
   } else {
     lessonId = "lesson";
   }
@@ -299,7 +317,6 @@ function importLesson() {
     lessonTitle = "Lesson Title";
   }
 
-  lessonId = lessonId.replaceAll("\\s+","");
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
 
