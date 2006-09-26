@@ -21,7 +21,7 @@
   <component-instance name="wiki.create" 
     logger="lenya.module.td_glossary_cat"
     class="org.apache.lenya.cms.site.usecases.CreateDocument">
-    <view template="usecases/site/create.jx"/>
+    <view template="modules/sitemanagement/usecases/site/create.jx"/>
     <exit usecase="wiki.edit"/>
   </component-instance>
   

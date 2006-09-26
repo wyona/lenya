@@ -29,3 +29,8 @@ Wiki Module Installation (default Publication) BETA
 3) Build Lenya
 
 4) Start Lenya, login to default-wiki or default pub and create a new Wiki document
+
+
+CHANGELOG:
+
+-edit usecase works now with an uri view which is build dynamically. edit.jx is not used anymore.

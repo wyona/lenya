@@ -21,7 +21,7 @@
   
   <component-instance name="wiki.edit" logger="lenya.wiki"
     class="org.apache.lenya.wiki.cms.usecases.Edit">
-    <view template="modules/wiki/usecases/edit.jx" menu="false"/>
+    <view uri="cocoon://modules/wiki/wiki.edit" menu="false"/>
   </component-instance>
   
 </xconf>

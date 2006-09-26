@@ -51,9 +51,6 @@
           </map:transform>
           <map:serialize type="text"/>
         </map:match>
-          
-
-
 
       <!-- parametrized doctype matcher -->
       <!-- pattern="{rendertype}" -->
@@ -75,5 +72,27 @@
       </map:match>
       </map:pipeline>
     
+    <map:pipeline internal-only="yes">
+      <!-- when editing, the page should look exactly like the original, and since
+           we cannot know anything about the pipelines used for rendering, we must
+           delegate the job to the publication's own sitemap. -->
+      <map:match pattern="wiki.delegateToPubSitemap/**">
+        <map:mount src="{fallback:{page-envelope:publication-id}:sitemap.xmap}" uri-prefix="wiki.delegateToPubSitemap"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <!-- this is the view of the usecase (see config/cocoon-xconf/usecases.xconf) -->
+      <map:match pattern="wiki.edit">
+        <map:generate src="cocoon:/wiki.delegateToPubSitemap/authoring{page-envelope:document-url}"/>
+        <map:transform src="fallback://lenya/modules/wiki/xslt/page2edit.xsl">
+          <map:parameter name="contextPath" value="{request:contextPath}"/>
+          <map:parameter name="continuationId" value="{flow-continuation:id}"/>
+          <map:parameter name="usecaseName" value="{request-param:lenya.usecase}"/>
+          <map:parameter name="wikiContent" value="{session-attr:wikiContent}"/>
+        </map:transform>
+        <map:serialize type="xhtml"/>
+      </map:match>
+    </map:pipeline>       
   </map:pipelines>
 </map:sitemap>
