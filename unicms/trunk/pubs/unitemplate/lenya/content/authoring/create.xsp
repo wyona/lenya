@@ -10,6 +10,9 @@
   
   <xsp:structure>
     <xsp:include>org.apache.lenya.cms.publication.Publication</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.Document</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.DocumentException</xsp:include>
+    <xsp:include>org.apache.lenya.cms.publication.DublinCore</xsp:include>
   </xsp:structure>
 
   <parent-child>
@@ -33,6 +36,12 @@
 
       Publication pub = (Publication) <input:get-attribute module="page-envelope" as="object" name="publication"/>;
       
+      Document doc = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
+      String publisher = null;
+      try {
+        publisher = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_PUBLISHER);
+      } catch (DocumentException e) {}
+
     </xsp:logic>
 
     <parentid><xsp:expr>parentId</xsp:expr></parentid>
@@ -43,7 +52,7 @@
 
     <dc:creator><input:get-attribute module="access-control" name="user-id"/> (<input:get-attribute module="access-control" name="user-name"/>)</dc:creator>
     <dc:subject></dc:subject>
-    <dc:publisher>Universität Zürich</dc:publisher>
+    <dc:publisher><xsp:expr>publisher</xsp:expr></dc:publisher>
     <dc:date><input:get-attribute module="date" name="currentDate"/></dc:date>
     <dc:rights>Universität Zürich</dc:rights>
     <dc:language><xsp:expr>pub.getDefaultLanguage()</xsp:expr></dc:language>

@@ -44,9 +44,11 @@
       Document doc = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
       String[] usedLanguages = null;
       String description = null;
+      String publisher = null;
       try {
         usedLanguages = doc.getLanguages();
         description = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_DESCRIPTION);
+        publisher = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_PUBLISHER);
       } catch (DocumentException e) {}
       if (usedLanguages != null) {
       	for (int i = 0; i &lt; usedLanguages.length; i++) {
@@ -66,7 +68,7 @@
     <document-language><input:get-attribute module="page-envelope" name="document-language"/></document-language>
     <dc:creator><input:get-attribute module="access-control" name="user-id"/> (<input:get-attribute module="access-control" name="user-name"/>)</dc:creator>
     <dc:subject></dc:subject>
-    <dc:publisher>University of Zurich</dc:publisher>
+    <dc:publisher><xsp:expr>publisher</xsp:expr></dc:publisher>
     <dc:description><xsp:expr>description</xsp:expr></dc:description>
     <dc:date><input:get-attribute module="date" name="currentDate"/></dc:date>
     <dc:rights>University of Zurich</dc:rights>
