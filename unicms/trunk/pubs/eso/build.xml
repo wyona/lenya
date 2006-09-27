@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- $Id: build.xml 17766 2006-09-10 14:31:53Z thomas $ -->
+
+<!-- +- UniCMS e-Learning add-ons: eLML support. Install/Uninstall script.
+     +- -->
+
+<project default="install" basedir=".">
+  
+  <target name="init">
+    <property file="local.build.properties"/>
+    <property file="build.properties"/>
+    <property name="pub.dir" value="${pubs.dir}/${pub.prefix}"/>
+    <mkdir dir="work"/>
+  </target>
+
+  <target name="cleanup">
+    <delete dir="work"/>
+  </target>
+
+  <target name="install" description="Install module" depends="init">
+    
+    <echo>INFO: copying files to ${pub.prefix}</echo>
+
+    <echo>INFO: Creating backup directory</echo>
+    <mkdir dir="backup"/>
+
+    <echo>INFO: Copying footer</echo>
+    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
+      <fileset dir=".">
+        <include name="footer.xsl"/>
+      </fileset>
+    </copy>
+
+    <antcall target="touch"/>
+
+    <antcall target="cleanup"/> 
+
+  </target>
+
+  <target name="touch" depends="init" description="touch all within publication directory ">
+    <echo>Touch all files within ${pub.dir}</echo>
+    <touch>
+      <fileset dir="${pub.dir}"/>
+    </touch>
+  </target>
+  
+</project>
