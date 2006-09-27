@@ -342,6 +342,31 @@
   </xsl:if>
 </xsl:template> 
 
+
+<!-- Sitemap within subsite should cover subsite only -->
+
+<xsl:template match="unizh:node">
+  <xsl:variable name="subsite-homepage-basic-url" select="concat('/', $homepage-basic-url)"/>
+  <xsl:choose>
+    <xsl:when test="$homepage-basic-url = 'index'">
+      <xsl:copy-of select="."/>
+    </xsl:when>
+    <xsl:when test="@id = $subsite-homepage-basic-url">
+      <xsl:copy>
+        <xsl:apply-templates select="@*|*[name() != 'unizh:node']"/>
+      </xsl:copy>
+      <xsl:apply-templates select="unizh:node"/>
+    </xsl:when>
+    <xsl:when test="starts-with(@id, $subsite-homepage-basic-url)">
+      <xsl:copy-of select="."/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-templates select="unizh:node"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+
 <xsl:template match="@*|node()">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
