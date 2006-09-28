@@ -172,6 +172,11 @@
             <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
+        <xsl:if test="$nodeid ='modul4'">
+          <div id="modulimg">
+            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+          </div>
+        </xsl:if>
         <div class="content">
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
