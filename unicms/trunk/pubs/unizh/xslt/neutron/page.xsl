@@ -24,17 +24,17 @@
   <head>
     <title>
       Apache Lenya |
-      <xsl:value-of select="$publicationid"/> |
+      <xsl:value-of select="$publication-id"/> |
       <xsl:value-of select="$area"/> |
       <xsl:value-of select="$nodeid"/>.html |
        <xsl:value-of select="**/lenya:meta/dc:title"/>
      </title>
      <script src="/lenya/menu/menu.js" type="text/javascript"><xsl:comment/> </script>
      <style type="text/css">
-        @import url("http://localhost:8888/unitemplate/authoring/content-neutron.css");
-        @import url("http://localhost:8888/unitemplate/authoring/css/institute.css");
+        @import url("<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/content-neutron.css");
+        @import url("<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/css/institute.css");
       </style>
-      <script src="http://localhost:8888/unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
+      <script src="{$root}unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
   </head>
     
   <body>
@@ -135,7 +135,7 @@
             <div class="footermargintop"><xsl:comment/></div>
             <div class="topnav"><a href="#top">top</a></div>
             <div class="solidline">
-              <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+              <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
             </div>
             <div id="footer">© 2005 Universität Zürich | <a href="" /><xsl:comment/></div>
           </div>

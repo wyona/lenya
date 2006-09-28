@@ -28,7 +28,7 @@
 <xsl:param name="fontsize"/>
 <xsl:param name="querystring"/>
 <xsl:param name="creationdate"/>
-<xsl:param name="publicationid"/>
+<xsl:param name="publication-id"/>
 
 <xi:include href="../doctypes/variables.xsl#xpointer(/*/*)"/>
 <xsl:template match="/">
@@ -44,10 +44,10 @@
      </title>
      <script src="/lenya/menu/menu.js" type="text/javascript"><xsl:comment/> </script>
      <style type="text/css">
-        @import url("http://localhost:8888/unitemplate/authoring/content-neutron.css");
-        @import url("http://localhost:8888/unitemplate/authoring/css/institute.css");
+        @import url("<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/content-neutron.css");
+        @import url("<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/css/institute.css");
       </style>
-      <script src="http://localhost:8888/unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
+      <script src="{$root}unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
   </head>
     
   <body>
@@ -62,10 +62,10 @@
      <div id="headerarea">
        <div style="float:right;width:195px;">
          <div class="imgunilogo"><a href="http://www.unizh.ch">
-           <img height="45" width="180" alt="unizh logo" src="http://localhost:8888/unitemplate/authoring/images/logo_de.gif" /></a>
+           <img height="45" width="180" alt="unizh logo" src="{$root}{$publication-id}/authoring/images/logo_de.gif" /></a>
          </div>
          <div class="imginstitute">
-           <img height="45" width="180" alt="institute's picture" src="http://localhost:8888/unitemplate/authoring/images/key-visual.jpg" />
+           <img height="45" width="180" alt="institute's picture" src="{$root}{$publication-id}/authoring/images/key-visual.jpg" />
          </div>
        </div>
        <div id="headertitelpos">
@@ -110,20 +110,20 @@
      <div id="primarnav"><xsl:comment/></div>
      <div class="floatclear"><xsl:comment/></div>
      <div class="endheaderline">
-        <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+        <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
      </div> 
       <div id="toolnav">
         <div class="icontextpos">
           <div id="icontext"><xsl:comment/></div>
         </div>
         <a onmouseover="changeIcontext('Diese Seite drucken')" onmouseout="changeIcontext('')" onClick="window.open('index_de.print.html', '', 'width=700,height=700,menubar=yes,scrollbars')" href="#">
-          <img height="10" width="10" alt="Diese Seite drucken" src="http://localhost:8888/unizh/authoring/images/icon_print.gif" />
+          <img height="10" width="10" alt="Diese Seite drucken" src="{$root}unizh/authoring/images/icon_print.gif" />
         </a> |
         <a href="?fontsize=big" onmouseover="changeIcontext('Schrift grösser/kleiner')" onmouseout="changeIcontext('')" id="switchFontSize">
-          <img height="9" width="18" alt="Schrift grösser/kleiner" src="http://localhost:8888/unizh/authoring/images/icon_bigfont.gif" />
+          <img height="9" width="18" alt="Schrift grösser/kleiner" src="{$root}unizh/authoring/images/icon_bigfont.gif" />
         </a> |
         <a onmouseover="changeIcontext('PDA-optimierte Ansicht')" onmouseout="changeIcontext('')" href="?version=simple">
-          <img height="9" width="18" alt="PDA-optimierte Ansicht" src="http://localhost:8888/unizh/authoring/images/icon_pda.gif" />
+          <img height="9" width="18" alt="PDA-optimierte Ansicht" src="{$root}unizh/authoring/images/icon_pda.gif" />
         </a>
       </div>
       <div class="floatclear"><xsl:comment/></div> 
@@ -131,19 +131,19 @@
         <div id="secnav">
           <a name="navigation" accesskey="1"><xsl:comment/></a>
           <div class="solidline">
-            <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+            <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
           </div>
           <ul>
             <li>
               <a href="#">Menu Item</a>
               <div class="dotline">
-                <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+                <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
               </div>
             </li>
             <li>
               <a href="#">Menu Item</a>
               <div class="dotline">
-                <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+                <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
               </div>
             </li>
           </ul>
@@ -168,7 +168,7 @@
             <div class="footermargintop"><xsl:comment/></div>
             <div class="topnav"><a href="#top">top</a></div>
             <div class="solidline">
-              <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+              <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
             </div>
             <div id="footer">© 2005 Universität Zürich | <a href="" /><xsl:comment/></div>
           </div>

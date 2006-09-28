@@ -27,7 +27,7 @@
 <xsl:param name="fontsize"/>
 <xsl:param name="querystring"/>
 <xsl:param name="creationdate"/>
-<xsl:param name="publicationid"/>
+<xsl:param name="publication-id"/>
 
 
 <xi:include href="../doctypes/variables.xsl#xpointer(/*/*)"/>
