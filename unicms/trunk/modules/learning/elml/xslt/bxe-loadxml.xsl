@@ -119,10 +119,14 @@
 <!-- elml2xhtml mapping -->
 
 <xsl:template match="elml:paragraph">
+  <xsl:if test="@title">
+    <xhtml:h3><xsl:value-of select="@title"/></xhtml:h3>
+  </xsl:if> 
   <xhtml:p>
     <xsl:apply-templates/>
   </xhtml:p>
 </xsl:template> 
+
 
 <xsl:template match="elml:newLine">
   <xhtml:br/>
@@ -206,12 +210,6 @@
   </xhtml:li>
 </xsl:template>
 
-
-<xsl:template match="elml:link">
-  <xhtml:a>
-    <xsl:apply-templates select="@*|node()"/>
-  </xhtml:a>
-</xsl:template>
 
 <!-- 
 <xsl:template match="elml:multimedia">

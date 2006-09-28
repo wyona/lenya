@@ -55,7 +55,7 @@
       <xsl:when test="name() = 'originallanguage'">originalLanguage</xsl:when>
       <xsl:when test="name() = 'creationdate'">creationDate</xsl:when>
       <xsl:when test="name() = 'modificationdate'">modificationDate</xsl:when>
-      <xsl:when test="name() = 'cssclassimp'">CSSClassImp</xsl:when>
+      <xsl:when test="name() = 'cssclass'">cssClass</xsl:when>
       <xsl:otherwise>
          <xsl:value-of select="name()"/>
       </xsl:otherwise>
@@ -198,9 +198,22 @@
 
 <xsl:template match="xhtml:p">
   <paragraph>
-    <xsl:apply-templates/>
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::*[local-name() = 'h3' and position() = 1]">
+        <xsl:attribute name="title">
+          <xsl:value-of select="preceding-sibling::*[local-name() ='h3' and position() = 1]"/>
+        </xsl:attribute>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="@title">
+          <xsl:copy-of select="@title"/>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates/> 
   </paragraph>
 </xsl:template>
+
 
 <xsl:template match="xhtml:br">
   <newLine/>

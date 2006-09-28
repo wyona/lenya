@@ -131,7 +131,6 @@
     <element name="body">
       <zeroOrMore>
         <choice>
-          <ref name="lenya.asset"/>
           <ref name="column"/>
           <ref name="table"/>
           <ref name="list"/>
@@ -165,7 +164,6 @@
     <element name="body">
       <zeroOrMore>
         <choice>
-          <ref name="lenya.asset"/>
           <ref name="column"/>
           <ref name="table"/>
           <ref name="list"/>
@@ -194,7 +192,6 @@
     </optional>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -222,7 +219,6 @@
     </optional>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -251,7 +247,6 @@
     </optional>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
