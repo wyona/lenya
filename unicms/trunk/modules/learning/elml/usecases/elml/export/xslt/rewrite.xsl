@@ -45,6 +45,16 @@
   </xsl:attribute>
 </xsl:template>
 
+<xsl:template match="@href[parent::xhtml:a]">
+  <xsl:attribute name="href">
+    <xsl:call-template name="substring-after-last">
+      <xsl:with-param name="input"><xsl:value-of select="."/></xsl:with-param>
+      <xsl:with-param name="substr">/</xsl:with-param>
+    </xsl:call-template>
+  </xsl:attribute>
+</xsl:template>
+
+
 
 <xsl:template match="@src[parent::xhtml:embed]">
   <xsl:attribute name="src">
