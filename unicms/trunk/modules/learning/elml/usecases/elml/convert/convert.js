@@ -135,54 +135,6 @@ function convertLesson() {
     }
   }
   
-  
-  cocoon.log.info("Starting conversion elml:multimedia -> lenya:asset or xhtml:object");
-    
-  for (var i = 0; i < domToDocumentMap.length; i++) {
-      
-    var dom = domToDocumentMap[i][0];
-    
-    while (dom.getElementsByTagName("multimedia").length > 0) {
-    
-      var multimedia = dom.getElementsByTagName("multimedia").item(0); 
-      
-      if (multimedia.hasAttribute("src")) {
-        var src = multimedia.getAttribute("src");
-        var type = multimedia.getAttribute("type");
-        
-        if (type == "gif" || type == "jpeg" || type == "png") {
-        
-          var object = dom.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:object");
-          cocoon.log.error("Replacing : " + multimedia + " by " + object);    
-          object.setAttribute("data", src.substr(src.lastIndexOf("/") + 1));
-          if (multimedia.hasAttribute("width")) {
-            object.setAttribute("width", multimedia.getAttribute("width"));
-          }
-          if (multimedia.hasAttribute("height")) {
-            object.setAttribute("height", multimedia.getAttribute("height"));
-          }
-          
-          cocoon.log.error("Object src attribute: " + object.getAttribute("data"));       
-          multimedia.parentNode.replaceChild(object, multimedia);
-          
-        } else {
-        
-          var asset = dom.createElementNS("http://apache.org/cocoon/lenya/page-envelope/1.0", "lenya:asset"); 
-          cocoon.log.error("Replacing : " + multimedia + " by " + asset);    
-          asset.setAttribute("src", src.substr(src.lastIndexOf("/") + 1));
-          asset.setAttribute("type", multimedia.getAttribute("type"));
-          asset.setAttribute("size", "");
-          cocoon.log.error("Asset src attribute: " + asset.getAttribute("src"));       
-          multimedia.parentNode.replaceChild(asset, multimedia);
-          
-        }
-      } else {
-        multimedia.parentNode.removeChild(multimedia);
-      }
-    }
-  }  
-  
-  
    /* Serialize DOM fragments to documents */
    
   for (var i=0; i < domToDocumentMap.length; i++) {
