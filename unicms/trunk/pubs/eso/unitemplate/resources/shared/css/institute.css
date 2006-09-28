@@ -1,0 +1,53 @@
+/* institute specific part of header */
+#headerarea {
+	background-color: #CCCC99;
+}
+.imgunilogo {
+	background-color: #FE0000;
+}
+.imginstitute {
+	background-color: #CCCC99;
+}
+
+/*link*/
+a { 
+	text-decoration: none;
+	color:#993333;  
+}
+
+a:hover {
+	background-color:#E9E9D2;
+}
+
+.contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
+	color:#CC9999; 
+}
+
+table.grid {
+       border-collapse:collapse; 
+       margin: 0px auto 8px auto;
+       border-bottom: 1px solid #333;
+}
+table.grid tr td {
+  border: 1px solid #DDD;
+}
+
+table.grid th {
+	border-color: #DDD;
+	border-bottom: medium double #333;
+}
+
+table.grid td.table-structure {
+	border-color: #DDD;
+}
+
+table.grid td {
+	border-bottom: 1px solid #333;
+}
+
+.citation {
+	font-size: 1.05em;
+	font-style: italic;
+	margin:8px 20px 8px 20px;
+	line-height:1.3em;
+}
