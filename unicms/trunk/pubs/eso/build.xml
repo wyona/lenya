@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!-- $Id: build.xml 17766 2006-09-10 14:31:53Z thomas $ -->
 
-<!-- +- UniCMS e-Learning add-ons: eLML support. Install/Uninstall script.
+<!-- +- Eso Layout add-ons. Install/Uninstall script.
      +- -->
 
 <project default="install" basedir=".">
@@ -23,13 +23,60 @@
 
     <echo>INFO: Creating backup directory</echo>
     <mkdir dir="backup"/>
-
-    <echo>INFO: Copying footer</echo>
-    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
-      <fileset dir=".">
+    
+    <echo>INFO: Backing up files</echo>
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unizh/xslt/common">
         <include name="footer.xsl"/>
       </fileset>
     </copy>
+    
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unizh/xslt/doctypes">
+        <include name="xhtml-standard.xsl"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unitemplate/resources/shared/css">
+        <include name="institute.css"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unitemplate/resources/shared/images">
+        <include name="*"/>
+      </fileset>
+    </copy>
+
+    <echo>INFO: Copying footer</echo>
+    <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
+      <fileset dir="unizh/xslt/common">
+        <include name="footer.xsl"/>
+      </fileset>
+    </copy>
+    
+    <echo>INFO: Copying xhtml-standard</echo>
+    <copy todir="${pubs.dir}/unizh/xslt/doctypes" overwrite="yes">
+      <fileset dir="unizh/xslt/doctypes">
+        <include name="xhtml-standard.xsl"/>
+      </fileset>
+    </copy>
+    
+    <echo>INFO: Copying Institute CSS</echo>
+    <copy todir="${pubs.dir}/unitemplate/resources/shared/css" overwrite="yes">
+      <fileset dir="unitemplate/resources/shared/css">
+        <include name="institute.css"/>
+      </fileset>
+    </copy> 
+    
+    <echo>INFO: Copying Main Images</echo>
+    <copy todir="${pubs.dir}/unitemplate/resources/shared/images" overwrite="yes">
+      <fileset dir="unitemplate/resources/shared/images">
+        <include name="*"/>
+      </fileset>
+    </copy> 
+
 
     <antcall target="touch"/>
 
