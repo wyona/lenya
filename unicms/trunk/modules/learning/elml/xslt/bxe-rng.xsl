@@ -492,7 +492,7 @@
 </xsl:template>
 
 
-<xsl:template match="rng:element[@name = 'multimedia']">
+<!-- <xsl:template match="rng:element[@name = 'multimedia']">
   <element name="xhtml:object">
     <attribute name="data">
       <text/>
@@ -501,7 +501,7 @@
       <text/>
     </attribute>
   </element>
-</xsl:template> 
+</xsl:template>  -->
 
 
 
