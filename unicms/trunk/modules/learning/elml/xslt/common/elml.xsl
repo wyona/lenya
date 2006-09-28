@@ -546,6 +546,26 @@
   </xsl:template>
 
 
+  <xsl:template match="elml:toc">
+    <xsl:choose>
+      <xsl:when test="/document/content/*[local-name() = 'lesson']">
+        <p>
+          <xsl:for-each select="/document/unizh:children/index:child">
+            <xsl:if test="*/*/@title">
+              <a class="arrow" href="{@href}"><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
+            </xsl:if>
+          </xsl:for-each>
+        </p>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>
+          <xsl:for-each select="/document/content/*//elml:learningObject">
+            <a class="arrow" href="#{@label}"><xsl:value-of select="@title"/><xsl:comment/></a><br/>
+          </xsl:for-each>
+        </p>
+      </xsl:otherwise>
+    </xsl:choose> 
+  </xsl:template>
 
   <!-- Named templates --> 
 

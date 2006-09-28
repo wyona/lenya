@@ -323,6 +323,24 @@
     </element>
   </define>
 
+  <define name="toc">
+    <element name="toc">
+      <attribute name="scope">
+        <choice>
+          <value>lessons</value>
+          <value>lesson</value>
+          <value>unit</value>
+        </choice>
+      </attribute>
+      <attribute name="recurse">
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute> 
+    </element>
+  </define>
+
 
   <!-- Type definitions -->
 
@@ -332,6 +350,7 @@
     <ref name="TitleImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="toc"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -352,6 +371,7 @@
     <ref name="NavTitleImp"/> 
     <zeroOrMore>
       <choice>
+        <ref name="toc"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -383,6 +403,7 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="toc"/>
         <ref name="table"/>
         <ref name="list"/>
         <ref name="box"/>
@@ -409,6 +430,7 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="toc"/>
         <ref name="list"/>
         <ref name="term"/>
         <ref name="multimedia"/>
@@ -432,6 +454,7 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
+        <ref name="toc"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
