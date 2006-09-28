@@ -212,35 +212,32 @@
     </element>
   </define> 
 
-  <define name="multimedia">
-	<choice>
-      <element name="lenya:asset">
-        <attribute name="size"><ref name="Text.datatype"/></attribute>
-        <attribute name="src"><ref name="Text.datatype"/></attribute>
-        <attribute name="type"><ref name="Text.datatype"/></attribute>
-      </element>
-      <element name="xhtml:object">
-	    <optional>
-          <attribute name="data"><text/></attribute>
-        </optional>
-	    <optional>
-          <attribute name="title"><text/></attribute>
-        </optional>
-	    <optional>
-          <attribute name="type"><text/></attribute>
-        </optional>
-	    <optional>
-          <attribute name="href"><text/></attribute>
-        </optional>
-	    <optional>
-	      <attribute name="width"><text/></attribute>
-        </optional>
-        <optional>
-          <attribute name="height"><text/></attribute>
-		</optional>
-         <text/>
-      </element>
-     </choice>
+
+ <define name="multimedia">
+    <element name="multimedia">
+      <ref name="LabelImp"/>
+      <ref name="IconImp"/>
+      <ref name="SourceImp"/>
+      <ref name="TypeReq"/>
+      <ref name="AlignmentImp"/>
+      <ref name="SizeImp"/>
+      <ref name="LegendImp"/>
+      <ref name="BibIDRefImp"/>
+      <ref name="Thumbnail"/>
+      <ref name="HTMLAttributesImp"/>
+      <ref name="VisibleImp"/>
+      <ref name="CSSClassImp"/>
+      <optional>
+        <text/>
+      </optional>
+      <!-- can't support inline elements because bxe crashes on anyname!
+      <zeroOrMore>
+        <choice>
+          <ref name="anyElement"/>
+          <text/>
+        </choice>
+      </zeroOrMore> -->
+    </element>
   </define>
 
   <define name="formatted">
@@ -335,7 +332,6 @@
     <ref name="TitleImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -356,7 +352,6 @@
     <ref name="NavTitleImp"/> 
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -388,7 +383,6 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="table"/>
         <ref name="list"/>
         <ref name="box"/>
@@ -415,7 +409,6 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="list"/>
         <ref name="term"/>
         <ref name="multimedia"/>
@@ -439,7 +432,6 @@
     <ref name="CSSClassImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>

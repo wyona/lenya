@@ -412,55 +412,7 @@ function importLesson() {
       
     }
   }
-      
-  /* Convert elml:multimedia to lenya:asset or xhtml:object*/
-      
-  cocoon.log.info("Starting conversion elml:multimedia -> lenya:asset or xhtml:object");
-    
-  for (var i = 0; i < domToDocumentMap.length; i++) {
-      
-    var dom = domToDocumentMap[i][0];
-    
-    while (dom.getElementsByTagName("multimedia").length > 0) {
-    
-      var multimedia = dom.getElementsByTagName("multimedia").item(0); 
-      
-      if (multimedia.hasAttribute("src")) {
-        var src = multimedia.getAttribute("src");
-        var type = multimedia.getAttribute("type");
-        
-        if (type == "gif" || type == "jpeg" || type == "png") {
-        
-          var object = dom.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:object");
-          cocoon.log.error("Replacing : " + multimedia + " by " + object);    
-          object.setAttribute("data", src.substr(src.lastIndexOf("/") + 1));
-          if (multimedia.hasAttribute("width")) {
-            object.setAttribute("width", multimedia.getAttribute("width"));
-          }
-          if (multimedia.hasAttribute("height")) {
-            object.setAttribute("height", multimedia.getAttribute("height"));
-          }
-          
-          cocoon.log.error("Object src attribute: " + object.getAttribute("data"));       
-          multimedia.parentNode.replaceChild(object, multimedia);
-          
-        } else {
-        
-          var asset = dom.createElementNS("http://apache.org/cocoon/lenya/page-envelope/1.0", "lenya:asset"); 
-          cocoon.log.error("Replacing : " + multimedia + " by " + asset);    
-          asset.setAttribute("src", src.substr(src.lastIndexOf("/") + 1));
-          asset.setAttribute("type", multimedia.getAttribute("type"));
-          asset.setAttribute("size", "");
-          cocoon.log.error("Asset src attribute: " + asset.getAttribute("src"));       
-          multimedia.parentNode.replaceChild(asset, multimedia);
-          
-        }
-      } else {
-        multimedia.parentNode.removeChild(multimedia);
-      }
-    }
-  }    
-      
+         
       
   /* Serialize DOM fragments to documents */
   
@@ -470,7 +422,6 @@ function importLesson() {
     var document = domToDocumentMap[i][1];
     
     createAssets(zip, dom, document, true); // FIXME: add assets to confirmation page
-    createObjects(zip, dom, document, true); // FIXME: add objects to confirmation page
     
     var sourceUri = documentHelper.getSourceUri(document);  
     var source = resolver.resolveURI(sourceUri); 
@@ -484,62 +435,40 @@ function importLesson() {
 }
 
 
-function createObjects(zip, dom, doc, rewriteLinks) {
-
-  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-  var objectNodes = dom.getElementsByTagName("xhtml:object");
- 
-  for (var i = 0; i < objectNodes.length; i++) {
-    var node = objectNodes.item(i);
-    var data = node.getAttribute("data");
-    var objectName = data;
-    cocoon.log.error("Object name is: " + objectName);
-   
-    var entries = zip.entries();
-
-    for (entries; entries.hasMoreElements();) {
-      var entry = entries.nextElement();
-      if (entry.getName().indexOf(objectName) > -1) {
-        var is = zip.getInputStream(entry);  // FIXME: eventually use zipSource 
-        var resManager = new ResourcesManager(doc);
-        var dir = resManager.getPath();
-        var path = dir +  File.separator + objectName;
-        var source = resolver.resolveURI(path);
-        var out = source.getOutputStream();
-
-        var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-        var len;
-
-        while((len = is.read(buffer)) >= 0)
-          out.write(buffer, 0, len);
-
-        is.close();
-        out.close();
-        
-      }
-    }
-  }
-}
-
-
 function createAssets(zip, dom, doc, rewriteLinks) {
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-  var assetNodes = dom.getElementsByTagName("lenya:asset");
-  // var assetNodesNS = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-
-  for (var i = 0; i < assetNodes.length; i++) {
-    var node = assetNodes.item(i);
+  var multimediaNodes = dom.getElementsByTagName("multimedia");
+  var multimediaNodesNS = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+ 
+  for (var i = 0; i < multimediaNodes.length; i++) {
+    var node = multimediaNodes.item(i);
     var src = node.getAttribute("src");
-    var assetName = src;
-    cocoon.log.error("Asset name is: " + assetName);
+    var thumbnail = null;
+    if (node.hasAttribute("thumbnail")) {
+      thumbnail = node.getAttribute("thumbnail");
+    }
+    
+    var assetName = src.substring(src.lastIndexOf("/") + 1);
+    node.setAttribute("src", assetName);
+    cocoon.log.error("src was: " + src + " rewritten to: " + node.getAttribute("src"));
+    
+    var thumbnailName = null;
+    if (thumbnail != null) {
+      thumbnailName = thumbnail.substring(thumbnail.lastIndexOf("/") + 1);
+      node.setAttribute("thumbnail", thumbnailName);
+      cocoon.log.error("thumbnail was: " + thumbnail + " rewritten to: " + node.getAttribute("thumbnail"));
+    }
    
     var entries = zip.entries();
 
     for (entries; entries.hasMoreElements();) {
       var entry = entries.nextElement();
+      if (thumbnailName != null && entry.getName().indexOf(thumbnailName) > -1) {
+        assetName = thumbnailName;
+      }
       if (entry.getName().indexOf(assetName) > -1) {
-        var is = zip.getInputStream(entry);  // FIXME: eventually use zipSource 
+        var is = zip.getInputStream(entry);  // FIXME: eventually use zipSource
         var resManager = new ResourcesManager(doc);
         var dir = resManager.getPath();
         var path = dir +  File.separator + assetName;
@@ -556,10 +485,10 @@ function createAssets(zip, dom, doc, rewriteLinks) {
         out.close();
 
         // Generate asset meta file
-        
-        var metasrc = resolver.resolveURI(path + ".meta");  
+
+        var metasrc = resolver.resolveURI(path + ".meta");
         out = metasrc.getOutputStream();
-      
+
         var suffix = assetName.substring(assetName.indexOf(".") + 1);
         cocoon.log.error("suffix is : " + suffix);
         var mimeType = null;
@@ -575,15 +504,21 @@ function createAssets(zip, dom, doc, rewriteLinks) {
            mimeType = "unknown";
         }
 
-        var title = assetName.substring(0, assetName.indexOf(".")); // FIXME: elml:multimedia should provide title attribute 
+        var title = assetName.substring(0, assetName.indexOf(".")); // FIXME: elml:multimedia should provide title attribute
 
         cocoon.processPipelineTo("createmetadata", {"mimeType" : mimeType, "title" : title}, out);
+
         out.close();
       }
-    } 
+    }
+  }
+
+  for (var i = 0; i < multimediaNodesNS.length; i++) {
+
   }
 
 }
+
 
 function buildDocument(id, lang) {
 

@@ -428,7 +428,6 @@
     <ref name="TitleImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -453,7 +452,6 @@
     <ref name="NavTitleImp"/> 
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>
@@ -487,7 +485,6 @@
     <ref name="AlignmentImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="table"/>
         <ref name="list"/>
         <ref name="box"/>
@@ -512,7 +509,6 @@
     <ref name="AlignmentImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="list"/>
         <ref name="term"/>
         <ref name="multimedia"/>
@@ -534,7 +530,6 @@
     <ref name="IconImp"/>
     <zeroOrMore>
       <choice>
-        <ref name="lenya.asset"/>
         <ref name="column"/>
         <ref name="table"/>
         <ref name="list"/>

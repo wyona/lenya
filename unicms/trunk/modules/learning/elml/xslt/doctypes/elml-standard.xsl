@@ -31,10 +31,7 @@
   <xsl:include href="../common/header.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
   <xsl:include href="../common/navigation.xsl"/>
-  <xsl:include href="../common/elements.xsl"/> 
-  <xsl:include href="../common/elml-object.xsl"/> 
-
-  <xsl:include href="../common/elml.xsl"/>
+  <xsl:include href="../common/elml.xsl"/> 
   <xsl:include href="../common/biblio_harvard.xsl"/>
 
   <xsl:template match="document">
