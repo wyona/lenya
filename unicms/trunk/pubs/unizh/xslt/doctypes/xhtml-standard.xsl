@@ -101,8 +101,8 @@
 
 
   <xsl:template name="one-column">
-    <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-    <div class="contentarea1col">
+   <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+   <div class="contentarea1col">
     <h1>
       <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
@@ -112,7 +112,8 @@
     <div bxe_xpath="/{$document-element-name}/xhtml:body">
       <xsl:apply-templates select="*/xhtml:body/*"/>
     </div>
-    </div>
+    <xsl:call-template name="footer"/>
+   </div>
   </xsl:template>
 
 
