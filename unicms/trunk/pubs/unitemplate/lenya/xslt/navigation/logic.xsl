@@ -239,6 +239,26 @@
 </xsl:template>
 
 
+<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'search']">
+  <div id="search">
+    <xsl:attribute name="href">
+      <xsl:choose>
+        <xsl:when test="$isHomepage = 'true' and not($index) and //nav:node[@current = 'true']/nav:node[@id = 'search']">
+          <xsl:value-of select="//nav:node[@current = 'true']/nav:node[@id = 'search']/@href"/>
+        </xsl:when>
+        <xsl:when test="$homepage-basic-url != 'index' and //nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'search']">
+          <xsl:value-of select="//nav:node[@basic-url = $homepage-basic-url]/nav:node[@id = 'search']/@href"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@href"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+    <xsl:value-of select="."/>
+  </div>
+</xsl:template>
+
+
 <!-- header -->
  
 <xsl:template match="unizh:header">
