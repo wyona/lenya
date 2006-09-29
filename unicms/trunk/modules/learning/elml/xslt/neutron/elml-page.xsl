@@ -17,7 +17,6 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
 >
 
-
 <xsl:template match="/">
 
 <html>
@@ -31,10 +30,10 @@
      </title>
      <script src="/lenya/menu/menu.js" type="text/javascript"><xsl:comment/> </script>
      <style type="text/css">
-        @import url("http://localhost:8888/unitemplate/authoring/content-neutron.css");
-        @import url("http://localhost:8888/unitemplate/authoring/css/institute.css");
+        @import url(<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/content-neutron.css");
+        @import url(<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/css/institute.css");
       </style>
-      <script src="http://localhost:8888/unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
+      <script src="{$root}unizh/authoring/javascript/uni.js" type="text/javascript"> </script>
   </head>
     
   <body>
@@ -65,8 +64,8 @@
          <div>
            <h2>
              <xsl:choose>
-               <xsl:when test="**/unizh:header">
-                 <xsl:value-of select="**/unizh:header/unizh:superscription"/>
+               <xsl:when test="descendant::unizh:header">
+                 <xsl:value-of select="descendant::unizh:header/unizh:superscription"/>
                </xsl:when>
                <xsl:otherwise>
                 Universität Zürich   
@@ -78,11 +77,11 @@
            <span>
              <a href="#">
                <xsl:choose>
-                 <xsl:when test="**/unizh:header">
-                   <xsl:value-of select="**/unizh:header/unizh:heading"/>
+                 <xsl:when test="descendant::unizh:header">
+                   <xsl:value-of select="descendant::unizh:header/unizh:heading"/>
                  </xsl:when>
                  <xsl:otherwise>
-                   <xsl:value-of select="$publicationid"/>
+                   <xsl:value-of select="$publication-id"/>
                  </xsl:otherwise>
                </xsl:choose>
              </a>
@@ -142,7 +141,7 @@
             <div class="footermargintop"><xsl:comment/></div>
             <div class="topnav"><a href="#top">top</a></div>
             <div class="solidline">
-              <img height="1" width="1" alt="separation line" src="http://localhost:8888/unizh/authoring/images/1.gif" />
+              <img height="1" width="1" alt="separation line" src="{$root}unizh/authoring/images/1.gif" />
             </div>
             <div id="footer">© 2005 Universität Zürich | <a href="" /><xsl:comment/></div>
           </div>
