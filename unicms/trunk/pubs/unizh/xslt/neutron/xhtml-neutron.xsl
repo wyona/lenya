@@ -18,6 +18,19 @@
 >
 
 
+<xsl:param name="root"/>
+<xsl:param name="contextprefix"/>
+<xsl:param name="area"/>
+<xsl:param name="rendertype"/>
+<xsl:param name="defaultlanguage"/>
+<xsl:param name="language"/>
+<xsl:param name="nodeid"/>
+<xsl:param name="fontsize"/>
+<xsl:param name="querystring"/>
+<xsl:param name="creationdate"/>
+<xsl:param name="publication-id"/>
+
+
 <xi:include href="../doctypes/variables.xsl#xpointer(/*/*)"/>
 <xi:include href="page.xsl#xpointer(/*/*)"/>
 <xi:include href="../common/navigation.xsl#xpointer(/*/*)"/>

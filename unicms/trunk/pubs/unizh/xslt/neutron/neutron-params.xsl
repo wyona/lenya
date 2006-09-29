@@ -11,7 +11,7 @@
  
 
   <xsl:param name="root"/>
-  <xsl:param name="publicationid"/>
+  <xsl:param name="publication-id"/>
   <xsl:param name="documentid"/>
   <xsl:param name="area"/>
   <xsl:param name="language"/>
@@ -36,10 +36,10 @@
     </xsl:copy>
   </xsl:template>
 
-  <xsl:template match="xsl:param[@name='publicationid']">
+  <xsl:template match="xsl:param[@name='publication-id']">
     <xsl:copy>
       <xsl:apply-templates select="@name"/>
-      <xsl:value-of select="$publicationid"/>
+      <xsl:value-of select="$publication-id"/>
     </xsl:copy>
   </xsl:template>
   

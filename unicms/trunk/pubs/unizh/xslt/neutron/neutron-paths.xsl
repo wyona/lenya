@@ -12,7 +12,10 @@
 
   <xsl:namespace-alias stylesheet-prefix="xslt" result-prefix="xsl"/>
 
-  <xsl:param name="root"/>
+  <xsl:param name="scheme"/>
+  <xsl:param name="servername"/>
+  <xsl:param name="port"/>
+  <xsl:param name="contextprefix"/>
   <xsl:param name="publication-id"/>
   
   <xsl:template match="/">
@@ -22,33 +25,16 @@
 
   <xsl:template match="@src">
     <xsl:attribute name="src">
-      <xsl:value-of select="concat($root, .)"/>
+      <xsl:value-of select="concat($scheme, '://', $servername, ':', $port, .)"/>
     </xsl:attribute>
   </xsl:template>
 
   <xsl:template match="xhtml:style">
     <style type="text/css">
-      @import url("<xsl:value-of select="$root"/><xsl:value-of select="$publication-id"/>/authoring/content-neutron.css");
+      @import url("<xsl:value-of select="concat($scheme, '://', $servername, ':', $port, $contextprefix, '/', $publication-id)"/>/authoring/content-neutron.css");
     </style>
   </xsl:template>
 
-
-  <xsl:template name="substring-after-last">
-    <xsl:param name="input" />
-    <xsl:param name="substr" />    
-    <xsl:variable name="temp" select="substring-after($input,$substr)"/>
-    <xsl:choose>
-      <xsl:when test="$substr and contains($temp,$substr)">
-        <xsl:call-template name="substring-after-last">
-          <xsl:with-param name="input"  select="$temp" />
-          <xsl:with-param name="substr" select="$substr" />
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$temp" />
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
 
   <xsl:template match="@*|node()" priority="-1">
     <xsl:copy>

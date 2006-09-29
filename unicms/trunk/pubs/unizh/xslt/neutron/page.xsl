@@ -65,8 +65,8 @@
          <div>
            <h2>
              <xsl:choose>
-               <xsl:when test="**/unizh:header">
-                 <xsl:value-of select="**/unizh:header/unizh:superscription"/>
+               <xsl:when test="descendant::unizh:header">
+                 <xsl:value-of select="descendant::unizh:header/unizh:superscription"/>
                </xsl:when>
                <xsl:otherwise>
                 Universität Zürich   
@@ -78,11 +78,11 @@
            <span>
              <a href="#">
                <xsl:choose>
-                 <xsl:when test="**/unizh:header">
-                   <xsl:value-of select="**/unizh:header/unizh:heading"/>
+                 <xsl:when test="descendant::unizh:header">
+                   <xsl:value-of select="descendant::unizh:header/unizh:heading"/>
                  </xsl:when>
                  <xsl:otherwise>
-                   <xsl:value-of select="$publicationid"/>
+                   <xsl:value-of select="$publication-id"/>blabla
                  </xsl:otherwise>
                </xsl:choose>
              </a>
