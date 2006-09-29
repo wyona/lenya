@@ -23,7 +23,12 @@
   <map:pipelines>
         
     <map:pipeline>
-   
+     
+      <map:match pattern="xml/**/*.xml">
+        <map:generate src="../../../content/{1}/{2}.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+ 
      <!-- Usecase matcher -->
 
      <map:match type="usecase" pattern="neutron">
@@ -51,7 +56,10 @@
           </map:transform>
           
           <map:transform src="../../../../unizh/xslt/neutron/neutron-paths.xsl">
-            <map:parameter name="root" value="http://{request:serverName}:{request:serverPort}/"/>
+            <map:parameter name="scheme" value="http"/>
+            <map:parameter name="servername" value="{request:serverName}"/>
+            <map:parameter name="port" value="{request:serverPort}"/>
+            <map:parameter name="contextprefix" value="{request:contextPath}"/>
             <map:parameter name="publication-id" value="{page-envelope:publication-id}"/>
           </map:transform> 
           <map:serialize type="xml"/>
@@ -59,7 +67,33 @@
 
 
         <map:match type="step" pattern="template">
-          <map:generate src="../../../../unizh/xslt/neutron/template.xml"/>
+          <map:aggregate element="document">
+            <map:part element="content" src="{page-envelope:document-file}"/> 
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/breadcrumb{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/servicenav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/toolnav{page-envelope:document-url}.xml"/> 
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/menu{page-envelope:document-url}.xml"/>  
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/tabs{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/orthonav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/footnav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/ancestors{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/parent{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/allnodes{page-envelope:document-url}.xml"/>
+
+            <map:part src="../../../config/unizh/unizh.xconf"/> 
+
+          </map:aggregate>
+
+          <map:transform src="../../../../unizh/xslt/includeAssetMetaData.xsl">
+            <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+          </map:transform>
+          <map:transform type="cinclude"/> 
+          <map:transform src="../../../lenya/xslt/navigation/header.xsl"/>
+          <map:transform src="../../../lenya/xslt/navigation/logic.xsl">
+            <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+          </map:transform> 
+
+          <map:transform src="../../../../unizh/xslt/neutron/template.xsl"/> 
           <map:serialize type="xml"/>
         </map:match>
 
