@@ -521,34 +521,43 @@ img.icon {
 
 /*Ortho navigation*/
 #orthonav  {
-	text-align:right;
-	margin-bottom:20px;
+  text-align:right;
+  margin-bottom:20px;
+  margin-right:198px;
+  border-bottom: 1px solid #ccccff;
+  font-size: 11px;
 }
 
 #orthonav a {
-  color:#333399; 
   padding:2px 6px;
-  background-color:#E9E9F0;
   border-top: 1px solid #ccccff;
   border-right: 1px solid #ccccff;
-  border-bottom: 1px solid #ccccff;
-  font-size: 0.95em;
+  border-left: 1px solid #ccccff;
+  line-height: 2;
 }
 
-#orthonav a.inactive {
-   color:#999;  
+#orthonav a.current {
+  color:#333;  
+  border-bottom: 4px solid #fff;
+  background-image: url(<context-prefix/>/unizh/authoring/images/1.gif);
 }
 
 #orthonav a.active {
-  background-color:#ffffff;
-   color:#333;  
-   border-bottom: 1px solid #fff;
+  color:#333399; 
+  background-image: url(<context-prefix/>/unizh/authoring/images/tabs-active.jpg);
 }
 
-#orthonav .spacer {
-	padding-top:2px;
-	padding-bottom:3px;
-	border-right: 1px solid #ccccff;
+#orthonav a.inactive {
+  color:#999999;  
+  background-image: url(<context-prefix/>/unizh/authoring/images/tabs-inactive.jpg);
+}
+
+#orthonav a.current:hover {
+  background-color:#E9E9F0;
+}
+
+#orthonav a.active:hover {
+  background: url(<context-prefix/>/unizh/authoring/images/1.gif) top left repeat;
 }
 
 
@@ -1352,17 +1361,6 @@ table.imgMitLegende tr td img {
 
 /* uni additions */
 
-
- /*Ortho navigation*/
-
-#orthonav  {
-  margin-right:198px;
-}
-
-#orthonav a {
-  border-left: 1px solid #ccccff;
-  font-size: 11px;
-}
 
 /* image upload */
 .upload_block {
