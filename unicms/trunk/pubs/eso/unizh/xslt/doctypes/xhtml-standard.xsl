@@ -159,22 +159,22 @@
         </xsl:if>
         <xsl:if test="$nodeid ='modul1'">
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <xsl:if test="$nodeid ='modul2'">
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <xsl:if test="$nodeid ='modul3'">
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <xsl:if test="$nodeid ='modul4'">
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <div class="content">
@@ -232,7 +232,7 @@
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/home.jpg"/>
+            <img src="{$localsharedresources}/images/home.jpg"/>
           </div>
 
         <div class="content">
