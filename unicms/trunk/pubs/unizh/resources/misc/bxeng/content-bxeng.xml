@@ -1281,7 +1281,7 @@ td .object object[width] {
 
 .quicklink .a {
         margin-left: 8px;
-        fontsize: 11px;
+        font-size: 11px;
         display: block;
 }
 

@@ -36,6 +36,7 @@
          <element name="teaser" ns="http://unizh.ch/doctypes/elements/1.0"/>
          <element name="quicklinks" ns="http://unizh.ch/doctypes/elements/1.0"/>
          <element name="quicklink" ns="http://unizh.ch/doctypes/elements/1.0"/>
+         <element name="links" ns="http://unizh.ch/doctypes/elements/1.0"/>
          
          <!-- attributes --> 
          <attribute name="id"/>      
