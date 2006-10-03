@@ -1120,7 +1120,9 @@
     <div>
       <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
         <a name="{position()}"><xsl:comment/></a>
-        <xsl:apply-templates select="."/>
+        <xsl:apply-templates select=".">
+          <xsl:with-param name="name_download">Dokument im Web</xsl:with-param>
+        </xsl:apply-templates>
       </xsl:for-each>
     </div>
   </xsl:template>
