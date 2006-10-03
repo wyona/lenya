@@ -510,11 +510,11 @@
   <xsl:template match="elml:citation">
     <xsl:choose>
       <xsl:when test="string(parent::*[text()])">
-        #8222;<i><xsl:apply-templates/><xsl:comment/></i>#8220;
+        &#8222;<i><xsl:apply-templates/><xsl:comment/></i>&#8220;
         <xsl:call-template name="BibliographyRef"/>
       </xsl:when>
       <xsl:otherwise>
-        #8222;<i class="citation"><xsl:apply-templates/><xsl:comment/></i>#8220;
+        &#8222;<i class="citation"><xsl:apply-templates/><xsl:comment/></i>&#8220;
         <xsl:call-template name="BibliographyRef"/>
       </xsl:otherwise>
     </xsl:choose>
@@ -562,7 +562,7 @@
         <p>
           <xsl:for-each select="/document/unizh:children/index:child">
             <xsl:if test="*/*/@title">
-              <a class="arrow" href="{@href}"><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
+              <a class="arrow"><xsl:attribute name="href"><xsl:value-of select="concat($contextprefix,@href)"/></xsl:attribute><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
             </xsl:if>
           </xsl:for-each>
         </p>
