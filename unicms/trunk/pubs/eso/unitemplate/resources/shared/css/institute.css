@@ -19,6 +19,12 @@ a:hover {
 	background-color:#E9E9D2;
 }
 
+
+.relatedboxborder {
+	border: 1px solid #CCCC99;
+}
+
+
 .contentarea a:visited, .contcol2 a:visited, .contentarea1col a:visited {
 	color:#CC9999; 
 }
