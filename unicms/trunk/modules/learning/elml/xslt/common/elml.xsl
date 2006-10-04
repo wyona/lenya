@@ -6,6 +6,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
   xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:elml="http://www.elml.ch"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0" 
@@ -298,9 +299,6 @@
       <xsl:if test="@colspan">
         <xsl:attribute name="colspan"><xsl:value-of select="@colspan"/></xsl:attribute>
       </xsl:if>
-      <xsl:if test="@cssClass">
-        <xsl:attribute name="class"><xsl:value-of select="@cssClass"/></xsl:attribute>
-      </xsl:if>
       <xsl:apply-templates/>
     </td>
   </xsl:template>
@@ -506,11 +504,10 @@
     </xsl:choose> 
   </xsl:template>
 
-
   <xsl:template match="elml:citation">
     <xsl:choose>
       <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
-        <div class="@cssClass">"<xsl:apply-templates/>"
+        <div class="{@cssClass}">"<xsl:apply-templates/>"
           <br/>
           <xsl:call-template name="BibliographyRef"/> 
         </div>
@@ -523,7 +520,6 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
 
   <xsl:template match="elml:newLine">
     <br/>
@@ -636,9 +632,8 @@
 
   <!-- Asset Handling -->
 
- 
   <xsl:template match="elml:multimedia">
-    <xsl:if test="not(@visible='print')"><!-- check inline multimedia in original source for good -->
+    <xsl:if test="not(@visible='print')">
       <table cellpadding="0" cellspacing="2" border="0" width="100%" class="content_table">
         <tr>
           <xsl:if test="@icon">
@@ -660,7 +655,7 @@
                     <xsl:call-template name="compute-path"/>
                   </xsl:for-each>
                 </xsl:variable>
-                <a href="?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
+                <a href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
                   <xsl:call-template name="MultimediaShow"/>
                 </a>
               </xsl:when>
@@ -686,9 +681,9 @@
             </td>
           </tr>
         </xsl:if>
-      </table>
+      </table> 
     </xsl:if>
-  </xsl:template>
+  </xsl:template> 
 
 
   <xsl:template name="MultimediaAttributes">
@@ -705,7 +700,7 @@
     <xsl:param name="pathMultimedia">
       <xsl:choose>
         <xsl:when test="@thumbnail">
-          <xsl:value-of select="@thumbnail"/>
+          <xsl:value-of select="concat($nodeid, '/', @thumbnail)"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="concat($nodeid, '/', @src)"/>
@@ -717,7 +712,7 @@
     </xsl:param>
     <xsl:choose>
       <xsl:when test="@thumbnail">
-        <a href="{$pathMultimediaSource}" target="_blank">
+        <a href="#" onClick="window.open('{$pathMultimediaSource}', 'detail','width={@width},height={@height},resizable,menubar=no'); return false;">
         <xsl:call-template name="Image">
           <xsl:with-param name="pathMultimedia">
             <xsl:value-of select="$pathMultimedia"/>
@@ -1059,10 +1054,20 @@
       <xsl:with-param name="href">
         <xsl:choose>
           <xsl:when test="$insertWhat = 'asset'">
-            ?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=<xsl:value-of select="$trimmedElementPath"/>&amp;insertWhere=<xsl:value-of select="$insertWhere"/>&amp;insertTemplate=insertAsset.xml&amp;insertReplace=<xsl:value-of select="$insertReplace"/>
+            <xsl:text>?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=</xsl:text>
+            <xsl:value-of select="$trimmedElementPath"/>
+            <xsl:text>&amp;insertWhere=</xsl:text>
+            <xsl:value-of select="$insertWhere"/>
+            <xsl:text>&amp;insertTemplate=insertAsset.xml&amp;insertReplace=</xsl:text>
+            <xsl:value-of select="$insertReplace"/>
           </xsl:when>
           <xsl:otherwise>
-            ?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=<xsl:value-of select="$trimmedElementPath"/>&amp;insertWhere=<xsl:value-of select="$insertWhere"/>&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=<xsl:value-of select="$insertReplace"/>
+            <xsl:text>?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=false&amp;assetXPath=</xsl:text>
+            <xsl:value-of select="$trimmedElementPath"/>
+            <xsl:text>&amp;insertWhere=</xsl:text>
+            <xsl:value-of select="$insertWhere"/>
+            <xsl:text>&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=</xsl:text>
+            <xsl:value-of select="$insertReplace"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
@@ -1095,10 +1100,6 @@
      <p>
      <xsl:call-template name="assetUpload">
        <xsl:with-param name="insertWhat">image</xsl:with-param>
-       <xsl:with-param name="insertWhere">after</xsl:with-param>
-     </xsl:call-template>
-     <xsl:call-template name="assetUpload">
-       <xsl:with-param name="insertWhat">asset</xsl:with-param>
        <xsl:with-param name="insertWhere">after</xsl:with-param>
      </xsl:call-template>
      </p>
@@ -1194,6 +1195,24 @@
         <xsl:text>)</xsl:text>
       </xsl:if>
     </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:a[@href != '']">
+    <a href="{@href}">
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
+            <xsl:text>extern</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+             <xsl:text>arrow</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:copy-of select="@target"/>
+      <xsl:apply-templates/><xsl:comment/>
+    </a>
   </xsl:template>
 
 </xsl:stylesheet>
