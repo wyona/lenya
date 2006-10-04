@@ -28,7 +28,7 @@
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/html-head-print.xsl"/>
   <xsl:include href="../common/header-print.xsl"/>
-  <xsl:include href="../common/footer.xsl"/>
+  <xsl:include href="../common/footer-print.xsl"/>
   <xsl:include href="../common/navigation.xsl"/>
   <xsl:include href="../common/elements.xsl"/> 
   <xsl:include href="../common/object.xsl"/>
@@ -68,9 +68,7 @@
               <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
               <xsl:apply-templates select="/document/xhtml:div[@id = 'pages']"/>
           </div>
-          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
-          <div class="footermargintop"><xsl:comment/></div>
-          <div id="footer">&#169; 2005 Universit&#228;t Z&#252;rich | <xsl:value-of select="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']"/></div>
+          <xsl:call-template name="footer-print"/>
         </div>
         <br/>
       </body> 
