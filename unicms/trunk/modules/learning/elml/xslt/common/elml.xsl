@@ -509,13 +509,17 @@
 
   <xsl:template match="elml:citation">
     <xsl:choose>
-      <xsl:when test="string(parent::*[text()])">
-        &#8222;<i><xsl:apply-templates/><xsl:comment/></i>&#8220;
-        <xsl:call-template name="BibliographyRef"/>
+      <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
+        <div class="@cssClass">"<xsl:apply-templates/>"
+          <br/>
+          <xsl:call-template name="BibliographyRef"/> 
+        </div>
       </xsl:when>
       <xsl:otherwise>
-        &#8222;<i class="citation"><xsl:apply-templates/><xsl:comment/></i>&#8220;
-        <xsl:call-template name="BibliographyRef"/>
+        <xsl:if test="node()">
+          <i>"<xsl:apply-templates/>"</i>
+        </xsl:if>
+        <xsl:call-template name="BibliographyRef"/> 
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
