@@ -3,9 +3,9 @@
 
 <lenya:publication xmlns:lenya="http://apache.org/cocoon/lenya/publication/1.0">
   <lenya:name>Unitemplate</lenya:name>
-  <lenya:pub-version>UniCMS 1.2.0.3</lenya:pub-version>
-  <lenya:lenya-version>1.2.3-dev</lenya:lenya-version>
-  <lenya:cocoon-version>2.1.7</lenya:cocoon-version>
+  <lenya:pub-version>UniCMS 1.2.0.4</lenya:pub-version>
+  <lenya:lenya-version>1.2.4</lenya:lenya-version>
+  <lenya:cocoon-version>2.1.8</lenya:cocoon-version>
   <lenya:description>The template publication of the university.</lenya:description>
   <lenya:credits>Special thanks to </lenya:credits>
   <lenya:help></lenya:help>
