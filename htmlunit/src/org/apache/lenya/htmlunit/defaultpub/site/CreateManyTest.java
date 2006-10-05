@@ -44,11 +44,10 @@ public class CreateManyTest extends LenyaTestCase {
      */
     public void testCreateManyDocuments() throws Exception {
         loginAsDefaultUser();
-        int nofDocuments = 10;
 
         String startDocID = this.config.getString("lenya.tests.general.startDocID");
 
-        createDocumentsRec(startDocID, nofDocuments);
+        createDocumentsRec(startDocID, this.nofDocuments);
 
         logout();
     }
