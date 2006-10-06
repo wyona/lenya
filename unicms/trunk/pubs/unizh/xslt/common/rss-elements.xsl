@@ -87,7 +87,11 @@ function open_rss_window(url)
          <xsl:if test="$items = '' or position() &lt;= $items">
            <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
            <h2><xsl:value-of select="title"/>&#160;
-           <span class="lead"><xsl:value-of select="pubDate"/></span></h2>
+           <span class="lead">
+             <xsl:variable name="pubDateLength" select="string-length(pubDate)"/>
+             <xsl:value-of select="substring(pubDate, 0, $pubDateLength - 12)"/>
+           </span>
+           </h2>
            <p><xsl:apply-templates select="description"/>
            <xsl:if test="link != ''">
              <br/>
