@@ -162,7 +162,7 @@ public abstract class HtmlUnitTestCase extends TestCase {
                 this.logger.error("Response content charset: " + response.getContentCharSet());
                 this.logger.error("Response load time in ms: "
                         + response.getLoadTimeInMilliSeconds());
-                this.logger.error(this.currentPage.asXml());
+                this.logger.info(this.currentPage.asXml());
             }
             // print alerts:
             if (this.collectedAlerts.size() > 0) {
