@@ -80,7 +80,7 @@ public class PublishTest extends LenyaTestCase12 {
         // call the submit usecase
         loadHtmlPage(url + "?&lenya.event=submit&lenya.usecase=submit&lenya.step=showscreen");
         
-        if(FindInPage("Submit")){
+        if(findInPage("Submit")){
         	clickButton("submit");
         	assertTitleContains(this.config.getString("lenya.tests.general.authoringPageTitle"));
         }
@@ -110,7 +110,7 @@ public class PublishTest extends LenyaTestCase12 {
         String docIDpure = docID.replaceFirst("/","");
         loadHtmlPage(url + "?uris="+contextprefix+this.pubid+"/"+LIVE_AREA+docID+".html&sources="+docIDpure+"/index_"+this.config.getString("lenya.tests.site.createLanguage")+".xml&task-id=publish&lenya.event=publish&lenya.usecase=publish&lenya.step=showscreen");
 
-        if(FindInPage("Publish")){
+        if(findInPage("Publish")){
         	assertTitleContains(this.config.getString("lenya.tests.workflow.publish.pageTitle"));
         	
         	// Now submit the form by clicking the button

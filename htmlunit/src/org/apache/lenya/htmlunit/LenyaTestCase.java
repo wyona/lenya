@@ -145,7 +145,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
         // check if the parent exists
         //loadHtmlPage(prefix + ".html");
         //assertTitleContains(this.config.getString("lenya.tests.general.authoringPageTitle"));
-        ParentExistsOrCreate(parentDocID, "htmlunit Tests", "xhtml");        
+        parentExistsOrCreate(parentDocID, "htmlunit Tests", "xhtml");        
 
         // check if the newExists document does not exist yet:
         assertPageDoesNotExist(parentDocID + "/" + newNodeID, AUTHORING_AREA);
@@ -210,21 +210,21 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
     
     /**
      * Checks that the page nodeID exists in the Authoring-Area, if not create it.
-     * @param NodeID
+     * @param nodeID
      * @param title
      * @param doctype
      * @throws Exception
      */
-    protected void ParentExistsOrCreate(String NodeID,
+    protected void parentExistsOrCreate(String nodeID,
             String title, String doctype) throws Exception {
-    	String page = new String (this.pubid + "/" + AUTHORING_AREA + NodeID +".html");
+    	String page = new String (this.pubid + "/" + AUTHORING_AREA + nodeID +".html");
     	try {
     		loadHtmlPage(page);
     		return;
-    	}catch (FailingHttpStatusCodeException e){
+    	} catch (FailingHttpStatusCodeException e) {
     		this.logger.info(page+" does not exist, it will be created");
     		
-    		String NodeIDpure = NodeID.replaceFirst("/","");
+    		String nodeIDpure = nodeID.replaceFirst("/","");
     		//createNewDocument("/index", NodeIDpure, title, doctype);
     		
     		String prefix = this.pubid + "/" + AUTHORING_AREA + "/index.html";
@@ -238,7 +238,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
 
             HtmlTextInput inputDocId = (HtmlTextInput) form
                     .getInputByName("documentId");
-            inputDocId.setValueAttribute(NodeIDpure);
+            inputDocId.setValueAttribute(nodeIDpure);
 
             HtmlTextInput inputTitle = (HtmlTextInput) form.getInputByName("dublincore.title");
             inputTitle.setValueAttribute(title);
@@ -256,9 +256,9 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
      * Looks for the String What in the currentPage. Returns true if the currentPage contains String What
      * @param What
      */
-    protected boolean FindInPage(String What){
+    protected boolean findInPage(String what){
         String pagesource = this.currentPage.getPage().asText();
-        Pattern patter = Pattern.compile(What);
+        Pattern patter = Pattern.compile(what);
         boolean found = patter.matcher(pagesource).find();
         return found;
     }    
@@ -295,7 +295,7 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
 
         // call the submit usecase
         loadHtmlPage(url + "?&lenya.usecase=workflow.submit");
-        if (FindInPage("The event submit")) {
+        if (findInPage("The event submit")) {
             // in case it is already submited it shows the loginscreen
             assertTitleContains(this.config.getString("lenya.tests.workflow.submit.pageTitle"));
             this.logger.info("Can not submit: " + docID  + " seems to be already submited.");
