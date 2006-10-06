@@ -579,7 +579,7 @@
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
-            <br/>
+            <br class="floatclear"/>
             <xsl:if test="$area = 'authoring'">
               <a class="arrow_right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
             </xsl:if>
@@ -600,6 +600,7 @@
         - Noch kein Eintrag erfasst - <br/> 
       </xsl:otherwise>
     </xsl:choose>
+    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
     <br/>
   </xsl:template>
 

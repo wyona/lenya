@@ -276,10 +276,6 @@
           <xsl:variable name="creator" select="unizh:newsitem/lenya:meta/dc:creator"/>
           <xsl:choose>
             <xsl:when test="$creator = ''"/>
-            <xsl:when test="contains($creator, '(') and contains($creator, ')')">
-              <h3><xsl:value-of select="substring-after(substring-before($creator, ')'), '(')"/></h3>
-              <p>&#160;</p>
-            </xsl:when>
             <xsl:otherwise>
               <h3><xsl:value-of select="$creator"/></h3>
               <p>&#160;</p>
