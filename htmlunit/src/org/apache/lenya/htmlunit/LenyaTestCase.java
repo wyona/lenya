@@ -14,6 +14,7 @@
  */
 package org.apache.lenya.htmlunit;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -39,10 +40,12 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
      * Publication id which should be defined in the property file.
      */
     protected String pubid;
+    protected Random random;
 
     protected void setUp() throws Exception {
         super.setUp();
         this.pubid = this.config.getString("lenya.pubid");
+        this.random = new Random(System.currentTimeMillis());
     }
 
     /**
@@ -176,7 +179,9 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
      * @return id of the form &quot;htmlunit33489823&quot;
      */
     protected String createTestNodeID() {
-        return "htmlunit" + System.currentTimeMillis();
+        long rand = this.random.nextLong();
+        if (rand<0) rand = -rand;
+        return "htmlunit" + rand;
     }
     
     /**
