@@ -25,22 +25,34 @@ h1, h2, h3, h4, h5, p {
 	line-height:20px;
 }
 h1 {
-	font-size: 16px;
+	font-size: 17px;
 }
 h2 {
-	font-size: 13px;
+	font-size: 15px;
+	font-weight:bold;
 }
 h3 {
 	font-size: 13px;
-	font-style: italic;
-	font-weight:normal;
+	font-weight:bold;
 }
+
+h4, h5, h6 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight:bold;
+ }
+ 
 .klein {
 	font-size: 11px;
 }
+
+.sup {
+  font: 11px upper;
+  
+}
 /*link*/
 a { 
-	text-decoration: none;
+	text-decoration: underscore;
 	color:#000000;  
 }
 .content li a {
