@@ -50,7 +50,7 @@
     <user-id><input:get-attribute module="access-control" name="user-id"/></user-id>
     <ip-address><input:get-attribute module="access-control" name="ip-address"/></ip-address>
 
-    <dc:creator><input:get-attribute module="access-control" name="user-id"/> (<input:get-attribute module="access-control" name="user-name"/>)</dc:creator>
+    <dc:creator><input:get-attribute module="access-control" name="user-name"/></dc:creator>
     <dc:subject></dc:subject>
     <dc:publisher><xsp:expr>publisher</xsp:expr></dc:publisher>
     <dc:date><input:get-attribute module="date" name="currentDate"/></dc:date>
