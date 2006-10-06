@@ -80,15 +80,6 @@ public class CopyPasteTest extends LenyaTestCase {
         executeSimpleUsecase(newParentID, "sitemanagement.paste");
     }
 
-    public void executeSimpleUsecase(String docID, String usecase) throws Exception {
-        // call the usecase on the given document
-        loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID + ".html?lenya.usecase="+usecase);
-        assertTitleContains(this.config.getString("lenya.tests."+usecase+".pageTitle"));
-
-        clickButton("submit");
-        assertTitleContains(this.config.getString("lenya.tests.general.authoringPageTitle"));
-    }
-    
     public static Test suite() {
         return new TestSuite(CopyPasteTest.class);
     }

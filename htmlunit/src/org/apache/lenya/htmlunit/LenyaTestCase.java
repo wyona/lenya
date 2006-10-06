@@ -332,4 +332,23 @@ public abstract class LenyaTestCase extends HtmlUnitTestCase {
 
         assertTitleContains(this.config.getString("lenya.tests.general.authoringPageTitle"));
     }
+    
+    /**
+     * Executes a simple usecase on the given document. 
+     * The usecase is required to have a confirmation view, where this method will
+     * simply click ok.
+     * @param docID
+     * @param usecase
+     * @throws Exception
+     */
+    public void executeSimpleUsecase(String docID, String usecase) throws Exception {
+        // call the usecase on the given document
+        loadHtmlPage(this.pubid + "/" + AUTHORING_AREA + docID + ".html?lenya.usecase="+usecase);
+        assertTitleContains(this.config.getString("lenya.tests."+usecase+".pageTitle"));
+
+        clickButton("submit");
+        assertTitleContains(this.config.getString("lenya.tests.general.authoringPageTitle"));
+    }
+    
+    
 }
