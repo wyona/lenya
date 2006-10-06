@@ -27,7 +27,7 @@
        5. error
        6. fatal (the most serious)
     -->
-    <debugLevel>6</debugLevel>
+    <debugLevel>4</debugLevel>
     <baseUrl>http://localhost:8888/</baseUrl>
     <!-- <baseUrl>http://nj-test.amc.customers.wyona.com/</baseUrl> -->
     <language>en-us</language>
