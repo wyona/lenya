@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * Base class to run HtmlUnit tests with JUnit.
  * 
  * Example:
+ * 
  * <pre>
  * public void testHomePage() throws Exception {
  * 
@@ -64,8 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  *     final WebClient webClient = new WebClient();
  *     final URL url = new URL(&quot;http://localhost:8888/index.html&quot;);
  *     final HtmlPage page = (HtmlPage) webClient.getPage(url);
- *     assertEquals(&quot;Apache Lenya - Content Management System&quot;, page
- *             .getTitleText());
+ *     assertEquals(&quot;Apache Lenya - Content Management System&quot;, page.getTitleText());
  * }
  * </pre>
  */
@@ -107,8 +107,10 @@ public abstract class HtmlUnitTestCase extends TestCase {
     protected String testName;
 
     protected List collectedAlerts = new ArrayList();
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see junit.framework.TestCase#setUp()
      */
     protected void setUp() throws Exception {
@@ -116,7 +118,8 @@ public abstract class HtmlUnitTestCase extends TestCase {
 
         // read the config file
         ConfigurationFactory factory = new ConfigurationFactory();
-        URL configURL = new File(System.getProperty("htmlunit.config.file", "default-config.xml")).toURL();
+        URL configURL = new File(System.getProperty("htmlunit.config.file", "default-config.xml"))
+                .toURL();
         factory.setConfigurationURL(configURL);
         config = factory.getConfiguration();
 
@@ -124,20 +127,23 @@ public abstract class HtmlUnitTestCase extends TestCase {
         log.setLevel(Integer.parseInt(this.config.getString("htmlunit.debugLevel")));
         this.logger = log;
         this.baseURL = this.config.getString("htmlunit.baseUrl");
-        //this.webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
-        //this.webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        // this.webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
+        // this.webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
         this.webClient = new WebClient();
-        this.webClient.addRequestHeader("Accept-Language",this.config.getString("htmlunit.language"));
+        this.webClient.addRequestHeader("Accept-Language", this.config
+                .getString("htmlunit.language"));
         this.webClient.setRedirectEnabled(true);
-        this.webClient.setAlertHandler( new CollectingAlertHandler(this.collectedAlerts) );
-        
-        // FIXME: there are some problems with htmlunit and the 
+        this.webClient.setAlertHandler(new CollectingAlertHandler(this.collectedAlerts));
+
+        // FIXME: there are some problems with htmlunit and the
         // javascript of the site area
         this.webClient.setJavaScriptEnabled(false);
         this.webClient.setRefreshHandler(new ThreadedRefreshHandler());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see junit.framework.TestCase#runTest()
      */
     protected void runTest() throws Throwable {
@@ -154,13 +160,14 @@ public abstract class HtmlUnitTestCase extends TestCase {
                 this.logger.error("Response status message: " + response.getStatusMessage());
                 this.logger.error("Response content type: " + response.getContentType());
                 this.logger.error("Response content charset: " + response.getContentCharSet());
-                this.logger.error("Response load time in ms: " + response.getLoadTimeInMilliSeconds());
+                this.logger.error("Response load time in ms: "
+                        + response.getLoadTimeInMilliSeconds());
                 this.logger.error(this.currentPage.asXml());
             }
             // print alerts:
-            if (this.collectedAlerts.size()>0) {
+            if (this.collectedAlerts.size() > 0) {
                 this.logger.error("Alerts:");
-                for (int i=0; i<this.collectedAlerts.size(); i++) {
+                for (int i = 0; i < this.collectedAlerts.size(); i++) {
                     this.logger.error(this.collectedAlerts.get(i).toString());
                 }
             }
@@ -169,7 +176,9 @@ public abstract class HtmlUnitTestCase extends TestCase {
         this.logger.info("-------- End testcase [" + this.testName + "] ---------");
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see junit.framework.TestCase#tearDown()
      */
     protected void tearDown() throws Exception {
@@ -180,6 +189,7 @@ public abstract class HtmlUnitTestCase extends TestCase {
 
     /**
      * Sends an HTTP request and handles the response as HTML document.
+     * 
      * @param pageURL
      * @throws Exception
      */
@@ -189,9 +199,10 @@ public abstract class HtmlUnitTestCase extends TestCase {
         Page page = webClient.getPage(url);
         this.currentPage = handlePage(page);
     }
-    
+
     /**
      * Click on an element like a button or an anchor (link).
+     * 
      * @param element
      * @throws Exception
      */
@@ -199,10 +210,12 @@ public abstract class HtmlUnitTestCase extends TestCase {
         Page page = element.click();
         this.currentPage = handlePage(page);
     }
-    
-    /** 
-     * Clicks the given button of the first form in the current page. 
-     * @param name name attribute of the button
+
+    /**
+     * Clicks the given button of the first form in the current page.
+     * 
+     * @param name
+     *            name attribute of the button
      * @throws Exception
      */
     protected void clickButton(String name) throws Exception {
@@ -212,26 +225,26 @@ public abstract class HtmlUnitTestCase extends TestCase {
     }
 
     /**
-     * Performs a few tests on a page, then attempts to convert the page to
-     * an html page and returns it.
+     * Performs a few tests on a page, then attempts to convert the page to an
+     * html page and returns it.
+     * 
      * @param page
      * @return
      * @throws Exception
      */
     protected HtmlPage handlePage(Page page) throws Exception {
         this.response = page.getWebResponse();
-        
+
         assertNotNull("Response contains invalid HTML", page);
         assertTrue("Response should be an HTML page", page instanceof HtmlPage);
-        //assertTrue("Response status not 200",
-        //        this.response.getStatusCode() == 200);
-        
+        // assertTrue("Response status not 200",
+        // this.response.getStatusCode() == 200);
+
         if (this.logger.isDebugEnabled()) {
-            this.logger.debug(((HtmlPage)page).asXml());
+            this.logger.debug(((HtmlPage) page).asXml());
         }
         return (HtmlPage) page;
     }
-    
 
     /**
      * Simulates a click. A link with the provided text must be present on the
@@ -242,46 +255,48 @@ public abstract class HtmlUnitTestCase extends TestCase {
         click(link);
     }
 
-    /** 
-     * Simulates a click. The path must be present on the page 
+    /**
+     * Simulates a click. The path must be present on the page
      */
     protected void clickLink(String linkPath) throws Exception {
 
         final HtmlElement documentElement = currentPage.getDocumentElement();
-        final List links = documentElement.getHtmlElementsByAttribute("a",
-                "href", linkPath);
+        final List links = documentElement.getHtmlElementsByAttribute("a", "href", linkPath);
         HtmlAnchor link = (HtmlAnchor) links.get(0);
         click(link);
     }
-    
+
     /**
      * Asserts that the title of the current page contains the given string.
+     * 
      * @param titleExtract
      */
     protected void assertTitleContains(String titleExtract) {
         String title = currentPage.getTitleText();
-        assertFalse("provided text \"" + titleExtract
-                    + "\" not found in title \"" + title + "\"", title.indexOf(titleExtract) == -1);
+        assertFalse("provided text \"" + titleExtract + "\" not found in title \"" + title + "\"",
+                title.indexOf(titleExtract) == -1);
     }
 
     /**
      * Asserts that the title of the current page is equal to the given string.
+     * 
      * @param expectedTitle
      */
     protected void assertTitleEquals(String expectedTitle) {
         String title = currentPage.getTitleText();
-        assertEquals("provided title \"" + expectedTitle
-                + "\" doesn't match page title \"" + title + "\"", title, expectedTitle);
+        assertEquals("provided title \"" + expectedTitle + "\" doesn't match page title \"" + title
+                + "\"", title, expectedTitle);
     }
 
     /**
      * Asserts that the page contains the given string.
+     * 
      * @param expectedContent
      */
     protected void assertPageContainsText(String expectedContent) {
         String page = currentPage.asText();
-        assertFalse("provided content \""
-                    + expectedContent + "\" not found on this page", page.indexOf(expectedContent) == -1);
+        assertFalse("provided content \"" + expectedContent + "\" not found on this page", page
+                .indexOf(expectedContent) == -1);
     }
 
 }
