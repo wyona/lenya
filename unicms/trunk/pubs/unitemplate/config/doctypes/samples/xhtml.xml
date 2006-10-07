@@ -12,11 +12,11 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:description>Insert description here</dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
-    <dc:publisher>Universitaet Zuerich</dc:publisher>
+    <dc:publisher>Universität Zürich</dc:publisher>
     <dcterms:created>date of creation</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
     <dc:language>de</dc:language>
-    <dc:rights>Universitaet Zuerich</dc:rights>
+    <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
   <unizh:related-content>
     <unizh:teaser>
