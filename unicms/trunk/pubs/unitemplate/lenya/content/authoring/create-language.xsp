@@ -45,10 +45,12 @@
       String[] usedLanguages = null;
       String description = null;
       String publisher = null;
+      String rights = null;
       try {
         usedLanguages = doc.getLanguages();
         description = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_DESCRIPTION);
         publisher = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_PUBLISHER);
+        rights = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_RIGHTS);
       } catch (DocumentException e) {}
       if (usedLanguages != null) {
       	for (int i = 0; i &lt; usedLanguages.length; i++) {
@@ -71,7 +73,7 @@
     <dc:publisher><xsp:expr>publisher</xsp:expr></dc:publisher>
     <dc:description><xsp:expr>description</xsp:expr></dc:description>
     <dc:date><input:get-attribute module="date" name="currentDate"/></dc:date>
-    <dc:rights>University of Zurich</dc:rights>
+    <dc:rights><xsp:expr>rights</xsp:expr></dc:rights>
     <dc:languages>
       <xsp:logic>
 	for (int i = 0; i &lt; validLanguages.length; i++) {

@@ -38,8 +38,10 @@
       
       Document doc = (Document) <input:get-attribute module="page-envelope" as="object" name="document"/>;
       String publisher = null;
+      String rights = null;
       try {
         publisher = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_PUBLISHER);
+        rights = doc.getDublinCore().getFirstValue(DublinCore.ELEMENT_RIGHTS);
       } catch (DocumentException e) {}
 
     </xsp:logic>
@@ -54,7 +56,7 @@
     <dc:subject></dc:subject>
     <dc:publisher><xsp:expr>publisher</xsp:expr></dc:publisher>
     <dc:date><input:get-attribute module="date" name="currentDate"/></dc:date>
-    <dc:rights>Universität Zürich</dc:rights>
+    <dc:rights><xsp:expr>rights</xsp:expr></dc:rights>
     <dc:language><xsp:expr>pub.getDefaultLanguage()</xsp:expr></dc:language>
 
   </parent-child>
