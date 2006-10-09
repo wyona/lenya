@@ -69,7 +69,7 @@ $Id: addMetaData.xsl,v 1.6 2004/02/04 14:41:17 gregor Exp $
     </dc:language>
   </xsl:template>  
 
-  <xsl:template match="dc:publisher[$publisher!='']">
+  <xsl:template match="dc:publisher">
     <dc:publisher>
       <xsl:value-of select="$publisher"/>
     </dc:publisher>
@@ -81,7 +81,7 @@ $Id: addMetaData.xsl,v 1.6 2004/02/04 14:41:17 gregor Exp $
     </dcterms:created>
   </xsl:template>  
 
-  <xsl:template match="dc:rights[$rights!='']">
+  <xsl:template match="dc:rights">
     <dc:rights>
       <xsl:value-of select="$rights"/>
     </dc:rights>
