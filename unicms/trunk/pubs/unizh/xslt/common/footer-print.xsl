@@ -17,7 +17,7 @@
     <div id="footer">&#169;&#160;<xsl:value-of select="/document/content/*/lenya:meta/dc:rights"/>
       | <i18n:date src-pattern="yyyy-MM-dd" value="{$date}"/>
       <xsl:variable name="publisher" select="/document/content/*/lenya:meta/dc:publisher"/>
-      <xsl:if test="($publisher != '') and ($publisher != /document/content/*/lenya:meta/dc:rights)">
+      <xsl:if test="($publisher != '') and (substring($publisher, 1, 9) != substring(/document/content/*/lenya:meta/dc:rights, 1, 9))">
         <xsl:choose>
           <xsl:when test="contains($publisher, '@')">
             <script language="javascript">
