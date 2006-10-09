@@ -153,10 +153,10 @@ function validateForm(theForm)
                 <td class="lenya-form-caption">Description:</td><td><textarea class="lenya-form-element" name="properties.create.description" rows="3">&#160;</textarea></td>
               </tr>
               <tr>
-                <td class="lenya-form-caption">Publisher:</td><td><input class="lenya-form-element" type="text" name="properties.create.publisher" value="{/parent-child/dc:publisher}"/></td>
+                <td class="lenya-form-caption">Publisher:</td><td><input class="lenya-form-element" type="text" name="properties.create.publisher"><xsl:attribute name="value"><xsl:apply-templates select="dc:publisher"/></xsl:attribute>&#160;</input></td>
               </tr>
               <tr>
-                <td class="lenya-form-caption">Rights:</td><td><input class="lenya-form-element" type="text" name="properties.create.rights" value="{/parent-child/dc:rights}"/></td>
+                <td class="lenya-form-caption">Rights:</td><td><input class="lenya-form-element" type="text" name="properties.create.rights"><xsl:attribute name="value"><xsl:apply-templates select="dc:rights"/></xsl:attribute>&#160;</input></td>
               </tr>
               <xsl:choose>
                 <xsl:when test="$doctype = 'xhtml'">
@@ -189,6 +189,32 @@ function validateForm(theForm)
     </xsl:if>
   </xsl:template>
   
+  <xsl:template match="dc:publisher">
+    <xsl:variable name="publisher" select="/parent-child/dc:publisher"/>
+    <xsl:variable name="language" select="/parent-child/dc:language"/>
+    <xsl:choose>
+      <xsl:when test="($publisher = '') and ($language = 'de')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="starts-with($publisher, 'Universit') and ($language = 'de')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="($publisher = '') and ($language = 'en')">University of Zurich</xsl:when>
+      <xsl:when test="starts-with($publisher, 'Universit') and ($language = 'en')">University of Zurich</xsl:when>
+      <xsl:otherwise><xsl:value-of select="$publisher"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="dc:rights">
+    <xsl:variable name="rights" select="/parent-child/dc:rights"/>
+    <xsl:variable name="language" select="/parent-child/dc:language"/>
+    <xsl:choose>
+      <xsl:when test="($rights = '') and ($language = 'de')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="starts-with($rights, 'Universit') and ($language = 'de')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="($rights = '') and ($language = 'en')">University of Zurich</xsl:when>
+      <xsl:when test="starts-with($rights, 'Universit') and ($language = 'en')">University of Zurich</xsl:when>
+      <xsl:otherwise><xsl:value-of select="$rights"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
   <xsl:template match="exception">
     <font color="red">EXCEPTION</font><br />
     Go <a href="{../referer}">back</a> to page.<br />

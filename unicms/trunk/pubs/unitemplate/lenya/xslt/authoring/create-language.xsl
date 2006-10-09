@@ -102,10 +102,10 @@ function validateForm(theForm)
                 <td class="lenya-form-caption">Description:</td><td><textarea class="lenya-form-element" name="properties.create.description" rows="3"><xsl:apply-templates select="dc:description"/>&#160;</textarea></td>
               </tr>
               <tr>
-                <td class="lenya-form-caption">Publisher:</td><td><input class="lenya-form-element" type="text" name="properties.create.publisher" value="{/parent-child/dc:publisher}"/></td>
+                <td class="lenya-form-caption">Publisher:</td><td><input class="lenya-form-element" type="text" name="properties.create.publisher"><xsl:attribute name="value"><xsl:apply-templates select="dc:publisher"/></xsl:attribute>&#160;</input></td>
               </tr>
               <tr>
-                <td class="lenya-form-caption">Rights:</td><td><input class="lenya-form-element" type="text" name="properties.create.rights" value="{/parent-child/dc:rights}"/></td>
+                <td class="lenya-form-caption">Rights:</td><td><input class="lenya-form-element" type="text" name="properties.create.rights"><xsl:attribute name="value"><xsl:apply-templates select="dc:rights"/></xsl:attribute>&#160;</input></td>
               </tr>
               <tr>
                 <td class="lenya-form-caption">Date:</td><td><input class="lenya-form-element" type="hidden" name="properties.create.date" value="{/parent-child/dc:date}"/><xsl:value-of select="/parent-child/dc:date"/></td>
@@ -143,6 +143,32 @@ function validateForm(theForm)
         <xsl:value-of select="."/>
       </xsl:when>
       <xsl:otherwise> </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="dc:publisher">
+    <xsl:variable name="publisher" select="/parent-child/dc:publisher"/>
+    <xsl:variable name="documentLanguage" select="/parent-child/document-language"/>
+    <xsl:choose>
+      <xsl:when test="($publisher = '') and ($documentLanguage = 'en')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="starts-with($publisher, 'Universit') and ($documentLanguage = 'en')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="($publisher = '') and ($documentLanguage = 'de')">University of Zurich</xsl:when>
+      <xsl:when test="starts-with($publisher, 'Universit') and ($documentLanguage = 'de')">University of Zurich</xsl:when>
+      <xsl:otherwise><xsl:value-of select="$publisher"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="dc:rights">
+    <xsl:variable name="rights" select="/parent-child/dc:rights"/>
+    <xsl:variable name="documentLanguage" select="/parent-child/document-language"/>
+    <xsl:choose>
+      <xsl:when test="($rights = '') and ($documentLanguage = 'en')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="starts-with($rights, 'Universit') and ($documentLanguage = 'en')">Universit&#228;t Z&#252;rich</xsl:when>
+      <xsl:when test="($rights = '') and ($documentLanguage = 'de')">University of Zurich</xsl:when>
+      <xsl:when test="starts-with($rights, 'Universit') and ($documentLanguage = 'de')">University of Zurich</xsl:when>
+      <xsl:otherwise><xsl:value-of select="$rights"/></xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
