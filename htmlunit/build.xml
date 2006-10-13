@@ -11,11 +11,7 @@
        ant -Dbuild.properties.file=my.build.properties
        Default is build.properties
   -->
-  <condition property="build.properties.file" value="build.properties">
-    <not>
-      <isset property="build.properties.file"/>
-    </not>
-  </condition>
+  <property name="build.properties.file" value="build.properties"/>
   <property file="${build.properties.file}"/>
 
   <!-- set classpath-->
