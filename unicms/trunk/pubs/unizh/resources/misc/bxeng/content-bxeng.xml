@@ -2,83 +2,105 @@
 <css>
 
 /*allgemeine Definition*/
+html > body {font-size:12px}
+
 body {
-        font-size: 12px;
-        font-family: Arial, sans-serif;
-        line-height: 18px;
-        color:#333;
-        margin:0px 20px;
-        padding:0px;
-        background-color: #FFFFFF;
+  	font-family: Arial, sans-serif;
+	line-height: 1.5em;
+	color:#333;
+	margin:0px 20px;
+	padding:0px;
+	background-color: #FFFFFF;
  }
 
 .bodywidth {
-        max-width:800px;
-        width:expression(document.body.clientWidth > 800  ? "800px": "auto");
-        margin-right: auto;
-        margin-left: auto;
+	max-width:800px;
+	width:expression(document.body.clientWidth > 800  ? "802px": "auto");
+	margin-right: auto;
+	margin-left: auto;
 }
 
 
 /*font*/
 h2, h3, h4, h5, h6{
-        margin-top: 0px;
-        margin-bottom: 9px;
-        padding-top: 9px;
-        line-height:18px;
+	margin-top: 0px;
+	margin-bottom: 0.8em;
+	padding-top: 0.8em;
+	line-height: 1.2em;
 }
 
 p {
-        padding:0px;
-        margin-top: 0px;
-        margin-bottom: 9px;
+	padding:0px;
+	margin-top: 0px;
+	margin-bottom: 0.9em;
 }
+
 .relatedboxcont p {
-        margin:0px;
+	margin:0px;
 }
+
 h1 {
-        padding: 0;
-        font-size: 16px;
-        line-height:20px;
-        margin-top: 0px;
-        margin-bottom: 9px;
+	padding: 0;
+	font-size: 1.4em;
+	line-height: 1.3em;
+	margin-top: 0px;
+	margin-bottom: 0.65em;
 }
+
 h2 {
-        font-size: 12px;
+	font-size: 1.2em;
+    line-height: 1.2em;
 }
+
 h3 {
-        font-size: 12px;
-        font-style: italic;
-        font-weight:bold;
+	font-size: 1.0em;
+	font-weight:bold;
 }
+
 h4, h5, h6 {
-        font-size: 12px;
-        font-style: italic;
-        font-weight:normal;
+	font-size: 1.0em;
+	font-style: italic;
+	font-weight:bold;
 }
+
+
+code {
+  font-size: 1.0em;
+}
+
 .titel {
-        font-weight: bold;
+	font-weight: bold;
 }
+
 .italic {
-        font-style: italic;
-        font-weight:normal;
+	font-style: italic;
+	font-weight:normal;
 }
+
 .klein, .teasertext {
-        font-size: 11px;
-        line-height: 15px;
+	font-size: 0.95em;
+	line-height: 1.3em;
 }
+
 .kleintitel {
-        font-size: 11px;
-        font-weight:bold;
+	font-size: 0.95em;
+	font-weight:bold;
 }
+
 .lead {
-        color:#999999;
-        font-size: 12px;
-        font-weight:bold;
+	color:#999999;
+	font-size: 1.0em;
+	font-weight:bold;
 }
+
 .urltext {
-        color:#999999;
+	color:#999999;
 }
+
+.attention {
+  color: #cc3333;
+}
+
 /*link*/
 a {
         text-decoration: none;
@@ -292,6 +314,7 @@ img.icon {
 * html #col1 {
   margin-right: 17px;
  }
+ 
 /* Seconder navigation */
 #secnav {
         line-height: 20px;
@@ -578,6 +601,37 @@ a.rss {
 
 /*list element*/
 
+ul.type1, ol.type1, ol.type2 {
+  padding-left:1.5em;
+}
+  
+ul.type2, ul.type3  {
+  list-style-type:none;
+  padding-left:0;
+}
+ 
+ul.type2 li {
+	background-image: url(<context-prefix/>/unizh/authoring/images/list_square.gif);
+	background-position: 0.5em 0.6em;
+	background-repeat: no-repeat;
+	padding-left:1.5em;
+}
+
+ul.type3 li {
+	background-image: url(<context-prefix/>/unizh/authoring/images/list_hyphen.gif);
+	background-position: 0.5em 0.75em;
+	background-repeat: no-repeat;
+	padding-left:1.5em;
+}
+
+ol.type2, ol.type1 li ol.type1  {
+  list-style-type:lower-alpha;
+}
+  
+ol.type2 li ol.type2 {
+list-style-type: decimal;
+}
+
 ul.squarelist {
         margin-bottom:18px;
 }
@@ -609,12 +663,7 @@ ul.linknav {
 ol {
         margin-top: 0;
 }
-* html ol  {
-        margin-left:20px;
-}
-* html ol li {
-        margin-left:25px;
-}
+
 ol.list a {
         background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
         padding-left:13px;
@@ -1281,7 +1330,7 @@ td .object object[width] {
 
 .quicklink .a {
         margin-left: 8px;
-        font-size: 11px;
+        fontsize: 11px;
         display: block;
 }
 
@@ -1353,7 +1402,6 @@ td .object object[width] {
         content: "RSS Reader";
         display: block;
 }
-
 
 
 </css>
