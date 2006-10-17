@@ -138,7 +138,63 @@ a.arrow {
 .imginstitute {
 	display:none;
 }
+
 /*list element*/
+
+ul.type1, ol.type1, ol.type2 {
+  padding-left:1.5em;
+}
+  
+ul.type2, ul.type3  {
+  list-style-type:none;
+  padding-left:0;
+}
+ 
+ul.type2 li {
+	background-image: url(<context-prefix/>/unizh/authoring/images/list_square.gif);
+	background-position: 0.5em 0.6em;
+	background-repeat: no-repeat;
+	padding-left:1.5em;
+}
+
+ul.type3 li {
+	background-image: url(<context-prefix/>/unizh/authoring/images/list_hyphen.gif);
+	background-position: 0.5em 0.75em;
+	background-repeat: no-repeat;
+	padding-left:1.5em;
+}
+
+ol.type2, ol.type1 li ol.type1  {
+  list-style-type:lower-alpha;
+}
+  
+ol.type2 li ol.type2 {
+list-style-type: decimal;
+}
+
+/*list styles for IE */
+
+* html ul.type1 {
+  padding-left:0;
+  margin-left:1.5em;
+}
+  
+* html ul.type2, * html ul.type3  {
+  list-style-type:none;
+  padding-left:0;
+  margin-left:0;
+}
+
+* html ol.type1, * html ol.type2 {
+  padding-left:0;
+  margin-left:0.6em;
+}
+  
+* html ol.type1 li, * html ol.type2 li {
+  padding-left:0;
+  margin-left:1.8em;
+}
+
 
 ul.squarelist li {
 	padding:0px;
