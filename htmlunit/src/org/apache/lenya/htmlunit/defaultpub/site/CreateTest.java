@@ -59,6 +59,20 @@ public class CreateTest extends LenyaTestCase {
         logout();
     }
 
+    /**
+     * Attempts to create a resource document.
+     * 
+     * @throws Exception
+     */
+    public void testCreateResourceDocument() throws Exception {
+      loginAsDefaultUser();
+      String nodeID = createTestNodeID(); 
+      String startDocID = this.config.getString("lenya.tests.general.startDocID");
+      createNewDocument(startDocID, nodeID,
+          "htmlunit resource document", "resource");
+      logout();
+    }
+
     public static Test suite() {
         return new TestSuite(CreateTest.class);
     }
