@@ -154,12 +154,12 @@
       <div class="contentarea">
         <xsl:if test="$nodeid ='about'">
           <div id="modulimg">
-            <img src="{$contextprefix}/unitemplate/resources/shared/images/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <xsl:if test="$nodeid ='modul1'">
           <div id="modulimg">
-            <img src="{$localsharedresources}/{$nodeid}.jpg"/>
+            <img src="{$localsharedresources}/images/{$nodeid}.jpg"/>
           </div>
         </xsl:if>
         <xsl:if test="$nodeid ='modul2'">
