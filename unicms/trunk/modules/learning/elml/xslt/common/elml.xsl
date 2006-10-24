@@ -194,20 +194,22 @@
     <xsl:variable name="glossRef" select="@glossRef"/>
     <xsl:variable name="glossPageUrl" select="concat($contextprefix, /document/unizh:level/level:node[*/elml:glossary]/@href)"/>
     <xsl:variable name="definition" select="/document/unizh:level/level:node/*/elml:glossary/elml:definition[@term = $glossRef]/text()"/>
+    <xsl:variable name="term" select="/document/unizh:level/level:node/*/elml:glossary/elml:definition[@term = $glossRef]/@term"/>
     <!-- <xsl:if test="@icon">
       <img src="{$imageprefix}/icons/{@icon}.gif"/>
     </xsl:if> -->
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*[1][text()]">
-        <p>
-          <b><xsl:value-of select="$glossRef"/><xsl:comment/></b>:
-          <xsl:apply-templates select="$definition"/>
-        </p>
+      <xsl:when test="text()">
+        <a href="{concat($glossPageUrl, '#', $glossRef)}" alt="{$definition}" title="{$definition}">
+          <xsl:value-of select="."/>
+        </a>
       </xsl:when>
       <xsl:otherwise>
-          <a href="{concat($glossPageUrl, '#', $glossRef)}" alt="{$definition}" title="{$definition}"><xsl:value-of select="$glossRef"/></a>
+        <p>
+          <b><xsl:value-of select="$term"/></b>: <xsl:value-of select="$definition"/>
+        </p>
       </xsl:otherwise>
-    </xsl:choose> 
+    </xsl:choose>
   </xsl:template>
 
 
@@ -504,10 +506,11 @@
     </xsl:choose> 
   </xsl:template>
 
+
   <xsl:template match="elml:citation">
     <xsl:choose>
       <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
-        <div class="{@cssClass}">"<xsl:apply-templates/>"
+        <div class="@cssClass">"<xsl:apply-templates/>"
           <br/>
           <xsl:call-template name="BibliographyRef"/> 
         </div>
@@ -520,6 +523,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+
 
   <xsl:template match="elml:newLine">
     <br/>
@@ -562,7 +566,7 @@
         <p>
           <xsl:for-each select="/document/unizh:children/index:child">
             <xsl:if test="*/*/@title">
-              <a class="arrow"><xsl:attribute name="href"><xsl:value-of select="concat($contextprefix,@href)"/></xsl:attribute><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
+              <a class="arrow" href="{@href}"><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
             </xsl:if>
           </xsl:for-each>
         </p>
@@ -1125,9 +1129,7 @@
     <div>
       <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
         <a name="{position()}"><xsl:comment/></a>
-        <xsl:apply-templates select=".">
-          <xsl:with-param name="name_download">Dokument im Web</xsl:with-param>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="."/>
       </xsl:for-each>
     </div>
   </xsl:template>
@@ -1214,5 +1216,10 @@
       <xsl:apply-templates/><xsl:comment/>
     </a>
   </xsl:template>
+
+
+
+
+
 
 </xsl:stylesheet>

@@ -36,14 +36,16 @@ function showscreen() {
   var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
   var doc = pageEnvelope.getDocument();
 
-  var url = doc.getLabel();
-  cocoon.sendPageAndWait("select.jx", {"url" : url});
+  var label = doc.getLabel();
+  cocoon.sendPageAndWait("select.jx", {"label" : label});
 
   var mode = cocoon.request.getParameter("mode");
   if (mode.equals("elml")) {
     exportELML(doc);
-  } else {
+  } else if (mode.equals("cp")) {
     exportCP(doc);
+  } else if (mode.equals("pdf")){
+    exportPDF(doc);
   }
 
   cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
@@ -334,6 +336,99 @@ function exportCP(doc) {
    cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
 
 }
+
+
+function exportPDF(doc) {
+
+  var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+  var pub = doc.getPublication();
+  var children = getChildren(doc);
+  var filename = doc.getName() + ".pdf";
+  var resManager = new ResourcesManager(doc);
+  var pdfFile = resManager.getPath().getAbsolutePath() + "/" + filename;
+  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
+  var source = resolver.resolveURI(pdfFile);
+
+  /* Process lesson document to dom */
+
+  var path = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
+  var dom = pipelineUtil.processToDOM("xml/" + path, null);
+
+
+  /* Rewrite multimedia tags */
+
+  var mmNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+
+  for (var i = 0; i < mmNodes.length; i++) {
+    var mmNode = mmNodes.item(i);
+    var src = mmNode.getAttribute("src");
+
+    mmNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
+  }
+
+   /* Process lesson parts to dom  */
+
+  for (var i = 0; i < children.size(); i++) {
+    var path = children.get(i).getId() + "/index_" + doc.getLanguage() + ".xml";
+    var partDOM = pipelineUtil.processToDOM("xml/" + path, null);
+    var resManager = new ResourcesManager(children.get(i));
+
+    var mmNodes = partDOM.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+
+    for (var j = 0; j < mmNodes.length; j++) {
+      var mmNode = mmNodes.item(j);
+      var src = mmNode.getAttribute("src");
+
+      mmNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
+    }
+
+     /* Add part to lesson */
+     var cloned = dom.importNode(partDOM.documentElement, true);
+     dom.documentElement.appendChild(cloned);
+   }
+
+
+  var label = doc.getLabel();
+  var units = new ArrayList();
+
+  var unitNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "unit");
+  for (var i = 0; i < unitNodes.length; i++) {
+    units.add(unitNodes.item(i));
+  }
+
+  cocoon.sendPageAndWait("pdf/configure.jx", {"label" : label, "units" : units});
+
+  var role = cocoon.request.get("role");
+  var publisher = cocoon.request.get("publisher");
+  var author = cocoon.request.get("author");
+  var url = cocoon.request.get("url");
+  var pagebreak_level = cocoon.request.get("pagebreak_level");
+  var chapter_numbers = cocoon.request.get("chapter_numbers");
+  var optional_units = "";
+
+  var date = new Date();
+  var yearMonth = "" + date.getMonth() + ". " + date.getFullYear();
+
+  for (var i = 0; i < unitNodes.length; i++) {
+    var label = unitNodes.item(i).getAttribute("label");
+    if (cocoon.request.get(label)) {
+      optional_units += unitNodes.item(i).getAttribute("label");
+    }
+  }
+
+
+   var out = source.getOutputStream();
+   /* Serialize lesson to string */
+   cocoon.processPipelineTo("pdf/", {"dom": dom, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "optional_units": optional_units}, out);
+   out.close();
+
+   var url = doc.getName() + "/" + filename;
+   var size = Math.round(new File(pdfFile).length() / 1024) + " KB";
+   cocoon.sendPageAndWait("pdf/download.jx", {"url" : url, "filename" : filename, "length": size});
+
+}
+
+
 
 /** returns a directory name for asset storage **/
 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<jx:template xmlns:jx="http://apache.org/cocoon/templates/jx/1.0">
+  <configuration>
+    <fonts>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsans.xml" 
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSans.ttf">
+        <font-triplet name="GillSans" style="normal" weight="normal"/>
+      </font>
+       <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsansbold.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSansBold.ttf">
+        <font-triplet name="GillSans" style="normal" weight="bold"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsansitalic.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSansItalic.ttf">
+        <font-triplet name="GillSans" style="italic" weight="normal"/>
+      </font>
+    </fonts>
+  </configuration>
+</jx:template>

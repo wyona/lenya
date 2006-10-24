@@ -26,7 +26,11 @@
         <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
       </map:transformers>
       <map:readers default="resource"/>
-      <map:serializers default="xhtml"/>
+      <map:serializers default="xhtml">
+        <map:serializer name="fo2pdf-elml" logger="sitemap.serializer.fo2pdf" mime-type="application/pdf" src="org.apache.cocoon.serialization.FOPSerializer">
+          <user-config>cocoon:/config-fop.xml</user-config>
+        </map:serializer>
+      </map:serializers>
       <map:matchers default="wildcard"/>
       <map:selectors/>
   </map:components>
@@ -71,15 +75,28 @@
 
      <map:pipeline type="noncaching">
 
-       <map:match pattern="dom.jx">
-         <map:generate type="jx" src="usecases/elml/export/jx/dom.jx"/>
-         <map:transform src="usecases/elml/export/xslt/dom.xsl"/> 
+       <map:match pattern="config-fop.xml">
+         <map:generate type="jx" src="usecases/elml/export/pdf/config/config.jx">
+           <map:parameter name="base-dir" value="/Developer/Java/cocoon-lenya/build/lenya/webapp/lenya/pubs/unitemplate/usecases/elml/export/pdf/config"/>
+         </map:generate>
          <map:serialize type="xml"/>
        </map:match>
 
        <map:match pattern="manifest.jx">
          <map:generate type="jx" src="usecases/elml/export/jx/manifest.jx"/>
          <map:serialize type="xml"/>
+       </map:match>
+
+       <map:match pattern="dom.jx">
+         <map:generate type="jx" src="usecases/elml/export/jx/dom.jx"/>
+         <map:transform src="usecases/elml/export/xslt/dom.xsl"/> 
+         <map:serialize type="xml"/>
+       </map:match>
+
+       <map:match pattern="pdf/*.jx">
+         <map:generate type="jx" src="usecases/elml/export/pdf/jx/{1}.jx"/>
+          <map:call resource="style-cms-page"/>
+         <map:serialize type="xhtml"/>
        </map:match>
 
        <map:match pattern="*.jx">
@@ -122,6 +139,21 @@
          <map:serialize type="html"/>
        </map:match>
 
+       <map:match pattern="pdf/**">
+         <map:generate type="jx" src="usecases/elml/export/jx/dom.jx"/>
+         <map:transform src="usecases/elml/export/pdf/xslt/elml.xsl">
+           <map:parameter name="role" value="{flow-attribute:role}"/>
+           <map:parameter name="date" value="{flow-attribute:date}"/>
+           <map:parameter name="publisher" value="{flow-attribute:publisher}"/>
+           <map:parameter name="author" value="{flow-attribute:author}"/>
+           <map:parameter name="online-url" value="{flow-attribute:url}"/>
+           <map:parameter name="role" value="{flow-attribute:role}"/>
+           <map:parameter name="pagebreak_level" value="{flow-attribute:pagebreak_level}"/>
+           <map:parameter name="chapter_numbers" value="{flow-attribute:chapter_numbers}"/>
+           <map:parameter name="optional_units" value="{flow-attribute:optional_units}"/>
+         </map:transform> 
+         <map:serialize type="fo2pdf-elml"/>
+       </map:match>
 
        <map:match pattern="exportlesson" type="usecase">
          <map:select type="request-parameter">
@@ -130,6 +162,9 @@
              <map:call continuation="{request-param:lenya.continuation}"/>
            </map:when>
            <map:when test="exit">
+             <map:call continuation="{request-param:lenya.continuation}"/>
+           </map:when>
+           <map:when test="pdf">
              <map:call continuation="{request-param:lenya.continuation}"/>
            </map:when>
            <map:otherwise>
