@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><furtherReading xmlns="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace"><lenya:meta>
+<?xml version="1.0" encoding="UTF-8"?><furtherReading xmlns="http://www.elml.ch" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" xhtml:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace"><lenya:meta>
     <dc:title>Lesson </dc:title>
     <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject/>

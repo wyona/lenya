@@ -4,6 +4,7 @@
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
          >
  
   <include href="metadata/metadata.rng"/>
@@ -18,6 +19,7 @@
       <ref name="LessonLabelReq"/>
       <ref name="TitleReq"/>
       <ref name="NavTitleImp"/>
+      <attribute name="xhtml:dummy"><text/></attribute>
       <attribute name="lenya:dummy"><text/></attribute>
       <attribute name="dc:dummy"><text/></attribute>
       <attribute name="dcterms:dummy"><text/></attribute>

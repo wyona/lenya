@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Lektion" label="Label"><lenya:meta>
+<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://www.elml.ch" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" xhtml:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Lektion" label="Label"><lenya:meta>
       <dc:title>Lektion</dc:title>
       <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
       <dc:subject/>
@@ -17,10 +17,10 @@
     <elml:rights>Rigths</elml:rights>
   </elml:metadata>
   -->
-   <elml:entry xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" label="LEntryLesson" title="Einleitung" navTitle="Intro">
+   <elml:entry xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" label="LEntryLesson" title="Einleitung" navTitle="Intro">
                 <paragraph>Paragraph</paragraph>
         </elml:entry>
-        <elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        <elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">
           <elml:lObjective role="student">Lernziel</elml:lObjective>
           <elml:lObjective role="student">Lernziel</elml:lObjective>
         </elml:goals>

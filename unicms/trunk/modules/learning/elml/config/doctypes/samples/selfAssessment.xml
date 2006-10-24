@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><selfAssessment xmlns="http://www.elml.ch" xmlns:elml="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Uebung (Self Assessment)" label="Uebung" metaSetUpInfo="Setup info"><lenya:meta>
+<?xml version="1.0" encoding="UTF-8"?><selfAssessment xmlns="http://www.elml.ch" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:elml="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xhtml:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Uebung (Self Assessment)" label="Uebung" metaSetUpInfo="Setup info"><lenya:meta>
     <dc:title>Uebung (Self Assessment)</dc:title>
     <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject/>

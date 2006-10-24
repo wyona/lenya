@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:elml="http://www.elml.ch"
   xmlns="http://www.elml.ch" 
   xmlns:dcterms="http://purl.org/dc/terms/" 
@@ -14,6 +15,7 @@
   <xsl:template match="/*">
     <xsl:copy>
       <xsl:attribute name="lenya:dummy">FIXME:keepNamespace</xsl:attribute>
+      <xsl:attribute name="xhtml:dummy">FIXME:keepNamespace</xsl:attribute>
       <xsl:attribute name="elml:dummy">FIXME:keepNamespace</xsl:attribute>
       <xsl:attribute name="dc:dummy">FIXME:keepNamespace</xsl:attribute>
       <xsl:attribute name="dcterms:dummy">FIXME:keepNamespace</xsl:attribute>

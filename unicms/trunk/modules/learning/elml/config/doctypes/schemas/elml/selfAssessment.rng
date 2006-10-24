@@ -21,6 +21,7 @@
    <define name="selfAssessment">
     <element name="selfAssessment">
       <attribute name="lenya:dummy"><text/></attribute>
+      <attribute name="xhtml:dummy"><text/></attribute>
       <attribute name="dc:dummy"><text/></attribute>
       <attribute name="dcterms:dummy"><text/></attribute>
       <attribute name="elml:dummy"><text/></attribute>

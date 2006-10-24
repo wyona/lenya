@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://www.elml.ch" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="Lerneinheit" lenya:dummy="FIXME:keepNamespace" title="Lerneinheit (Unit)">
+<?xml version="1.0" encoding="UTF-8"?><unit xmlns="http://www.elml.ch" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xhtml:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" label="Lerneinheit" lenya:dummy="FIXME:keepNamespace" title="Lerneinheit (Unit)">
 <lenya:meta>
     <dc:title>unit</dc:title>
     <dc:description> </dc:description>
