@@ -182,12 +182,15 @@
 
 
   <xsl:template match="elml:definition">
-    <div>
-      <a name="{@term}"><xsl:comment/></a>
-      <b><xsl:value-of select="@term"/></b>: 
-      <xsl:apply-templates/>
-      <xsl:call-template name="BibliographyRef"/>
-    </div>
+    <xsl:if test="not($area = 'live' and @visible='print')">
+      <xsl:call-template name="displaymarker"/>
+      <div>
+        <a name="{@term}"><xsl:comment/></a>
+        <b><xsl:value-of select="@term"/></b>: 
+        <xsl:apply-templates/>
+        <xsl:call-template name="BibliographyRef"/>
+      </div>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="elml:term">
@@ -251,24 +254,27 @@
   </xsl:template>
 
   <xsl:template match="elml:table">
-    <!-- eventually add support for width, height, units -->
-    <xsl:if test="@label">
-      <a name="{@label}"><xsl:comment/></a>
-    </xsl:if>
-    <xsl:if test="@icon">
-      <img src="{$imageprefix}/icons/{@icon}.gif"/>
-    </xsl:if>
-    <xsl:if test="@title">
-      <xsl:value-of select="@title"/>
-    </xsl:if>
-    <table border="0" width="100%" class="grid">
+    <xsl:if test="not($area = 'live' and @visible='print')">
+      <xsl:call-template name="displaymarker"/>
+      <!-- eventually add support for width, height, units -->
+      <xsl:if test="@label">
+        <a name="{@label}"><xsl:comment/></a>
+      </xsl:if>
+      <xsl:if test="@icon">
+        <img src="{$imageprefix}/icons/{@icon}.gif"/>
+      </xsl:if>
+      <xsl:if test="@title">
+        <xsl:value-of select="@title"/>
+      </xsl:if>
+      <table border="0" width="100%" class="grid">
         <xsl:apply-templates/>
-    </table>
-    <xsl:if test="@legend">
-      <xsl:value-of select="@legend"/>
-      <xsl:call-template name="BibliographyRef"/>
-      <br/>
-      <br/>
+      </table>
+      <xsl:if test="@legend">
+        <xsl:value-of select="@legend"/>
+        <xsl:call-template name="BibliographyRef"/>
+        <br/>
+        <br/>
+      </xsl:if>
     </xsl:if>
   </xsl:template>
 
@@ -533,30 +539,32 @@
   </xsl:template>
 
   <xsl:template match="elml:paragraph">
-    <xsl:if test="@label">
-      <a name="{@label}"><xsl:comment/></a>
+    <xsl:if test="not($area = 'live' and @visible='print')">
+      <xsl:call-template name="displaymarker"/> 
+      <xsl:if test="@label">
+        <a name="{@label}"><xsl:comment/></a>
+      </xsl:if>
+      <xsl:if test="@title">
+        <h3><xsl:value-of select="@title"/></h3>
+      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="@icon">
+          <p>
+          <table border="0">
+            <tr>
+              <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
+              <td><xsl:apply-templates/></td>
+            </tr>
+          </table>
+          </p>
+        </xsl:when>
+        <xsl:otherwise>
+          <p>
+            <xsl:apply-templates/>
+          </p>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:if>
-    <xsl:if test="@title">
-      <h3><xsl:value-of select="@title"/></h3>
-    </xsl:if>
-    <xsl:choose>
-      <xsl:when test="@icon">
-        <p>
-        <table border="0">
-          <tr>
-            <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
-            <td><xsl:apply-templates/></td>
-          </tr>
-        </table>
-        </p>
-      </xsl:when>
-      <xsl:otherwise>
-        <p>
-          <xsl:apply-templates/>
-        </p>
-      </xsl:otherwise>
-    </xsl:choose>
-    
   </xsl:template>
 
 
@@ -634,10 +642,29 @@
   </xsl:template>
 
 
+  <xsl:template name="displaymarker">
+    <xsl:if test="@visible = 'print' or @visible  = 'online'">
+      <table width="412" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="40%">
+            <hr style="color: #fff; background-color: #fff; border: 1px dotted #666666; border-style: none none dotted;"/>
+          </td>
+          <td align="center" style="color: #666666"><xsl:value-of select="@visible"/></td>
+          <td width="40%" align="right">
+            <hr style="color: #fff; background-color: #fff; border: 1px dotted #666666; border-style: none none dotted;"/>
+          </td>
+        </tr>
+      </table>
+    </xsl:if> 
+  </xsl:template>
+
+
+
   <!-- Asset Handling -->
 
   <xsl:template match="elml:multimedia">
-    <xsl:if test="not(@visible='print')">
+    <xsl:if test="not($area = 'live' and @visible='print')">
+      <xsl:call-template name="displaymarker"/>
       <table cellpadding="0" cellspacing="2" border="0" width="100%" class="content_table">
         <tr>
           <xsl:if test="@icon">
