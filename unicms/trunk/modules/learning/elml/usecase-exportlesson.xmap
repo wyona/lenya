@@ -150,6 +150,7 @@
            <map:parameter name="role" value="{flow-attribute:role}"/>
            <map:parameter name="pagebreak_level" value="{flow-attribute:pagebreak_level}"/>
            <map:parameter name="chapter_numbers" value="{flow-attribute:chapter_numbers}"/>
+           <map:parameter name="body-font-family" value="{flow-attribute:font}"/>
            <map:parameter name="optional_units" value="{flow-attribute:optional_units}"/>
          </map:transform> 
          <map:serialize type="fo2pdf-elml"/>

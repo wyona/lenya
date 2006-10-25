@@ -86,6 +86,18 @@
             </tr>
             <tr>
               <td valign="top">
+                Font:
+              </td>
+              <td>
+                <select name="font">
+                  <option value="sans_classic">Sans Serif (classic)</option>
+                  <option value="sans_renaissance">Sans Serif (renaissance)</option>
+                  <option value="serif">Serif</option>     
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">
                 Optional Units:
               </td>
               <td>

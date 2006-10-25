@@ -4,18 +4,48 @@
     <fonts>
       <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsans.xml" 
             kerning="yes"
-            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSans.ttf">
-        <font-triplet name="GillSans" style="normal" weight="normal"/>
+            embed-file="${cocoon.parameters['base-dir']}/fonts/gillsans.ttf">
+        <font-triplet name="sans_renaissance" style="normal" weight="normal"/>
       </font>
        <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsansbold.xml"
             kerning="yes"
-            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSansBold.ttf">
-        <font-triplet name="GillSans" style="normal" weight="bold"/>
+            embed-file="${cocoon.parameters['base-dir']}/fonts/gillsansbold.ttf">
+        <font-triplet name="sans_renaissance" style="normal" weight="bold"/>
       </font>
       <font metrics-file="${cocoon.parameters['base-dir']}/fonts/gillsansitalic.xml"
             kerning="yes"
-            embed-file="${cocoon.parameters['base-dir']}/fonts/GillSansItalic.ttf">
-        <font-triplet name="GillSans" style="italic" weight="normal"/>
+            embed-file="${cocoon.parameters['base-dir']}/fonts/gillsansitalic.ttf">
+        <font-triplet name="sans_renaissance" style="italic" weight="normal"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/verdana.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/verdana.ttf">
+        <font-triplet name="sans_classic" style="normal" weight="normal"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/verdanabold.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/verdanabold.ttf">
+        <font-triplet name="sans_classic" style="normal" weight="bold"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/verdanaitalic.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/verdanaitalic.ttf">
+        <font-triplet name="sans_classic" style="italic" weight="normal"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/baskerville.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/baskerville.ttf">
+        <font-triplet name="serif" style="normal" weight="normal"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/baskervillebold.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/baskervillebold.ttf">
+        <font-triplet name="serif" style="normal" weight="bold"/>
+      </font>
+      <font metrics-file="${cocoon.parameters['base-dir']}/fonts/baskervilleitalic.xml"
+            kerning="yes"
+            embed-file="${cocoon.parameters['base-dir']}/fonts/baskervilleitalic.ttf">
+        <font-triplet name="serif" style="italic" weight="normal"/>
       </font>
     </fonts>
   </configuration>

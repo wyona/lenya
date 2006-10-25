@@ -27,7 +27,7 @@
   <xsl:param name="chapter_numbers"/>
 
 
-  <xsl:param name="body-font-family">GillSans</xsl:param>
+  <xsl:param name="body-font-family">Baskerville</xsl:param>
   <xsl:param name="fontsize">11pt</xsl:param>
   <xsl:param name="lineheight">13pt</xsl:param>
   <xsl:param name="fontsize_title">16pt</xsl:param>

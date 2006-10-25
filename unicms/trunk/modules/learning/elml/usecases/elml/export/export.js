@@ -404,6 +404,7 @@ function exportPDF(doc) {
   var url = cocoon.request.get("url");
   var pagebreak_level = cocoon.request.get("pagebreak_level");
   var chapter_numbers = cocoon.request.get("chapter_numbers");
+  var font = cocoon.request.get("font");
   var optional_units = "";
 
   var date = new Date();
@@ -419,7 +420,7 @@ function exportPDF(doc) {
 
    var out = source.getOutputStream();
    /* Serialize lesson to string */
-   cocoon.processPipelineTo("pdf/", {"dom": dom, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "optional_units": optional_units}, out);
+   cocoon.processPipelineTo("pdf/", {"dom": dom, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "font" : font, "optional_units": optional_units}, out);
    out.close();
 
    var url = doc.getName() + "/" + filename;
