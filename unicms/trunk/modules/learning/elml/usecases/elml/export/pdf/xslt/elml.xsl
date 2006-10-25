@@ -29,11 +29,11 @@
 
   <xsl:param name="body-font-family">GillSans</xsl:param>
   <xsl:param name="fontsize">12pt</xsl:param>
-  <xsl:param name="lineheight">15pt</xsl:param>
+  <xsl:param name="lineheight">14pt</xsl:param>
   <xsl:param name="fontsize_title">16pt</xsl:param>
   <xsl:param name="fontweight_title">bold</xsl:param>
   <xsl:param name="lineheight_title">28pt</xsl:param>
-  <xsl:param name="block-space-after">12pt</xsl:param>
+  <xsl:param name="block-space-after">10pt</xsl:param>
   <xsl:param name="legendratio">0.8</xsl:param>
   <xsl:param name="converter_pixel_mm">0.3</xsl:param>
 
@@ -201,24 +201,24 @@
   <xsl:param name="factor">
     <xsl:choose>
       <xsl:when test="local-name()='lesson'">
-        <xsl:text>1.6</xsl:text>
-      </xsl:when>
-      <xsl:when test="local-name()='unit' or local-name()='glossary' or local-name()='index' or local-name()='bibliography' or local-name()='metadata' ">
         <xsl:text>1.4</xsl:text>
       </xsl:when>
-      <xsl:when test="local-name()='learningObject'">
+      <xsl:when test="local-name()='unit' or local-name()='glossary' or local-name()='index' or local-name()='bibliography' or local-name()='metadata' ">
         <xsl:text>1.2</xsl:text>
       </xsl:when>
+      <xsl:when test="local-name()='learningObject'">
+        <xsl:text>1.0</xsl:text>
+      </xsl:when>
       <xsl:when test="local-name()='clarify' or local-name()='look' or local-name()='act'">
-        <xsl:text>1.2</xsl:text>
+        <xsl:text>1.0</xsl:text>
       </xsl:when>
       <xsl:when test="local-name()='entry' or local-name()='goals' or local-name()='summary' or local-name()='selfAssessment' or local-name()='furtherReading'">
         <xsl:choose>
           <xsl:when test="local-name(parent::*)='lesson'">
-            <xsl:text>1.2</xsl:text>
+            <xsl:text>1.0</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>1.2</xsl:text>
+            <xsl:text>1.0</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -387,7 +387,7 @@
 
 <xsl:template match="elml:definition">
   <xsl:param name="term"/>
-  <fo:block font-weight="bold">
+  <fo:block font-style="italic">
     <xsl:if test="not($term)">
       <xsl:attribute name="id">
         <xsl:value-of select="generate-id()"/>
@@ -411,7 +411,7 @@
 
 <xsl:template match="elml:definition" mode="icon">
   <xsl:param name="term"/>
-  <fo:block font-weight="bold">
+  <fo:block font-style="italic">
     <xsl:if test="not($term)">
       <xsl:attribute name="id">
         <xsl:value-of select="generate-id()"/>
@@ -438,7 +438,7 @@
 <xsl:template name="BibliographyRef">
 <!--A template used to generate bibliography references within the lesson, eg. (Negri 2004)-->
   <xsl:if test="@bibIDRef">
-    <fo:inline>
+    <fo:inline font-variant="small-caps">
       <xsl:variable name="id" select="@bibIDRef"/>
       <xsl:variable name="author">
         <xsl:choose>
@@ -452,40 +452,40 @@
       </xsl:variable>
       <xsl:text> </xsl:text>
       <xsl:if test="not(@yearOnly='yes')">
-      <xsl:text>(</xsl:text>
-    </xsl:if>
-    <fo:basic-link>
-      <xsl:attribute name="internal-destination">
-        <xsl:value-of select="concat('id', generate-id(/elml:lesson/elml:bibliography/*[@bibID=$id]))"/>
-      </xsl:attribute>
-      <xsl:choose>
-        <xsl:when test="contains($author, ',')">
-          <xsl:value-of select="substring-before($author, ',')"/>
-          <xsl:if test="contains(substring-after($author, ','), ',')">
-            <xsl:text> et al.</xsl:text>
-          </xsl:if>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$author"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </fo:basic-link> 
-    <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr">
-      <xsl:text> </xsl:text>
-      <xsl:if test="@yearOnly='yes'">
         <xsl:text>(</xsl:text>
       </xsl:if>
-      <xsl:value-of select="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear"/>
-        <xsl:if test="@pageNr">
-          <xsl:text>, p. </xsl:text>
-          <xsl:value-of select="@pageNr"/>
+      <fo:basic-link>
+        <xsl:attribute name="internal-destination">
+          <xsl:value-of select="concat('id', generate-id(/elml:lesson/elml:bibliography/*[@bibID=$id]))"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="contains($author, ',')">
+            <xsl:value-of select="substring-before($author, ',')"/>
+            <xsl:if test="contains(substring-after($author, ','), ',')">
+              <xsl:text> et al.</xsl:text>
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$author"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </fo:basic-link> 
+      <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr">
+        <xsl:text> </xsl:text>
+        <xsl:if test="@yearOnly='yes'">
+          <xsl:text>(</xsl:text>
         </xsl:if>
-      </xsl:if>
-      <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr or not(@yearOnly='yes')">
-        <xsl:text>)</xsl:text>
-      </xsl:if>
-   </fo:inline>
-  </xsl:if>
+        <xsl:value-of select="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear"/>
+          <xsl:if test="@pageNr">
+            <xsl:text>, p. </xsl:text>
+            <xsl:value-of select="@pageNr"/>
+          </xsl:if>
+        </xsl:if>
+        <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr or not(@yearOnly='yes')">
+          <xsl:text>)</xsl:text>
+        </xsl:if>
+     </fo:inline>
+   </xsl:if>
 </xsl:template>
 
 
@@ -1007,20 +1007,20 @@
     <xsl:when test="text()">
       <xsl:value-of select="."/>
       <fo:footnote>
-        <fo:inline vertical-align="super" font-size="{$fontsize}*0.8">
+        <fo:inline vertical-align="super" font-size="{$fontsize}*0.6">
           <xsl:number count="elml:term[text()]" level="any"/>
         </fo:inline>
         <fo:footnote-body>
-          <fo:block start-indent="0pt" font-size="{$fontsize}*0.8" line-height="{$lineheight}*0.8">
-            <xsl:number count="elml:term[text()]" level="any"/>
+          <fo:block start-indent="0pt" line-height="{$lineheight}*0.8">
+            <fo:inline font-size="{$fontsize}*0.6"><xsl:number count="elml:term[text()]" level="any"/></fo:inline>
             <xsl:text> </xsl:text>
-            <xsl:value-of select="$definition"/>
+            <fo:inline font-size="{$fontsize}*0.8"><xsl:value-of select="$definition"/></fo:inline>
           </fo:block>
         </fo:footnote-body>
       </fo:footnote>
     </xsl:when>
     <xsl:otherwise>
-      <fo:block font-weight="bold">
+      <fo:block font-style="italic">
         <xsl:value-of select="$term"/>: 
       </fo:block>
       <fo:block start-indent="15pt">

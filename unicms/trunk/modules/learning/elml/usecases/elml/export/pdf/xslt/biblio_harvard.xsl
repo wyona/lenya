@@ -1,273 +1,278 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Joel Fisler (Geographisches Institut Uni Zuerich) -->
 <xsl:stylesheet xmlns:elml="http://www.elml.ch" version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2004/07/xpath-functions" xmlns:xdt="http://www.w3.org/2004/07/xpath-datatypes">
-	<!-- ******* Bibliography Elements *********** -->
-	<xsl:template match="elml:book">
-		<xsl:param name="comment"/>
-		<xsl:param name="furtherReading"/>
-		<fo:list-item>
-			<fo:list-item-label end-indent="label-end()">
-				<fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
-			</fo:list-item-label>
-			<fo:list-item-body start-indent="body-start()">
-				<fo:block>
-					<xsl:if test="not($furtherReading)">
-						<xsl:attribute name="id">
-							<xsl:value-of select="generate-id(.)"/>
-						</xsl:attribute>
-					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
-						<xsl:choose>
-							<xsl:when test="@author">
-								<xsl:value-of select="@author"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$label_anon"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</fo:inline>
-					<xsl:choose>
-						<xsl:when test="@publicationYear">
-							<xsl:text>, </xsl:text>
-							<xsl:value-of select="@publicationYear"/>
-							<xsl:text>. </xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>. </xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-					<xsl:if test="@title">
-						<fo:inline font-style="italic">
-							<xsl:value-of select="@title"/>
-						</fo:inline>
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<xsl:if test="@edition">
-						<xsl:value-of select="@edition"/>
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<xsl:if test="@publicationPlace">
-						<xsl:value-of select="@publicationPlace"/>
-					</xsl:if>
-					<xsl:if test="@publisher">
-						<xsl:if test="@publicationPlace">
-							<xsl:text>: </xsl:text>
-						</xsl:if>
-						<xsl:value-of select="@publisher"/>
-					</xsl:if>
-					<xsl:if test="@publisher or @publicationPlace">
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<xsl:if test="text()">
-						<fo:inline font-stretch="narrower">
-							<xsl:text> [</xsl:text>
-							<xsl:value-of select="text()"/>
-							<xsl:text>]</xsl:text>
-						</fo:inline>
-					</xsl:if>
-					<xsl:if test="$comment">
-						<fo:block font-size="-1">
-							<xsl:value-of select="$comment"/>
-						</fo:block>
-					</xsl:if>
-					<xsl:if test="@downloadUrl">
-						<fo:block>
-							<xsl:value-of select="$label_download"/>
-							<xsl:text>: </xsl:text>
-							<fo:basic-link>
-								<xsl:attribute name="external-destination">
-									<xsl:value-of select="@downloadUrl"/>
-								</xsl:attribute>
-								<xsl:value-of select="@downloadUrl"/>
-							</fo:basic-link>
-						</fo:block>
-					</xsl:if>
-				</fo:block>
-			</fo:list-item-body>
-		</fo:list-item>
-	</xsl:template>
-	<xsl:template match="elml:contributionInBook">
-		<xsl:param name="comment"/>
-		<xsl:param name="furtherReading"/>
-		<fo:list-item>
-			<fo:list-item-label end-indent="label-end()">
-				<fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
-			</fo:list-item-label>
-			<fo:list-item-body start-indent="body-start()">
-				<fo:block>
-					<xsl:if test="not($furtherReading)">
-						<xsl:attribute name="id">
-							<xsl:value-of select="generate-id(.)"/>
-						</xsl:attribute>
-					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
-						<xsl:choose>
-							<xsl:when test="@author">
-								<xsl:value-of select="@author"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$label_anon"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</fo:inline>
-					<xsl:choose>
-						<xsl:when test="@publicationYear">
-							<xsl:text>, </xsl:text>
-							<xsl:value-of select="@publicationYear"/>
-							<xsl:text>. </xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>. </xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-					<xsl:if test="@titleOfContribution">
-						<xsl:value-of select="@titleOfContribution"/>
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<fo:inline font-style="italic">
-						<xsl:text>In: </xsl:text>
-					</fo:inline>
-					<xsl:if test="@editor">
-						<fo:inline font-weight="bold" font-variant="small-caps">
-							<xsl:value-of select="@editor"/>
-						</fo:inline>
-						<xsl:text>, ed. </xsl:text>
-					</xsl:if>
-					<xsl:if test="@title">
-						<fo:inline font-style="italic">
-							<xsl:value-of select="@title"/>
-						</fo:inline>
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<xsl:if test="@publicationPlace">
-						<xsl:value-of select="@publicationPlace"/>
-					</xsl:if>
-					<xsl:if test="@publisher">
-						<xsl:if test="@publicationPlace">
-							<xsl:text>: </xsl:text>
-						</xsl:if>
-						<xsl:value-of select="@publisher"/>
-					</xsl:if>
-					<xsl:if test="@pageNr">
-						<xsl:if test="@publicationPlace or @publisher">
-							<xsl:text>, </xsl:text>
-						</xsl:if>
-						<xsl:value-of select="@pageNr"/>
-					</xsl:if>
-					<xsl:if test="@publisher or @publicationPlace or @pageNr">
-						<xsl:text>. </xsl:text>
-						<xsl:text> </xsl:text>
-					</xsl:if>
-					<xsl:if test="text()">
-						<fo:inline font-stretch="narrower">
-							<xsl:text> [</xsl:text>
-							<xsl:value-of select="text()"/>
-							<xsl:text>]</xsl:text>
-						</fo:inline>
-					</xsl:if>
-					<xsl:if test="$comment">
-						<fo:block font-size="-1">
-							<xsl:value-of select="$comment"/>
-						</fo:block>
-					</xsl:if>
-					<xsl:if test="@downloadUrl">
-						<fo:block>
-							<xsl:value-of select="$label_download"/>
-							<xsl:text>: </xsl:text>
-							<fo:basic-link>
-								<xsl:attribute name="external-destination">
-									<xsl:value-of select="@downloadUrl"/>
-								</xsl:attribute>
-								<xsl:value-of select="@downloadUrl"/>
-							</fo:basic-link>
-						</fo:block>
-					</xsl:if>
-				</fo:block>
-			</fo:list-item-body>
-		</fo:list-item>
-	</xsl:template>
-	<xsl:template match="elml:journalArticle">
-		<xsl:param name="comment"/>
-		<xsl:param name="furtherReading"/>
-		<fo:list-item>
-			<fo:list-item-label end-indent="label-end()">
-				<fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
-			</fo:list-item-label>
-			<fo:list-item-body start-indent="body-start()">
-				<fo:block>
-					<xsl:if test="not($furtherReading)">
-						<xsl:attribute name="id">
-							<xsl:value-of select="generate-id(.)"/>
-						</xsl:attribute>
-					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
-						<xsl:choose>
-							<xsl:when test="@author">
-								<xsl:value-of select="@author"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$label_anon"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</fo:inline>
-					<xsl:choose>
-						<xsl:when test="@publicationYear">
-							<xsl:text>, </xsl:text>
-							<xsl:value-of select="@publicationYear"/>
-							<xsl:text>. </xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>. </xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-					<xsl:if test="@title">
-						<xsl:value-of select="@title"/>
-						<xsl:text>. </xsl:text>
-					</xsl:if>
-					<xsl:if test="@journalTitle">
-						<fo:inline font-style="italic">
-							<xsl:value-of select="@journalTitle"/>
-						</fo:inline>
-						<xsl:if test="@volumeNr or @pageNr">
-							<xsl:text>, </xsl:text>
-						</xsl:if>
-					</xsl:if>
-					<xsl:if test="@volumeNr">
-						<xsl:value-of select="@volumeNr"/>
-						<xsl:text>, </xsl:text>
-					</xsl:if>
-					<xsl:if test="@pageNr">
-						<xsl:value-of select="@pageNr"/>
-					</xsl:if>
-					<xsl:text>. </xsl:text>
-					<xsl:if test="text()">
-						<fo:inline font-stretch="narrower">
-							<xsl:text> [</xsl:text>
-							<xsl:value-of select="text()"/>
-							<xsl:text>]</xsl:text>
-						</fo:inline>
-					</xsl:if>
-					<xsl:if test="$comment">
-						<fo:block font-size="-1">
-							<xsl:value-of select="$comment"/>
-						</fo:block>
-					</xsl:if>
-					<xsl:if test="@downloadUrl">
-						<fo:block>
-							<xsl:value-of select="$label_download"/>
-							<xsl:text>: </xsl:text>
-							<fo:basic-link>
-								<xsl:attribute name="external-destination">
-									<xsl:value-of select="@downloadUrl"/>
-								</xsl:attribute>
-								<xsl:value-of select="@downloadUrl"/>
-							</fo:basic-link>
-						</fo:block>
-					</xsl:if>
-				</fo:block>
-			</fo:list-item-body>
-		</fo:list-item>
-	</xsl:template>
+
+<xsl:template match="elml:book">
+  <xsl:param name="comment"/>
+  <xsl:param name="furtherReading"/>
+  <fo:list-item>
+    <fo:list-item-label end-indent="label-end()">
+      <fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
+    </fo:list-item-label>
+    <fo:list-item-body start-indent="body-start()">
+      <fo:block>
+        <xsl:if test="not($furtherReading)">
+          <xsl:attribute name="id">
+            <xsl:value-of select="generate-id(.)"/>
+          </xsl:attribute>
+        </xsl:if>
+       <fo:inline font-variant="small-caps">
+         <xsl:choose>
+           <xsl:when test="@author">
+             <xsl:value-of select="@author"/>
+           </xsl:when>
+           <xsl:otherwise>
+             <xsl:value-of select="$label_anon"/>
+           </xsl:otherwise>
+         </xsl:choose>
+       </fo:inline>
+       <xsl:choose>
+         <xsl:when test="@publicationYear">
+           <xsl:text>, </xsl:text>
+           <xsl:value-of select="@publicationYear"/>
+           <xsl:text>. </xsl:text>
+         </xsl:when>
+         <xsl:otherwise>
+           <xsl:text>. </xsl:text>
+         </xsl:otherwise>
+       </xsl:choose>
+       <xsl:if test="@title">
+         <fo:inline font-style="italic">
+           <xsl:value-of select="@title"/>
+         </fo:inline>
+         <xsl:text>. </xsl:text>
+       </xsl:if>
+       <xsl:if test="@edition">
+         <xsl:value-of select="@edition"/>
+         <xsl:text>. </xsl:text>
+       </xsl:if>
+       <xsl:if test="@publicationPlace">
+         <xsl:value-of select="@publicationPlace"/>
+       </xsl:if>
+       <xsl:if test="@publisher">
+         <xsl:if test="@publicationPlace">
+           <xsl:text>: </xsl:text>
+         </xsl:if>
+         <xsl:value-of select="@publisher"/>
+       </xsl:if>
+       <xsl:if test="@publisher or @publicationPlace">
+         <xsl:text>. </xsl:text>
+       </xsl:if>
+       <xsl:if test="text()">
+         <fo:inline font-stretch="narrower">
+           <xsl:text> [</xsl:text>
+           <xsl:value-of select="text()"/>
+           <xsl:text>]</xsl:text>
+         </fo:inline>
+       </xsl:if>
+       <xsl:if test="$comment">
+         <fo:block font-size="-1">
+           <xsl:value-of select="$comment"/>
+         </fo:block>
+       </xsl:if>
+       <xsl:if test="@downloadUrl">
+         <fo:block>
+           <xsl:value-of select="$label_download"/>
+           <xsl:text>: </xsl:text>
+           <fo:basic-link>
+              <xsl:attribute name="external-destination">
+                <xsl:value-of select="@downloadUrl"/>
+              </xsl:attribute>
+              <xsl:value-of select="@downloadUrl"/>
+            </fo:basic-link>
+          </fo:block>
+        </xsl:if>
+      </fo:block>
+    </fo:list-item-body>
+  </fo:list-item>
+</xsl:template>
+
+<xsl:template match="elml:contributionInBook">
+  <xsl:param name="comment"/>
+  <xsl:param name="furtherReading"/>
+  <fo:list-item>
+    <fo:list-item-label end-indent="label-end()">
+      <fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
+    </fo:list-item-label>
+    <fo:list-item-body start-indent="body-start()">
+      <fo:block>
+        <xsl:if test="not($furtherReading)">
+          <xsl:attribute name="id">
+            <xsl:value-of select="generate-id(.)"/>
+          </xsl:attribute>
+        </xsl:if>
+        <fo:inline font-variant="small-caps">
+          <xsl:choose>
+            <xsl:when test="@author">
+              <xsl:value-of select="@author"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$label_anon"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </fo:inline>
+        <xsl:choose>
+          <xsl:when test="@publicationYear">
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="@publicationYear"/>
+            <xsl:text>. </xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>. </xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="@titleOfContribution">
+          <xsl:value-of select="@titleOfContribution"/>
+          <xsl:text>. </xsl:text>
+        </xsl:if>
+        <fo:inline font-style="italic">
+          <xsl:text>In: </xsl:text>
+        </fo:inline>
+        <xsl:if test="@editor">
+          <fo:inline font-variant="small-caps">
+            <xsl:value-of select="@editor"/>
+          </fo:inline>
+          <xsl:text>, ed. </xsl:text>
+        </xsl:if>
+        <xsl:if test="@title">
+          <fo:inline font-style="italic">
+            <xsl:value-of select="@title"/>
+          </fo:inline>
+          <xsl:text>. </xsl:text>
+        </xsl:if>
+        <xsl:if test="@publicationPlace">
+          <xsl:value-of select="@publicationPlace"/>
+        </xsl:if>
+        <xsl:if test="@publisher">
+          <xsl:if test="@publicationPlace">
+            <xsl:text>: </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="@publisher"/>
+        </xsl:if>
+        <xsl:if test="@pageNr">
+          <xsl:if test="@publicationPlace or @publisher">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="@pageNr"/>
+        </xsl:if>
+        <xsl:if test="@publisher or @publicationPlace or @pageNr">
+          <xsl:text>. </xsl:text>
+          <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:if test="text()">
+          <fo:inline font-stretch="narrower">
+            <xsl:text> [</xsl:text>
+            <xsl:value-of select="text()"/>
+            <xsl:text>]</xsl:text>
+          </fo:inline>
+        </xsl:if>
+        <xsl:if test="$comment">
+          <fo:block font-size="-1">
+            <xsl:value-of select="$comment"/>
+          </fo:block>
+        </xsl:if>
+        <xsl:if test="@downloadUrl">
+          <fo:block>
+            <xsl:value-of select="$label_download"/>
+            <xsl:text>: </xsl:text>
+            <fo:basic-link>
+              <xsl:attribute name="external-destination">
+                <xsl:value-of select="@downloadUrl"/>
+              </xsl:attribute>
+              <xsl:value-of select="@downloadUrl"/>
+            </fo:basic-link>
+          </fo:block>
+        </xsl:if>
+      </fo:block>
+    </fo:list-item-body>
+  </fo:list-item>
+</xsl:template>
+
+
+<xsl:template match="elml:journalArticle">
+  <xsl:param name="comment"/>
+  <xsl:param name="furtherReading"/>
+  <fo:list-item>
+    <fo:list-item-label end-indent="label-end()">
+      <fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
+    </fo:list-item-label>
+    <fo:list-item-body start-indent="body-start()">
+      <fo:block>
+        <xsl:if test="not($furtherReading)">
+          <xsl:attribute name="id">
+            <xsl:value-of select="generate-id(.)"/>
+          </xsl:attribute>
+        </xsl:if>
+        <fo:inline font-variant="small-caps">
+          <xsl:choose>
+            <xsl:when test="@author">
+              <xsl:value-of select="@author"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$label_anon"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </fo:inline>
+        <xsl:choose>
+          <xsl:when test="@publicationYear">
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="@publicationYear"/>
+            <xsl:text>. </xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>. </xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="@title">
+          <xsl:value-of select="@title"/>
+          <xsl:text>. </xsl:text>
+        </xsl:if>
+        <xsl:if test="@journalTitle">
+          <fo:inline font-style="italic">
+            <xsl:value-of select="@journalTitle"/>
+          </fo:inline>
+          <xsl:if test="@volumeNr or @pageNr">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+        </xsl:if>
+        <xsl:if test="@volumeNr">
+          <xsl:value-of select="@volumeNr"/>
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+        <xsl:if test="@pageNr">
+          <xsl:value-of select="@pageNr"/>
+        </xsl:if>
+        <xsl:text>. </xsl:text>
+        <xsl:if test="text()">
+          <fo:inline font-stretch="narrower">
+            <xsl:text> [</xsl:text>
+            <xsl:value-of select="text()"/>
+            <xsl:text>]</xsl:text>
+          </fo:inline>
+        </xsl:if>
+        <xsl:if test="$comment">
+          <fo:block font-size="-1">
+            <xsl:value-of select="$comment"/>
+          </fo:block>
+        </xsl:if>
+        <xsl:if test="@downloadUrl">
+          <fo:block>
+            <xsl:value-of select="$label_download"/>
+            <xsl:text>: </xsl:text>
+            <fo:basic-link>
+              <xsl:attribute name="external-destination">
+                <xsl:value-of select="@downloadUrl"/>
+              </xsl:attribute>
+              <xsl:value-of select="@downloadUrl"/>
+            </fo:basic-link>
+          </fo:block>
+        </xsl:if>
+      </fo:block>
+    </fo:list-item-body>
+  </fo:list-item>
+</xsl:template>
+
+
 	<xsl:template match="elml:newspaperArticle">
 		<xsl:param name="comment"/>
 		<xsl:param name="furtherReading"/>
@@ -282,7 +287,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -364,7 +369,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -448,7 +453,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -476,7 +481,7 @@
 						<xsl:text>In: </xsl:text>
 					</fo:inline>
 					<xsl:if test="@editor">
-						<fo:inline font-weight="bold" font-variant="small-caps">
+						<fo:inline font-variant="small-caps">
 							<xsl:value-of select="@editor"/>
 						</fo:inline>
 						<xsl:text>, ed. </xsl:text>
@@ -552,7 +557,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -639,7 +644,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -721,7 +726,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -864,7 +869,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -964,7 +969,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -1056,7 +1061,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -1140,7 +1145,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
@@ -1234,7 +1239,7 @@
 							<xsl:value-of select="generate-id(.)"/>
 						</xsl:attribute>
 					</xsl:if>
-					<fo:inline font-weight="bold" font-variant="small-caps">
+					<fo:inline font-variant="small-caps">
 						<xsl:choose>
 							<xsl:when test="@author">
 								<xsl:value-of select="@author"/>
