@@ -260,6 +260,7 @@
         <xsl:text>namedanchor</xsl:text>
       </xsl:attribute>
       <xsl:apply-templates select="@*|node()"/>
+      <xsl:comment/>
     </xsl:copy>
   </xsl:template>
 
