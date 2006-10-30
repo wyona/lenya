@@ -346,7 +346,7 @@
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
-    <table border="0" width="100%" bgcolor="#dedede">
+    <table border="0" width="100%" class="box">
       <tr>
         <xsl:if test="@icon">
           <td>
@@ -516,7 +516,7 @@
   <xsl:template match="elml:citation">
     <xsl:choose>
       <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
-        <div class="@cssClass">"<xsl:apply-templates/>"
+        <div><xsl:attribute name="class"><xsl:value-of select="@cssClass"/></xsl:attribute>"<xsl:apply-templates/>"
           <br/>
           <xsl:call-template name="BibliographyRef"/> 
         </div>
@@ -574,7 +574,7 @@
         <p>
           <xsl:for-each select="/document/unizh:children/index:child">
             <xsl:if test="*/*/@title">
-              <a class="arrow" href="{@href}"><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
+              <a class="arrow" href="{@href}"><xsl:attribute name="href"><xsl:value-of select="concat($contextprefix,@href)"/></xsl:attribute><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
             </xsl:if>
           </xsl:for-each>
         </p>
@@ -593,7 +593,7 @@
 
   <xsl:template name="Legend">
     <xsl:if test="@legend or @bibIDRef">
-      <div class="legend">
+      <div class="legende">
         <xsl:value-of select="@legend"/>
         <xsl:call-template name="BibliographyRef"/>
       </div>
@@ -1156,7 +1156,9 @@
     <div>
       <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
         <a name="{position()}"><xsl:comment/></a>
-        <xsl:apply-templates select="."/>
+        <xsl:apply-templates select=".">
+          <xsl:with-param name="name_download">Dokument im Web</xsl:with-param>
+        </xsl:apply-templates>
       </xsl:for-each>
     </div>
   </xsl:template>
