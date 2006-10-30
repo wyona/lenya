@@ -220,7 +220,7 @@ function exportCP(doc) {
    var assets = resManager.getResources();
    for (var i = 0; i < assets.length; i++) {
      // FIXME: prevent deadlock by working on tmp file first.
-     if(assets[i].getName().equals(filename)) continue;
+     if(assets[i].getName().equals(filename) || assets[i].getName().equals(filename + ".tmp")) continue;
  
      var source = resolver.resolveURI(assets[i].getAbsolutePath());
      var dir = null;

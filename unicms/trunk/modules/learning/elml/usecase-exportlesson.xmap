@@ -77,7 +77,7 @@
 
        <map:match pattern="config-fop.xml">
          <map:generate type="jx" src="usecases/elml/export/pdf/config/config.jx">
-           <map:parameter name="base-dir" value="/Developer/Java/cocoon-lenya/build/lenya/webapp/lenya/pubs/unitemplate/usecases/elml/export/pdf/config"/>
+           <map:parameter name="base-dir" value="{realpath://lenya/pubs}/{page-envelope:publication-id}/usecases/elml/export/pdf/config"/>
          </map:generate>
          <map:serialize type="xml"/>
        </map:match>
