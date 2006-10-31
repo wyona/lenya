@@ -558,7 +558,7 @@
 
   <xsl:template match="unizh:children[ancestor::unizh:news]">
     <xsl:if test="preceding-sibling::xhtml:object">
-      <br class="floatclear"/>
+      <br/>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="index:child">
@@ -580,7 +580,7 @@
           <p>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
-            <br class="floatclear"/>
+            <br/>
             <xsl:if test="$area = 'authoring'">
               <a class="arrow_right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
             </xsl:if>
@@ -592,7 +592,11 @@
               <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
                 <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </xsl:when>
-              <xsl:otherwise/>
+              <xsl:otherwise>
+                <xsl:if test="$area = 'authoring'">
+                  &#160;
+                </xsl:if>
+              </xsl:otherwise>
             </xsl:choose>
           </p>
         </xsl:for-each>
