@@ -169,7 +169,7 @@
              <map:call continuation="{request-param:lenya.continuation}"/>
            </map:when>
            <map:otherwise>
-             <map:call function="showscreen"/>
+             <map:call function="selectExportMode"/>
            </map:otherwise>
          </map:select>
        </map:match>

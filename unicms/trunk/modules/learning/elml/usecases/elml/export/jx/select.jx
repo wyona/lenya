@@ -38,7 +38,7 @@
               <td>
                 Please specify an export format. <br/>
                 <br/>
-                 <input type="radio" name="mode" value="elml">eLML Source (zipped)</input><br/>
+                 <input type="radio" name="mode" value="source">eLML Source (zipped)</input><br/>
                  <input type="radio" name="mode" value="cp">IMS CP</input><br/>
                  <input type="radio" name="mode" value="pdf">PDF</input><br/>
                 <br/>
