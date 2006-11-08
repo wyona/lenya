@@ -54,6 +54,14 @@ table.grid td {
 .citation {
 	font-size: 1.05em;
 	font-style: italic;
-	margin:8px 20px 8px 20px;
+	padding:8px 20px 8px 20px;
 	line-height:1.3em;
+}
+
+.box {
+    background-color: #eeeeee;
+    border: 1px dashed #cccccc;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 4px;
 }
