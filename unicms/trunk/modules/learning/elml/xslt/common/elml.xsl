@@ -169,7 +169,6 @@
             </xsl:apply-templates>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:value-of select="."/>
       </xsl:for-each>
     </ul>
   </xsl:template>
