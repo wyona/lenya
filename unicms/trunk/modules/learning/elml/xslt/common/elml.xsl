@@ -169,6 +169,7 @@
             </xsl:apply-templates>
           </xsl:otherwise>
         </xsl:choose>
+
       </xsl:for-each>
     </ul>
   </xsl:template>
@@ -515,7 +516,7 @@
   <xsl:template match="elml:citation">
     <xsl:choose>
       <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
-        <div><xsl:attribute name="class"><xsl:value-of select="@cssClass"/></xsl:attribute>"<xsl:apply-templates/>"
+        <div class="citation">"<xsl:apply-templates/>"
           <br/>
           <xsl:call-template name="BibliographyRef"/> 
         </div>
@@ -605,7 +606,7 @@
 
 
   <xsl:template name="WidthHeight">
-    <xsl:if test="@width">
+    <xsl:if test="@width and not(@thumbnail)">
       <xsl:attribute name="width">
         <xsl:value-of select="@width"/>
         <xsl:if test="@units='percent'">
@@ -629,7 +630,7 @@
           </xsl:attribute>
         </xsl:if>
       </xsl:when>
-      <xsl:when test="@height">
+      <xsl:when test="@height  and not(@thumbnail)">
         <xsl:attribute name="height">
           <xsl:value-of select="@height"/>
           <xsl:if test="@units='percent'">
