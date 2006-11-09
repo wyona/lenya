@@ -514,9 +514,20 @@
 
 
   <xsl:template match="elml:citation">
+    <xsl:variable name="cssclass">
+      <xsl:choose>
+        <xsl:when test="@cssClass">
+            <xsl:value-of select="@cssClass"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>citation</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:choose>
       <xsl:when test="preceding-sibling::*[local-name() = 'paragraph' and position() = 1]">
-        <div class="citation">"<xsl:apply-templates/>"
+        <div class="{$cssclass}">
+          "<xsl:apply-templates/>"
           <br/>
           <xsl:call-template name="BibliographyRef"/> 
         </div>
@@ -1155,6 +1166,7 @@
   <xsl:template match="elml:bibliography">
     <div>
       <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
+        <xsl:sort select="@author"/>
         <a name="{position()}"><xsl:comment/></a>
         <xsl:apply-templates select=".">
           <xsl:with-param name="name_download">Dokument im Web</xsl:with-param>
@@ -1172,7 +1184,9 @@
       <xsl:variable name="bibNode" select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]"/>
       <xsl:variable name="position">
         <xsl:for-each select="$bibNode/../*">
+            
             <xsl:if test="@bibID = $id">
+              
               <xsl:value-of select="position() - 1"/>
             </xsl:if>
           </xsl:for-each>
