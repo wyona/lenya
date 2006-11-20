@@ -49,8 +49,6 @@
     <delete dir="work" />
     <mkdir dir="work"/>
 
-    <exec dir="." executable="./skip-dummy-ns" os="Linux"/>
-
     <echo>INFO: Patching doctypes.xmap</echo>
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patch-doctype-xmap.xsl" includes="doctypes.xmap" extension=".xmap" />
     <copy todir="${pubs.dir}/uzh">
@@ -67,6 +65,10 @@
     <touch>
       <fileset dir="${pub.dir}"/>
     </touch>
+  </target>
+
+  <target name="skipns" depends="init" description="skip namespace that has been created for working purpose">
+    <exec dir="." executable="./skip-dummy-ns" os="Linux"/>
   </target>
   
 </project>
