@@ -1,0 +1,6 @@
+#! /bin/sh
+# filename: skip-dummy-ns
+find . -type f -name '../uzh/xslt/doctypes/xhtml-standard.xsl' -print | while read i
+do
+  sed 's/xmlns\:xsl=\"http\:\/\/www\.unizh\.ch\/dummy-ns\/\"//g' $i > $i.tmp && mv $i.tmp $i
+done
