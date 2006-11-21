@@ -2,7 +2,7 @@
 # filenamme: skip-dummy-ns
 #
 # you have to set the execute permission for this script!
-#
+# 
 # set path to your uzh publication (that is being patched) accordingly
 find path/to/your/uzh/pub -type f -name 'xhtml-standard.xsl' -print | while read i
 do
