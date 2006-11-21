@@ -16,7 +16,7 @@
     <delete dir="work"/>
   </target>
 
-  <target name="backup" description="Backup uzh publication that is being worked on" depends="init">
+  <target name="backup" description="backup uzh publication that is being worked on" depends="init">
     <delete dir="backup" />
     <mkdir dir="backup"/>
     <copy todir="backup" overwrite="yes">
@@ -25,7 +25,7 @@
   </target>
 
 
-  <target name="deploy" description="Deploy uzh publication" depends="init, backup">
+  <target name="install" description="install uzh publication" depends="init, backup">
     
     <echo>INFO: copying files to ${pubs.dir}/${pub.prefix}</echo>
 
@@ -43,15 +43,15 @@
 
     <echo>INFO: Patching xhtml-standard.xsl</echo>
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patch-xhtml-standard-xsl.xsl" includes="xslt/doctypes/xhtml-standard.xsl" extension=".xsl" />
-    <copy todir="${pubs.dir}/uzh">
+    <copy todir="${pubs.dir}/uzh" overwrite="yes">
       <fileset dir="work" />
     </copy>
-    <delete dir="work" />
+    <antcall target="cleanup"/> 
     <mkdir dir="work"/>
 
     <echo>INFO: Patching doctypes.xmap</echo>
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patch-doctype-xmap.xsl" includes="doctypes.xmap" extension=".xmap" />
-    <copy todir="${pubs.dir}/uzh">
+    <copy todir="${pubs.dir}/uzh" overwrite="yes">
       <fileset dir="work" />
     </copy>
 
@@ -60,14 +60,23 @@
 
   </target>
 
-  <target name="touch" depends="init" description="touch all within publication directory ">
-    <echo>Touch all files within ${pub.dir}</echo>
+
+  <target name="uninstall" depends="init, backup" description="uninstall uzh publication">
+    <echo>INFO: Uninstalling all files within ${pub.dir}</echo>
+    <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${pubs.dir}/unitemplate/doctypes.xmap"/>
+    <delete dir="${pubs.dir}/uzh/xslt"/>
+    <antcall target="cleanup"/> 
+  </target>
+
+  <target name="touch" depends="init" description="touch all within publication directory">
+    <echo>INFO: Touching all files within ${pub.dir}</echo>
     <touch>
       <fileset dir="${pub.dir}"/>
     </touch>
   </target>
 
-  <target name="skipns" depends="init" description="skip namespace that has been created for working purpose">
+  <target name="clearns" description="clear namespace that has been created for working purpose">
+    <echo>INFO: Clearing dummy namespace in xhtml-standard.xsl</echo>
     <exec dir="." executable="./skip-dummy-ns" os="Linux"/>
   </target>
   
