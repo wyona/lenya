@@ -18,6 +18,18 @@
     </copy>
   </template>
 
+  <template match="foo:template">
+    <choose>
+      <when test="@name='name-of-patched-template'">
+      </when>
+      <otherwise>
+        <copy>
+          <apply-templates select="@*|node()"/>
+        </copy>
+      </otherwise>
+    </choose>
+  </template>
+
   <template match="@*|node()">
     <copy>
       <apply-templates select="@*|node()"/>
