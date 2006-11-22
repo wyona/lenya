@@ -85,7 +85,7 @@
 
   <target name="clearns" description="clear namespace that has been created for working purpose">
     <echo>INFO: Clearing dummy namespace in the doctypes xsl files</echo>
-    <exec dir="." executable="./skip-dummy-ns" os="Linux"/>
+    <exec dir="." executable="./clear-dummy-ns.sh" os="Linux"/>
   </target>
   
 </project>
