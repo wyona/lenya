@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- $Id: patch-xhtml-standard-xsl.xsl, v 1.00 2006/11/20 17:00:00 mike Exp $ -->
+<!-- $Id: xhtml-standard-xsl.xsl, v 1.00 2006/11/22 12:00:00 mike Exp $ -->
 
 <stylesheet version="1.0" xmlns="http://www.w3.org/1999/XSL/Transform"
     xmlns:foo="http://www.w3.org/1999/XSL/Transform"

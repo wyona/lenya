@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- $Id: patch-doctype-xmap.xsl, v 1.00 2006/11/20 17:00:00 mike Exp $ -->
+<!-- $Id: doctypes-xmap.xsl, v 1.00 2006/11/22 12:00:00 mike Exp $ -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:map="http://apache.org/cocoon/sitemap/1.0">
