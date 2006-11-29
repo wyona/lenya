@@ -11,6 +11,16 @@
   </xsl:template>
 
 
+  <xsl:template match="map:transform[@src='../unizh/xslt/assetDots.xsl']">
+    <xsl:copy>
+      <xsl:attribute name="src">
+        <xsl:text>xslt/assetDots.xsl</xsl:text>
+      </xsl:attribute>
+      <xsl:apply-templates select="@*[name()!='src']|node()"/>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>

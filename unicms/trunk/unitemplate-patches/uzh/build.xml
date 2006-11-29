@@ -27,7 +27,9 @@
 
   <target name="install" description="install uzh publication" depends="init, backup">
     
-    <echo>INFO: copying files to ${pubs.dir}/${pub.prefix}</echo>
+    <echo>INFO: Copying the xslt files to ${pubs.dir}/${pub.prefix}</echo>
+
+    <copy todir="${pubs.dir}/uzh/xslt" overwrite="yes" file="xslt/assetDots.xsl"/>
 
     <copy todir="${pubs.dir}/uzh/xslt/common" overwrite="yes">
       <fileset dir="xslt/common"/>
@@ -41,7 +43,8 @@
       <fileset dir="xslt/doctypes/add-ons"/>
     </copy>
 
-    <echo>INFO: Patching the doctypes xsl files</echo>
+    <echo> </echo>
+    <echo>INFO: Patching the doctypes xslt files</echo>
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/xhtml-standard-xsl.xsl" includes="xslt/doctypes/xhtml-standard.xsl" extension=".xsl" />
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/xhtml-simple-xsl.xsl" includes="xslt/doctypes/xhtml-simple.xsl" extension=".xsl" />
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/xhtml-print-xsl.xsl" includes="xslt/doctypes/xhtml-print.xsl" extension=".xsl" />
@@ -56,12 +59,17 @@
     <antcall target="cleanup"/> 
     <mkdir dir="work"/>
 
+    <echo> </echo>
     <echo>INFO: Copying and patching doctypes.xmap</echo>
     <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
     <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/doctypes-xmap.xsl" includes="doctypes.xmap" extension=".xmap" />
     <copy todir="${pubs.dir}/uzh" overwrite="yes">
       <fileset dir="work" />
     </copy>
+
+    <echo> </echo>
+    <echo>INFO: Copying differing schemas and samples to ${pubs.dir}/uzh/config/doctypes</echo>
+    <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="config/doctypes/schemas/homepage4cols.rng"/>
 
     <antcall target="touch"/>
     <antcall target="cleanup"/> 
@@ -72,6 +80,7 @@
   <target name="uninstall" depends="init, backup" description="uninstall uzh publication">
     <echo>INFO: Uninstalling all files within ${pub.dir}</echo>
     <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
+    <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/homepage4cols.rng"/>
     <delete dir="${pubs.dir}/uzh/xslt"/>
     <antcall target="cleanup"/> 
   </target>
