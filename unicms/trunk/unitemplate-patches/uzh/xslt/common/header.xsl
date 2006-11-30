@@ -12,6 +12,8 @@
   <xsl:include href="../../../unizh/xslt/common/header.xsl"/>
 -->
 
+  <xsl:param name="documentid"/>
+
   <xsl:template name="header">
     <div id="headerarea">
       <div style="float:right;width:195px;">
@@ -21,7 +23,26 @@
           </a>
         </div>
         <div class="imginstitute">
-          <img src="{$localsharedresources}/images/key-visual.jpg" alt="institute's picture" width="180" height="45" />
+          <xsl:choose>
+            <xsl:when test="starts-with($documentid, '/forschung')">
+              <img src="{$localsharedresources}/images/kv-forschung.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:when>
+            <xsl:when test="starts-with($documentid, '/organisation')">
+              <img src="{$localsharedresources}/images/kv-organisation.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:when>
+            <xsl:when test="starts-with($documentid, '/portrait')">
+              <img src="{$localsharedresources}/images/kv-portrait.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:when>
+            <xsl:when test="starts-with($documentid, '/services')">
+              <img src="{$localsharedresources}/images/kv-services.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:when>
+            <xsl:when test="starts-with($documentid, '/studium')">
+              <img src="{$localsharedresources}/images/kv-studium.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:when>
+            <xsl:otherwise>
+              <img src="{$localsharedresources}/images/key-visual.jpg" alt="theme picture" width="180" height="45" />
+            </xsl:otherwise>
+          </xsl:choose>
         </div>
       </div>
       <div id="headertitelpos">

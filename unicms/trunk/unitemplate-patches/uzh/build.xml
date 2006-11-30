@@ -71,6 +71,12 @@
     <echo>INFO: Copying differing schemas and samples to ${pubs.dir}/uzh/config/doctypes</echo>
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="config/doctypes/schemas/homepage4cols.rng"/>
 
+    <echo> </echo>
+    <echo>INFO: Copying local resources to ${pubs.dir}/uzh/resources/shared/images</echo>
+    <copy todir="${pubs.dir}/uzh/resources/shared/images" overwrite="yes">
+      <fileset dir="resources/shared/images" />
+    </copy>
+
     <antcall target="touch"/>
     <antcall target="cleanup"/> 
 
@@ -82,6 +88,12 @@
     <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/homepage4cols.rng"/>
     <delete dir="${pubs.dir}/uzh/xslt"/>
+    <delete>
+      <fileset dir="${pubs.dir}/uzh/resources/shared/images" includes="kv-*.jpg"/>
+    </delete>
+    <copy todir="${pubs.dir}/uzh/resources/shared/images" overwrite="yes">
+      <fileset dir="${unitemplate.srcdir}/resources/shared/images" />
+    </copy>
     <antcall target="cleanup"/> 
   </target>
 
