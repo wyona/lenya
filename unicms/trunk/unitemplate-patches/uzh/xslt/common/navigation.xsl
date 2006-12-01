@@ -20,6 +20,7 @@
           <div class="linkseparator">|</div>
         </xsl:if>
       </xsl:for-each>
+      <xsl:comment/>
     </div>
   </xsl:template>
 
