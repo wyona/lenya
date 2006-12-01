@@ -27,7 +27,27 @@
 
   <target name="install" description="install uzh publication" depends="init, backup">
     
-    <echo>INFO: Copying the xslt files to ${pubs.dir}/${pub.prefix}</echo>
+    <echo>INFO: Copying the files for the logical transformation to ${pubs.dir}/uzh/lenya/xslt/navigation</echo>
+    <copy todir="${pubs.dir}/uzh/lenya/xslt/navigation" overwrite="yes">
+      <fileset dir="${unitemplate.srcdir}/lenya/xslt/navigation"/>
+    </copy>
+    <copy todir="${pubs.dir}/uzh/lenya/xslt/navigation" overwrite="yes">
+      <fileset dir="lenya/xslt/navigation"/>
+    </copy>
+
+    <echo> </echo>
+    <echo>INFO: Patching the files for the logical transformation</echo>
+    <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/breadcrumb-xsl.xsl" includes="lenya/xslt/navigation/breadcrumb.xsl" extension=".xsl" />
+    <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/logic-xsl.xsl" includes="lenya/xslt/navigation/logic.xsl" extension=".xsl" />
+    <xslt basedir="${pubs.dir}/uzh" destdir="work" style="patchers/tabs-xsl.xsl" includes="lenya/xslt/navigation/tabs.xsl" extension=".xsl" />
+    <copy todir="${pubs.dir}/uzh" overwrite="yes">
+      <fileset dir="work" />
+    </copy>
+    <antcall target="cleanup"/> 
+    <mkdir dir="work"/>
+
+    <echo> </echo>
+    <echo>INFO: Copying the layout xslt files to ${pubs.dir}/uzh/xslt</echo>
 
     <copy todir="${pubs.dir}/uzh/xslt" overwrite="yes" file="xslt/assetDots.xsl"/>
 
@@ -72,10 +92,11 @@
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="config/doctypes/schemas/homepage4cols.rng"/>
 
     <echo> </echo>
-    <echo>INFO: Copying local resources to ${pubs.dir}/uzh/resources/shared/images</echo>
+    <echo>INFO: Copying local resources to ${pubs.dir}/uzh/resources/shared</echo>
     <copy todir="${pubs.dir}/uzh/resources/shared/images" overwrite="yes">
       <fileset dir="resources/shared/images" />
     </copy>
+    <copy todir="${pubs.dir}/uzh/resources/shared/css" overwrite="yes" file="resources/shared/css/institute.css"/>
 
     <antcall target="touch"/>
     <antcall target="cleanup"/> 
@@ -84,7 +105,15 @@
 
 
   <target name="uninstall" depends="init, backup" description="uninstall uzh publication">
+
     <echo>INFO: Uninstalling all files within ${pub.dir}</echo>
+    <delete>
+      <fileset dir="${pubs.dir}/uzh/lenya/xslt/navigation" includes="*.xsl"/>
+    </delete>
+    <copy todir="${pubs.dir}/uzh/lenya/xslt/navigation" overwrite="yes">
+      <fileset dir="${unitemplate.srcdir}/lenya/xslt/navigation"/>
+    </copy>
+
     <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/homepage4cols.rng"/>
     <delete dir="${pubs.dir}/uzh/xslt"/>
@@ -94,6 +123,7 @@
     <copy todir="${pubs.dir}/uzh/resources/shared/images" overwrite="yes">
       <fileset dir="${unitemplate.srcdir}/resources/shared/images" />
     </copy>
+    <copy todir="${pubs.dir}/uzh/resources/shared/css" overwrite="yes" file="${unitemplate.srcdir}/resources/shared/css/institute.css"/>
     <antcall target="cleanup"/> 
   </target>
 

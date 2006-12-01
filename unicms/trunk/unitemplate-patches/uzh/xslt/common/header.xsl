@@ -59,6 +59,10 @@
         <div id="primarnav">&#160;</div>
       </xsl:otherwise>
     </xsl:choose>
+    <xsl:if test="/document/xhtml:div[@id = 'sub-tabs']">
+      <div class="floatclear"><xsl:comment/></div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'sub-tabs']"/>
+    </xsl:if>
     <div class="floatclear"><xsl:comment/></div>
     <div class="endheaderline">
       <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
