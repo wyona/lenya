@@ -14,6 +14,11 @@
 # set path to your uzh publication (that is being patched) accordingly
 #------
 
+find /path/to/lenya-src/build/lenya/webapp/lenya/pubs/uzh/lenya/xslt/navigation -type f -name '*.xsl' -print | while read i
+do
+  sed 's/xmlns\:xsl=\"http\:\/\/www\.unizh\.ch\/dummy-ns\/\"//g' $i > $i.tmp && mv $i.tmp $i
+done
+
 find /path/to/lenya-src/build/lenya/webapp/lenya/pubs/uzh/xslt/doctypes -type f -name '*.xsl' -print | while read i
 do
   sed 's/xmlns\:xsl=\"http\:\/\/www\.unizh\.ch\/dummy-ns\/\"//g' $i > $i.tmp && mv $i.tmp $i
