@@ -18,11 +18,9 @@
 
 <xsl:template match="nav:node">
   <div>
-    <xsl:choose>
-      <xsl:when test="@current = 'true' or descendant::nav:node[@current = 'true']">
-        <xsl:attribute name="current">true</xsl:attribute>
-      </xsl:when>
-    </xsl:choose>
+    <xsl:if test="@current = 'true' or descendant::nav:node[@current = 'true']">
+      <xsl:attribute name="current">true</xsl:attribute>
+    </xsl:if>
     <xsl:copy-of select="@href"/>
     <xsl:copy-of select="@basic-url"/>
     <xsl:value-of select="nav:label"/>
