@@ -104,6 +104,13 @@
       </map:match>
     </map:pipeline>
 
+    <!-- custom layout -->
+    <map:pipeline>
+      <map:match pattern="*/layout-**.*">
+        <map:read src="resources/shared/layout/{2}.{3}"/>
+      </map:match>
+    </map:pipeline>
+
     <!-- relaxNG schema -->
     <map:pipeline>
       <map:match pattern="*/**.rng">

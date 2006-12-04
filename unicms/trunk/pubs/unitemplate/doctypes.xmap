@@ -93,7 +93,18 @@
         <map:serialize type="xml"/>
         
       </map:match>
-    
+   
+
+      <map:match pattern="layout/xhtml">
+        <map:act type="resource-exists" src="resources/shared/layout/template.xhtml">
+          <map:generate src="resources/shared/layout/template.xhtml"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        <map:generate src="../../content/util/empty.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+
 <!--
       <map:match pattern="include-rss/**.rss.xml">
         <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
@@ -161,6 +172,7 @@
        <map:match pattern="search-*-*/*/*/**.html">
         <map:aggregate element="document">
           <map:part element="content" src="cocoon:/xml"/>
+          <map:part element="layout" src="cocoon:/layout/xhtml"/>
           <map:part src="cocoon://{3}/search-live/lucene"/>
           <map:part src="cocoon://navigation/{3}/{4}/breadcrumb/{5}.html.xml"/>
           <map:part src="cocoon://navigation/{3}/{4}/servicenav/{5}.html.xml"/>
@@ -233,6 +245,7 @@
       <map:match pattern="*-*-*/*/*/**.html">
         <map:aggregate element="document">
           <map:part element="content" src="cocoon:/xml"/>
+          <map:part element="layout" src="cocoon:/layout/xhtml"/>
           <map:part src="cocoon://navigation/{4}/{5}/breadcrumb/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/servicenav/{6}.html.xml"/>
           <map:part src="cocoon://navigation/{4}/{5}/toolnav/{6}.html.xml"/>

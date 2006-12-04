@@ -32,11 +32,12 @@
   <xsl:include href="../common/navigation.xsl"/>
   <xsl:include href="../common/elements.xsl"/> 
   <xsl:include href="../common/object.xsl"/> 
+  <xsl:include href="../common/layout-template.xsl"/>
 
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
-  </xsl:template>
+  </xsl:template> 
 
 
   <xsl:template match="content"> 

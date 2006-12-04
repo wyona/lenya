@@ -2,7 +2,7 @@
 <css>
 
 /*allgemeine Definition*/
-html > body {font-size:12px}
+html &gt; body {font-size:12px}
 
 body {
   	font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@ body {
 
 .bodywidth {
 	max-width:800px;
-	width:expression(document.body.clientWidth > 800  ? "802px": "auto");
+	width:expression(document.body.clientWidth &gt; 800  ? "802px": "auto");
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -113,7 +113,7 @@ a:hover {
         color:#999999;
 }
 a.arrow {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+        background-image:url(/unizh/authoring/images/arrow.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -121,7 +121,7 @@ a.arrow {
         margin-left:2px;
 }
 .relatedbox a.arrow, ul.squarelist li a,  .contentindex a, .klein a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+        background-image:url(/unizh/authoring/images/arrow.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -129,7 +129,7 @@ a.arrow {
         margin-left:2px;
 }
 .relatedbox a.arrow,.contentindex a, .klein a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow4.gif);
+        background-image:url(/unizh/authoring/images/arrow4.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -137,14 +137,14 @@ a.arrow {
         margin-left:2px;
 }
 a.back {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow_back.gif);
+        background-image:url(/unizh/authoring/images/arrow_back.gif);
         padding-left:13px;
         background-repeat: no-repeat;
         padding-right:2px;
         margin-left:2px;
 }
 a.download {
-        background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
+        background-image:url(/unizh/authoring/images/icon_download.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -153,7 +153,7 @@ a.download {
 }
 
 a.extern {
-        background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+        background-image:url(/unizh/authoring/images/icon_extern.gif);
         padding-left:13px;
         background-repeat: no-repeat;
         padding-right:2px;
@@ -216,7 +216,7 @@ img.icon {
         padding:0px;
 }
 .endheaderline {
-        background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+        background-image: url(/unizh/authoring/images/dot_line66.gif);
         margin-bottom:0px;
         height:1px;
 }
@@ -326,7 +326,7 @@ img.icon {
 }
 .navup a {
         display:block;
-        background-image:url(<context-prefix/>/unizh/authoring/images/icon_arrow_up.gif);
+        background-image:url(/unizh/authoring/images/icon_arrow_up.gif);
         padding-left:20px;
         background-repeat: no-repeat;
 }
@@ -427,7 +427,7 @@ img.icon {
 }
 
 #quicklink ul li a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+        background-image:url(/unizh/authoring/images/arrow.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -561,7 +561,7 @@ ul.sitemap ul ul ul li a {
 }
 
 a.rss {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow_rss.gif);
+        background-image:url(/unizh/authoring/images/arrow_rss.gif);
         background-position:left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -590,7 +590,7 @@ a.rss {
         margin-bottom:7px;
 }
 .topnav a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow_top.gif);
+        background-image:url(/unizh/authoring/images/arrow_top.gif);
         margin-right:7px;
         background-repeat: no-repeat;
         background-position:left;
@@ -611,14 +611,14 @@ ul.type2, ul.type3  {
 }
  
 ul.type2 li {
-	background-image: url(<context-prefix/>/unizh/authoring/images/list_square.gif);
+	background-image: url(/unizh/authoring/images/list_square.gif);
 	background-position: 0.5em 0.6em;
 	background-repeat: no-repeat;
 	padding-left:1.5em;
 }
 
 ul.type3 li {
-	background-image: url(<context-prefix/>/unizh/authoring/images/list_hyphen.gif);
+	background-image: url(/unizh/authoring/images/list_hyphen.gif);
 	background-position: 0.5em 0.75em;
 	background-repeat: no-repeat;
 	padding-left:1.5em;
@@ -637,7 +637,7 @@ ul.squarelist {
 }
 
 ul.squarelist li {
-        background-image: url(<context-prefix/>/unizh/authoring/images/listsq.gif);
+        background-image: url(/unizh/authoring/images/listsq.gif);
         background-position: left top;
         background-repeat: no-repeat;
         padding-left:13px;
@@ -647,7 +647,7 @@ ul.linknav {
         font-size:11px;
 }
 .content1 ul.linknav li a, .content2 ul.linknav li a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow6.gif);
+        background-image:url(/unizh/authoring/images/arrow6.gif);
         background-position: left top;
         padding-left:13px;
         background-repeat: no-repeat;
@@ -665,7 +665,7 @@ ol {
 }
 
 ol.list a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+        background-image:url(/unizh/authoring/images/arrow.gif);
         padding-left:13px;
         background-repeat: no-repeat;
         background-position: left top;
@@ -682,7 +682,7 @@ ol.list a {
         width:100%;
 }
 .linkrow a {
-        background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+        background-image:url(/unizh/authoring/images/icon_extern.gif);
         padding-left:13px;
         font-size: 12px;
         line-height:20px;
@@ -1048,21 +1048,21 @@ th.width105 {
         border:0px;
 }
 .dotline {
-        background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+        background-image: url(/unizh/authoring/images/dot_line66.gif);
         width:100%;
         height:1px;
         border:0px;
         margin:0px;
 }
 .dotlinelead {
-        background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+        background-image: url(/unizh/authoring/images/dot_line66.gif);
         width:100%;
         height:1px;
         border:0px;
         margin: 0 0 7px 0;
 }
 .dotlinemitmargin {
-        background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+        background-image: url(/unizh/authoring/images/dot_line66.gif);
         width:100%;
         height:1px;
         border:0px;
@@ -1140,7 +1140,7 @@ a.namedanchor {
 /* BXE */
 
 .asset {
-  background-image:url(<context-prefix/>/unizh/authoring/images/icon_download.gif);
+  background-image:url(/unizh/authoring/images/icon_download.gif);
   padding-left:13px;
   background-repeat: no-repeat;
   padding-right:2px;
@@ -1404,4 +1404,127 @@ td .object object[width] {
 }
 
 
+
+    /* elml */
+
+.lObjective {
+        display: list-item;
+        list-style-position: inside;
+}
+
+
+.definition {
+        display: block;
+}
+
+.definition .term {
+         color: #000;
+         font-weight: bold;
+}
+.definition .term:after {
+        content: ": ";
+}
+
+
+table.elml {
+        border-width: 1px;
+        border-spacing: 0px;
+        border-style: solid;
+        border-collapse: collapse;
+}
+table.elml th {
+        border-width: 1px;
+        padding: 3px;
+        border-style: solid;
+}
+table.elml td {
+        border-width: 1px;
+        padding: 3px;
+        border-style: solid;
+}
+
+
+.lowercase {
+        text-transform:lowercase;
+}
+
+.uppercase {
+        text-transform:lowercase;
+}
+
+.box {
+        display: block;
+        background-color: #ddd;
+        margin-top: 15px;
+        margin-bottom: 15px;
+}
+
+.term {
+        color: #0000ff;
+}
+
+.bibliography {
+        display:block;
+}
+
+.book {
+        display:block;
+}
+
+.contributionInBook {
+        display:block;
+}
+
+.journalArticle {
+        display:block;
+}
+
+.newspaperArticle {
+        display:block;
+}
+
+.map {
+        display:block;
+}
+
+.conferencePaper {
+        display:block;
+}
+
+.publicationCorporateBody {
+        display:block;
+}
+
+.thesis {
+        display:block;
+}
+
+.patent {
+        display:block;
+}
+
+
+.videoFilmBroadcast {
+        display:block;
+}
+
+.websites {
+        display:block;
+}
+
+.eJournals {
+        display:block;
+}
+
+.mailLists {
+        display:block;
+}
+
+.personalMail {
+        display:block;
+}
+
+.cdrom {
+        display:block;
+}
 </css>
