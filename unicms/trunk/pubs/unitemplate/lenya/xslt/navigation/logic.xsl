@@ -46,7 +46,7 @@
 
 <!-- Menu -->
 
-<xsl:template match="xhtml:div[@id = 'menu']"> 
+<xsl:template match="/document/xhtml:div[@id = 'menu']"> 
   <xsl:choose>
     <xsl:when test="$isHomepage = 'true'">
 
@@ -126,7 +126,7 @@
 
 <!-- Contcol1 (tabs) for contact, impressum, sitemap, search --> 
 
-<xsl:template match="xhtml:div[@id = 'menu' and $tabs = 'true' and ($node-id = 'contact' or $node-id='sitemap' or $node-id = 'impressum' or $node-id = 'search')]">
+<xsl:template match="/document/xhtml:div[@id = 'menu' and $tabs = 'true' and ($node-id = 'contact' or $node-id='sitemap' or $node-id = 'impressum' or $node-id = 'search')]">
   <unizh:contcol1> 
     <xsl:apply-templates select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols][1]/*/unizh:contcol1/unizh:quicklinks"/> 
   </unizh:contcol1>
@@ -135,7 +135,7 @@
 
 <!-- tabs -->
 
-<xsl:template match="xhtml:div[@id = 'tabs']">
+<xsl:template match="/document/xhtml:div[@id = 'tabs']">
   <xsl:if test="$tabs = 'true'">
     <div id="tabs">
       <xsl:choose>
@@ -179,7 +179,7 @@
 
 <!-- servicenav -->
 
-<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'home']">
+<xsl:template match="/document/xhtml:div/xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'home']">
   <div id="home">
     <xsl:attribute name="href">
       <xsl:choose>
@@ -199,7 +199,7 @@
 </xsl:template>
 
 
-<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'contact']">
+<xsl:template match="/document/xhtml:div/xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'contact']">
   <div id="contact">
     <xsl:attribute name="href">
       <xsl:choose>
@@ -219,7 +219,7 @@
 </xsl:template>
 
 
-<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'sitemap']">
+<xsl:template match="/document/xhtml:div/xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'sitemap']">
   <div id="sitemap">
     <xsl:attribute name="href">
       <xsl:choose>
@@ -239,7 +239,7 @@
 </xsl:template>
 
 
-<xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'search']">
+<xsl:template match="/document/xhtml:div/xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'search']">
   <div id="search">
     <xsl:attribute name="href">
       <xsl:choose>
@@ -288,7 +288,7 @@
 <!-- breadcrumb path -->
 
 
-<xsl:template match="xhtml:div[@id = 'breadcrumb']">
+<xsl:template match="/document/xhtml:div[@id = 'breadcrumb']">
   <div id="breadcrumb" root="{@root}" label="{@label}">
     <xsl:if test="/document/uz:unizh/uz:section/@breadcrumb = 'true'">
       <div>
