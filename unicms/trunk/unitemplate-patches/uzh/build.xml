@@ -89,6 +89,7 @@
 
     <echo> </echo>
     <echo>INFO: Copying differing schemas and samples to ${pubs.dir}/uzh/config/doctypes</echo>
+    <copy todir="${pubs.dir}/uzh/config/doctypes/samples" overwrite="yes" file="config/doctypes/samples/homepage4cols.xml"/>
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="config/doctypes/schemas/homepage4cols.rng"/>
 
     <echo> </echo>
@@ -115,6 +116,7 @@
     </copy>
 
     <copy todir="${pubs.dir}/uzh" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
+    <copy todir="${pubs.dir}/uzh/config/doctypes/samples" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/samples/homepage4cols.xml"/>
     <copy todir="${pubs.dir}/uzh/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/homepage4cols.rng"/>
     <delete dir="${pubs.dir}/uzh/xslt"/>
     <delete>
