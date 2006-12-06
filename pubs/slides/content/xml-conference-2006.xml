@@ -62,7 +62,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="goals" status="wip">
+<s:slide id="goals" status="ready">
 <s:title>Goals - Creature Comforts with Yulup and Neutron</s:title>
 <s:content>
 <p>
@@ -79,7 +79,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="auto-discovery" status="wip">
+<s:slide id="auto-discovery" status="ready">
 <s:title>Auto-Discovery of Introspection</s:title>
 <s:content>
 <p>
@@ -97,7 +97,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="introspection-neutron" status="wip">
+<s:slide id="introspection-neutron" status="ready">
 <s:title>Introspection Neutron</s:title>
 <s:content>
 <p>
@@ -115,7 +115,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="specification" status="wip">
+<s:slide id="specification" status="ready">
 <s:title>Specification</s:title>
 <s:content>
 <p>
@@ -128,7 +128,7 @@
 </s:content>
 </s:slide>
 
-<s:slide id="demo" status="wip">
+<s:slide id="demo" status="ready">
 <s:title>Demo</s:title>
 <s:content>
 <p>
