@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<!-- OSCOM 2 Template, written with SlideML 0.9, 2002-08-20 -->
+
+<s:slideset 
+	xmlns:s="http://www.oscom.org/2002/SlideML/0.9/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+	xmlns="http://www.w3.org/1999/xhtml"
+-->
+	
+	<s:metadata>
+		<s:title>Creature Comforts</s:title>
+		
+		
+		<s:author>
+                                <s:name>Michael Wechner</s:name> <!-- NOT SlideML specification -->
+				<s:email>michael.wechner@wyona.com</s:email>
+				<s:orgname>Wyona</s:orgname>
+		</s:author>
+			
+		
+		<s:confgroup>
+  			<s:confdates>
+				<s:start>2006-11-05</s:start>
+				<s:end>2006-11-07</s:end>
+			</s:confdates> 
+  			<s:conftitle>XML Conference 2006, Boston, USA</s:conftitle> 
+  			<s:address>
+                        Sheraton Boston Hotel, Prudential Center, 39 Dalton Street, Boston, 02199 MA, USA
+			</s:address> 
+  		</s:confgroup>
+		
+		
+		<dc:subject>Fill in some comma-seperated keywords</dc:subject>
+		<dc:date>2003-02-06T10:45</dc:date>
+		<dc:rights>Fill in some copyright information (optional)</dc:rights>
+			
+		<s:abstract>Fill in your abstract</s:abstract>
+	</s:metadata>
+	
+
+
+
+<s:slide id="bio" status="ready">
+<s:title>Short Bio of Michael Wechner</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
+  <li>Computer simulations on dendritic growth (Max-Planck Institute)</li>
+  <li>Co-Founder Wyona</li>
+  <li>Co-Founder and former president of OSCOM</li>
+  <li>Original Creator of Apache Lenya and ASF member</li>
+  <li>Director of documentary movie "FUD - Fear Uncertainty Doubt"</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<!--
+<s:slide id="lenya" status="ready">
+<s:title>Apache Lenya</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Open Source Content Management Framework/System</li>
+  <li>Wired News (Lycos), Atlantic Media Company, NZZ, Mobiliar, University of Zurich, ...</li>
+  <li>Everything XML</li>
+  <li>No vendor lock-in</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="history" status="ready">
+<s:title>History of Apache Lenya</s:title>
+<s:content>
+<p>
+<ol>
+  <li>1998/1999: "Physics": Journal of Pattern Formation</li>
+  <li>2000/2001: NZZ (Neue Z&#252;rcher Zeitung)</li>
+  <li>2003: Incubator of Apache Software Foundation</li>
+  <li>2004: Top Level Project of Apache Software Foundation</li>
+  <li>2006: Release 1.4</li>
+  <li>2007: Yanel/Yulup (Leaving the room ...?)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="asf" status="ready">
+<s:title>Apache Software Foundation</s:title>
+<s:content>
+<p>
+<ol>
+  <li>1995: To develop a HTTP server</li>
+  <li>1999: Incorporated as 501(c)(3) (non-profit)</li>
+  <li>Provide a foundation for open collaborative software development</li>
+  <li>Provide a legal entity</li>
+  <li>Provide a shelter from legal suits</li>
+  <li>Protect the Apache brand</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="numbers" status="ready">
+<s:title>Some ASF numbers (2006)</s:title>
+<s:content>
+<p>
+<ol>
+  <li>approx. 1000 ASF committers</li>
+  <li>approx. 200 ASF members</li>
+  <li>9 board members</li>
+  <li>approx. 34 top level projects</li>
+  <li>approx. 34 incubator projects</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="philosophy" status="ready">
+<s:title>ASF philosophy</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Collaborative software development</li>
+  <li>Commercial-friendly standard license</li>
+  <li>Consistently high quality software</li>
+  <li>Respectful, honest, technical-based interaction</li>
+  <li>Faithful implementation of standards</li>
+  <li>Security as a mandatory feature</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="classical" status="ready">
+<s:title>"Classical" FOSS project/community</s:title>
+<s:content>
+<p>
+<ol>
+  <li>One person has a need and starts a project</li>
+  <li>People start to contribute</li>
+  <li>People get involved with decisions</li>
+  <li>The original creator is having new interests or is getting bored (leaving the room)</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="hierarchy" status="ready">
+<s:title>ASF Hierarchy</s:title>
+<s:content>
+<p>
+<ol>
+  <li>User</li>
+  <li>Contributor</li>
+  <li>Committer (contract to be signed)</li>
+  <li>Project Management Committee member</li>
+  <li>ASF member (owner, contract to be signed)</li>
+  <li>ASF board member</li>
+  <li>ASF chairman/president</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="incubator" status="ready">
+<s:title>ASF Incubator</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Filtering the creation of new (sub-)projects</li>
+  <li>Help on operational infrastructure</li>
+  <li>Supervise and mentor the incubated community</li>
+  <li>Quality assurance resp. evaluation of maturity</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="sustainability" status="ready">
+<s:title>Sustainability</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Self-Regulation</li>
+  <li>Critical Mass</li>
+  <li>Socialization is not enough</li>
+  <li>Guidelines/Bylaws, whereas the reasons are more important</li>
+  <li>Knowing the reasons for "collaboration"</li>
+  <li>Transparency</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="morepriciples" status="ready">
+<s:title>More Principles (Lessons learned ...)</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Eat your own dogfood</li>
+  <li>Continuous integration</li>
+  <li>Simplicity/Out-of-the-box</li>
+  <li>Performance/Scalability/Redundancy</li>
+  <li>Down/Upgradeability</li>
+  <li>Forwards/Backwards Compatibility</li>
+  <li>...</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+-->
+
+<s:slide id="companies" status="ready">
+<s:title>Companies running OS projects</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Employees (Salaries)</li>
+  <li>Shareholders (Profit)</li>
+  <li>Business instead Development driven</li>
+  <li>Conflicts of Interests re Open Development</li>
+<!--
+  <li>Marketing power</li>
+-->
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="opensourcedevelopment" status="ready">
+<s:title>Open Source "versus" Open Development</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Open Source: License "authorized" by OSI (Open Source Initiative)</li>
+  <li>Open Development: Bylaws "authorized" by nobody yet!</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="richardandbruce" status="ready">
+<s:title>It's about freedom</s:title>
+<s:content>
+<p>
+<ol>
+  <li>What freedom?</li>
+  <li>Who cares?</li>
+  <li>Bruce Perens: It's time to talk again about free software</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="pesimistic" status="ready">
+<s:title>Being Pesimistic</s:title>
+<s:content>
+<p>
+<ol>
+  <li>The monopoly is dead, long live the monopoly</li>
+  <li>The revolution is dead, long live the revolution</li>
+  <li>Media can be very misleading ...</li>
+  <li>The summer of love</li>
+  <li>Volunteer Fatigue</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="optimistic" status="ready">
+<s:title>Being Optimistic</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Shift from one equilibrium to another equilibrium</li>
+  <li>Competition has increased</li>
+  <li>Prices have decreased</li>
+  <li>Look back on what we have accomplished</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+<s:slide id="qanda" status="ready">
+<s:title>Thanks and QA</s:title>
+<s:content>
+<p>
+<ol>
+  <li>Thanks</li>
+  <li>Questions and Answers</li>
+</ol>
+</p>
+</s:content>
+</s:slide>
+
+</s:slideset>
