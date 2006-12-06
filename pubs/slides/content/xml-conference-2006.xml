@@ -52,11 +52,11 @@
 <ol>
   <li>Math. Physics at ETH (Swiss Federal Institute of Technology Z&#252;rich)</li>
   <li>Computer simulations on dendritic growth (Max-Planck Institute)</li>
-  <li>Co-Founder Wyona</li>
-  <li>Co-Founder and former president of OSCOM</li>
+  <li>Co-Founder <a href="http://www.wyona.com">Wyona</a></li>
+  <li>Co-Founder and former president of <a href="http://www.oscom.org">OSCOM</a></li>
   <li>Original Creator of <a href="http://lenya.apache.org">Apache Lenya</a> and ASF member</li>
-  <li>Original Creator of Yanel and Yulup</li>
-  <li>Director of documentary movie "FUD - Fear Uncertainty Doubt"</li>
+  <li>Original Creator of <a href="http://yanel.wyona.org">Yanel</a> and <a href="http://www.yulup.org">Yulup</a></li>
+  <li>Director of documentary movie <a href="http://www.wyonapictures.com/en/fud/index.html">"FUD - Fear Uncertainty Doubt"</a></li>
 </ol>
 </p>
 </s:content>
@@ -85,10 +85,11 @@
 <p>
 <ol>
   <li><a href="http://demo.yulup.org/editable-page-without-locking.html">Hello World</a></li>
-  <li>Not just example (X)HTML, but also <a href="http://demo.yulup.org/calendar.xhtml">XML</a>, <a href="http://demo.yulup.org/plain-text.html">TXT</a>/<a href="http://demo.yulup.org/hello-wiki.html">Wiki</a>, ...</li>
-  <li>Authentication</li>
-  <li>Atom</li>
-  <li>NAR</li>
+  <li>Not just (X)HTML, but also <a href="http://demo.yulup.org/calendar.xhtml">XML</a>, <a href="http://demo.yulup.org/plain-text.html">TXT</a>/<a href="http://demo.yulup.org/hello-wiki.html">Wiki</a>, ...</li>
+  <li><a href="http://demo.yulup.org/editable-page-with-locking.html">Authentication/Authorization</a></li>
+  <li><a href="http://demo.yulup.org/atom/entries/">Atom</a></li>
+  <li><a href="http://demo.yulup.org/nar-test.html">NAR</a></li>
+  <li><a href="http://demo.yulup.org/testpage_andi_1.html">Upload/Bridging the gap</a></li>
 </ol>
 </p>
 </s:content>
