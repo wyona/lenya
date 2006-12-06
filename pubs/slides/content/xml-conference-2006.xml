@@ -133,6 +133,14 @@
 <s:content>
 <p>
 <ol>
+<!--
+  <li><a href="http://127.0.0.1:8080/yanel/yulup-demo/editable-page-without-locking.html">Hello World</a></li>
+  <li>Not just (X)HTML, but also <a href="http://127.0.0.1:8080/yanel/yulup-demo/calendar.xhtml">XML</a>, <a href="http://127.0.0.1:8080/yanel/yulup-demo/plain-text.html">TXT</a>/<a href="http://127.0.0.1:8080/yanel/yanel-website/wiki/hello-world.html">Wiki</a>, ...</li>
+  <li><a href="http://127.0.0.1:8080/yanel/yulup-demo/editable-page-with-locking.html">Authentication/Authorization</a></li>
+  <li><a href="http://127.0.0.1:8080/yanel/yulup-demo/atom/entries/">Atom</a></li>
+  <li><a href="http://127.0.0.1:8080/yanel/yulup-demo/nar-test.html">NAR</a></li>
+  <li><a href="http://127.0.0.1:8080/yanel/yulup-demo/testpage_andi_1.html">Upload/Bridging the gap</a></li>
+-->
   <li><a href="http://demo.yulup.org/editable-page-without-locking.html">Hello World</a></li>
   <li>Not just (X)HTML, but also <a href="http://demo.yulup.org/calendar.xhtml">XML</a>, <a href="http://demo.yulup.org/plain-text.html">TXT</a>/<a href="http://demo.yulup.org/hello-wiki.html">Wiki</a>, ...</li>
   <li><a href="http://demo.yulup.org/editable-page-with-locking.html">Authentication/Authorization</a></li>
