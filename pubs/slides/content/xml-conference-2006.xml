@@ -68,7 +68,7 @@
 <p>
 <ol>
   <li>Creature Comforts (as simple as it gets)</li>
-  <li>Decoupling the user interface from the server (Neutralizing the server side)</li>
+  <li><a href="http://neutron.wyona.org/FutureCMSArchitecture.pdf">Decoupling</a> the user interface from the server (<a href="http://neutron.wyona.org">Neutralizing</a> the server side)</li>
   <li>Tim Berners-Lee's vision of a <a href="http://de.wikipedia.org/wiki/Writable_Web">writable web</a></li>
   <li>Bridging the gap between the web and desktop (OOo, Word, ...)</li>
   <li>Being able to work offline</li>
@@ -84,8 +84,11 @@
 <s:content>
 <p>
 <ol>
-  <li>Simple Example</li>
-  <li>Not just example XHTML, but also XML, TXT, ...</li>
+  <li><a href="http://demo.yulup.org/editable-page-without-locking.html">Hello World</a></li>
+  <li>Not just example (X)HTML, but also <a href="http://demo.yulup.org/calendar.xhtml">XML</a>, <a href="http://demo.yulup.org/plain-text.html">TXT</a>/<a href="http://demo.yulup.org/hello-wiki.html">Wiki</a>, ...</li>
+  <li>Authentication</li>
+  <li>Atom</li>
+  <li>NAR</li>
 </ol>
 </p>
 </s:content>
