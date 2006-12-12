@@ -240,7 +240,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:a[ancestor::unizh:teaser and parent::xhtml:p]">
+  <xsl:template match="xhtml:a[ancestor::unizh:teaser and not(parent::unizh:teaser)]">
     <a href="{@href}">
       <xsl:copy-of select="@target"/>
       <xsl:value-of select="text()"/>
