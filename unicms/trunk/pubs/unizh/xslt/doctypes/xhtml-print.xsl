@@ -48,11 +48,18 @@
           <xsl:call-template name="header"/>
           <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"  /></div>
           <div class="content">
-            <h1>
-              <xsl:value-of select="*/lenya:meta/dc:title"/>
-            </h1>
-            <p>&#160;</p>
-            <xsl:apply-templates select="*/xhtml:body/*"/>
+            <xsl:choose>
+              <xsl:when test="$document-element-name = 'unizh:person'">
+                <xsl:call-template name="person"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <h1>
+                  <xsl:value-of select="*/lenya:meta/dc:title"/>
+                </h1>
+                <p>&#160;</p>
+                <xsl:apply-templates select="*/xhtml:body/*"/>
+              </xsl:otherwise>
+            </xsl:choose>
           </div>
           <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
           <xsl:apply-templates select="*/unizh:related-content/unizh:teaser"/>
@@ -71,4 +78,50 @@
     </xsl:copy>
   </xsl:template> 
   
+  <xsl:template name="person">
+    <div class="teamBlock">
+      <div class="teamImg">
+        <xsl:apply-templates select="unizh:person/xhtml:object"/>
+      </div>
+      <div class="teamText">
+        <p>
+          <b>
+            <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
+              <xsl:if test="unizh:person/unizh:academictitle !=''">
+                <xsl:value-of select="unizh:person/unizh:academictitle"/>&#160;
+              </xsl:if>
+            </span>
+            <span bxe_xpath="/{$document-element-name}/unizh:firstname">
+              <xsl:value-of select="unizh:person/unizh:firstname"/>&#160;
+            </span>
+            <span bxe_xpath="/{$document-element-name}/unizh:lastname">
+              <xsl:value-of select="unizh:person/unizh:lastname"/>
+            </span>
+          </b>
+          <br/>
+          <span bxe_xpath="/{$document-element-name}/unizh:position">
+            <xsl:value-of select="unizh:person/unizh:position"/>
+          </span>
+          <br/>
+          Tel.: 
+          <span bxe_xpath="/{$document-element-name}/unizh:phone">
+            <xsl:value-of select="unizh:person/unizh:phone"/>
+          </span>
+          <br/>
+          Mail: 
+          <span bxe_xpath="/{$document-element-name}/unizh:email">
+            <xsl:value-of select="unizh:person/unizh:email"/>
+          </span>
+        </p>
+      </div>
+      <div class="floatleftclear"><xsl:comment/></div>
+    </div>
+    <div class="solidline">
+      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+    </div>
+    <div bxe_xpath="/{$document-element-name}/unizh:description">
+      <xsl:apply-templates select="unizh:person/unizh:description"/>
+    </div>
+  </xsl:template>
+
 </xsl:stylesheet>
