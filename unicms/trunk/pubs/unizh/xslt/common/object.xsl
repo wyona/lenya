@@ -363,7 +363,16 @@
 
     <xsl:param name="width"/>
     <xsl:param name="height"/>
-    <xsl:param name="src" select="concat($nodeid, '/', @data)"/>
+    <xsl:param name="src">
+      <xsl:choose>
+        <xsl:when test="starts-with(@data, 'http')">
+          <xsl:value-of select="@data"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat($nodeid, '/', @data)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
     <xsl:param name="href" select="@href"/>
     <xsl:variable name="alt">
       <xsl:choose>
