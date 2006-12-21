@@ -318,19 +318,19 @@
         <map:select type="parameter">
           <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
           <map:when test="simple">
-            <map:generate src="cocoon:/{1}/search.html.simple"/>
+            <map:generate src="cocoon:/{1}/search{2}.html.simple"/>
           </map:when>
           <map:when test="standard">
-            <map:generate src="cocoon:/{1}/search.html.internal"/>
+            <map:generate src="cocoon:/{1}/search{2}.html.internal"/>
           </map:when>
           <map:otherwise>
             <map:select type="parameter">
               <map:parameter name="parameter-selector-test" value="{session-context:version/}"/>
               <map:when test="simple">
-                <map:generate src="cocoon:/{1}/search.html.simple"/>
+                <map:generate src="cocoon:/{1}/search{2}.html.simple"/>
               </map:when>
               <map:otherwise>
-                 <map:generate src="cocoon:/{1}/search.html.internal"/>
+                 <map:generate src="cocoon:/{1}/search{2}.html.internal"/>
               </map:otherwise>
             </map:select>
           </map:otherwise>
