@@ -58,12 +58,6 @@
         <create>
           <pageTitle>New Document</pageTitle>
         </create>
-        <createLanguage>
-          <language>de</language>
-        </createLanguage>
-        <deleteLanguage>
-          <pageTitle>Remove Language Version</pageTitle>
-        </deleteLanguage>
         <copy>
           <pageTitle>Copy Document</pageTitle>
         </copy>
