@@ -41,14 +41,14 @@
     </copy>
 
     <echo>INFO: Copy Access Control</echo>
-    <copy todir="${destination.dir}/config/ac">
+    <copy todir="${destination.dir}/config/ac" overwrite="yes">
       <fileset dir="${source.dir}/config/ac">
 	<exclude name="ac.xconf"/>
       </fileset>
     </copy>
     
     <echo>INFO: Change context in ac.xconf</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/config/ac/ac.xconf" 
       out="${destination.dir}/config/ac/ac.xconf" style="ac-xconf.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
@@ -102,7 +102,7 @@
     </copy>
 
     <echo>INFO: Change i18n config de</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/config/i18n/unizh_de.xml" 
       out="${destination.dir}/config/i18n/unizh_de.xml" style="i18n.xsl">
       <outputproperty name="encoding" value="ISO-8859-1"/>
@@ -111,7 +111,7 @@
     </xslt>
     
     <echo>INFO: Change i18n config en</echo>
-    <xslt
+    <xslt force="true"
       in="${source.dir}/config/i18n/unizh_en.xml"
       out="${destination.dir}/config/i18n/unizh_en.xml" style="i18n.xsl">
       <param name="publicationName" expression="${new.publication.name}"/>
@@ -134,13 +134,13 @@
     </copy>
     
     <echo>INFO: Change search configuration</echo>
-    <xslt in="${source.dir}/config/search/crawler-live.xconf"
+    <xslt force="true" in="${source.dir}/config/search/crawler-live.xconf"
       out="${destination.dir}/config/search/crawler-live.xconf" style="search.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
       <param name="templatePublication" expression="${old.publication.prefix}"/>
     </xslt>
 
-    <xslt in="${source.dir}/config/search/lucene-live.xconf"
+    <xslt force="true" in="${source.dir}/config/search/lucene-live.xconf"
       out="${destination.dir}/config/search/lucene-live.xconf" style="search.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
       <param name="templatePublication" expression="${old.publication.prefix}"/>
@@ -155,7 +155,7 @@
     </copy>
     
     <echo>INFO: Change export.expression in targets.xml</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/config/tasks/targets.xml" 
       out="${destination.dir}/config/tasks/targets.xml" style="targets.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
@@ -177,14 +177,14 @@
     </copy>
 
     <echo>INFO: Change breadcrumb in unizh.xconf</echo>
-    <xslt in="${source.dir}/config/unizh/unizh.xconf"
+    <xslt force="true" in="${source.dir}/config/unizh/unizh.xconf"
       out="${destination.dir}/config/unizh/unizh.xconf" style="unizh-conf.xsl">
       <outputproperty name="encoding" value="ISO-8859-1"/>
       <param name="publicationName" expression="${new.publication.name}"/>
     </xslt>
 
     <echo>INFO: Change publication configuration</echo>
-    <xslt in="${source.dir}/config/publication.xconf"
+    <xslt force="true" in="${source.dir}/config/publication.xconf"
       out="${destination.dir}/config/publication.xconf" style="publication-xconf.xsl">
       <param name="publicationName" expression="${new.publication.prefix}"/>
       <param name="templatePublication" expression="${old.publication.prefix}"/>
@@ -202,7 +202,7 @@
     <antcall target="standard-pub"/>
     
     <echo>INFO: Name new Publication ${source.dir}</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/publication.xml" 
       out="${destination.dir}/publication.xml" style="publication-xml.xsl">
       <param name="publicationName" expression="${new.publication.name}"/>
@@ -220,7 +220,7 @@
     <mkdir dir="${destination.dir}/resources/authoring"/>
     
     <echo>INFO: Copy Content</echo>
-    <copy todir="${destination.dir}/content">
+    <copy todir="${destination.dir}/content" overwrite="yes">
       <fileset dir="${source.dir}/content">
 	<exclude name="authoring/sitetree.xml"/>
 	<exclude name="authoring/index/index_de.xml"/>
@@ -228,7 +228,7 @@
     </copy>
   
     <echo>INFO: Change sitetree.xml</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/content/authoring/sitetree.xml" 
       out="${destination.dir}/content/authoring/sitetree.xml" style="sitetree.xsl">
       <outputproperty name="indent" value="yes"/>
@@ -237,7 +237,7 @@
     </xslt>
     
     <echo>INFO: Create Homepages</echo>
-    <xslt 
+    <xslt force="true" 
       in="${source.dir}/content/authoring/index/index_de.xml" 
       out="${destination.dir}/content/authoring/index/index_de.xml" style="index.xsl">
       <outputproperty name="indent" value="yes"/>
@@ -262,7 +262,7 @@
     <mkdir dir="${destination.dir}/resources/authoring"/>
     
     <echo>INFO: Copy Content</echo>
-    <copy todir="${destination.dir}/content">
+    <copy todir="${destination.dir}/content" overwrite="yes">
       <fileset dir="${stdpub.source.dir}/content">
 	<exclude name="authoring/sitetree.xml"/>
 	<exclude name="authoring/index/index_de.xml"/>
@@ -270,7 +270,7 @@
     </copy>
   
     <echo>INFO: Change sitetree.xml</echo>
-    <xslt 
+    <xslt force="true" 
       in="${stdpub.source.dir}/content/authoring/sitetree.xml" 
       out="${destination.dir}/content/authoring/sitetree.xml" style="sitetree.xsl">
       <outputproperty name="indent" value="yes"/>
@@ -279,7 +279,7 @@
     </xslt>
     
     <echo>INFO: Create Homepages</echo>
-    <xslt 
+    <xslt force="true" 
       in="${stdpub.source.dir}/content/authoring/index/index_de.xml" 
       out="${destination.dir}/content/authoring/index/index_de.xml" style="index.xsl">
       <outputproperty name="indent" value="yes"/>
