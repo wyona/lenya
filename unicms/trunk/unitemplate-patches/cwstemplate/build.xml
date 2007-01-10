@@ -173,4 +173,12 @@
     <exec dir="." executable="./clear-dummy-ns.sh" os="Linux"/>
   </target>
   
+ <target name="test" description="clear namespace that has been created for working purpose">
+    <echo>INFO: Clearing dummy namespace in the doctypes xsl files</echo>
+    <exec dir="." executable="./clear-dummy-ns.sh" os="Mac OS X">
+      <arg value="${pub.dir}/lenya"/>
+      <env key="eins" path="${pub.dir}/bin"/>
+    </exec>
+  </target>
+
 </project>
