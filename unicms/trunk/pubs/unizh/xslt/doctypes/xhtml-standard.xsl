@@ -74,6 +74,9 @@
             <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
               <xsl:call-template name="homepage4columns"/>
             </xsl:when>
+            <xsl:when test="$document-element-name = 'unizh:portal'">
+              <xsl:call-template name="portal"/>
+            </xsl:when>
             <xsl:when test="$document-element-name = 'unizh:news'">
               <xsl:call-template name="three-columns"/>
             </xsl:when>
@@ -225,6 +228,28 @@
 
  
   <xsl:template name="homepage4columns">
+    <div id="col1">
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+      <xsl:apply-templates select="*/unizh:contcol1"/>
+      <xsl:comment/>
+    </div>
+    <div class="contcol2">
+      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+      </div>
+      <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+      <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+        <div class="content">
+          <xsl:apply-templates select="*/xhtml:body/*"/>
+        </div>
+        <xsl:call-template name="footer"/>
+      </div>
+    </div>
+  </xsl:template>
+
+
+  <xsl:template name="portal">
     <div id="col1">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
       <xsl:apply-templates select="*/unizh:contcol1"/>
