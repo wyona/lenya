@@ -59,23 +59,6 @@
       <fileset dir="${unizh.srcdir}/xslt/doctypes"/>
     </copy>
 
-    <copy todir="${pub.dir}/xslt/doctypes/add-ons" overwrite="yes">
-      <fileset dir="xslt/doctypes/add-ons"/>
-    </copy>
-
-    <echo> </echo>
-    <echo>INFO: Patching the doctypes xslt files</echo>
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/xhtml-standard-xsl.xsl" includes="xslt/doctypes/xhtml-standard.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/xhtml-simple-xsl.xsl" includes="xslt/doctypes/xhtml-simple.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/xhtml-print-xsl.xsl" includes="xslt/doctypes/xhtml-print.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/xhtml-context-xsl.xsl" includes="xslt/doctypes/xhtml-context.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/variables-xsl.xsl" includes="xslt/doctypes/variables.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/search-standard-xsl.xsl" includes="xslt/doctypes/search-standard.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/search-simple-xsl.xsl" includes="xslt/doctypes/search-simple.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/search-print-xsl.xsl" includes="xslt/doctypes/search-print.xsl" extension=".xsl" />
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="work" />
-    </copy>
     <antcall target="cleanup"/> 
     <mkdir dir="work"/>
 
