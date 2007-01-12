@@ -136,7 +136,7 @@
   </target>
 
 
-  <target name="uzhpublic-true" if="replacedata">
+  <target name="uzhpublic-true" if="replacedata" description="Checks if installation concerns UZH public portal">
     <condition property="uzhpublic.true">
       <equals arg1="${pub.prefix}" arg2="public"/>
     </condition>
@@ -150,7 +150,7 @@
   </target>
 
   
-  <target name="substitute-cwspublic-homepage" depends="uzhpublic-true" if="uzhpublic.true">
+  <target name="substitute-cwspublic-homepage" depends="uzhpublic-true" if="uzhpublic.true" description="Copying homepages (de and en) for UZH public portal">
     <echo>INFO: Replacing homepage in uzh-public publication</echo>
     <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
     <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
