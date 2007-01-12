@@ -31,36 +31,24 @@
     <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes">
       <fileset dir="${unitemplate.srcdir}/lenya/xslt/navigation"/>
     </copy>
+    <mkdir dir="${pub.dir}/lenya/xslt-fallback"/>
+    <mkdir dir="${pub.dir}/lenya/xslt-fallback/navigation"/>
+    <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/breadcrumb.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/logic.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/tabs.xsl"/>
     <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes">
       <fileset dir="lenya/xslt/navigation"/>
     </copy>
 
     <echo> </echo>
-    <echo>INFO: Patching the files for the logical transformation</echo>
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/breadcrumb-xsl.xsl" includes="lenya/xslt/navigation/breadcrumb.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/logic-xsl.xsl" includes="lenya/xslt/navigation/logic.xsl" extension=".xsl" />
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/tabs-xsl.xsl" includes="lenya/xslt/navigation/tabs.xsl" extension=".xsl" />
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="work" />
-    </copy>
-    <antcall target="cleanup"/> 
-    <mkdir dir="work"/>
-
-    <echo> </echo>
     <echo>INFO: Copying the layout xslt files to ${pub.dir}/xslt</echo>
-
     <copy todir="${pub.dir}/xslt" overwrite="yes" file="xslt/assetDots.xsl"/>
-
     <copy todir="${pub.dir}/xslt/common" overwrite="yes">
       <fileset dir="xslt/common"/>
     </copy>
-
     <copy todir="${pub.dir}/xslt/doctypes" overwrite="yes">
       <fileset dir="${unizh.srcdir}/xslt/doctypes"/>
     </copy>
-
-    <antcall target="cleanup"/> 
-    <mkdir dir="work"/>
 
     <echo> </echo>
     <echo>INFO: Copying and patching necessary *.xmap files</echo>
@@ -102,6 +90,10 @@
   <target name="uninstall" depends="init, backup" description="uninstall uzh publication">
 
     <echo>INFO: Uninstalling all files within ${pub.dir}</echo>
+ 
+    <delete>
+      <fileset dir="${pub.dir}/lenya/xslt-fallback" includes="*.xsl"/>
+    </delete>
     <delete>
       <fileset dir="${pub.dir}/lenya/xslt/navigation" includes="*.xsl"/>
     </delete>
@@ -128,7 +120,9 @@
 
     <antcall target="touch"/>
     <antcall target="cleanup"/> 
+ 
   </target>
+
 
   <target name="touch" depends="init" description="touch all within publication directory">
     <echo>INFO: Touching all files within ${pub.dir}</echo>
@@ -137,6 +131,7 @@
     </touch>
   </target>
 
+
   <target name="substituteportal" if="replacedata">
     <echo>INFO: Replacing homepage with portalpage</echo>
     <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="config/doctypes/samples/portal.xml"/>
@@ -144,24 +139,22 @@
     <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="config/doctypes/samples/portal.xml"/>
     <move file="${pub.dir}/content/authoring/index/portal.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
   </target>
+
   
   <target name="substitutehomepage" if="replacedata">
     <echo>INFO: Replacing portalpage with homepage</echo>
     <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="${unitemplate.srcdir}/content/authoring/index/index_de.xml"/>
     <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="${unitemplate.srcdir}/content/authoring/index/index_en.xml"/>
   </target>
-  
-  <target name="clearns" description="clear namespace that has been created for working purpose">
-    <echo>INFO: Clearing dummy namespace in the doctypes xsl files</echo>
-    <exec dir="." executable="./clear-dummy-ns.sh" os="Linux"/>
-  </target>
-  
+
+
  <target name="test" description="clear namespace that has been created for working purpose">
     <echo>INFO: Clearing dummy namespace in the doctypes xsl files</echo>
-    <exec dir="." executable="./clear-dummy-ns.sh" os="Mac OS X">
-      <arg value="${pub.dir}/lenya"/>
-      <env key="eins" path="${pub.dir}/bin"/>
+    <exec executable="./clear-dummy-ns.sh" dir="." failonerror="true">
+      <arg value="${JAVA_HOME}"/>
+      <env key="eins" path='$pub.dir/bin'/>
     </exec>
   </target>
+
 
 </project>

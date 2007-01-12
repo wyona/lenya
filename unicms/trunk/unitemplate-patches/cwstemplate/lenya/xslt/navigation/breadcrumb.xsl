@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: breadcrumb-add-on.xsl, v 1.00 2006/12/01 17:00:00 mike Exp $ -->
+<!-- $Id: breadcrumb.xsl, v 1.00 2006/12/01 17:00:00 mike Exp $ -->
 
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
     xmlns="http://www.w3.org/1999/xhtml">
+
+
+ <xsl:include href="../../xslt-fallback/navigation/breadcrumb.xsl"/>
 
 
 <xsl:template match="nav:site">

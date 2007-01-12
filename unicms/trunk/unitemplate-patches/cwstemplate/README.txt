@@ -6,12 +6,14 @@
 
 How to install the specific templating for the uzh publication:
 
-1) clone the uzh publication INTO /path/to/lenya-src/build/lenya/webapp/lenya/pubs
-   (this is where your uzh templates will be installed)
+1) (in UNICMS_SRC_DIR/tools/clone/)
+   clone the uzh publication INTO /path/to/lenya-src/build/lenya/webapp/lenya/pubs
+     (this is where your uzh templates will be installed)
 
-(in the current directory)
+# clone script in preparation - make sure that you have execute permission on it
 
-2) ant install
-3) make sure that you have execute permission on "clear-dummy-ns.sh"
-4) ant clearns
-5) install lenya (including unicms)
+2) (in the current directory)
+   ant install
+
+3) (in LENYA_SRC_DIR)
+   install lenya (including unicms)
