@@ -16,20 +16,22 @@
 <include href="xhtml.rng">
   
   <start>
-    <ref name="unizh.portal"/>
+    <ref name="unizh.overview"/>
   </start>
 
   <define name="html.attlist">
     <ref name="XHTML.version.attrib"/>
     <ref name="I18n.attrib"/>
+    <ref name="unizh.columns.attrib"/>
+    <ref name="unizh.hideChildren.attrib"/>
     <ref name="dummy.attlist"/>
   </define>
 
 </include>
 
 
-<define name="unizh.portal">
-  <element name="unizh:portal">
+<define name="unizh.overview">
+  <element name="unizh:overview">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
     <ref name="unizh.contcol1"/>
@@ -47,7 +49,6 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
-        <ref name="unizh.rss-reader"/>
       </choice>
     </oneOrMore>
   </element>
@@ -56,10 +57,19 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
-        <ref name="unizh.rss-reader"/>
       </choice>
     </oneOrMore>
   </element>
+  <optional>
+    <element name="unizh:column">
+      <oneOrMore>
+        <choice>
+          <ref name="unizh.teaser"/>
+          <ref name="unizh.links"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </optional>
 </define>
 
 

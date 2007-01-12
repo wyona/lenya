@@ -33,6 +33,7 @@
   <element name="unizh:homepage4cols">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
+    <ref name="unizh.header"/>
     <ref name="unizh.contcol1"/>
     <ref name="unizh.related-content"/>
     <element name="body">
@@ -48,6 +49,7 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
       </choice>
     </oneOrMore>
   </element>
@@ -56,6 +58,7 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
       </choice>
     </oneOrMore>
   </element>
@@ -65,6 +68,7 @@
         <choice>
           <ref name="unizh.teaser"/>
           <ref name="unizh.links"/>
+          <ref name="unizh.rss-reader"/>
         </choice>
       </oneOrMore>
     </element>

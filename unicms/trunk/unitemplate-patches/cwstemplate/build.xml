@@ -12,9 +12,11 @@
     <mkdir dir="work"/>
   </target>
 
+
   <target name="cleanup">
     <delete dir="work"/>
   </target>
+
 
   <target name="backup" description="backup uzh publication that is being worked on" depends="init">
     <delete dir="backup" />
@@ -72,7 +74,8 @@
       <fileset dir="config/doctypes/schemas" />
     </copy>
 
-    <antcall target="substituteportal"/>
+    <antcall target="substitute-cwsxxx-homepage"/>
+    <antcall target="substitute-cwspublic-homepage"/>
 
     <echo> </echo>
     <echo>INFO: Copying local resources to ${pub.dir}/resources/shared</echo>
@@ -91,9 +94,7 @@
 
     <echo>INFO: Uninstalling all files within ${pub.dir}</echo>
  
-    <delete>
-      <fileset dir="${pub.dir}/lenya/xslt-fallback" includes="*.xsl"/>
-    </delete>
+    <delete dir="${pub.dir}/lenya/xslt-fallback"/>
     <delete>
       <fileset dir="${pub.dir}/lenya/xslt/navigation" includes="*.xsl"/>
     </delete>
@@ -103,11 +104,14 @@
 
     <copy todir="${pub.dir}" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
     <copy todir="${pub.dir}" overwrite="yes" file="${unitemplate.srcdir}/parameter-doctype.xmap"/>
-    <delete file="${pub.dir}/config/doctypes/samples/portal.xml"/>
-    <delete file="${pub.dir}/config/doctypes/schemas/portal.rng"/>
+
     <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/samples/homepage4cols.xml"/>
     <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/homepage4cols.rng"/>
-    <antcall target="substitutehomepage"/>
+    <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/samples/overview.xml"/>
+    <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes" file="${unitemplate.srcdir}/config/doctypes/schemas/overview.rng"/>
+    <delete file="${pub.dir}/config/doctypes/samples/cws-public-homepage.xml"/>
+
+    <antcall target="substitute-standard-homepage"/>
 
     <delete dir="${pub.dir}/xslt"/>
     <delete>
@@ -132,29 +136,42 @@
   </target>
 
 
-  <target name="substituteportal" if="replacedata">
-    <echo>INFO: Replacing homepage with portalpage</echo>
-    <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="config/doctypes/samples/portal.xml"/>
-    <move file="${pub.dir}/content/authoring/index/portal.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
-    <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="config/doctypes/samples/portal.xml"/>
-    <move file="${pub.dir}/content/authoring/index/portal.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
+  <target name="uzhpublic-true" if="replacedata">
+    <condition property="uzhpublic.true">
+      <equals arg1="${pub.prefix}" arg2="public"/>
+    </condition>
+  </target>
+
+
+  <target name="substitute-cwsxxx-homepage" if="replacedata">
+    <echo>INFO: Replacing homepage</echo>
+    <copy file="config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
+    <copy file="config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
   </target>
 
   
-  <target name="substitutehomepage" if="replacedata">
-    <echo>INFO: Replacing portalpage with homepage</echo>
-    <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="${unitemplate.srcdir}/content/authoring/index/index_de.xml"/>
-    <copy todir="${pub.dir}/content/authoring/index" overwrite="yes" file="${unitemplate.srcdir}/content/authoring/index/index_en.xml"/>
+  <target name="substitute-cwspublic-homepage" depends="uzhpublic-true" if="uzhpublic.true">
+    <echo>INFO: Replacing homepage in uzh-public publication</echo>
+    <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
+    <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
+  </target>
+
+  
+  <target name="substitute-standard-homepage" if="replacedata">
+    <echo>INFO: Reversing homepage</echo>
+    <copy file="${unitemplate.srcdir}/content/authoring/index/index_de.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
+    <copy file="${unitemplate.srcdir}/content/authoring/index/index_en.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
   </target>
 
 
- <target name="test" description="clear namespace that has been created for working purpose">
+<!--
+ <target name="test" description="(in case i need this again)">
     <echo>INFO: Clearing dummy namespace in the doctypes xsl files</echo>
     <exec executable="./clear-dummy-ns.sh" dir="." failonerror="true">
       <arg value="${JAVA_HOME}"/>
       <env key="eins" path='$pub.dir/bin'/>
     </exec>
   </target>
-
+-->
 
 </project>

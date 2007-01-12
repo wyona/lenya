@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:portal xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:overview xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
 xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+unizh:columns="2" unizh:hideChildren="false"
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
   <lenya:meta>
-    <dc:title>Homepage title</dc:title>
+    <dc:title>Overview page title</dc:title>
     <dc:description></dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
@@ -32,7 +33,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       <unizh:title>Title</unizh:title>
       <p>Teaser text</p>
     </unizh:teaser>
-    <unizh:rss-reader url="http://www.unizh.ch/news/rss/agenda_rss.php" items="2">Agenda</unizh:rss-reader>
   </unizh:related-content>
   <body>
     <unizh:column>
@@ -47,9 +47,30 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       </unizh:links>
     </unizh:column>
     <unizh:column>
-      <unizh:rss-reader url="http://www.unipublic.unizh.ch/index.rss.xml" items="2">Unipublic</unizh:rss-reader>
-      <unizh:rss-reader url="http://www.unizh.ch/news/rss/cms/ibis_rss.php" items="2">Ibis</unizh:rss-reader>
+      <unizh:teaser>
+        <unizh:title>Titel</unizh:title>
+        <p>Teaser text.</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:teaser>
+       <unizh:links>
+        <unizh:title href="#">Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+       <unizh:links>
+        <unizh:title href="#">Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
     </unizh:column>
   </body>
-</unizh:portal>
+</unizh:overview>
 

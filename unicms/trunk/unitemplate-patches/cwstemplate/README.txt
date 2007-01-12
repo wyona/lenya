@@ -7,8 +7,9 @@
 How to install the specific templating for the uzh publication:
 
 1) (in UNICMS_SRC_DIR/tools/clone/)
-   clone the uzh publication INTO /path/to/lenya-src/build/lenya/webapp/lenya/pubs
-     (this is where your uzh templates will be installed)
+   clone the uzh publication INTO /path/to/lenya-src/build/lenya/webapp/lenya/pubs (this is where your uzh templates will be installed)
+
+# note: the public uzh website must be named "public" (for that it get's the appropriate sample homepage)
 
 # clone script in preparation - make sure that you have execute permission on it
 
