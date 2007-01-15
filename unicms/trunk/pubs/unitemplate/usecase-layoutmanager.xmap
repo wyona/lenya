@@ -69,24 +69,30 @@
 
      <map:pipeline type="noncaching">
 
+       <map:match pattern="createdocument">
+         <map:generate type="jx" src="usecases/layoutmanager/jx/createDocument.jx"/>
+         <map:serialize type="xml"/>
+       </map:match>
+
        <map:match pattern="*.jx">
          <map:generate type="jx" src="usecases/layoutmanager/jx/{1}.jx"/>
          <map:call resource="style-cms-page"/>
          <map:serialize type="xhtml"/>
        </map:match>
 
+       <map:match pattern="xml/**">
+         <map:generate src="context://lenya/pubs/{page-envelope:publication-id}/{1}"/>
+         <map:serialize type="xml"/>
+       </map:match>
 
        <map:match pattern="layoutmanager" type="usecase">
          <map:select type="request-parameter">
            <map:parameter name="parameter-name" value="lenya.step"/>
-           <map:when test="upload">
-             <map:call continuation="{request-param:lenya.continuation}"/>
+           <map:when test="init">
+             <map:call function="init"/>
            </map:when>
-           <map:when test="install">
-             <map:call continuation="{request-param:lenya.continuation}"/>
-           </map:when> 
            <map:otherwise>
-             <map:call function="manager"/>
+             <map:call continuation="{request-param:lenya.continuation}"/>
            </map:otherwise>
          </map:select>
        </map:match>
