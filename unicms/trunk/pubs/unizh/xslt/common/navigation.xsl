@@ -152,7 +152,7 @@
 
   <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @class = 'home']">
     <div class="navup">
-      <a href="{@href}"><xsl:value-of select="."/></a>
+      <a href="{@href}"><xsl:value-of select="."/><xsl:comment/></a>
     </div>
   </xsl:template>
 

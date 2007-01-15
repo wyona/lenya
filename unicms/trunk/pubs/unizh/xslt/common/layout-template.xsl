@@ -136,20 +136,21 @@
 
 
   <xsl:template name="breadcrumbtrail">
-    <ul>
-      <xsl:for-each select="/document/xhtml:div[@id = 'breadcrumb']/xhtml:div">
-        <li><a href="{@href}"><xsl:value-of select="text()"/></a></li>
-      </xsl:for-each>
-    </ul>
+    <xsl:for-each select="/document/xhtml:div[@id = 'breadcrumb']/xhtml:div">
+      <a href="{@href}"><xsl:value-of select="text()"/></a> 
+      <xsl:if test="position() != last()">&#62;</xsl:if>
+    </xsl:for-each>
   </xsl:template>
 
 
   <xsl:template name="tabs">
-    <ul>
-      <xsl:for-each select="/document/xhtml:div[@id = 'tabs']/xhtml:div">
-        <li><a href="{@href}"><xsl:value-of select="text()"/></a></li>
-      </xsl:for-each>
-    </ul>
+    <xsl:for-each select="/document/xhtml:div[@id = 'tabs']/xhtml:div">
+      <a href="{@href}"><xsl:value-of select="text()"/></a>
+      <xsl:if test="position() != last()">
+        <div class="linkseparator">|</div>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:comment/>&#160; 
   </xsl:template>
 
 
@@ -162,15 +163,24 @@
 
   <xsl:template name="quicklinks">
     <xsl:if test="/document/content/*/unizh:contcol1/unizh:quicklinks/unizh:quicklink">
-      <div id="quicklinks">
+      <div class="quicklinks" id="quicklink">
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+        </div>
+        <p class="titel"><xsl:value-of select="/document/content/*/unizh:contcol1/unizh:quicklinks/@label"/></p>
+        <div class="dotlinelead">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
+        </div>
         <xsl:for-each select="/document/content/*/unizh:contcol1/unizh:quicklinks/unizh:quicklink">
-          <h2><xsl:value-of select="xhtml:p"/></h2>
+          <xsl:apply-templates select="xhtml:p"/>
           <ul>
             <xsl:for-each select="xhtml:a">
-              <li><a href="{@href}"><xsl:value-of select="text()"/></a></li>
+              <li>
+                <a href="{@href}"><xsl:value-of select="."/></a>
+              </li>
             </xsl:for-each>
           </ul>
-        </xsl:for-each>
+          <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>        </xsl:for-each>
       </div>
     </xsl:if>
     <xsl:comment/>
@@ -204,10 +214,11 @@
       <xsl:variable name="current" select="descendant::xhtml:div[@current = 'true']"/>
       <xsl:variable name="level" select="count($descendants)"/>
 
-      <div id="menu">
+      <div id="secnav">
         <xsl:if test="$level > 3">
           <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
         </xsl:if>
+        <div class="solidline"><img alt="separation line" height="1" src="/unizh/authoring/images/1.gif" width="1" /><xsl:comment/></div>
         <ul>
           <xsl:choose>
             <xsl:when test="$level > 3">
@@ -237,13 +248,16 @@
         </ul>
       </xsl:if>
     </li>
+    <xsl:if test="parent::xhtml:div[@id = 'menu']">
+      <div class="dotline"><img alt="separation line" height="1" src="/unizh/authoring/images/1.gif" width="1" /></div>
+    </xsl:if>
   </xsl:template>
 
 
 
   <xsl:template name="sidebar">
     <xsl:if test="/document/content/*/unizh:related-content/*">
-      <div id="sidebar"><xsl:comment/>
+      <div class="relatedbox"><xsl:comment/>
         <xsl:apply-templates select="/document/content/*/unizh:related-content/*"/>
       </div>
     </xsl:if>
