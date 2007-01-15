@@ -10,6 +10,7 @@
       <map:resource name="elml-page">
         <map:aggregate element="document">
           <map:part src="cocoon:/xml" element="content"/>
+          <map:part element="layout" src="cocoon:/layout/xhtml"/>
           <map:part src="cocoon://navigation/{{publication-id}}/{{area}}/breadcrumb/{{document-id}}.html.xml"/>
           <map:part src="cocoon://navigation/{{publication-id}}/{{area}}/servicenav/{{document-id}}.html.xml"/>
           <map:part src="cocoon://navigation/{{publication-id}}/{{area}}/toolnav/{{document-id}}.html.xml"/>

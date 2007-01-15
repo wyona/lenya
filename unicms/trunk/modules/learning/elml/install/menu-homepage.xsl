@@ -17,6 +17,7 @@
     <xsl:copy-of select="."/>
     <block>
       <item uc:usecase="importlesson" href="?">Import eLML Lesson</item>
+      <item href="?" uc:usecase="layoutmanager">Layout Manager...</item>
     </block>
   </xsl:template>
 
