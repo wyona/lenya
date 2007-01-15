@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 
-<!-- $Id: upload.jx 14920 2006-07-03 12:03:58Z thomas $ -->
+<!-- $Id: manager.jx 14920 2006-07-03 12:03:58Z thomas $ -->
 
 <page:page xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" 
            xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0" 
@@ -32,7 +32,7 @@
       <div class="lenya-box-body">
         <form enctype="multipart/form-data" method="post" id="form-upload">
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-          <input type="hidden" name="lenya.step" value="upload"/>
+          <input type="hidden" name="lenya.step" value="addPackage"/>
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
 
           <table>
@@ -40,7 +40,7 @@
               <td>
                 <ul>
                   <jx:forEach var="package" items="${packages}">
-                    <li>${package.getName()} [<a href="?lenya.usecase=layoutmanager&#38;lenya.step=remove&#38;filename=${package.getName()}">Remove</a>]</li>
+                    <li>${package.title} [<a href="?lenya.usecase=layoutmanager&#38;lenya.step=deletePackage&#38;filename=${package.name}&#38;lenya.continuation=${continuation.id}">Delete</a>]</li>
                   </jx:forEach>
                 </ul>
               </td>
@@ -48,7 +48,8 @@
             <tr>
               <td>
                 <br/>
-                <input type="file" name="upload-file"/><input type="submit" name="upload" value="Add"/>
+                <b>New Package:</b><br/><br/>
+                Title: <input type="text" name="package-title" value="Enter a package title"/> File: <input type="file" name="upload-file"/><input type="submit" name="add" value="Add"/>
               </td>
             </tr>
           </table>
@@ -62,7 +63,7 @@
       <div class="lenya-box-body">
         <form enctype="multipart/form-data" method="post" id="form-upload">
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-          <input type="hidden" name="lenya.step" value="install"/>
+          <input type="hidden" name="lenya.step" value="installPackage"/>
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <table>
             <tr>
@@ -70,7 +71,18 @@
                 <select name="filename">
                   <option value="default_package">Default</option>
                   <jx:forEach var="package" items="${packages}">
-                    <option value="${package.getName()}">${package.getName()}</option>
+                    <jx:choose>
+                      <jx:when test="${package.installed == 'true'}">
+                        <option value="${package.name}" selected="selected">
+                        ${package.title}
+                        </option>
+                      </jx:when>
+                      <jx:otherwise>
+                        <option value="${package.name}">
+                        ${package.title}
+                        </option>
+                      </jx:otherwise>
+                    </jx:choose>
                   </jx:forEach>
                 </select>
               </td>
