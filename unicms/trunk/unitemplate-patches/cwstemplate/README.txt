@@ -10,8 +10,9 @@ How to install the specific templating for the uzh publication:
    clone the uzh publication INTO /path/to/lenya-src/build/lenya/webapp/lenya/pubs (this is where your uzh templates will be installed)
 
 # note: the public uzh website must be named "public" (for that it get's the appropriate sample homepage)
+#       set 'replacedata=homepage' when installing a publication the first time to install the sample homepage
 
-# clone script in preparation - make sure that you have execute permission on it
+# clone script is in preparation - make sure that you have execute permission on it
 
 2) (in the current directory)
    ant install
