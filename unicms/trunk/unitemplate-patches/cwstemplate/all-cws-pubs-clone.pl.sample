@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+#
+# Script to clone and patch multiple UZH Corporate Website (CWS) publications.
+# No need to edit a clone.properties file and clone manually when using this script.
+#
+#    This script needs an input file called publications.txt containing
+#    following informations separated by colon:
+#    - new.publication.prefix -> the prefix of the publication
+#    - new.publication.name -> the name of the publication
+#    - new.publication.homepage -> "keep"/"reset" (needed in "all-cws-pubs-install.pl")
+#    - new.publication.master -> the e-mail of the "publication master"
+#    Default values of this values of the settings are found in your
+#    tools/clone/local.clone.properties.
+#
+#    DON'T FORGET to set the appropriate $PublicationRoot et cetera !!
+#
+# jaf: 1.7.2004
+#
+#  change: 17.01.07 (trd) adapted for cloning and patching of CWS publications
+#
+
+use strict;
+
+my $PublicationFile="all-cws-pubs.txt";
+my $PublicationRoot="/path/to/lenya-src/build/lenya/webapp/lenya/pubs";
+my $LenyaRoot="/path/to/lenya-src";
+my $UnicmsRoot="/path/to/unicms-src";
+
+my @list;
+my $property1;
+my $property2;
+my $property3;
+my $property4;
+my $property5;
+my $property6;
+my $thiscommand;
+my $command = "$LenyaRoot/tools/bin/ant -f $UnicmsRoot/tools/clone/build.xml";
+my $target = "clone";
+
+open (FILE, "<$PublicationFile") or die "Could not open file $PublicationFile: $!\n";
+
+while ($_=<FILE>) {
+
+  @list = split (/:/,$_);
+  print "Cloning publication $list[1] using prefix $list[0] \n";
+
+  $property1="-Dnew.publication.prefix=\"$list[0]\"";
+  $property2="-Dnew.publication.name=\"$list[1]\"";
+  $property3="-Dnew.publication.content=\"standard\"";
+  $property4="-Dnew.publication.master=\"$list[3]\"";
+  $property5="-Ddestination.dir=\"$PublicationRoot/$list[0]\"";
+  $property6="-Dold.publication.prefix=\"unitemplate\"";
+
+  $thiscommand = "$command $property1 $property2 $property3 $property4 $property5 $property6 $target";
+
+  system($thiscommand) == 0 or die "system $thiscommand failed: $? due to: $! \n";
+}
