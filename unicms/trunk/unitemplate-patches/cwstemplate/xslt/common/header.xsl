@@ -12,6 +12,7 @@
   <xsl:include href="../../../unizh/xslt/common/header.xsl"/>
 -->
 
+  <xsl:param name="publicationid"/>
   <xsl:param name="documentid"/>
 
   <xsl:template name="header">
@@ -24,20 +25,20 @@
         </div>
         <div class="imginstitute">
           <xsl:choose>
-            <xsl:when test="starts-with($documentid, '/forschung')">
-              <img src="{$localsharedresources}/images/kv-forschung.jpg" alt="theme picture" width="180" height="45" />
+            <xsl:when test="starts-with($documentid, '/research')">
+              <img src="{$localsharedresources}/images/kv_research.jpg" alt="theme picture" width="180" height="45" />
             </xsl:when>
-            <xsl:when test="starts-with($documentid, '/organisation')">
-              <img src="{$localsharedresources}/images/kv-organisation.jpg" alt="theme picture" width="180" height="45" />
+            <xsl:when test="starts-with($documentid, '/organization')">
+              <img src="{$localsharedresources}/images/kv_organization.jpg" alt="theme picture" width="180" height="45" />
             </xsl:when>
             <xsl:when test="starts-with($documentid, '/portrait')">
-              <img src="{$localsharedresources}/images/kv-portrait.jpg" alt="theme picture" width="180" height="45" />
+              <img src="{$localsharedresources}/images/kv_portrait.jpg" alt="theme picture" width="180" height="45" />
             </xsl:when>
             <xsl:when test="starts-with($documentid, '/services')">
-              <img src="{$localsharedresources}/images/kv-services.jpg" alt="theme picture" width="180" height="45" />
+              <img src="{$localsharedresources}/images/kv_services.jpg" alt="theme picture" width="180" height="45" />
             </xsl:when>
-            <xsl:when test="starts-with($documentid, '/studium')">
-              <img src="{$localsharedresources}/images/kv-studium.jpg" alt="theme picture" width="180" height="45" />
+            <xsl:when test="starts-with($documentid, '/studies')">
+              <img src="{$localsharedresources}/images/kv_studies.jpg" alt="theme picture" width="180" height="45" />
             </xsl:when>
             <xsl:otherwise>
               <img src="{$localsharedresources}/images/key-visual.jpg" alt="theme picture" width="180" height="45" />
@@ -47,7 +48,26 @@
       </div>
       <div id="headertitelpos">
         <xsl:apply-templates select="/document/xhtml:div[@id = 'servicenav']"/>
-      </div>
+        <xsl:choose>
+          <xsl:when test="$publicationid = 'public'"/>
+          <xsl:when test="$document-element-name = 'unizh:homepage' or $document-element-name = 'unizh:homepage4cols'">
+            <h1>
+              <span bxe_xpath="/{$document-element-name}/unizh:header/unizh:heading">
+                <a href="{/document/xhtml:div[@id = 'servicenav']/xhtml:div[@id = 'home']/@href}">
+                  <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
+                </a>
+              </span>
+            </h1>
+          </xsl:when>
+          <xsl:otherwise>
+            <h1>
+              <a href="{/document/xhtml:div[@id = 'servicenav']/xhtml:div[@id = 'home']/@href}">
+                <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
+              </a>
+            </h1>
+          </xsl:otherwise> 
+        </xsl:choose>
+        </div>
     </div>
     <div class="floatclear"><xsl:comment/></div>
     <!-- tabs -->

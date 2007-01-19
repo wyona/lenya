@@ -14,6 +14,17 @@
     <condition property="replacedata">
       <equals arg1="${homepage}" arg2="reset"/>
     </condition>
+
+    <condition property="uzhpublic.true">
+      <equals arg1="${pub.prefix}" arg2="public"/>
+    </condition>
+
+    <condition property="uzhpublic.replacedata">
+      <and>
+        <equals arg1="${homepage}" arg2="reset"/>
+        <equals arg1="${pub.prefix}" arg2="public"/>
+      </and>
+    </condition>
   </target>
 
 
@@ -42,9 +53,10 @@
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/breadcrumb.xsl"/>
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/logic.xsl"/>
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/tabs.xsl"/>
-    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes">
-      <fileset dir="lenya/xslt/navigation"/>
-    </copy>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/breadcrumb.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/logic.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/tabs.xsl"/>
+    <antcall target="install-double-tabs"/>
 
     <echo> </echo>
     <echo>INFO: Copying the layout xslt files to ${pub.dir}/xslt</echo>
@@ -119,7 +131,7 @@
 
     <delete dir="${pub.dir}/xslt"/>
     <delete>
-      <fileset dir="${pub.dir}/resources/shared/images" includes="kv-*.jpg"/>
+      <fileset dir="${pub.dir}/resources/shared/images" includes="kv_*.jpg"/>
     </delete>
     <copy todir="${pub.dir}/resources/shared/images" overwrite="yes">
       <fileset dir="${unitemplate.srcdir}/resources/shared/images" />
@@ -140,10 +152,8 @@
   </target>
 
 
-  <target name="uzhpublic-true" if="replacedata" description="Checks if installation concerns UZH public portal">
-    <condition property="uzhpublic.true">
-      <equals arg1="${pub.prefix}" arg2="public"/>
-    </condition>
+  <target name="install-double-tabs" if="uzhpublic.true">
+    <copy file="lenya/xslt/navigation/logic.xsl.public" tofile="${pub.dir}/lenya/xslt/navigation/logic.xsl" overwrite="yes"/>
   </target>
 
 
@@ -154,7 +164,7 @@
   </target>
 
   
-  <target name="substitute-cwspublic-homepage" depends="uzhpublic-true" if="uzhpublic.true" description="Copying homepages (de and en) for UZH public portal">
+  <target name="substitute-cwspublic-homepage" if="uzhpublic.replacedata" description="Copying homepages (de and en) for UZH public portal">
     <echo>INFO: Replacing homepage in uzh-public publication</echo>
     <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
     <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>

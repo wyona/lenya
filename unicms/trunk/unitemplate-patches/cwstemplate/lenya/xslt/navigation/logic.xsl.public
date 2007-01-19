@@ -12,10 +12,11 @@
 <xsl:template match="xhtml:div[(@id = 'menu')]">
   <xsl:choose>
     <xsl:when test="$index"/>
-    <xsl:when test="xhtml:div[@current = 'true' or descendant::xhtml:div[@current = 'true']]/*">
+    <xsl:when test="xhtml:div[@current = 'true']"/>
+    <xsl:when test="*/xhtml:div[@current = 'true' or descendant::xhtml:div[@current = 'true']]/*">
 
       <div id="menu">
-        <xsl:apply-templates select="xhtml:div[@current = 'true' or descendant::xhtml:div[@current = 'true']]/*"/>
+        <xsl:apply-templates select="*/xhtml:div[@current = 'true' or descendant::xhtml:div[@current = 'true']]/*"/>
       </div>
 
     </xsl:when>
@@ -30,8 +31,11 @@
     </div>
 </xsl:template>
 
-
-<xsl:template match="xhtml:div[@id = 'sub-tabs']"/>
+<xsl:template match="xhtml:div[@id = 'sub-tabs']">
+    <div id="sub-tabs">
+      <xsl:apply-templates/>
+    </div>
+</xsl:template>
 
 
 </xsl:stylesheet>
