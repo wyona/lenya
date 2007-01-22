@@ -287,14 +287,8 @@
 
 <!-- breadcrumb path -->
 
-
 <xsl:template match="/document/xhtml:div[@id = 'breadcrumb']">
   <div id="breadcrumb" root="{@root}" label="{@label}">
-    <xsl:if test="/document/uz:unizh/uz:section/@breadcrumb = 'true'">
-      <div>
-        <xsl:value-of select="/document/uz:unizh/uz:section"/>
-      </div>
-    </xsl:if>
     <xsl:apply-templates select="xhtml:div[@basic-url = /document/unizh:ancestors/unizh:ancestor[unizh:homepage | unizh:homepage4cols]/@basic-url]"/>
     <xsl:choose>
       <xsl:when test="$isHomepage = 'true'">
@@ -334,10 +328,6 @@
   </div>
 </xsl:template>
 
-
-<!-- Show/Hide Contcol1 -->
-
-<xsl:template match="unizh:contcol1[$tabs = 'false']"/>
 
 <!-- Collections. Hide children nodes in menu -->
 

@@ -8,6 +8,7 @@
     <styles>
       <style href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=xsl"/> 
       <style-template href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=template" mode="pre"/>  
-    </styles>   
+    </styles>  
+    <schema type="relaxNG" url="${cocoon.parameters['base-url']}${cocoon.parameters['document-type']}.rng"/>
   </edit>
 </introspection>

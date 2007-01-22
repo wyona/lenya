@@ -32,7 +32,7 @@
   <xsl:include href="../common/navigation.xsl"/>
   <xsl:include href="../common/elements.xsl"/> 
   <xsl:include href="../common/object.xsl"/> 
-  <xsl:include href="../common/layout-template.xsl"/>
+  <xsl:include href="../common/layout-template.xsl"/> 
 
 
   <xsl:template match="document">
@@ -198,8 +198,14 @@
 
   <xsl:template name="homepage">
     <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-      <xsl:apply-templates select="*/unizh:contcol1"/>
+      <xsl:choose>
+        <xsl:when test="/document/xhtml:div[@id = 'menu']/*">
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="*/unizh:contcol1"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -226,8 +232,14 @@
  
   <xsl:template name="homepage4columns">
     <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-      <xsl:apply-templates select="*/unizh:contcol1"/>
+      <xsl:choose>
+        <xsl:when test="/document/xhtml:div[@id = 'menu']/*">
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="*/unizh:contcol1"/>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:comment/>
     </div>
     <div class="contcol2">

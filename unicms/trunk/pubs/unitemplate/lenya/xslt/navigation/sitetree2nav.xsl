@@ -30,6 +30,7 @@
 <xsl:param name="root"/>
 <xsl:param name="chosenlanguage"/>
 <xsl:param name="defaultlanguage"/>
+
     
 <xsl:variable name="path-to-context"><xsl:call-template name="create-path-to-context"/></xsl:variable>
 <!--
@@ -177,8 +178,9 @@ Apply nodes recursively
       <xsl:value-of select="$language-suffix"/><xsl:text/>
       <xsl:value-of select="$suffix"/><xsl:text/>
     </xsl:variable>
-    
-    <xsl:if test="$url = $canonical-url or $url = $non-canonical-url">
+   
+    <!-- FIXME: take url params of rewritten session urls (see jetty's jsession;) into account in core -->
+    <xsl:if test="starts-with($url, $canonical-url) or starts-with($url, $non-canonical-url)">
       <xsl:attribute name="current">true</xsl:attribute>
     </xsl:if>
     
