@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<introspection xmlns="http://www.wyona.org/neutron/1.0" xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"> 
+  <edit mime-type="text/xml" name="${cocoon.parameters['document-label']}">
+    <open url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=open" method="GET"/>
+    <save url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=save" method="PUT"/> 
+    <checkout url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=checkout" method="GET"/>
+    <checkin url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=checkin" method="PUT"/>
+    <styles>
+      <style href="${cocoon.parameters['base-url']}/doctypes/xhtml-standard.xsl">
+        <parameter name="root" value="${cocoon.parameters['root']}"/>
+        <parameter name="publicationid" value="${cocoon.parameters['publicationid']}"/>
+        <parameter name="documentid" value="${cocoon.parameters['documentid']}"/>
+        <parameter name="area" value="${cocoon.parameters['area']}"/>
+        <parameter name="language" value="${cocoon.parameters['language']}"/>
+        <parameter name="languages" value="${cocoon.parameters['langages']}"/>
+        <parameter name="defaultlanguage" value="${cocoon.parameters['defaultlanguage']}"/>
+        <parameter name="nodeid" value="${cocoon.parameters['nodeid']}"/>
+        <parameter name="contextprefix" value="${cocoon.parameters['contextprefix']}"/>
+        <parameter name="rendertype" value="${cocoon.parameters['rendertype']}"/>
+        <parameter name="lastmodified" value="${cocoon.parameters['lastmodified']}"/>
+        <parameter name="fontsize" value="${cocoon.parameters['fontsize']}"/>
+        <parameter name="querystring" value=""/>
+        <parameter name="creationdate" value="${cocoon.parameters['creationdate']}"/>
+      </style> 
+      <style-template href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=template"/>  
+    </styles>  
+    <schema type="relaxNG" url="${cocoon.parameters['base-url']}/${cocoon.parameters['document-type']}.rng"/> 
+  </edit>
+</introspection>

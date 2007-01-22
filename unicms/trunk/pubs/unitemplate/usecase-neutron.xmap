@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: neutron.xmap 344359 2005-11-15 12:44:22Z thomas $ -->
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+<!-- =========================== Components ================================ -->
+
+  <map:components>
+    <map:transformers default="xslt">
+      <map:transformer name="level" logger="lenya.sitemap.transformer.level" src="ch.unizh.lenya.cms.cocoon.transformation.DocumentLevelTransformer"/>
+      <map:transformer name="sitemap" logger="lenya.sitemap.transformer.sitemap" src="ch.unizh.lenya.cms.cocoon.transformation.SitemapTransformer"/>
+    </map:transformers>
+  </map:components>
+
+<!-- ========================== Flowscript ================================= -->
+
+  <map:flow language="javascript">
+    <map:script src="../../usecases/neutron/neutron.js"/>
+  </map:flow>
+
+<!-- ========================== Pipelines ================================== -->
+
+  <map:pipelines>
+    
+    <map:pipeline type="noncaching">
+ 
+      <map:match pattern="*.jx">
+        <map:generate type="jx" src="../../usecases/neutron/jx/{1}.jx"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <!-- load XML file for ancestors -->
+      <!-- pattern="xml/{area}/{doctype}/{document-path}" -->
+      <map:match pattern="xml/*/**.xml">
+        <map:generate src="content/{1}/{2}.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+      
+      <map:match pattern="request2document">
+       <map:generate type="stream"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="xmlsource/**">
+        <map:act type="resource-exists" src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{1}">
+          <map:generate src="context://lenya/pubs/{page-envelope:publication-id}/content/authoring/{../1}"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        <map:generate src="context://lenya/content/util/empty.xml"/> 
+        <map:serialize status-code="404"/> 
+      </map:match> 
+      
+      
+      <map:match pattern="exception-auth">
+        <map:generate type="jx" src="../../usecases/neutron/jx/exception-auth.jx">
+          <map:parameter name="base-url" value="http://{request:serverName}:{request:serverPort}{request:requestURI}"/>
+        </map:generate>
+        <map:serialize type="xml" status-code="401"/>
+      </map:match>
+            
+    </map:pipeline>
+    
+<!-- ========================= Public Resources =========================== -->     
+    <map:pipeline>
+    
+
+     <!-- Usecase matcher -->
+
+      <map:match type="usecase" pattern="neutron">
+     
+        <map:match type="step" pattern="introspect">
+          <map:generate type="jx" src="usecases/neutron/jx/introspection.jx">
+            <map:parameter name="base-url" value="{page-envelope:context-prefix}/{page-envelope:publication-id}/authoring"/>
+            <map:parameter name="document-url" value="{page-envelope:document-url}"/>
+            <map:parameter name="document-label" value="{page-envelope:document-label}"/>
+            <map:parameter name="document-type" value="{page-envelope:document-type}"/>
+
+            <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
+            <map:parameter name="publicationid" value="{page-envelope:publication-id}"/>
+            <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+            <map:parameter name="area" value="{page-envelope:area}"/>
+            <map:parameter name="language" value="{page-envelope:document-language}"/>
+            <map:parameter name="languages" value="{page-envelope:document-languages-csv}"/>
+            <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
+            <map:parameter name="nodeid" value="{page-envelope:document-node-id}"/>
+            <map:parameter name="contextprefix" value="{request:contextPath}"/>
+            <map:parameter name="rendertype" value="view"/><!-- FIXME: use edit? -->
+            <map:parameter name="lastmodified" value="{page-envelope:document-lastmodified}"/>
+            <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
+            <map:parameter name="querystring" value="{request:queryString}"/>
+            <map:parameter name="creationdate" value="{page-envelope:document-dc-date-created}"/>
+          </map:generate>
+          <map:serialize type="xml"/>
+        </map:match>
+         
+        <map:match type="step" pattern="authenticate">
+          <map:call function="authenticate"/>
+        </map:match>
+        
+        <map:match type="step" pattern="open">
+          <map:call function="open"/>
+        </map:match>
+        
+        <map:match type="step" pattern="save">
+          <map:call function="save"/>
+        </map:match>
+        
+        <map:match type="step" pattern="checkout">
+          <map:call function="checkout"/>
+        </map:match>
+        
+        <map:match type="step" pattern="checkin">
+          <map:call function="checkin"/>
+        </map:match>
+        
+        <map:match type="step" pattern="template">
+          <map:aggregate element="document">
+            <map:part element="content" src="{page-envelope:document-file}"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/breadcrumb{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/servicenav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/toolnav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/menu{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/tabs{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/orthonav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/footnav{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/ancestors{page-envelope:document-url}.xml"/>            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/parent{page-envelope:document-url}.xml"/>
+            <map:part src="cocoon://navigation/{page-envelope:publication-id}/{page-envelope:area}/allnodes{page-envelope:document-url}.xml"/>
+            <map:part src="config/unizh/unizh.xconf"/>
+          </map:aggregate>
+
+          <map:transform type="level">
+            <map:parameter name="namespace" value="http://unizh.ch/doctypes/elements/1.0"/>
+            <map:parameter name="cIncludeNamespace" value="http://apache.org/cocoon/include/1.0"/>
+          </map:transform>
+ 
+          <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
+            <map:parameter name="documentid" value="{page-envelope:document-id}"/>
+          </map:transform>
+ 
+          <map:transform type="cinclude"/>
+          <map:transform src="lenya/xslt/navigation/header.xsl"/>
+          <map:transform src="lenya/xslt/navigation/logic.xsl">
+            <map:parameter name="node-id" value="{page-envelope:document-node-id}"/>
+          </map:transform>
+          <map:transform src="../unizh/xslt/neutron/template.xsl"/>
+          <map:serialize type="xml"/>
+        </map:match>
+      
+      </map:match>
+      
+    </map:pipeline>
+
+  </map:pipelines>
+
+</map:sitemap>

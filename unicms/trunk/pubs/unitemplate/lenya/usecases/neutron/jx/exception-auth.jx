@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<exception xmlns="http://www.wyona.org/neutron/1.0" xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" type="data-not-well-formed">
-  <message>${message}</message>
- <data-not-well-formed url="/hello/world.html">
-    <line number="45" message="element not closed"/>
-  </data-not-well-formed>
-</exception>
-
