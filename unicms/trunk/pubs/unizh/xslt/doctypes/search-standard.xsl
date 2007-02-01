@@ -21,6 +21,7 @@
   <xsl:param name="nodeid"/>
   <xsl:param name="fontsize"/>
   <xsl:param name="querystring"/>
+  <xsl:param name="servername"/>
 
 
   <xsl:include href="../doctypes/variables.xsl"/>
@@ -87,9 +88,10 @@
   </xsl:template>
 
   <xsl:template match="xhtml:form[@id = 'search']">
-    <form id="formsearchcontent">
+    <form id="formsearchcontent" action="http://www.google.com/u/unizh" method="get" accept-charset="UTF-8">
       <div class="searchtextblock">
-        <input class="searchfield" type="text" name="queryString" value="{xhtml:input[@name='queryString']/@value}"/>
+        <input class="searchfield" type="text" name="query" value="{xhtml:input[@name='queryString']/@value}"/>
+        <input name="hq" type="hidden" value="inurl:{$servername}"/>
         <input class="submitbutton" type="submit" name="sa">
           <xsl:attribute name="value">
             <xsl:choose>
@@ -100,12 +102,18 @@
         </input> 
       </div>
       <div>
-        <a href="http://www.google.com/u/unizh?hl=de&amp;ie=ISO-8859-1&amp;domains=unizh.ch&amp;q={xhtml:input[@name='queryString']/@value}&amp;btnG=Suche&amp;sitesearch=unizh.ch" >
+        <input checked="true" name="hq" type="radio" value="inurl:{$servername}"/>
+        <xsl:choose>
+           <xsl:when test="$language = 'de'">Suchen in </xsl:when>
+           <xsl:when test="$language = 'en'">Search </xsl:when>
+        </xsl:choose>
+        <xsl:value-of select="$servername"/>
+ 
+       <input name="hq" type="radio"/> 
          <xsl:choose>
-           <xsl:when test="$language = 'de'">Suchen auf "www.unizh.ch"</xsl:when>
-           <xsl:otherwise>Search domain "www.unizh.ch"</xsl:otherwise>
+           <xsl:when test="$language = 'de'">Suchen in domain "uzh.ch"</xsl:when>
+           <xsl:otherwise>Search domain "uzh.ch"</xsl:otherwise>
          </xsl:choose>
-         </a>
       </div>
       
       <!-- <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>  -->

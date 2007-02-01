@@ -6,7 +6,8 @@
   xmlns="http://www.w3.org/1999/xhtml" 
 >
   <xsl:param name="publicationid"/>
-  
+  <xsl:param name="servername"/>
+
   <xsl:template match="xhtml:div[@id = 'orthonav']">
     <xsl:if test="*">
       <div id="orthonav">
@@ -63,10 +64,11 @@
           </form>
         </xsl:when>
         <xsl:otherwise>
-          <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
-          <form id="formsearch" action="{xhtml:div[@id = 'search']/@href}" method="get">
+          <label for="formsearch">Suchen:</label>  
+          <form id="formsearch" action="http://www.google.com/u/unizh" method="get" accept-charset="UTF-8">
+             <input name="hq" type="hidden" value="inurl:{$servername}"/> 
              <div class="serviceform">
-                <input type="text" name="queryString" accesskey="5" />
+                <input type="text" name="query" accesskey="5" />
              </div>
              <div class="serviceform">
                 <a href="javascript:document.forms['formsearch'].submit();">go!</a>
