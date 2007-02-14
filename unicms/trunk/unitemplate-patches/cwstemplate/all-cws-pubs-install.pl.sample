@@ -42,7 +42,7 @@ open (FILE, "<$PublicationFile") or die "Could not open file $PublicationFile: $
 while ($_=<FILE>) {
 
   @list = split (/:/,$_);
-  print "Cloning publication $list[1] using prefix $list[0] \n";
+  print "Transforming publication $list[1] into CWS type using prefix $list[0] \n";
 
   $property1="-Dpub.prefix=\"$list[0]\"";
   $property2="-Dpubs.dir=\"$PublicationRoot\"";
