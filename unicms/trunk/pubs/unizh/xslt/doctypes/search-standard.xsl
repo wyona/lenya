@@ -22,6 +22,7 @@
   <xsl:param name="fontsize"/>
   <xsl:param name="querystring"/>
   <xsl:param name="servername"/>
+  <xsl:param name="proxy-url-live"/>
 
 
   <xsl:include href="../doctypes/variables.xsl"/>
@@ -88,43 +89,39 @@
   </xsl:template>
 
   <xsl:template match="xhtml:form[@id = 'search']">
-    <form id="formsearchcontent" action="http://www.google.com/u/unizh" method="get" accept-charset="UTF-8">
-      <div class="searchtextblock">
-        <input class="searchfield" type="text" name="query" value="{xhtml:input[@name='queryString']/@value}"/>
-        <input name="hq" type="hidden" value="inurl:{$servername}"/>
-        <input class="submitbutton" type="submit" name="sa">
-          <xsl:attribute name="value">
-            <xsl:choose>
-              <xsl:when test="$language = 'de'">Suchen</xsl:when>
-              <xsl:otherwise>Search</xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </input> 
-      </div>
-      <div>
-        <input checked="true" name="hq" type="radio" value="inurl:{$servername}"/>
-        <xsl:choose>
-           <xsl:when test="$language = 'de'">Suchen in </xsl:when>
-           <xsl:when test="$language = 'en'">Search </xsl:when>
-        </xsl:choose>
-        <xsl:value-of select="$servername"/>
- 
-       <input name="hq" type="radio"/> 
-         <xsl:choose>
-           <xsl:when test="$language = 'de'">Suchen in domain "uzh.ch"</xsl:when>
-           <xsl:otherwise>Search domain "uzh.ch"</xsl:otherwise>
-         </xsl:choose>
-      </div>
-      
-      <!-- <xsl:apply-templates select="xhtml:input[@name = 'publication-id']"/>  -->
-      <xsl:apply-templates select="xhtml:input[@type = 'hidden']"/>
-      <div class="endheaderline">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-      </div>
+
+    <div class="searchtextblock">
+    <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{$proxy-url-live}" accept-charset="UTF-8">
+      <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+      <input name="q" type="text" size="40" />
+      <input type="submit" name="sa" value="Search" />
+
+      <a href="http://www.google.com" target="_blank"><img src="{$imageprefix}/poweredby_FFFFFF.gif" align="right"/></a>
+
+      <input type="hidden" name="cof" value="FORID:11" /><br />
+      <input id="custom" name="sitesearch" value="{$servername}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$servername"/></label>
+      <input id="custom" name="sitesearch" value="*.unizh.ch" type="radio"/><label for="custom"> UZH Search</label>
     </form>
+    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_009347054195260226203%3Ahahgnjx1tks"></script>
+    </div>
+
+    <!-- Google Search Result Snippet Begins -->
+    <div id="results_009347054195260226203:hahgnjx1tks"></div>
+      <script type="text/javascript">
+         var googleSearchIframeName = "results_009347054195260226203:hahgnjx1tks";
+         var googleSearchFormName = "searchbox_009347054195260226203:hahgnjx1tks";
+         var googleSearchFrameWidth = 600;
+         var googleSearchFrameborder = 0;
+         var googleSearchDomain = "www.google.com";
+         var googleSearchPath = "/cse";
+      </script>
+      <script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+    <!-- Google Search Result Snippet Ends -->
+
   </xsl:template>
 
 
+<!--
   <xsl:template match="xhtml:input[@type = 'radio' and @name = 'publication-id']">
     <div class="searchoptionblock">
       <input class="searchoption" type="radio" name="{@name}" value="{@value}">
@@ -135,22 +132,7 @@
       <xsl:value-of select="."/>
     </div>
   </xsl:template> 
-
-
-  <xsl:template match="xhtml:div[@id = 'results']">
-    <h2><xsl:value-of select="xhtml:h1"/></h2>
-    <xsl:for-each select="xhtml:p/xhtml:ul/xhtml:li">
-      <div class="solidlinelist">
-        <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-      </div>
-      <a href="{xhtml:a/@href}"><xsl:value-of select="xhtml:a"/></a><br/>
-      <xsl:value-of select="xhtml:span[@class = 'excerpt']"/>
-      <p>
-        <span class="urltext"><xsl:value-of select="xhtml:a/@href"/></span>
-      </p>
-    </xsl:for-each>
-  </xsl:template>
-
+-->
 
   <xsl:template match="xhtml:div[@id = 'exception']">
     <xsl:value-of select="."/>
