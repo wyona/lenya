@@ -89,20 +89,17 @@
   </xsl:template>
 
   <xsl:template match="xhtml:form[@id = 'search']">
-
     <div class="searchtextblock">
     <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{$proxy-url-live}" accept-charset="UTF-8">
       <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
-      <input name="q" type="text" size="40" />
+      <input name="q" type="text" size="40"/>
       <input type="submit" name="sa" value="Search" />
-
-      <a href="http://www.google.com" target="_blank"><img src="{$imageprefix}/poweredby_FFFFFF.gif" align="right"/></a>
-
       <input type="hidden" name="cof" value="FORID:11" /><br />
       <input id="custom" name="sitesearch" value="{$servername}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$servername"/></label>
       <input id="custom" name="sitesearch" value="*.unizh.ch" type="radio"/><label for="custom"> UZH Search</label>
     </form>
     <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_009347054195260226203%3Ahahgnjx1tks"></script>
+    <a href="http://www.google.com" target="_blank"><img src="{$imageprefix}/poweredby_FFFFFF.gif" align="right"/></a>
     </div>
 
     <!-- Google Search Result Snippet Begins -->

@@ -64,21 +64,33 @@
           </form>
         </xsl:when>
         <xsl:otherwise>
-          <label for="formsearch">Suchen:</label>  
-          <form id="formsearch" action="http://www.google.com/u/unizh" method="get" accept-charset="UTF-8">
-             <input name="hq" type="hidden" value="inurl:{$servername}"/> 
-             <div class="serviceform">
-                <input type="text" name="query" accesskey="5" />
-             </div>
-             <div class="serviceform">
-                <a href="javascript:document.forms['formsearch'].submit();">go!</a>
-             </div>
-          </form>
-        </xsl:otherwise>
+	  <!-- 
+	       The following switch is necessary to prevent that the id for the form tag i.e. searchbox_0093470....
+	       occurs twice on the search page. See:  ../doctypes/search-standard.xsl. The form id is used by a 
+	       javascript provided by google.
+	  -->  
+	  <xsl:choose>
+	    <xsl:when test="$nodeid != 'search'">
+	      <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
+
+	      <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{xhtml:div[@id = 'search']/@href}" method="get" accept-charset="UTF-8">
+		<input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+		<input type="hidden" name="cof" value="FORID:11" />
+		<input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+		<div class="serviceform">
+		  <input type="text" name="q" accesskey="5" />
+		</div>
+		<div class="serviceform">
+		  <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();">go!</a>
+		</div>
+	      </form>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:otherwise>
       </xsl:choose>
     </div>
   </xsl:template>
-
+  
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
       <div class="icontextpos">
