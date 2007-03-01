@@ -7,7 +7,7 @@
 -->
 
   <index-dir src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/index/live/unitemplate-index"/>
-  <htdocs-dump-dir src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/htdocs_dump/live/www.unitemplate.unizh.ch"/>
+  <htdocs-dump-dir src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/htdocs_dump/live/www.unitemplate.uzh.ch"/>
 
   <indexer class="org.apache.lenya.lucene.index.DefaultIndexer"/>
 </lucene>

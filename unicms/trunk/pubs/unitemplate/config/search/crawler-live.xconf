@@ -3,9 +3,9 @@
 <crawler>
   <user-agent>lenya</user-agent>
 
-  <base-url href="http://www.unitemplate.unizh.ch/index.html"/>
-  <scope-url href="http://www.unitemplate.unizh.ch/"/>
-  <uri-list src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/uris-www.unitemplate.unizh.ch.txt"/>
-  <htdocs-dump-dir src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/htdocs_dump/live/www.unitemplate.unizh.ch.new"/>
+  <base-url href="http://www.unitemplate.uzh.ch/index.html"/>
+  <scope-url href="http://www.unitemplate.uzh.ch/"/>
+  <uri-list src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/uris-www.unitemplate.uzh.ch.txt"/>
+  <htdocs-dump-dir src="/usr/local/home/lenya/build/webapps/lenya/lenya/pubs/unitemplate/work/search/lucene/htdocs_dump/live/www.unitemplate.uzh.ch.new"/>
   <robots src="robots.txt"/>
 </crawler>
