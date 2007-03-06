@@ -1,0 +1,102 @@
+<bindings xmlns="http://www.example.org/widgetbindings/1.0" ns="http://www.w3.org/1999/xhtml">
+
+  <!-- Linebreak and Paragraphs -->
+
+  <binding element="br">
+    <component id="linefeed"/>
+  </binding>
+
+
+  <binding element="p">
+    <component id="paragraph"/>
+  </binding>
+
+  <!-- Tables -->
+  <binding element="table">
+    <component id="table"/>
+  </binding>
+
+  <binding element="tr">
+    <component id="table.row"/>
+  </binding>
+
+  <binding element="th">
+    <component id="table.heading"/>
+  </binding>
+
+  <binding element="td">
+    <component id="table.data"/>
+  </binding>
+  
+  <!-- Unordered List -->
+  <binding element="ul">
+    <component id="unordered-list"/>
+  </binding>
+
+  <binding element="ul li">
+    <component id="unordered-listitem"/>
+  </binding>
+
+  <!-- Ordered List -->
+  <binding element="ol">
+    <component id="ordered-list"/>
+  </binding>
+
+  <binding element="ol li">
+    <component id="ordered-listitem"/>
+  </binding>
+  
+  <!-- Inline formatting -->
+  <binding element="b">
+    <component id="bold"/>
+  </binding>
+
+  <binding element="i">
+    <component id="italic"/>
+  </binding>
+
+  <binding element="u">
+    <component id="underline"/>
+  </binding>
+
+  <binding element="strike">
+    <component id="strikeout"/>
+  </binding>
+
+  <binding element="sub">
+    <component id="subscript"/>
+  </binding>
+
+  <binding element="sup">
+    <component id="superscript"/>
+  </binding>
+
+  <!-- Hyperlinks -->
+  <binding element="a">
+    <component id="anchor">
+      <parameter name="href.attribname" value="href"/>
+    </component>
+  </binding>
+   
+  <!-- Images -->
+  <binding element="img">
+    <component id="image">
+      <parameter name="src.attribname" value="src"/>
+    </component> 
+  </binding>
+
+
+  <!-- Newline -->
+
+  <binding element="br">
+    <component id="linebreak"/>
+  </binding>
+
+  <!-- Paragraph -->
+
+  <binding element="p">
+    <component id="paragraph"/>
+  </binding>
+
+</bindings>
+

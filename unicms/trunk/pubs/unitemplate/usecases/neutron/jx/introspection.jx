@@ -6,7 +6,7 @@
     <checkout url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=checkout" method="GET"/>
     <checkin url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=checkin" method="PUT"/>
     <styles>
-      <style href="${cocoon.parameters['base-url']}/doctypes/xhtml-standard.xsl">
+      <style href="${cocoon.parameters['base-url']}/doctypes/${cocoon.parameters['document-type']}-standard.xsl">
         <parameter name="root" value="${cocoon.parameters['root']}"/>
         <parameter name="publicationid" value="${cocoon.parameters['publicationid']}"/>
         <parameter name="documentid" value="${cocoon.parameters['documentid']}"/>
@@ -23,7 +23,9 @@
         <parameter name="creationdate" value="${cocoon.parameters['creationdate']}"/>
       </style> 
       <style-template href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=template"/>  
-    </styles>  
+    </styles> 
+    <widgets href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=widgets"/> 
+    <inserts href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=inserts"/>
     <schema type="relaxNG" url="${cocoon.parameters['base-url']}/${cocoon.parameters['document-type']}.rng"/> 
   </edit>
 </introspection>

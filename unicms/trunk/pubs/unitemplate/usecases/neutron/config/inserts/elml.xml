@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<insertTemplates
+   xmlns:elml="http://www.elml.ch"
+>
+
+
+  <template label="Entry" element="entry">
+    <elml:entry>
+      <elml:paragraph>Introduction</elml:paragraph>
+    </elml:entry>
+  </template>
+
+  <template label="Goals" element="goals">
+    <elml:goals>
+      <elml:lObjective>A learning objective</elml:lObjective>
+    </elml:goals> 
+  </template>
+
+  <template label="Clarify" element="clarify">
+    <elml:clarify>
+      <elml:paragraph>Clarify</elml:paragraph>
+    </elml:clarify>
+  </template>
+
+  <template label="Look" element="look">
+    <elml:look>
+      <elml:paragraph>Look</elml:paragraph>
+    </elml:look>
+  </template>
+
+  <template label="Act" element="act">
+    <elml:act metaSetUpInfo="setup description">
+      <elml:paragraph>Act</elml:paragraph>
+    </elml:act>
+  </template>
+
+</insertTemplates>
+

@@ -204,12 +204,12 @@
     <xsl:choose>
       <xsl:when test="text()">
         <a href="{concat($glossPageUrl, '#', $glossRef)}" alt="{$definition}" title="{$definition}">
-          <xsl:value-of select="."/>
+          <xsl:value-of select="."/><xsl:comment/>
         </a>
       </xsl:when>
       <xsl:otherwise>
         <p>
-          <b><xsl:value-of select="$term"/></b>: <xsl:value-of select="$definition"/>
+          <b><xsl:value-of select="$term"/><xsl:comment/></b>: <xsl:value-of select="$definition"/>
         </p>
       </xsl:otherwise>
     </xsl:choose>
@@ -847,11 +847,8 @@
 
   <xsl:template name="Image">
     <xsl:param name="pathMultimedia"/>
-    <img>
+    <img src="{$pathMultimedia}">
       <xsl:call-template name="Label"/>
-        <xsl:attribute name="src">
-        <xsl:value-of select="$pathMultimedia"/>
-      </xsl:attribute>
       <xsl:call-template name="MultimediaAttributes"/>
       <xsl:attribute name="border">0</xsl:attribute>
       <xsl:attribute name="alt">
@@ -866,20 +863,13 @@
     <object classid="CLSID:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">
     <xsl:call-template name="Label"/>
     <xsl:call-template name="MultimediaAttributes"/>
-    <param name="movie">
-      <xsl:attribute name="value">
-        <xsl:value-of select="$pathMultimedia"/>
-      </xsl:attribute>
-     </param>
+     <param name="movie" value="{$pathMultimedia}"/>
      <param name="quality" value="best"/>
      <param name="scale" value="exactfit"/>
      <param name="menu" value="true"/>
      <param name="play" value="true"/> 
-     <embed pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" quality="best" scale="exactfit" menu="true" play="true">
+     <embed src="{$pathMultimedia}" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" quality="best" scale="exactfit" menu="true" play="true">
        <xsl:call-template name="Label"/>
-       <xsl:attribute name="src">
-         <xsl:value-of select="$pathMultimedia"/>
-       </xsl:attribute>
        <xsl:call-template name="MultimediaAttributes"/>
      </embed>
    </object>
