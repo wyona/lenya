@@ -9,7 +9,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
     <style type="text/css">
-    <!--
       <xsl:comment>
         <xsl:choose>
           <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
@@ -21,7 +20,6 @@
         </xsl:choose>
         @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
       </xsl:comment>
-      -->
     </style>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
 <script xmlns:xhtml="http://www.w3.org/1999/xhtml" src="{$contextprefix}/unizh/authoring/javascript/elml.js" type="text/javascript"/>
