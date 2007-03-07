@@ -416,42 +416,6 @@
         <map:serialize type="xml"/>
       </map:match>
 
-      <map:match pattern="*/doctypes/lesson-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/unit-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/selfAssessment-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/summary-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/furtherReading-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/glossary-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/doctypes/bibliography-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/elml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-
       <map:match pattern="*/**.xsl">
         <map:generate src="../unizh/xslt/{2}.xsl"/>
         <map:serialize type="xml"/>
