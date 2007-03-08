@@ -611,12 +611,13 @@
 
 
   <xsl:template match="xhtml:p[parent::unizh:short]">
-    <xsl:apply-templates/>
+    <p>
+      <xsl:apply-templates/>
+    </p>
   </xsl:template>
 
 
   <xsl:template match="xhtml:a[parent::unizh:short]">
-    <br/>
     <a class="arrow" href="{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
 
