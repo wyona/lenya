@@ -151,7 +151,7 @@
     <label>Dispatch Newsletter</label>
     <task id="send" class="org.apache.lenya.cms.mail.MailTask">
       <parameter name="server" value="wyona.com"/>
-      <parameter name="from" value="Universit&#228;t Z&#252;rich &#045; unipublic &#060;unipublic@unicom.unizh.ch&#062;"/>
+      <parameter name="from" value="Universit&#228;t Z&#252;rich &#045; unipublic &#060;unipublic@unicom.uzh.ch&#062;"/>
     </task>
     <task id="clear" class="ch.unizh.unipublic.lenya.cms.task.ClearNewsletterTask"/>
   </task>
