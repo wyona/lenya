@@ -22,7 +22,6 @@
       </xsl:comment>
     </style>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
-<script xmlns:xhtml="http://www.w3.org/1999/xhtml" src="{$contextprefix}/unizh/authoring/javascript/elml.js" type="text/javascript"/>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
     </xsl:if>
