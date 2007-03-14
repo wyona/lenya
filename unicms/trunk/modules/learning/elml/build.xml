@@ -168,30 +168,6 @@
       >
     </xslt>
 
-    <!-- BXE integration -->
-    <echo>INFO: Copying BXE workarounds</echo>
-    <copy todir="${pubs.dir}/unizh/xslt/" overwrite="yes">
-       <fileset dir="elml/xslt">
-        <include name="bxe-loadxml.xsl"/>
-        <include name="bxe-savexml.xsl"/>
-        <include name="bxe-rng.xsl"/>
-      </fileset>
-    </copy>
-
-    <echo>INFO: Patching usecase-bxeng.xmap</echo>
-    <xslt
-      in="${pub.dir}/usecase-bxeng.xmap"
-      out="work/usecase-bxeng.xmap" style="elml/install/usecase-bxeng.xsl"
-      >
-    </xslt>
-
-    <echo>INFO: Patching css file content-bxeng.xml</echo> 
-    <xslt
-      in="${pubs.dir}/unizh/resources/misc/bxeng/content-bxeng.xml"
-      out="work/content-bxeng.xml" style="elml/install/content-bxeng.xsl"
-      >
-    </xslt>
-
     <echo>INFO: Installing webdav support</echo>
     <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
       <fileset dir="elml/lenya/usecases/webdav"/>
@@ -204,7 +180,6 @@
         <include name="doctypes.xmap"/>
         <include name="menus.xmap"/>
         <include name="parameter-doctype.xmap"/>
-        <include name="usecase-bxeng.xmap"/>
       </fileset>
     </copy>
 
@@ -227,12 +202,6 @@
       </fileset>
     </copy>
 
-    <copy todir="backup" overwrite="yes">
-      <fileset dir="${pubs.dir}/unizh/resources/misc/bxeng">
-         <include name="content-bxeng.xml"/>
-      </fileset>
-    </copy>
-
 
     <echo>INFO: Installing patched files</echo>
 
@@ -242,7 +211,6 @@
         <include name="doctypes.xmap"/>
         <include name="menus.xmap"/>
         <include name="parameter-doctype.xmap"/>
-        <include name="usecase-bxeng.xmap"/>
       </fileset>
     </copy>
 
@@ -265,11 +233,6 @@
       </fileset>
     </copy>
 
-    <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
-      <fileset dir="work">
-         <include name="content-bxeng.xml"/>
-      </fileset>
-    </copy>
 
     <antcall target="touch"/>
 
@@ -366,9 +329,6 @@
     <delete dir="${pub.dir}/config/menus"/>
     <delete file="${pubs.dir}/unizh/xslt/elml-level.xsl"/>
     <delete file="${pubs.dir}/unizh/resources/shared/javascript/elml.js"/>
-    <delete file="${pubs.dir}/unizh/xslt/bxe-loadxml.xsl"/>
-    <delete file="${pubs.dir}/unizh/xslt/bxe-savexml.xsl"/>
-    <delete file="${pubs.dir}/unizh/xslt/bxe-rng.xsl"/>
 
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="backup">
@@ -376,7 +336,6 @@
         <include name="doctypes.xmap"/>
         <include name="menus.xmap"/>
         <include name="parameter-doctype.xmap"/>
-        <include name="usecase-bxeng.xmap"/>
       </fileset>
     </copy>
 
@@ -396,12 +355,6 @@
     <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
        <fileset dir="backup">
         <include name="html-head.xsl"/>
-      </fileset>
-    </copy>
-
-    <copy todir="${pubs.dir}/unizh/resources/misc/bxeng" overwrite="yes">
-      <fileset dir="backup">
-         <include name="content-bxeng.xml"/>
       </fileset>
     </copy>
 
