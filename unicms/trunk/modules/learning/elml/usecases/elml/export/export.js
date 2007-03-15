@@ -109,28 +109,6 @@ function exportSource(doc) {
      dom.documentElement.appendChild(cloned);
    }
 
-   /* Rewrite links */
-
-  var linkNodes = dom.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "a"); 
-
-  for (var i = 0; i < linkNodes.length; i++) {
-    var anchor = linkNodes.item(i);
-    var href = anchor.getAttribute("href");
-    var link = dom.createElementNS("http://www.elml.ch", "elml:link");
-    if (href.indexOf(doc.getId()) > -1) {
-      link.setAttribute("targetLesson", dom.documentElement.getAttribute("label"));
-      if (href.indexOf("#") > -1) {
-        var targetLabel = href.substring(href.indexOf("#") + 1, href.length());
-        cocoon.log.error("TargetLabel: " + targetLabel);
-        link.setAttribute("targetLabel", targetLabel);
-      }
-    } else {
-      link.setAttribute("uri", href);
-    } 
-  
-    anchor.parentNode.replaceChild(link, anchor);
-    i--;
-  }
 
    /* Create archive of gathered stuff */
 

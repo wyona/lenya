@@ -354,65 +354,6 @@ function importLesson() {
   
   /** Pre-Processing: process dom fragments before serializing to documents **/
   
-  /* Rewrite links */
- 
-  cocoon.log.info("Starting Link rewrite process...");
-  
-  var labelToURIMap = new Array();
-  
-  for (var i = 0; i < domToDocumentMap.length; i++) {
-      
-    var dom = domToDocumentMap[i][0];
-    var document = domToDocumentMap[i][1];
-    
-    var elements = dom.getElementsByTagName("*");
-    for (var j = 0; j < elements.length; j++) {
-      if (elements.item(j).hasAttribute("label")) {
-        var label = elements.item(j).getAttribute("label");
-        var uri = pageEnvelope.getContext() + document.getCompleteURL() + "#" + label;
-        labelToURIMap.push (new Array(label, uri));
-      }
-    }
-  }  
-  
-  for (var i = 0; i < domToDocumentMap.length; i++) {
-      
-    var dom = domToDocumentMap[i][0];
-    
-    while (dom.getElementsByTagName("link").length > 0) {
-    
-      var link = dom.getElementsByTagName("link").item(0); 
-      var uri = null;
-      
-      if (link.hasAttribute("targetLabel")) {
-        var targetLabel = link.getAttribute("targetLabel");
-        
-        for (var z = 0; z < labelToURIMap.length; z++) {
-          var label = labelToURIMap[z][0];
-          if (label.equals(targetLabel)) {
-              var uri = labelToURIMap[z][1];
-              // j--; // might be platform dependant. 
-          }
-        }
-      } else {
-        uri = link.getAttribute("uri");
-      }
-      
-      var anchor = dom.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:a");
-      anchor.setAttribute("href", uri);
-      var childNodes = link.childNodes;
-      
-      for (var y = 0; y < childNodes.length; y++) {
-        var node = childNodes.item(y);
-        var clone = node.cloneNode(true);
-        anchor.appendChild(clone);
-      }
-              
-      link.parentNode.replaceChild(anchor, link);
-      
-    }
-  }
-         
       
   /* Serialize DOM fragments to documents */
   
@@ -421,7 +362,7 @@ function importLesson() {
     var dom = domToDocumentMap[i][0];
     var document = domToDocumentMap[i][1];
     
-    createAssets(zip, dom, document, true); // FIXME: add assets to confirmation page
+    createAssets(zip, dom, document); // FIXME: add assets to confirmation page
     
     var sourceUri = documentHelper.getSourceUri(document);  
     var source = resolver.resolveURI(sourceUri); 
@@ -435,7 +376,7 @@ function importLesson() {
 }
 
 
-function createAssets(zip, dom, doc, rewriteLinks) {
+function createAssets(zip, dom, doc) {
 
   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
   var multimediaNodes = dom.getElementsByTagName("multimedia");
