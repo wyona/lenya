@@ -226,7 +226,7 @@
     <a href="{@href}">
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
+          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
             <xsl:text>extern</xsl:text>
           </xsl:when>
           <xsl:otherwise>
@@ -308,7 +308,7 @@
           <a href="{@href}">
             <xsl:attribute name="class">
               <xsl:choose>
-                <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
+                <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
                   <xsl:text>extern</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
