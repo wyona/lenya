@@ -46,7 +46,7 @@
         <xsl:attribute name="href"><xsl:value-of select="concat('http://www.unipublic.unizh.ch',$id,'.html')"/></xsl:attribute>
       </link> 
       <summary>
-        <xsl:value-of select="lenya:meta/dc:description"/>
+        <xsl:value-of select="up:teaser/xhtml:div"/>
       </summary>
       <author>
         <name>

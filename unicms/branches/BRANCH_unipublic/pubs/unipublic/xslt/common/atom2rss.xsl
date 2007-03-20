@@ -43,6 +43,7 @@
       <xsl:apply-templates select="atom:title"/>    
       <xsl:apply-templates select="atom:summary"/>
       <xsl:apply-templates select="atom:link"/>    
+      <xsl:apply-templates select="atom:issued"/>
     </item>
   </xsl:template>
   
@@ -69,6 +70,12 @@
         </link>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="atom:issued">
+    <pubDate>
+      <i18n:date-time src-pattern="yyyy-MM-dd'T'hh:mm:ss" pattern="EEE, dd MMM yyyy HH:mm:ss Z" locale="en_US"><xsl:value-of select="."/></i18n:date-time>
+   </pubDate>
   </xsl:template>
 
   <xsl:template match="atom:modified" mode="feed">
