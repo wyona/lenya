@@ -525,7 +525,10 @@
   <define name="PresentationImp">
      <optional>
       <attribute name="presentation">
-        <text/><!-- list, table -->
+        <choice>
+          <value>list</value>
+          <value>table</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -541,7 +544,10 @@
   <define name="RoleImp">
     <optional>
       <attribute name="role">
-        <text/><!-- tutor, student -->
+        <choice>
+          <value>tutor</value>
+          <value>student</value>
+        </choice>
       </attribute>
     </optional>
   </define> 
@@ -574,7 +580,10 @@
     </optional>
     <optional>
       <attribute name="target">
-        <text/><!-- _blank, _top -->
+        <choice> 
+          <value>_blank</value>
+          <value>_top</value>
+        </choice>
       </attribute>
     </optional>
   </define> 
@@ -582,21 +591,42 @@
   <define name="NewLineImp">
     <optional>
       <attribute name="space">
-        <text/><!-- short, long -->
+        <choice>
+          <value>short</value>
+          <value>long</value>
+        </choice>
       </attribute>
     </optional>
   </define> 
 
   <define name="TypeReq">
     <attribute name="type">
-      <text/><!-- gif, jpeg, png, flash, svg, quicktime, mpeg, applet, vrml, x3d, realone, mathml, div -->
+      <choice>
+        <value>gif</value>
+        <value>jpeg</value>
+        <value>png</value>
+        <value>flash</value>
+        <value>svg</value>
+        <value>quicktime</value>
+        <value>mpeg</value>
+        <value>applet</value>
+        <value>vrml</value>
+        <value>x3d</value>
+        <value>realone</value>
+        <value>mathml</value>
+        <value>div</value>
+      </choice>
     </attribute>
   </define>
 
   <define name="VisibleImp">
     <optional>
       <attribute name="visible">
-        <text/><!-- all, online, print -->
+        <choice>
+          <value>all</value>
+          <value>online</value>
+          <value>print</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -628,7 +658,14 @@
   <define name="AlignmentImp">
     <optional>
       <attribute name="align">
-        <text/><!-- left, center, right, top, middle, bottom -->
+        <choice>
+          <value>left</value>
+          <value>center</value>
+          <value>right</value>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -658,7 +695,10 @@
     </optional>
     <optional>
       <attribute name="units">
-        <text/><!-- pixels, percent -->
+        <choice>
+          <value>pixels</value>
+          <value>percent</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -679,7 +719,10 @@
   <define name="ListStyleImp">
     <optional>
       <attribute name="listStyle">
-        <text/><!-- ordered, unordered -->
+        <choice>
+          <value>ordered</value>
+          <value>unordered</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -692,14 +735,27 @@
 
   <define name="StyleReq">
     <attribute name="style">
-      <text/> <!-- bold, italic, underlined, crossedOut, upperCase, lowerCase, subscript, superscript, code -->
+      <choice> 
+        <value>bold</value>
+        <value>italic</value>
+        <value>underlined</value>
+        <value>crossedOut</value>
+        <value>upperCase</value>
+        <value>lowerCase</value>
+        <value>supscript</value>
+        <value>superscript</value>
+        <value>code</value>
+      </choice>
     </attribute>
   </define>
 
   <define name="YearOnlyImp">
     <optional>
       <attribute name="yearOnly">
-        <text/><!-- YesNoType -->
+        <choice>
+          <value>yes</value>
+          <value>no</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -707,7 +763,10 @@
   <define name="IndexAttImp">
     <optional>
       <attribute name="mainEntry">
-        <text/><!-- YesNoType -->
+        <choice>
+          <value>yes</value>
+          <value>no</value>
+        </choice>
       </attribute>
     </optional>
     <optional>
