@@ -260,17 +260,18 @@
   </define>
 
   <define name="link">
-    <element name="xhtml:a">
-      <optional>
-        <attribute name="href"><text/></attribute>
-      </optional>
-      <optional>
-        <attribute name="title"><text/></attribute>
-      </optional>
-      <optional>
-        <attribute name="target"><text/></attribute>
-	  </optional>
-      <text/>
+    <element name="link">
+      <ref name="UriImp"/>
+      <ref name="LegendImp"/>
+      <ref name="IconImp"/>
+      <ref name="RoleImp"/>
+      <ref name="CSSClassImp"/>
+      <choice>
+        <optional>
+          <ref name="multimedia"/>
+        </optional>
+        <text/>
+      </choice>
     </element>
   </define>
 
