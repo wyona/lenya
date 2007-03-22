@@ -23,13 +23,13 @@
       <xsl:if test="/search-and-results/search/publication-id = 'unizh'">
         <xsl:attribute name="checked">true</xsl:attribute>
       </xsl:if>
-      www.unizh.ch
+      www.uzh.ch
     </input>
     <input type="radio" name="publication-id" value="{$unizh.pubId}">
       <xsl:if test="/search-and-results/search/publication-id = $unizh.pubId">
         <xsl:attribute name="checked">true</xsl:attribute>
       </xsl:if>
-        www.<xsl:value-of select="$unizh.pubId"/>.unizh.ch
+        www.<xsl:value-of select="$unizh.pubId"/>.uzh.ch
     </input> 
   </form>
 
