@@ -21,7 +21,7 @@
     <p>
     Beispiel eines kurzen News-Eintrags. Kurzeinträge können einen Textblock, ein Bild und einen Hyperlink auf eine beliebige Zielseite enthalten.
     </p>
-    <a href="http://www.unizh.ch">Zielseite</a>
+    <a href="http://www.uzh.ch">Zielseite</a>
   </unizh:short>
   <body>
     <p> </p>

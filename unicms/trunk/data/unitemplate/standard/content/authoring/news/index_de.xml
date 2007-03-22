@@ -18,7 +18,7 @@
     </unizh:teaser>
   </unizh:related-content>
   <body>
-    <p>Einleitung: <br />Mehr Information zu diesem Dokumenttyp:<br /><a href="doctypes/custom/News.html" title="">Beispiel</a><br /><a href="http://www.unicms.unizh.ch/docu/doku12/doctypes/news.html" title="">Dokumentation</a></p>
+    <p>Einleitung: <br />Mehr Information zu diesem Dokumenttyp:<br /><a href="doctypes/custom/News.html" title="">Beispiel</a><br /><a href="http://www.unicms.uzh.ch/docu/doku12/doctypes/news.html" title="">Dokumentation</a></p>
     <unizh:children/>
     <p>Ausleitung: Anmerkungen.</p>
   </body>

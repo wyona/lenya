@@ -27,7 +27,7 @@
     <unizh:teaser name="Beispiel">
       <unizh:title>Beispiel-Teaser</unizh:title>
       <p>Beispiel für einen Teaser.</p><a href="#" title="Teaser Link">Link</a>
-    </unizh:teaser><unizh:rss-reader url="http://www.unipublic.unizh.ch/index.rss.xml" items="1">Unipublic</unizh:rss-reader><unizh:rss-reader url="http://www.unizh.ch/news/rss/cms/ibis_rss.php" items="5">Ibis</unizh:rss-reader>
+    </unizh:teaser><unizh:rss-reader url="http://www.unipublic.uzh.ch/index.rss.xml" items="1">Unipublic</unizh:rss-reader><unizh:rss-reader url="http://www.uzh.ch/news/rss/cms/ibis_rss.php" items="5">Ibis</unizh:rss-reader>
   </unizh:related-content>
   <body>
     <p>
@@ -38,7 +38,7 @@ und bewirtschaften.
 
 <h3>Dokumentation:</h3>
 <p>
-Ausführliche Informationen zur Erstellung und Wartung einer UniCMS-Publikation finden Sie in der <a href="http://www.unicms.unizh.ch/docu.html">UniCMS Online-Dokumentation</a>.<br/>
+Ausführliche Informationen zur Erstellung und Wartung einer UniCMS-Publikation finden Sie in der <a href="http://www.unicms.uzh.ch/docu.html">UniCMS Online-Dokumentation</a>.<br/>
 </p><unizh:rss-reader url="/doctypes/custom/News.rss.xml" items="3">Beispiel RSS-News (intern)</unizh:rss-reader>
   </body>
 </unizh:homepage>
