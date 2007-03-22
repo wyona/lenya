@@ -20,6 +20,6 @@
   <body>
     <p>Dies ist ein Beispiel für den Dokumenttyp "RSS-News". Innerhalb einer  News-Seite erstellte Beiträge (News-Item) werden automatisch in einem RSS-Kanal zusammengefasst und können so an einer oder mehreren Stellen Ihrer Publikation oder von einer anderen RSS-fähigen Software (z.B. von einem Weblog-Betreiber) angezeigt werden. Beispiele für die Einbindung von RSS-News finden Sie auf der <a href="/lenya/unitemplate/authoring/index.html" title="Einstiegsseite">Einstiegsseite</a> dieser Publikation.</p>
     <unizh:children/>
-    <p>Weitere Informationen zum Einsatz von RSS-News finden Sie in der  <a href="https://cmsstaging.unizh.ch/lenya/unicms/authoring/docu/doku12.html" title="UniCMS-Online-Dokumentation">UniCMS-Online-Dokumentation</a>. </p>
+    <p>Weitere Informationen zum Einsatz von RSS-News finden Sie in der  <a href="http://www.unicms.uzh.ch/docu/doku12/doctypes/news.html" title="UniCMS-Online-Dokumentation">UniCMS-Online-Dokumentation</a>. </p>
   </body>
 </unizh:news>

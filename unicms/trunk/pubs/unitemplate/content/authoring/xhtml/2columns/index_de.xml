@@ -18,7 +18,7 @@
 		<p>Different text styles can be used: <strong>bold</strong> or <em>italic</em> or
                 <small>small</small>
 </p>
-		<p>Links can be set to <a href="http://www.unizh.ch/">external resources</a>
+		<p>Links can be set to <a href="http://www.uzh.ch/">external resources</a>
                 as well as to <a href="/lenya/unitemplate/authoring/index.html">internal
                 pages</a>.</p>
                 <p>There are also markups: <unizh:attention>warning</unizh:attention> and <cite>cite</cite>
