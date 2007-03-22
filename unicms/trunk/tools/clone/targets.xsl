@@ -11,7 +11,7 @@
         <property value="/lenya/{$publicationName}/live" name="{@name}"/>
       </xsl:when>
 	  <xsl:when test="@name='mail.mailhost'">
-		<property value="mailhost.unizh.ch" name="{@name}"/>
+		<property value="mailhost.uzh.ch" name="{@name}"/>
 	  </xsl:when>
 	  <xsl:when test="@name='notification.from'">
 		<property value="{$publicationMaster}" name="{@name}"/>
