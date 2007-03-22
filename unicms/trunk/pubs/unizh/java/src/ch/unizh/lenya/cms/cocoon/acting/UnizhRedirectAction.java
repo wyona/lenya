@@ -78,7 +78,7 @@ import java.util.Map;
  * of the current document. Returns null object if no attribute is specified
  * or if the current document is not of type "redirect".
  * 
- * @author <a href="mailto:michael.trindler@id.unizh.ch">Michael Trindler</a>
+ * @author <a href="mailto:michael.trindler@id.uzh.ch">Michael Trindler</a>
  */
 public class UnizhRedirectAction extends AbstractAction {
 

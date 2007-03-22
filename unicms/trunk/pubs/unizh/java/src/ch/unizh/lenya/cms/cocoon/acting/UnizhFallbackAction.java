@@ -84,7 +84,7 @@ import java.util.Map;
  * There is also a parameter needed saying where the file is located in the root Publication
  * <map:parameter name="rootpath" value="resources/images/{2}.gif"/>
  * 
- * @author <a href="mailto:jann.forrer@id.unizh.ch">Jann Forrer</a>
+ * @author <a href="mailto:jann.forrer@id.uzh.ch">Jann Forrer</a>
  */
 public class UnizhFallbackAction extends AbstractConfigurableAction {
 
