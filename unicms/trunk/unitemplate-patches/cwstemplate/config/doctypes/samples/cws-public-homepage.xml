@@ -37,7 +37,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       <unizh:title>Title</unizh:title>
       <p>Teaser text</p>
     </unizh:teaser>
-    <unizh:rss-reader url="http://www.unizh.ch/news/rss/agenda_rss.php" items="2">Agenda</unizh:rss-reader>
+    <unizh:rss-reader url="http://www.uzh.ch/news/rss/agenda_rss.php" items="2">Agenda</unizh:rss-reader>
   </unizh:related-content>
   <body>
     <unizh:column>
@@ -52,8 +52,8 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       </unizh:links>
     </unizh:column>
     <unizh:column>
-      <unizh:rss-reader url="http://www.unipublic.unizh.ch/index.rss.xml" items="2">Unipublic</unizh:rss-reader>
-      <unizh:rss-reader url="http://www.unizh.ch/news/rss/cms/ibis_rss.php" items="2">Ibis</unizh:rss-reader>
+      <unizh:rss-reader url="http://www.unipublic.uzh.ch/index.rss.xml" items="2">Unipublic</unizh:rss-reader>
+      <unizh:rss-reader url="http://www.uzh.ch/news/rss/cms/ibis_rss.php" items="2">Ibis</unizh:rss-reader>
     </unizh:column>
   </body>
 </unizh:homepage4cols>

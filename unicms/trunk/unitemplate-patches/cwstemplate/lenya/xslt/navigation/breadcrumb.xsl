@@ -11,7 +11,7 @@
 
 
 <xsl:template match="nav:site">
-  <div id="breadcrumb" root="http://www.unizh.ch" label="Universit&#228;t Z&#252;rich">
+  <div id="breadcrumb" root="http://www.uzh.ch" label="Universit&#228;t Z&#252;rich">
     <xsl:apply-templates select="nav:node[descendant-or-self::nav:node[@current = 'true'] and not(@id = 'index')]"/> 
   </div>
 </xsl:template>
