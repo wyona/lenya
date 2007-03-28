@@ -743,7 +743,7 @@
         <value>crossedOut</value>
         <value>upperCase</value>
         <value>lowerCase</value>
-        <value>supscript</value>
+        <value>subscript</value>
         <value>superscript</value>
         <value>code</value>
       </choice>
