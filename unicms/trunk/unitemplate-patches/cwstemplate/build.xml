@@ -43,7 +43,7 @@
 
 
   <target name="install" description="install uzh publication" depends="init, backup">
-    
+
     <echo>INFO: Copying the files for the logical transformation to ${pub.dir}/lenya/xslt/navigation</echo>
     <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes">
       <fileset dir="${unitemplate.srcdir}/lenya/xslt/navigation"/>
@@ -53,52 +53,39 @@
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/breadcrumb.xsl"/>
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/logic.xsl"/>
     <copy todir="${pub.dir}/lenya/xslt-fallback/navigation" overwrite="yes" file="${unitemplate.srcdir}/lenya/xslt/navigation/tabs.xsl"/>
-    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/breadcrumb.xsl"/>
-    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/logic.xsl"/>
-    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="lenya/xslt/navigation/tabs.xsl"/>
-    <antcall target="install-double-tabs"/>
+    <antcall target="copy-navigation-extended"/>
+    <antcall target="copy-navigation-public"/>
 
     <echo> </echo>
     <echo>INFO: Copying the layout xslt files to ${pub.dir}/xslt</echo>
-    <copy todir="${pub.dir}/xslt" overwrite="yes" file="xslt/assetDots.xsl"/>
-    <copy todir="${pub.dir}/xslt/common" overwrite="yes">
-      <fileset dir="xslt/common"/>
-    </copy>
-    <copy todir="${pub.dir}/xslt/doctypes" overwrite="yes">
-      <fileset dir="${unizh.srcdir}/xslt/doctypes"/>
-    </copy>
+    <antcall target="copy-xslt-extended"/>
+    <antcall target="copy-xslt-public"/>
 
     <echo> </echo>
     <echo>INFO: Copying and patching necessary *.xmap files</echo>
     <copy todir="${pub.dir}" overwrite="yes" file="${unitemplate.srcdir}/doctypes.xmap"/>
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/doctypes-xmap.xsl" includes="doctypes.xmap" extension=".xmap" />
-    <copy todir="${pub.dir}" overwrite="yes">
-      <fileset dir="work" />
-    </copy>
-    <copy todir="${pub.dir}" overwrite="yes" file="${unitemplate.srcdir}/parameter-doctype.xmap"/>
-    <xslt force="true" basedir="${pub.dir}" destdir="work" style="patchers/parameter-doctype-xmap.xsl" includes="parameter-doctype.xmap" extension=".xmap" />
+    <antcall target="patch-doctypes-extended"/>
+    <antcall target="patch-doctypes-public"/>
+    <copy todir="${pub.dir}" overwrite="yes" file="${unitemplate.srcdir}/publication-sitemap.xmap"/>
+    <xslt force="true" basedir="${pub.dir}" destdir="work" style="extended/patchers/publication-sitemap-xmap.xsl" includes="publication-sitemap.xmap" extension=".xmap" />
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="work" />
     </copy>
 
     <echo> </echo>
     <echo>INFO: Copying differing schemas and samples to ${pub.dir}/config/doctypes</echo>
-    <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes">
-      <fileset dir="config/doctypes/samples" />
-    </copy>
-    <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
-      <fileset dir="config/doctypes/schemas" />
-    </copy>
+    <antcall target="copy-samples-extended"/>
+    <antcall target="copy-samples-public"/>
+    <antcall target="copy-schemas-extended"/>
+    <antcall target="copy-schemas-public"/>
 
     <antcall target="substitute-cwsxxx-homepage"/>
     <antcall target="substitute-cwspublic-homepage"/>
 
     <echo> </echo>
     <echo>INFO: Copying local resources to ${pub.dir}/resources/shared</echo>
-    <copy todir="${pub.dir}/resources/shared/images" overwrite="yes">
-      <fileset dir="resources/shared/images" />
-    </copy>
-    <copy todir="${pub.dir}/resources/shared/css" overwrite="yes" file="resources/shared/css/institute.css"/>
+    <antcall target="copy-resources-extended"/>
+    <antcall target="copy-resources-public"/>
 
     <antcall target="touch"/>
     <antcall target="cleanup"/> 
@@ -152,22 +139,120 @@
   </target>
 
 
-  <target name="install-double-tabs" if="uzhpublic.true">
-    <copy file="lenya/xslt/navigation/logic.xsl.public" tofile="${pub.dir}/lenya/xslt/navigation/logic.xsl" overwrite="yes"/>
+  <target name="copy-navigation-extended" unless="uzhpublic.true">
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="extended/lenya/xslt/navigation/breadcrumb.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="extended/lenya/xslt/navigation/logic.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="extended/lenya/xslt/navigation/tabs.xsl"/>
+  </target>
+
+
+  <target name="copy-navigation-public" if="uzhpublic.true">
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="public/lenya/xslt/navigation/breadcrumb.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="public/lenya/xslt/navigation/logic.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="public/lenya/xslt/navigation/tabs.xsl"/>
+    <copy todir="${pub.dir}/lenya/xslt/navigation" overwrite="yes" file="public/lenya/xslt/navigation/subtabs.xsl"/>
+  </target>
+
+
+  <target name="copy-xslt-extended">
+    <copy todir="${pub.dir}/xslt" overwrite="yes" file="extended/xslt/assetDots.xsl"/>
+    <copy todir="${pub.dir}/xslt/common" overwrite="yes">
+      <fileset dir="extended/xslt/common"/>
+    </copy>
+    <copy todir="${pub.dir}/xslt/doctypes" overwrite="yes">
+      <fileset dir="extended/xslt/doctypes"/>
+    </copy>
+  </target>
+
+
+  <target name="copy-xslt-public" if="uzhpublic.true">
+    <copy todir="${pub.dir}/xslt/common" overwrite="yes">
+      <fileset dir="public/xslt/common"/>
+    </copy>
+    <copy todir="${pub.dir}/xslt/doctypes" overwrite="yes">
+      <fileset dir="public/xslt/doctypes"/>
+    </copy>
+  </target>
+
+
+  <target name="patch-doctypes-extended" unless="uzhpublic.true">
+    <xslt force="true" basedir="${pub.dir}" destdir="work" style="extended/patchers/doctypes-xmap.xsl" includes="doctypes.xmap" extension=".xmap"/>
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="work" />
+    </copy>
+  </target>
+
+
+  <target name="patch-doctypes-public" if="uzhpublic.true">
+    <xslt force="true" basedir="${pub.dir}" destdir="work" style="public/patchers/doctypes-xmap.xsl" includes="doctypes.xmap" extension=".xmap"/>
+    <copy todir="${pub.dir}" overwrite="yes">
+      <fileset dir="work" />
+    </copy>
+  </target>
+
+
+  <target name="copy-samples-extended" unless="uzhpublic.true">
+    <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes">
+      <fileset dir="extended/config/doctypes/samples" />
+    </copy>
+  </target>
+
+
+  <target name="copy-samples-public" if="uzhpublic.true">
+    <copy todir="${pub.dir}/config/doctypes/samples" overwrite="yes">
+      <fileset dir="public/config/doctypes/samples" />
+    </copy>
+  </target>
+
+
+  <target name="copy-schemas-extended" unless="uzhpublic.true">
+    <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
+      <fileset dir="extended/config/doctypes/schemas" />
+    </copy>
+  </target>
+
+
+  <target name="copy-schemas-public" if="uzhpublic.true">
+    <copy todir="${pub.dir}/config/doctypes/schemas" overwrite="yes">
+      <fileset dir="public/config/doctypes/schemas" />
+    </copy>
+  </target>
+
+
+  <target name="copy-resources-extended">
+    <copy todir="${pub.dir}/resources/shared/images" overwrite="yes">
+      <fileset dir="extended/resources/shared/images" />
+    </copy>
+    <copy todir="${pub.dir}/resources/shared/css" overwrite="yes">
+      <fileset dir="extended/resources/shared/css" />
+    </copy>
+  </target>
+
+
+  <target name="copy-resources-public" if="uzhpublic.true">
+    <copy todir="${pub.dir}/resources/shared/images" overwrite="yes">
+      <fileset dir="public/resources/shared/images" />
+    </copy>
+    <copy todir="${pub.dir}/resources/shared/css" overwrite="yes">
+      <fileset dir="public/resources/shared/css" />
+    </copy>
+    <copy todir="${pub.dir}/resources/shared/javascript" overwrite="yes">
+      <fileset dir="public/resources/shared/javascript" />
+    </copy>
   </target>
 
 
   <target name="substitute-cwsxxx-homepage" if="replacedata">
     <echo>INFO: Replacing homepage</echo>
-    <copy file="config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
-    <copy file="config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
+    <copy file="extended/config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
+    <copy file="extended/config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
   </target>
 
   
   <target name="substitute-cwspublic-homepage" if="uzhpublic.replacedata" description="Copying homepages (de and en) for UZH public portal">
     <echo>INFO: Replacing homepage in uzh-public publication</echo>
-    <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
-    <copy file="config/doctypes/samples/cws-public-homepage.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
+    <copy file="extended/config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_de.xml" overwrite="yes"/>
+    <copy file="extended/config/doctypes/samples/homepage4cols.xml" tofile="${pub.dir}/content/authoring/index/index_en.xml" overwrite="yes"/>
   </target>
 
   
