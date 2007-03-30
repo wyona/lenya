@@ -13,7 +13,7 @@
     <div id="headerarea">
       <div id="visuals">
         <div class="imgunilogo">
-          <a href="http://www.unizh.ch">
+          <a href="http://www.uzh.ch">
             <img src="{$localsharedresources}/images/logo_{$language}.gif" alt="unizh logo" width="180" height="45" />
           </a>
         </div>
