@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="xhtml.rng">
+  
+  <start>
+    <ref name="unizh.homepage4cols"/>
+  </start>
+
+  <define name="html.attlist">
+    <ref name="XHTML.version.attrib"/>
+    <ref name="I18n.attrib"/>
+    <ref name="dummy.attlist"/>
+  </define>
+
+</include>
+
+
+<define name="unizh.homepage4cols">
+  <element name="unizh:homepage4cols">
+    <ref name="html.attlist"/>
+    <ref name="lenya.meta"/>
+    <ref name="unizh.header"/> 
+    <optional>
+      <ref name="home.contcol1"/>
+    </optional>
+    <ref name="home.related-content"/>
+    <element name="body">
+      <ref name="unizh.columns"/>
+    </element>
+  </element>
+</define>
+
+
+<define name="unizh.columns">
+  <element name="unizh:column">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <choice>
+      <oneOrMore>
+        <choice>
+          <ref name="unizh.teaser"/>
+          <ref name="unizh.links"/>
+          <ref name="unizh.rss-reader"/>
+        </choice>
+      </oneOrMore>
+      <ref name="unizh.startlinks"/>
+    </choice>
+  </element>
+  <element name="unizh:column">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <oneOrMore>
+      <choice>
+        <ref name="unizh.teaser"/>
+        <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
+      </choice>
+    </oneOrMore>
+  </element>
+  <optional>
+    <element name="unizh:column">
+      <element name="unizh:title">
+        <text/>
+      </element>
+      <oneOrMore>
+      <choice>
+        <ref name="unizh.teaser"/>
+        <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
+      </choice>
+      </oneOrMore>
+    </element>
+  </optional>
+</define>
+
+
+<define name="home.related-content">
+  <element name="unizh:related-content">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <zeroOrMore>
+      <choice>
+        <ref name="unizh.banner"/>
+        <ref name="unizh.teaser"/>
+        <ref name="unizh.rss-reader"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.startlinks">
+  <element name="unizh:startlinks">
+    <ref name="object"/>
+    <oneOrMore>
+      <element name="unizh:startlink">
+        <ref name="a"/>
+        <text/>
+      </element>
+    </oneOrMore>
+  </element>
+</define>
+
+
+<define name="home.contcol1">
+  <element name="unizh:contcol1">
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <zeroOrMore>
+      <choice>
+        <ref name="unizh.directlinks"/>
+        <ref name="unizh.quicklinks"/>
+        <ref name="unizh.select"/>
+        <ref name="object"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.directlinks">
+  <element name="unizh:directlinks">
+    <oneOrMore>
+      <ref name="a"/>
+   </oneOrMore>
+  </element>
+</define>
+
+</grammar>

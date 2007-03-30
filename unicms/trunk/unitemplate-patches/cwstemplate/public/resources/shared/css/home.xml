@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** common elements ******/
+
+div.contcol1 h2, div.relatedbox h2, div.column h2
+{
+    border-top:0;
+    background-color:#ADADD6;
+    padding:3px 0 3px 10px !important;
+    padding:2px 0 3px 10px;
+    color:#333333;
+    font-weight:bold;
+    font-size:0.95em;
+    line-height:1.3em;
+    margin-bottom: 10px;
+}
+
+div.contcol1 h2
+{
+    font-size:inherit;
+}
+
+/****** header elements ******/
+
+/* wide header for homepage */
+div#headerarea
+{
+    width:100%;
+    display:block;
+    height:180px;
+    margin-top:15px;
+    background-image:url(images/headerimage.jpg);
+    background-position:top left;
+    background-repeat:no-repeat;
+    margin-bottom:1px !important;
+    margin-bottom:2px;
+}
+
+div#uniLogoPos
+{ 
+    position:absolute; 
+    z-index:20;
+}
+
+div#imguniarea
+{
+    background-color: #fff;
+    width:180px;
+    height:45px;
+}
+
+/* primary navigation on homepage */
+div#primarnav
+{
+    position: absolute;
+    top: 174px;
+    padding-top:0;
+}
+div#primarnav a
+{
+    background-color:#FFFFFF;
+    color:#333399;
+}
+div#primarnav a:hover
+{
+    background-color:#666699;
+    color:#ccccff;
+}
+
+/****** left column ******/
+
+/* direct links */
+ul#directlinks
+{
+    list-style-type:none;
+    padding:0;
+    margin: 0 0 10px 0;
+}
+ul#directlinks li a
+{
+    background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+    background-position: 10px 1px;
+    background-color:#ADADD6;
+    padding:3px 0 3px 23px !important;
+    padding:2px 0 3px 23px;
+    background-repeat: no-repeat;
+    line-height: 1.3em;
+    display:block;
+    font-weight:bold;
+    width: 142px;
+}
+ul#directlinks li a#directlink1
+{
+    background-color: #99cc33;
+}
+ul#directlinks li a#directlink2
+{
+    background-color: #9999ff;
+}
+ul#directlinks li a#directlink3
+{
+    background-color: #66ccff;
+}
+ul#directlinks li a#directlink4
+{
+    background-color: #cccc00;
+}
+ul#directlinks li a#directlink5
+{
+    background-color: #ff9933;
+}
+ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover
+{
+    background-color:#E9E9F0;
+}
+
+/****** related content column ******/
+
+/* teaser box (in related content) has light purple background, no borders on homepage */
+div.relatedbox div.teaser
+{
+    border: 1px solid #E2E2FF !important;
+    background-color:#E2E2FF;
+    margin-bottom:10px;
+}
+div.relatedbox div.teaser p
+{
+    margin:0;
+}
+div.relatedbox div.teaser a:hover
+{
+    background-color:#F7F7F7;
+}
+
+div.relatedbox div.emergency
+{
+    border: 1px solid #FF3300 !important;
+    background-color:#FF3300;
+}
+
+div.relatedbox div.emergency p
+{
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+div.relatedbox div.emergency a
+{
+    font-weight: bold;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/****** content column(s) ******/
+
+/* startLink: unizh:children on homepage */
+div#startlinks
+{
+    font-size:0.95em;
+    line-height: 1.3em;
+    background-color:#E2E2FF;
+    padding:0;
+    margin: 0 0 10px 0;
+}
+div#startlinks img
+{ 
+    display:block;
+} 
+div#startlinks ul
+{
+    list-style-type: none;
+    padding: 0 10px 7px 10px;
+    margin: 0;
+}
+div#startlinks ul li
+{
+    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+    background-repeat: repeat-x;
+    background-position: left top;
+    padding: 1px 0 3px 0;
+}
+div#startlinks ul li#first
+{
+    background-image: none;
+    padding: 0 0 3px 0;
+}
+div#startlinks ul li a.arrow {
+    padding:2px 0 0px 13px !important;
+    padding:1px 0 0px 13px;
+    display:block;
+    font-weight:bold;
+    background-position: 0px 2px;
+    margin-left:0;
+}
+div#startlinks ul li a.arrow:hover
+{
+    background-color:#F7F7F7;
+}
+
+/* footer */
+#footer {
+    margin-bottom:20px;
+}
+
+</css>

@@ -1,0 +1,63 @@
+
+/****** header elements ******/
+
+/* key visual */
+div.imginstitute
+{
+    background-color: transparent;
+}
+
+/* primary navigation narrow header - first level tabs */
+div#primarnav
+{
+    line-height: 1.85em;
+    padding-top:28px;
+}
+div#primarnav a
+{
+    padding:0px 13px;
+    background-color:#666699;
+    color:#E2E2FF;
+    font-weight:bold;
+    height:21px;
+}
+div#primarnav a:hover
+{
+    background-color:#FFFFFF;
+    color:#333399;
+}
+div#primarnav a.activ
+{
+    background-color:#FFFFFF;
+    color:#333399;
+}
+
+/* secondary navigation narrow header - second level tabs */
+div#secnavTab
+{
+    font-size: 0.95em;
+    font-family: Arial, sans-serif;
+    line-height: 1.8em;
+    color:#666699; 
+    display:block;
+}
+div#secnavTab a
+{
+    float:left;
+    padding:0px 13px;
+    display:block;
+}
+div#secnavTab a:hover
+{
+    background-color:#E9E9F0;
+    text-decoration: none;
+}
+div#secnavTab a.activ
+{
+    background-color:#E9E9F0;
+}
+.linkseparator
+{
+    color:#666699;
+    float:left;
+}
