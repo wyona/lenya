@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** header elements ******/
+
+/* wide header for homepage */
+div#headerarea
+{
+    background-image:url(images/headerimage.jpg);
+    background-position:top left;
+    background-repeat:no-repeat;
+    height:160px;
+    margin-top:15px;
+}
+div#headerarea h1
+{
+    font-size: 1.8em;
+      line-height:2em;
+    margin:74px 0 0 5px;
+}
+
+/****** related content column ******/
+
+div.relatedbox div.emergency
+{
+    border: 1px solid #FF3300 !important;
+    background-color:#FF3300;
+    margin-bottom:10px;
+}
+
+div.relatedbox div.emergency p
+{
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+div.relatedbox div.emergency a
+{
+    font-weight: bold;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+</css>

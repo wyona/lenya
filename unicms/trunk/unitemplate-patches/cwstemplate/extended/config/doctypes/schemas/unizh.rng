@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         >
+
+<define name="lightblock.class.deprecated">
+  <choice>
+	<ref name="h2"/>
+	<ref name="h3"/>
+	<ref name="h4"/>
+	<ref name="p"/>
+    <ref name="object"/>
+    <ref name="lenya.asset"/>
+  </choice>
+</define>
+
+<define name="lightblock.class">
+  <choice>
+    <ref name="lenya.asset"/>
+    <ref name="a"/>
+  </choice>
+</define>
+
+
+<define name="unizh.header">
+  <element name="unizh:header">
+    <element name="unizh:superscription">
+      <optional>
+        <text/>
+      </optional>
+    </element>
+    <element name="unizh:heading">
+      <text/>
+    </element>
+  </element>
+</define>
+
+<define name="unizh.tabs.attrib">
+  <attribute name="unizh:tabs">
+    <choice>
+      <value type="string">true</value>
+      <value type="string">false</value>
+    </choice>
+  </attribute>
+</define>
+
+<define name="unizh.hideChildren.attrib">
+  <attribute name="unizh:hideChildren">
+    <choice>
+      <value type="string">true</value>
+      <value type="string">false</value>
+    </choice>
+  </attribute>
+</define>
+
+
+<define name="unizh.columns.attrib">
+  <attribute name="unizh:columns">
+    <ref name="Number.datatype"/>
+  </attribute>
+</define>
+
+
+<define name="unizh.related-content">
+  <element name="unizh:related-content">
+    <optional>
+      <attribute name="link">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="unizh.banner"/>
+        <ref name="unizh.teaser"/>
+        <ref name="unizh.rss-reader"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.contcol1">
+  <element name="unizh:contcol1">
+    <zeroOrMore>
+      <choice>
+        <ref name="unizh.quicklinks"/>
+        <ref name="unizh.select"/>
+        <ref name="object"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.quicklinks">
+  <element name="unizh:quicklinks">
+    <attribute name="label">
+      <text/>
+    </attribute>
+    <oneOrMore>
+      <element name="unizh:quicklink">
+        <optional>
+          <element name="p">
+            <text/>
+          </element>
+        </optional>
+        <oneOrMore>
+          <ref name="a"/>
+        </oneOrMore>
+      </element>
+   </oneOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.teaser">
+  <element name="unizh:teaser">
+    <optional>
+      <attribute name="name">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="link">
+        <text/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="object"/> 
+    </zeroOrMore> 
+    <element name="unizh:title">
+      <text/>
+    </element>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="lenya.asset"/>
+        <ref name="a"/>
+      </choice>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="teaser.p">
+  <element name="p"> 
+     <ref name="teaser.model"/> 
+  </element>
+</define>
+
+
+<define name="teaser.model">
+   <zeroOrMore>
+    <choice>
+      <text/>
+      <ref name="teaser.class"/>
+    </choice>
+  </zeroOrMore>
+</define>
+
+<define name="teaser.class">
+  <choice>
+    <ref name="teaser.b"/>
+    <ref name="br"/>
+    <ref name="teaser.em"/>
+    <ref name="teaser.cite"/>
+    <ref name="teaser.strong"/> 
+    <ref name="teaser.big"/>
+    <ref name="teaser.i"/>
+    <ref name="teaser.a"/> 
+    <ref name="unizh.attention"/>
+  </choice>
+</define>
+
+<define name="teaser.em">
+  <element name="em">
+    <ref name="em.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.cite">
+  <element name="cite">
+    <ref name="cite.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.strong">
+  <element name="strong">
+    <ref name="strong.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.b">
+  <element name="b">
+    <ref name="b.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.big">
+  <element name="big">
+    <ref name="big.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.i">
+  <element name="i">
+    <ref name="i.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+<define name="teaser.a">
+  <element name="a">
+    <ref name="a.attlist"/>
+    <ref name="teaser.model"/>
+  </element>
+</define>
+
+
+<define name="unizh.toc">
+  <element name="unizh:toc"><empty/></element>
+</define>
+
+<define name="unizh.toplink">
+  <element name="unizh:toplink"><empty/></element>
+</define>
+
+<define name="unizh.sitemap">
+  <element name="unizh:sitemap"><empty/></element>
+</define>
+
+
+<define name="unizh.children">
+  <element name="unizh:children">
+    <optional>
+      <attribute name="abstracts">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </element>
+</define>
+
+<define name="unizh.level">
+  <element name="unizh:level">
+    <empty/>
+  </element>
+</define>
+
+<define name="unizh.rss-reader">
+  <element name="unizh:rss-reader">
+    <optional>
+      <attribute name="url">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="items">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="link">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemDescription">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemImage">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemPubdate">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <element name="unizh:title">
+        <text/>
+      </element>
+    </optional>
+  </element>
+</define>
+
+<define name="unizh.attention">
+  <element name="unizh:attention">
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+<define name="unizh.abstract">
+  <element name="unizh:abstract">
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+
+<define name="unizh.banner">
+  <element name="unizh:banner">
+    <optional>
+      <attribute name="name">
+        <text/>
+      </attribute>
+    </optional>
+    <ref name="object"/> 
+  </element>
+</define>
+
+
+<define name="unizh.links">
+  <element name="unizh:links">
+    <element name="unizh:title">
+      <optional>
+        <attribute name="href">
+          <text/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="a"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.select">
+  <element name="unizh:select">
+    <attribute name="label">
+      <text/>
+    </attribute>
+    <oneOrMore>
+      <ref name="a"/>
+    </oneOrMore>
+  </element>
+</define>
+
+
+</grammar>
