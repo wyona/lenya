@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:homepage4cols xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:homepage4cols
+xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
 xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
-unizh:columns="3"
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
@@ -21,60 +21,81 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
   <unizh:header>
-    <unizh:superscription>Name Departement</unizh:superscription>
-    <unizh:heading>Titel Website</unizh:heading>
+    <unizh:superscription>Universität Zürich</unizh:superscription>
+    <unizh:heading>Universität Zürich</unizh:heading>
   </unizh:header>
   <unizh:contcol1>
-    <unizh:quicklinks label="Quick Links">
+    <unizh:title>column title</unizh:title>
+    <unizh:directlinks>
+      <xhtml:a href="#">Link 1</xhtml:a>
+      <xhtml:a href="#">Link 2</xhtml:a>
+      <xhtml:a href="#">Link 3</xhtml:a>
+      <xhtml:a href="#">Link 4</xhtml:a>
+    </unizh:directlinks>
+    <unizh:select label="Thema">
+      <xhtml:a href="#">Link 1</xhtml:a>
+      <xhtml:a href="#">Link 2</xhtml:a>
+      <xhtml:a href="#">Link 3</xhtml:a>
+      <xhtml:a href="#">Link 4</xhtml:a>
+    </unizh:select>
+    <unizh:quicklinks label="Thema">
       <unizh:quicklink>
-        <p>Thema:</p>
-        <a href="#">Quicklink</a>
+        <p>text paragraph</p>
+        <xhtml:a href="#">Link 1</xhtml:a>
+        <xhtml:a href="#">Link 2</xhtml:a>
+        <xhtml:a href="#">Link 3</xhtml:a>
+        <xhtml:a href="#">Link 4</xhtml:a>
       </unizh:quicklink>
     </unizh:quicklinks>
   </unizh:contcol1>
   <unizh:related-content>
+    <unizh:title>column title</unizh:title>
+    <unizh:banner name="Banner">
+      <object data="#" href="#" title="upload banner image asset here" type="">
+        <div class="caption" />
+      </object>
+    </unizh:banner>
     <unizh:teaser>
       <unizh:title>Title</unizh:title>
       <p>Teaser text</p>
     </unizh:teaser>
+    <unizh:rss-reader image="true" itemDescription="true" itemImage="true" items="2" link="true" url="#">
+      <unizh:title>feed title (leave empty to display feed title)</unizh:title>
+    </unizh:rss-reader> 
   </unizh:related-content>
   <body>
     <unizh:column>
-      <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
-        <xhtml:a href="#">Link 1 </xhtml:a>
-        <xhtml:a href="#">Link 2 </xhtml:a>
-        <xhtml:a href="#">Link 3 </xhtml:a>
-        <xhtml:a href="#">Link 4 </xhtml:a>
-        <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
-      </unizh:links>
+      <unizh:title>column title</unizh:title>
+      <unizh:startlinks>
+        <object data="" href="" title="catalog image" type="">
+          <div class="caption" />
+        </object>
+        <unizh:startlink>
+          <xhtml:a href="#">Link 1</xhtml:a>
+          text paragraph
+        </unizh:startlink>
+        <unizh:startlink>
+          <xhtml:a href="#">Link 2</xhtml:a>
+          text paragraph
+        </unizh:startlink>
+        <unizh:startlink>
+          <xhtml:a href="#">Link 3</xhtml:a>
+          text paragraph
+        </unizh:startlink>
+        <unizh:startlink>
+          <xhtml:a href="#">Link 4</xhtml:a>
+          text paragraph
+        </unizh:startlink>
+      </unizh:startlinks>
     </unizh:column>
     <unizh:column>
-      <unizh:teaser>
-        <unizh:title>Titel</unizh:title>
-        <p>Teaser text.</p>
-        <xhtml:a href="#">Link</xhtml:a>
-      </unizh:teaser>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
-        <xhtml:a href="#">Link 1 </xhtml:a>
-        <xhtml:a href="#">Link 2 </xhtml:a>
-        <xhtml:a href="#">Link 3 </xhtml:a>
-        <xhtml:a href="#">Link 4 </xhtml:a>
-        <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
-      </unizh:links>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
-        <xhtml:a href="#">Link 1 </xhtml:a>
-        <xhtml:a href="#">Link 2 </xhtml:a>
-        <xhtml:a href="#">Link 3 </xhtml:a>
-        <xhtml:a href="#">Link 4 </xhtml:a>
-        <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
-      </unizh:links>
+      <unizh:title>column title</unizh:title>
+      <unizh:rss-reader itemPubdate="true" items="1" link="true" url="#">
+        <unizh:title>feed title (leave empty to display feed title)</unizh:title>
+      </unizh:rss-reader>
+      <unizh:rss-reader image="true" itemDescription="true" itemImage="true" items="2" link="true" url="#">
+        <unizh:title>feed title (leave empty to display feed title)</unizh:title>
+      </unizh:rss-reader> 
     </unizh:column>
   </body>
 </unizh:homepage4cols>
-

@@ -5,7 +5,7 @@ xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
 xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
-unizh:columns="2" unizh:hideChildren="false"
+unizh:hideChildren="false"
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
@@ -31,8 +31,13 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
     </unizh:lead>
     <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Title</unizh:title>
+        <p>Teaser text</p>
+      </unizh:teaser>
       <unizh:links>
         <unizh:title href="#">Thema</unizh:title>
+        <p>Textparagraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
@@ -42,8 +47,9 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
       </unizh:links>
     </unizh:column>
     <unizh:column>
-       <unizh:links>
+      <unizh:links>
         <unizh:title href="#">Thema</unizh:title>
+        <p>Textparagraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
@@ -51,7 +57,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
         <xhtml:a href="#">Link 5 </xhtml:a>
         <xhtml:a href="#">weitere Angebote... </xhtml:a>
       </unizh:links>
-       <unizh:links>
+      <unizh:links>
         <unizh:title href="#">Thema</unizh:title>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>

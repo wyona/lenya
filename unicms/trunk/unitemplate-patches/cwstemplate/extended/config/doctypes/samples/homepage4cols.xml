@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unizh:homepage4cols xmlns="http://www.w3.org/1999/xhtml"  
+<unizh:homepage4cols
+xmlns="http://www.w3.org/1999/xhtml"  
 xmlns:xhtml="http://www.w3.org/1999/xhtml" 
 xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/"
 xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
-unizh:columns="3"
 dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
@@ -21,7 +21,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
   <unizh:header>
-    <unizh:superscription>Name Departement</unizh:superscription>
+    <unizh:superscription>&#160;</unizh:superscription>
     <unizh:heading>Titel Website</unizh:heading>
   </unizh:header>
   <unizh:contcol1>
@@ -41,40 +41,31 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <body>
     <unizh:column>
       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
         <xhtml:a href="#">Link 4 </xhtml:a>
         <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
       </unizh:links>
     </unizh:column>
     <unizh:column>
       <unizh:teaser>
-        <unizh:title>Titel</unizh:title>
-        <p>Teaser text.</p>
-        <xhtml:a href="#">Link</xhtml:a>
+        <unizh:title>Title</unizh:title>
+        <p>Teaser text</p>
       </unizh:teaser>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
-        <xhtml:a href="#">Link 1 </xhtml:a>
-        <xhtml:a href="#">Link 2 </xhtml:a>
-        <xhtml:a href="#">Link 3 </xhtml:a>
-        <xhtml:a href="#">Link 4 </xhtml:a>
-        <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
-      </unizh:links>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
-        <xhtml:a href="#">Link 1 </xhtml:a>
-        <xhtml:a href="#">Link 2 </xhtml:a>
-        <xhtml:a href="#">Link 3 </xhtml:a>
-        <xhtml:a href="#">Link 4 </xhtml:a>
-        <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
-      </unizh:links>
     </unizh:column>
   </body>
 </unizh:homepage4cols>
-

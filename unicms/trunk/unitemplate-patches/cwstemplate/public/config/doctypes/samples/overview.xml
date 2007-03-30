@@ -10,7 +10,7 @@ dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
 lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
 
   <lenya:meta>
-    <dc:title>Overview page title</dc:title>
+    <dc:title>Overview page title (may be left empty)</dc:title>
     <dc:description></dc:description>
     <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject></dc:subject>
@@ -21,51 +21,80 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
   <unizh:contcol1>
-    <unizh:quicklinks label="Quick Links">
+    <unizh:quicklinks label="Quicklinks">
       <unizh:quicklink>
-        <p>Thema:</p>
-        <a href="#">Quicklink</a>
+        <p>topic:</p>
+        <xhtml:a href="#">Link 1</xhtml:a>
+        <xhtml:a href="#">Link 2</xhtml:a>
+        <xhtml:a href="#">Link 3</xhtml:a>
+        <xhtml:a href="#">Link 4</xhtml:a>
+        <xhtml:a href="#">Link 5</xhtml:a>
       </unizh:quicklink>
     </unizh:quicklinks>
   </unizh:contcol1>
   <unizh:related-content>
+    <unizh:banner name="Banner">
+      <object data="#" href="#" title="upload banner image asset here" type="">
+        <div class="caption" />
+      </object>
+    </unizh:banner>
     <unizh:teaser>
       <unizh:title>Title</unizh:title>
       <p>Teaser text</p>
     </unizh:teaser>
+    <unizh:rss-reader image="true" itemDescription="true" itemImage="true" items="2" link="true" url="#">
+      <unizh:title>feed title (leave empty to display feed title)</unizh:title>
+    </unizh:rss-reader> 
   </unizh:related-content>
   <body>
     <unizh:column>
       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
         <xhtml:a href="#">Link 4 </xhtml:a>
         <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+      <unizh:links>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
       </unizh:links>
     </unizh:column>
     <unizh:column>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+      <unizh:links>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
         <xhtml:a href="#">Link 4 </xhtml:a>
         <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
       </unizh:links>
-       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+      <unizh:links>
+        <unizh:title href="#">topic</unizh:title>
+        <p>text paragraph</p>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
         <xhtml:a href="#">Link 4 </xhtml:a>
         <xhtml:a href="#">Link 5 </xhtml:a>
-        <xhtml:a href="#">weitere Angebote... </xhtml:a>
       </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Title</unizh:title>
+        <p>Teaser text</p>
+      </unizh:teaser>
+      <unizh:rss-reader itemPubdate="true" items="1" link="true" url="#">
+        <unizh:title>feed title (leave empty to display feed title)</unizh:title>
+      </unizh:rss-reader>
     </unizh:column>
   </body>
 </unizh:overview>
-
