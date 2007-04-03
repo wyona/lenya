@@ -13,6 +13,15 @@
 
 <!-- overwrite included templates -->
 
+  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'home']">
+    <a>
+      <xsl:attribute name="href"><xsl:text>http://www.uzh.ch</xsl:text></xsl:attribute>
+      <xsl:attribute name="accesskey"><xsl:text>0</xsl:text></xsl:attribute>
+      <xsl:value-of select="text()"/>
+    </a>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:div[@id = 'toolnav']" priority="1">
     <div id="toolnav">
       <div class="icontextpos">

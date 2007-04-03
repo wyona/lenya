@@ -18,7 +18,7 @@
 
 <!-- overwrite included templates -->
 
-<xsl:variable name="tabs" priority="1"/>
+<xsl:variable name="tabs" priority="1">true</xsl:variable>
 
 
 <!-- menu -->
