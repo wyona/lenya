@@ -33,6 +33,20 @@
 
 <!-- overwrite included templates -->
 
+  <xsl:template match="xhtml:div[@id = 'servicenav']" priority="1">
+    <div id="servicenavpos">
+      <xsl:choose>
+        <xsl:when test="$document-element-name = 'unizh:homepage4cols' or $document-element-name = 'unizh:homepage'">
+          <xsl:apply-templates select="xhtml:div[@id != 'home']"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates />
+        </xsl:otherwise>
+      </xsl:choose>
+    </div>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:div[@id = 'toolnav']" priority="1">
     <div id="toolnav">
       <div class="icontextpos">
