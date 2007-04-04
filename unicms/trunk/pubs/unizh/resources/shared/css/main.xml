@@ -1023,6 +1023,7 @@ ol.list a {
 .teamBlock {
 	padding-top:9px;
 	padding-bottom:9px;
+	overflow: hidden;
 }
 
 .teamImg {
