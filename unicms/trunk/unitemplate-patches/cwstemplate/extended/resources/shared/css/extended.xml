@@ -40,10 +40,9 @@ div.teaser p
 div.teaser img
 {
     display:block;
-    margin-bottom:2px !important;
-    margin-bottom:1px;
+    margin-bottom:2px;
 }
-div.teaser a.arrow, div.teaser a.extern
+div.teaser a.internal, div.teaser a.uzh, div.teaser a.www
 {
     display: block;
 }
@@ -81,9 +80,9 @@ div.rssReader h3.linked
 div.rssReader h3 a
 {
     background-color:#EBEBFF;
-    background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
     background-repeat: no-repeat;
-    background-position: 9px 3px;
+    background-position: 9px 2px;
     padding:2px 9px 3px 23px;
     margin: 0;
     display: block;
@@ -94,7 +93,7 @@ div.rssReader h3 a:hover
 }
 div.rssReader.internal h3 a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
     background-position: 9px 2px;
 }
 div.rssReader h4
@@ -133,23 +132,22 @@ div.rssReader ul li h4
 }
 div.rssReader ul li a.block
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
     background-repeat: no-repeat;
-    background-position:0 3px;
-    padding:2px 0 3px 13px !important;
-    padding:1px 0 3px 13px;
+    background-position:0 2px;
+    padding:2px 0 3px 13px;
     display:block;
     margin-left:0;
 }
 div.rssReader.internal ul li a.block
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
 }
 div.rssReader ul li a.more
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/icon_extern.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
     background-repeat: no-repeat;
-    background-position: 0 1px;
+    background-position: left top;
     display: block;
     padding: 0 0 3px 13px;
     margin: 0 0 0 0;
@@ -157,7 +155,7 @@ div.rssReader ul li a.more
 }
 div.rssReader.internal ul li a.more
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
 }
 div.rssReader ul li img
 {
@@ -228,8 +226,7 @@ div#select
 }
 div#select h3
 {
-    padding:4px 0 3px 0 !important;
-    padding:3px 0 3px 0;
+    padding:4px 0 3px 0;
     margin: 0;
 }
 div#select select
@@ -263,8 +260,7 @@ div#quicklinks
 div#quicklinks h3
 {
     line-height: 1.3em;
-    padding:4px 0 3px 0 !important;
-    padding:3px 0 3px 0;
+    padding:4px 0 3px 0;
     margin: 0;
 }
 div#quicklinks ul
@@ -283,12 +279,11 @@ div#quicklinks ul li
 }
 div#quicklinks ul li a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
     background-position:0 2px;
     background-repeat: no-repeat;
     width: 132px;
-    padding:2px 0 3px 13px !important;
-    padding:1px 0 3px 13px;
+    padding:2px 0 3px 13px;
     line-height: 1.3em;
     display:block;
 }

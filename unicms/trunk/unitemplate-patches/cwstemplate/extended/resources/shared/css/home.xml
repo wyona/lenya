@@ -23,7 +23,7 @@ div#headerarea h1
 
 div.relatedbox div.emergency
 {
-    border: 1px solid #FF3300 !important;
+    border: 1px solid #FF3300;
     background-color:#FF3300;
     margin-bottom:10px;
 }

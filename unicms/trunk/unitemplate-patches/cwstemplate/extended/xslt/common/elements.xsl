@@ -55,25 +55,8 @@
       </xsl:if>
       <h3><xsl:value-of select="unizh:title"/><xsl:comment/></h3>
       <xsl:apply-templates select="xhtml:p"/>
-      <xsl:for-each select="lenya:asset">
-        <xsl:apply-templates select="."/>
-      </xsl:for-each>
-      <xsl:for-each select="xhtml:a">
-        <a href="{@href}">
-          <xsl:attribute name="class">
-            <xsl:choose>
-              <xsl:when test="starts-with(@href, 'http://')">
-                <xsl:text>extern</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                 <xsl:text>arrow</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          <xsl:copy-of select="@target"/>
-          <xsl:apply-templates/>
-        </a>
-      </xsl:for-each> 
+      <xsl:apply-templates select="lenya:asset"/>
+      <xsl:apply-templates select="xhtml:a"/>
     </div>
   </xsl:template>
 
@@ -108,7 +91,24 @@
       <xsl:apply-templates select="."/>
     </xsl:for-each>
     <xsl:for-each select="xhtml:a">
-      <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+      <a href="{@href}">
+        <xsl:attribute name="class">
+          <xsl:choose>
+            <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
+              <xsl:text>www</xsl:text>
+            </xsl:when>
+            <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
+              <xsl:text>uzh</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:text>internal</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:copy-of select="@target"/>
+        <xsl:apply-templates/><xsl:comment/>
+      </a>
+      <br/>
     </xsl:for-each>
     <xsl:apply-templates select="lenya:asset-dot"/>
     <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
@@ -131,11 +131,14 @@
             <a href="{unizh:title/@href}">
               <xsl:attribute name="class">
                 <xsl:choose>
-                  <xsl:when test="starts-with(unizh:title/@href, 'http://')">
-                    <xsl:text>extern</xsl:text>
+                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and not(contains(unizh:title/@href, '.unizh.ch')) and not(contains(unizh:title/@href, '.uzh.ch'))">
+                    <xsl:text>www</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
+                    <xsl:text>uzh</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:text>arrow</xsl:text>
+                     <xsl:text>internal</xsl:text>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:attribute>
@@ -157,19 +160,7 @@
       <ul>
         <xsl:for-each select="xhtml:a">
           <li>
-            <a href="{@href}">
-              <xsl:attribute name="class">
-                <xsl:choose>
-                  <xsl:when test="starts-with(@href, 'http://')">
-                    <xsl:text>extern</xsl:text>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>arrow</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:attribute>
-              <xsl:value-of select="."/>
-            </a>
+            <xsl:apply-templates select="."/>
           </li>
         </xsl:for-each>
       </ul>
@@ -207,7 +198,7 @@
 
   <xsl:template match="xhtml:a[parent::unizh:short]" priority="1">
     <br/>
-    <a class="arrow" href="{@href}"><i18n:text>more</i18n:text></a>
+    <a class="internal" href="{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
 
 </xsl:stylesheet>
