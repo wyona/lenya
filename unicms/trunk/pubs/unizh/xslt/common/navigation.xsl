@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: header.xsl,v 1.40 2005/03/09 11:11:13 peter Exp $ -->
+
+
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -38,67 +39,94 @@
 
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenavpos">
-      <xsl:for-each select="xhtml:div[@id != 'search']">
-        <xsl:if test="@id = 'home'">
-           <a href="{@href}" accesskey="0"><xsl:value-of select="."/></a> 	
-        </xsl:if>
-        <xsl:if test="@id = 'contact'">
-         <a href="{@href}" accesskey="3"><xsl:value-of select="."/></a> 	
-        </xsl:if>
-        <xsl:if test="@id = 'sitemap'">
-          <a href="{@href}" accesskey="4"><xsl:value-of select="."/></a> 	
-        </xsl:if>
-       |
-      </xsl:for-each>
-      
-      <xsl:choose>
-        <xsl:when test="$publicationid = 'id'">      
-          <label for="formsearch">Suchen:</label>  
-          <form id="formsearch" action="http://www.id.uzh.ch/search/search.jsp" method="get" accept-charset="UTF-8">
-             <div class="serviceform">
-                <input type="text" name="query" accesskey="5" />
-             </div>
-             <div class="serviceform">
-                <a href="javascript:document.forms['formsearch'].submit();">go!</a>
-             </div>
-          </form>
-        </xsl:when>
-        <xsl:otherwise>
-	  <!-- 
-	       The following switch is necessary to prevent that the id for the form tag i.e. searchbox_0093470....
-	       occurs twice on the search page. See:  ../doctypes/search-standard.xsl. The form id is used by a 
-	       javascript provided by google.
-	  -->  
-	  <xsl:choose>
-	    <xsl:when test="$nodeid != 'search'">
-	      <label for="formsearch"><xsl:value-of select="xhtml:div[@id='search']"/>:</label>
-
-	      <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{xhtml:div[@id = 'search']/@href}" method="get" accept-charset="UTF-8">
-		<input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
-		<input type="hidden" name="cof" value="FORID:11" />
-		<input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
-		<div class="serviceform">
-		  <input type="text" name="q" accesskey="5" />
-		</div>
-		<div class="serviceform">
-		  <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();">go!</a>
-		</div>
-	      </form>
-	    </xsl:when>
-	  </xsl:choose>
-	</xsl:otherwise>
-      </xsl:choose>
+      <xsl:apply-templates />
     </div>
   </xsl:template>
-  
+
+
+  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav']]">
+    <xsl:if test="position() &gt; 1">
+      <xsl:text> | </xsl:text>
+    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="@id='search'">
+        <xsl:choose>
+          <xsl:when test="$publicationid = 'id'">      
+            <label for="formsearch">Suchen:</label>  
+            <form id="formsearch" action="http://www.id.uzh.ch/search/search.jsp" method="get" accept-charset="UTF-8">
+               <div class="serviceform">
+                  <input type="text" name="query" accesskey="5" />
+               </div>
+               <div class="serviceform">
+                  <a href="javascript:document.forms['formsearch'].submit();">go!</a>
+               </div>
+            </form>
+          </xsl:when>
+          <xsl:otherwise>
+<!--
+   The following switch is necessary to prevent that the id for the form tag i.e. searchbox_0093470....
+   occurs twice on the search page. See:  ../doctypes/search-standard.xsl. The form id is used by a 
+   javascript provided by google.
+-->
+            <xsl:if test="$nodeid != 'search'">
+              <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{@href}" method="get" accept-charset="UTF-8">
+                <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+                <input type="hidden" name="cof" value="FORID:11" />
+                <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+                <div class="serviceform">
+                  <input type="text" name="q" accesskey="5" />
+                </div>
+                <div class="serviceform">
+                  <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();"><xsl:value-of select="text()"/></a>
+                </div>
+              </form>
+            </xsl:if>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <a>
+          <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+          <xsl:attribute name="accesskey">
+            <xsl:choose>
+              <xsl:when test="@id = 'home'">0</xsl:when>
+              <xsl:when test="@id = 'contact'">3</xsl:when>
+              <xsl:when test="@id = 'sitemap'">4</xsl:when>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:value-of select="text()"/>
+        </a>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:div[@id = 'toolnav']">
     <div id="toolnav">
       <div class="icontextpos">
         <div id="icontext">&#160;</div>
       </div>
-      <xsl:for-each select="xhtml:div[@class='language']">
-        <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> |
-      </xsl:for-each>
+      <xsl:choose>
+        <xsl:when test="count(xhtml:div[@class='language']) &gt; 1">
+          <xsl:for-each select="xhtml:div[@class='language']">
+            <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a>
+            <xsl:text> | </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="count(xhtml:div[@class='language']) = 1">
+          <a>
+            <xsl:attribute name="href"><xsl:value-of select="xhtml:div[@class='language']/@href"/></xsl:attribute>
+            <xsl:choose>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'de'">Deutsch</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'en'">English</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'fr'">Français</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'it'">Italiano</xsl:when>
+              <xsl:otherwise><xsl:value-of select="translate(xhtml:div[@class='language']/text(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></xsl:otherwise>
+            </xsl:choose>
+          </a>
+          <xsl:text> | </xsl:text>
+        </xsl:when>
+      </xsl:choose>
       <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', '', 'width=700,height=700,menubar=yes,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" /></a> |
       <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
         <xsl:attribute name="id">switchFontSize</xsl:attribute>
@@ -201,7 +229,7 @@
 
   <xsl:template match="xhtml:div[@id = 'simplenav']">
     <div id="primarnav">
-	<a name="navigation"><xsl:comment/></a>
+    <a name="navigation"><xsl:comment/></a>
       <xsl:for-each select="xhtml:div">
         <a href="{@href}"><xsl:value-of select="@label"/></a>
         <xsl:if test="@id = 'up'"><br/></xsl:if>

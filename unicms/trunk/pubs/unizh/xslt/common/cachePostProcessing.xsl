@@ -18,29 +18,6 @@
 <xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'authoring')"/>
 
 
-<xsl:template match="style[@type = 'text/css']">
-  <xsl:copy>
-    <xsl:copy-of select="@*"/>
-  <xsl:comment>
-    <xsl:choose>
-      <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/big.css");
-        @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
-      </xsl:when>
-      <xsl:when test="contains($fontsize, 'normal')">
-        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
-        @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
-      </xsl:when>
-      <xsl:otherwise>
-        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
-        @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:comment>
-  </xsl:copy>
-</xsl:template>
-
-
 <xsl:template match="a[@id = 'switchFontSize']">
   <xsl:copy>
         <xsl:attribute name="href">

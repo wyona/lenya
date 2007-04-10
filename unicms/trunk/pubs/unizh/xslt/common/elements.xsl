@@ -227,10 +227,13 @@
       <xsl:attribute name="class">
         <xsl:choose>
           <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
-            <xsl:text>extern</xsl:text>
+            <xsl:text>www</xsl:text>
+          </xsl:when>
+          <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch')) or (contains(@href, '.uzh.ch')))">
+            <xsl:text>uzh</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-             <xsl:text>arrow</xsl:text>
+             <xsl:text>internal</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -309,15 +312,18 @@
             <xsl:attribute name="class">
               <xsl:choose>
                 <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
-                  <xsl:text>extern</xsl:text>
+                  <xsl:text>www</xsl:text>
+                </xsl:when>
+                <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
+                  <xsl:text>uzh</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                   <xsl:text>arrow</xsl:text>
+                   <xsl:text>internal</xsl:text>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
             <xsl:copy-of select="@target"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates/><xsl:comment/>
           </a>
           <br/>
         </xsl:for-each> 
@@ -357,7 +363,24 @@
       <xsl:apply-templates select="."/>
     </xsl:for-each>
     <xsl:for-each select="xhtml:a">
-      <a class="arrow" href="{@href}"><xsl:value-of select="."/></a><br/>
+      <a href="{@href}">
+        <xsl:attribute name="class">
+          <xsl:choose>
+            <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
+              <xsl:text>www</xsl:text>
+            </xsl:when>
+            <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
+              <xsl:text>uzh</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:text>internal</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:copy-of select="@target"/>
+        <xsl:apply-templates/><xsl:comment/>
+      </a>
+      <br/>
     </xsl:for-each>
     <xsl:apply-templates select="lenya:asset-dot"/>
     <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
@@ -520,7 +543,7 @@
     <p>
       <xsl:for-each select="../*">
         <xsl:if test="self::xhtml:h2">
-          <a class="arrow" href="#{position()}">
+          <a class="internal" href="#{position()}">
             <xsl:apply-templates select="self::xhtml:h2/unizh:attention | self::xhtml:h2/*[name() != 'unizh:attention']/text() | self::xhtml:h2/text()"/>
           </a>
           <br/>
@@ -546,7 +569,7 @@
   </xsl:template>
 
   <xsl:template match="level:node">
-    <a class="arrow" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a><br/>
+    <a class="internal" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a><br/>
   </xsl:template>
 
   <xsl:template match="xhtml:div[@id='link-to-parent']">
@@ -582,15 +605,30 @@
             <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
             <br/>
             <xsl:if test="$area = 'authoring'">
-              <a class="arrow_right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
+              <a class="internal right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
             </xsl:if>
             <xsl:variable name="fulltext" select="normalize-space(*/*/xhtml:body/xhtml:p)"/>
             <xsl:choose>
               <xsl:when test="*/*/unizh:short/xhtml:a">
-                <a class="arrow" href="{*/*/unizh:short/xhtml:a/@href}"><i18n:text>more</i18n:text></a>
+                <a href="{*/*/unizh:short/xhtml:a/@href}">
+                  <xsl:attribute name="class">
+                    <xsl:choose>
+                      <xsl:when test="starts-with(*/*/unizh:short/xhtml:a/@href, 'http://') and not(contains(*/*/unizh:short/xhtml:a/@href, '.unizh.ch')) and not(contains(*/*/unizh:short/xhtml:a/@href, '.uzh.ch'))">
+                        <xsl:text>www</xsl:text>
+                      </xsl:when>
+                      <xsl:when test="starts-with(*/*/unizh:short/xhtml:a/@href, 'http://') and ((contains(*/*/unizh:short/xhtml:a/@href, '.unizh.ch') ) or (contains(*/*/unizh:short/xhtml:a/@href, '.uzh.ch')))">
+                        <xsl:text>uzh</xsl:text>
+                      </xsl:when>
+                      <xsl:otherwise>
+                         <xsl:text>internal</xsl:text>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:attribute>
+                  <i18n:text>more</i18n:text>
+                </a>
               </xsl:when>
               <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
-                <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
+                <a class="internal" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:if test="$area = 'authoring'">
@@ -618,7 +656,7 @@
 
 
   <xsl:template match="xhtml:a[parent::unizh:short]">
-    <a class="arrow" href="{@href}"><i18n:text>more</i18n:text></a>
+    <a class="internal" href="{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
 
 
@@ -672,7 +710,7 @@
                 <br/>
                 <xsl:value-of select="*/unizh:person/unizh:position"/><br/>
                 Mail: <xsl:value-of select="*/unizh:person/unizh:email"/><br/>
-                <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
+                <a class="internal" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </p>
             </div>
             <div class="floatleftclear"><xsl:comment/></div>
@@ -701,7 +739,7 @@
     </h3>
     <br/>
     <xsl:apply-templates mode="collection" select="descendant::unizh:lead"/>
-    <a class="arrow" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
+    <a class="internal" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
   </xsl:template>
 -->
 
@@ -739,7 +777,7 @@
  
   <xsl:template match="dc:title" mode="index">
     <xsl:param name="href"/>
-    <a class="arrow" href="{$contextprefix}{$href}">
+    <a class="internal" href="{$contextprefix}{$href}">
       <xsl:value-of select="."/>
     </a>
   </xsl:template>

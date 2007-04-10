@@ -95,7 +95,7 @@ function open_rss_window(url)
            <p><xsl:apply-templates select="description"/>
            <xsl:if test="link != ''">
              <br/>
-             <a class="arrow" href="{link}"><i18n:text>more</i18n:text></a><br/>
+             <a class="internal" href="{link}"><i18n:text>more</i18n:text></a><br/>
            </xsl:if>
            </p>
          </xsl:if>
