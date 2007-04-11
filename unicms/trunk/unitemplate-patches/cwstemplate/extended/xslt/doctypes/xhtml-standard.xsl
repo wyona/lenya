@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -210,7 +209,9 @@
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
-        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+        <xsl:call-template name="emergency"/>
+        <xsl:apply-templates select="*/unizh:related-content"/>
+        <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
@@ -246,6 +247,7 @@
         </xsl:choose>
       </xsl:attribute>
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+        <xsl:call-template name="emergency"/>
         <xsl:apply-templates select="*/unizh:related-content"/>
         <xsl:comment/>
       </div>

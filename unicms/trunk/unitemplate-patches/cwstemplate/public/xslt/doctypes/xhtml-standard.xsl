@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -253,7 +252,9 @@
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
-        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+        <xsl:call-template name="emergency"/>
+        <xsl:apply-templates select="*/unizh:related-content"/>
+        <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
@@ -497,10 +498,18 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:title[parent::unizh:column or parent::unizh:contcol1 or parent::unizh:related-content][ancestor::unizh:homepage4cols]">
+  <xsl:template match="unizh:title[parent::unizh:column or parent::unizh:contcol1][ancestor::unizh:homepage4cols]">
     <h2>
       <xsl:value-of select="."/>
     </h2>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:title[parent::unizh:related-content][ancestor::unizh:homepage4cols]">
+    <h2>
+      <xsl:value-of select="."/>
+    </h2>
+    <xsl:call-template name="emergency"/>
   </xsl:template>
 
 
@@ -508,6 +517,6 @@
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
-  </xsl:template> 
-  
+  </xsl:template>
+
 </xsl:stylesheet>

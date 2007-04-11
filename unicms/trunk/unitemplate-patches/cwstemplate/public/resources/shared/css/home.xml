@@ -129,24 +129,6 @@ div.relatedbox div.teaser a:hover
     background-color:#F7F7F7;
 }
 
-div.relatedbox div.emergency
-{
-    border: 1px solid #FF3300;
-}
-
-div.relatedbox div.emergency p
-{
-    font-weight: bold;
-    color: #FFFFFF;
-}
-
-div.relatedbox div.emergency a
-{
-    font-weight: bold;
-    color: #FFFFFF;
-    text-decoration: underline;
-}
-
 /****** content column(s) ******/
 
 /* startLink: unizh:children on homepage */

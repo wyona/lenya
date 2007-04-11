@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
 
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -76,6 +76,15 @@
       </ul>
       <xsl:apply-templates select="index:child"/>
     </div>
+  </xsl:template>
+
+
+  <xsl:template name="emergency">
+    <xsl:comment>emergency message</xsl:comment>
+    <xsl:comment>#if expr="\"$REMOTE_ADDR\" = /130.60./"</xsl:comment>
+    <xsl:comment>#include virtual="/admin/notfallhinweis/emergency.txt"</xsl:comment>
+    <xsl:comment>#endif</xsl:comment>
+    <xsl:comment>end emergency message</xsl:comment>
   </xsl:template>
 
 

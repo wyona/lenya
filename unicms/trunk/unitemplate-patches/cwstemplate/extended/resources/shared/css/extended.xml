@@ -307,6 +307,31 @@ div.relatedbox div.banner img
     margin-bottom: 10px;
 }
 
+/* emergency message */
+div.relatedbox div.emergency
+{
+    background-color: #FF3300;
+    border: 1px solid #FF3300;
+}
+
+div.relatedbox div.emergency h3
+{
+    color: #000000;
+}
+
+div.relatedbox div.emergency p
+{
+    color: #FFFFFF;
+}
+
+div.relatedbox div.emergency a.uzh
+{
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right_emergency.png);
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 /****** content column(s) ******/
 
 /* extended overview page, optional 3rd column */
