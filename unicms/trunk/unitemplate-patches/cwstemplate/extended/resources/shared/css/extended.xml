@@ -332,6 +332,12 @@ div.relatedbox div.emergency a.uzh
     text-decoration: underline;
 }
 
+div.relatedbox div.emergency a.uzh:hover
+{
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    color: #333399;
+}
+
 /****** content column(s) ******/
 
 /* extended overview page, optional 3rd column */
