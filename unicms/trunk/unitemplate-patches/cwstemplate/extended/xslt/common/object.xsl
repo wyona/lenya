@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
 
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -83,6 +83,13 @@
     </xsl:otherwise>
       </xsl:choose>
     </div>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]" priority="1">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">178</xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:stylesheet>
