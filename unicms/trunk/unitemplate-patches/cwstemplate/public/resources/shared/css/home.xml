@@ -114,21 +114,6 @@ ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks
 
 /****** related content column ******/
 
-/* teaser box (in related content) has light purple background, no borders on homepage */
-div.relatedbox div.teaser
-{
-    border: 1px solid #E2E2FF;
-    margin-bottom:10px;
-}
-div.relatedbox div.teaser p
-{
-    margin:0;
-}
-div.relatedbox div.teaser a:hover
-{
-    background-color:#F7F7F7;
-}
-
 /****** content column(s) ******/
 
 /* startLink: unizh:children on homepage */
@@ -173,6 +158,10 @@ div#startlinks ul li a.internal, div#startlinks ul li a.uzh
 div#startlinks ul li a.internal:hover, div#startlinks ul li a.uzh:hover
 {
     background-color:#F7F7F7;
+}
+div#startlinks ul li a.internal:visited, div#startlinks ul li a.uzh:visited
+{
+    color:#333399;
 }
 
 /* footer */
