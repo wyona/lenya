@@ -58,7 +58,17 @@
 <!-- overwrite included templates -->
 
   <xsl:template match="unizh:teaser" priority="1">
-    <div class="teaser">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@highlight and @highlight = 'true'">
+            <xsl:text>teaser highlighted</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>teaser</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:if test="xhtml:object">
         <xsl:apply-templates select="xhtml:object"/>
       </xsl:if>
@@ -67,60 +77,6 @@
       <xsl:apply-templates select="lenya:asset"/>
       <xsl:apply-templates select="xhtml:a"/>
     </div>
-  </xsl:template>
-
-
-  <xsl:template match="unizh:teaser[parent::unizh:column]" priority="1">
-    <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
-        <div class="solidlinemitmargin">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <div class="kleintitel">
-      <xsl:value-of select="unizh:title"/>
-    </div>
-    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
-    <xsl:choose>
-      <xsl:when test="xhtml:object">
-        <xsl:apply-templates select="xhtml:object"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:apply-templates select="xhtml:p"/>
-    <xsl:for-each select="lenya:asset">
-      <xsl:apply-templates select="."/>
-    </xsl:for-each>
-    <xsl:for-each select="xhtml:a">
-      <a href="{@href}">
-        <xsl:attribute name="class">
-          <xsl:choose>
-            <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
-              <xsl:text>www</xsl:text>
-            </xsl:when>
-            <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
-              <xsl:text>uzh</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-               <xsl:text>internal</xsl:text>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:attribute>
-        <xsl:copy-of select="@target"/>
-        <xsl:apply-templates/><xsl:comment/>
-      </a>
-      <br/>
-    </xsl:for-each>
-    <xsl:apply-templates select="lenya:asset-dot"/>
-    <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
   </xsl:template>
 
 
@@ -177,7 +133,7 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:contcol1[parent::unizh:homepage or parent::unizh:overview or parent::unizh:homepage4cols]">
+  <xsl:template match="unizh:contcol1[parent::unizh:homepage or parent::unizh:overview or parent::unizh:homepage4cols]" priority="1">
     <div class="contcol1" bxe_xpath="/{$document-element-name}/unizh:contcol1">
       <xsl:apply-templates/><xsl:comment/>
     </div>
