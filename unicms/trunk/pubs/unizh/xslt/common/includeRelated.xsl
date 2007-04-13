@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:cinclude="http://apache.org/cocoon/include/1.0"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
-  >
+>
 
 
 
@@ -32,9 +35,7 @@
         </cinclude:includexml>   
       </xsl:when>
       <xsl:otherwise>
-        <unizh:teaser>
-          <xsl:apply-templates/>
-        </unizh:teaser>
+        <xsl:copy-of select="."/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template> 
