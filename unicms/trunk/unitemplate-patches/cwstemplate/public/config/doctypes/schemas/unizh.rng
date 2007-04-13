@@ -11,10 +11,10 @@
 
 <define name="lightblock.class.deprecated">
   <choice>
-	<ref name="h2"/>
-	<ref name="h3"/>
-	<ref name="h4"/>
-	<ref name="p"/>
+    <ref name="h2"/>
+    <ref name="h3"/>
+    <ref name="h4"/>
+    <ref name="p"/>
     <ref name="object"/>
     <ref name="lenya.asset"/>
   </choice>
@@ -129,6 +129,14 @@
     <optional>
       <attribute name="link">
         <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="highlight">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
       </attribute>
     </optional>
     <zeroOrMore>
