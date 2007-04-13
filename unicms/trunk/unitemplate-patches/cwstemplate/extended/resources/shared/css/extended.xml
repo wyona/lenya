@@ -52,6 +52,17 @@ div.teaser img.icon
     vertical-align: bottom;
 }
 
+/* highlighted teaser for use in related content or content */
+div.teaser.highlighted
+{
+    border: 1px solid #E2E2FF;
+    background-color:#E2E2FF;
+}
+div.teaser.highlighted a:hover
+{
+    background-color:#F7F7F7;
+}
+
 /* rss reader for external RSS feeds (where external means: outside virtual subdomain) */
 div.rssReader
 {
@@ -90,6 +101,10 @@ div.rssReader h3 a
 div.rssReader h3 a:hover
 {
     background-color:#F7F7F7;
+}
+div.rssReader h3 a:visited
+{
+    color:#333399;
 }
 div.rssReader.internal h3 a
 {
