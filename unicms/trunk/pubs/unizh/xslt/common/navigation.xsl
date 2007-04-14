@@ -144,7 +144,7 @@
 
     <div id="secnav">
       <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
-        <a accesskey="1" name="navigation"><xsl:comment/></a>
+        <a name="navigation" class="namedanchor"><xsl:comment/></a>
       </xsl:if>
       <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:if test="$level > 3">
@@ -201,7 +201,7 @@
 
   <xsl:template match="xhtml:div[@id = 'tabs']">
     <div id="primarnav">
-      <a name="navigation"><xsl:comment/></a> 
+      <a name="navigation" class="namedanchor"><xsl:comment/></a> 
       <xsl:for-each select="xhtml:div">
         <a href="{@href}">
           <xsl:if test="@current = 'true'">
@@ -229,7 +229,7 @@
 
   <xsl:template match="xhtml:div[@id = 'simplenav']">
     <div id="primarnav">
-    <a name="navigation"><xsl:comment/></a>
+      <a name="navigation" class="namedanchor"><xsl:comment/></a>
       <xsl:for-each select="xhtml:div">
         <a href="{@href}"><xsl:value-of select="@label"/></a>
         <xsl:if test="@id = 'up'"><br/></xsl:if>
