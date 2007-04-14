@@ -103,19 +103,19 @@
 
 
   <xsl:template name="one-column">
-   <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-   <div class="contentarea1col">
-    <h1>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
-      <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
-        <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+    <a name="content" class="namedanchor"><xsl:comment/></a>
+    <div class="contentarea1col">
+      <h1>
+        <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
+          <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+        </div>
+      </h1>
+      <div bxe_xpath="/{$document-element-name}/xhtml:body">
+        <xsl:apply-templates select="*/xhtml:body/*"/>
       </div>
-    </h1>
-    <div bxe_xpath="/{$document-element-name}/xhtml:body">
-      <xsl:apply-templates select="*/xhtml:body/*"/>
+      <xsl:call-template name="footer"/>
     </div>
-    <xsl:call-template name="footer"/>
-   </div>
   </xsl:template>
 
 
@@ -126,7 +126,7 @@
     </div>
     <div class="contcol2">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div class="content">
         <h1>
           <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -153,7 +153,7 @@
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
         <div class="content">
           <h1>
@@ -182,9 +182,9 @@
         <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div>
         <xsl:attribute name="class">contentarea</xsl:attribute>
-        <a name="content"><xsl:comment/></a>
         <div class="content">
           <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
             <h1>
@@ -214,10 +214,9 @@
         <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
               <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
@@ -252,6 +251,7 @@
         <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div>
         <xsl:attribute name="class">
           <xsl:choose>
@@ -259,7 +259,6 @@
             <xsl:otherwise>contentarea</xsl:otherwise>
           </xsl:choose>
         </xsl:attribute>
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <xsl:choose>
             <xsl:when test="$numColumns = 3">
@@ -288,8 +287,8 @@
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <p class="lead">
              <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
@@ -351,8 +350,8 @@
           <xsl:apply-templates select="*/unizh:related-content"/>
         </div>
       </div> -->
+      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
           <p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
