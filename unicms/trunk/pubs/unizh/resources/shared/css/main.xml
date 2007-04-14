@@ -337,7 +337,7 @@ img.icon {
 
 /*
 * html a.namedanchor {
-    padding:0px;
+    padding: 0;
 }
 */
 
