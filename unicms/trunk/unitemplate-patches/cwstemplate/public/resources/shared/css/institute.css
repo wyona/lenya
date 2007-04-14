@@ -21,6 +21,10 @@ div#primarnav a
     font-weight:bold;
     height:21px;
 }
+div#primarnav a.namedanchor
+{
+    padding: 0;
+}
 div#primarnav a:hover
 {
     background-color:#FFFFFF;
