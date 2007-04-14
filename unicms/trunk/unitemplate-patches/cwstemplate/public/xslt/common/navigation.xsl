@@ -128,6 +128,7 @@
 
   <xsl:template match="xhtml:div[@id = 'tabs']" priority="1">
     <div id="primarnav">
+      <a name="navigation" class="namedanchor"><xsl:comment/></a>
       <xsl:for-each select="xhtml:div">
         <a href="{@href}">
           <xsl:choose>
