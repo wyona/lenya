@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
+
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
