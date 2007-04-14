@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
 
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
@@ -19,7 +19,8 @@
   <xsl:template match="unizh:rss-reader" priority="1">
     <xsl:variable name="target">
       <xsl:choose>
-        <xsl:when test="@url and starts-with(@url, 'http://') and not(contains(@url, '.uzh.ch'))">external</xsl:when>
+        <xsl:when test="@url and starts-with(@url, 'http://') and not(contains(@url, '.unizh.ch')) and not(contains(@url, '.uzh.ch'))">www</xsl:when>
+        <xsl:when test="@url and starts-with(@url, 'http://') and ((contains(@url, '.unizh.ch')) or (contains(@url, '.uzh.ch')))">uzh</xsl:when>
         <xsl:otherwise>internal</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -89,7 +90,7 @@
                             <xsl:with-param name="year"><xsl:value-of select="substring(pubDate, 1, 4)"/></xsl:with-param>
                             <xsl:with-param name="month"><xsl:value-of select="substring(pubDate, 6, 2)"/></xsl:with-param>
                             <xsl:with-param name="day"><xsl:value-of select="substring(pubDate, 9, 2)"/></xsl:with-param>
-                            <xsl:with-param name="format">%Y.%n.%e</xsl:with-param>
+                            <xsl:with-param name="format">%e.%n.%Y</xsl:with-param>
                           </xsl:call-template>:
                         </xsl:if>
                         <xsl:value-of select="title"/>
