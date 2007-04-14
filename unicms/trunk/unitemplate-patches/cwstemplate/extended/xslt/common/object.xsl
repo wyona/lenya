@@ -88,7 +88,16 @@
 
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]" priority="1">
     <xsl:call-template name="object">
-      <xsl:with-param name="width">178</xsl:with-param>
+      <xsl:with-param name="width">
+        <xsl:choose>
+          <xsl:when test="$numColumns = 3">
+            <xsl:value-of select="171"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="178"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
