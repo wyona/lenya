@@ -10,7 +10,8 @@
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
     xmlns="http://www.w3.org/1999/xhtml"
-    >
+>
+
 
 <!-- doctypes specific navigation logic -->
 
