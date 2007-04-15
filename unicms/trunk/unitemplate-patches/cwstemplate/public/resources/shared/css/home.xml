@@ -25,9 +25,10 @@ div.contcol1 h2
 /* wide header for homepage */
 div#headerarea
 {
-    width:100%;
+    position: relative;
     display:block;
-    height:180px;
+    width: 100%;
+    height: 180px;
     margin-top:15px;
     background-image:url(images/headerimage.jpg);
     background-position:top left;
@@ -35,10 +36,41 @@ div#headerarea
     margin-bottom:1px;
 }
 
+div#headerlink
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+div#headerlink a
+{
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+
 div#uniLogoPos
-{ 
-    position:absolute; 
-    z-index:20;
+{
+    position: absolute;
+    z-index: 20;
+}
+
+div#visuals
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+div#headertitelpos
+{
+    position: absolute;
+    right: 195px;
+    top: 0;
+    margin: 0 0 0 6px;
+    z-index: 15;
 }
 
 div#imguniarea
@@ -52,8 +84,9 @@ div#imguniarea
 div#primarnav
 {
     position: absolute;
-    top: 174px;
+    top: 159px;
     padding-top:0;
+    z-index: 10;
 }
 div#primarnav a
 {
