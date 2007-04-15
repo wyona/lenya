@@ -272,6 +272,9 @@
         <unizh:heading href="#">
           <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
         </unizh:heading>
+        <xsl:if test="/document/content/*/unizh:header/unizh:headerlink">
+          <xsl:copy-of select="/document/content/*/unizh:header/unizh:headerlink"/>
+        </xsl:if>
       </xsl:when>
       <xsl:otherwise>
         <unizh:superscription>
