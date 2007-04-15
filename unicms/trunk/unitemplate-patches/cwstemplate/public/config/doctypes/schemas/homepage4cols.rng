@@ -32,7 +32,7 @@
   <element name="unizh:homepage4cols">
     <ref name="html.attlist"/>
     <ref name="lenya.meta"/>
-    <ref name="unizh.header"/> 
+    <ref name="home.header"/> 
     <optional>
       <ref name="home.contcol1"/>
     </optional>
@@ -86,6 +86,25 @@
       </oneOrMore>
     </element>
   </optional>
+</define>
+
+
+<define name="home.header">
+  <element name="unizh:header">
+    <element name="unizh:superscription">
+      <optional>
+        <text/>
+      </optional>
+    </element>
+    <element name="unizh:heading">
+      <text/>
+    </element>
+    <optional>
+      <element name="unizh:headerlink">
+        <text/>
+      </element>
+    </optional>
+  </element>
 </define>
 
 
