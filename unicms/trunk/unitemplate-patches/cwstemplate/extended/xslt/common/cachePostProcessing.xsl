@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: html-head.xsl,v 1.2 2004/02/04 14:34:37 gregor Exp $ -->
+
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -16,6 +16,11 @@
 
 
 <!-- overwrite included templates -->
+
+  <xsl:template match="style[@type = 'text/css']" priority="1">
+    <xsl:copy-of select="."/>
+  </xsl:template>
+
 
   <xsl:template match="unizh:rss-reader" priority="1">
     <unizh:rss-reader url="{@url}" items="{@items}" image="{@image}" link="{@link}" itemDescription="{@itemDescription}" itemImage="{@itemImage}" itemPubdate="{@itemPubdate}">
