@@ -46,8 +46,9 @@ div#headerlink
 div#headerlink a
 {
     display:block;
-    width: 100%;
+    width: 50%;
     height: 100%;
+    margin: 0 0 0 50%;
 }
 
 div#uniLogoPos
