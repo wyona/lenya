@@ -18,9 +18,6 @@
 
 <!-- overwrite included templates -->
 
-<xsl:variable name="tabs" priority="1">true</xsl:variable>
-
-
 <!-- menu -->
 
 <xsl:template match="/document/xhtml:div[@id = 'menu']" priority="1">
