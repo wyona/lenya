@@ -19,26 +19,25 @@
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
     <style type="text/css">
       <xsl:comment>
-        <xsl:choose>
-          <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-            <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/big.css");</xsl:text>
-          </xsl:when>
-          <xsl:when test="contains($fontsize, 'normal')">
-            <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/main.css");</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/main.css");</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
+        <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/main.css");</xsl:text>
         <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/extended.css");</xsl:text>
+        <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/public.css");</xsl:text>
         <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/institute.css");</xsl:text>
         <xsl:if test="$document-element-name = 'unizh:homepage4cols' or $document-element-name = 'unizh:homepage'">
           <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/home.css");</xsl:text>
+        </xsl:if>
+        <xsl:if test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
+          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/visibility.css");</xsl:text>
+          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/visibility_public.css");</xsl:text>
+        </xsl:if>
+        <xsl:if test="($document-element-name = 'unizh:homepage4cols' or $document-element-name = 'unizh:homepage') and (contains($fontsize, 'big') and not(contains($fontsize, 'normal')))">
+          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/visibility_home.css");</xsl:text>
         </xsl:if>
       </xsl:comment>
     </style>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
     <script type="text/javascript" src="{$localsharedresources}/javascript/institute.js"/>
+    <script xmlns:xhtml="http://www.w3.org/1999/xhtml" src="{$contextprefix}/unizh/authoring/javascript/elml.js" type="text/javascript"/>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
     </xsl:if>
