@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** all ******/
+
+*html body
+{
+    font-size:1em;
+}
+
+html > body
+{
+    font-size:16px
+}
+
+body
+{
+    line-height: 1.4em;
+    color:#000;
+}
+
+/****** common elements ******/
+
+h2, h3, h4, h5, h6
+{
+    margin-bottom: 0.5em;
+}
+
+p
+{
+    margin-bottom: 0.6em;
+}
+
+h2
+{
+    font-size: 1.2em;
+    /* removed line-height: 1.2em*/
+}
+
+a:hover, a:visited:hover, div#headerarea a:hover, div#breadcrumbnav a:hover, div#primarnav a:hover, div#primarnav a.activ:hover, div#secnav a.activ:hover, div#toolnav a:hover, div#quicklinks ul li a:hover, div.rssReader h3 a:hover, div.teaser.highlighted a:hover, div.relatedbox div.emergency a.uzh:hover,
+ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover,
+div#startlinks ul li a.internal:hover, div#startlinks ul li a.uzh:hover
+{
+    color: #FFF;
+    background-color: #333;
+}
+
+div#breadcrumbnav a
+{
+    color: #666;
+}
+
+div#headerlink a:hover, div#uniLogoPos a:hover
+{
+    background-color: transparent;
+}
+
+div#primarnav
+{
+    line-height: 1.5em;
+}
+
+div#servicenavpos a:hover
+{
+    background-color:#FFF;
+    color:#339;
+    text-decoration: none;
+}
+
+</css>

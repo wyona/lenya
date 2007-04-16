@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** all ******/
+
+div#primarnav a
+{
+    background-color:#FFF;
+    color:#339;
+}
+
+div#primarnav a:hover
+{
+    background-color:#333;
+    color:#FFF;
+}
+
+</css>
