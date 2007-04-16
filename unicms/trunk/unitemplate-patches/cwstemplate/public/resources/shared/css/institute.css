@@ -65,3 +65,26 @@ div#secnavTab a.activ
     color:#666699;
     float:left;
 }
+
+/****** left column ******/
+
+ul#directlinks li a#directlink1
+{
+    background-color: #99cc33;
+}
+ul#directlinks li a#directlink2
+{
+    background-color: #9999ff;
+}
+ul#directlinks li a#directlink3
+{
+    background-color: #66ccff;
+}
+ul#directlinks li a#directlink4
+{
+    background-color: #cccc00;
+}
+ul#directlinks li a#directlink5
+{
+    background-color: #ff9933;
+}
