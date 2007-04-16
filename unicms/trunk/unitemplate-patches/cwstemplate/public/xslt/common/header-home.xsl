@@ -5,17 +5,17 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml" 
-  xmlns:unizh="http://uzh.ch/doctypes/elements/1.0" 
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
 >
 
 
   <xsl:template name="header-home">
     <div id="headerarea">
-      <xsl:if test="count(*/*[2]/*) = 3">
+      <xsl:if test="*/unizh:header/unizh:headerlink">
         <div id="headerlink">
           <a>
             <xsl:attribute name="href">
-              <xsl:value-of select="*/*[2]/*[3]"/>
+              <xsl:value-of select="*/unizh:header/unizh:headerlink"/>
             </xsl:attribute>
             <xsl:comment/>
           </a>
