@@ -186,6 +186,7 @@ div#visuals
     float: right;
     width: 195px;
 }
+
 /****** left column ******/
 
 /* second and deeper lever navigation */
