@@ -111,7 +111,7 @@ ul#directlinks
 }
 ul#directlinks li a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     background-position: 10px 3px;
     background-color:#ADADD6;
     padding:3px 0 3px 23px;

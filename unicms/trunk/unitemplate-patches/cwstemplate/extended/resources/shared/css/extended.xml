@@ -91,7 +91,7 @@ div.rssReader h3.linked
 div.rssReader h3 a
 {
     background-color:#EBEBFF;
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     background-repeat: no-repeat;
     background-position: 9px 2px;
     padding:2px 9px 3px 23px;
@@ -108,7 +108,7 @@ div.rssReader h3 a:visited
 }
 div.rssReader.internal h3 a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position: 9px 2px;
 }
 div.rssReader h4
@@ -147,7 +147,7 @@ div.rssReader ul li h4
 }
 div.rssReader ul li a.block
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     background-repeat: no-repeat;
     background-position:0 2px;
     padding:2px 0 3px 13px;
@@ -156,11 +156,11 @@ div.rssReader ul li a.block
 }
 div.rssReader.internal ul li a.block
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
 }
 div.rssReader ul li a.more
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     background-repeat: no-repeat;
     background-position: left top;
     display: block;
@@ -170,7 +170,7 @@ div.rssReader ul li a.more
 }
 div.rssReader.internal ul li a.more
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
 }
 div.rssReader ul li img
 {
@@ -295,7 +295,7 @@ div#quicklinks ul li
 }
 div#quicklinks ul li a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:0 2px;
     background-repeat: no-repeat;
     width: 132px;
@@ -342,7 +342,7 @@ div.relatedbox div.emergency p
 
 div.relatedbox div.emergency a.uzh
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right_emergency.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right_emergency.gif);
     color: #FFF;
     font-weight: bold;
     text-decoration: underline;
@@ -350,7 +350,7 @@ div.relatedbox div.emergency a.uzh
 
 div.relatedbox div.emergency a.uzh:hover
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     color: #333399;
 }
 
