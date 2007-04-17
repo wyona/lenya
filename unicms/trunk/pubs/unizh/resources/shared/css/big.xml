@@ -785,7 +785,7 @@ ul.type1, ol.type1, ol.type2 {
   padding-left:1.5em;
 }
   
-ul.type2, ul.type3  {
+ul.type2, ul.type3, ul.type4 {
   list-style-type:none;
   padding-left:0;
 }
@@ -803,6 +803,23 @@ ul.type3 li {
     background-repeat: no-repeat;
     padding-left:1.5em;
 }
+
+ul.type4 li {
+    padding-left:1em;
+}
+
+/*
+ul.type3 li {
+padding-left:1.5em;
+
+}
+
+ul.type3 li:before { 
+  margin-left: -0.6em;
+  display: marker;
+  content: "- ";
+}
+*/
 
 ol.type2, ol.type1 li ol.type1  {
   list-style-type:lower-alpha;

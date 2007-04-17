@@ -162,6 +162,7 @@
       <value type="string">type1</value>
       <value type="string">type2</value>
       <value type="string">type3</value>
+      <value type="string">type4</value>
     </choice>
   </attribute>
 </define>
