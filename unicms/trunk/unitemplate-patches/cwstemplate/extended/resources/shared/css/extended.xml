@@ -261,16 +261,20 @@ div#select select
 }
 div#select input#submit
 {
+    line-height: 1.3em;
+    font-size: 0.95em;
     width: 35px;
-    background-color:#E2E2FF;
-    border:0;
-    padding:0;
-    margin:0;
-    display:inline;
+    color: #333399;
+    background-color: #E2E2FF;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: inline;
 }
 div#select input#submit:hover
 { 
-    background-color:#F7F7F7;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #333399; 
 }
 
 /* quicklinks */
