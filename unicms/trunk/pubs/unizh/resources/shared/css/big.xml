@@ -123,7 +123,7 @@ a:hover {
 }
 
 a.internal, a.uzh {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:left top;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -136,7 +136,7 @@ a.right_aligned {
 }
 
 .relatedbox a.internal, .relatedbox a.uzh, ul.squarelist li a,  .contentindex a, .klein a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:left top;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -145,7 +145,7 @@ a.right_aligned {
 }
 
 .relatedbox a.internal, .relatedbox a.uzh, .contentindex a, .klein a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:left top;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -154,7 +154,7 @@ a.right_aligned {
 }
 
 a.back {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_left.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_left.gif);
     padding-left:13px;
     background-repeat: no-repeat;
     padding-right:2px;
@@ -162,7 +162,7 @@ a.back {
 }
 
 a.download {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_download.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_download.gif);
     background-position:left top;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -171,7 +171,7 @@ a.download {
 }
 
 a.www {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     padding-left:13px;
     background-repeat: no-repeat;
     padding-right:2px;
@@ -382,7 +382,7 @@ img.icon {
 
 .navup a {
     display:block;
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.gif);
     padding-left:20px;
     background-repeat: no-repeat;
 }
@@ -507,7 +507,7 @@ img.icon {
 }
 
 #quicklink ul li a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:left top;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -736,7 +736,7 @@ ul.sitemap ul ul ul li a {
 }
 
 a.rss {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:0px 4px;
     padding-left:13px;
     background-repeat: no-repeat;
@@ -770,7 +770,7 @@ a.rss {
 }
 
 .topnav a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.gif);
     margin-right:7px;
     background-repeat: no-repeat;
     background-position: left top;
@@ -840,7 +840,7 @@ ul.linknav {
 }
 
 .content1 ul.linknav li a, .content2 ul.linknav li a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position: 0px 2px;
     padding:3px 0 2px 13px;
     background-repeat: no-repeat;
@@ -867,7 +867,7 @@ ol {
 }
 
 ol.list a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     padding-left:13px;
     background-repeat: no-repeat;
     background-position: left top;
@@ -887,7 +887,7 @@ ol.list a {
 }
 
 .linkrow a {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.png);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     padding-left:13px;
     font-size: 1.0em;
     line-height:1.6em;
