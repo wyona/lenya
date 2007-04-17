@@ -17,6 +17,9 @@
     <title>UZH - <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/> - <xsl:value-of select="*/lenya:meta/dc:title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon">
+      <xsl:attribute name="href"><xsl:value-of select="$localsharedresources"/><xsl:text>/favicon.ico</xsl:text></xsl:attribute>
+    </link>
     <style type="text/css">
       <xsl:comment>
         <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/main.css");</xsl:text>
