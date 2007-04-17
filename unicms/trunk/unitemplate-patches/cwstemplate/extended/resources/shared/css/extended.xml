@@ -63,6 +63,13 @@ div.teaser.highlighted a:hover
     background-color:#F7F7F7;
 }
 
+/* asset link */
+div.teaser div.asset img
+{
+    margin: 0;
+    display: inline;
+}
+
 /* rss reader for external RSS feeds (where external means: outside virtual subdomain) */
 div.rssReader
 {
