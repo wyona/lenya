@@ -9,6 +9,9 @@
   <xsl:param name="publicationid"/>
   <xsl:param name="servername"/>
 
+  <xsl:variable name="temp" select="substring-after($servername, 'http://')"/>
+  <xsl:variable name="hostname" select="substring-before($temp, '/index.html')"/>
+
   <xsl:template match="xhtml:div[@id = 'orthonav']">
     <xsl:if test="*">
       <div id="orthonav">
@@ -72,7 +75,7 @@
               <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{@href}" method="get" accept-charset="UTF-8">
                 <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
                 <input type="hidden" name="cof" value="FORID:11" />
-                <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+                <input type="hidden" id="custom" name="sitesearch" value="{$hostname}"/>
                 <div class="serviceform">
                   <input type="text" name="q" accesskey="5" />
                 </div>
