@@ -34,7 +34,7 @@
           <map:parameter name="fontsize" value="{request-param:fontsize}; {session-context:font/size}"/>
           <map:parameter name="querystring" value="{request:queryString}"/> 
           <map:parameter name="creationdate" value="{page-envelope:document-dc-date-created}"/>
-          <map:parameter name="servername" value="{request:serverName}"/>
+          <map:parameter name="servername" value="{proxy-url:live:/index:de}"/>
           <map:parameter name="proxy-url-live" value="{proxy-url:live:{page-envelope:document-id}:{page-envelope:document-language}}"/>
         </map:transform>
     </map:resource>
