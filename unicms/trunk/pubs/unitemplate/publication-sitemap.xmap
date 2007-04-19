@@ -299,7 +299,7 @@
       </map:match>
  
      <!-- a separate matcher for search in order to avoid caching of the search page -->
-      <map:match pattern="*/search*.html">
+      <map:match pattern="**/search*.html">
         <map:select type="parameter">
           <map:parameter name="parameter-selector-test" value="{request-param:version}"/>
           <map:when test="simple">
