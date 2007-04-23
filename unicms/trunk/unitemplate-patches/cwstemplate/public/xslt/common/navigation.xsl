@@ -31,6 +31,25 @@
   </xsl:template>
 
 
+  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav'] and @id = 'search']" priority="1">
+    <form>
+      <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
+      <xsl:attribute name="action">http://www.google.uzh.ch/result.html</xsl:attribute>
+      <xsl:attribute name="method">get</xsl:attribute>
+      <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
+      <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+      <input type="hidden" name="cof" value="FORID:11" />
+      <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+      <div class="serviceform">
+        <input type="text" name="q" accesskey="5" />
+      </div>
+      <div class="serviceform">
+        <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();"><xsl:value-of select="text()"/></a>
+      </div>
+    </form>
+  </xsl:template>
+
+
 <!-- overwrite included templates -->
 
   <xsl:template match="xhtml:div[@id = 'servicenav']" priority="1">
