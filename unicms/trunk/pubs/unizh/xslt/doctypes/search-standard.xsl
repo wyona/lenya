@@ -91,7 +91,23 @@
   </xsl:template>
 
   <xsl:template match="xhtml:form[@id = 'search']">
+  <div id="phonebook" style="margin-top: 2em;">
+  <h2>Suchen im Telefon- und E-Mail-Verzeichnis der Universität Zürich</h2>
+    <form name="tel" action="http://www.phonebook.unizh.ch/" method="post">
+     <input name="case" value="i" type="hidden"/>
+     <input value="Y" name="all_dirs" type="hidden"/>
+     <input style="background-color: rgb(255, 255, 160);" name="Name/Bezeichnung" size="40" class="monospace" type="text"/>
+     <input value="Suchen" name="submitButtonName" type="submit"/>
+
+     <p>
+
+     <a onclick="opt_tel()" href="http://www.phonebook.unizh.ch/">Mehr Optionen</a>
+     </p>
+    </form>
+  </div>
+        
     <div class="searchtextblock">
+    <h2>Suchen im Internet</h2>
     <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{$proxy-url-live}" accept-charset="UTF-8">
       <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
       <input name="q" type="text" size="40"/>
