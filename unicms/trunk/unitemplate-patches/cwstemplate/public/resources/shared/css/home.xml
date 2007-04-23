@@ -121,7 +121,7 @@ ul#directlinks li a
     font-weight:bold;
     width: 142px;
 }
-ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover
+ul#directlinks li a:hover
 {
     background-color:#E9E9F0;
 }
