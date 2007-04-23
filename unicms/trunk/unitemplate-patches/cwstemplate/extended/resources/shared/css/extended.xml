@@ -98,7 +98,7 @@ div.rssReader h3.linked
 div.rssReader h3 a
 {
     background-color:#EBEBFF;
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-repeat: no-repeat;
     background-position: 9px 2px;
     padding:2px 9px 3px 23px;
@@ -154,7 +154,7 @@ div.rssReader ul li h4
 }
 div.rssReader ul li a.block
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-repeat: no-repeat;
     background-position:0 2px;
     padding:2px 0 3px 13px;
@@ -167,7 +167,7 @@ div.rssReader.internal ul li a.block
 }
 div.rssReader ul li a.more
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-repeat: no-repeat;
     background-position: left top;
     display: block;
