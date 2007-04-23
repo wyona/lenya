@@ -6,7 +6,7 @@
 >
 
 
-  <xsl:include href="../../../unizh/xslt/rss.xsl"/>
+  <xsl:include href="../../../unizh/xslt/common/rss.xsl"/>
 
 
 <!-- overwrite included templates -->
