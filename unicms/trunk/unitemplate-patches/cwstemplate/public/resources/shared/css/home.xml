@@ -111,7 +111,7 @@ ul#directlinks
 }
 ul#directlinks li a
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position: 10px 3px;
     background-color:#ADADD6;
     padding:3px 0 3px 23px;
@@ -121,7 +121,27 @@ ul#directlinks li a
     font-weight:bold;
     width: 142px;
 }
-ul#directlinks li a:hover
+ul#directlinks li a#directlink1
+{
+    background-color: #99cc33;
+}
+ul#directlinks li a#directlink2
+{
+    background-color: #9999ff;
+}
+ul#directlinks li a#directlink3
+{
+    background-color: #66ccff;
+}
+ul#directlinks li a#directlink4
+{
+    background-color: #cccc00;
+}
+ul#directlinks li a#directlink5
+{
+    background-color: #ff9933;
+}
+ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover
 {
     background-color:#E9E9F0;
 }
