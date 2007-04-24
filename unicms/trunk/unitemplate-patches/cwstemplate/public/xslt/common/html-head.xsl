@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: html-head.xsl 20549 2006-12-04 12:57:40Z thomas $ -->
+
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
     <link rel="shortcut icon" type="image/vnd.microsoft.icon">
-      <xsl:attribute name="href"><xsl:value-of select="$localsharedresources"/><xsl:text>/favicon.ico</xsl:text></xsl:attribute>
+      <xsl:attribute name="href"><xsl:value-of select="$localsharedresources"/><xsl:text>/images/favicon.ico</xsl:text></xsl:attribute>
     </link>
     <style type="text/css">
       <xsl:comment>
