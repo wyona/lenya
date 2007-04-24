@@ -123,23 +123,23 @@ ul#directlinks li a
 }
 ul#directlinks li a#directlink1
 {
-    background-color: #99cc33;
+    background-color: #FF9933;
 }
 ul#directlinks li a#directlink2
 {
-    background-color: #9999ff;
+    background-color: #CCCC00;
 }
 ul#directlinks li a#directlink3
 {
-    background-color: #66ccff;
+    background-color: #99CC33;
 }
 ul#directlinks li a#directlink4
 {
-    background-color: #cccc00;
+    background-color: #66CCFF;
 }
 ul#directlinks li a#directlink5
 {
-    background-color: #ff9933;
+    background-color: #9999FF;
 }
 ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover
 {
