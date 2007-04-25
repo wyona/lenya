@@ -42,11 +42,13 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:select">
-    <div id="select">
-      <h3><xsl:value-of select="@label"/></h3>
-      <form action="javascript:selectLocation()" method="POST" enctype="text/plain">
-        <select name="target" onchange="selectLocation()">
+  <xsl:template match="unizh:relocator">
+    <form>
+      <xsl:attribute name="action"><xsl:value-of select="@href"/></xsl:attribute>
+      <xsl:attribute name="method">post</xsl:attribute>
+      <div class="relocator">
+        <h3><xsl:value-of select="@label"/></h3>
+        <select name="location" onchange="selectLocation( this.options[this.selectedIndex].value )">
           <xsl:for-each select="xhtml:a">
             <option>
               <xsl:attribute name="value"><xsl:value-of select="@href"/></xsl:attribute>
@@ -55,8 +57,8 @@
           </xsl:for-each>
         </select>
         <input type="submit" id="submit" value="go!" />
-      </form>
-    </div>
+      </div>
+    </form>
   </xsl:template>
 
 
