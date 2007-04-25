@@ -240,26 +240,26 @@ div#secnav ul li ul li ul li ul li a
 
 
 /* faculty select */
-div#select
+div.relocator
 {
     line-height: 1.3em;
     background-color:#E2E2FF;
     padding: 0 10px 12px 10px;
     margin: 0 0 10px 0;
 }
-div#select h3
+div.relocator h3
 {
-    padding:4px 0 3px 0;
+    padding:3px 0 1px 0;
     margin: 0;
 }
-div#select select
+div.relocator select
 {
     line-height: 1.3em;
     font-size: 0.95em;
     width: 105px;
     margin:0 3px 0 0;
 }
-div#select input#submit
+div.relocator input#submit
 {
     line-height: 1.3em;
     font-size: 0.95em;
@@ -271,7 +271,7 @@ div#select input#submit
     margin: 0;
     display: inline;
 }
-div#select input#submit:hover
+div.relocator input#submit:hover
 { 
     background-color: #F7F7F7;
     border-bottom: 1px solid #333399; 

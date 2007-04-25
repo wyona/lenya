@@ -90,7 +90,7 @@
     <zeroOrMore>
       <choice>
         <ref name="unizh.quicklinks"/>
-        <ref name="unizh.select"/>
+        <ref name="unizh.relocator"/>
         <ref name="object"/>
       </choice>
     </zeroOrMore>
@@ -377,9 +377,12 @@
 </define>
 
 
-<define name="unizh.select">
-  <element name="unizh:select">
+<define name="unizh.relocator">
+  <element name="unizh:relocator">
     <attribute name="label">
+      <text/>
+    </attribute>
+    <attribute name="href">
       <text/>
     </attribute>
     <oneOrMore>

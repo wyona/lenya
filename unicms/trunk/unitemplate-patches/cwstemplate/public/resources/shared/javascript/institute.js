@@ -13,7 +13,8 @@ function changeImgNav(imgNr){
     }
 }
 
-function selectLocation() {
-	newLocation = document.forms[1].target.options[document.forms[1].target.selectedIndex].value;
-	if (newLocation) location.href = newLocation;
+function selectLocation( newLocation ) {
+    if ( ( newLocation ) && ( newLocation != '' ) ) {
+        location.href = newLocation;
+    }
 }

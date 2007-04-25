@@ -146,7 +146,7 @@
       <choice>
         <ref name="unizh.directlinks"/>
         <ref name="unizh.quicklinks"/>
-        <ref name="unizh.select"/>
+        <ref name="unizh.relocator"/>
         <ref name="object"/>
       </choice>
     </zeroOrMore>
