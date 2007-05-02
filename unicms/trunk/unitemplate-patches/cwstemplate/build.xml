@@ -220,6 +220,7 @@
 
 
   <target name="copy-resources-extended">
+    <copy todir="${pub.dir}/resources/shared" overwrite="yes" file="extended/resources/shared/favicon.ico"/>
     <copy todir="${pub.dir}/resources/shared/images" overwrite="yes">
       <fileset dir="extended/resources/shared/images" />
     </copy>
