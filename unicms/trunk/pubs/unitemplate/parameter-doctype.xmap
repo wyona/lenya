@@ -40,24 +40,6 @@
         <sourcetype name="redirect">
           <document-element local-name="redirect"/>
         </sourcetype>
-        <sourcetype name="lesson">
-          <document-element local-name="lesson"/>
-        </sourcetype>
-        <sourcetype name="unit">
-          <document-element local-name="unit"/>
-        </sourcetype>
-        <sourcetype name="selfAssessment">
-          <document-element local-name="selfAssessment"/>
-        </sourcetype>
-        <sourcetype name="furtherReading">
-          <document-element local-name="furtherReading"/>
-        </sourcetype>
-        <sourcetype name="glossary">
-          <document-element local-name="glossary"/>
-        </sourcetype>
-        <sourcetype name="bibliography">
-          <document-element local-name="bibliography"/>
-        </sourcetype>
       </map:action>
     </map:actions>
   </map:components>
