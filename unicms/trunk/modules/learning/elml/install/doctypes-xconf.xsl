@@ -7,59 +7,8 @@
     <xsl:copy>
       <xsl:apply-templates/>
       <doc type="lesson">
-        <children>
-          <doc type="introduction"/>
-          <doc type="unit"/>
-          <doc type="selfAssessment"/>
-          <doc type="summary"/>
-          <doc type="furtherReading"/>
-          <doc type="glossary"/>
-          <doc type="bibliography"/>
-        </children>
         <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
           <sample-name>lesson.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-    
-      <doc type="unit">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>unit.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-
-      <doc type="selfAssessment">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>selfAssessment.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-
-      <doc type="summary">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>summary.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-
-      <doc type="furtherReading">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>furtherReading.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-
-      <doc type="glossary">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>glossary.xml</sample-name>
-        </creator>
-        <workflow src="2stage.xml"/>
-      </doc>
-
-      <doc type="bibliography">
-        <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
-          <sample-name>bibliography.xml</sample-name>
         </creator>
         <workflow src="2stage.xml"/>
       </doc>

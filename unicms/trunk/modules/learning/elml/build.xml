@@ -49,17 +49,13 @@
       <fileset dir="elml/xslt/common"/>
     </copy>
 
-    <copy todir="${pubs.dir}/unizh/xslt/neutron" overwrite="yes">
-      <fileset dir="elml/xslt/neutron"/>
-    </copy> 
-
 
     <echo>INFO: Copying resources</echo>
     <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
       <fileset dir="elml/resources/shared/images/icons"/>
     </copy>
 
-     <copy todir="${pubs.dir}/unizh/resources/shared/css" overwrite="yes">
+     <copy todir="${pubs.dir}/resources/shared/css" overwrite="yes">
       <fileset dir="elml/resources/shared/css"/>
     </copy>
 
@@ -96,6 +92,13 @@
         <include name="usecase-exportlesson.xmap"/>
       </fileset>
     </copy>
+
+    <copy todir="${pub.dir}" overwrite="yes"> 
+      <fileset dir="elml">
+        <include name="usecase-importlessonlanguage.xmap"/>
+      </fileset>
+    </copy>
+
 
     <copy todir="${pub.dir}" overwrite="yes">
       <fileset dir="elml"> 
@@ -147,10 +150,10 @@
       >
     </xslt>
 
-    <echo>INFO: Copying level includes</echo>
+    <echo>INFO: Copying elml navigation xslt</echo>
     <copy todir="${pubs.dir}/unizh/xslt" overwrite="yes">
        <fileset dir="elml/xslt">
-        <include name="elml-level.xsl"/>
+        <include name="elml-navigation.xsl"/>
       </fileset>
     </copy>
 
@@ -168,10 +171,10 @@
       >
     </xslt>
 
-    <echo>INFO: Installing webdav support</echo>
+    <!-- <echo>INFO: Installing webdav support</echo>
     <copy todir="${pub.dir}/lenya/usecases/webdav" overwrite="yes">
       <fileset dir="elml/lenya/usecases/webdav"/>
-    </copy>
+    </copy> -->
 
     <echo>INFO: Backing up files</echo>
     <copy todir="backup" overwrite="yes">

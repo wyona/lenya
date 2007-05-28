@@ -7,6 +7,44 @@
          >
 
 
+
+
+
+
+<define name="lesson.config">
+  <element name="config">
+    <zeroOrMore>
+      <ref name="anyElement"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+<define name="lesson.messagebundle">
+  <element name="messagebundle">
+    <zeroOrMore>
+      <ref name="anyElement"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+ <define name="anyElement">
+    <element>
+      <anyName/>
+      <zeroOrMore>
+	<choice>
+	  <attribute>
+	    <anyName/>
+	  </attribute>
+	  <text/>
+	  <ref name="anyElement"/>
+	</choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
+
+
 <define name="OrganisationReq">
   <attribute name="level">
     <text/><!-- Basic, Intermediate, Advanced -->

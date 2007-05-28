@@ -55,25 +55,9 @@
     <menus>
       <menu name="File" label="File">
 	<block>
-	  
-	  <xsp:logic>
-	    {
-        if (Publication.ARCHIVE_AREA.equals(area) || Publication.TRASH_AREA.equals(area)) {
-          <item>New Document</item>
-	  <item>New Homepage</item>
-        }
-        else {
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=unit">New Unit</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=selfAssessment">New SelfAssessment</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=summary">New Summary</item>   
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=furtherReading">New FurtherReading</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=glossary">New Glossary</item>
-          <item uc:usecase="create" uc:step="showscreen" href="?doctype=bibliography">New Bibliography</item>
-        }
-	    }
-	  </xsp:logic>
-	</block>
-	<block>
+           <xsp:content>
+            <item uc:usecase="importlessonlanguage" uc:step="showscreen" href="?">Import language version</item>
+          </xsp:content>
 	  <xsp:logic>
 	    {
 	      if (isDocument

@@ -14,8 +14,7 @@
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   >
 
-  <xsl:template match="lenya:meta"/>
-  <xsl:template match="unizh:header"/>
+
 
   <xsl:template match="elml:lesson">
     <xsl:if test="@label">
@@ -29,7 +28,7 @@
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
     <xsl:if test="@title">
-      <h2><xsl:value-of select="@title"/></h2>
+      <h3><xsl:value-of select="@title"/></h3>
     </xsl:if>
     <div>
       <xsl:apply-templates/>
@@ -68,6 +67,9 @@
 
 
   <xsl:template match="elml:unit">
+    <xsl:if test="$pagebreak_level = 'lesson'">
+      <h2><xsl:value-of select="@title"/></h2>
+    </xsl:if>
     <div>
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
@@ -80,7 +82,7 @@
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
-    <h2><xsl:value-of select="@title"/></h2>
+    <h3><xsl:value-of select="@title"/></h3>
     <div>
       <xsl:apply-templates/>
     </div>
@@ -92,7 +94,7 @@
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
     <xsl:if test="@title">
-      <h2><xsl:value-of select="@title"/></h2>
+      <h3><xsl:value-of select="@title"/></h3>
     </xsl:if>
     <div>
       <xsl:apply-templates/>
@@ -105,7 +107,7 @@
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
     <xsl:if test="@title">
-      <h2><xsl:value-of select="@title"/></h2>
+      <h3><xsl:value-of select="@title"/></h3>
     </xsl:if>
     <div>
       <xsl:apply-templates/>
@@ -118,7 +120,7 @@
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
     <xsl:if test="@title">
-      <h2><xsl:value-of select="@title"/></h2>
+      <h3><xsl:value-of select="@title"/></h3>
     </xsl:if>
     <div>
       <xsl:apply-templates/>  <!-- metaSetUpInfo in tutor view -->
@@ -131,8 +133,11 @@
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
       </xsl:if>
-      <xsl:if test="@title and parent::elml:unit">
-        <h2><xsl:value-of select="@title"/></h2>
+      <xsl:if test="$pagebreak_level = 'lesson' and parent::elml:lesson">
+        <h2><xsl:value-of select="//elml:msg[@name = 'name_selfAssessment']"/></h2>
+      </xsl:if>
+      <xsl:if test="parent::elml:unit">
+        <h3><xsl:value-of select="//elml:msg[@name = 'name_selfAssessment']"/></h3>
       </xsl:if>
       <xsl:apply-templates/> <!-- metaSetUpInfo in tutor view -->
     </div>
@@ -143,26 +148,34 @@
       <xsl:if test="@label">
         <a name="{@label}"><xsl:comment/></a>
       </xsl:if>
+      <xsl:if test="$pagebreak_level = 'lesson' and parent::elml:lesson">
+        <h2><xsl:value-of select="//elml:msg[@name = 'name_summary']"/></h2>
+      </xsl:if>
       <xsl:if test="@title and parent::elml:unit">
-        <h2><xsl:value-of select="@title"/></h2>
+        <h3><xsl:value-of select="//elml:msg[@name = 'name_summary']"/></h3>
       </xsl:if>
       <xsl:apply-templates/>
     </div>
   </xsl:template>
  
   <xsl:template match="elml:furtherReading">
+
+    <xsl:if test="$pagebreak_level = 'lesson'">
+      <h2><xsl:value-of select="//elml:msg[@name = 'name_furtherReading']"/></h2>
+    </xsl:if>
+
     <ul>
       <xsl:for-each select="elml:resItem">
         <xsl:variable name="id" select="@bibIDRef"/>
         <xsl:choose>
           <xsl:when test="@sorting='off'">
-            <xsl:apply-templates select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]">
+            <xsl:apply-templates select="//elml:bibliography/*[@bibID=$id]">
               <xsl:with-param name="comment" select="text()"/>
               <xsl:with-param name="furtherReading" select="@bibIDRef"/>
             </xsl:apply-templates>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:apply-templates select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]">
+            <xsl:apply-templates select="//elml:bibliography/*[@bibID=$id]">
               <xsl:with-param name="comment" select="text()"/>
                 <xsl:with-param name="furtherReading" select="@bibIDRef"/>
               <xsl:sort select="@author" order="ascending" lang="de"/>
@@ -175,6 +188,9 @@
   </xsl:template>
 
   <xsl:template match="elml:glossary">
+    <xsl:if test="$pagebreak_level = 'lesson'">
+      <h2><xsl:value-of select="//elml:msg[@name = 'name_glossary']"/></h2>
+    </xsl:if>
     <div>
       <xsl:apply-templates/>
     </div>
@@ -184,33 +200,31 @@
   <xsl:template match="elml:definition">
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
-      <div>
+      <dl>
         <a name="{@term}"><xsl:comment/></a>
-        <b><xsl:value-of select="@term"/></b>: 
-        <xsl:apply-templates/>
-        <xsl:call-template name="BibliographyRef"/>
-      </div>
+        <dt><xsl:value-of select="@term"/></dt> 
+        <dd><xsl:apply-templates/>
+          <xsl:call-template name="BibliographyRef"/>
+        </dd>
+      </dl>
     </xsl:if>
   </xsl:template>
 
   <xsl:template match="elml:term">
     <xsl:variable name="glossRef" select="@glossRef"/>
-    <xsl:variable name="glossPageUrl" select="concat($contextprefix, /document/unizh:level/level:node[*/elml:glossary]/@href)"/>
-    <xsl:variable name="definition" select="/document/unizh:level/level:node/*/elml:glossary/elml:definition[@term = $glossRef]/text()"/>
-    <xsl:variable name="term" select="/document/unizh:level/level:node/*/elml:glossary/elml:definition[@term = $glossRef]/@term"/>
-    <!-- <xsl:if test="@icon">
-      <img src="{$imageprefix}/icons/{@icon}.gif"/>
-    </xsl:if> -->
+    <xsl:variable name="definition" select="//elml:glossary/elml:definition[@term = $glossRef]/text()"/>
+    <xsl:variable name="term" select="//elml:glossary/elml:definition[@term = $glossRef]/@term"/>
     <xsl:choose>
       <xsl:when test="text()">
-        <a href="{concat($glossPageUrl, '#', $glossRef)}" alt="{$definition}" title="{$definition}">
+        <a href="{concat('?lesson.section=glossary', '#', $glossRef)}" alt="{$definition}" title="{$definition}">
           <xsl:value-of select="."/><xsl:comment/>
         </a>
       </xsl:when>
       <xsl:otherwise>
-        <p>
-          <b><xsl:value-of select="$term"/><xsl:comment/></b>: <xsl:value-of select="$definition"/>
-        </p>
+        <dl>
+          <dt><xsl:value-of select="$term"/><xsl:comment/></dt> 
+          <dd><xsl:value-of select="$definition"/></dd>
+        </dl>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -254,6 +268,15 @@
   </xsl:template>
 
   <xsl:template match="elml:table">
+
+   <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+     <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
+
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
       <!-- eventually add support for width, height, units -->
@@ -312,6 +335,14 @@
   </xsl:template>
 
   <xsl:template match="elml:list">
+
+    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
@@ -319,7 +350,7 @@
       <img src="{$imageprefix}/icons/{@icon}.gif"/>
     </xsl:if>
     <xsl:if test="@title">
-      <h2><xsl:value-of select="@title"/></h2>
+      <h3><xsl:value-of select="@title"/></h3>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="@listStyle = 'ordered'">
@@ -343,6 +374,14 @@
   </xsl:template>
 
   <xsl:template match="elml:box">
+
+    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
@@ -411,6 +450,14 @@
   </xsl:template>
 
   <xsl:template match="elml:popup">
+
+    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
     <xsl:variable name="varname">
       <xsl:text>solution</xsl:text>
       <xsl:value-of select="generate-id()"/>
@@ -487,29 +534,34 @@
 
   <xsl:template match="elml:link">
     <xsl:variable name="targetLabel" select="@targetLabel"/>
-    <xsl:variable name="url">
+    <xsl:variable name="targetNode" select="//*[@label = $targetLabel]"/>
+    <xsl:variable name="uri">
       <xsl:choose>
-        <xsl:when test="/document/content/*[local-name() = 'lesson']">
-          <xsl:value-of select="concat($contextprefix, /document/unizh:children/index:child[descendant::*[@label = $targetLabel]]/@href)"/>  
+        <xsl:when test="$targetNode[self::elml:unit]">
+          ?lesson.section=unit&#38;section.label=<xsl:value-of select="$targetNode/@label"/>
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:unit]">
+          ?lesson.section=unit&#38;section.label=<xsl:value-of select="//elml:unit[descendant::* = $targetNode]/@label"/>#<xsl:value-of select="$targetNode/@label"/>
+        </xsl:when>
+        <xsl:when test="$targetNode[self::elml:selfAssessment]">
+           ?lesson.section=selfAssessment 
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:selfAssessment]">
+            ?lesson.section=selfAssessment#<xsl:value-of select="$targetNode/@label"/> 
+        </xsl:when>
+        <xsl:when test="$targetNode[self::elml:summary]">
+             ?lesson.section=summary
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:summary]">        
+             ?lesson.section=summary#<xsl:value-of select="$targetNode/@label"/> 
         </xsl:when>
         <xsl:otherwise>
-          <xsl:if test="/document/unizh:level/level:node[descendant::*[@label = $targetLabel]]">
-            <xsl:value-of select="concat($contextprefix, /document/unizh:level/level:node[descendant::*[@label = $targetLabel]]/@href)"/>
-          </xsl:if>
-          <xsl:if test="/document/unizh:ancestors/unizh:ancestor[descendant::*[@label = $targetLabel]]">
-            <xsl:value-of select="concat($contextprefix, /document/unizh:ancestors/unizh:ancestor[descendant::*[@label = $targetLabel]/@href])"/>
-          </xsl:if>
+             ?lesson.section=#<xsl:value-of select="$targetNode/@label"/>
         </xsl:otherwise>
-      </xsl:choose>      
+      
+      </xsl:choose>
     </xsl:variable>
-    <xsl:choose>
-      <xsl:when test="@uri">
-        <a href="{@uri}"><xsl:apply-templates/></a>
-      </xsl:when>
-      <xsl:otherwise>
-        <a href="{$url}#{@targetLabel}"><xsl:apply-templates/><xsl:comment/></a>
-      </xsl:otherwise> 
-    </xsl:choose> 
+    <a href="{$uri}"><xsl:apply-templates/></a> 
   </xsl:template>
 
 
@@ -550,6 +602,13 @@
   </xsl:template>
 
   <xsl:template match="elml:paragraph">
+    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/> 
       <xsl:if test="@label">
@@ -571,6 +630,8 @@
         </xsl:when>
         <xsl:otherwise>
           <p>
+            
+
             <xsl:apply-templates/>
           </p>
         </xsl:otherwise>
@@ -580,24 +641,63 @@
 
 
   <xsl:template match="elml:toc">
-    <xsl:choose>
-      <xsl:when test="/document/content/*[local-name() = 'lesson']">
-        <p>
-          <xsl:for-each select="/document/unizh:children/index:child">
-            <xsl:if test="*/*/@title">
-              <a class="arrow" href="{@href}"><xsl:attribute name="href"><xsl:value-of select="concat($contextprefix,@href)"/></xsl:attribute><xsl:value-of select="*/*/@title"/><xsl:comment/></a><br/>
+    <p>
+      <xsl:choose>
+        <xsl:when test="@scope = 'unit'">
+          <xsl:for-each select="ancestor::elml:unit[1]//elml:learningObject">
+            <xsl:if test="@title">
+              <a class="arrow" href="#{@label}">
+                <xsl:value-of select="@title"/>
+                <xsl:comment/>
+              </a>
+              <br/>
             </xsl:if>
           </xsl:for-each>
-        </p>
-      </xsl:when>
-      <xsl:otherwise>
-        <p>
-          <xsl:for-each select="/document/content/*//elml:learningObject">
-            <a class="arrow" href="#{@label}"><xsl:value-of select="@title"/><xsl:comment/></a><br/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:for-each select="//elml:lesson/*">
+            <xsl:if test="self::elml:unit">
+              <a class="arrow" href="?lesson.section=unit&#38;section.label={@label}">
+                <xsl:value-of select="@title"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if>
+            <xsl:if test="self::elml:selfAssessment">
+              <a class="arrow" href="?lesson.section=selfAssessment">
+                 <xsl:value-of select="//elml:messagebundle/elml:msg[@name = 'name_selfAssessment']"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if>
+            <xsl:if test="self::elml:summary">
+              <a class="arrow" href="?lesson.section=summary">
+                 <xsl:value-of select="//elml:messagebundle/elml:msg[@name = 'name_summary']"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if> 
+            <xsl:if test="self::elml:furtherReading">
+              <a class="arrow" href="?lesson.section=furtherReading">
+                <xsl:value-of select="//elml:messagebundle/elml:msg[@name = 'name_furtherReading']"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if>
+            <xsl:if test="self::elml:glossary">
+              <a class="arrow" href="?lesson.section=glossary">
+                 <xsl:value-of select="//elml:messagebundle/elml:msg[@name = 'name_glossary']"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if>
+            <xsl:if test="self::elml:bibliography">
+              <a class="arrow" href="?lesson.section=bibliography">
+                <xsl:value-of select="//elml:messagebundle/elml:msg[@name = 'name_bibliography']"/>
+                <xsl:comment/>
+              </a>
+            </xsl:if>
+            <br/>
           </xsl:for-each>
-        </p>
-      </xsl:otherwise>
-    </xsl:choose> 
+        </xsl:otherwise>
+      </xsl:choose>
+    </p>
+
   </xsl:template>
 
   <!-- Named templates --> 
@@ -674,6 +774,14 @@
   <!-- Asset Handling -->
 
   <xsl:template match="elml:multimedia">
+
+    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
+    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
+      <div class="contextInfo">
+        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
+      </div>
+    </xsl:if>
+
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
       <table cellpadding="0" cellspacing="2" border="0" width="100%" class="content_table">
@@ -1154,6 +1262,10 @@
   <!-- bibliography -->
 
   <xsl:template match="elml:bibliography">
+
+    <xsl:if test="$pagebreak_level = 'lesson'">
+      <h2><xsl:value-of select="//elml:msg[@name = 'name_bibliography']"/></h2>
+    </xsl:if>
     <div>
       <xsl:for-each select="*[not(self::lenya:meta) and not(self::unizh:header)]">
         <xsl:sort select="@author"/>
@@ -1171,7 +1283,7 @@
 
     <xsl:if test="@bibIDRef">
       <xsl:variable name="id" select="@bibIDRef"/>
-      <xsl:variable name="bibNode" select="/document/unizh:level/level:node/*/elml:bibliography/*[@bibID=$id]"/>
+      <xsl:variable name="bibNode" select="//elml:bibliography/*[@bibID=$id]"/>
       <xsl:variable name="position">
         <xsl:for-each select="$bibNode/../*">
             
@@ -1201,7 +1313,7 @@
       <!-- FIXME: add link when pagebreak set to unit  -->
       <a target="_top" class="bibLink">
         <xsl:attribute name="href">
-          <xsl:value-of select="concat($contextprefix, /document/unizh:level/level:node[*/elml:bibliography]/@href, '#', $position)"/>
+          <xsl:value-of select="concat('?lesson.section=bibliography', '#', $position)"/>
         </xsl:attribute>
         <xsl:choose>
           <xsl:when test="contains($author, ',')">
@@ -1251,7 +1363,9 @@
   </xsl:template>
 
 
-
+  <xsl:template match="elml:contextInformation">
+    <xsl:apply-templates/>
+  </xsl:template>
 
 
 

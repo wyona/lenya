@@ -1,18 +1,79 @@
 <grammar ns="http://www.elml.ch"
          xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
          xmlns:elml="http://www.elml.ch"
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
-         xmlns:wrap="http://unizh.ch/doctypes/wrap/1.0"
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
          >
 
   <include href="lenya.rng"/>
-  <include href="elml/lesson.rng"/>
+
+  <include href="elml/unit.rng"/>
+  <include href="elml/glossary.rng"/>
+
+  <include href="elml/metadata/metadata.rng"/>
+  <include href="elml/config.rng"/> 
+  <include href="elml/common.rng"/>
+  <include href="elml/bibliography/harvard.rng"/>
 
   <start>
-    <ref name="lesson"/>
+    <element name="unizh:lessonEnvelope">
+      <attribute name="lenya:dummy"><text/></attribute>
+      <attribute name="dc:dummy"><text/></attribute>
+      <attribute name="dcterms:dummy"><text/></attribute>
+      <attribute name="elml:dummy"><text/></attribute>
+      <ref name="lenya.meta"/>
+      <ref name="lesson.config"/>
+      <ref name="lesson.messagebundle"/>
+      <ref name="lesson"/> 
+    </element>
   </start>
+
+
+  <define name="lesson">
+    <element name="lesson">
+      <ref name="SchemaLocation"/>
+      <ref name="LessonLabelReq"/>
+      <ref name="TitleReq"/>
+      <ref name="NavTitleImp"/>
+      <interleave>
+        <optional>
+          <ref name="entry"/>
+        </optional>
+        <optional>
+          <ref name="goals"/>
+        </optional>
+      </interleave>
+      <oneOrMore>
+        <ref name="unit"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <choice>
+          <ref name="selfAssessment"/>
+          <ref name="summary"/>
+        </choice>
+      </zeroOrMore>
+      <optional>
+        <ref name="furtherReading"/>
+      </optional>
+      <optional>
+        <ref name="glossary"/>
+      </optional>
+      <optional>
+        <ref name="context"/>
+      </optional>
+      <optional>
+        <ref name="bibliography"/>
+      </optional>
+      <optional>
+        <element name="metadata">
+          <ref name="RoleImp"/>
+          <ref name="MetaDataType"/>
+        </element>
+      </optional>
+    </element>
+  </define>
 
 </grammar>

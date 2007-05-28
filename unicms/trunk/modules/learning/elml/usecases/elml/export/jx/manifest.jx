@@ -5,21 +5,21 @@
   </imscp:metadata>
   <imscp:organizations>
     <imscp:organization identifier="default" structure="hierarchical">
-      <imscp:title>${doc.getLabel()}</imscp:title>
-      <imscp:item identifier="item-${doc.getName()}" identifierref="${doc.getName()}">
-        <imscp:title>${doc.getLabel()}</imscp:title>
-        <jx:forEach var="item" items="${items}">
-          <imscp:item identifier="item-${item.getName()}" identifierref="${item.getName()}">
-            <imscp:title>${item.getLabel()}</imscp:title>
+      <imscp:title>${lessonTitle}</imscp:title>
+      <imscp:item identifier="item-${lessonLabel}" identifierref="${lessonLabel}">
+        <imscp:title>${lessonTitle}</imscp:title>
+        <jx:forEach var="section" items="${sections}">
+          <imscp:item identifier="item-${section.label}" identifierref="${section.label}">
+            <imscp:title>${section.title}</imscp:title>
           </imscp:item>           
         </jx:forEach>
       </imscp:item>
     </imscp:organization>
   </imscp:organizations>
   <imscp:resources>
-    <imscp:resource identifier="${doc.getName()}" type="webcontent" href="${doc.getName()}.html"/>
-    <jx:forEach var="item" items="${items}">
-      <imscp:resource identifier="${item.getName()}" type="webcontent" href="${item.getName()}.html"/>
+    <imscp:resource identifier="${lessonLabel}" type="webcontent" href="${lessonLabel}.html"/>
+    <jx:forEach var="section" items="${sections}">
+      <imscp:resource identifier="${section.label}" type="webcontent" href="${section.label}.html"/>
     </jx:forEach>
   </imscp:resources>
 </imscp:manifest>

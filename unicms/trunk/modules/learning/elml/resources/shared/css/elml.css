@@ -1,0 +1,16 @@
+.contextInfo {
+
+  float: right;
+  position: relative;
+  width: 170px;
+  border: 1px solid #ccccff;
+  left: 200px;
+  margin-left: -200px;
+  margin-bottom: 18px;
+
+  padding: 8px 9px 10px 9px;
+  line-height: 1.3em;
+  font-size: 0.95em;
+
+  clear: right;
+}

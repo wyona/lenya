@@ -34,6 +34,9 @@
         </optional>
       </interleave>
       <optional>
+        <ref name="context"/>
+      </optional>
+      <optional>
         <element name="metadata">
           <ref name="MetaDataType"/>
         </element>

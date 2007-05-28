@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wf:history xmlns:wf="http://apache.org/cocoon/lenya/workflow/1.0" workflow="2stage.xml">
+<wf:version state="authoring">
+<wf:identity>
+</wf:identity>
+</wf:version>
+</wf:history>

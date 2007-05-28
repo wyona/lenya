@@ -1,27 +1,539 @@
-<?xml version="1.0" encoding="UTF-8"?><lesson xmlns="http://www.elml.ch" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:elml="http://www.elml.ch" xhtml:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" elml:dummy="FIXME:keepNamespace" title="Lektion" label="Label"><lenya:meta>
-      <dc:title>Lektion</dc:title>
-      <dc:description/><dc:creator>Autor des Dokuments</dc:creator>
-      <dc:subject/>
-      <dc:publisher>UZH</dc:publisher>
-      <dcterms:created>date of creation</dcterms:created>
-      <dcterms:issued>date of publication</dcterms:issued>
-      <dc:language>de</dc:language>
-      <dc:rights>UZH</dc:rights>
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:lessonEnvelope 
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:elml="http://www.elml.ch"
+  xmlns="http://www.elml.ch"
+  dc:dummy="FIXME:keepNamespace" 
+  dcterms:dummy="FIXME:keepNamespace"
+  lenya:dummy="FIXME:keepNamespace"
+  elml:dummy="FIXME:keepNamespace" 
+  >
+
+   <lenya:meta>
+    <dc:title>Lesson title</dc:title>
+    <dc:description></dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject></dc:subject>
+    <dc:publisher>UniversitA$t ZA1/4rich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UniversitA$t ZA1/4rich</dc:rights>
   </lenya:meta>
-  <!-- <elml:metadata>
-    <elml:organisation>Organisation</elml:organisation>
-    <elml:prerequisites>Prerequisites</elml:prerequisites>
-    <elml:keywords>Keywords</elml:keywords>
-    <elml:technical>Technical</elml:technical>
-    <elml:lessonInfo>Lesson info</elml:lessonInfo>
-    <elml:rights>Rigths</elml:rights>
-  </elml:metadata>
-  -->
-   <elml:entry xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" label="LEntryLesson" title="Einleitung" navTitle="Intro">
-                <paragraph>Paragraph</paragraph>
-        </elml:entry>
-        <elml:goals xmlns:unizh="http://unizh.ch/doctypes/elements/1.0">
-          <elml:lObjective role="student">Lernziel</elml:lObjective>
-          <elml:lObjective role="student">Lernziel</elml:lObjective>
-        </elml:goals>
+
+
+  <config>
+    <general>
+      <!--Enter the contact Email that students will use to contact the tutor -->
+      <contact>joelfisler@users.sourceforge.net</contact>
+      <!--Enter the URL to your servers home page -->
+      <server>http://www.elml.ch</server>
+      <!--Would like to make a transformation for role 'tutor' or 'student'? -->
+      <role>student</role>
+      <!--On which level would like have the page break? To generate just one output use "oneoutput", else "lesson", "unit" or "lo" -->
+      <pagebreak_level>unit</pagebreak_level>
+      <!--If you would like to have chapter titles with numeration, set this to "yes" else to "no" -->
+      <chapter_numeration>yes</chapter_numeration>
+      <!-- Which type of imsmanifest.xml will be produced: IMS CP or SCORM compatible (accepted values are: 'ims' or 'scorm' or 'both') -->
+      <manifest_type>scorm</manifest_type>
+      <!--Define units that should be marked/highlighted as optional for the student. Enter unit-labels separated by a comma or leave empty. -->
+      <optional_units>
+        <labelname/>
+      </optional_units>
+    </general>
+    <!--These parameters are only used for the online version -->
+    <online>
+      <!--Enter an URL to your bugtracker form here (or leave empty if you dont have one) -->
+      <bugtracker>http://sourceforge.net/projects/elml/</bugtracker>
+      <!--Would you like to use a navigation in your online version? "yes" or "no" -->
+      <use_navigation>yes</use_navigation>
+    </online>
+    <!--These parameters are only used for the print version -->
+    <print>
+    <!--Links are also clickable in the PDF version. Should additionally the link URI be written in brackets after the link text? Choose "yes" or "no" -->
+       <display_links>no</display_links>
+       <!--If you use the latest FOP version enter the value "0.9", otherwise use "0.2" -->
+       <fop_version>0.2</fop_version>
+       <!--The height of your page (Eg. "29.7cm" for A4) -->
+      <pageheight>29.7cm</pageheight>
+      <!--The width of your page (Eg. "21cm" for A4) -->
+      <pagewidth>21cm</pagewidth>
+      <!--Your default font size (Eg. "11pt") -->
+      <fontsize>11pt</fontsize>
+      <!--Your default line height  (Eg. "15pt") -->
+      <lineheight>15pt</lineheight>
+      <!--Your default font weight for titles  (Eg. "bold") -->
+      <fontweighttitle>bold</fontweighttitle>
+      <!--The conversion factor from pixel to mm (do NOT change, should be "0.2646") -->
+      <converter_pixel_mm>0.2646</converter_pixel_mm>
+    </print>
+    <!--These parameters are only used for the latex version -->
+    <latex>
+      <!--The type of latex document created: Either article or book -->
+       <documentclass>book</documentclass>
+    </latex>
+  </config>
+
+  <messagebundle>
+
+    <msg name="name_content">Inhaltsverzeichnis</msg>
+    <msg name="name_entry">Einfuhrung</msg>
+    <msg name="name_lObjectives">Lernziele</msg>
+    <msg name="name_glossary">Glossar</msg>
+    <msg name="name_glossary_empty"> ist noch leer.</msg>
+    <msg name="name_keywords">Schlusselworter</msg>
+    <msg name="name_summary">Zusammenfassung</msg>
+    <msg name="name_selfAssessment">&#220;bung</msg>
+    <msg name="name_furtherReading">Literaturempfehlungen</msg>
+    <msg name="name_bibliography">Bibliographie</msg>
+    <msg name="name_metaSetUpInfo">Installationshinweise (Tutoren): </msg>
+    <msg name="name_metadata">Metadaten</msg>
+    <msg name="name_solution">Losung</msg>
+    <msg name="name_solutiontext">Klicken Sie hier fur mehr Informationen</msg>
+    <msg name="name_anon">Anonym</msg>
+    <msg name="name_size">Grosse</msg>
+    <msg name="name_type">Typ</msg>
+    <msg name="name_internalLink">Link zur</msg>
+    <msg name="name_lesson">Lektion</msg>
+    <msg name="name_page">Seite</msg>
+    <msg name="name_page_of">von</msg>
+    <msg name="name_hint">Hinweis</msg>
+    <msg name="name_nolegend">Legende fehlt</msg>
+    <msg name="name_notanimage">Dieses Element (Animation, Video etc.) kann in der PDF version nicht dargestellt werden und ist nur in der online Version sichtbar.</msg>
+    <msg name="name_download">Herunterladen</msg>
+    <msg name="name_selfCheckCorrect">Prufen</msg>
+    <msg name="name_selfCheckSolve">Losung</msg>
+    <msg name="name_selfCheckMissing">Du hast noch nicht alle richtigen Antworten angekreuzt!</msg>
+    <msg name="name_optionalunits_symbol"> *</msg>
+    <msg name="name_optionalunits_text">Diese Unit wurde als fakultativ markiert.</msg>
+    <msg name="name_index">Index</msg>
+    <msg name="name_context">Anhang</msg>
+    <msg name="name_figures">Abbildungsverzeichnis</msg>
+    <msg name="name_tables">Tabellenverzeichnis</msg>
+    <msg name="name_bugtracker">Fehler gefunden?</msg>
+    <msg name="name_contact">Kontakt</msg>
+    <msg name="name_print">Drucken</msg>
+    <msg name="name_printed">Stand vom: </msg>
+    <msg name="name_responsible">Verantwortliche Personen:</msg>
+    <msg name="name_tutoronly">Diese Unit ist nur fur Tutoren und nicht fur Studierende sichtbar.</msg>
+    <msg name="name_biblio_book">Monographien (Bucher)</msg>
+    <msg name="name_biblio_contributionInBook">Beitrage aus Sammelbanden</msg>
+    <msg name="name_biblio_journalArticle">Beitrage aus Zeitschriften</msg>
+    <msg name="name_biblio_newspaperArticle">Beitrage aus Zeitungen</msg>
+    <msg name="name_biblio_map">Kartenmaterialien</msg>
+    <msg name="name_biblio_conferencePaper">Beitrage zu einer Konferenz</msg>
+    <msg name="name_biblio_publicationCorporateBody">Publikationen von Korperschaften</msg>
+    <msg name="name_biblio_thesis">Dissertationen, Diplomarbeiten etc.</msg>
+    <msg name="name_biblio_patent">Patente</msg>
+    <msg name="name_biblio_videoFilmBroadcast">Audiovisuelle Medien</msg>
+    <msg name="name_biblio_websites">Veroffentlichungen im Internet</msg>
+    <msg name="name_biblio_eJournals">Beitrage in eJournals</msg>
+    <msg name="name_biblio_mailLists">Veroffentlichungen in Mailing-Listen</msg>
+    <msg name="name_biblio_personalMail">Personliche E-Mails</msg>
+    <msg name="name_biblio_cdRom">CD-ROM</msg>
+  </messagebundle>
+
+
+
+  <lesson label="IntroToDBS" title="Introduction to Database Systems" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elml.ch ../../../_config/validate.xsd" navTitle="Introduction DBS">
+	<entry>
+		<paragraph>Data management and especially the management of geodata is not bound to a specific technology. It would be possible to use analogous map archives or file based record systems. However, the term Geoinformationsystem implies some demands that exceed the storage and retrieval of data. These additional needs can be satisfied sensibly with database systems only.</paragraph>
+		<paragraph>This lesson is focused on database concepts and architectures. After an introduction and the definition of some of the most important terms in the unit <link targetLesson="IntroToDBS" targetLabel="DefinOfTerms">Definition of Terms</link> we will devote our selfs to the specific characteristics of the database approach (unit <link targetLesson="IntroToDBS" targetLabel="DBApproaChar">Characteristics of the Database Approach</link>). The closer examination of various applications of databases in the unit <link targetLesson="IntroToDBS" targetLabel="ExamplesApps">Example Applications</link> allows to become acquainted with the use of databases in different fields and contexts and to extend the knowledge about the characteristics of databases. A comparison of the database approach with file based solutions is made in the unit <link targetLesson="IntroToDBS" targetLabel="AdvantDisadv">Advantages and Disadvantages</link>.</paragraph>
+	</entry>
+	<goals>
+		<lObjective>Be used to the terminology of data, information and data management and be able to explain the most important terms.</lObjective>
+		<lObjective>Know and understand the characteristics of database systems and be able to transfer these to applications in your daily live.</lObjective>
+	</goals>
+	<unit label="DefinOfTerms" title="Definition of Terms">
+		<entry title="From Data to usable Information...">
+			<paragraph>Before we start with the use and architecture of data management solutions we discuss the terminology of this field to get to know the basic terms like information, data, database systems. A lot of these basic terms are used daily but most often not in the right context.</paragraph>
+		</entry>
+		<learningObject title="Data versus Information" label="dataAndInfo" navTitle="Data vs. Information">
+			<clarify>
+				<term glossRef="Data (especially computer data)"/>
+				<term glossRef="Information"/>
+				<paragraph>Something is information if a specific question is answered and that answer increases the understanding of the questioner and enables him to come closer to a specific objective. (Translation from <citation bibIDRef="b4"/>) </paragraph>
+				<paragraph>Information has the following aspects:</paragraph>
+				<list listStyle="unordered">
+					<item>
+						<term glossRef="Dimensions of Information">structured</term> and <term glossRef="Syntax">syntactic</term>
+					</item>
+					<item>
+						<term glossRef="Dimensions of Information">semantic</term> (as regards content)</item>
+					<item>
+						<term glossRef="Dimensions of Information">pragmatic</term> (relevant to applications)</item>
+				</list>
+				<paragraph title="Relationship between Data and Information">The terms data and information are often used interchangeably and in the wrong context. Therefore a list of distinguishing features is presented below</paragraph>
+				<list listStyle="unordered">
+					<item>Semantic aspects of data are often coded. This codes need to be defined and interpreted after conventions previously agreed upon (e.g. Grades from 1 to 6 with the convention 6 = very good).</item>
+					<item>Generally, information needs to be reconstructed or derived from data (e.g. the average rainfall of the month July over the last 10 years). </item>
+					<item>Normally, data do not contain aspects relevant to applications (e.g. it is not possible to derive information for applications like tax, developement, flood risk, etc. from the coordinates of a parcel of land). </item>
+				</list>
+			</clarify>
+			<look>
+				<column>
+					<columnLeft width="350" units="pixels" align="center">
+						<multimedia src="../image/chinese_letter_small.gif" type="gif" legend="A letter in chinese language"/>
+					</columnLeft>
+					<columnRight>
+						<paragraph>Trying to read a letter in a foreign language we are able to recognise the structure and the syntactic aspects of it like the paragraphs, sentences, words, etc. but we cannot make out the meaning of the writing.</paragraph>
+						<paragraph>However, writing in our own language too cannot be called information in every case. At least we might be able to understand the content (<term glossRef="Dimensions of Information">semantic</term>) but if this content is irrelevant or not interesting to us then the important aspect of the usefulness is missing.</paragraph>
+					</columnRight>
+				</column>
+			</look>
+		</learningObject>
+		<learningObject title="The Components of an Information System" navTitle="Components IS">
+			<clarify>
+				<paragraph><term glossRef="Conceptual">Conceptually</term> an information systems has got a layered structure. <newLine/>Move your mouse over the terms of the following interaction and get to know what parts make up an information system.</paragraph>
+				<multimedia src="../multimedia/aufbau_informationssystem.swf" type="flash" legend="The Components of an Information System" width="490" height="300" align="center"/>
+				<paragraph>The data managements components of an information system are:</paragraph>
+				<term glossRef="Data and Database"/>
+				<term glossRef="Database Management System"/>
+				<term glossRef="Database System"/>
+				<paragraph icon="remark">Database management systems and database systems are in the focus of this module.</paragraph>
+				<term glossRef="Information System"/>
+				<paragraph icon="remark">According to the first part of this unit where the <link targetLabel="dataAndInfo" targetLesson="IntroToDBS">difference between data and information</link> was discussed, the tools of an information system enrich the data with <term glossRef="Dimensions of Information">semantic</term> and <term glossRef="Dimensions of Information">pragmatic</term> aspects.</paragraph>
+				<paragraph>For sure you have already heard the term geoinformation system and maybe also read the one or other definition of it. The following paragraph defines the term geoinformation system and compares this definition with the one of an information system as discussed earlier in this unit.</paragraph>
+				<term glossRef="Geoinformation System"/>
+				<paragraph>This definition contains the most important aspects of the definition of an information system but focusses on data with spatial reference.</paragraph>
+			</clarify>
+		</learningObject>
+	</unit>
+	<unit label="DBApproaChar" title="Characteristics of the Database Approach" navTitle="Characteristics">
+		<entry>
+			<paragraph>The database approach has some very characteristic features which are discussed in detail in this unit.<newLine/> In the unit <link targetLesson="IntroToDBS" targetLabel="ExamplesApps">Example Applications</link> the use of databases in different fields is presented and according to these examples the most important features of the database approach revised. <newLine/> A comparison between the filebased approach and the database approach can be found in the unit <link targetLesson="IntroToDBS" targetLabel="AdvantDisadv">Advantages and Disadvantages</link>.</paragraph>
+		</entry>
+		<learningObject title="Concurrent Use" label="mehrfachn">
+			<clarify>
+				<paragraph> A database system allows several users to access the database concurrently. Answering different questions from different users with the same (base) data is a central aspect of an information system.<newLine/> Such concurrent use of data increases the economy of a system. Data capturing and data storage is not <term glossRef="Redundancy">redundant</term>, the system can be operated from a central control and the data can be updated more efficient. Additionally, better use of the most often very expensive <term glossRef="Geodata">(geo) data</term> can be made. <newLine space="long"/>When using data concurrently the problem of how the system should behave if changes done are in competition (e.g. two different users with different applications change the same data simultaneously) needs to be solved. Additionally, there is a bigger security risk, for example, in the realms of data protection.<newLine/>In technical jargon changes to a database are called transactions. This term is explained later in this lesson.</paragraph>
+			</clarify>
+			<look>
+				<paragraph> An example for concurrent use is the travel database of a bigger travel agency. The employees of different branches can access the database concurrently and book journeys for their clients. Each travel agent sees on his interface if there are still seats available for a specific journey or if it is already fully booked.</paragraph>
+				<multimedia src="../image/mehrfachnutzung.gif" type="gif" align="center" legend="Concurrent Use of the same Data"/>
+			</look>
+		</learningObject>
+		<learningObject title="Structured and Described Data" label="struktDaten" navTitle="Structured Data">
+			<clarify>
+				<paragraph>A fundamental feature of the database approach is that the database systems does not only contain the data but also the complete definition and description of these data. These descriptions are basically details about the extent, the structure, the type and the format of all data and, additionally, the relationship between the data. This kind of stored data is called metadata ("data about data").<newLine space="long"/>
+					<term glossRef="Metadata">Metadata</term> is used from the DBMS software but also from applications like GIS and from users of databases. As DBMS software is not written for one specific database application the <term glossRef="Metadata">metadata</term> of a database is used to get information about the extent, the structure, etc. of it.</paragraph>
+				<term glossRef="Structured Data"/>
+			</clarify>
+			<look>
+				<paragraph>Following a simple example how data can be described in a database.<newLine/>Below there is a database table. Because of the structure of this table (first colum = Prename, second column = Name, third column = Postcode, forth column = City) it is known that a entry in the first column must be a prename (coded as string) and an entry in the third column must be a postcode (coded as number).</paragraph>
+				<multimedia src="../image/datenbanktabelle.gif" type="gif" align="center" legend="Example of an Database Table"/>
+			</look>
+		</learningObject>
+		<learningObject title="Separation of Data and Applications" label="trennDataApp">
+			<clarify>
+				<paragraph>As described in the feature <link targetLesson="IntroToDBS" targetLabel="struktDaten">structured data</link> the structure of a database is described through <term glossRef="Metadata">metadata</term> which is also stored in the database.<newLine space="long"/>An application software does not need any knowledge about the physical data storage like encoding, format, storage place, etc. It only communicates with the management system of a database (DBMS) via a standardised interface with the help of a standardised language like SQL. The access to the data and the metadata is entirely done by the DBMS.<newLine space="long"/>In this way all the applications can be totally seperated from the data. Therefore database internal reorganisations or improvement of efficiency do not have any influence on the application software.</paragraph>
+			</clarify>
+			<look>
+				<multimedia src="../image/trennung_Daten_Anwendung.gif" type="gif" align="center" legend="Separation of Data and Applications"/>
+			</look>
+		</learningObject>
+		<learningObject title="Data Integrity" label="dataint">
+			<clarify>
+				<paragraph>Data integrity is a byword for the quality and the reliability of the data of a database system. In a broader sense data integrity includes also the protection of the database from unauthorised access (confidentiality) and unauthorised changes.<newLine space="long"/> Data reflect facts of the real world. Logically, it is demanded that this reflection is done correctly. A DBMS should support the task to bring only correct and consistent data into the database. Additionally, correct <link targetLesson="IntroToDBS" targetLabel="transakt">transactions</link> ensure that the consistency is maintained during the operation of the system. </paragraph>
+			</clarify>
+			<look>
+				<paragraph>An example for inconsistency would be if contradictory statements were saved in the same database.</paragraph>
+				<multimedia src="../image/widerspruchsfreiheit.gif" type="gif" align="center" legend="Two Database Tables with Contradictory Datasets"/>
+			</look>
+		</learningObject>
+		<learningObject title="Transactions" label="transakt">
+			<clarify>
+				<paragraph>A transaction is a bundle of actions which are done within a database to bring it from one consistent state to a new consistent state. In between the data are inevitable inconsistent. <newLine/>A transaction is atomic what means that it cannot be divided up any further. Within a transaction all or none of the actions need to be carried out. Doing only a part of the actions would lead to an inconsistent database state.</paragraph>
+			</clarify>
+			<look>
+				<paragraph>One example of a transaction is the transfer of an amount of money from one bank account to another. The debit of the money from one account and the credit of it to another account makes together a consistent transaction. This transaction is also atomic. The debit or credit alone would both lead to an inconsistent state. After finishing the transaction (debit and credit) the changes to both accounts become persistent and the one who gave the money has now less money on his account while the receiver has now a higher balance. <newLine/>Try it using the buttons at the bottom to the left which allow to navigate through the steps of this example.</paragraph>
+				<multimedia src="../multimedia/transaktion_konten.swf" type="flash" width="500" height="290" legend="Transaction of money from one account to another" align="center"/>
+			</look>
+		</learningObject>
+		<learningObject title="Data Persistence" label="datapersis">
+			<clarify>
+				<paragraph>Data persistence means that in a DBMS all data is maintained as long as it is not deleted explicitely. The life span of data needs to be determined directly or indirectly be the user and must not be dependent on system features. Additionally data once stored in a database must not be lost. <newLine/> Changes of a database which are done by a <link targetLesson="IntroToDBS" targetLabel="transakt">transaction</link> are persistent. When a transaction is finished even a system crash cannot put the data in danger. </paragraph>
+			</clarify>
+		</learningObject>
+		<learningObject title="Data Views" label="datensichten">
+			<clarify>
+				<paragraph> Typically, a database has several users and each of them, depending on access rights and desire, needs an individual view of the data (content and form). Such a data view can consist of a subset of the stored data or of from the stored data derived data (not explicitely stored).</paragraph>
+			</clarify>
+			<look>
+				<paragraph>A university manages the data about students. Beside matriculation number, name, address, etc. other information like in which course the student is registered, if he needs to do a resit, and so on is managed as well. <newLine/>This extensive database is used by several people all with different needs and rights.<newLine space="long"/>Please click on the four buttons below to see the different data views for different users of this database.</paragraph>
+				<multimedia src="../multimedia/sichten.swf" type="flash" legend="Different Data Views" height="340" width="570" align="center"/>
+				<paragraph>The database administrator has a view on the whole database while other users in this example have only a restricted view on the database. The administration, for example, does not need information about names and matriculation numbers in case they want to create an anonymous statistic about the resits. In the student lists there should not be any sensitive data about the resits or similiar. However, the lecturer of a class needs the detailed information about the students in this class including resits and so on.</paragraph>
+			</look>
+		</learningObject>
+	</unit>
+	<unit label="ExamplesApps" title="Example Applications">
+		<entry>
+			<paragraph>Current information technology solutions distinguish itselfs by having many distributed user which want to concurrently use constantly updated data. Therefore, database systems are used in different fields and there is rarely an information technology solution that gets by without. <newLine/>Following a couple of examples for the use of database systems are discussed.<newLine space="long"/> For each example the application is shortly described first and then the for this application specific database features are commented on. The respective features with their descriptions can be found in the unit <link targetLesson="IntroToDBS" targetLabel="DBApproaChar">Characteristics of the Database Approach</link> which is linked from the keywords.</paragraph>
+		</entry>
+		<learningObject title="Management of Bank Accounts" navTitle="Bank Accounts">
+			<clarify>
+				<paragraph>The management of bank accounts are a demanding task which has used database systems as aid since some time. Today, probably nobody could think about operating in the very complex world of finances without the help of database systems.<newLine space="long"/>The most important characteristics of such database systems:</paragraph>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="transakt">Transaction</link>
+					</columnLeft>
+					<columnRight>The successfull and correct course of transactions is very important when managing bank accounts. It cannot be true that a credit is made to the wrong account or that a debit is made more than once.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="dataint">Data Integrity</link>
+					</columnLeft>
+					<columnRight>Data integrity is very important. It needs to be clearly defined what the requirements and rules of consistency are and how these can be followed.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="datapersis">Data Persistence</link>
+					</columnLeft>
+					<columnRight>For an owner of a bank account it is reassuring to know that the persistence of the data is guaranteed. Data are not deleted arbitrarily or are lost mysteriously.</columnRight>
+				</column>
+			</clarify>
+		</learningObject>
+		<learningObject title="Timetable Informationsystem" navTitle="Timetables">
+			<clarify>
+				<paragraph>The online timetable of the SBB (Swiss Federal Railways) is an example of a web based information system founded on a database system from the bounds of public transport. Its main task is to inform the users with current and correct information about the best connections and the train operation of the SBB at any time.<newLine space="long"/> The most important characteristics of such a database system:</paragraph>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="mehrfachn">Concurrent Use</link>
+					</columnLeft>
+					<columnRight>The database system of the SBB timetable can be used by different users and applications concurrently. While the information are used internally within the SBB information about the timetables and other specific information can also be used from the public via the internet.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="dataint">Data Integrity</link>
+					</columnLeft>
+					<columnRight>The users of the SBB timetables need current and correct information at any time. These makes great demands on the data integrity. Therefore, timetable or platform changes or any other changes need to be updated constantly in the database system.</columnRight>
+				</column>
+				<paragraph>Such a database system can get more than one call per second in record times. Therefore, perfomance is also a very important characteristic which was not mentioned above.</paragraph>
+			</clarify>
+			<look>
+				<multimedia src="../image/fahrplan_sbb.jpg" type="jpeg" width="600" height="430" legend="Screenshot SBB Timetable Informationsystem" align="center" bibIDRef="b8" units="pixels"/>
+				<paragraph>Internet access to the SBB timetable: <link uri="http://fahrplan.sbb.ch/">http://fahrplan.sbb.ch/</link>
+				</paragraph>
+			</look>
+		</learningObject>
+		<learningObject title="Library Catalogue">
+			<clarify>
+				<paragraph> The library catalogue NEBIS <citation bibIDRef="b9"/> is the catalogue of a network of libraries and information desks in Switzerland. With the help of NEBIS it is possible to search for specific books or publications in libraries all over Switzerland. <newLine space="long"/>The most important characteristics of such a database system:</paragraph>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="struktDaten">Structured and Described Data</link>
+					</columnLeft>
+					<columnRight> It is more than helpful to have a clearly defined structure when recording and updating several thousands of books, magazins and publications. Additionally, the description of the data allows to search selectively for specific objects.<newLine/>Further, a clear structure is also free of redundancy. This saves works as already a very small <term glossRef="Redundancy">redundancy</term> would lead to a multiple of work. </columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="datensichten">Data Views</link>
+					</columnLeft>
+					<columnRight>Depending on how detailled and specialised a search should be done a user needs more or less information from the database. Thus, for a coarse search title and author might already be sufficient. However, when looking for a specific edition of a book some more information is needed. With this in view the user can choose between different data views. Additionally, there are views for the manager of the catalogue which are not accessible be the public user.</columnRight>
+				</column>
+			</clarify>
+			<look>
+				<paragraph>Different Data Views (click on the thumbnail for a bigger image)</paragraph>
+				<column>
+					<columnLeft width="50" units="percent" align="center">
+						<multimedia src="../image/datensicht_I.gif" type="gif" thumbnail="../image/datensicht_I_thumb.gif" legend="Result List of the Search" bibIDRef="b9"/>
+					</columnLeft>
+					<columnRight width="50" units="percent" align="center">
+						<multimedia src="../image/datensicht_II.gif" type="gif" thumbnail="../image/datensicht_II_thumb.gif" legend="Standard View of a Choosen Entry" bibIDRef="b9"/>
+					</columnRight>
+				</column>
+				<column>
+					<columnLeft width="50" units="percent" align="center">
+						<multimedia src="../image/datensicht_III.gif" type="gif" thumbnail="../image/datensicht_III_thumb.gif" legend="Catalogue View of a Choosen Entry" bibIDRef="b9"/>
+					</columnLeft>
+					<columnRight width="50" units="percent" align="center">
+						<multimedia src="../image/datensicht_IV.gif" type="gif" thumbnail="../image/datensicht_IV_thumb.gif" legend="'MARC'-View of a Choosen Entry" bibIDRef="b9"/>
+					</columnRight>
+				</column>
+				<multimedia src="../image/nebis.gif" type="gif" align="center" thumbnail="../image/nebis_thumb.gif" legend="Screenshot of a Library Catalogue" bibIDRef="b9"/>
+				<paragraph>Online access to the NEBIS library catalogue: <link uri="http://www.nebis.ch/">http://www.nebis.ch/</link>
+				</paragraph>
+			</look>
+		</learningObject>
+		<learningObject title="Central Geodata Warehouse" navTitle="Geodata-Warehouse">
+			<clarify>
+				<paragraph>Lately, it is getting more common in city and canton governments to manage and update spatial data of all parts of the government in one central data pool called geodata warehouse (a spatial database management system). This makes huge savings as the data is now stored redundance free and needs to be updated only once. Until now the some data needed to be stored and updated in different departements of the government. This made it enormously difficult to have current data at all places. Additionally, when doing bigger projects the data can now simply be taken out of the geodata pool and does not need to be gathered in tedious and lengthy work.<newLine space="long"/>The most important characteristics of such database systems:</paragraph>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="mehrfachn">Concurrent Use</link>
+					</columnLeft>
+					<columnRight>A central geodata warehouse is a nice example of concurrent use of a database system. On the one hand different users get their data from it - the employees of the different departements. On the other hand different application software (e.g. GIS systeme) are used to access the geodata warehouse. Therefore, it is possible that the forestry departement uses GIS software A for access to the data while the surveyor departement uses GIS software B.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="trennDataApp">Separation of Data and Applications</link>
+					</columnLeft>
+					<columnRight>Like described above, different user with different applications get access to the data. This is only possible, if the data is separated from the applications. Would the data be connected to the application it would be much work to process the data in way that other applications could read and use it. This independence is especially import in cases where the DBMS software needs replacement. With the separation of data and applications this is possible without having to re-write all of the application software.<newLine/> Example: A Microsoft Word file (where the data is included in the application format) is quite difficult to open with the Microsoft Excel software even though both applications are made by the same company.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="datapersis">Data Persistence</link>
+					</columnLeft>
+					<columnRight> The capture of <term glossRef="Geodata">geodata</term> and other data is most often a lot of work and very expensive. Therefore, data persistence is a very important characteristic of a geodata warehouse. This way, it is possible to ensure that data is not lost and needs then be replaced costly.</columnRight>
+				</column>
+				<column>
+					<columnLeft width="150" units="pixels" align="left">
+						<link targetLesson="IntroToDBS" targetLabel="dataint">Data Integrity</link>
+					</columnLeft>
+					<columnRight>Governmental data often give information about legal conditions like, for example, the cadaster. Therefore, these data need to be thoroughly correct and reliable. That is achieved through the definition and following of specific consistency requirements and rules.</columnRight>
+				</column>
+			</clarify>
+			<look>
+				<multimedia src="../image/geodataWarehouse.gif" type="gif" legend="Schematic Representation of a Geodata Warehouse and the possible Access to it from different Offices" align="center"/>
+			</look>
+		</learningObject>
+		<selfAssessment title="Exercise" metaSetUpInfo="Set up discussion topic 'Database Applications', Feedback from Tutor to individual students">
+			<paragraph>Find another database application (your work environment, internet,...) and try to figure out which are the most important characteristics of that application.<newLine/>Write a short summary of these information (like the ones you have seen in this unit) and post your writing to the discussion board under the topic 'Database Applications'. Look and discuss also at the postings from other students.<newLine/>A tutor will comment on your summary (also posted to the discussion board)</paragraph>
+		</selfAssessment>
+	</unit>
+	<unit label="AdvantDisadv" title="Advantages and Disadvantages">
+		<entry title="From the file-card box to the database">
+			<paragraph>Management and storage of data has changed a great deal over the years - from the file-card box, via the first (file based) digital version, to the modern database systems. The first part of this unit deals with file based systems in comparison to database systems. Afterwards, the advantages and disadvantages of database systems are discussed.</paragraph>
+		</entry>
+		<learningObject title="Comparison DBS versus file based" navTitle="Vergleich">
+			<clarify>
+				<paragraph> Knowing about the characteristics of a database system (unit <link targetLesson="IntroToDBS" targetLabel="DBApproaChar">Characteristics of the Database Approach</link> and unit <link targetLesson="IntroToDBS" targetLabel="ExamplesApps">Example Applications</link>) we will have a look at file based systems. With a file based approach each user defines and creates with a specific software the files he needs for a specific application. In comparison to the database system approach this results in some limitations.<newLine/>Move the mouse over the bold terms to the left and the limitations of the file based approach in comparison to the database approach are explained in writing (right) and graphic (below).</paragraph>
+				<multimedia src="../multimedia/dateibasiert_neu.swf" type="flash" width="550" height="470" legend="Database Systems versus File Based Systems" align="center"/>
+			</clarify>
+			<look>
+				<paragraph> Using a file based system it is possible that, for example, the administration of a school maintains information about the registration and fee payment of the students (e.g. based on a spreadsheet software). Meanwhile the lecturers manage data about the students and their grades. Even though both user groups are interested in student data they both might have different files and different software to update and change these. Such <term glossRef="Redundancy">redundancy</term> in the definition and storage of data wastes storage space. Additionally, the work needed to update data in more than one system is multiplied by the number of systems. In case above a change of basic student data like the address might need an update in the system of the lecturer and in the system of the administration as well. </paragraph>
+			</look>
+		</learningObject>
+		<learningObject title="Advantages of a DBMS">
+			<clarify>
+				<paragraph> Basically, all in the unit <link targetLesson="IntroToDBS" targetLabel="DBApproaChar">Characteristics of the Database Approach</link> listed features can be listed as advantages here too. </paragraph>
+				<list listStyle="unordered">
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="mehrfachn">Concurrent Use</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="struktDaten">Structured and Described Data</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="trennDataApp">Separation of Data and Applications</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="dataint">Data Integrity</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="transakt">Transactions</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="datapersis">Data Persistence</link>
+					</item>
+					<item>
+						<link targetLesson="IntroToDBS" targetLabel="datensichten">Data Views</link>
+					</item>
+				</list>
+				<paragraph>Additionally, there are some advantages which were not yet explicitely mentioned.<newLine space="long"/> Use the blue buttons to navigate.</paragraph>
+				<multimedia src="../multimedia/vorteile.swf" type="flash" height="230" width="510" align="center"/>
+				<paragraph> Click on the following link to get a list of the further advantages. (<link uri="../multimedia/furtherAdvantagesDBMS.doc">DOC file of the advantages</link>) </paragraph>
+			</clarify>
+		</learningObject>
+		<learningObject title="Disadvantages of a DBMS">
+			<clarify>
+				<paragraph>Beside the numerous advantages of a database system the disadvantages should not be kept secret.<newLine space="long"/>Use the blue buttons to navigate.</paragraph>
+				<multimedia src="../multimedia/nachteile.swf" type="flash" height="230" width="510" align="center"/>
+				<paragraph> Click on the following link to get a list of the disadvantages. (<link uri="../multimedia/DisadvantagesDBMS.doc">DOC file of the disadvantages</link>) </paragraph>
+			</clarify>
+		</learningObject>
+	</unit>
+	<selfAssessment title="Tasks" metaSetUpInfo="none">
+		<paragraph>The following task should allow you to test if you have understood the content of this lesson.</paragraph>
+		<multimedia src="../multimedia/tabellenkalkulationVsDbms.swf" type="flash" align="center" height="310" width="470"/>
+		<multimedia src="../multimedia/zentralesGeodataWarehouse.swf" type="flash" align="center" height="310" width="470"/>
+		<paragraph>Drag the numbers beside the terms onto the circles in the graphic. Place them as exactly as possible and click '&gt;Check' when you have placed them all. Symbols will show you which numbers are placed correctly and which are on the wrong place. The '&gt;Reset' button clears the graphic from all numbers.<newLine/>Attention: The '&gt;Check' button only works correctly if all circles in the graphic are covered with a number.</paragraph>
+		<multimedia src="../multimedia/dragDrop_test_informationssystemaufbau.swf" type="flash" width="500" height="300" align="center"/>
+	</selfAssessment>
+	<summary>
+		<paragraph>In this lesson the significance of the data management based on database systems and the role of a database system within a geoinformation system (GIS) was explained. At the beginning, terms like database system and geoinformation system were defined and the terms data and information positioned in context.<newLine space="long"/>Following important reasons for the use of database systems for the management of data in general and geodata in particular were given and illustrated with example applications of different fields of use. Included in the significant characteristics of the database approach are concurrent use as well as structured and described data. Additionally the advantages of the separation of data and applications and the features for high reliablitiy and data security like the concepts of transactions and data views were discussed.</paragraph>
+	</summary>
+	<furtherReading>
+		<resItem bibIDRef="b4">Introduction into Information Systems and Databases, in German</resItem>
+	</furtherReading>
+	<glossary>
+		<definition term="Data (especially computer data)">The presentation of facts, information or concepts which are created in a computer readable form or are translated into such a form.</definition>
+		<definition term="Information" bibIDRef="b4">Information is a useable answer to a concrete question.</definition>
+		<definition term="Dimensions of Information" bibIDRef="b5">In the information theory three dimensions of information are distinguished: the syntactic, the semantic and the pragmatic. Let us take the example of a traffic light. In the syntactic dimension we differentate the three colours red, yellow and green. But the traffic light makes more sense in the semantic dimension. In this dimension the colours are linked to meanings. Red means stop, green means go on. However, only in the pragmatic dimension the traffic light gets useable for the traffic. Pragmatically, red means that the driver of a car must stop.</definition>
+		<definition term="Syntax">Syntax can in linguistics be described as the study of the rules, or "patterned relations" that govern the way the words in a sentence come together.</definition>
+		<definition term="Conceptual">A concept is an abstract, universal idea, notion, or entity that serves to designate a category or class of entities, events, or relations. Concepts are abstract in that they omit the differences of the things in their extension, treating them as if they were identical. They are universal in that they apply equally to every thing in their extension. Concepts are also the basic elements of propositions, much the same way a word is the basic semantic element of a sentence.</definition>
+		<definition term="Data and Database">An amount of data which are viewed by the operator as somehow going together plus additional data which is used by the DBMS to work correctly are called a database.</definition>
+		<definition term="Database Management System">A database management system (DBMS) is a software product for the persistent, consistent and application indepent storage and management of data. But also for the flexible and easy use of big and concurrently used databases.</definition>
+		<definition term="Database System">A database system (DBS) consists of a DBMS and one or more databases.</definition>
+		<definition term="Information System">A information system extends the database with a couple of software tools for querying, presenting, transforming and analysing the data.</definition>
+		<definition term="Geoinformation System">
+			<citation bibIDRef="b77">A geoinformation system allows to capture, store, analyse and present all data that describe a part of the earths surface and all on this part located technical and administrative equipment but also geoscientific, economic and ecologic features. (Translation)</citation>
+		</definition>
+		<definition term="Redundancy">Redundancy, in general terms, refers to the quality or state of being redundant, that is: exceeding what is necessary or normal, containing an excess. This can have a negative connotation, superfluous, but also positive, serving as a duplicate for preventing failure of an entire system.</definition>
+		<definition term="Geodata">Geodata or data with a spatial relation are data about object that through a position in space directly or indirectly can be referenced. The space is defined through a coordinate system which is in relation to the earth surface.</definition>
+		<definition term="Metadata">Metadata literally "data about data", is information that describes another set of data. A common example is a library catalog card, which contains data about the contents and location of a book: It is data about the data in the book referred to by the card. Other common contents of metadata include the source or author of the described dataset, how it should be accessed, and its limitations. Another important type of data about data is the links or relationship among data.</definition>
+		<definition term="Structured Data">Data is called structured if it can be subdivided systematically and linked.</definition>
+	</glossary>
+	<bibliography>
+		<book bibID="b4" author="ZEHNDER, C.A." publicationPlace="Zürich" publicationYear="1998" publisher="vdf Hochschulverlag AG" title="Informationssysteme und Datenbanken"/>
+		<contributionInBook bibID="b1" author="DITTRICH, K." editor="RECHENBERG, P., POMBERGER, G." pageNr="875-908" publicationPlace="Wien" publicationYear="1999" publisher="Carl Hanser    Verlag" title="Informatik-Handbuch" titleOfContribution="Datenbanksysteme"/>
+		<book bibID="b7" author="BARTELME, N." edition="3rd" publicationPlace="Berlin" publicationYear="2000" publisher="Springer" title="Geoinformatik - Modelle, Strukturen, Funktionen"/>
+		<book bibID="b77" author="BARTELME, N." publicationYear="1989" title="GIS-Technologie. Geoinformationssysteme, Landinformationssysteme und ihre Grundlagen" publisher="Springer"/>
+		<websites bibID="b5" accessedDate="31. März 2003" url="http://www.foraus.de/download/aktuelles/hl_ausb_m_lernaufg.pdf"/>
+		<websites bibID="b6" accessedDate="25. Oktober 2004" author="WARTH, D." url="http://www.fask.uni-mainz.de/inst/iaspk/Linguistik/Syntax/Was.html"/>
+		<websites bibID="b8" accessedDate="29. Juni 2005" title="SBB: Online Fahrplan" author="SBB AG" url="http://www.sbb.ch/" publicationYear="2005"/>
+		<websites bibID="b9" accessedDate="29. Juni 2005" title="Netzwerk von Bibliotheken und Informationsstellen in der Schweiz" author="Lierz, W., Scherer, E." publicationPlace="Zürich" publicationYear="2004" url="http://www.nebis.ch/"/>
+	</bibliography>
+	<metadata role="student">
+		<organisation level="Basic" module="DM">
+			<creationPosition>
+				<!--<posNumber>4</posNumber>-->
+				<previous>none</previous>
+				<following>DBSysConcept</following>
+			</creationPosition>
+		</organisation>
+		<prerequisites>
+			<preReqItem label="none"/>
+		</prerequisites>
+		<keywords>
+			<keywordItem>Database Management</keywordItem>
+		</keywords>
+		<technical>
+			<technicalRequirement>
+				<type>PlugIn</type>
+				<name>Flash</name>
+				<minimumVersion>6.0 (MX)</minimumVersion>
+				<downloadURL>http://www.macromedia.com/shockwave/download/download.cgi</downloadURL>
+				<installationRemarks>The Macromedia website might give help when having trouble installing the flash plugin.</installationRemarks>
+			</technicalRequirement>
+		</technical>
+		<lessonInfo>
+			<language language="en" derived="yes" originalLanguage="de"/>
+			<lifecycle>
+				<version creationDate="2003-03-31" modificationDate="2006-01-06">2</version>
+				<contribute>
+					<person responsible="Overall" name="Susanne Bleisch" email="s.bleisch@fhbb.ch" institute="FHBB" departement="VGI"/>
+					<person responsible="Overall" name="Stephan Nebiker" email="s.nebiker@fhbb.ch" institute="FHBB" departement="VGI">Mainly concepts and corrections</person>
+					<person responsible="Translation" name="Susanne Bleisch" email="s.bleisch@fhbb.ch" institute="FHBB" departement="VGI">First version of the translation German to English</person>
+					<person responsible="Revision" name="Susanne Bleisch" email="s.bleisch@fhbb.ch" institute="FHBB" departement="VGI">Update for version 2 (eLML and CC)</person>
+				</contribute>
+				<commentsNextVersion>see original version (german)</commentsNextVersion>
+			</lifecycle>
+			<educational>
+				<difficulty>Medium</difficulty>
+				<typicalLearningTime>
+					<time>3 h</time>
+					<description>Average value from the tests with FHBB students in February 2003</description>
+				</typicalLearningTime>
+			</educational>
+		</lessonInfo>
+		<rights>
+			<cost>no</cost>
+			<copyright>GITTA 2000-2005</copyright>
+		</rights>
+	</metadata>
 </lesson>
+
+</unizh:lessonEnvelope>

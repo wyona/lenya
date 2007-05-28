@@ -14,18 +14,9 @@
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
          >
 
-<include href="config.rng"/>
-<include href="common.rng"/>
-<include href="bibliography/harvard.rng"/>
 
- <define name="glossary">
+  <define name="glossary">
     <element name="glossary">
-      <attribute name="lenya:dummy"><text/></attribute>
-      <attribute name="xhtml:dummy"><text/></attribute>
-      <attribute name="dc:dummy"><text/></attribute>
-      <attribute name="dcterms:dummy"><text/></attribute>
-      <attribute name="elml:dummy"><text/></attribute>
-      <ref name="lenya.meta"/>
       <ref name="VisibleImp"/>
       <oneOrMore>
         <element name="definition">

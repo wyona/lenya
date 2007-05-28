@@ -8,37 +8,6 @@
         <map:generate type="serverpages" src="config/menus/lesson.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
-
-      <map:match type="doctype" pattern="unit">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="selfAssessment">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="summary">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="furtherReading">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="glossary">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match type="doctype" pattern="bibliography">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
     <xsl:copy-of select="."/>
   </xsl:template>
 

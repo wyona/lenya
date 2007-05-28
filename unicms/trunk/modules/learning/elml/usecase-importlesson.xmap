@@ -78,7 +78,7 @@
 
        <map:match pattern="createdocument">
          <map:generate type="jx" src="usecases/elml/import/jx/createDocument.jx"/>
-         <map:transform src="usecases/elml/import/xslt/createDocument.xsl"/>
+         <!-- <map:transform src="usecases/elml/import/xslt/createDocument.xsl"/> -->
          <map:serialize type="xml"/>
        </map:match>
 

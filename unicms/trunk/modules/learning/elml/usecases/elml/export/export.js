@@ -38,237 +38,272 @@ function selectExportMode() {
 
 
 
-/** Export to eLML Source **/
+/* Export to eLML Source */
 
 function exportSource(doc) {
 
   var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+  var flowHelper = new FlowHelper();
+  var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
+
+
   var pub = doc.getPublication();
-  var assetPaths = new ArrayList();
+  var languages = new Array();
 
-  /* Parse lesson DOM */
-
-  var path = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
-  var dom = pipelineUtil.processToDOM("xml/" + path, null);
-
-  /* Get document assets and rewrite asset links */
-  var resMgr = new ResourcesManager(doc);
-  var assetsPath = resMgr.getPath().getAbsolutePath();
-
-  var assetNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-
-  for (var i = 0; i < assetNodes.length; i++) {
-    var assetNode = assetNodes.item(i);
-    var assetName = assetNode.getAttribute("src");
-    var dir = getAssetExportDir(assetName);
-
-    var assetFile = new File(assetsPath + "/" + assetName);
-    cocoon.log.error(assetsPath + assetName);  
-
-    if (assetFile.exists()) {
-      cocoon.log.error("Asset file exists: " + assetFile.exists());
-      assetPaths.add({"src" : assetsPath + "/" + assetName, "dest" : dir + "/" + assetName});
-      assetNode.setAttribute("src", "../" + dir + "/" + assetName); // FIXME: path configuration
-    }
-  }
-
-  /* Parse lesson fragments DOM */
-
-  var children = getChildren(doc);
+  var filename = doc.getName() + ".zip";
   
-  for (var i = 0; i < children.size(); i++) {
-    var path = children.get(i).getId() + "/index_" + doc.getLanguage() + ".xml";
-    var partDOM = pipelineUtil.processToDOM("xml/" + path, null);
+  var resManager = new ResourcesManager(doc);
+  var zipPath = resManager.getPath().getAbsolutePath() + "/" + filename;
+  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
+  var source = resolver.resolveURI(zipPath);
 
-    /* Get assets and rewrite asset links */
-    var resMgr = new ResourcesManager(children.get(i));
+  var out = new ZipOutputStream(source.getOutputStream());
+
+  var languages = doc.getLanguages();
+
+  for (var i=0; i < languages.length; i++) { 
+
+    var language = languages[i];
+    var lessonPath = doc.getId() + "/index_" + language + ".xml";
+    var assets = new ArrayList();
+
+    cocoon.log.error("Current language: " + language + "\n");
+
+    var lessonDOM = pipelineUtil.processToDOM("xml/" + lessonPath, null);
+    var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
+
+    var resMgr = new ResourcesManager(doc);
     var assetsPath = resMgr.getPath().getAbsolutePath();
+    var assetNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
 
-    var assetNodes = partDOM.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-    cocoon.log.error("Node count: " + assetNodes.length);
-  
     for (var j = 0; j < assetNodes.length; j++) {
       var assetNode = assetNodes.item(j);
       var assetName = assetNode.getAttribute("src");
       var dir = getAssetExportDir(assetName);
+      var asset = new File(assetsPath + "/" + assetName);
 
-      var assetFile = new File(assetsPath + "/" + assetName);
-      cocoon.log.error(assetsPath + "/" + assetName);
-
-      if (assetFile.exists()) {
-        cocoon.log.error("Asset file exists: " + assetFile.exists());
-        assetPaths.add({"src" : assetsPath + "/" + assetName, "dest" : dir + "/" + assetName});
-        cocoon.log.error("Added path: " + assetsPath + "/" + assetName);
-  
-        assetNode.setAttribute("src", "../" + dir + "/" + assetName);
+      if (asset.exists()) {
+        cocoon.log.error("Asset exists: " + asset.exists());
+          
+        assets.add({"src" : assetsPath + "/" + assetName, "dest" : dir + "/" + assetName});
+        assetNode.setAttribute("src", "../" + dir + "/" + assetName); // FIXME: path configuration
       }
     }
 
-     /* Add fragment to lesson dom */
-     var cloned = dom.importNode(partDOM.documentElement, true);
-     dom.documentElement.appendChild(cloned);
-   }
-
-
-   /* Create archive of gathered stuff */
-
-   var filename = doc.getName() + ".zip";
+    var zipEntry = new ZipEntry(doc.getName() + "/" + language + "/text/" + doc.getName() + ".xml");
+    out.putNextEntry(zipEntry);
    
-   var resManager = new ResourcesManager(doc);
-   var path = resManager.getPath().getAbsolutePath() + "/" + filename;
-   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-   var source = resolver.resolveURI(path);
+    cocoon.processPipelineTo("lesson.jx", {"dom": lessonNode}, out);
 
-   var out = new ZipOutputStream(source.getOutputStream());
-   var zipEntry = new ZipEntry(doc.getName() + "/" + doc.getLanguage() + "/text/" + doc.getName() + ".xml");
-   out.putNextEntry(zipEntry);
-   
-   /* Serialize lesson to string */
-   cocoon.processPipelineTo("dom.jx", {"dom": dom}, out);
-   
-   /* Copy assets */
+    for (var j = 0; j < assets.size(); j++) {
+      var src = assets.get(j).src;
+      var dest = assets.get(j).dest;
+      var source = resolver.resolveURI(src);
+      var is = source.getInputStream();
+      
+      var assetName = doc.getName() + "/" + language + "/" + dest;
+      cocoon.log.error("Asset: " + assetName + "\n");
+      var zipEntry = new ZipEntry(assetName);
+      out.putNextEntry(zipEntry);
+      var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+      var len;
 
-   for (var i = 0; i < assetPaths.size(); i++) {
-     var src = assetPaths.get(i).src;
-     var dest = assetPaths.get(i).dest;
-     var source = resolver.resolveURI(src);
-     cocoon.log.error("Created source " + source);
-     var is = source.getInputStream();
-     var zipEntry = new ZipEntry(doc.getName() + "/" + doc.getLanguage() + "/" + dest);
-     cocoon.log.error("Created entry: " + zipEntry);
-     out.putNextEntry(zipEntry);
-     cocoon.log.error("Reading from input stream " + is + " to output stream " + out);
-     var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-     var len;
+      while((len = is.read(buffer)) >= 0)
+        out.write(buffer, 0, len);
+      is.close();
+      
+    } 
 
-     while((len = is.read(buffer)) >= 0)
-       out.write(buffer, 0, len);
-     is.close();
-   }
+  }
 
-   out.close();
+  out.close();
 
-   /* Provide download location for created archive  */
 
-   var url = doc.getName() + "/" + filename;
-   var size = Math.round(new File(path).length() / 1024) + " KB";
-   cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
+  var url = doc.getName() + "/" + filename;
+  var size = Math.round(new File(zipPath).length() / 1024) + " KB";
+  cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
 
-   cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
+  cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
 
 }
 
 
-/** Export to IMS Content Package format **/
+
+ /** Export to IMS Content Package format **/
 
 function exportCP(doc) {
 
-   // cocoon.sendPageAndWait("cpconf.jx", {"heading" : doc.getLabel()});
-
-   var superscription = cocoon.request.getParameter("superscription");
-   var heading = cocoon.request.getParameter("heading");
-
+   var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+   var sourceUtil = Packages.org.apache.lenya.cms.cocoon.source.SourceUtil;
    var flowHelper = new FlowHelper();
    var documentHelper = flowHelper.getDocumentHelper(cocoon);
    var pub = doc.getPublication();
    var filename = doc.getName() + "-cp.zip";
    var resManager = new ResourcesManager(doc);
-   var path = resManager.getPath().getAbsolutePath() + "/" + filename;
+   var path = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/data/" + filename;
    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
    var source = resolver.resolveURI(path);
 
-   /* Create the archive file */
+   var documentPath = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
+   var lessonDOM = pipelineUtil.processToDOM("xml/" + documentPath, null);
+   var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
 
-   var out = new ZipOutputStream(source.getOutputStream());
+   var headerHeading = lessonNode.getAttribute("title");
+   cocoon.sendPageAndWait("cp-config.jx", {"header_heading" : headerHeading});
+ 
+   headerHeading = cocoon.request.get("header_heading");
+   var pagebreakLevel = cocoon.request.get("pagebreak_level");
+   var headerSuperscription = cocoon.request.get("header_superscription");
+
+   var omitHeader = "false";
+   if(cocoon.request.get("omit_header")) {
+     omitHeader = "true";
+   };
+
+
+   var sectionNodes = new Array();
+
+  if (pagebreakLevel == "unit") {
    
-   /* Create the IMS manifest zip entry */
+     var childNodes = lessonNode.childNodes;
    
-   var zipEntry = new ZipEntry("imsmanifest.xml");
-   out.putNextEntry(zipEntry);
-   var children = getChildren(doc);
-   cocoon.log.error("Serializing manifest for : " + doc + " " + children); 
-   cocoon.processPipelineTo("manifest.jx", {"doc" : doc, "items" : children}, out);
+     for (var i=0; i < childNodes.length; i++) {
+       var childNode = childNodes.item(i);
+       var localName = childNode.localName;
 
-   /* Serialize lesson to xhtml files and add to archive */
-
-   // Serialize lesson document
-   var sourceUri = documentHelper.getSourceUri(doc);
-   zipEntry = new ZipEntry(doc.getName() + ".html");
-   out.putNextEntry(zipEntry);
-   cocoon.log.error("Serializing lesson document: " + doc.getName() + " " + sourceUri + " " + superscription + " " + heading);
-  
-   cocoon.processPipelineTo("xhtml/cp", {"nodeid": doc.getName(), "sourceUri": sourceUri, "superscription" : superscription, "heading" : heading, "cssdir" : "css", "jsdir" : "js", "imgdir" : "images"}, out);
-
-   // Serialize lesson fragments 
-   for (var i = 0; i < children.size(); i++) {
-     var child = children.get(i);
-     sourceUri = documentHelper.getSourceUri(child);
-     zipEntry = new ZipEntry(child.getName() + ".html");
-     cocoon.log.error("Putting output stream to first child entry");
-     out.putNextEntry(zipEntry);
-     cocoon.processPipelineTo("xhtml/cp", {"nodeid": child.getName(), "sourceUri": sourceUri, "superscription" : superscription, "heading" : heading, "cssdir" : "css", "jsdir" : "js", "imgdir" : "images", "assetdir" : "resources"}, out);
+       if (localName == "unit" ||
+           localName == "summary" ||
+           localName == "selfAssessment" ||
+           localName == "furtherReading" ||
+           localName == "glossary" ||
+           localName == "bibliography") {
+         sectionNodes.push(childNode);
+       }
+     }
    }
 
-   /* Add assets to archive */
+   // circumvent concurrency check
+   var tmpSource = resolver.resolveURI(path + ".tmp");
+   if (tmpSource.exists())
+     tmpSource["delete"]();
 
-   // Add lesson assets
-   var resManager = new ResourcesManager(doc);
+   var out = new ZipOutputStream(source.getOutputStream());
+
+
+   var lessonLabel = lessonNode.getAttribute("label");
+   var lessonTitle = lessonNode.getAttribute("title");
+   var sections = new Array();
+
+   for (var i = 0; i < sectionNodes.length; i++) {
+
+     var node = sectionNodes[i];
+     var label = null;
+     var title = null;
+
+     if (node.hasAttribute("label")) {
+       label = node.getAttribute("label");
+     } else {
+       label = node.localName;
+     }
+
+     if (node.hasAttribute("title")) {
+       title = node.getAttribute("title");
+     } else {
+       var messages = lessonDOM.getElementsByTagName("msg");
+       var hasMessage = false;
+
+       for (var j=0; j < messages.length; j++) {
+         if (messages.item(j).getAttribute("name") == "name_" + node.localName) {
+           title = messages.item(j).textContent;
+           hasMessage = true;
+           break;
+         }
+       }
+
+       if (!hasMessage) {
+         title = node.localName;
+       }
+     }
+
+     var section = new Object();
+     section.label = label;
+     section.title = title;
+     section.type = node.localName;
+     sections.push(section);
+   }
+
+
+   /* Document */
+   var zipEntry = new ZipEntry("imsmanifest.xml");
+   out.putNextEntry(zipEntry);
+   cocoon.processPipelineTo("manifest.jx", {"lessonLabel" : lessonLabel, "lessonTitle": lessonTitle, "sections" : sections}, out);
+
+
+   zipEntry = new ZipEntry(lessonLabel + ".html");
+   out.putNextEntry(zipEntry);
+   cocoon.processPipelineTo("xhtml/cp", {
+     "pagebreak_level": pagebreakLevel,
+     "section": "",
+     "label": "",
+     "cssdir" : "css",
+     "jsdir" : "js",
+     "imgdir" : "images",
+     "assetdir": "resources",
+     "header_heading": headerHeading,
+     "header_superscription": headerSuperscription,
+     "omit_header": omitHeader},
+      out);
+
+   for (var i=0; i < sections.length; i++) {
+     var section = sections[i];
+     zipEntry = new ZipEntry(section.label + ".html");
+     cocoon.log.error("Section entry: " + zipEntry + "\n");
+     out.putNextEntry(zipEntry);
+     cocoon.log.error("Creating section: " + pagebreakLevel + ", " + section.type + ", " + section.label + "\n");
+     cocoon.processPipelineTo("xhtml/cp", {
+       "pagebreak_level": pagebreakLevel,
+       "current_section": section.type,
+       "current_label": section.label,
+       "cssdir" : "css",
+       "jsdir" : "js",
+       "imgdir" : "images",
+       "assetdir": "resources", 
+       "header_heading": headerHeading, 
+       "header_superscription": headerSuperscription,
+       "omit_header": omitHeader},
+       out);
+   }
+
+
+   /* Resources */
    var assets = resManager.getResources();
    for (var i = 0; i < assets.length; i++) {
-     // FIXME: prevent deadlock by working on tmp file first.
-     if(assets[i].getName().equals(filename)) continue;
- 
+
      var source = resolver.resolveURI(assets[i].getAbsolutePath());
      var dir = null;
+
+     if (assets[i].getName() == filename) continue;  // exclude existing cp-archive from being copied into new archive
+
      if (assets[i].getName().indexOf(".swf") > -1) {  // FIXME: Test for mimeType
        dir = "resources";
      } else {
        dir = "images";
-     } 
+     }
      var zipEntry = new ZipEntry(dir + "/" + assets[i].getName());
-     cocoon.log.error("Created entry: " + zipEntry);
      out.putNextEntry(zipEntry);
 
      var is = source.getInputStream();
-     cocoon.log.error("Reading from input stream " + is + " to output stream " + out);
      var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
      var len;
      while((len = is.read(buffer)) >= 0)
        out.write(buffer, 0, len);
-     is.close(); 
+     is.close();
    }
 
-
-   // Add assets of lesson fragments
-   for (var i = 0; i < children.size(); i++) {
-     var resManager = new ResourcesManager(children.get(i));
-     var assets = resManager.getResources();
-
-     for (var j = 0; j < assets.length; j++) {
-       var source = resolver.resolveURI(assets[j].getAbsolutePath());
-       var dir = null;
-       if (assets[j].getName().indexOf(".swf") > -1) {  // FIXME: Test for mimeType            
-         dir = "resources";
-       } else {
-         dir = "images";
-       }
-       var zipEntry = new ZipEntry(dir + "/" + assets[j].getName());
-       cocoon.log.error("Created entry: " + zipEntry);
-       out.putNextEntry(zipEntry);
-     
-       var is = source.getInputStream();
-       cocoon.log.error("Reading from input stream " + is + " to output stream " + out);
-       var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-       var len;
-       while((len = is.read(buffer)) >= 0)
-         out.write(buffer, 0, len);
-       is.close();
-     }
-   }
 
    /* Add static resources (images, css) used by document layout to the archive */
 
-   var imgPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/images";
+   var imgPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/images";
    var dir = new File(imgPath);
    var files = dir.listFiles();
    if (files != null) {
@@ -276,7 +311,7 @@ function exportCP(doc) {
        var source = resolver.resolveURI(files[i].getAbsolutePath());
        var zipEntry = new ZipEntry("images/" + files[i].getName());
        out.putNextEntry(zipEntry);
-      
+       
        var is = source.getInputStream();
        var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
        var len;
@@ -287,7 +322,7 @@ function exportCP(doc) {
    }
     
    
-  var cssPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/css";
+  var cssPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/css";
    var dir = new File(cssPath);
    var files = dir.listFiles();
    if (files != null) {
@@ -306,7 +341,7 @@ function exportCP(doc) {
    }
 
    
-   var jsPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/js";
+   var jsPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/js";
    var dir = new File(jsPath);
    var files = dir.listFiles();
    if (files != null) {
@@ -323,10 +358,17 @@ function exportCP(doc) {
        is.close();
      }
    }
-
    
    out.close();
-  
+ 
+   var destPath = resManager.getPath().getAbsolutePath() + "/" + filename;
+   var tmpDest = resolver.resolveURI(destPath + ".tmp");
+   if (tmpDest.exists())
+     tmpDests["delete"]();
+ 
+   sourceUtil.copy(resolver, path, destPath);
+
+
    var url = doc.getName() + "/" + filename;
    var size = Math.round(new File(path).length() / 1024) + " KB";
    cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
@@ -340,7 +382,6 @@ function exportPDF(doc) {
 
   var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
   var pub = doc.getPublication();
-  var children = getChildren(doc);
   var filename = doc.getName() + ".pdf";
   var resManager = new ResourcesManager(doc);
   var pdfFile = resManager.getPath().getAbsolutePath() + "/" + filename;
@@ -350,46 +391,24 @@ function exportPDF(doc) {
   /* Process lesson document to dom */
 
   var path = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
-  var dom = pipelineUtil.processToDOM("xml/" + path, null);
+  var lessonDOM = pipelineUtil.processToDOM("xml/" + path, null);
+  var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
 
 
   /* Rewrite multimedia tags */
 
-  var mmNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+  var multimediaNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
 
-  for (var i = 0; i < mmNodes.length; i++) {
-    var mmNode = mmNodes.item(i);
-    var src = mmNode.getAttribute("src");
-
-    mmNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
+  for (var i = 0; i < multimediaNodes.length; i++) {
+    var multimediaNode = multimediaNodes.item(i);
+    var src = multimediaNode.getAttribute("src");
+    multimediaNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
   }
-
-   /* Process lesson parts to dom  */
-
-  for (var i = 0; i < children.size(); i++) {
-    var path = children.get(i).getId() + "/index_" + doc.getLanguage() + ".xml";
-    var partDOM = pipelineUtil.processToDOM("xml/" + path, null);
-    var resManager = new ResourcesManager(children.get(i));
-
-    var mmNodes = partDOM.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-
-    for (var j = 0; j < mmNodes.length; j++) {
-      var mmNode = mmNodes.item(j);
-      var src = mmNode.getAttribute("src");
-
-      mmNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
-    }
-
-     /* Add part to lesson */
-     var cloned = dom.importNode(partDOM.documentElement, true);
-     dom.documentElement.appendChild(cloned);
-   }
-
 
   var label = doc.getLabel();
   var units = new ArrayList();
 
-  var unitNodes = dom.getElementsByTagNameNS("http://www.elml.ch", "unit");
+  var unitNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "unit");
   for (var i = 0; i < unitNodes.length; i++) {
     units.add(unitNodes.item(i));
   }
@@ -415,10 +434,9 @@ function exportPDF(doc) {
     }
   }
 
-
    var out = source.getOutputStream();
-   /* Serialize lesson to string */
-   cocoon.processPipelineTo("pdf/", {"dom": dom, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "font" : font, "optional_units": optional_units}, out);
+
+   cocoon.processPipelineTo("pdf/", {"dom": lessonNode, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "font" : font, "optional_units": optional_units}, out);
    out.close();
 
    var url = doc.getName() + "/" + filename;
@@ -429,9 +447,6 @@ function exportPDF(doc) {
 
 }
 
-
-
-/** returns a directory name for asset storage **/
 
 function getAssetExportDir(assetName) {
   // FIXME: use metadata to obtain mimeType. Define constants for dir names.

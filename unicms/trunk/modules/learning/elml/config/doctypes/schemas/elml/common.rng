@@ -127,6 +127,7 @@
       <ref name="RoleImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <oneOrMore>
         <ref name="tablerow"/>
       </oneOrMore>
@@ -156,6 +157,7 @@
       <ref name="ListStyleImp"/>
       <ref name="BibIDRefImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <oneOrMore>
         <ref name="listItem"/>
       </oneOrMore>    
@@ -184,15 +186,17 @@
 
   <define name="box">
     <element name="box">
+      <ref name="ContextIDRefImp"/>
       <ref name="ParaType"/>
     </element>
   </define>
 
-  <define name="term"> <!-- Querreferenzen -->
+  <define name="term"> 
     <element name="term">
       <ref name="GlossaryRefReq"/>
       <ref name="IconImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <text/> 
     </element>
   </define>
@@ -227,6 +231,7 @@
       <ref name="HTMLAttributesImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <optional>
         <text/>
       </optional>
@@ -255,6 +260,7 @@
 
   <define name="popup">
     <element name="popup">
+       <ref name="ContextIDRefImp"/>
       <ref name="ParaType"/>
     </element>
   </define>
@@ -266,6 +272,7 @@
       <ref name="IconImp"/>
       <ref name="RoleImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <choice>
         <optional>
           <ref name="multimedia"/>
@@ -282,6 +289,7 @@
       <ref name="IconImp"/>
       <ref name="YearOnlyImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -309,6 +317,7 @@
       <ref name="IconImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
+      <ref name="ContextIDRefImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -339,6 +348,25 @@
           <value>false</value>
         </choice>
       </attribute> 
+    </element>
+  </define>
+
+
+  <define name="context">
+    <element name="context">
+      <zeroOrMore>
+        <ref name="contextInformation"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+
+  <define name="contextInformation">
+    <element name="contextInformation">
+      <attribute name="contextID">
+        <text/> 
+      </attribute>
+      <ref name="ParaType"/>
     </element>
   </define>
 
@@ -780,6 +808,14 @@
   <define name="SchemaLocation">
     <optional>
       <attribute name="xsi:schemaLocation">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="ContextIDRefImp">
+    <optional>
+      <attribute name="contextIDRef">
         <text/>
       </attribute>
     </optional>
