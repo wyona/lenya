@@ -21,11 +21,11 @@
   </binding>
 
   <binding element="th">
-    <component id="table.heading"/>
+    <component id="table.heading" colspan="colspan" rowspan="rowspan"/>
   </binding>
 
   <binding element="td">
-    <component id="table.data"/>
+    <component id="table.data" colspan="colspan" rowspan="rowspan"/>
   </binding>
   
   <!-- Unordered List -->
@@ -47,11 +47,11 @@
   </binding>
   
   <!-- Inline formatting -->
-  <binding element="b">
+  <binding element="strong">
     <component id="bold"/>
   </binding>
 
-  <binding element="i">
+  <binding element="em">
     <component id="italic"/>
   </binding>
 
