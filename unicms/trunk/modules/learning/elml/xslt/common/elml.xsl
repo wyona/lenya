@@ -80,15 +80,19 @@
 
   <xsl:template match="elml:learningObject">
     <xsl:if test="@label">
-      <a name="{@label}"><xsl:comment/></a>
+      <a name="{@label}">
+        <xsl:comment/>
+      </a>
     </xsl:if>
-    <h3><xsl:value-of select="@title"/></h3>
+    <h2>
+      <xsl:value-of select="@title"/>
+    </h2>
     <div>
       <xsl:apply-templates/>
     </div>
+    <div class="topnav"><a href="#top">top</a></div>
   </xsl:template>
-
-
+ 
   <xsl:template match="elml:clarify">
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
@@ -450,27 +454,19 @@
   </xsl:template>
 
   <xsl:template match="elml:popup">
-
-    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
-
     <xsl:variable name="varname">
       <xsl:text>solution</xsl:text>
       <xsl:value-of select="generate-id()"/>
     </xsl:variable>
     <xsl:choose>
       <xsl:when test="@icon">
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="content_table">
+        <table cellpadding="0" cellspacing="0" width="100%" class="popup">
           <!-- <xsl:call-template name="Label"/> -->
-            <tr>
-              <td width="40" align="left" valign="top">
-                <img src="{$imageprefix}/icons/{@icon}.gif"/>
-              </td>
-              <td valign="top">
+          <tr>
+            <td width="40" align="left" valign="top">
+              <img src="{$imageprefix}/icons/{@icon}.gif"/>
+            </td>
+            <td valign="top">
               <div id="{$varname}" class="popupTitle">
                 <xsl:attribute name="onclick">
                   <xsl:text>onBlock('</xsl:text>
@@ -484,7 +480,8 @@
                 </h3>
                 <p>(Mausklick um Loesung ein bzw. wieder auszublenden)</p>
               </div>
-              <div id="{$varname}text" class="popupText" style="display: none;  background-color: #cccccc;">
+              <div id="{$varname}text" class="popupText"
+                style="display: none;  background-color: #cccccc;">
                 <xsl:if test="@title">
                   <xsl:attribute name="title">
                     <xsl:value-of select="@title"/>
@@ -492,7 +489,7 @@
                 </xsl:if>
                 <xsl:attribute name="onclick">
                   <xsl:text>off('</xsl:text>
-                    <xsl:value-of select="$varname"/>
+                  <xsl:value-of select="$varname"/>
                   <xsl:text>')</xsl:text>
                 </xsl:attribute>
                 <xsl:apply-templates/>
@@ -502,41 +499,56 @@
         </table>
       </xsl:when>
       <xsl:otherwise>
-        <div id="{$varname}" class="popupTitle">
-          <xsl:attribute name="onclick">
-            <xsl:text>onBlock('</xsl:text>
-            <xsl:value-of select="$varname"/>
-            <xsl:text>')</xsl:text>
-          </xsl:attribute>
-          <xsl:if test="@title">
-            <h3><xsl:value-of select="@title"/></h3>
-          </xsl:if>
-          <p>
-            <!-- <xsl:call-template name="Label"/> -->(Mausklick um Loesung ein bzw. wieder auszublenden)
-          </p>
-        </div>
-        <div id="{$varname}text" style="display: none; background-color: #cccccc;">
-          <xsl:if test="@title">
-            <xsl:attribute name="title">
-              <xsl:value-of select="@title"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:attribute name="onclick">
-            <xsl:text>off('</xsl:text>
-            <xsl:value-of select="$varname"/>
-            <xsl:text>')</xsl:text>
-          </xsl:attribute>
-          <xsl:apply-templates/>
-        </div>
+        <table border="0" width="100%" class="popup">
+          <tr>
+            <td id="{$varname}" class="popupTitle">
+              <xsl:attribute name="onclick">
+                <xsl:text>onBlock('</xsl:text>
+                <xsl:value-of select="$varname"/>
+                <xsl:text>')</xsl:text>
+              </xsl:attribute>
+              <xsl:if test="@title">
+                <h3>
+                  <xsl:value-of select="@title"/>
+                </h3>
+              </xsl:if>
+              <p>
+                <!-- <xsl:call-template name="Label"/> -->(Mausklick um Loesung ein bzw. wieder
+                auszublenden) </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="{$varname}text" style="display: none; background-color: #cccccc;">
+                <xsl:if test="@title">
+                  <xsl:attribute name="title">
+                    <xsl:value-of select="@title"/>
+                  </xsl:attribute>
+                </xsl:if>
+                <xsl:attribute name="onclick">
+                  <xsl:text>off('</xsl:text>
+                  <xsl:value-of select="$varname"/>
+                  <xsl:text>')</xsl:text>
+                </xsl:attribute>
+              <xsl:apply-templates/>
+                </div>
+            </td>
+          </tr>
+        </table>
       </xsl:otherwise>
-     </xsl:choose> 
+    </xsl:choose>
   </xsl:template>
+
+
 
   <xsl:template match="elml:link">
     <xsl:variable name="targetLabel" select="@targetLabel"/>
     <xsl:variable name="targetNode" select="//*[@label = $targetLabel]"/>
     <xsl:variable name="uri">
       <xsl:choose>
+        <xsl:when test="@uri">
+          <xsl:value-of select="@uri"/>
+        </xsl:when>
         <xsl:when test="$targetNode[self::elml:unit]">
           ?lesson.section=unit&#38;section.label=<xsl:value-of select="$targetNode/@label"/>
         </xsl:when>
@@ -602,6 +614,7 @@
   </xsl:template>
 
   <xsl:template match="elml:paragraph">
+
     <xsl:variable name="contextIDRef" select="@contextIDRef"/>
     <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
       <div class="contextInfo">
@@ -610,35 +623,32 @@
     </xsl:if>
 
     <xsl:if test="not($area = 'live' and @visible='print')">
-      <xsl:call-template name="displaymarker"/> 
+      <xsl:call-template name="displaymarker"/>
       <xsl:if test="@label">
-        <a name="{@label}"><xsl:comment/></a>
+        <a name="{@label}">
+          <xsl:comment/>
+        </a>
       </xsl:if>
       <xsl:if test="@title">
-        <h3><xsl:value-of select="@title"/></h3>
+        <h3>
+          <xsl:value-of select="@title"/>
+        </h3>
       </xsl:if>
       <xsl:choose>
         <xsl:when test="@icon">
           <p>
-          <table border="0">
-            <tr>
-              <td><img src="{$imageprefix}/icons/{@icon}.gif"/></td>
-              <td><xsl:apply-templates/></td>
-            </tr>
-          </table>
+            <img src="{$imageprefix}/icons/{@icon}.gif" style="float:left; padding:4px"/>
+              <xsl:apply-templates/>
           </p>
         </xsl:when>
         <xsl:otherwise>
           <p>
-            
-
             <xsl:apply-templates/>
           </p>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>
-
 
   <xsl:template match="elml:toc">
     <p>
@@ -702,9 +712,28 @@
 
   <!-- Named templates --> 
 
-  <xsl:template name="Legend">
+   <xsl:template name="Legend">
+    <xsl:param name="popup"/>
+    <xsl:param name="pathMultimedia">
+      <xsl:choose>
+        <xsl:when test="@thumbnail">
+          <xsl:value-of select="concat($nodeid, '/', @thumbnail)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat($nodeid, '/', @src)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="pathMultimediaSource">
+      <xsl:value-of select="$nodeid"/>/<xsl:value-of select="@src"/>
+    </xsl:param>
     <xsl:if test="@legend or @bibIDRef">
       <div class="legende">
+        <xsl:if test="$popup='true'">
+          <a href="#"
+            onClick="window.open('{$pathMultimediaSource}', 'detail','width={@width},height={@height},resizable,menubar=no'); return false;"
+            >( + )&#160;</a>
+        </xsl:if>
         <xsl:value-of select="@legend"/>
         <xsl:call-template name="BibliographyRef"/>
       </div>
@@ -773,22 +802,15 @@
 
   <!-- Asset Handling -->
 
-  <xsl:template match="elml:multimedia">
-
-    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
-
+   <xsl:template match="elml:multimedia">
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
       <table cellpadding="0" cellspacing="2" border="0" width="100%" class="content_table">
         <tr>
           <xsl:if test="@icon">
             <td width="40" align="left" valign="top">
-              <img src="{$imageprefix}/icons/{@icon}.gif" width="30" height="30" align="left" title="{@icon}" alt="{@icon}" class="icon"/>
+              <img src="{$imageprefix}/icons/{@icon}.gif" width="36" height="36" align="left"
+                title="{@icon}" alt="{@icon}" class="icon"/>
             </td>
           </xsl:if>
           <td>
@@ -805,7 +827,8 @@
                     <xsl:call-template name="compute-path"/>
                   </xsl:for-each>
                 </xsl:variable>
-                <a href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
+                <a
+                  href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
                   <xsl:call-template name="MultimediaShow"/>
                 </a>
               </xsl:when>
@@ -813,7 +836,7 @@
                 <xsl:call-template name="MultimediaShow"/>
               </xsl:otherwise>
             </xsl:choose>
-         </td>
+          </td>
         </tr>
         <xsl:if test="@legend or @bibIDRef">
           <tr>
@@ -827,13 +850,22 @@
               <xsl:call-template name="Alignment">
                 <xsl:with-param name="istd">yes</xsl:with-param>
               </xsl:call-template>
-              <xsl:call-template name="Legend"/>
+              <xsl:call-template name="Legend">
+                <xsl:with-param name="popup">
+                  <xsl:choose>
+                    <xsl:when test="@thumbnail">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                  </xsl:choose>
+
+                </xsl:with-param>
+              </xsl:call-template>
+
             </td>
           </tr>
         </xsl:if>
-      </table> 
+      </table>
     </xsl:if>
-  </xsl:template> 
+  </xsl:template>
 
 
   <xsl:template name="MultimediaAttributes">

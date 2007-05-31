@@ -111,6 +111,18 @@
       <fileset dir="elml/usecases/elml"/>
     </copy>
 
+    <copy todir="${pub.dir}/usecases/neutron/config/widgets" overwrite="yes">
+      <fileset dir="elml/usecases/neutron/config/widgets">
+        <include name="elml.xml"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${pub.dir}/usecases/neutroni/config/inserts" overwrite="yes">
+      <fileset dir="elml/usecases/neutron/config/inserts">
+        <include name="elml.xml"/>
+      </fileset>
+    </copy>
+
     <echo>INFO: Patching menu config files </echo>
     <xslt
       in="${pub.dir}/menus.xmap"
@@ -289,17 +301,6 @@
         <include name="biblio_harvard.xsl"/>
       </fileset>
     </delete> 
-
-    <delete>
-      <fileset dir="${pubs.dir}/unizh/xslt/neutron">
-        <include name="summary-neutron.xsl"/>
-        <include name="selfAssessment-neutron.xsl"/>
-        <include name="lesson-neutron.xsl"/>
-        <include name="elml-page.xsl"/>
-        <include name="bibliography-neutron.xsl"/>
-        <include name="unit-neutron.xsl"/>
-      </fileset>
-    </delete>
 
     <delete>
       <fileset dir="${pubs.dir}/unizh/resources/shared/images/icons">

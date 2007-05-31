@@ -19,9 +19,9 @@
           </xsl:otherwise>
         </xsl:choose>
         @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
-        @import url("<xsl:value-of select="$localsharedresources"/>/css/elml.css");
       </xsl:comment>
     </style>
+    <link type="text/css" rel="stylesheet" href="{$localsharedresources}/css/elml.css"/>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
 <script xmlns:xhtml="http://www.w3.org/1999/xhtml" src="{$contextprefix}/unizh/authoring/javascript/elml.js" type="text/javascript"/>
     <xsl:if test="$document-element-name = 'unizh:news'">

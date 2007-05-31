@@ -37,6 +37,52 @@
     <component id="superscript"/>
   </binding>
 
+
+
+   <!-- Tables -->
+  <binding element="table">
+    <component id="table">
+      <template>
+        <elml:table>
+          <elml:tablerow>
+            <elml:tabledata>test</elml:tabledata>
+            <elml:tabledata>test</elml:tabledata>
+            <elml:tabledata>test</elml:tabledata>
+            <elml:tabledata>test</elml:tabledata>
+          </elml:tablerow>
+        </elml:table>
+      </template>
+    </component>
+  </binding>
+
+  <binding element="tablerow">
+    <component id="table.row"/>
+  </binding>
+
+  <binding element="tableheading">
+    <component id="table.heading" colspan="colspan" rowspan="rowspan"/>
+  </binding>
+
+  <binding element="tabledata">
+    <component id="table.data" colspan="colspan" rowspan="rowspan"/>
+  </binding>
+
+   <!-- Unordered List -->
+  <binding element="list[style=unordered]">
+    <component id="unordered-list"/>
+  </binding>
+
+  <!-- Ordered List -->
+  <binding element="list[style=ordered]">
+    <component id="ordered-list"/>
+  </binding>
+
+  <!-- List items -->
+  <binding element="item">
+    <component id="listitem"/>
+  </binding>
+
+
   <!-- Hyperlinks -->
   <binding element="link">
     <component id="anchor">
