@@ -1,4 +1,4 @@
-<bindings xmlns="http://www.example.org/widgetbindings/1.0" ns="http://www.w3.org/1999/xhtml">
+<bindings xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.example.org/widgetbindings/1.0" ns="http://www.w3.org/1999/xhtml">
 
   <!-- Linebreak and Paragraphs -->
 
@@ -13,7 +13,15 @@
 
   <!-- Tables -->
   <binding element="table">
-    <component id="table"/>
+    <component id="table">
+      <template>
+        <xhtml:table class="ornate">
+          <xhtml:tr>
+            <xhtml:td>data</xhtml:td>
+          </xhtml:tr>
+        </xhtml:table>
+      </template> 
+    </component>
   </binding>
 
   <binding element="tr">
