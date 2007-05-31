@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:lessonEnvelope 
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:elml="http://www.elml.ch"
+  xmlns="http://www.elml.ch"
+  dc:dummy="FIXME:keepNamespace" 
+  dcterms:dummy="FIXME:keepNamespace"
+  lenya:dummy="FIXME:keepNamespace"
+  elml:dummy="FIXME:keepNamespace" 
+  >
+
+   <lenya:meta>
+    <dc:title>Lesson title</dc:title>
+    <dc:description></dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject></dc:subject>
+    <dc:publisher>UniversitA$t ZA1/4rich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>UniversitA$t ZA1/4rich</dc:rights>
+  </lenya:meta>
+
+
+  <config>
+    <general>
+      <!--Enter the contact Email that students will use to contact the tutor -->
+      <contact>joelfisler@users.sourceforge.net</contact>
+      <!--Enter the URL to your servers home page -->
+      <server>http://www.elml.ch</server>
+      <!--Would like to make a transformation for role 'tutor' or 'student'? -->
+      <role>student</role>
+      <!--On which level would like have the page break? To generate just one output use "oneoutput", else "lesson", "unit" or "lo" -->
+      <pagebreak_level>unit</pagebreak_level>
+      <!--If you would like to have chapter titles with numeration, set this to "yes" else to "no" -->
+      <chapter_numeration>yes</chapter_numeration>
+      <!-- Which type of imsmanifest.xml will be produced: IMS CP or SCORM compatible (accepted values are: 'ims' or 'scorm' or 'both') -->
+      <manifest_type>scorm</manifest_type>
+      <!--Define units that should be marked/highlighted as optional for the student. Enter unit-labels separated by a comma or leave empty. -->
+      <optional_units>
+        <labelname/>
+      </optional_units>
+    </general>
+    <!--These parameters are only used for the online version -->
+    <online>
+      <!--Enter an URL to your bugtracker form here (or leave empty if you dont have one) -->
+      <bugtracker>http://sourceforge.net/projects/elml/</bugtracker>
+      <!--Would you like to use a navigation in your online version? "yes" or "no" -->
+      <use_navigation>yes</use_navigation>
+    </online>
+    <!--These parameters are only used for the print version -->
+    <print>
+    <!--Links are also clickable in the PDF version. Should additionally the link URI be written in brackets after the link text? Choose "yes" or "no" -->
+       <display_links>no</display_links>
+       <!--If you use the latest FOP version enter the value "0.9", otherwise use "0.2" -->
+       <fop_version>0.2</fop_version>
+       <!--The height of your page (Eg. "29.7cm" for A4) -->
+      <pageheight>29.7cm</pageheight>
+      <!--The width of your page (Eg. "21cm" for A4) -->
+      <pagewidth>21cm</pagewidth>
+      <!--Your default font size (Eg. "11pt") -->
+      <fontsize>11pt</fontsize>
+      <!--Your default line height  (Eg. "15pt") -->
+      <lineheight>15pt</lineheight>
+      <!--Your default font weight for titles  (Eg. "bold") -->
+      <fontweighttitle>bold</fontweighttitle>
+      <!--The conversion factor from pixel to mm (do NOT change, should be "0.2646") -->
+      <converter_pixel_mm>0.2646</converter_pixel_mm>
+    </print>
+    <!--These parameters are only used for the latex version -->
+    <latex>
+      <!--The type of latex document created: Either article or book -->
+       <documentclass>book</documentclass>
+    </latex>
+  </config>
+
+  <messagebundle>
+
+    <msg name="name_content">Inhaltsverzeichnis</msg>
+    <msg name="name_entry">Einfuhrung</msg>
+    <msg name="name_lObjectives">Lernziele</msg>
+    <msg name="name_glossary">Glossar</msg>
+    <msg name="name_glossary_empty"> ist noch leer.</msg>
+    <msg name="name_keywords">Schlusselworter</msg>
+    <msg name="name_summary">Zusammenfassung</msg>
+    <msg name="name_selfAssessment">&#220;bung</msg>
+    <msg name="name_furtherReading">Literaturempfehlungen</msg>
+    <msg name="name_bibliography">Bibliographie</msg>
+    <msg name="name_metaSetUpInfo">Installationshinweise (Tutoren): </msg>
+    <msg name="name_metadata">Metadaten</msg>
+    <msg name="name_solution">Losung</msg>
+    <msg name="name_solutiontext">Klicken Sie hier fur mehr Informationen</msg>
+    <msg name="name_anon">Anonym</msg>
+    <msg name="name_size">Grosse</msg>
+    <msg name="name_type">Typ</msg>
+    <msg name="name_internalLink">Link zur</msg>
+    <msg name="name_lesson">Lektion</msg>
+    <msg name="name_page">Seite</msg>
+    <msg name="name_page_of">von</msg>
+    <msg name="name_hint">Hinweis</msg>
+    <msg name="name_nolegend">Legende fehlt</msg>
+    <msg name="name_notanimage">Dieses Element (Animation, Video etc.) kann in der PDF version nicht dargestellt werden und ist nur in der online Version sichtbar.</msg>
+    <msg name="name_download">Herunterladen</msg>
+    <msg name="name_selfCheckCorrect">Prufen</msg>
+    <msg name="name_selfCheckSolve">Losung</msg>
+    <msg name="name_selfCheckMissing">Du hast noch nicht alle richtigen Antworten angekreuzt!</msg>
+    <msg name="name_optionalunits_symbol"> *</msg>
+    <msg name="name_optionalunits_text">Diese Unit wurde als fakultativ markiert.</msg>
+    <msg name="name_index">Index</msg>
+    <msg name="name_context">Anhang</msg>
+    <msg name="name_figures">Abbildungsverzeichnis</msg>
+    <msg name="name_tables">Tabellenverzeichnis</msg>
+    <msg name="name_bugtracker">Fehler gefunden?</msg>
+    <msg name="name_contact">Kontakt</msg>
+    <msg name="name_print">Drucken</msg>
+    <msg name="name_printed">Stand vom: </msg>
+    <msg name="name_responsible">Verantwortliche Personen:</msg>
+    <msg name="name_tutoronly">Diese Unit ist nur fur Tutoren und nicht fur Studierende sichtbar.</msg>
+    <msg name="name_biblio_book">Monographien (Bucher)</msg>
+    <msg name="name_biblio_contributionInBook">Beitrage aus Sammelbanden</msg>
+    <msg name="name_biblio_journalArticle">Beitrage aus Zeitschriften</msg>
+    <msg name="name_biblio_newspaperArticle">Beitrage aus Zeitungen</msg>
+    <msg name="name_biblio_map">Kartenmaterialien</msg>
+    <msg name="name_biblio_conferencePaper">Beitrage zu einer Konferenz</msg>
+    <msg name="name_biblio_publicationCorporateBody">Publikationen von Korperschaften</msg>
+    <msg name="name_biblio_thesis">Dissertationen, Diplomarbeiten etc.</msg>
+    <msg name="name_biblio_patent">Patente</msg>
+    <msg name="name_biblio_videoFilmBroadcast">Audiovisuelle Medien</msg>
+    <msg name="name_biblio_websites">Veroffentlichungen im Internet</msg>
+    <msg name="name_biblio_eJournals">Beitrage in eJournals</msg>
+    <msg name="name_biblio_mailLists">Veroffentlichungen in Mailing-Listen</msg>
+    <msg name="name_biblio_personalMail">Personliche E-Mails</msg>
+    <msg name="name_biblio_cdRom">CD-ROM</msg>
+  </messagebundle>
+  
+  #{lesson}
+
+</unizh:lessonEnvelope>
