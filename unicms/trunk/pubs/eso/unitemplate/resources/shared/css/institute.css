@@ -65,3 +65,11 @@ table.grid td {
     margin-bottom: 6px;
     padding: 4px;
 }
+
+.popup {
+    background-color: #eed7d7;
+    border: 1px dashed #bbbbbb;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 4px;
+}

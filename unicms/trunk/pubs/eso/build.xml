@@ -49,6 +49,12 @@
       </fileset>
     </copy>
 
+    <copy todir="backup" overwrite="yes">
+      <fileset dir="${pubs.dir}/unizh/resources/shared/images/icons">
+        <include name="*"/>
+      </fileset>
+    </copy>
+
     <echo>INFO: Copying footer</echo>
     <copy todir="${pubs.dir}/unizh/xslt/common" overwrite="yes">
       <fileset dir="unizh/xslt/common">
@@ -77,6 +83,12 @@
       </fileset>
     </copy> 
 
+    <echo>INFO: Copying Icons</echo>
+    <copy todir="${pubs.dir}/unizh/resources/shared/images/icons" overwrite="yes">
+      <fileset dir="unizh/resources/shared/images/icons">
+        <include name="*"/>
+      </fileset>
+    </copy> 
 
     <antcall target="touch"/>
 
