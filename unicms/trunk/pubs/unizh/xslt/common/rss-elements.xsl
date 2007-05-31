@@ -27,7 +27,7 @@
            <![CDATA[
 function open_rss_window(url)
 {
-	newwindow=window.open(url,'rsswindow','left=0,top=100,scrollbars=yes');
+	newwindow=window.open(url,'rsswindow','left=0,top=100,toolbar,location,status,scrollbars,resizable,menubar,dependent,resizeable');
 	if (window.focus) {newwindow.focus()};
 }
            ]]>
