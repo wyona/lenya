@@ -86,7 +86,6 @@
     <xsl:param name="name_anon">unknown</xsl:param>
     <xsl:param name="name_download"/>
 
-    <xsl:param name="furtherReading"/>
       <li>
         <b class="bibAuthor">
           <xsl:choose>
@@ -577,7 +576,6 @@
      <xsl:param name="name_anon">unknown</xsl:param>
      <xsl:param name="name_download"/>
  
-     <xsl:param name="furtherReading"/>
        <li>
          <b class="bibAuthor">
            <xsl:choose>
