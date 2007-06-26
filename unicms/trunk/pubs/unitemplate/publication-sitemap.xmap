@@ -242,6 +242,21 @@
 
       </map:match>
 
+
+      <map:match pattern="*/site.rdf">
+
+        <!-- standard xml -->
+        <map:generate src="content/{page-envelope:area}/sitetree.xml"/>
+        <map:transform src="usecases/neutron/xslt/sitetree2rdf.xsl">
+          <map:parameter name="baseurl" value="http://{request:serverName}:{request:serverPort}{page-envelope:context-prefix}/{page-envelope:publication-id}/{page-envelope:area}"/>
+          <map:parameter name="languages" value="{page-envelope:publication-languages-csv}"/>
+          <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>
+        </map:transform>
+        <map:serialize type="xml"/>
+    
+      </map:match>
+
+
       <map:match pattern="include-rss/**.rss.xml">
         <map:act type="resource-exists" src="content/{page-envelope:area}/{1}/index_{page-envelope:document-language}.xml">
         <map:act type="language-exists">
