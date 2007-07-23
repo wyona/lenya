@@ -28,4 +28,5 @@
     <inserts href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=inserts"/>
     <schema type="relaxNG" url="${cocoon.parameters['base-url']}/${cocoon.parameters['document-type']}.rng"/> 
   </edit>
+  <sitemap type="lenya-rdf" name="Unitemplate" href="${cocoon.parameters['base-url']}/site.rdf"/>
 </introspection>
