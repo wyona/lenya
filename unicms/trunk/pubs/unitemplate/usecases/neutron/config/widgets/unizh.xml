@@ -81,11 +81,17 @@
 
   <!-- Hyperlinks -->
   <binding element="a">
-    <component id="anchor">
-      <parameter name="href.attribname" value="href"/>
-    </component>
+    <component id="link" href="href"/>
   </binding>
-   
+  
+
+  <!-- Anchors -->
+  <binding element="a[name]">
+    <component id="anchor" name="name"/>
+  </binding>
+
+
+ 
   <!-- Images -->
   <binding element="img">
     <component id="image">
