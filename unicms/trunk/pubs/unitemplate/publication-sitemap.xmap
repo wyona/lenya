@@ -248,6 +248,7 @@
         <!-- standard xml -->
         <map:generate src="content/{page-envelope:area}/sitetree.xml"/>
         <map:transform src="usecases/neutron/xslt/sitetree2rdf.xsl">
+          <map:parameter name="pub" value="{page-envelope:publication-id}"/>
           <map:parameter name="baseurl" value="http://{request:serverName}:{request:serverPort}{page-envelope:context-prefix}/{page-envelope:publication-id}/{page-envelope:area}"/>
           <map:parameter name="languages" value="{page-envelope:publication-languages-csv}"/>
           <map:parameter name="defaultlanguage" value="{page-envelope:default-language}"/>

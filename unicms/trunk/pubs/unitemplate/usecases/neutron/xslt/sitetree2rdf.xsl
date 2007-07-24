@@ -28,6 +28,7 @@
     xmlns:map="http://lenya.apache.org/sitemap/"
     >
 
+<xsl:param name="pub"/>
 <xsl:param name="baseurl"/>
 <xsl:param name="languages"/>
 <xsl:param name="defaultlanguage"/>  
@@ -38,7 +39,7 @@
 
 <xsl:template match="tree:site">
   <RDF>
-    <Description about="{$baseurl}/site.rdf" map:root="{$baseurl}/" map:defaultLanguage="de" dc:name="Unitemplate Sitemap"/>
+    <Description about="{$baseurl}/site.rdf" map:root="{$baseurl}/" map:defaultLanguage="de" dc:name="{$pub}"/>
     <xsl:call-template name="create-resources"/>
     <xsl:call-template name="create-navigation"/>
   </RDF>
