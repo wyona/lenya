@@ -12,20 +12,25 @@
   xmlns:uz="http://unizh.ch"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
   >
-  
+
+
   <xsl:variable name="languagesuffix">
     <xsl:if test="$defaultlanguage != $language">.<xsl:value-of select="$language"/></xsl:if>
   </xsl:variable>
-  
+
+
   <xsl:variable name="documentlanguagesuffix">
     <xsl:if test="$defaultlanguage != $language">_<xsl:value-of select="$language"/></xsl:if>
   </xsl:variable>
-                  
+
+
   <xsl:variable name="imageprefix" select="concat($contextprefix, '/unizh/authoring/images')"/>
   <xsl:variable name="localsharedresources" select="concat(substring-before($root, $area), 'authoring')"/>
-  
+
+
   <xsl:variable name="content" select="/document/content/*"/>
-  
+
+
   <xsl:variable name="document-element-name">
     <xsl:choose>
       <xsl:when test="name($content) = local-name($content)">
@@ -37,6 +42,7 @@
     </xsl:choose>
   </xsl:variable>
 
+
    <xsl:variable name="hideChildren">
     <xsl:choose>
       <xsl:when test="$document-element-name = 'unizh:overview'">
@@ -47,6 +53,21 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>false</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+
+  <xsl:variable name="numColumns">
+    <xsl:choose>
+      <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
+        <xsl:value-of select="count(/document/content/unizh:homepage4cols/xhtml:body/unizh:column)"/>
+      </xsl:when>
+      <xsl:when test="$document-element-name = 'unizh:overview'">
+        <xsl:value-of select="2"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="1"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -25,7 +24,7 @@
   <xsl:param name="querystring"/>
   <xsl:param name="creationdate"/>
 
-  <xsl:include href="../doctypes/variables.xsl"/>
+  <xsl:include href="variables.xsl"/>
   <xsl:include href="../common/html-head.xsl"/>
   <xsl:include href="../common/header.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
@@ -175,20 +174,27 @@
       <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
       <xsl:comment/>
     </div>
-    <div class="contcol2">
+    <div>
+      <xsl:attribute name="class">contcol2</xsl:attribute>
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
-        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+        <xsl:apply-templates select="*/unizh:related-content"/>
+        <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <div class="contentarea">
+      <a name="content" class="namedanchor"><xsl:comment/></a>
+      <div>
+        <xsl:attribute name="class">contentarea</xsl:attribute>
         <div class="content">
-          <a name="content"><xsl:comment/></a>
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
-          <xsl:apply-templates select="*/xhtml:body/*"/>
+          <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+            <h1>
+              <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+                <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+              </div>
+            </h1>
+          </xsl:if>
+          <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:lead"/>
+          <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]"/>
+          <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]"/>
         </div>
         <xsl:call-template name="footer"/>
       </div>
@@ -368,9 +374,18 @@
                   <xsl:value-of select="unizh:person/unizh:phone"/>
                 </span>
                 <br/>
-                Mail: 
                 <span bxe_xpath="/{$document-element-name}/unizh:email">
-                  <xsl:value-of select="unizh:person/unizh:email"/>
+                  <xsl:if test="unizh:person/unizh:email !=''">
+                    <xsl:text>Mail: </xsl:text>
+                    <a>
+                      <xsl:attribute name="href">
+                        <xsl:text>mailto:</xsl:text>
+                        <xsl:value-of select="unizh:person/unizh:email"/>
+                      </xsl:attribute>
+                      <xsl:attribute name="class">internal</xsl:attribute>
+                      <xsl:value-of select="unizh:person/unizh:email"/>
+                    </a>
+                  </xsl:if>
                 </span>
               </p>
             </div>
@@ -414,16 +429,15 @@
   </xsl:template>
 
 
-
   <xsl:template match="unizh:column[1]">
-    <div class="content1" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[1]">
+    <div class="column" id="c1" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[1]">
       <xsl:apply-templates/>
     </div>
   </xsl:template>
 
 
   <xsl:template match="unizh:column[2]">
-    <div class="content2" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[2]">
+    <div class="column" id="c2" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:column[2]">
       <xsl:apply-templates/>
     </div>
   </xsl:template>
