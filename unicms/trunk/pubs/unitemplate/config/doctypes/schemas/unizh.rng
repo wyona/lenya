@@ -11,10 +11,10 @@
 
 <define name="lightblock.class.deprecated">
   <choice>
-	<ref name="h2"/>
-	<ref name="h3"/>
-	<ref name="h4"/>
-	<ref name="p"/>
+    <ref name="h2"/>
+    <ref name="h3"/>
+    <ref name="h4"/>
+    <ref name="p"/>
     <ref name="object"/>
     <ref name="lenya.asset"/>
   </choice>
@@ -86,12 +86,12 @@
 
 <define name="unizh.contcol1">
   <element name="unizh:contcol1">
-    <optional>
+    <zeroOrMore>
       <choice>
         <ref name="unizh.quicklinks"/>
         <ref name="object"/>
       </choice>
-    </optional>
+    </zeroOrMore>
   </element>
 </define>
 
@@ -99,7 +99,7 @@
 <define name="unizh.quicklinks">
   <element name="unizh:quicklinks">
     <attribute name="label">
-      <value type="string">Quick Links</value>
+      <text/>
     </attribute>
     <oneOrMore>
       <element name="unizh:quicklink">
@@ -127,6 +127,14 @@
     <optional>
       <attribute name="link">
         <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="highlight">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
       </attribute>
     </optional>
     <zeroOrMore>
@@ -279,7 +287,43 @@
         </choice>
       </attribute>
     </optional>
-    <text/>
+    <optional>
+      <attribute name="link">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemDescription">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemImage">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemPubdate">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <element name="unizh:title">
+        <text/>
+      </element>
+    </optional>
   </element>
 </define>
 
@@ -292,6 +336,29 @@
 <define name="unizh.abstract">
   <element name="unizh:abstract">
     <ref name="Inline.model"/>
+  </element>
+</define>
+
+
+<define name="unizh.links">
+  <element name="unizh:links">
+    <element name="unizh:title">
+      <optional>
+        <attribute name="href">
+          <text/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
+    <optional>
+      <ref name="object"/>
+    </optional>
+    <optional>
+      <ref name="teaser.p"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="a"/>
+    </zeroOrMore>
   </element>
 </define>
 

@@ -101,6 +101,16 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="classid">
+        <ref name="URI.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="codebase">
+        <ref name="URI.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="float">
         <choice>
           <value>true</value>

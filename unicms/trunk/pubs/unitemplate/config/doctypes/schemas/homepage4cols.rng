@@ -65,6 +65,7 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
       </choice>
     </oneOrMore>
   </element>
@@ -73,30 +74,8 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.links"/>
+        <ref name="unizh.rss-reader"/>
       </choice>
-    </oneOrMore>
-  </element>
-</define>
-
-
-<define name="unizh.links">
-  <element name="unizh:links">
-    <element name="unizh:title">
-      <optional>
-        <attribute name="href">
-          <text/>
-        </attribute>
-      </optional>
-      <text/>
-    </element>
-    <optional>
-      <ref name="object"/>
-    </optional>
-    <optional>
-      <ref name="teaser.p"/>
-    </optional>
-    <oneOrMore>
-      <ref name="a"/>
     </oneOrMore>
   </element>
 </define>
