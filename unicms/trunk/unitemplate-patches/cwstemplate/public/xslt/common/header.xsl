@@ -32,7 +32,7 @@
     <xsl:apply-templates select="/document/xhtml:div[@id = 'subtabs']"/>
     <div class="floatclear"><xsl:comment/></div>
     <div class="endheaderline">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+      <img src="{$imageprefix}/1.gif" width="1" height="1"/>
     </div>
   </xsl:template>
 
