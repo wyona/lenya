@@ -7,8 +7,8 @@
 
 
   <xsl:template match="unizh:rss-reader">
-    <unizh:rss-reader items="{@items}" url="{@url}" description="{@descriptions}" image="{@image}">
-      <title><xsl:value-of select="."/></title>
+    <unizh:rss-reader url="{@url}" items="{@items}" image="{@image}" link="{@link}" itemDescription="{@itemDescription}" itemImage="{@itemImage}">
+      <unizh:title><xsl:value-of select="unizh:title"/></unizh:title>
       <cinclude:includexml ignoreErrors="true">
         <xsl:choose>
           <xsl:when test="starts-with(@url, 'http://')">
@@ -21,6 +21,7 @@
       </cinclude:includexml> 
     </unizh:rss-reader>
   </xsl:template>
+
 
   <xsl:template match="@*|node()" priority="-1">
     <xsl:copy>
