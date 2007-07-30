@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- $Id: variables.xsl,v 1.5 2004/06/18 16:30:28 jann Exp $ -->
+
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -17,19 +17,5 @@
 
 
 <!-- define new variables -->
-
-  <xsl:variable name="numColumns">
-    <xsl:choose>
-      <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
-        <xsl:value-of select="count(/document/content/unizh:homepage4cols/xhtml:body/unizh:column)"/>
-      </xsl:when>
-      <xsl:when test="$document-element-name = 'unizh:overview'">
-        <xsl:value-of select="2"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="1"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
 
 </xsl:stylesheet>
