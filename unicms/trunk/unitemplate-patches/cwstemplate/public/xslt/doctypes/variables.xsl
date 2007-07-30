@@ -29,7 +29,10 @@
     </xsl:choose>
   </xsl:variable>
 
-  <xsl:variable name="numColumns">
+
+<!-- overwrite included templates -->
+
+  <xsl:variable name="numColumns" priority="1">
     <xsl:choose>
       <xsl:when test="$document-element-name = 'unizh:homepage4cols'">
         <xsl:value-of select="count(/document/content/unizh:homepage4cols/xhtml:body/unizh:column)"/>
