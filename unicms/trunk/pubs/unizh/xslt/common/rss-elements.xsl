@@ -5,83 +5,119 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:i18n="http://apache.org/cocoon/i18n/2.1">
- 
+  xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
+  xmlns:dt="http://xsltsl.org/date-time"
+>
+
+  <xsl:import href="http://xsltsl.sourceforge.net/modules/stdlib.xsl"/>
+
   <xsl:param name="contextprefix"/>
- 
+
   <xsl:variable name="imageprefix" select="concat($contextprefix, '/unizh/authoring/images')"/> 
 
-<!--  <xsl:template match="unizh:rss-reader[parent::unizh:related-content]"> -->
   <xsl:template match="unizh:rss-reader">
-    <xsl:variable name="items" select="@items"/>
-    <xsl:variable name="url" select="@url"/>
-
-    <div class="relatedboxborder">
-      <div class="relatedboxcont">
-         <xsl:choose>
-           <xsl:when test="rss/channel">
-
-    <script language="javascript">
-      <xsl:comment>
-           var newwindow;
-           <![CDATA[
-function open_rss_window(url)
-{
-	newwindow=window.open(url,'rsswindow','left=0,top=100,toolbar,location,status,scrollbars,resizable,menubar,dependent,resizeable');
-	if (window.focus) {newwindow.focus()};
-}
-           ]]>
-      </xsl:comment>
-    </script>
-
-             <xsl:if test="@image = 'true' and rss/channel/image">
-               <xsl:variable name="imageheight">
-                 <xsl:choose>
-                   <xsl:when test="rss/channel/image/height &lt; 100">
-                     <xsl:value-of select="rss/channel/image/height"/>
-                   </xsl:when>
-                   <xsl:otherwise>64</xsl:otherwise>
-                 </xsl:choose>
-               </xsl:variable>
-               <xsl:variable name="imagewidth">
-                 <xsl:choose>
-                   <xsl:when test="rss/channel/image/width &lt; 156">
-                     <xsl:value-of select="rss/channel/image/width"/>
-                   </xsl:when>
-                   <xsl:otherwise>100</xsl:otherwise>
-                 </xsl:choose>
-               </xsl:variable>
-               <img src="{rss/channel/image/url}" height="{$imageheight}" width="{$imagewidth}"/><br/>
-             </xsl:if>
-
-             <div class="titel"><xsl:value-of select="rss/channel/title"/></div>
-             <div class="titel">&#160;</div>
-             <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /><xsl:comment/></div>
-             <xsl:for-each select="rss/channel/item">
-               <xsl:if test="$items = '' or position() &lt;= $items">
-                 <xsl:choose>
-                   <xsl:when test="starts-with($url, 'http://')">
-                     <a class="rss" href="{link}" onclick="javascript:open_rss_window('{link}'); return false;"><xsl:value-of select="title"/></a>
-                   </xsl:when>
-                   <xsl:otherwise>
-                     <a class="rss" href="{link}"><xsl:value-of select="title"/></a>
-                   </xsl:otherwise>
-                 </xsl:choose>
-                 <xsl:if test="(position() &lt; $items) and (position() != last())">
-                   <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/><xsl:comment/></div>
-                 </xsl:if>
-               </xsl:if>
-             </xsl:for-each>
-           </xsl:when>
-           <xsl:otherwise>
-            no rss 
-           </xsl:otherwise>
-         </xsl:choose>
-      </div>
+    <xsl:variable name="target">
+      <xsl:choose>
+        <xsl:when test="@url and starts-with(@url, 'http://') and not(contains(@url, '.unizh.ch')) and not(contains(@url, '.uzh.ch'))">
+          <xsl:text>www</xsl:text>
+        </xsl:when>
+        <xsl:when test="@url and starts-with(@url, 'http://') and ((contains(@url, '.unizh.ch')) or (contains(@url, '.uzh.ch')))">
+          <xsl:text>uzh</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>internal</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="$target = 'www'">rssReader www</xsl:when>
+          <xsl:when test="$target = 'uzh'">rssReader uzh</xsl:when>
+          <xsl:otherwise>rssReader internal</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="rss/channel">
+          <h3>
+            <xsl:choose>
+              <xsl:when test="@link = 'true' and string-length(rss/channel/link)">
+                <xsl:attribute name="class">linked</xsl:attribute>
+                <a>
+                  <xsl:attribute name="href"><xsl:value-of select="rss/channel/link"/></xsl:attribute>
+                  <xsl:choose>
+                    <xsl:when test="string-length(unizh:title)"><xsl:value-of select="unizh:title"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="rss/channel/title"/></xsl:otherwise>
+                  </xsl:choose>
+                </a>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:choose>
+                  <xsl:when test="string-length(unizh:title)"><xsl:value-of select="unizh:title"/></xsl:when>
+                  <xsl:otherwise><xsl:value-of select="rss/channel/title"/></xsl:otherwise>
+                </xsl:choose>
+              </xsl:otherwise>
+            </xsl:choose>
+          </h3>
+          <ul>
+            <xsl:for-each select="rss/channel/item">
+              <xsl:if test="../../../@items = '' or position() &lt; = ../../../@items">
+                <li>
+                  <xsl:if test="position() = 1">
+                    <xsl:attribute name="id">first</xsl:attribute>
+                  </xsl:if>
+                  <xsl:choose>
+                    <xsl:when test="../../../@itemDescription = 'true' or (../../../@itemDescription = 'true' and ../../../@itemImage = 'true')">
+                      <h4><xsl:value-of select="title"/></h4>
+                      <xsl:if test="../../../@itemImage = 'true' and image and image/url">
+                        <a>
+                          <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
+                          <img>
+                            <xsl:attribute name="src"><xsl:value-of select="image/url"/></xsl:attribute>
+                            <xsl:attribute name="alt">thumbnail image</xsl:attribute>
+                          </img>
+                        </a>
+                      </xsl:if>
+                      <xsl:if test="../../../@itemDescription = 'true'">
+                        <xsl:value-of select="description"/>
+                      </xsl:if>
+                      <a>
+                        <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
+                        <xsl:attribute name="class">block</xsl:attribute>
+                        <xsl:text>weiter</xsl:text>
+                      </a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <a>
+                        <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
+                        <xsl:attribute name="class">block</xsl:attribute>
+                        <xsl:if test="../../../@itemPubdate = 'true' and pubDate">
+                          <xsl:call-template name="dt:format-date-time">
+                            <xsl:with-param name="year"><xsl:value-of select="substring(pubDate, 1, 4)"/></xsl:with-param>
+                            <xsl:with-param name="month"><xsl:value-of select="substring(pubDate, 6, 2)"/></xsl:with-param>
+                            <xsl:with-param name="day"><xsl:value-of select="substring(pubDate, 9, 2)"/></xsl:with-param>
+                            <xsl:with-param name="format">%e.%n.%Y</xsl:with-param>
+                          </xsl:call-template>:
+                        </xsl:if>
+                        <xsl:value-of select="title"/>
+                      </a>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </li>
+              </xsl:if>
+            </xsl:for-each>
+          </ul>
+        </xsl:when>
+        <xsl:otherwise>
+          no rss
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 
-  <xsl:template match="unizh:rss-reader[ancestor::div[@class='content']]">
+
+  <!-- separate display for rss reader in content, but not in columns -->
+  <xsl:template match="unizh:rss-reader[ancestor::div[@class='content'] and not(parent::div[@class='column'])]">
     <xsl:variable name="items" select="@items"/>
        <h2><xsl:value-of select="rss/channel/title"/></h2>
        <xsl:for-each select="rss/channel/item">
