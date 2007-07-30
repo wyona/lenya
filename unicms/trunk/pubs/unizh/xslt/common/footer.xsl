@@ -15,7 +15,7 @@
   <xsl:template name="footer">
     <div class="footermargintop"><xsl:comment/></div>
     <div class="topnav"><a href="#top">top</a></div>
-    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
+    <div class="solidline"><img src="{$imageprefix}/1.gif" width="1" height="1" /></div>
     <div id="footer">&#169;&#160;<xsl:value-of select="/document/content/*/lenya:meta/dc:rights"/>
       | <i18n:date src-pattern="yyyy-MM-dd" value="{$date}"/>
       <xsl:variable name="publisher" select="/document/content/*/lenya:meta/dc:publisher"/>
