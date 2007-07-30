@@ -3,224 +3,22 @@
 
 /****** all ******/
 
-/* body width is non-scalable */
-div.bodywidth
-{
-    width:800px;
-}
 
 /****** common elements ******/
 
-h3
+/* link */
+div.contentareawide a:visited, div.wide a:visited
 {
-    font-weight:bold;
-    line-height: inherit;
-    font-size: inherit;
-}
-
-/* teaser for use in related content or content */
-div.teaser
-{
-    line-height: 1.3em;
-    font-size: 0.95em;
-    border: 1px solid #ccccff;
-    padding: 9px 9px 10px 9px;
-    margin-bottom:10px;
-}
-div.teaser h3
-{
-    padding: 0;
-    margin: 0;
-}
-
-div.teaser p
-{
-    margin:0;
-}
-div.teaser img
-{
-    display:block;
-    margin-bottom:2px;
-}
-div.teaser a.internal, div.teaser a.uzh, div.teaser a.www
-{
-    display: block;
-}
-div.teaser img.icon
-{
-    display:inline;
-    vertical-align: bottom;
-}
-
-/* highlighted teaser for use in related content or content */
-div.teaser.highlighted
-{
-    border: 1px solid #E2E2FF;
-    background-color:#E2E2FF;
-}
-div.teaser.highlighted a:hover
-{
-    background-color:#F7F7F7;
-}
-
-/* asset link */
-div.teaser div.asset img
-{
-    margin: 0;
-    display: inline;
-}
-
-/* rss reader for external RSS feeds (where external means: outside virtual subdomain) */
-div.rssReader
-{
-    line-height: 1.3em;
-    font-size: 0.95em;
-    border: 1px solid #ccccff;
-    padding: 0 0 7px 0;
-    margin-bottom:10px;
-}
-/* rss reader for internal RSS feeds (where internal means: within virtual subdomain) */
-div.rssReader.internal
-{
-    background-color:#f2f2f2;
-}
-div.rssReader h3
-{
-    padding:2px 9px 3px 9px;
-    margin: 0;
-    background-color:#E2E2FF;
-}
-div.rssReader h3.linked
-{
-    padding: 0;
-    margin: 0;
-}
-div.rssReader h3 a
-{
-    background-color:#EBEBFF;
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-    background-repeat: no-repeat;
-    background-position: 9px 2px;
-    padding:2px 9px 3px 23px;
-    margin: 0;
-    display: block;
-}
-div.rssReader h3 a:hover
-{
-    background-color:#F7F7F7;
-}
-div.rssReader h3 a:visited
-{
-    color:#333399;
-}
-div.rssReader.internal h3 a
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-    background-position: 9px 2px;
-}
-div.rssReader h4
-{
-    font-weight: normal;
-    font-style: normal;
-    padding: 3px 9px 3px 9px;
-    margin:0;
-}
-div.rssReader p
-{
-    margin:0;
-}
-div.rssReader ul
-{
-    list-style-type: none;
-    padding: 0 9px 0 9px;
-    margin: 0;
-}
-div.rssReader ul li
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left top;
-    padding: 1px 0 0 0;
-}
-div.rssReader ul li#first
-{
-    background-image: none;
-}
-div.rssReader ul li h4
-{
-    background-image: none;
-    font-weight:bold;
-    padding: 3px 0 0 0;
-}
-div.rssReader ul li a.block
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-    background-repeat: no-repeat;
-    background-position:0 2px;
-    padding:2px 0 3px 13px;
-    display:block;
-    margin-left:0;
-}
-div.rssReader.internal ul li a.block
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-}
-div.rssReader ul li a.more
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-    background-repeat: no-repeat;
-    background-position: left top;
-    display: block;
-    padding: 0 0 3px 13px;
-    margin: 0 0 0 0;
-    clear: left;
-}
-div.rssReader.internal ul li a.more
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-}
-div.rssReader ul li img
-{
-    display:block;
-    float:left;
-    margin:3px 7px 0 0;
-}
-
-/****** header elements ******/
-
-div#visuals
-{
-    float: right;
-    width: 195px;
+    color:#666666; 
 }
 
 /****** left column ******/
 
 /* second and deeper lever navigation */
-div#secnav
-{
-    line-height: 1.1em;
-    font-size: inherit;
-    border-top: solid 1px #999999;
-    padding: 0;
-    margin: 3px 0 20px 0;
-}
-div#secnav ul li
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    padding: 0 0 1px 0;
-}
 div#secnav ul li a
 {
     padding: 4px 0 5px 7px;
     display: block;
-}
-div#secnav ul li ul li, div#secnav ul li ul li ul li, div#secnav ul li ul li ul li ul li
-{
-    background-image: none;
-    padding: 1px 0 0 0;
 }
 div#secnav ul li ul li a
 {
@@ -277,55 +75,7 @@ div.relocator input#submit:hover
     border-bottom: 1px solid #333399; 
 }
 
-/* quicklinks */
-div#quicklinks
-{
-    background-color:#E2E2FF;
-    padding: 0 10px 7px 10px;
-    margin: 0 0 10px 0;
-}
-div#quicklinks h3
-{
-    line-height: 1.3em;
-    padding:4px 0 3px 0;
-    margin: 0;
-}
-div#quicklinks ul
-{
-    list-style-type:none;
-    padding:0;
-    margin: 0;
-}
-div#quicklinks ul li
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left top;
-    padding: 1px 0 0 0;
-    margin: 0;
-}
-div#quicklinks ul li a
-{
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
-    background-position:0 2px;
-    background-repeat: no-repeat;
-    width: 132px;
-    padding:2px 0 3px 13px;
-    line-height: 1.3em;
-    display:block;
-}
-div#quicklinks ul li a:hover
-{ 
-    background-color:#F7F7F7;
-}
-
 /****** related content column ******/
-div.relatedbox
-{
-    width: 180px;
-    margin-left:15px;
-    padding-right: 0px;
-}
 
 /* banner (related content) */
 div.relatedbox div.banner img
@@ -378,23 +128,9 @@ div.contentareawide
 {
     margin-right:195px;
 }
-div.contentarea div.content div.column
-{
-    width:198px;
-}
 div.contentareawide div.content div.column
 {
     width:191px;
-}
-div.contentarea div.content div.column#c1
-{
-    margin-right:20px;
-    float: left;
-}
-div.contentarea div.content div.column#c2
-{
-    float: left;
-    display:block;
 }
 div.contentareawide div.content div.column#c1
 {
@@ -416,73 +152,7 @@ div.contentareawide div.content div.column#c3
 /* links element for use in content columns */
 div.links
 {
-    line-height: 1.3em;
-    font-size: 0.95em;
     border-top: solid 1px #999999;
-    padding: 0;
-    margin: 0 0 20px 0;
-}
-div.links img
-{ 
-    display:block;
-} 
-div.links h3
-{
-    padding:2px 0 3px 0;
-    margin: 0;
-}
-div.links h3.noimage
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    padding:2px 0 4px 0;
-}
-div.links h3.linked
-{
-    padding: 0;
-    margin: 0;
-}
-div.links h3.noimage.linked
-{
-    padding: 0 0 1px 0;
-    margin: 0;
-}
-div.links h3 a
-{
-    background-position: 0 2px;
-    padding:2px 0 3px 13px;
-    margin: 0;
-    display: block;
-}
-div.links p
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    padding:2px 0 4px 1px;
-    margin: 0;
-}
-div.links ul
-{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-div.links ul li
-{
-    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    padding: 0 0 1px 0;
-}
-div.links ul li a
-{
-    background-repeat: no-repeat;
-    background-position:0 2px;
-    padding:2px 0 3px 13px;
-    display:block;
-    margin-left:0;
 }
 
 </css>
