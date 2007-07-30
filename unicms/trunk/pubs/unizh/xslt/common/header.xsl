@@ -11,7 +11,7 @@
 
   <xsl:template name="header">
     <div id="headerarea">
-      <div style="float:right;width:195px;">
+      <div id="visuals">
         <div class="imgunilogo">
           <a href="http://www.uzh.ch">
             <img src="{$localsharedresources}/images/logo_{$language}.gif" alt="unizh logo" width="180" height="45" />
@@ -28,7 +28,6 @@
             <div bxe_xpath="/{$document-element-name}/unizh:header/unizh:superscription">
               <h2>
                 <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription"/>
-              
               </h2>
             </div>
             <h1>
@@ -64,7 +63,7 @@
     </xsl:choose>
     <div class="floatclear"><xsl:comment/></div>
     <div class="endheaderline">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
+      <img src="{$imageprefix}/1.gif" width="1" height="1"/>
     </div>
   </xsl:template>
 
