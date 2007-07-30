@@ -9,9 +9,6 @@
   <xsl:param name="publicationid"/>
   <xsl:param name="servername"/>
 
-  <xsl:variable name="temp" select="substring-after($servername, 'http://')"/>
-  <xsl:variable name="hostname" select="substring-before($temp, '/index.html')"/>
-
   <xsl:template match="xhtml:div[@id = 'orthonav']">
     <xsl:if test="*">
       <div id="orthonav">
@@ -55,14 +52,20 @@
       <xsl:when test="@id='search'">
         <xsl:choose>
           <xsl:when test="$publicationid = 'id'">      
-            <label for="formsearch">Suchen:</label>  
-            <form id="formsearch" action="http://www.id.uzh.ch/search/search.jsp" method="get" accept-charset="UTF-8">
-               <div class="serviceform">
-                  <input type="text" name="query" accesskey="5" />
-               </div>
-               <div class="serviceform">
-                  <a href="javascript:document.forms['formsearch'].submit();">go!</a>
-               </div>
+            <form>
+              <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
+              <xsl:attribute name="action">http://www.google.uzh.ch/result.html</xsl:attribute>
+              <xsl:attribute name="method">get</xsl:attribute>
+              <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
+              <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+              <input type="hidden" name="cof" value="FORID:11" />
+              <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+              <div class="serviceform">
+                <input type="text" name="q" accesskey="5" />
+              </div>
+              <div class="serviceform">
+                <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();"><xsl:value-of select="text()"/></a>
+              </div>
             </form>
           </xsl:when>
           <xsl:otherwise>
@@ -72,10 +75,14 @@
    javascript provided by google.
 -->
             <xsl:if test="$nodeid != 'search'">
-              <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{@href}" method="get" accept-charset="UTF-8">
+              <form>
+                <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
+                <xsl:attribute name="action">@href</xsl:attribute>
+                <xsl:attribute name="method">get</xsl:attribute>
+                <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
                 <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
                 <input type="hidden" name="cof" value="FORID:11" />
-                <input type="hidden" id="custom" name="sitesearch" value="{$hostname}"/>
+                <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
                 <div class="serviceform">
                   <input type="text" name="q" accesskey="5" />
                 </div>
@@ -152,11 +159,8 @@
       <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:if test="$level > 3">
         <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
-       </xsl:if>
+      </xsl:if>
       <xsl:if test="(descendant::xhtml:div[@current = 'true']) or ($hideChildren != 'true')">
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-        </div>
         <ul>
           <xsl:choose>
             <xsl:when test="$level > 3">
@@ -186,11 +190,6 @@
           <xsl:apply-templates select="xhtml:div"/>
         </ul>
       </xsl:if>
-      <xsl:if test="parent::xhtml:div[@id = 'menu']">
-        <div class="dotline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-        </div>
-      </xsl:if>
     </li>
   </xsl:template>
 
@@ -216,6 +215,7 @@
           <div class="linkseparator">|</div>
         </xsl:if>
       </xsl:for-each>
+      &#160;
     </div>
   </xsl:template>
 
