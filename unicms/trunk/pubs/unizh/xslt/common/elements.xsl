@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
+
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:dcterms="http://purl.org/dc/terms/"
@@ -131,10 +132,9 @@
   </xsl:template>
 
 
-
   <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
-
     <xsl:variable name="fulltext" select="normalize-space(.)"/>
+
     <xsl:choose>
       <xsl:when test="ancestor::unizh:newsitem and (($fulltext = '') or ($fulltext = '&#160;'))">
           <xsl:copy>
@@ -143,12 +143,12 @@
       </xsl:when>
 
       <xsl:when test="xhtml:object[@float = 'true']">
-        <div class="upload_block">
+        <div class="objectContainer">
           <xsl:copy>
             <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
           </xsl:copy>
           <xsl:if test="lenya:asset-dot">
-              <br class="floatclear"/>
+            <br class="floatclear"/>
             <hr/>
             <xsl:apply-templates select="lenya:asset-dot"/>
             <br/>
@@ -158,13 +158,11 @@
       </xsl:when>
 
       <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
-        <div class="upload_block">
-          <xsl:apply-templates select="preceding-sibling::*[1]" mode="preprocess"/>
-          <xsl:copy>
-            <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
-          </xsl:copy>
+        <div class="objectContainer">
+          <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement"/>
+          <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
           <xsl:if test="lenya:asset-dot">
-              <br class="floatclear"/>
+            <br class="floatclear"/>
             <hr/>
             <xsl:apply-templates select="lenya:asset-dot"/>
             <br/>
@@ -174,12 +172,12 @@
       </xsl:when>
 
       <xsl:otherwise>
-        <div class="upload_block">
+        <div class="objectContainer">
           <xsl:copy>
             <xsl:apply-templates select="@*|*[not(self::lenya:asset-dot)]|text()"/>
           </xsl:copy>
           <xsl:if test="lenya:asset-dot">
-              <br class="floatclear"/>
+            <br class="floatclear"/>
             <hr/>
             <xsl:apply-templates select="lenya:asset-dot"/>
             <br/>
@@ -295,136 +293,80 @@
 
 
   <xsl:template match="unizh:teaser">
-    <div class="relatedboxborder">
-      <div class="relatedboxcont">
-        <xsl:if test="xhtml:object">
-          <xsl:apply-templates select="xhtml:object"/>
-          <br/>
-        </xsl:if>
-        <b><xsl:value-of select="unizh:title"/><xsl:comment/></b><br/>
-        <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-        <xsl:apply-templates select="xhtml:p"/>
-        <xsl:for-each select="lenya:asset">
-          <xsl:apply-templates select="."/>
-        </xsl:for-each>
-        <xsl:for-each select="xhtml:a">
-          <a href="{@href}">
-            <xsl:attribute name="class">
-              <xsl:choose>
-                <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
-                  <xsl:text>www</xsl:text>
-                </xsl:when>
-                <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
-                  <xsl:text>uzh</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                   <xsl:text>internal</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:attribute>
-            <xsl:copy-of select="@target"/>
-            <xsl:apply-templates/><xsl:comment/>
-          </a>
-          <br/>
-        </xsl:for-each> 
-        <xsl:apply-templates select="lenya:asset-dot"/>
-      </div> 
-    </div>
-  </xsl:template>
-
-
-  <xsl:template match="unizh:teaser[parent::unizh:column]">
-    <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
-        <div class="solidlinemitmargin">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <div class="kleintitel">
-      <xsl:value-of select="unizh:title"/>
-    </div>
-    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/> 
-    <xsl:choose>
-      <xsl:when test="xhtml:object">
+    <div>
+      <xsl:attribute name="class">
+        <xsl:choose>
+          <xsl:when test="@highlight and @highlight = 'true'">
+            <xsl:text>teaser highlighted</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>teaser</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:if test="xhtml:object">
         <xsl:apply-templates select="xhtml:object"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:apply-templates select="xhtml:p"/>
-    <xsl:for-each select="lenya:asset">
-      <xsl:apply-templates select="."/>
-    </xsl:for-each>
-    <xsl:for-each select="xhtml:a">
-      <a href="{@href}">
-        <xsl:attribute name="class">
-          <xsl:choose>
-            <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
-              <xsl:text>www</xsl:text>
-            </xsl:when>
-            <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch') ) or (contains(@href, '.uzh.ch')))">
-              <xsl:text>uzh</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-               <xsl:text>internal</xsl:text>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:attribute>
-        <xsl:copy-of select="@target"/>
-        <xsl:apply-templates/><xsl:comment/>
-      </a>
-      <br/>
-    </xsl:for-each>
-    <xsl:apply-templates select="lenya:asset-dot"/>
-    <div class="dotlinemitmargin"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
+      </xsl:if>
+      <h3><xsl:value-of select="unizh:title"/><xsl:comment/></h3>
+      <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
+      <xsl:apply-templates select="xhtml:p"/>
+      <xsl:apply-templates select="lenya:asset"/>
+      <xsl:apply-templates select="xhtml:a"/>
+      <xsl:apply-templates select="lenya:asset-dot"/>
+    </div>
   </xsl:template>
 
 
   <xsl:template match="unizh:links">
-    <xsl:choose>
-      <xsl:when test="preceding-sibling::* or ../../unizh:lead/xhtml:object or ../../unizh:lead/xhtml:p/descendant-or-self::*[text()]">
-        <div class="solidlinemitmargin">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"/>
-        </div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <div class="kleintitel">
-      <xsl:value-of select="unizh:title"/>
-    </div>
-    <xsl:apply-templates select="unizh:title/lenya:asset-dot"/>
-    <xsl:choose>
-      <xsl:when test="xhtml:object">
+    <div class="links">
+      <h3>
+        <xsl:choose>
+          <xsl:when test="unizh:title/@href">
+            <xsl:choose>
+              <xsl:when test="xhtml:object">
+                <xsl:attribute name="class">linked</xsl:attribute>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:attribute name="class">noimage linked</xsl:attribute>
+              </xsl:otherwise>
+            </xsl:choose>
+            <a href="{unizh:title/@href}">
+              <xsl:attribute name="class">
+                <xsl:choose>
+                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and not(contains(unizh:title/@href, '.unizh.ch')) and not(contains(unizh:title/@href, '.uzh.ch'))">
+                    <xsl:text>www</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
+                    <xsl:text>uzh</xsl:text>
+                  </xsl:when>
+                  <xsl:otherwise>
+                     <xsl:text>internal</xsl:text>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:attribute>
+              <xsl:value-of select="unizh:title"/>
+            </a>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:if test="not(xhtml:object)">
+              <xsl:attribute name="class">noimage</xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="unizh:title"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </h3>
+      <xsl:if test="xhtml:object">
         <xsl:apply-templates select="xhtml:object"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:apply-templates select="xhtml:p"/>
-    <ul class="linknav">
-      <xsl:for-each select="xhtml:a">
-        <li>
-          <a href="{@href}">
-            <xsl:value-of select="."/>
-          </a>
-          <div class="dotline">
-            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-          </div>
-        </li>
-      </xsl:for-each>
-    </ul>
+      </xsl:if>
+      <xsl:apply-templates select="xhtml:p"/>
+      <ul>
+        <xsl:for-each select="xhtml:a">
+          <li>
+            <xsl:apply-templates select="."/>
+          </li>
+        </xsl:for-each>
+      </ul>
+    </div>
   </xsl:template>
 
 
@@ -436,26 +378,19 @@
 
 
   <xsl:template match="unizh:quicklinks">
-      <div class="quicklinks" id="quicklink">
-        <div class="solidline">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-        </div>
-        <p class="titel"><xsl:value-of select="@label"/></p>
-        <div class="dotlinelead">
-          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  />
-        </div>
-        <xsl:for-each select="unizh:quicklink">
-          <xsl:apply-templates select="xhtml:p"/>
-          <ul>
-            <xsl:for-each select="xhtml:a">
-              <li>
-                <a href="{@href}"><xsl:value-of select="."/></a>
-              </li>
-            </xsl:for-each>
-          </ul>
-          <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1"  /></div>
-        </xsl:for-each>
-      </div>
+    <div id="quicklinks">
+      <h3><xsl:value-of select="@label"/></h3>
+      <xsl:for-each select="unizh:quicklink">
+        <xsl:copy-of select="xhtml:p"/>
+        <ul>
+          <xsl:for-each select="xhtml:a">
+            <li>
+              <a href="{@href}"><xsl:value-of select="."/></a>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </xsl:for-each>
+    </div>
   </xsl:template>
 
   
@@ -663,28 +598,24 @@
   <xsl:template match="xhtml:p[parent::xhtml:body and ($rendertype != 'imageupload')]">
     <xsl:choose>
       <xsl:when test="xhtml:object[@float = 'true']">
-        <div class="img_block">
-          <xsl:copy>
-            <xsl:apply-templates/>
-          </xsl:copy>
+        <div class="objectContainer">
+          <xsl:apply-templates/>
           <br class="floatclear"/>
         </div>
       </xsl:when>
 
       <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
-        <div class="img_block">
-          <xsl:apply-templates select="preceding-sibling::*[1]" mode="preprocess"/>
-          <xsl:copy>
-            <xsl:apply-templates/>
-          </xsl:copy>
+        <div class="objectContainer">
+          <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement"/>
+          <xsl:apply-templates/>
           <br class="floatclear"/>
         </div>
       </xsl:when>
 
       <xsl:otherwise>
-          <xsl:copy>
-            <xsl:apply-templates/>
-          </xsl:copy>
+        <xsl:copy>
+          <xsl:apply-templates/>
+        </xsl:copy>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -709,7 +640,18 @@
                 </b>
                 <br/>
                 <xsl:value-of select="*/unizh:person/unizh:position"/><br/>
-                Mail: <xsl:value-of select="*/unizh:person/unizh:email"/><br/>
+                <xsl:if test="*/unizh:person/unizh:email !=''">
+                  <xsl:text>Mail: </xsl:text>
+                  <a>
+                    <xsl:attribute name="href">
+                      <xsl:text>mailto:</xsl:text>
+                      <xsl:value-of select="*/unizh:person/unizh:email"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="class">internal</xsl:attribute>
+                    <xsl:value-of select="*/unizh:person/unizh:email"/>
+                  </a>
+                  <br />
+                </xsl:if>
                 <a class="internal" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
               </p>
             </div>
