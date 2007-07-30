@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: elements.xsl,v 1.79 2005/01/17 09:15:15 thomas Exp $ -->
+
+
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
@@ -13,46 +14,20 @@
   <xsl:param name="contextprefix"/>
   <xsl:param name="rendertype"/>
 
+
   <xsl:template name="width-attribute">
     <xsl:choose>
-      <xsl:when test="@popup = 'true'">
-        <xsl:choose>
-          <xsl:when test="@width > 0">
-            <xsl:value-of select="@width" />
-          </xsl:when>
-          <xsl:otherwise>
-             <xsl:text>204</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      <xsl:when test="not(@width) or (@width = '')">
+      <xsl:when test="not(@width) or (@width = '') or contains(@width, 'px')">
         <xsl:text>204</xsl:text>
       </xsl:when>
-      <xsl:when test="(@float = 'true') and not(@align = 'right')">
-        <xsl:text>204</xsl:text>
+      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 1) and (@width > 800)">
+        <xsl:text>800</xsl:text>
       </xsl:when>
-      <xsl:when test="/document/content/xhtml:html/@unizh:columns = 1">
-        <xsl:choose>
-          <xsl:when test="@width > 800">
-            <xsl:text>800</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="@width"/>
-          </xsl:otherwise>
-        </xsl:choose>
+      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 2) and (@width > 615)">
+        <xsl:text>615</xsl:text>
       </xsl:when>
-      <xsl:when test="/document/content/xhtml:html/@unizh:columns = 2"> 
-        <xsl:choose>
-          <xsl:when test="@width > 615">
-            <xsl:text>615</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="@width"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      <xsl:when test="@width > 415">
-        <xsl:text>415</xsl:text>
+      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 3) and (@width > 416)">
+        <xsl:text>416</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="@width"/>
@@ -60,44 +35,50 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="xhtml:object" mode="preprocess">
-    <xsl:choose>
-      <xsl:when test="xhtml:div[@class = 'caption'] or (@popup = 'true')">
-        <xsl:apply-templates select="." mode="withCaption"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="." mode="plain"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
 
-
-  <xsl:template match="xhtml:object" mode="plain">
-
+  <xsl:template match="xhtml:object" mode="objectElement">
+    <xsl:variable name="width">
+      <xsl:call-template name="width-attribute" />
+    </xsl:variable>
     <div>
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="(@float = 'true') and (@align = 'right')">
-            <xsl:text>imgTextflussLeft</xsl:text>
+          <xsl:when test="( (@float = 'true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p') )">
+            <xsl:choose>
+              <xsl:when test="@align = 'right'">
+                <xsl:text>objectFloat right</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>objectFloat left</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:when>
-          <xsl:when test="@float = 'true'">
-            <xsl:text>imgTextfluss</xsl:text>
-          </xsl:when>
-          <xsl:otherwise/>
+          <xsl:otherwise>
+            <xsl:text>objectBlock</xsl:text>
+          </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
-
+      <xsl:attribute name="style">
+        <xsl:text>width:</xsl:text><xsl:value-of select="$width"/><xsl:text>px;</xsl:text>
+      </xsl:attribute>
       <xsl:call-template name="object">
         <xsl:with-param name="width">
-          <xsl:call-template name="width-attribute" />
+          <xsl:value-of select="$width"/>
         </xsl:with-param>
       </xsl:call-template>
-
+      <xsl:if test="((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '') or (@popup = 'true'))">
+        <div>
+          <xsl:value-of select="xhtml:div[@class = 'caption']"/>
+          <xsl:if test="@popup = 'true'">
+            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={dc:metadata/lenya:meta/lenya:width},height={dc:metadata/lenya:meta/lenya:height}')">(+)</a>
+          </xsl:if>
+        </div>
+      </xsl:if>
     </div>
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object" mode="withCaption">
+  <!--xsl:template match="xhtml:object" mode="withCaption">
     <xsl:variable name="width">
       <xsl:call-template name="width-attribute" />
     </xsl:variable>
@@ -139,7 +120,7 @@
       </tr>
     </table>
 
-  </xsl:template>
+  </xsl:template-->
 
 
   <xsl:template match="xhtml:object[ancestor::xhtml:table]">
@@ -191,7 +172,7 @@
 
   <xsl:template match="xhtml:object[parent::unizh:contcol1]">
     <xsl:call-template name="object">
-      <xsl:with-param name="width">160</xsl:with-param>
+      <xsl:with-param name="width">165</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
@@ -204,30 +185,18 @@
 
 
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]">
-    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
-    <xsl:variable name="alt">
-      <xsl:choose>
-        <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <div class="teaser64long">
-      <xsl:choose>
-        <xsl:when test="@href != ''">
-          <a href="{@href}">
-            <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
-          </a>
-        </xsl:when>
-        <xsl:otherwise>
-          <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </div>
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">
+        <xsl:choose>
+          <xsl:when test="$numColumns = 3">
+            <xsl:value-of select="171"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="178"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
 
 
@@ -243,19 +212,26 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-
-    <div class="teaser64long">
+    <xsl:variable name="width">
       <xsl:choose>
-        <xsl:when test="@href != ''">
-          <a href="{@href}">
-            <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
-          </a>
+        <xsl:when test="$numColumns = 3">
+          <xsl:value-of select="191"/>
         </xsl:when>
         <xsl:otherwise>
-          <img src="{$src}" alt="{$alt}" width="198" height="64" class="teaser64long"/>
+          <xsl:value-of select="198"/>
         </xsl:otherwise>
       </xsl:choose>
-    </div>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="@href != ''">
+        <a href="{@href}">
+          <img src="{$src}" alt="{$alt}" width="{$width}" />
+        </a>
+      </xsl:when>
+      <xsl:otherwise>
+        <img src="{$src}" alt="{$alt}" width="{$width}" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
@@ -291,20 +267,21 @@
     </div>
   </xsl:template>
 
+
   <xsl:template match="xhtml:object[parent::unizh:short]">
     <div class="imgTextfluss">
       <xsl:choose>
-	<xsl:when test="ancestor::index:child">
-	  <xsl:call-template name="object">
-	    <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', @data)"/>
-	    <xsl:with-param name="width">100</xsl:with-param>
-	  </xsl:call-template>
-	</xsl:when>
-	<xsl:otherwise>
-	  <xsl:call-template name="object">
-	    <xsl:with-param name="width">100</xsl:with-param>
-	  </xsl:call-template>
-	</xsl:otherwise>
+    <xsl:when test="ancestor::index:child">
+      <xsl:call-template name="object">
+        <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', @data)"/>
+        <xsl:with-param name="width">100</xsl:with-param>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="object">
+        <xsl:with-param name="width">100</xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
       </xsl:choose>
     </div>
   </xsl:template>
@@ -346,14 +323,24 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
+  <!--xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
     <xsl:choose>
       <xsl:when test="not(@float = 'true') or not(parent::xhtml:body)">
-        <xsl:apply-templates select="." mode="preprocess"/>
+        <xsl:apply-templates select="." />
       </xsl:when>
       <xsl:when test="name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p'"/>
       <xsl:otherwise>
-        <xsl:apply-templates select="." mode="preprocess"/>
+        <xsl:apply-templates select="." />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template-->
+
+
+  <xsl:template match="xhtml:object[ancestor::xhtml:body]">
+    <xsl:choose>
+      <xsl:when test="(@float='true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p')"/>
+      <xsl:otherwise>
+        <xsl:apply-templates select="." mode="objectElement"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
