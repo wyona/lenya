@@ -24,7 +24,7 @@
   <xsl:param name="querystring"/>
   <xsl:param name="creationdate"/>
 
-  <xsl:include href="../doctypes/variables.xsl"/>
+  <xsl:include href="variables.xsl"/>
   <xsl:include href="../common/html-head.xsl"/>
   <xsl:include href="../common/header.xsl"/>
   <xsl:include href="../common/footer.xsl"/>
