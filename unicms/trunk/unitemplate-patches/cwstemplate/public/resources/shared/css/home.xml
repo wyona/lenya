@@ -140,12 +140,7 @@ ul#directlinks li a#directlink5
 {
     background-color: #9999FF;
 }
-ul#directlinks li a#directlink6
-{
-    background-color: #CECCA6;
-}
-ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover, ul#directlinks li a#directlink6:hover
-{
+    {
     background-color:#E9E9F0;
 }
 
