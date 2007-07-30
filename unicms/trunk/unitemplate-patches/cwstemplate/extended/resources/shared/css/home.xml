@@ -15,7 +15,7 @@ div#headerarea
 div#headerarea h1
 {
     font-size: 1.8em;
-      line-height:2em;
+    line-height:2em;
     margin:74px 0 0 5px;
 }
 
