@@ -426,53 +426,34 @@
       </map:match>
 
 
-      <!-- XSLTs for editor -->
+      <!-- XSLTs for tc editor -->
 
-      <map:match pattern="*/*/xslt/doctypes/homepage-standard.xsl">
+      <map:match pattern="xslt/doctypes/variables.xsl">
+        <map:act type="resource-exists" src="xslt/doctypes/variables.xsl">
+          <map:generate src="xslt/doctypes/variables.xsl"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        <map:generate src="../unizh/xslt/doctypes/variables.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="xslt/doctypes/*.xsl">
+        <map:act type="resource-exists" src="xslt/doctypes/xhtml-standard.xsl">
+          <map:generate src="xslt/doctypes/xhtml-standard.xsl"/>
+          <map:serialize type="xml"/>
+        </map:act>
         <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
         <map:serialize type="xml"/>
       </map:match>
 
-      <map:match pattern="*/*/xslt/doctypes/homepage4cols-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
+      <map:match pattern="xslt/*/*.xsl">
+        <map:act type="resource-exists" src="xslt/{1}/{2}.xsl">
+          <map:generate src="xslt/{../1}/{../2}.xsl"/>
+          <map:serialize type="xml"/>
+        </map:act>
+        <map:generate src="../unizh/xslt/{1}/{2}.xsl"/>
         <map:serialize type="xml"/>
       </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/overview-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/news-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/newsitem-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/team-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/person-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/*/xslt/doctypes/redirect-standard.xsl">
-        <map:generate src="../unizh/xslt/doctypes/xhtml-standard.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
-      <map:match pattern="*/**.xsl">
-        <map:generate src="../{2}.xsl"/>
-        <map:serialize type="xml"/>
-      </map:match>
-
 
 
       <map:match pattern="*/**.pdf">

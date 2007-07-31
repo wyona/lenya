@@ -42,6 +42,24 @@
       </map:match>
     </map:pipeline>
 
+      <!-- XSLTs for tc editor -->
+    <map:pipeline>
+      <map:match pattern="xslt/doctypes/variables.xsl">
+        <map:generate src="xslt/doctypes/variables.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="xslt/doctypes/*.xsl">
+        <map:generate src="xslt/doctypes/xhtml-standard.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
+      <map:match pattern="xslt/*/*.xsl">
+        <map:generate src="xslt/{1}/{2}.xsl"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
     <!-- asset icons -->
     <map:pipeline>
       <map:match pattern="*/images/icons/*.gif">
