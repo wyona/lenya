@@ -22,17 +22,17 @@
     </link>
     <style type="text/css">
       <xsl:comment>
-        <xsl:text>@import url("</xsl:text><xsl:value-of select="$contextprefix"/><xsl:text>/unizh/authoring/css/main.css");</xsl:text>
-        <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/extended.css");</xsl:text>
-        <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/institute.css");</xsl:text>
+        @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
+        @import url("<xsl:value-of select="$localsharedresources"/>/css/extended.css");
+        @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
         <xsl:if test="$document-element-name = 'unizh:homepage4cols' or $document-element-name = 'unizh:homepage'">
-          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/home.css");</xsl:text>
+          @import url("<xsl:value-of select="$localsharedresources"/>/css/home.css");
         </xsl:if>
         <xsl:if test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/visibility.css");</xsl:text>
+          @import url("<xsl:value-of select="$localsharedresources"/>/css/visibility.css");
         </xsl:if>
         <xsl:if test="($document-element-name = 'unizh:homepage4cols' or $document-element-name = 'unizh:homepage') and (contains($fontsize, 'big') and not(contains($fontsize, 'normal')))">
-          <xsl:text>@import url("</xsl:text><xsl:value-of select="$localsharedresources"/><xsl:text>/css/visibility_home.css");</xsl:text>
+          @import url("<xsl:value-of select="$localsharedresources"/>/css/visibility_home.css");
         </xsl:if>
       </xsl:comment>
     </style>
