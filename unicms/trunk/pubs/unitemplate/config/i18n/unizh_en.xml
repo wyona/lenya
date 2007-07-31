@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<catalogue xml:lang="de">
+<catalogue xml:lang="en">
   <!-- <message key="key">Value</message> -->
   <message key="edit_item">Edit Item</message>
   <message key="error_newsitem">ERROR: Skip either the text in the following paragraph (use the BXE editor!) or the hyperlink in the summary (element 'a'). A news item cannot contain both at the same time.</message>
