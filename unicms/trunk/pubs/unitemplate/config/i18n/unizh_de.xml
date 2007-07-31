@@ -4,4 +4,8 @@
   <message key="edit_item">Bearbeiten</message>
   <message key="error_newsitem">FEHLER: Löschen Sie entweder den Text im folgenden Paragraphen (vorzugsweise mit dem BXE-Editor!) oder den Link in obenstehender Zusammenfassung (Element 'a'). Ein News-Item kann nur eines von beidem enthalten.</message>
   <message key="more">Mehr...</message>
+  <message key="Further options">Mehr Optionen</message>
+  <message key="Search">Suchen</message>
+  <message key="Search the telephone directory">Suchen im Telefon- und E-Mail-Verzeichnis der Universitat Zurich</message>
+  <message key="Search the Web">Suchen im Internet</message>
 </catalogue>

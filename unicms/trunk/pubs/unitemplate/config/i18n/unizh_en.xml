@@ -4,4 +4,8 @@
   <message key="edit_item">Edit Item</message>
   <message key="error_newsitem">ERROR: Skip either the text in the following paragraph (use the BXE editor!) or the hyperlink in the summary (element 'a'). A news item cannot contain both at the same time.</message>
   <message key="more">More...</message>
+  <message key="Further options">Further options</message>
+  <message key="Search">Search</message>
+  <message key="Search the telephone directory">Search the telephone and e-mail directory of the University of Zurich</message>
+  <message key="Search the Web">Search the Web</message>
 </catalogue>
