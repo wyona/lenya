@@ -687,12 +687,21 @@
 
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
-      <xsl:when test="xhtml:object or (xhtml:p/descendant-or-self::*[text()])">
+      <xsl:when test="xhtml:p/descendant-or-self::*[text()]">
         <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
-          <xsl:apply-templates/>
+          <p>
+            <xsl:if test="xhtml:object">
+              <xsl:apply-templates select="xhtml:object"/>
+            </xsl:if>
+            <xsl:apply-templates select="xhtml:p/child::node()"/>
+          </p>
         </div>
       </xsl:when>
-      <xsl:otherwise/>
+      <xsl:when test="xhtml:object">
+        <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
+          <xsl:apply-templates select="xhtml:object"/>
+        </div>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 
