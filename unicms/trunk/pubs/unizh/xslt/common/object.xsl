@@ -41,33 +41,24 @@
 
   <!-- the width of teaser images in content columns depends on the number of columns -->
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]">
+    <xsl:variable name="width">
+      <xsl:choose>
+        <xsl:when test="$numColumns = 3">
+          <xsl:value-of select="171"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="178"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:call-template name="object">
-      <xsl:with-param name="width">
-        <xsl:choose>
-          <xsl:when test="$numColumns = 3">
-            <xsl:value-of select="171"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="178"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:with-param>
+      <xsl:with-param name="width" select="$width"/>
     </xsl:call-template>
   </xsl:template>
 
 
+  <!-- the width of images in linklists also depends on the number of columns -->
   <xsl:template match="xhtml:object[parent::unizh:links]">
-    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
-    <xsl:variable name="alt">
-      <xsl:choose>
-        <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
     <xsl:variable name="width">
       <xsl:choose>
         <xsl:when test="$numColumns = 3">
@@ -78,49 +69,41 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:choose>
-      <xsl:when test="@href != ''">
-        <a href="{@href}">
-          <img src="{$src}" alt="{$alt}" width="{$width}" />
-        </a>
-      </xsl:when>
-      <xsl:otherwise>
-        <img src="{$src}" alt="{$alt}" width="{$width}" />
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:call-template name="object">
+      <xsl:with-param name="width" select="$width"/>
+    </xsl:call-template>
   </xsl:template>
 
 
+  <!-- lead image can only be full width or one column width -->
   <xsl:template match="xhtml:object[parent::unizh:lead]">
-    <xsl:variable name="src" select="concat($nodeid, '/', @data)"/>
-    <xsl:variable name="alt">
+    <xsl:variable name="width">
       <xsl:choose>
-        <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
+        <xsl:when test="$numColumns = 3">
+          <xsl:choose>
+            <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
+              <xsl:value-of select="605"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="191"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
+          <xsl:choose>
+            <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
+              <xsl:value-of select="416"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="198"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-
-    <xsl:choose>
-      <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
-        <img src="{$src}" alt="{$alt}" width="413" class="leadimg_mittopmargin"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <img src="{$src}" alt="{$alt}" width="198" class="leadimg_mittopmargin"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:object[ancestor::unizh:news and not(parent::unizh:teaser)]">
-    <div class="imgTextfluss">
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">204</xsl:with-param>
-      </xsl:call-template>
-    </div>
+    <xsl:call-template name="object">
+      <xsl:with-param name="width" select="$width"/>
+    </xsl:call-template>
   </xsl:template>
 
 
