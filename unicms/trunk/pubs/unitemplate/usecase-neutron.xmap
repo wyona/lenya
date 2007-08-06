@@ -39,6 +39,12 @@
   <map:pipelines>
     
     <map:pipeline type="noncaching">
+
+      <map:match pattern="createmetadata">
+        <map:generate type="jx" src="../../usecases/neutron/jx/meta.jx"/>
+        <map:serialize type="xml"/>
+      </map:match>
+
  
       <map:match pattern="*.jx">
         <map:generate type="jx" src="../../usecases/neutron/jx/{1}.jx"/>
@@ -120,6 +126,10 @@
         <map:match type="step" pattern="save">
           <map:call function="save"/>
         </map:match>
+
+        <map:match type="step" pattern="upload">
+          <map:call function="upload"/>
+        </map:match>
         
         <map:match type="step" pattern="checkout">
           <map:call function="checkout"/>
@@ -144,7 +154,7 @@
             <map:part src="config/unizh/unizh.xconf"/>
           </map:aggregate>
 
-          <!-- eLML specifiy stuff -->
+          <!-- eLML specific stuff -->
 
           <map:select type="parameter">
             <map:parameter name="parameter-selector-test" value="{page-envelope:document-type}"/>
@@ -209,6 +219,9 @@
           <map:serialize type="xml"/>
         </map:match>
       </map:match>
+
+ 
+
 
     </map:pipeline>
 
