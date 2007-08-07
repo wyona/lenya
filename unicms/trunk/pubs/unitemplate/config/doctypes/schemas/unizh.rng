@@ -324,6 +324,7 @@
         <text/>
       </element>
     </optional>
+    <text/>
   </element>
 </define>
 
