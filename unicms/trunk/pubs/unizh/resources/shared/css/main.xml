@@ -337,7 +337,8 @@ div.objectContainer
 }
 div.objectContainer div.objectFloat
 {
-    background-color:#E9E9F0; width:204px;
+    background-color:#E9E9F0;
+    width:204px;
 }
 div.objectContainer div.left
 {
@@ -1094,6 +1095,10 @@ div.dotlinemitmargin
     height:1px;
     border:0px;
     margin: 0.65em 0;
+}
+h2 span.datetime
+{
+    color: #999;
 }
 
 /* edit view */
