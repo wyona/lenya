@@ -499,13 +499,27 @@
     <xsl:apply-templates select="index:child"/>
   </xsl:template>
 
+
   <xsl:template match="unizh:level">
     <xsl:apply-templates select="level:node"/>
   </xsl:template>
 
+
   <xsl:template match="level:node">
     <a class="internal" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a><br/>
   </xsl:template>
+
+
+  <xsl:template match="level:node[ancestor::unizh:newsitem]">
+    <xsl:variable name="fulltext" select="normalize-space(*/*/xhtml:body/xhtml:p)"/>
+    <xsl:choose>
+      <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
+        <a class="internal" href="{$contextprefix}{@href}"><xsl:value-of select="descendant::dc:title"/></a><br/>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>
+  </xsl:template>
+
 
   <xsl:template match="xhtml:div[@id='link-to-parent']">
     <p>
@@ -515,78 +529,148 @@
 
 
   <xsl:template match="unizh:children[ancestor::unizh:news]">
-    <xsl:if test="preceding-sibling::xhtml:object">
-      <br/>
+    <xsl:if test="preceding-sibling::*">
+      <div class="solidlinemitmargin"><img src="{$imageprefix}/1.gif" width="1" height="1" /></div>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="index:child">
         <xsl:for-each select="index:child">
           <xsl:variable name="creationdate" select="*/*/lenya:meta/dcterms:created"/>
-          <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-	  <h2><xsl:value-of select="*/*/lenya:meta/dc:title"/>&#160;
-             <span class="lead">
-             <xsl:choose>
-               <xsl:when test="string-length($creationdate) &lt; '25'">
-                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
-               </xsl:when>
-               <xsl:otherwise>
-                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}"/>
-               </xsl:otherwise>
-             </xsl:choose>
-             </span>
+          <h2>
+            <xsl:value-of select="*/*/lenya:meta/dc:title"/>
+            <xsl:text> </xsl:text>
+            <span class="datetime">
+              <xsl:choose>
+                <xsl:when test="string-length($creationdate) &lt; '25'">
+                  <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </span>
           </h2>
-          <p>
-            <xsl:apply-templates select="*/*/unizh:short/xhtml:object"/>
-            <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
-            <br/>
-            <xsl:if test="$area = 'authoring'">
-              <a class="internal right_aligned" href="{$contextprefix}{@href}"><i18n:text>edit_item</i18n:text></a>
-            </xsl:if>
-            <xsl:variable name="fulltext" select="normalize-space(*/*/xhtml:body/xhtml:p)"/>
-            <xsl:choose>
-              <xsl:when test="*/*/unizh:short/xhtml:a">
-                <a href="{*/*/unizh:short/xhtml:a/@href}">
-                  <xsl:attribute name="class">
-                    <xsl:choose>
-                      <xsl:when test="starts-with(*/*/unizh:short/xhtml:a/@href, 'http://') and not(contains(*/*/unizh:short/xhtml:a/@href, '.unizh.ch')) and not(contains(*/*/unizh:short/xhtml:a/@href, '.uzh.ch'))">
-                        <xsl:text>www</xsl:text>
-                      </xsl:when>
-                      <xsl:when test="starts-with(*/*/unizh:short/xhtml:a/@href, 'http://') and ((contains(*/*/unizh:short/xhtml:a/@href, '.unizh.ch') ) or (contains(*/*/unizh:short/xhtml:a/@href, '.uzh.ch')))">
-                        <xsl:text>uzh</xsl:text>
-                      </xsl:when>
-                      <xsl:otherwise>
-                         <xsl:text>internal</xsl:text>
-                      </xsl:otherwise>
-                    </xsl:choose>
-                  </xsl:attribute>
-                  <i18n:text>more</i18n:text>
-                </a>
-              </xsl:when>
-              <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
-                <a class="internal" href="{$contextprefix}{@href}"><i18n:text>more</i18n:text></a>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:if test="$area = 'authoring'">
-                  &#160;
-                </xsl:if>
-              </xsl:otherwise>
-            </xsl:choose>
-          </p>
+          <xsl:apply-templates select="*/*/unizh:short/xhtml:p"/>
+          <div class="solidlinemitmargin"><img src="{$imageprefix}/1.gif" width="1" height="1" /></div>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        - Noch kein Eintrag erfasst - <br/> 
+        - Noch kein Eintrag erfasst - <br/>
+        <div class="solidlinemitmargin"><img src="{$imageprefix}/1.gif" width="1" height="1" /></div>
       </xsl:otherwise>
     </xsl:choose>
-    <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-    <br/>
   </xsl:template>
 
 
   <xsl:template match="xhtml:p[parent::unizh:short]">
-    <p>
-      <xsl:apply-templates/>
-    </p>
+    <xsl:choose>
+      <xsl:when test="xhtml:object[@float = 'true']">
+        <xsl:choose>
+
+          <xsl:when test="ancestor::unizh:children">
+            <div class="objectContainer">
+              <xsl:apply-templates>
+                <xsl:with-param name="width-default" select="100"/>
+                <xsl:with-param name="hideCaption" select="'false'"/>
+                <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+              </xsl:apply-templates>
+              <xsl:call-template name="moreLink"/>
+              <br class="floatclear"/>
+            </div>
+          </xsl:when>
+          <xsl:when test="ancestor::unizh:newsitem">
+            <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
+              <xsl:apply-templates>
+                <xsl:with-param name="width-default" select="100"/>
+                <xsl:with-param name="hideCaption" select="'false'"/>
+              </xsl:apply-templates>
+              <br class="floatclear"/>
+            </div>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+
+      <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
+        <xsl:choose>
+          <xsl:when test="ancestor::unizh:children">
+            <div class="objectContainer">
+              <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
+                <xsl:with-param name="width-default" select="100"/>
+                <xsl:with-param name="hideCaption" select="'false'"/>
+                <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+              </xsl:apply-templates>
+              <xsl:apply-templates/>
+              <xsl:call-template name="moreLink"/>
+              <br class="floatclear"/>
+            </div>
+          </xsl:when>
+          <xsl:when test="ancestor::unizh:newsitem">
+            <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
+              <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
+                <xsl:with-param name="width-default" select="100"/>
+                <xsl:with-param name="hideCaption" select="'false'"/>
+              </xsl:apply-templates>
+              <xsl:apply-templates/>
+              <br class="floatclear"/>
+            </div>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="ancestor::unizh:children">
+            <xsl:copy>
+              <xsl:apply-templates/>
+            </xsl:copy>
+            <xsl:call-template name="moreLink"/>
+          </xsl:when>
+          <xsl:when test="ancestor::unizh:newsitem">
+            <div class="editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
+              <xsl:apply-templates/>
+            </div>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:otherwise>
+
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template name="moreLink">
+    <xsl:variable name="fulltext" select="normalize-space(../../xhtml:body/xhtml:p)"/>
+    <br/>
+    <xsl:if test="$area = 'authoring'">
+      <a class="internal right_aligned" href="{$contextprefix}{../../../../@href}"><i18n:text>edit_item</i18n:text></a>
+    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="../xhtml:a">
+        <a href="{../xhtml:a/@href}">
+          <xsl:attribute name="class">
+            <xsl:choose>
+              <xsl:when test="starts-with(../xhtml:a/@href, 'http://') and not(contains(../xhtml:a/@href, '.unizh.ch')) and not(contains(../xhtml:a/@href, '.uzh.ch'))">
+                <xsl:text>www</xsl:text>
+              </xsl:when>
+              <xsl:when test="starts-with(../xhtml:a/@href, 'http://') and ((contains(../xhtml:a/@href, '.unizh.ch') ) or (contains(../xhtml:a/@href, '.uzh.ch')))">
+                <xsl:text>uzh</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>internal</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <i18n:text>more</i18n:text>
+        </a>
+      </xsl:when>
+      <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
+        <a class="internal" href="{$contextprefix}{../../../../@href}"><i18n:text>more</i18n:text></a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="$area = 'authoring'">
+          &#160;
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
