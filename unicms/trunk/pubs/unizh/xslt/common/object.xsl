@@ -107,25 +107,6 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:object[parent::unizh:short]">
-    <div class="imgTextfluss">
-      <xsl:choose>
-    <xsl:when test="ancestor::index:child">
-      <xsl:call-template name="object">
-        <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', @data)"/>
-        <xsl:with-param name="width">100</xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">100</xsl:with-param>
-      </xsl:call-template>
-    </xsl:otherwise>
-      </xsl:choose>
-    </div>
-  </xsl:template>
-
-
   <xsl:template match="xhtml:object[parent::unizh:person]">
     <xsl:choose>
       <xsl:when test="not(@data)">
@@ -173,8 +154,11 @@
   </xsl:template>
 
 
+  <!-- wrap object element in xhtml div to enable floating, caption. call this template for all content objects -->
   <xsl:template match="xhtml:object" mode="objectElement">
     <xsl:param name="width-default" select="204"/>
+    <xsl:param name="hideCaption"/>
+    <xsl:param name="src"/>
     <xsl:variable name="width">
       <xsl:call-template name="width-attribute">
         <xsl:with-param name="width-default" select="$width-default"/>
@@ -201,12 +185,26 @@
       <xsl:attribute name="style">
         <xsl:text>width:</xsl:text><xsl:value-of select="$width"/><xsl:text>px;</xsl:text>
       </xsl:attribute>
-      <xsl:call-template name="object">
-        <xsl:with-param name="width">
-          <xsl:value-of select="$width"/>
-        </xsl:with-param>
-      </xsl:call-template>
-      <xsl:if test="((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '') or (@popup = 'true'))">
+      <xsl:choose>
+        <xsl:when test="$src">
+          <xsl:call-template name="object">
+            <xsl:with-param name="width">
+              <xsl:value-of select="$width"/>
+            </xsl:with-param>
+            <xsl:with-param name="src">
+              <xsl:value-of select="$src"/>
+            </xsl:with-param>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="object">
+            <xsl:with-param name="width">
+              <xsl:value-of select="$width"/>
+            </xsl:with-param>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:if test="$hideCaption != 'true' and (((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '')) or (@popup = 'true'))">
         <div>
           <xsl:value-of select="xhtml:div[@class = 'caption']"/>
           <xsl:if test="@popup = 'true'">
@@ -243,7 +241,6 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-
     <xsl:choose>
       <xsl:when test="$rendertype = 'imageupload'">
         <a href="{lenya:asset-dot/@href}">
