@@ -1,4 +1,54 @@
-<bindings xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.example.org/widgetbindings/1.0" ns="http://www.w3.org/1999/xhtml">
+<bindings xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns="http://www.example.org/widgetbindings/1.0" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  ns="http://www.w3.org/1999/xhtml">
+
+
+  <!-- Images -->
+  <binding element="object[type=image/jpeg]">
+    <component id="object[@type='image/jpeg']" src="data" title="title">
+      <template>
+        <xhtml:object type="image/jpeg" data="#data" title="#title">
+          <xhtml:div class="caption">#caption</xhtml:div>
+        </xhtml:object> 
+      </template>
+    </component>
+    <form-data name="title" target="@title"/>
+  </binding>
+
+  <binding element="object[type=image/gif]">
+    <component id="object[@type='image/gif']" src="data" title="title">
+      <template>
+        <xhtml:object type="image/gif" data="#data" title="#title">
+          <xhtml:div class="caption">#caption</xhtml:div>
+        </xhtml:object>
+      </template>
+    </component>
+    <form-data name="title" target="@title"/>
+  </binding>
+
+  <binding element="object[type=image/png]">
+    <component id="object[@type='image/png']" src="data" title="title">
+      <template>
+        <xhtml:object type="image/png" data="#data" title="#title">
+          <xhtml:div class="caption">#caption</xhtml:div>
+        </xhtml:object>
+      </template>
+    </component>
+    <form-data name="title" target="@title"/>
+  </binding>
+
+  <!-- Assets (attachments) -->
+
+  <binding element="lenya|asset">
+    <component id="attachment" src="src" title="." type="type" size="size">
+      <template>
+        <lenya:asset src="#src" type="#type" size="n.a"/>
+      </template>
+    </component>
+    <form-data name="title" target="."/>
+  </binding> 
+
 
   <!-- Linebreak and Paragraphs -->
 
