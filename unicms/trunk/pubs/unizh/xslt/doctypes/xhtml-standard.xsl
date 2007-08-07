@@ -276,7 +276,7 @@
       <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
         <div class="content">
-          <p class="lead">
+          <p>
              <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
              <xsl:choose>
                <xsl:when test="string-length($creationdate) &lt; '25'">
@@ -297,14 +297,10 @@
             <xsl:when test="$creator = ''"/>
             <xsl:otherwise>
               <h3><xsl:value-of select="$creator"/></h3>
-              <p>&#160;</p>
             </xsl:otherwise>
           </xsl:choose>
           <xsl:if test="$area = 'authoring'">
-            <div class="editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
-              <xsl:apply-templates select="unizh:newsitem/unizh:short/*"/>
-            </div>
-            <br class="floatclear"/>
+            <xsl:apply-templates select="unizh:newsitem/unizh:short/xhtml:p"/>
             <xsl:variable name="fulltext" select="normalize-space(unizh:newsitem/xhtml:body/xhtml:p)"/>
             <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and not(($fulltext = '') or ($fulltext = '&#160;'))">
               <h3> <i18n:text>error_newsitem</i18n:text> </h3>
