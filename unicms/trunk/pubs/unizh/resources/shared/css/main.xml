@@ -88,7 +88,7 @@ a:hover
 }
 div.contentarea a:visited, div.contcol2 a:visited, div.contentarea1col a:visited
 {
-    color:#666666; 
+    color:#884488;
 }
 a.internal, a.uzh
 {
