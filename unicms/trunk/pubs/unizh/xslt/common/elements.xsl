@@ -572,7 +572,16 @@
               <xsl:apply-templates>
                 <xsl:with-param name="width-default" select="100"/>
                 <xsl:with-param name="hideCaption" select="'false'"/>
-                <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+                <xsl:with-param name="src">
+                  <xsl:choose>
+                    <xsl:when test="starts-with(../*/@data, 'http')">
+                      <xsl:value-of select="../*/@data"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:value-of select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:with-param>
               </xsl:apply-templates>
               <xsl:call-template name="moreLink"/>
               <br class="floatclear"/>
@@ -597,7 +606,16 @@
               <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
                 <xsl:with-param name="width-default" select="100"/>
                 <xsl:with-param name="hideCaption" select="'false'"/>
-                <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+                <xsl:with-param name="src">
+                  <xsl:choose>
+                    <xsl:when test="starts-with(../*/@data, 'http')">
+                      <xsl:value-of select="../*/@data"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:value-of select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:with-param>
               </xsl:apply-templates>
               <xsl:apply-templates/>
               <xsl:call-template name="moreLink"/>
