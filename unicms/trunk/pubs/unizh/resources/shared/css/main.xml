@@ -179,6 +179,17 @@ div.teaser img.icon
     vertical-align: bottom;
 }
 
+/* highlighted teaser for use in related content or content */
+div.teaser.highlighted
+{
+    border: 1px solid #E2E2FF;
+    background-color:#E2E2FF;
+}
+div.teaser.highlighted a:hover
+{
+    background-color:#F7F7F7;
+}
+
 /* asset link */
 div.teaser div.asset img
 {
