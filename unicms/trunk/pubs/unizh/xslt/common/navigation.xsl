@@ -77,7 +77,6 @@
                 <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
                 <input type="hidden" name="cof" value="FORID:11" />
                 <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
-                <input type="hidden" name="ie" value="iso-8859-1"/>
                 <div class="serviceform">
                   <input type="text" name="q" accesskey="5" />
                 </div>
