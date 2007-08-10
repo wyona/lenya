@@ -429,7 +429,6 @@
   </xsl:template>
 
 
-
  <xsl:template match="lenya:asset">
    <xsl:variable name="extent">
      <xsl:value-of select="dc:metadata/dc:extent"/>
