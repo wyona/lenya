@@ -59,7 +59,7 @@
       </map:match>
 
       <map:match type="doctype" pattern="redirect">
-        <map:generate type="serverpages" src="../unizh/config/menus/childless.xsp"/>
+        <map:generate type="serverpages" src="../unizh/config/menus/redirect.xsp"/>
         <map:serialize type="xml"/>
       </map:match>
 
