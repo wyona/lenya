@@ -846,6 +846,11 @@ div.leadblock p img
     float: left;
     margin: 5px 20px 4px 0;
 }
+/* image upload icon */
+div.leadblock p a img
+{
+    background-color: #fff;
+}
 
 /* links element for use in content columns */
 div.links

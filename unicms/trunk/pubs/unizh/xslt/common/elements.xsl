@@ -355,6 +355,10 @@
           </xsl:otherwise>
         </xsl:choose>
       </h3>
+
+      <!-- show image upload icon when in insert image mode -->
+      <xsl:apply-templates select="unizh:title/*"/>
+
       <xsl:if test="xhtml:object">
         <xsl:apply-templates select="xhtml:object"/>
       </xsl:if>
@@ -889,7 +893,7 @@
       <xsl:for-each select="xhtml:tr">
         <xsl:variable name="eins"><xsl:value-of select="position()"/></xsl:variable>
         <xsl:copy>
-          <xsl:if test="($eins div 2) = round($eins div 2)">
+          <xsl:if test="($eins div 2) != round($eins div 2)">
             <xsl:attribute name="class">strip</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates/>

@@ -218,13 +218,13 @@
 
   <xsl:template match="xhtml:p[parent::unizh:lead and $rendertype = 'imageupload']">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
       <xsl:if test="not(preceding-sibling::xhtml:object)">
         <xsl:call-template name="asset-dot">
           <xsl:with-param name="insertWhat">image</xsl:with-param>
           <xsl:with-param name="insertWhere">before</xsl:with-param>
         </xsl:call-template>
       </xsl:if>
+      <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
   </xsl:template>
 
