@@ -123,28 +123,6 @@
     <copy todir="${destination.dir}/config/notification" overwrite="yes">
       <fileset dir="${source.dir}/config/notification"/>
     </copy>
-    
-    <echo>INFO: Copy search Config</echo>
-    <mkdir dir="${destination.dir}/config/search"/>
-    <copy todir="${destination.dir}/config/search" overwrite="yes">
-      <fileset dir="${source.dir}/config/search">
-	<exclude name="crawler-live.xconf"/>
-	<exclude name="lucene-live.xconf"/>
-      </fileset>
-    </copy>
-    
-    <echo>INFO: Change search configuration</echo>
-    <xslt force="true" in="${source.dir}/config/search/crawler-live.xconf"
-      out="${destination.dir}/config/search/crawler-live.xconf" style="search.xsl">
-      <param name="publicationName" expression="${new.publication.prefix}"/>
-      <param name="templatePublication" expression="${old.publication.prefix}"/>
-    </xslt>
-
-    <xslt force="true" in="${source.dir}/config/search/lucene-live.xconf"
-      out="${destination.dir}/config/search/lucene-live.xconf" style="search.xsl">
-      <param name="publicationName" expression="${new.publication.prefix}"/>
-      <param name="templatePublication" expression="${old.publication.prefix}"/>
-    </xslt>
 
     <echo>INFO: Copy tasks Config</echo>
     <mkdir dir="${destination.dir}/config/tasks"/>
@@ -197,7 +175,13 @@
     <copy todir="${destination.dir}/lenya" overwrite="yes">
       <fileset dir="${source.dir}/lenya"/>
     </copy>
-    
+   
+    <echo>INFO: Copy neutron infrastructure</echo>
+    <mkdir dir="${destination.dir}/usecases"/>
+    <copy todir="${destination.dir}/usecases" overwrite="yes">
+      <fileset dir="${source.dir}/usecases"/>
+    </copy>
+
     <antcall target="plain-pub"/>
     <antcall target="standard-pub"/>
     
@@ -207,7 +191,7 @@
       out="${destination.dir}/publication.xml" style="publication-xml.xsl">
       <param name="publicationName" expression="${new.publication.name}"/>
     </xslt>
-    
+   
     <antcall target="touch"/>
 
   </target>
