@@ -216,8 +216,8 @@
   </xsl:template>
 
 
+  <!-- this template should handle all objects -->
   <xsl:template name="object">
-
     <xsl:param name="width"/>
     <xsl:param name="height" select="@height"/>
     <xsl:param name="src">
@@ -255,11 +255,11 @@
           <xsl:with-param name="width" select="$width"/>
           <xsl:with-param name="height">
             <xsl:choose>
-              <xsl:when test="$controller = 'true'">
-                <xsl:value-of select="$height + 16"/>
+              <xsl:when test="$controller = 'false'">
+                <xsl:value-of select="$height"/>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:value-of select="$height"/>
+                <xsl:value-of select="$height + 16"/>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:with-param>
@@ -268,10 +268,19 @@
           <xsl:with-param name="autoplay" select="$autoplay"/>
         </xsl:call-template>
       </xsl:when>
-      <xsl:when test="$suffix = 'wmv'">
+      <xsl:when test="$suffix = 'wmv' or $suffix = 'asf'">
         <xsl:call-template name="objectWindowsMediaVideo">
           <xsl:with-param name="width" select="$width"/>
-          <xsl:with-param name="height" select="$height"/>
+          <xsl:with-param name="height">
+            <xsl:choose>
+              <xsl:when test="$controller = 'false'">
+                <xsl:value-of select="$height"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$height + 46"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:with-param>
           <xsl:with-param name="src" select="$src"/>
           <xsl:with-param name="controller" select="$controller"/>
           <xsl:with-param name="autoplay" select="$autoplay"/>
@@ -286,7 +295,7 @@
           <xsl:with-param name="autoplay" select="$autoplay"/>
         </xsl:call-template>
       </xsl:when>
-      <xsl:when test="$suffix = 'swf'">
+      <xsl:when test="$suffix = 'swf' or starts-with(@data, 'http://www.youtube.com/')">
         <xsl:call-template name="objectShockwaveFlash">
           <xsl:with-param name="width" select="$width"/>
           <xsl:with-param name="height" select="$height"/>
@@ -391,51 +400,51 @@
       <xsl:attribute name="height">
         <xsl:value-of select="$height"/>
       </xsl:attribute>
-        <param name="type" value="video/quicktime"/>
-        <param name="src">
-          <xsl:attribute name="value">
-            <xsl:value-of select="$src"/>
-          </xsl:attribute>
-        </param>
-        <param name="autoplay">
-          <xsl:attribute name="value">
-            <xsl:choose>
-              <xsl:when test="$autoplay = 'true'">true</xsl:when>
-              <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </param>
-        <param name="controller">
-          <xsl:attribute name="value">
-            <xsl:choose>
-              <xsl:when test="$controller = 'true'">true</xsl:when>
-              <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </param>
-        <embed type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/">
-          <xsl:attribute name="src">
-            <xsl:value-of select="$src"/>
-          </xsl:attribute>
-          <xsl:attribute name="width">
-            <xsl:value-of select="$width"/>
-          </xsl:attribute>
-          <xsl:attribute name="height">
-            <xsl:value-of select="$height"/>
-          </xsl:attribute>
-          <xsl:attribute name="autoplay">
-            <xsl:choose>
-              <xsl:when test="$autoplay = 'true'">true</xsl:when>
-              <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          <xsl:attribute name="controller">
-            <xsl:choose>
-              <xsl:when test="$controller = 'true'">true</xsl:when>
-              <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </embed>
+      <param name="type" value="video/quicktime"/>
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+      </param>
+      <param name="autoplay">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <param name="controller">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <embed type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/">
+        <xsl:attribute name="src">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+        <xsl:attribute name="width">
+          <xsl:value-of select="$width"/>
+        </xsl:attribute>
+        <xsl:attribute name="height">
+          <xsl:value-of select="$height"/>
+        </xsl:attribute>
+        <xsl:attribute name="autoplay">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="controller">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </embed>
     </object>
   </xsl:template>
 
@@ -444,7 +453,75 @@
     <xsl:param name="width"/>
     <xsl:param name="height"/>
     <xsl:param name="src"/>
-    <p>Windows Media Video is not supported yet</p>
+    <xsl:param name="autoplay"/>
+    <xsl:param name="controller"/>
+    <object classid="clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=x,x,x,x">
+      <xsl:attribute name="width">
+        <xsl:value-of select="$width"/>
+      </xsl:attribute>
+      <xsl:attribute name="height">
+        <xsl:value-of select="$height"/>
+      </xsl:attribute>
+      <param name="type" value="video/x-Ms-WMV" />
+      <param name="url">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+      </param>
+      <param name="autostart">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <param name="uimode">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">none</xsl:when>
+            <xsl:otherwise>mini</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <param name="showcontrols">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <embed type="video/x-Ms-WMV" pluginspage="http://www.microsoft.com/windows/windowsmedia/">
+        <xsl:attribute name="src">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+        <xsl:attribute name="width">
+          <xsl:value-of select="$width"/>
+        </xsl:attribute>
+        <xsl:attribute name="height">
+          <xsl:value-of select="$height"/>
+        </xsl:attribute>
+        <xsl:attribute name="autostart">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="uimode">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">none</xsl:when>
+            <xsl:otherwise>mini</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="showcontrols">
+          <xsl:choose>
+            <xsl:when test="$controller = 'false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </embed>
+    </object>
   </xsl:template>
 
 
@@ -452,7 +529,79 @@
     <xsl:param name="width"/>
     <xsl:param name="height"/>
     <xsl:param name="src"/>
-    <p>Real Media Video is not supported yet</p>
+    <xsl:param name="autoplay"/>
+    <xsl:param name="controller"/>
+    <object classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" id="RAOCX01">
+      <xsl:attribute name="width">
+        <xsl:value-of select="$width"/>
+      </xsl:attribute>
+      <xsl:attribute name="height">
+        <xsl:value-of select="$height"/>
+      </xsl:attribute>
+      <param name="type" value="application/vnd.rn-realmedia" />
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+      </param>
+      <param name="autostart">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <param name="controls" value="imagewindow" />
+      <param name="console" value="delta" />
+      <embed type="application/vnd.rn-realmedia">
+        <xsl:attribute name="src">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+        <xsl:attribute name="width">
+          <xsl:value-of select="$width"/>
+        </xsl:attribute>
+        <xsl:attribute name="height">
+          <xsl:value-of select="$height"/>
+        </xsl:attribute>
+        <xsl:attribute name="autostart">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="controls">imagewindow</xsl:attribute>
+        <xsl:attribute name="console">delta</xsl:attribute>
+      </embed>
+    </object>
+    <xsl:choose>
+      <xsl:when test="$controller = 'false'"/>
+      <xsl:otherwise>
+        <object width="416" height="26" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" id="RAOCX02">
+          <xsl:attribute name="width">
+            <xsl:value-of select="$width"/>
+          </xsl:attribute>
+          <xsl:attribute name="height">
+            <xsl:value-of select="26"/>
+          </xsl:attribute>
+          <param name="controls" value="controlpanel" />
+          <param name="console" value="delta" />
+          <embed>
+            <xsl:attribute name="src">
+              <xsl:value-of select="$src"/>
+            </xsl:attribute>
+            <xsl:attribute name="controls">controlpanel</xsl:attribute>
+            <xsl:attribute name="console">delta</xsl:attribute>
+            <xsl:attribute name="width">
+              <xsl:value-of select="$width"/>
+            </xsl:attribute>
+            <xsl:attribute name="height">
+              <xsl:value-of select="26"/>
+            </xsl:attribute>
+          </embed>
+        </object>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
@@ -460,7 +609,33 @@
     <xsl:param name="width"/>
     <xsl:param name="height"/>
     <xsl:param name="src"/>
-    <p>Flash Video is not supported yet</p>
+    <xsl:param name="autoplay"/>
+    <xsl:param name="controller"/>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+      <xsl:attribute name="width">
+        <xsl:value-of select="$width"/>
+      </xsl:attribute>
+      <xsl:attribute name="height">
+        <xsl:value-of select="$height"/>
+      </xsl:attribute>
+      <param name="type" value="application/x-shockwave-flash" />
+      <param name="movie">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+      </param>
+      <embed type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
+        <xsl:attribute name="src">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+        <xsl:attribute name="width">
+          <xsl:value-of select="$width"/>
+        </xsl:attribute>
+        <xsl:attribute name="height">
+          <xsl:value-of select="$height"/>
+        </xsl:attribute>
+      </embed>
+    </object>
   </xsl:template>
 
 
@@ -468,7 +643,55 @@
     <xsl:param name="width"/>
     <xsl:param name="height"/>
     <xsl:param name="src"/>
-    <p>QuickTime Audio is not supported yet</p>
+    <xsl:param name="autoplay"/>
+    <xsl:param name="controller"/>
+    <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+      <xsl:attribute name="width">
+        <xsl:value-of select="$width"/>
+      </xsl:attribute>
+      <xsl:attribute name="height">
+        <xsl:value-of select="16"/>
+      </xsl:attribute>
+      <param name="type" value="audio/mpeg"/>
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+      </param>
+      <param name="autoplay">
+        <xsl:attribute name="value">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </param>
+      <param name="controller">
+        <xsl:attribute name="value">
+          <xsl:value-of select="'true'"/>
+        </xsl:attribute>
+      </param>
+      <embed type="audio/mpeg" pluginspage="http://www.apple.com/quicktime/download/">
+        <xsl:attribute name="src">
+          <xsl:value-of select="$src"/>
+        </xsl:attribute>
+        <xsl:attribute name="width">
+          <xsl:value-of select="$width"/>
+        </xsl:attribute>
+        <xsl:attribute name="height">
+          <xsl:value-of select="16"/>
+        </xsl:attribute>
+        <xsl:attribute name="autoplay">
+          <xsl:choose>
+            <xsl:when test="$autoplay = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="controller">
+          <xsl:value-of select="'true'"/>
+        </xsl:attribute>
+      </embed>
+    </object>
   </xsl:template>
 
 
