@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><unizh:newsitem xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace">
-
   <lenya:meta>
     <dc:title>Beispiel-Beitrag (mit Volltext)</dc:title>
     <dc:description/>
-    <dc:creator>admin1 (Administrator)</dc:creator>
+    <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject/>
     <dc:publisher>Universität Zürich</dc:publisher>
-    <dcterms:created>Wed Oct 19 14:03:19 CEST 2005</dcterms:created>
+    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
@@ -18,13 +17,10 @@
     </unizh:teaser>
   </unizh:related-content>
   <unizh:short>
-    <p>
-    Längere News-Beiträge können in eine Zusammenfassung und einen Volltext unterteilt werden. Die Zusammenfassung erscheint in der Liste der News-Beiträge mit einem automatisch gesetzten Link auf den Volltext. Der Volltext erscheint auf einer separaten Seite und ist, im Gegensatz zur Kurzfassung, beliebig formatierbar. </p>
-    <a href="#">Mehr...</a>
+    <p>Längere News-Beiträge können in eine Zusammenfassung und einen Volltext unterteilt werden. Die Zusammenfassung erscheint in der Liste der News-Beiträge mit einem automatisch gesetzten Link auf den Volltext. Der Volltext erscheint auf einer separaten Seite und ist, im Gegensatz zur Kurzfassung, beliebig formatierbar.</p>
   </unizh:short>
   <body>
-    <p>Dies ist ein Beispiel für einen längeren News-Beitrag (Volltext). 
-    Längere News-Beiträge können in eine Zusammenfassung und einen Volltext unterteilt werden. Die Zusammenfassung erscheint in der Liste der News-Beiträge mit einem automatisch gesetzten Link auf den Volltext. Der Volltext erscheint auf einer separaten Seite und ist, im Gegensatz zur Kurzfassung, beliebig formatierbar.  </p>
+    <p>Dies ist ein Beispiel für einen längeren News-Beitrag (Volltext). Längere News-Beiträge können in eine Zusammenfassung und einen Volltext unterteilt werden. Die Zusammenfassung erscheint in der Liste der News-Beiträge mit einem automatisch gesetzten Link auf den Volltext. Der Volltext erscheint auf einer separaten Seite und ist, im Gegensatz zur Kurzfassung, beliebig formatierbar.</p>
   </body>
   <unizh:level/>
 </unizh:newsitem>
