@@ -25,7 +25,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     </unizh:teaser>
   </unizh:related-content>
   <body>
-  	<h2>Headline</h2>
+    <h2>Headline</h2>
     <p>Paragraph</p>
   </body>
 </html>
