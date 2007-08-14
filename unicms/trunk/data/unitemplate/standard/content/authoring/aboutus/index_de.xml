@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <lenya:meta>
     <dc:title>Über uns</dc:title>
-    <dc:description> </dc:description>
-    <dc:creator>lenya (Levi Vanya)</dc:creator>
+    <dc:description/>
+    <dc:creator>Autor des Dokuments</dc:creator>
     <dc:subject/>
     <dc:publisher>Universität Zürich</dc:publisher>
-    <dcterms:created>Wed Apr 05 14:34:54 CEST 2006</dcterms:created>
+    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
@@ -17,7 +17,7 @@
     </unizh:teaser>
   </unizh:related-content>
   <body>
-  &#9;<h2>Headline</h2>
+    <h2>Headline</h2>
     <p>Paragraph</p>
   </body>
 </html>

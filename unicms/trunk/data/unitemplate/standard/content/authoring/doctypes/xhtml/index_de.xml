@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace">
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace">
   <lenya:meta>
-<dc:title>Allgemeine Dokumenttypen (xhtml)</dc:title>
-<dc:creator>admin1 (Administrator)</dc:creator>
-<dc:subject></dc:subject>
-<dc:description> </dc:description>
-<dc:publisher>Universität Zürich</dc:publisher>
-<dc:identifier>/xhtml</dc:identifier>
-<dc:language>de</dc:language>
-<dc:rights>Universität Zürich</dc:rights>
-<dcterms:created>Wed Oct 19 14:50:12 CEST 2005</dcterms:created>
-<dcterms:issued>date of publication</dcterms:issued>
-</lenya:meta>
+    <dc:title>Allgemeine Dokumenttypen (xhtml)</dc:title>
+    <dc:description/>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
   <unizh:related-content>
     <unizh:teaser>
       <unizh:title>Title</unizh:title>
