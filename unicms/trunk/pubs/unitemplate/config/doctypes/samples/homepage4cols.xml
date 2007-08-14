@@ -46,7 +46,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     </unizh:lead>
     <unizh:column>
       <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+        <unizh:title>Thema</unizh:title>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
@@ -62,7 +62,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
         <xhtml:a href="#">Link</xhtml:a>
       </unizh:teaser>
        <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+        <unizh:title>Thema</unizh:title>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
@@ -71,7 +71,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
         <xhtml:a href="#">weitere Angebote... </xhtml:a>
       </unizh:links>
        <unizh:links>
-        <unizh:title href="#">Thema</unizh:title>
+        <unizh:title>Thema</unizh:title>
         <xhtml:a href="#">Link 1 </xhtml:a>
         <xhtml:a href="#">Link 2 </xhtml:a>
         <xhtml:a href="#">Link 3 </xhtml:a>
