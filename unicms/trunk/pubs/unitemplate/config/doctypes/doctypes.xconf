@@ -110,11 +110,7 @@
   <doc type="redirect">
     <children>
       <doc type="xhtml"/>
-      <doc type="news"/>
-      <doc type="team"/>
       <doc type="overview"/>
-      <doc type="homepage"/>
-      <doc type="homepage4cols"/>
       <doc type="redirect"/>
     </children>
     <creator src="org.apache.lenya.cms.authoring.DefaultBranchCreator">
