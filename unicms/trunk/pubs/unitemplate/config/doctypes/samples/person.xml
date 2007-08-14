@@ -29,8 +29,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <unizh:homepage>http://myhome.nocom.org</unizh:homepage>
   <unizh:description>
    <h2>Curriculum vitae</h2>
-   <p>
-     Enter CV or similar here.   
-   </p>
+   <p>Enter CV or similar here.</p>
   </unizh:description>
 </unizh:person>

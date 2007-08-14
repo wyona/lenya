@@ -21,9 +21,6 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <unizh:redirect-to href="#"/>
   </lenya:meta>
   <body>
-    <p>
-     Ein <strong>publiziertes</strong> <em>Redirect-</em>Dokument schaltet automatisch auf eine andere Seite der Publikation um.</p> <p>Öffnen Sie das Redirect-Dokument im One-Form Editor und tragen Sie die Zieladdresse im href-Attribut des Elements unizh:redirect-to ein.</p> <p>Sie hat dieselbe Form wie ein interner Link, also z.B.<br/> <em>/lenya/unicms/authoring/docu.html</em> oder <br/> <em>/lenya/ori/authoring/institute/adress.html</em> etc.
-    </p>
+    <p>Ein <strong>publiziertes</strong> <em>Redirect-</em>Dokument schaltet automatisch auf eine andere Seite der Publikation um.</p> <p>Öffnen Sie das Redirect-Dokument im One-Form Editor und tragen Sie die Zieladdresse im href-Attribut des Elements unizh:redirect-to ein.</p> <p>Sie hat dieselbe Form wie ein interner Link, also z.B.<br/> <em>/lenya/unicms/authoring/docu.html</em> oder <br/> <em>/lenya/ori/authoring/institute/adress.html</em> etc.</p>
   </body>
 </unizh:redirect>
-

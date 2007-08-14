@@ -21,8 +21,9 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   </lenya:meta>
   <unizh:related-content>
     <unizh:teaser>
-      <unizh:title>Titel</unizh:title>
-      <p>Teaser text.</p>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
     </unizh:teaser>
   </unizh:related-content>
   <body>
@@ -30,4 +31,3 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <p>Ausleitung, Anmerkungen.</p>
   </body>
 </unizh:team>
-
