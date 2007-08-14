@@ -6,10 +6,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
-  xmlns:dt="http://xsltsl.org/date-time"
 >
-
-  <xsl:import href="http://xsltsl.sourceforge.net/modules/stdlib.xsl"/>
 
   <xsl:param name="contextprefix"/>
 
@@ -68,7 +65,12 @@
                   </xsl:if>
                   <xsl:choose>
                     <xsl:when test="../../../@itemDescription = 'true' or (../../../@itemDescription = 'true' and ../../../@itemImage = 'true')">
-                      <h4><xsl:value-of select="title"/></h4>
+                      <h4>
+                        <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
+                          <i18n:date src-pattern="EEE, d MMM yyyy HH:mm:ss zzz" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                        </xsl:if>
+                        <xsl:value-of select="title"/>
+                      </h4>
                       <xsl:if test="../../../@itemImage = 'true' and image and image/url">
                         <a>
                           <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
@@ -91,13 +93,8 @@
                       <a>
                         <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
                         <xsl:attribute name="class">block</xsl:attribute>
-                        <xsl:if test="../../../@itemPubdate = 'true' and pubDate">
-                          <xsl:call-template name="dt:format-date-time">
-                            <xsl:with-param name="year"><xsl:value-of select="substring(pubDate, 1, 4)"/></xsl:with-param>
-                            <xsl:with-param name="month"><xsl:value-of select="substring(pubDate, 6, 2)"/></xsl:with-param>
-                            <xsl:with-param name="day"><xsl:value-of select="substring(pubDate, 9, 2)"/></xsl:with-param>
-                            <xsl:with-param name="format">%e.%n.%Y</xsl:with-param>
-                          </xsl:call-template>:
+                        <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
+                          <i18n:date src-pattern="EEE, d MMM yyyy HH:mm:ss zzz" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
                         </xsl:if>
                         <xsl:value-of select="title"/>
                       </a>
