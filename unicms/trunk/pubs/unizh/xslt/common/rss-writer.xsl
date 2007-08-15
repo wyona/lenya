@@ -57,7 +57,7 @@
               </xsl:choose> 
             </link>
             <description><xsl:apply-templates select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
-            <pubDate><xsl:value-of select="*/unizh:newsitem/lenya:meta/dcterms:created"/></pubDate>
+            <pubDate><xsl:value-of select="concat(substring(*/unizh:newsitem/lenya:meta/dcterms:created,1,3), ',', substring(*/unizh:newsitem/lenya:meta/dcterms:created,4))"/></pubDate>
           </item>
         </xsl:for-each>
       </channel>
