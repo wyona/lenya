@@ -58,6 +58,16 @@
           </h3>
           <ul>
             <xsl:for-each select="rss/channel/item">
+              <xsl:variable name="src-pattern">
+                <xsl:choose>
+                  <xsl:when test="number(substring(normalize-space(pubDate),1,1))">
+                    <xsl:text>d MMM yyyy HH:mm:ss zzz</xsl:text>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:text>EEE, d MMM yyyy HH:mm:ss zzz</xsl:text>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:variable>
               <xsl:if test="../../../@items = '' or position() &lt; = ../../../@items">
                 <li>
                   <xsl:if test="position() = 1">
@@ -67,7 +77,7 @@
                     <xsl:when test="../../../@itemDescription = 'true' or (../../../@itemDescription = 'true' and ../../../@itemImage = 'true')">
                       <h4>
                         <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
-                          <i18n:date src-pattern="EEE, d MMM yyyy HH:mm:ss zzz" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                          <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
                         </xsl:if>
                         <xsl:value-of select="title"/>
                       </h4>
@@ -94,7 +104,7 @@
                         <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
                         <xsl:attribute name="class">block</xsl:attribute>
                         <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
-                          <i18n:date src-pattern="EEE, d MMM yyyy HH:mm:ss zzz" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                          <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
                         </xsl:if>
                         <xsl:value-of select="title"/>
                       </a>
