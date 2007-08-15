@@ -841,6 +841,10 @@ div.leadblock img
     margin: 0 0 20px 0;
     background-color: #390;
 }
+div.leadblock p
+{
+    margin: 0 0 0.9em 0;
+}
 div.leadblock p img
 {
     float: left;
