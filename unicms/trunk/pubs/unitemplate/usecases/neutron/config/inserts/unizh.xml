@@ -31,7 +31,7 @@
 
   <template label="Unipublic RSS" element="rss-reader" name="rss-reader">
     <unizh:rss-reader url="http://www.unipublic.uzh.ch/index.rss.xml" items="1">
-      Unipublic
+      <unizh:title>Unipublic</unizh:title>
     </unizh:rss-reader>
   </template>
 
