@@ -144,7 +144,8 @@
 
 
   <!-- this template filters float objects, which are to be called from their following siblings -->
-  <xsl:template match="xhtml:object[ancestor::xhtml:body and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
+  <xsl:template match="xhtml:object[(ancestor::xhtml:body or ancestor::unizh:description) and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
+            <!-- unizh:description -> 'person' doctype -->
     <xsl:choose>
       <xsl:when test="(@float='true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p')"/>
       <xsl:otherwise>
