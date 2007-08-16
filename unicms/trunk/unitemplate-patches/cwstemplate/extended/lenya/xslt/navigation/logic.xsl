@@ -22,19 +22,14 @@
 
 <xsl:template match="/document/xhtml:div[@id = 'menu']" priority="1">
   <xsl:choose>
-    <xsl:when test="$homepage-basic-url = 'index'">
+    <xsl:when test="$home-basic-url = 'index'">
       <div id="menu">
         <xsl:apply-templates select="*/*"/>
       </div>
     </xsl:when>
-    <xsl:when test="descendant::xhtml:div[@basic-url = $homepage-basic-url]/*/*">
+    <xsl:when test="descendant::xhtml:div[@basic-url = $home-basic-url]/*/*">
       <div id="menu">
-<!--
-        <div class="home" href="{descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/@href}">
-          <xsl:value-of select="descendant::xhtml:div[@basic-url = $super-homepage-basic-url]/text()"/>
-        </div>
--->
-        <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $homepage-basic-url]/*/*"/>
+        <xsl:apply-templates select="descendant::xhtml:div[@basic-url = $home-basic-url]/*/*"/>
       </div>
     </xsl:when>
     <xsl:otherwise/>
@@ -68,11 +63,11 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="$homepage-basic-url = 'index'">
+          <xsl:when test="$home-basic-url = 'index'">
             <xsl:apply-templates/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:for-each select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $homepage-basic-url]/xhtml:div">
+            <xsl:for-each select="//xhtml:div[ancestor::xhtml:div[@id = 'menu'] and @basic-url = $home-basic-url]/xhtml:div">
               <div>
                 <xsl:choose>
                   <xsl:when test="@current = 'true' or descendant::xhtml:div[@current = 'true']">
@@ -109,11 +104,11 @@
           <xsl:apply-templates select="xhtml:div[@current = 'true']"/>
         </xsl:if>
       </xsl:when>
-      <xsl:when test="$homepage-basic-url = 'index'">
+      <xsl:when test="$home-basic-url = 'index'">
           <xsl:apply-templates select="xhtml:div[@basic-url != 'index']"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates select="xhtml:div[starts-with(@basic-url, concat($homepage-basic-url, '/'))]"/>
+        <xsl:apply-templates select="xhtml:div[starts-with(@basic-url, concat($home-basic-url, '/'))]"/>
       </xsl:otherwise>
     </xsl:choose>
   </div>
