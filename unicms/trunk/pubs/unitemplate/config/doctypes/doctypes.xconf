@@ -110,6 +110,8 @@
   <doc type="redirect">
     <children>
       <doc type="xhtml"/>
+      <doc type="news"/>
+      <doc type="team"/>
       <doc type="overview"/>
       <doc type="redirect"/>
     </children>
