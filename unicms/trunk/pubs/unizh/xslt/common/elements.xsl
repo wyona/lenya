@@ -401,6 +401,7 @@
 
   
   <xsl:template match="xhtml:body//xhtml:h2 | unizh:description//xhtml:h2">
+           <!-- unizh:description -> 'person' doctype -->
     <h2>
       <xsl:if test="@class">
         <xsl:copy-of select="@class"/>
