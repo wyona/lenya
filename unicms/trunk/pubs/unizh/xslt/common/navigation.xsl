@@ -71,7 +71,9 @@
             <xsl:if test="$nodeid != 'search'">
               <form>
                 <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
-                <xsl:attribute name="action">@href</xsl:attribute>
+                <xsl:attribute name="action">
+                  <xsl:value-of select="@href"/>
+                </xsl:attribute>
                 <xsl:attribute name="method">get</xsl:attribute>
                 <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
                 <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
