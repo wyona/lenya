@@ -132,7 +132,8 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:p[parent::xhtml:body and $rendertype = 'imageupload']">
+  <xsl:template match="xhtml:p[(parent::xhtml:body or parent::unizh:description) and $rendertype = 'imageupload']">
+            <!-- unizh:description -> 'person' doctype -->
     <xsl:variable name="fulltext" select="normalize-space(.)"/>
 
     <xsl:choose>
@@ -206,7 +207,8 @@
   </xsl:template>
 
 
-  <xsl:template match="lenya:asset[parent::xhtml:body and $rendertype = 'imageupload']">
+  <xsl:template match="lenya:asset[(parent::xhtml:body or parent::unizh:description) and $rendertype = 'imageupload']">
+            <!-- unizh:description -> 'person' doctype -->
     <a class="download" href="{lenya:asset-dot[1]/@href}">
       <xsl:value-of select="text()"/>
     </a>
@@ -399,7 +401,6 @@
 
   
   <xsl:template match="xhtml:body//xhtml:h2 | unizh:description//xhtml:h2">
-            <!-- unizh:description -> 'person' doctype -->
     <h2>
       <xsl:if test="@class">
         <xsl:copy-of select="@class"/>
@@ -470,7 +471,8 @@
           </a>
           (<xsl:value-of select="format-number($extent div 1024, '#.#')"/>KB, <img src="{$imageprefix}/icons/{$suffix}.gif" alt="{text()}" title="{text()}"/>)
         </div>
-        <xsl:if test="parent::xhtml:body and not(following-sibling::*[1][name() = 'lenya:asset'])">
+        <xsl:if test="(parent::xhtml:body or parent::unizh:description) and not(following-sibling::*[1][name() = 'lenya:asset'])">
+            <!-- unizh:description -> 'person' doctype -->
           <br/>
         </xsl:if>
       </xsl:otherwise>
@@ -701,7 +703,8 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:p[parent::xhtml:body and ($rendertype != 'imageupload')]">
+  <xsl:template match="xhtml:p[(parent::xhtml:body or parent::unizh:description) and ($rendertype != 'imageupload')]">
+            <!-- unizh:description -> 'person' doctype -->
     <xsl:choose>
       <xsl:when test="xhtml:object[@float = 'true']">
         <div class="objectContainer">
