@@ -2,6 +2,16 @@
 #headerarea {
 	background-color: #666699;
 }
+#headerarea h1 {
+        color: #ffffff;
+        font-size: 1.5em;
+        line-height: 1.5em;
+}
+#headerarea h2 {
+        color: #ffffff;
+        font-size: 1.0em;
+        line-height: 1.0em;
+}
 .imgunilogo {
 	background-color: #ccccff;
 }

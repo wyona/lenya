@@ -15,25 +15,64 @@
   limitations under the License.
 -->
 
-<!-- $Id: login.xsl,v 1.1 2004/08/06 16:12:24 jann Exp $ -->
+<!-- $Id: login.xsl,v 1.2 2007/08/19 16:12:24 mike Exp $ -->
     
 <xsl:stylesheet version="1.0"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"      
-xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
-xmlns:session="http://www.apache.org/xsp/session/2.0"
-xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0"
+  xmlns:session="http://www.apache.org/xsp/session/2.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output indent="yes" version="1.0" />
   <xsl:param name="publication_name" />
-  <xsl:variable name="copyright">Copyright &#169; 2003-2004 The Apache Software Foundation</xsl:variable>
+  <xsl:param name="server_name"/>
+  <xsl:param name="document_area"/>
+
+  <xsl:variable name="copyright"></xsl:variable>
+
+  <xsl:variable name="hostName">
+    <xsl:choose>
+      <xsl:when test="not($server_name)">
+        <xsl:value-of select="$publication_name"/>
+      </xsl:when>
+      <xsl:when test="starts-with($server_name, 'http://')">
+        <xsl:value-of select="substring($server_name,8)"/>
+      </xsl:when>
+      <xsl:when test="starts-with($server_name, 'https://')">
+        <xsl:value-of select="substring($server_name,9)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$server_name"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="displayHostName">
+    <xsl:choose>
+      <xsl:when test="not($document_area)">
+        <xsl:value-of select="'false'"/>
+      </xsl:when>
+      <xsl:when test="$document_area = 'live'">
+        <xsl:value-of select="'true'"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="'false'"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
   <xsl:template match="/">
     <xsl:apply-templates />
   </xsl:template>
+
   <xsl:template match="page">
     <page:page>
       <page:title>
         <xsl:call-template name="html-title" />
       </page:title>
-      <page:body>
+      <page:publicationId>
+        <xsl:value-of select="$publication_name"/>
+      </page:publicationId>
+       <page:body>
         <xsl:apply-templates select="body" />
         <p>
           <font face="verdana" size="-2">
@@ -43,12 +82,24 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       </page:body>
     </page:page>
   </xsl:template>
+
   <xsl:template name="html-title">
-    <i18n:translate>
-      <i18n:text i18n:key="login-to-pub"/>
-      <i18n:param><xsl:call-template name="pubname" /></i18n:param>
-    </i18n:translate>
+    <xsl:choose>
+      <xsl:when test="$displayHostName = 'true'">
+        <i18n:translate>
+          <i18n:text i18n:key="login-to-pub"/>
+          <i18n:param>
+            <xsl:value-of select="$hostName"/>
+          </i18n:param>
+        </i18n:translate>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>Anmelden an die Publikation </xsl:text>
+        <xsl:call-template name="pubname" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
+
   <xsl:template match="login">
     <p>
       <xsl:apply-templates select="authentication_failed" />
@@ -103,10 +154,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       </div>
     </div>
   </xsl:template>
+
   <xsl:template name="pubname">
     <xsl:value-of
     select="translate($publication_name, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" />
   </xsl:template>
+
   <xsl:template match="current_username">
   <br />
   Current username: 
@@ -119,6 +172,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   (
   <xsl:value-of select="@type" />
   )</xsl:template>
+
   <xsl:template match="no_username_yet">
   <br />
   No username yet</xsl:template>
@@ -132,11 +186,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:apply-templates />
   </a>
   </xsl:template>
+
   <xsl:template match="authentication_failed">
     <br />
     <font color="red">
       <i18n:text>Authentication failed</i18n:text>
     </font>
   </xsl:template>
+
 </xsl:stylesheet>
 
