@@ -101,22 +101,11 @@
       <fileset dir="${source.dir}/config/doctypes/schemas"/>
     </copy>
 
-    <echo>INFO: Change i18n config de</echo>
-    <xslt force="true" 
-      in="${source.dir}/config/i18n/unizh_de.xml" 
-      out="${destination.dir}/config/i18n/unizh_de.xml" style="i18n.xsl">
-      <outputproperty name="encoding" value="ISO-8859-1"/>
-      <param name="publicationName" expression="${new.publication.name}"/>
-      <param name="oldPublicationName" expression="${old.publication.name}"/>
-    </xslt>
-    
-    <echo>INFO: Change i18n config en</echo>
-    <xslt force="true"
-      in="${source.dir}/config/i18n/unizh_en.xml"
-      out="${destination.dir}/config/i18n/unizh_en.xml" style="i18n.xsl">
-      <param name="publicationName" expression="${new.publication.name}"/>
-      <param name="oldPublicationName" expression="${old.publication.name}"/>
-    </xslt>
+    <echo>INFO: Copy i18n Config</echo>
+    <mkdir dir="${destination.dir}/config/i18n"/>
+    <copy todir="${destination.dir}/config/i18n" overwrite="yes">
+      <fileset dir="${source.dir}/config/i18n"/>
+    </copy>
 
     <echo>INFO: Copy notification Config</echo>
     <mkdir dir="${destination.dir}/config/notification"/>
