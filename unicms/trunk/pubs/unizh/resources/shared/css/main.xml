@@ -600,16 +600,17 @@ div#secnav ul li ul li ul li ul li a
 }
 div.navup
 {
-    margin-top:1px;
-    margin-bottom: 23px;
+    margin: 0 0 18px 0;
     display:block;
 }
 div.navup a
 {
-    display:block;
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.gif);
-    padding-left:20px;
+    display: block;
+    background-image:url(../images/arrow_up.gif);
+    background-position: 0 2px;
     background-repeat: no-repeat;
+    padding: 1px 2px 3px 13px;
+    margin: 0 0 0 2px;
 }
 div.navup div.lead
 {

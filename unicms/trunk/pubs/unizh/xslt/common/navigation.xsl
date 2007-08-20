@@ -148,11 +148,11 @@
     <xsl:variable name="current" select="descendant::xhtml:div[@current = 'true']"/>
     <xsl:variable name="level" select="count($descendants)"/>
 
+    <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
     <div id="secnav">
       <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
         <a name="navigation" class="namedanchor"><xsl:comment/></a>
       </xsl:if>
-      <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
       <xsl:if test="$level > 3">
         <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
       </xsl:if>
