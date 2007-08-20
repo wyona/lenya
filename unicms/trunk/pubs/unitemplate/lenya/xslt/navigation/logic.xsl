@@ -50,8 +50,11 @@
   <xsl:variable name="entry-point-href">
     <xsl:choose>
       <xsl:when test="$index"/>
+      <xsl:when test="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = $home-basic-url]">
+        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = 'index']/@href"/>
+      </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/descendant-or-self::*[@basic-url = $home-basic-url]/../@href"/>
+        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/descendant::*[@basic-url = $home-basic-url]/../@href"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -59,8 +62,11 @@
   <xsl:variable name="entry-point-label">
     <xsl:choose>
       <xsl:when test="$index"/>
+      <xsl:when test="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = $home-basic-url]">
+        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/xhtml:div[@basic-url = 'index']/text()"/>
+      </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/descendant-or-self::*[@basic-url = $home-basic-url]/../text()"/>
+        <xsl:value-of select="/document/xhtml:div[@id = 'menu']/descendant::*[@basic-url = $home-basic-url]/../text()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
