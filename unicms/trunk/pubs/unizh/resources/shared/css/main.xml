@@ -53,7 +53,6 @@ h3
     font-size: 1.0em;
     font-weight:bold;
     line-height: inherit;
-    font-size: inherit;
 }
 h4, h5, h6
 {
@@ -103,7 +102,7 @@ a.right_aligned
 {
     float:right;
 }
-.relatedbox a.internal, .relatedbox a.uzh, ul.squarelist li a,  .contentindex a, .klein a
+div.relatedbox a.internal, div.relatedbox a.uzh, ul.squarelist li a,  .contentindex a, .klein a
 {
     background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:left top;
@@ -153,7 +152,7 @@ div.teaser
     font-size: 0.95em;
     border: 1px solid #ccccff;
     padding: 9px 9px 10px 9px;
-    margin-bottom:10px;
+    margin: 0 0 10px 0;
 }
 div.teaser h3
 {
@@ -167,7 +166,7 @@ div.teaser p
 div.teaser img
 {
     display:block;
-    margin-bottom:2px;
+    margin: 0 0 2px 0;
 }
 div.teaser a.internal, div.teaser a.uzh, div.teaser a.www
 {
@@ -531,19 +530,17 @@ div#col1
     font-size: 0.95em;
     font-family: Arial, sans-serif;
     line-height: 1.3em;
-    margin-right:20px;
 }
 * html div#col1
 {
-  height:100px; /*damit ein leerer div auch von IE erkannt wird*/
-  margin-right: 17px;
+    margin-right: -3px;
 }
 
 /* second and deeper level navigation */
 div#secnav
 {
     line-height: 1.1em;
-    font-size: inherit;
+    font-size: 1.0em;
     border-top: solid 1px #999999;
     padding: 0;
     margin: 0 0 20px 0;
@@ -606,7 +603,7 @@ div.navup
 div.navup a
 {
     display: block;
-    background-image:url(../images/arrow_up.gif);
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_up.gif);
     background-position: 0 2px;
     background-repeat: no-repeat;
     padding: 1px 2px 3px 13px;
@@ -733,8 +730,6 @@ div.relatedbox
 {
     float:right;
     width: 180px;
-    margin-left:15px;
-    padding-right: 0px;
 }
 
 /****** content column(s) ******/
@@ -783,21 +778,19 @@ div.relatedbox
 
 div.contcol2
 {
-    min-width:400px;
-    float: none;
     margin-left:185px;
 }
-* html .contcol2
+* html div.contcol2
 {
     height: 1%;
-    margin-left: 0px;
+    margin-left: 182px;
 }
 div#col2_nolimit
 {
     margin-left:185px;
     margin-top:0px;
 }
-* html #col2_nolimit
+* html div#col2_nolimit
 {
     margin-left: 0px;
     position:absolute; 
@@ -805,11 +798,7 @@ div#col2_nolimit
 div.contentarea
 {
     margin-right:199px;
-}
-* html .contentarea
-{
-    height: 1%;
-    margin-right: 0px;
+    height: 100%; /* this gets IE6 to nicely display content and related content next to each other */
 }
 div.contentnolimit
 {
@@ -841,6 +830,10 @@ div.leadblock img
 {
     margin: 0 0 20px 0;
     background-color: #390;
+}
+* html div.leadblock img
+{
+    margin: 0 -3px 20px 0;
 }
 div.leadblock p
 {
@@ -1079,10 +1072,9 @@ div.content div.solidline
 div.solidlinemitmargin
 {
     background-color: #cccccc;
-    height:1px;
-    width:100%;
+    height: 1px;
     margin: 1.7em 0 0 0;
-    border:0px;
+    border: 0;
 }
 div.solidlinelist
 {
