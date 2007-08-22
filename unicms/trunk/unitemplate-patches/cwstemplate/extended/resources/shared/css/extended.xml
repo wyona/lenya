@@ -9,7 +9,7 @@
 /* link */
 div.contentareawide a:visited, div.wide a:visited
 {
-    color:#666666; 
+    color:#884488; 
 }
 
 /****** left column ******/
@@ -18,22 +18,18 @@ div.contentareawide a:visited, div.wide a:visited
 div#secnav ul li a
 {
     padding: 4px 0 5px 7px;
-    display: block;
 }
 div#secnav ul li ul li a
 {
     padding: 3px 0px 5px 17px;
-    width:148px;
 }
 div#secnav ul li ul li ul li a
 {
     padding: 3px 0px 5px 27px;
-    width:138px;
 }
 div#secnav ul li ul li ul li ul li a
 {
     padding: 3px 0px 5px 37px;
-    width:128px;
 }
 
 
@@ -104,7 +100,7 @@ div.relatedbox div.emergency p
 div.relatedbox div.emergency a.uzh
 {
     background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right_emergency.gif);
-    color: #FFF;
+    color: #FFFFFF;
     font-weight: bold;
     text-decoration: underline;
 }
@@ -121,7 +117,7 @@ div.relatedbox div.emergency a.uzh:hover
 /* this extends contcol2 */
 div.wide
 {
-    margin-left:0;
+    margin-left: 0;
 }
 
 div.contentareawide
@@ -134,7 +130,6 @@ div.contentareawide div.content div.column
 }
 div.contentareawide div.content div.column#c1
 {
-    margin-left:0;
     margin-right:16px;
     float: left;
 }
