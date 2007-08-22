@@ -531,10 +531,6 @@ div#col1
     font-family: Arial, sans-serif;
     line-height: 1.3em;
 }
-* html div#col1
-{
-    margin-right: -3px;
-}
 
 /* second and deeper level navigation */
 div#secnav
@@ -798,6 +794,10 @@ div#col2_nolimit
 div.contentarea
 {
     margin-right:199px;
+}
+* html div.contentarea
+{
+    margin-right:196px;
     height: 100%; /* this gets IE6 to nicely display content and related content next to each other */
 }
 div.contentnolimit
