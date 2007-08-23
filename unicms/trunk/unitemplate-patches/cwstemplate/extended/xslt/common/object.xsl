@@ -16,6 +16,13 @@
 
 <!-- define new templates -->
 
+  <!-- banner object -->
+  <xsl:template match="xhtml:object[parent::unizh:banner]">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">180</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
 
 <!-- overwrite included templates -->
 
