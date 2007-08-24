@@ -197,7 +197,7 @@ div.rssReader
     font-size: 0.95em;
     border: 1px solid #ccccff;
     padding: 0 0 7px 0;
-    margin-bottom:10px;
+    margin: 0 0 10px 0;
 }
 
 /* rss reader for internal RSS feeds (where internal means: within virtual subdomain) */
