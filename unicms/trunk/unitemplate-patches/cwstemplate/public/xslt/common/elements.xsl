@@ -21,7 +21,7 @@
 
 <!-- define new templates -->
 
-  <!-- banner is only for extended publication homepages -->
+  <!-- banner is only for extended publication related contents -->
   <xsl:template match="unizh:banner">
     <div class="banner">
       <xsl:apply-templates select="xhtml:object"/>
