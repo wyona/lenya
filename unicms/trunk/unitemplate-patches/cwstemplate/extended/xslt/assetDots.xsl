@@ -9,27 +9,4 @@
 
   <xsl:import href="../../unizh/xslt/assetDots.xsl"/>
 
-  <xsl:template match="unizh:teaser[$rendertype = 'imageupload'] | unizh:rss-reader[parent::unizh:related-content and $rendertype = 'imageupload'] | xhtml:object[parent::unizh:related-content and $rendertype = 'imageupload']">
-    <br/>
-    <xsl:call-template name="asset-dot">
-      <xsl:with-param name="insertWhat">image</xsl:with-param>
-      <xsl:with-param name="insertWhere">before</xsl:with-param>
-    </xsl:call-template>
-    <br/>
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-    <br/>
-
-    <xsl:if test="not(following-sibling::*)">
-      <br/>
-      <xsl:call-template name="asset-dot">
-        <xsl:with-param name="insertWhat">image</xsl:with-param>
-        <xsl:with-param name="insertWhere">after</xsl:with-param>
-      </xsl:call-template>
-      <br/>
-    </xsl:if>
-
-  </xsl:template>
-
 </xsl:stylesheet>
