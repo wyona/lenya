@@ -74,10 +74,13 @@ div.relocator input#submit:hover
 /****** related content column ******/
 
 /* banner (related content) */
+div.relatedbox div.banner
+{
+    margin: 0 0 10px 0;
+}
 div.relatedbox div.banner img
 {
     display: block;
-    margin-bottom: 10px;
 }
 
 /* emergency message */

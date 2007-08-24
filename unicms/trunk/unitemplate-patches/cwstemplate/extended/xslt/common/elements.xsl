@@ -21,6 +21,14 @@
 
 <!-- define new templates -->
 
+  <!-- banner is only for extended publication related contents -->
+  <xsl:template match="unizh:banner">
+    <div class="banner">
+      <xsl:apply-templates select="xhtml:object"/>
+    </div>
+  </xsl:template>
+
+
   <!-- emergency message in fourth column -->
   <xsl:template name="emergency">
     <xsl:comment>emergency message</xsl:comment>
