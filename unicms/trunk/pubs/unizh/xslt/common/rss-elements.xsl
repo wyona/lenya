@@ -58,14 +58,19 @@
           </h3>
           <ul>
             <xsl:for-each select="rss/channel/item">
+              <xsl:variable name="substring1" select="substring(normalize-space(pubDate),1,1)"/>
+              <xsl:variable name="substring3" select="substring(normalize-space(pubDate),1,3)"/>
+              <xsl:variable name="substring4" select="substring(normalize-space(pubDate),1,4)"/>
               <xsl:variable name="src-pattern">
                 <xsl:choose>
-                  <xsl:when test="number(substring(normalize-space(pubDate),1,1))">
+                  <xsl:when test="$substring3 = 'Mon' or $substring3 = 'Tue' or $substring3 = 'Wed' or $substring3 = 'Thu' or $substring3 = 'Fri' or $substring3 = 'Sat' or $substring3 = 'Sun'">
+                    <xsl:text>EEE, d MMM yyyy HH:mm:ss zzz</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="number($substring4)"/>
+                  <xsl:when test="number($substring1)">
                     <xsl:text>d MMM yyyy HH:mm:ss zzz</xsl:text>
                   </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>EEE, d MMM yyyy HH:mm:ss zzz</xsl:text>
-                  </xsl:otherwise>
+                  <xsl:otherwise/>
                 </xsl:choose>
               </xsl:variable>
               <xsl:if test="../../../@items = '' or position() &lt; = ../../../@items">
@@ -77,7 +82,14 @@
                     <xsl:when test="../../../@itemDescription = 'true' or (../../../@itemDescription = 'true' and ../../../@itemImage = 'true')">
                       <h4>
                         <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
-                          <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                          <xsl:choose>
+                            <xsl:when test="$src-pattern = ''">
+                              <xsl:text>invalid date format</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
                         </xsl:if>
                         <xsl:value-of select="title"/>
                       </h4>
@@ -104,7 +116,14 @@
                         <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
                         <xsl:attribute name="class">block</xsl:attribute>
                         <xsl:if test="../../../@itemPubdate = 'true' and pubDate and pubDate != ''">
-                          <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                          <xsl:choose>
+                            <xsl:when test="$src-pattern = ''">
+                              <xsl:text>(invalid date format) </xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
                         </xsl:if>
                         <xsl:value-of select="title"/>
                       </a>
