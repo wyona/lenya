@@ -34,13 +34,22 @@
     <ref name="lenya.meta"/>
     <ref name="unizh.related-content"/>
     <element name="body">
-      <element name="unizh:children">
-        <empty/>
-      </element>
+      <optional>
+        <ref name="object"/>
+      </optional>
       <zeroOrMore>
         <element name="p">
           <ref name="Inline.model"/>
         </element>
+      </zeroOrMore>
+      <element name="unizh:children">
+        <empty/>
+      </element>
+      <zeroOrMore>
+        <choice>
+          <ref name="p"/>
+          <ref name="object"/> 
+        </choice>
       </zeroOrMore>
     </element>
   </element>
