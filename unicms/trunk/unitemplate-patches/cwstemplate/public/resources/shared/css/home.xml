@@ -139,7 +139,7 @@ ul#directlinks li a#directlink3
 }
 ul#directlinks li a#directlink4
 {
-    background-color: #66CCFF;
+    background-color: #66CBFF;
 }
 ul#directlinks li a#directlink5
 {
@@ -147,11 +147,11 @@ ul#directlinks li a#directlink5
 }
 ul#directlinks li a#directlink6
 {
-    background-color: #9999FF;
+    background-color: #9A99FF;
 }
 ul#directlinks li a#directlink7
 {
-    background-color: #CECCA6;
+    background-color: #CCCBAC;
 }
 ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover, ul#directlinks li a#directlink6:hover, ul#directlinks li a#directlink7:hover
 {
