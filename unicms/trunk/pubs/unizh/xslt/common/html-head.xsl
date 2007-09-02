@@ -29,9 +29,31 @@
         @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
       </xsl:comment>
     </style>
-    <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
+    </xsl:if>
+    <xsl:if test="descendant::unizh:map">
+      <script type="text/javascript">
+        <xsl:attribute name="src">
+          <xsl:text>http://maps.google.com/maps?file=api&amp;v=2&amp;key</xsl:text>
+          <xsl:value-of select="descendant::unizh:map[1]/@key"/>
+        </xsl:attribute>
+      </script>
+    </xsl:if>
+    <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
+    <xsl:if test="descendant::unizh:map">
+      <script type="text/javascript">
+        <xsl:comment>
+          <xsl:text>var maps = [</xsl:text>
+          <xsl:for-each select="descendant::unizh:map">
+            <xsl:call-template name="mapData"/>
+            <xsl:if test="not(position()=last())">
+              <xsl:text>,</xsl:text>
+            </xsl:if>
+          </xsl:for-each>
+          <xsl:text>];</xsl:text>
+        </xsl:comment>
+      </script>
     </xsl:if>
   </head>
 </xsl:template>

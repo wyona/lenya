@@ -914,4 +914,100 @@
     </xsl:copy>
   </xsl:template>
 
+
+  <!-- create div to represent google map -->
+  <xsl:template match="unizh:map">
+    <div class="map">
+      <xsl:attribute name="id">
+        <xsl:value-of select="@id"/>
+      </xsl:attribute>
+      <xsl:attribute name="style">
+        <xsl:choose>
+          <xsl:when test="ancestor::unizh:related-content">
+            <xsl:text>width: 180px; height: 180px</xsl:text>
+          </xsl:when>
+          <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 3)">
+            <xsl:text>width: 416px; height: 300px</xsl:text>
+          </xsl:when>
+          <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 2)">
+            <xsl:text>width: 615px; height: 400px</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>width: 800px; height: 500px</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text></xsl:text>
+      </xsl:attribute>
+      <noscript>JavaScript must be enabled in order for you to use Google Maps.</noscript>
+    </div>
+  </xsl:template>
+
+
+  <!-- create javascript array for google map API from unizh:map element (called from html-head.xsl) -->
+  <xsl:template name="mapData">
+    <xsl:text>{</xsl:text>
+    <xsl:text>"id":"</xsl:text><xsl:value-of select="@id"/><xsl:text>",</xsl:text>
+    <xsl:text>"center":{"lat":</xsl:text><xsl:value-of select="@lat"/><xsl:text>,"lng":</xsl:text><xsl:value-of select="@lng"/><xsl:text>},</xsl:text>
+    <xsl:text>"scale":</xsl:text><xsl:value-of select="@scale"/><xsl:text>,</xsl:text>
+    <xsl:text>"type":</xsl:text>
+    <xsl:choose>
+      <xsl:when test="@type">
+        <xsl:choose>
+          <xsl:when test="@type = 'hybrid'">
+            <xsl:text>G_HYBRID_MAP</xsl:text>
+          </xsl:when>
+          <xsl:when test="@type = 'satellite'">
+            <xsl:text>G_SATELLITE_MAP</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>G_NORMAL_MAP</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>G_NORMAL_MAP</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>,</xsl:text>
+    <xsl:text>"numbered":</xsl:text>
+    <xsl:choose>
+      <xsl:when test="@numbered and @numbered = 'true'">
+        <xsl:text>true</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>false</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>,</xsl:text>
+    <xsl:choose>
+      <xsl:when test="ancestor::unizh:related-content">
+        <xsl:text>"control":"small",</xsl:text>
+        <xsl:text>"typeControl":false,</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>"control":"large",</xsl:text>
+        <xsl:text>"typeControl":true,</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>"markers":[</xsl:text>
+    <xsl:for-each select="unizh:marker">
+      <xsl:call-template name="markerData"/>
+      <xsl:if test="not(position()=last())">
+        <xsl:text>,</xsl:text>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:text>]</xsl:text>
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
+
+  <xsl:template name="markerData">
+    <xsl:text>{</xsl:text>
+    <xsl:text>"lat":</xsl:text><xsl:value-of select="@lat"/><xsl:text>,</xsl:text>
+    <xsl:text>"lng":</xsl:text><xsl:value-of select="@lng"/><xsl:text>,</xsl:text>
+    <xsl:text>"label":"</xsl:text>
+    <xsl:text>"</xsl:text>
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>

@@ -43,6 +43,10 @@
     <html>
       <xsl:call-template name="html-head"/>
       <body>
+      <xsl:if test="descendant::unizh:map">
+        <xsl:attribute name="onload">GMultiMapload(maps)</xsl:attribute>
+        <xsl:attribute name="onunload">GUnload()</xsl:attribute>
+      </xsl:if>
         <div class="bodywidth">
           <a accesskey="1" title="Zur Navigation springen" href="#navigation"><xsl:comment/></a>
           <a accesskey="2" title="Zum Inhalt springen" href="#content"><xsl:comment/></a>
@@ -235,7 +239,7 @@
     </div>
   </xsl:template>
 
- 
+
   <xsl:template name="homepage4columns">
     <div id="col1">
       <xsl:choose>

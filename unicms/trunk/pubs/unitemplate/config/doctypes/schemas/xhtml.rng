@@ -220,6 +220,7 @@
     <ref name="unizh.children"/>
     <ref name="iframe"/>
     <ref name="unizh.toplink"/>
+    <ref name="unizh.map"/>
   </choice>
 </define>
 

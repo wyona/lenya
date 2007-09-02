@@ -78,6 +78,7 @@
       <choice>
         <ref name="unizh.teaser"/>
         <ref name="unizh.rss-reader"/>
+        <ref name="unizh.map"/>
       </choice>
     </zeroOrMore>
   </element>
@@ -156,8 +157,8 @@
 </define>
 
 <define name="teaser.p">
-  <element name="p"> 
-     <ref name="teaser.model"/> 
+  <element name="p">
+     <ref name="teaser.model"/>
   </element>
 </define>
 
@@ -360,6 +361,60 @@
     <zeroOrMore>
       <ref name="a"/>
     </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.map">
+  <element name="unizh:map">
+    <attribute name="id">
+      <text/>
+    </attribute>
+    <attribute name="lat">
+      <ref name="Number.datatype"/>
+    </attribute>
+    <attribute name="lng">
+      <ref name="Number.datatype"/>
+    </attribute>
+    <attribute name="scale">
+      <ref name="Number.datatype"/>
+    </attribute>
+    <attribute name="key">
+      <text/>
+    </attribute>
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value type="string">normal</value>
+          <value type="string">hybrid</value>
+          <value type="string">satellite</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="numbered">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="unizh.marker"/>
+    </zeroOrMore>
+  </element>
+</define>
+
+
+<define name="unizh.marker">
+  <element name="unizh:marker">
+    <attribute name="lat">
+      <ref name="Number.datatype"/>
+    </attribute>
+    <attribute name="lng">
+      <ref name="Number.datatype"/>
+    </attribute>
+    <ref name="teaser.model"/>
   </element>
 </define>
 
