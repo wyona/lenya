@@ -17,9 +17,5 @@
 
 <!-- overwrite included templates -->
 
-  <xsl:template match="style[@type = 'text/css']" priority="1">
-    <xsl:copy-of select="."/>
-  </xsl:template>
-
 
 </xsl:stylesheet>
