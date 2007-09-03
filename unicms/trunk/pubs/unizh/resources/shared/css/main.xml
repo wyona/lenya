@@ -69,15 +69,10 @@ div.attention
 }
 
 /* link */
-a
-{ 
+a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more
+{
     text-decoration: none;
     color:#333399;
-}
-a:hover
-{
-    text-decoration: underline;
-    background-color:#E9E9F0;
 }
 div.contentarea a:visited, div.contcol2 a:visited, div.contentarea1col a:visited
 {
@@ -129,6 +124,11 @@ a.www
     background-repeat: no-repeat;
     padding-right:2px;
     margin-left:2px;
+}
+a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover
+{
+    text-decoration: underline;
+    background-color:#E9E9F0;
 }
 img
 {
@@ -218,6 +218,8 @@ div.rssReader h3.linked
 }
 div.rssReader h3 a
 {
+    text-decoration: none;
+    color:#333399;
     background-color:#EBEBFF;
     background-image:url(<context-prefix/>/unizh/authoring/images/arrow_upright.gif);
     background-repeat: no-repeat;
@@ -229,6 +231,7 @@ div.rssReader h3 a
 div.rssReader h3 a:hover
 {
     background-color:#F7F7F7;
+    text-decoration: underline;
 }
 div.rssReader h3 a:visited
 {
@@ -353,6 +356,18 @@ div.objectContainer div.right
     margin: 4px 0 0 10px; float: right;
 }
 
+/* google map in related content or content */
+div.contentarea div.map
+{
+    margin: 0.7em 0 0.9em 0;
+    padding: 0;
+}
+div.relatedbox div.map
+{
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
 /****** header elements ******/
 
 div#headerarea
@@ -397,7 +412,8 @@ div#headerarea h1
 }
 div#headerarea a
 {
-    color:#FFF;
+    color: #FFF;
+    text-decoration: none;
 }
 div#headerarea a:hover
 {
@@ -436,11 +452,13 @@ div#breadcrumbnav
 div#breadcrumbnav a
 {
     color: #999;
+    text-decoration: none;
 }
 div#breadcrumbnav a:hover
 {
     color: #000;
     background-color: #FFF;
+    text-decoration: underline;
 }
 
 /* service navigation */
@@ -499,6 +517,8 @@ div#primarnav a
     float:left;
     padding:0px 7px;
     display:block;
+    text-decoration: none;
+    color:#333399;
 }
 div#primarnav a:hover
 {
@@ -538,6 +558,8 @@ div#secnav
 div#secnav a
 {
     display:block;
+    text-decoration: none;
+    color:#333399;
 }
 div#secnav a:hover
 {
@@ -627,11 +649,13 @@ div#toolnav
 div#toolnav a
 {
     color:#666; 
+    text-decoration: none;
     padding: 0 2px;
 }
 div#toolnav a:hover
 {
     background-color: transparent;
+    text-decoration: underline;
 }
 div#toolnav a.active
 {
@@ -702,6 +726,8 @@ div#quicklinks ul li
 }
 div#quicklinks ul li a
 {
+    text-decoration: none;
+    color:#333399;
     background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position:0 2px;
     background-repeat: no-repeat;
@@ -1180,6 +1206,12 @@ div#footer
     font-family: Verdana, sans-serif;
     color:#999;
     line-height:1.4em;
+}
+div#footer a
+{
+    text-decoration: none;
+    color:#333399;
+
 }
 .topnav
 {

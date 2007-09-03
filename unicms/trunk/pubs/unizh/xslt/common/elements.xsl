@@ -253,7 +253,7 @@
 
 
   <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
-    <a name="{@name}" class="namedanchor"><xsl:comment/></a>
+    <a name="{@name}" class="namedanchor"/>
   </xsl:template>
 
 
@@ -263,7 +263,6 @@
         <xsl:text>namedanchor</xsl:text>
       </xsl:attribute>
       <xsl:apply-templates select="@*|node()"/>
-      <xsl:comment/>
     </xsl:copy>
   </xsl:template>
 
@@ -447,7 +446,7 @@
      </xsl:call-template>
    </xsl:variable>
    <xsl:choose>
-     <xsl:when test="$suffix = 'swf'">
+     <xsl:when test="$suffix = 'swf' and not(ancestor::unizh:related-content)">
        <xsl:variable name="width">
          <xsl:choose>
            <xsl:when test="@size != ''"><xsl:value-of select="substring-before(@size, 'x')"/></xsl:when>

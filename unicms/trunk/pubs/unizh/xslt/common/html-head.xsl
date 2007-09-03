@@ -9,26 +9,36 @@
     <title>UZH - <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/> - <xsl:value-of select="*/lenya:meta/dc:title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <meta name="dc:title" content="{/document/content/*/lenya:meta/dc:title}"/>
-    <meta name="dc:creator" content="{/document/content/*/lenya:meta/dc:creator}"/>
     <meta name="dc:subject" content="{/document/content/*/lenya:meta/dc:subject}"/>
     <meta name="dc:description" content="{/document/content/*/lenya:meta/dc:description}"/>
     <meta name="dc:publisher" content="{/document/content/*/lenya:meta/dc:publisher}"/>
+    <meta name="dc:date" content="{$lastmodified}"/>
     <meta name="dc:language" content="{/document/content/*/lenya:meta/dc:language}"/>
     <meta name="dc:rights" content="{/document/content/*/lenya:meta/dc:rights}"/>
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
-    <style type="text/css">
-      <xsl:comment>
+    <!-- CSS must be included at this point in order to be available for editor, will be replaced in cachePostProcessing.xsl -->
+    <link rel="stylesheet" type="text/css">
+      <xsl:attribute name="href">
+        <xsl:value-of select="$contextprefix"/>
         <xsl:choose>
           <xsl:when test="contains($fontsize, 'big') and not(contains($fontsize, 'normal'))">
-            @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/big.css");
+            <xsl:text>/unizh/authoring/css/big.css</xsl:text>
+          </xsl:when>
+          <xsl:when test="contains($fontsize, 'normal')">
+            <xsl:text>/unizh/authoring/css/main.css</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            @import url("<xsl:value-of select="$contextprefix"/>/unizh/authoring/css/main.css");
+            <xsl:text>/unizh/authoring/css/main.css</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
-        @import url("<xsl:value-of select="$localsharedresources"/>/css/institute.css");
-      </xsl:comment>
-    </style>
+      </xsl:attribute>
+    </link>
+    <link rel="stylesheet" type="text/css">
+      <xsl:attribute name="href">
+        <xsl:value-of select="$localsharedresources"/>
+        <xsl:text>/css/institute.css</xsl:text>
+      </xsl:attribute>
+    </link>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
     </xsl:if>
