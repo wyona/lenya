@@ -1005,8 +1005,7 @@
     <xsl:text>{</xsl:text>
     <xsl:text>"lat":</xsl:text><xsl:value-of select="@lat"/><xsl:text>,</xsl:text>
     <xsl:text>"lng":</xsl:text><xsl:value-of select="@lng"/><xsl:text>,</xsl:text>
-    <xsl:text>"label":"</xsl:text>
-    <xsl:text>"</xsl:text>
+    <xsl:text>"label":""</xsl:text>
     <xsl:text>}</xsl:text>
   </xsl:template>
 

@@ -43,7 +43,10 @@
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
     <xsl:if test="descendant::unizh:map">
       <script type="text/javascript">
+        <xsl:text>//</xsl:text>
         <xsl:comment>
+          <xsl:text>[CDATA[
+          </xsl:text>
           <xsl:text>var maps = [</xsl:text>
           <xsl:for-each select="descendant::unizh:map">
             <xsl:call-template name="mapData"/>
@@ -52,6 +55,7 @@
             </xsl:if>
           </xsl:for-each>
           <xsl:text>];</xsl:text>
+          <xsl:text>//]]</xsl:text>
         </xsl:comment>
       </script>
     </xsl:if>
