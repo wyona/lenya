@@ -55,25 +55,30 @@
       <div class="icontextpos">
         <div id="icontext">&#160;</div>
       </div>
-      <xsl:for-each select="xhtml:div[@class='language']">
-        <xsl:choose>
-          <xsl:when test=". = 'de'">
-            <a href="{@href}">Deutsch</a>
-          </xsl:when>
-          <xsl:when test=". = 'en'">
-            <a href="{@href}">English</a>
-          </xsl:when>
-          <xsl:when test=". = 'fr'">
-            <a href="{@href}">Français</a>
-          </xsl:when>
-          <xsl:when test=". = 'it'">
-            <a href="{@href}">Italiano</a>
-          </xsl:when>
-          <xsl:otherwise>
+      <xsl:choose>
+        <xsl:when test="count(xhtml:div[@class='language']) &gt; 1">
+          <xsl:for-each select="xhtml:div[@class='language']">
             <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each>
+            <xsl:text> | </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="count(xhtml:div[@class='language']) = 1">
+          <a>
+            <xsl:attribute name="href"><xsl:value-of select="xhtml:div[@class='language']/@href"/></xsl:attribute>
+            <xsl:choose>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'de'">Deutsch</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'en'">English</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'fr'">Français</xsl:when>
+              <xsl:when test="xhtml:div[@class='language']/text() = 'it'">Italiano</xsl:when>
+              <xsl:otherwise><xsl:value-of select="translate(xhtml:div[@class='language']/text(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></xsl:otherwise>
+            </xsl:choose>
+          </a>
+          <xsl:text> | </xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
+        <xsl:attribute name="id">switchFontSize</xsl:attribute>
+        <img src="{$imageprefix}/icon_bigfont.gif" alt="{xhtml:div[@id = 'fontsize']}" width="18" height="9"/></a>
     </div>
     <div class="floatclear"><xsl:comment/></div>
   </xsl:template>

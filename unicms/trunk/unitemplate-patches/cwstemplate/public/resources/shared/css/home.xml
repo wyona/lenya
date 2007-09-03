@@ -115,6 +115,8 @@ ul#directlinks
 }
 ul#directlinks li a
 {
+    text-decoration: none;
+    color:#333399;
     background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
     background-position: 10px 3px;
     background-color:#ADADD6;
@@ -156,6 +158,7 @@ ul#directlinks li a#directlink7
 ul#directlinks li a:hover, ul#directlinks li a#directlink1:hover, ul#directlinks li a#directlink2:hover, ul#directlinks li a#directlink3:hover, ul#directlinks li a#directlink4:hover, ul#directlinks li a#directlink5:hover, ul#directlinks li a#directlink6:hover, ul#directlinks li a#directlink7:hover
 {
     background-color:#E9E9F0;
+    text-decoration: underline;
 }
 
 /****** related content column ******/
