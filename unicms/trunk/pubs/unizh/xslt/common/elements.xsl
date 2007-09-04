@@ -925,10 +925,10 @@
           <xsl:when test="ancestor::unizh:related-content">
             <xsl:text>width: 180px; height: 180px</xsl:text>
           </xsl:when>
-          <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 3)">
+          <xsl:when test="(/document/content/*/@unizh:columns = 3)">
             <xsl:text>width: 416px; height: 300px</xsl:text>
           </xsl:when>
-          <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 2)">
+          <xsl:when test="(/document/content/*/@unizh:columns = 2)">
             <xsl:text>width: 615px; height: 400px</xsl:text>
           </xsl:when>
           <xsl:otherwise>

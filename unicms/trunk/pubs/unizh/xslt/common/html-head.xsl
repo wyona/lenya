@@ -45,7 +45,7 @@
     <xsl:if test="descendant::unizh:map">
       <script type="text/javascript">
         <xsl:attribute name="src">
-          <xsl:text>http://maps.google.com/maps?file=api&amp;v=2&amp;key</xsl:text>
+          <xsl:text>http://maps.google.com/maps?file=api&amp;v=2&amp;key=</xsl:text>
           <xsl:value-of select="descendant::unizh:map[1]/@key"/>
         </xsl:attribute>
       </script>

@@ -357,15 +357,17 @@ div.objectContainer div.right
 }
 
 /* google map in related content or content */
-div.contentarea div.map
+div.contentarea div.map, div.contentarea1col div.map
 {
     margin: 0.7em 0 0.9em 0;
     padding: 0;
+    background-color: cornflowerblue;
 }
 div.relatedbox div.map
 {
     margin: 0 0 10px 0;
     padding: 0;
+    background-color: cornflowerblue;
 }
 
 /****** header elements ******/
