@@ -28,14 +28,14 @@
           <map:parameter name="current_label" value="{{request-param:section.label}}"/>
         </map:transform>
 
-        <map:transform type="index">
-          <map:parameter value="{{page-envelope:document-id}}" name="documentId"/>
-          <map:parameter value="http://unizh.ch/doctypes/elements/1.0" name="namespace"/>
-          <map:parameter value="http://apache.org/cocoon/include/1.0" name="cIncludeNamespace"/>
-        </map:transform>
         <map:transform src="../unizh/xslt/includeAssetMetaData.xsl">
           <map:parameter name="documentid" value="{{page-envelope:document-id}}"/>
         </map:transform>
+
+        <map:transform src="../unizh/xslt/includeMathML.xsl">
+          <map:parameter name="documentid" value="{{page-envelope:document-id}}"/>
+        </map:transform>
+
         <map:transform type="cinclude"/>
         <map:transform src="lenya/xslt/navigation/header.xsl"/>
         <map:transform src="lenya/xslt/navigation/logic.xsl">

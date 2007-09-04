@@ -273,14 +273,6 @@
 
   <xsl:template match="elml:table">
 
-   <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-     <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
-
-
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
       <!-- eventually add support for width, height, units -->
@@ -340,13 +332,6 @@
 
   <xsl:template match="elml:list">
 
-    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
-
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
     </xsl:if>
@@ -378,13 +363,6 @@
   </xsl:template>
 
   <xsl:template match="elml:box">
-
-    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
 
     <xsl:if test="@label">
       <a name="{@label}"><xsl:comment/></a>
@@ -606,6 +584,14 @@
   </xsl:template>
 
 
+  <xsl:template match="elml:annotation">
+
+     <div class="annotation">
+        <xsl:apply-templates/>
+      </div>
+
+  </xsl:template>
+
   <xsl:template match="elml:newLine">
     <br/>
     <xsl:if test="@space = 'long'">
@@ -614,13 +600,6 @@
   </xsl:template>
 
   <xsl:template match="elml:paragraph">
-
-    <xsl:variable name="contextIDRef" select="@contextIDRef"/>
-    <xsl:if test="@contextIDRef and //elml:contextInformation[@contextID = $contextIDRef]">
-      <div class="contextInfo">
-        <xsl:apply-templates select="//elml:contextInformation[@contextID = $contextIDRef]"/>
-      </div>
-    </xsl:if>
 
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
@@ -1393,12 +1372,5 @@
       <xsl:apply-templates/><xsl:comment/>
     </a>
   </xsl:template>
-
-
-  <xsl:template match="elml:contextInformation">
-    <xsl:apply-templates/>
-  </xsl:template>
-
-
 
 </xsl:stylesheet>

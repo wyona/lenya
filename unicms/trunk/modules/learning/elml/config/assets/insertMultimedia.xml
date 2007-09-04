@@ -50,6 +50,10 @@
       <xsl:when test="substring-after($data, '.') = 'x3d'">
         <elml:multimedia src="{$data}" type="x3d" legend="{$title}"/>
       </xsl:when>
+      <xsl:when test="substring-after($data, '.') = 'mml'">
+        <elml:multimedia src="{$data}" type="mathml" legend="{$title}"/>
+      </xsl:when>
+
 
       <xsl:otherwise>
         <elml:multimedia src="{$data}" type="" legend="{$title}"/>

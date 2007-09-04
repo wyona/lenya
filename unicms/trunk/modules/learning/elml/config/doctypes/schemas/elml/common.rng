@@ -127,7 +127,6 @@
       <ref name="RoleImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <oneOrMore>
         <ref name="tablerow"/>
       </oneOrMore>
@@ -157,7 +156,6 @@
       <ref name="ListStyleImp"/>
       <ref name="BibIDRefImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <oneOrMore>
         <ref name="listItem"/>
       </oneOrMore>    
@@ -186,7 +184,6 @@
 
   <define name="box">
     <element name="box">
-      <ref name="ContextIDRefImp"/>
       <ref name="ParaType"/>
     </element>
   </define>
@@ -196,7 +193,6 @@
       <ref name="GlossaryRefReq"/>
       <ref name="IconImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <text/> 
     </element>
   </define>
@@ -231,17 +227,15 @@
       <ref name="HTMLAttributesImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <optional>
         <text/>
       </optional>
-      <!-- can't support inline elements because bxe crashes on anyname!
       <zeroOrMore>
         <choice>
           <ref name="anyElement"/>
           <text/>
         </choice>
-      </zeroOrMore> -->
+      </zeroOrMore> 
     </element>
   </define>
 
@@ -260,7 +254,6 @@
 
   <define name="popup">
     <element name="popup">
-       <ref name="ContextIDRefImp"/>
       <ref name="ParaType"/>
     </element>
   </define>
@@ -272,7 +265,6 @@
       <ref name="IconImp"/>
       <ref name="RoleImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <choice>
         <optional>
           <ref name="multimedia"/>
@@ -289,7 +281,6 @@
       <ref name="IconImp"/>
       <ref name="YearOnlyImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -317,7 +308,6 @@
       <ref name="IconImp"/>
       <ref name="VisibleImp"/>
       <ref name="CSSClassImp"/>
-      <ref name="ContextIDRefImp"/>
       <zeroOrMore>
         <choice>
           <ref name="term"/>
@@ -352,23 +342,28 @@
   </define>
 
 
-  <define name="context">
-    <element name="context">
+  <define name="annotation">
+    <element name="annotation">
       <zeroOrMore>
-        <ref name="contextInformation"/>
+        <choice>
+          <ref name="toc"/>
+          <ref name="column"/>
+          <ref name="table"/>
+          <ref name="list"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="formatted"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="newLine"/>
+          <ref name="paragraph"/>
+          <ref name="indexItem"/>
+          <text/>
+        </choice>
       </zeroOrMore>
     </element>
   </define>
 
-
-  <define name="contextInformation">
-    <element name="contextInformation">
-      <attribute name="contextID">
-        <text/> 
-      </attribute>
-      <ref name="ParaType"/>
-    </element>
-  </define>
 
 
   <!-- Type definitions -->
@@ -390,6 +385,7 @@
         <ref name="link"/>
         <ref name="citation"/>
         <ref name="paragraph"/>
+        <ref name="annotation"/>
       </choice>
     </zeroOrMore>
   </define>
@@ -411,6 +407,7 @@
         <ref name="link"/>
         <ref name="citation"/>
         <ref name="paragraph"/>
+        <ref name="annotation"/>
       </choice>
     </zeroOrMore>
   </define>
@@ -495,6 +492,7 @@
         <ref name="newLine"/>
         <ref name="paragraph"/>
         <ref name="indexItem"/>
+        <ref name="annotation"/>
         <text/>
       </choice>
     </zeroOrMore>
@@ -813,13 +811,6 @@
     </optional>
   </define>
 
-  <define name="ContextIDRefImp">
-    <optional>
-      <attribute name="contextIDRef">
-        <text/>
-      </attribute>
-    </optional>
-  </define>
 
 
 </grammar>

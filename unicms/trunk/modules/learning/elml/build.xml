@@ -41,6 +41,10 @@
 
     <echo>INFO: Copying elml xslt's</echo>
 
+    <copy todir="${pubs.dir}/unizh/xslt" overwrite="yes">
+      <fileset dir="elml/xslt"/>
+    </copy>
+
     <copy todir="${pubs.dir}/unizh/xslt/doctypes" overwrite="yes">
       <fileset dir="elml/xslt/doctypes"/>
     </copy>
@@ -55,7 +59,7 @@
       <fileset dir="elml/resources/shared/images/icons"/>
     </copy>
 
-     <copy todir="${pubs.dir}/resources/shared/css" overwrite="yes">
+     <copy todir="${pubs.dir}/unitemplate/resources/shared/css" overwrite="yes">
       <fileset dir="elml/resources/shared/css"/>
     </copy>
 

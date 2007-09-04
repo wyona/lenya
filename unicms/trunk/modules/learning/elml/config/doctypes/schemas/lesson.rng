@@ -62,9 +62,6 @@
         <ref name="glossary"/>
       </optional>
       <optional>
-        <ref name="context"/>
-      </optional>
-      <optional>
         <ref name="bibliography"/>
       </optional>
       <optional>
