@@ -320,7 +320,7 @@ div.rssReader ul li img
 /* object div may contain a img or object element */
 div.objectBlock
 {
-    background-color:#E9E9F0;
+    background-color: #E9E9F0;
     margin: 1em 0 0 0;
     width: 204px;
 }
@@ -361,13 +361,13 @@ div.contentarea div.map, div.contentarea1col div.map
 {
     margin: 0.7em 0 0.9em 0;
     padding: 0;
-    background-color: cornflowerblue;
+    background-color: #E9E9F0;
 }
 div.relatedbox div.map
 {
     margin: 0 0 10px 0;
     padding: 0;
-    background-color: cornflowerblue;
+    background-color: #E9E9F0;
 }
 
 /****** header elements ******/

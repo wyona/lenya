@@ -72,4 +72,7 @@
     </xsl:choose>
   </xsl:variable>
 
+  <!-- this key is valid for all maps in http://cms.uzh.ch/ and is registered for stefan.paschke@gmail.com -->
+  <xsl:variable name="googleKeyAuthoring">ABQIAAAA71si2DaO4nTRE11c0Y-9rRRhLdUGH_GSS-a_1hHTCQv4xQeWKxQyx15NNRCW6eaoTBEmU577_Tllqw</xsl:variable>
+
 </xsl:stylesheet>
