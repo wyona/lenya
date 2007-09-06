@@ -14,15 +14,6 @@
 
   // google map functions
 
-  var baseIcon = new GIcon();
-  baseIcon.image = "http://www.weboffice.uzh.ch/projekte/unicms/google/images/markers/marker.png";
-  baseIcon.shadow = "http://www.weboffice.uzh.ch/projekte/unicms/google/images/markers/shadow50.png";
-  baseIcon.iconSize = new GSize(20, 34);
-  baseIcon.shadowSize = new GSize(37, 34);
-  baseIcon.iconAnchor = new GPoint(9, 34);
-  baseIcon.infoWindowAnchor = new GPoint(9, 2);
-  baseIcon.infoShadowAnchor = new GPoint(18, 25);
-
   function GMultiMapload(maps) {
     if (GBrowserIsCompatible()) {
       for (var i in maps) {
@@ -46,25 +37,26 @@
       map.addControl(new GMapTypeControl());
     }
     for (var i in mapData.markers) {
-      var index = i - 0 + 1;
       var point = new GLatLng(mapData.markers[i].lat, mapData.markers[i].lng);
-      map.addOverlay(createMarker(point, index, mapData.markers[i].label, mapData.numbered));
+      map.addOverlay(createMarker(point, mapData.markers[i].label, mapData.markers[i].icon));
     }
 
     return map;
   }
 
-  function createMarker(point, index, label, numbered) {
-    var icon = new GIcon(baseIcon);
-    if ( numbered && index && index > 0 ) {
-      icon.image = "http://www.weboffice.uzh.ch/projekte/unicms/google/images/markers/marker" +  index +".png";
-    }
-    else {
-      icon.image = "http://www.weboffice.uzh.ch/projekte/unicms/google/images/markers/marker.png";
-    }
+  function createMarker(point, label, iconData) {
+    var icon = new GIcon();
+    icon.image  = iconData.image;
+    icon.shadow = iconData.shadow;
+    icon.iconSize = new GSize(iconData.imageSize.width, iconData.imageSize.height);
+    icon.shadowSize = new GSize(iconData.shadowSize.width, iconData.shadowSize.height);
+    icon.iconAnchor = new GPoint(iconData.iconAnchor.x, iconData.iconAnchor.y);
+    icon.infoWindowAnchor = new GPoint(iconData.infoWindowAnchor.x, iconData.infoWindowAnchor.y);
+    icon.infoShadowAnchor = new GPoint(iconData.infoShadowAnchor.x, iconData.infoShadowAnchor.y);
+
     var marker = new GMarker(point, icon);
     if (label != "") {
-      GEvent.addListener(marker, "click", function() {marker.openInfoWindowHtml(label, {maxWidth: 100});});
+      GEvent.addListener(marker, "click", function() {marker.openInfoWindow(label)});
     }
 
     return marker;

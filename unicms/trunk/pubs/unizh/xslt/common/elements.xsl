@@ -968,16 +968,6 @@
       </xsl:otherwise>
     </xsl:choose>
     <xsl:text>,</xsl:text>
-    <xsl:text>"numbered":</xsl:text>
-    <xsl:choose>
-      <xsl:when test="@numbered and @numbered = 'true'">
-        <xsl:text>true</xsl:text>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:text>false</xsl:text>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:text>,</xsl:text>
     <xsl:choose>
       <xsl:when test="ancestor::unizh:related-content">
         <xsl:text>"control":"small",</xsl:text>
@@ -1001,10 +991,28 @@
 
 
   <xsl:template name="markerData">
+    <xsl:variable name="iconImage">
+      <xsl:choose>
+        <xsl:when test="../@numbered and ../@numbered='true' and (position() &lt; 11)">
+          <xsl:text>marker</xsl:text><xsl:value-of select="position()"/><xsl:text>.png</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>marker.png</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
     <xsl:text>{</xsl:text>
     <xsl:text>"lat":</xsl:text><xsl:value-of select="@lat"/><xsl:text>,</xsl:text>
     <xsl:text>"lng":</xsl:text><xsl:value-of select="@lng"/><xsl:text>,</xsl:text>
-    <xsl:text>"label":""</xsl:text>
+    <xsl:text>"label":"</xsl:text><xsl:apply-templates select="."/><xsl:text>",</xsl:text>
+    <xsl:text>"icon":{</xsl:text>
+    <xsl:text>"image":"</xsl:text><xsl:value-of select="$imageprefix"/><xsl:text>/</xsl:text><xsl:value-of select="$iconImage"/><xsl:text>",</xsl:text>
+    <xsl:text>"shadow":"</xsl:text><xsl:value-of select="$imageprefix"/><xsl:text>/shadow50.png",</xsl:text>
+    <xsl:text>"imageSize":{"width":20,"height":34},</xsl:text>
+    <xsl:text>"shadowSize":{"width":37,"height":34},</xsl:text>
+    <xsl:text>"iconAnchor":{"x":9,"y":34},</xsl:text>
+    <xsl:text>"infoWindowAnchor":{"x":9,"y":2},</xsl:text>
+    <xsl:text>"infoShadowAnchor":{"x":18,"y":25}</xsl:text>
+    <xsl:text>}</xsl:text>
     <xsl:text>}</xsl:text>
   </xsl:template>
 
