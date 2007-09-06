@@ -379,9 +379,6 @@
               <xsl:value-of select="$height"/>
             </xsl:attribute>
           </xsl:if>
-          <xsl:if test="$width = 416">
-            <xsl:attribute name="class">fullimg</xsl:attribute>
-          </xsl:if>
         </img>
       </xsl:otherwise>
     </xsl:choose>
