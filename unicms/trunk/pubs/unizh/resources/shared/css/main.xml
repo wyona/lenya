@@ -3,6 +3,11 @@
 
 /****** all ******/
 
+html
+{
+    font-size:100%;
+}
+
 body
 {
     font-family: Arial, sans-serif;
