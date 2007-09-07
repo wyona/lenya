@@ -43,15 +43,20 @@
           </image>
         </xsl:if>
         <xsl:for-each select="//index:child">
+          <xsl:variable name="fulltext" select="normalize-space(*/unizh:newsitem/xhtml:body/xhtml:p)"/>
+          <xsl:variable name="link" select="*/unizh:newsitem/unizh:short/xhtml:a"/>
           <item>
             <title><xsl:value-of select="*/unizh:newsitem/lenya:meta/dc:title"/></title>
             <link>
               <xsl:choose><!-- BXE keeps paragraph and &#160; as placeholders -->
-                <xsl:when test="*/unizh:newsitem/unizh:short/xhtml:a">
-                  <xsl:value-of select="*/unizh:newsitem/unizh:short/xhtml:a/@href"/>
+                <xsl:when test="$link">
+                  <xsl:value-of select="$link/@href"/>
+                </xsl:when>
+                <xsl:when test="not(($fulltext = '') or ($fulltext = '&#160;'))">
+                  <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:value-of select="concat($channelHomePath, substring-after(@href, $channelpath))"/>
+                  <xsl:value-of select="$channelhome"/>
                 </xsl:otherwise>
               </xsl:choose> 
             </link>
