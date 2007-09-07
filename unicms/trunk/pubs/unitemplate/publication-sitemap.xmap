@@ -41,9 +41,7 @@
       </map:serializer>
       
       <map:serializer logger="sitemap.serializer.html" mime-type="application/rss+xml" name="xml-rss" pool-grow="4" pool-max="32" pool-min="4" src="org.apache.cocoon.serialization.XMLSerializer">
-       <doctype-public>-//Netscape Communications//DTD RSS 0.91//EN</doctype-public>
-       <doctype-system>http://my.netscape.com/publish/formats/rss-0.91.dtd</doctype-system>
-         <buffer-size>1024</buffer-size>
+        <buffer-size>1024</buffer-size>
       </map:serializer>
     </map:serializers>
   </map:components>
