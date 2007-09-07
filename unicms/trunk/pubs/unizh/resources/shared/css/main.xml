@@ -336,6 +336,15 @@ div.objectBlock div, div.objectFloat div
     font-style: italic;
     padding: 5px 6px 18px 6px;
 }
+div.objectBlock div a, div.objectFloat div a
+{
+    text-decoration: none;
+    color:#333399;
+}
+div.objectBlock div a:hover, div.objectFloat div a:hover
+{
+    text-decoration: underline;
+}
 /* container for float objects */
 div.objectContainer
 {

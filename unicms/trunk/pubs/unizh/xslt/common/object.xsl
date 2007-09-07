@@ -208,6 +208,9 @@
       <xsl:if test="$hideCaption != 'true' and (((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '')) or (@popup = 'true'))">
         <div>
           <xsl:value-of select="xhtml:div[@class = 'caption']"/>
+          <xsl:if test="((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != ''))">
+            <xsl:text> </xsl:text>
+          </xsl:if>
           <xsl:if test="@popup = 'true'">
             <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={dc:metadata/lenya:meta/lenya:width},height={dc:metadata/lenya:meta/lenya:height}')">(+)</a>
           </xsl:if>
