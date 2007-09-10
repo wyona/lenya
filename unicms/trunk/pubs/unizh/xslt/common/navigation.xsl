@@ -45,7 +45,7 @@
 
 
   <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'servicenav']]">
-    <xsl:if test="position() &gt; 1">
+    <xsl:if test="(position() &gt; 1) and (@id != 'search')">
       <xsl:text> | </xsl:text>
     </xsl:if>
     <xsl:choose>
