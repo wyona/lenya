@@ -145,25 +145,30 @@
   <!-- separate display for rss reader in content, but not in columns -->
   <xsl:template match="unizh:rss-reader[ancestor::div[@class='content'] and not(parent::div[@class='column'])]">
     <xsl:variable name="items" select="@items"/>
-       <h2><xsl:value-of select="rss/channel/title"/></h2>
-       <xsl:for-each select="rss/channel/item">
-         <xsl:if test="$items = '' or position() &lt;= $items">
-           <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-           <h2><xsl:value-of select="title"/>&#160;
-           <span class="lead">
-             <xsl:variable name="pubDateLength" select="string-length(pubDate)"/>
-             <xsl:value-of select="substring(pubDate, 0, $pubDateLength - 12)"/>
-           </span>
-           </h2>
-           <p><xsl:apply-templates select="description"/></p>
-           <xsl:if test="link != ''">
-             <a class="internal" href="{link}"><i18n:text>more</i18n:text></a><br/>
-           </xsl:if>
-         </xsl:if>
-       </xsl:for-each>
-       <xsl:if test="not(rss/channel/item)">
-         <p>no rss</p>
-       </xsl:if>
+    <xsl:choose>
+      <xsl:when test="rss/channel/item">
+        <h2><xsl:value-of select="rss/channel/title"/></h2>
+        <xsl:for-each select="rss/channel/item">
+          <xsl:if test="$items = '' or position() &lt;= $items">
+            <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
+            <h2>
+              <xsl:value-of select="title"/>&#160;
+              <span class="datetime">
+                <xsl:variable name="pubDateLength" select="string-length(pubDate)"/>
+                <xsl:value-of select="substring(pubDate, 0, $pubDateLength - 12)"/>
+              </span>
+            </h2>
+            <p><xsl:apply-templates select="description"/></p>
+            <xsl:if test="link != ''">
+              <a class="internal" href="{link}"><i18n:text>more</i18n:text></a><br/>
+            </xsl:if>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>no rss</p>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template> 
 
 
