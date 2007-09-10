@@ -383,6 +383,31 @@
                     </a>
                   </xsl:if>
                 </span>
+                <br/>
+                <span bxe_xpath="/{$document-element-name}/unizh:homepage">
+                  <xsl:if test="unizh:person/unizh:homepage and (unizh:person/unizh:homepage !='')">
+                    <xsl:variable name="href" select="unizh:person/unizh:homepage"/>
+                    <a>
+                      <xsl:attribute name="class">
+                        <xsl:choose>
+                          <xsl:when test="starts-with($href, 'http://') and not(contains($href, '.unizh.ch')) and not(contains($href, '.uzh.ch'))">
+                            <xsl:text>www</xsl:text>
+                          </xsl:when>
+                          <xsl:when test="starts-with($href, 'http://') and ((contains($href, '.unizh.ch')) or (contains($href, '.uzh.ch')))">
+                            <xsl:text>uzh</xsl:text>
+                          </xsl:when>
+                          <xsl:otherwise>
+                             <xsl:text>internal</xsl:text>
+                          </xsl:otherwise>
+                        </xsl:choose>
+                      </xsl:attribute>
+                      <xsl:attribute name="href">
+                        <xsl:value-of select="$href"/>
+                      </xsl:attribute>
+                      <xsl:value-of select="$href"/>
+                    </a>
+                  </xsl:if>
+                </span>
               </p>
             </div>
             <div class="floatleftclear"><xsl:comment/></div>
