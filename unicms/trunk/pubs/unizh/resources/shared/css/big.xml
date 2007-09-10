@@ -3,6 +3,11 @@
 
 /****** all ******/
 
+html
+{
+    font-size:100%;
+}
+
 body
 {
     font-family: Arial, sans-serif;
@@ -337,6 +342,15 @@ div.objectBlock div, div.objectFloat div
     font-style: italic;
     padding: 5px 6px 18px 6px;
 }
+div.objectBlock div a, div.objectFloat div a
+{
+    text-decoration: none;
+    color:#000000;
+}
+div.objectBlock div a:hover, div.objectFloat div a:hover
+{
+    text-decoration: underline;
+}
 /* container for float objects */
 div.objectContainer
 {
@@ -358,15 +372,17 @@ div.objectContainer div.right
 }
 
 /* google map in related content or content */
-div.contentarea div.map
+div.contentarea div.map, div.contentarea1col div.map
 {
     margin: 0.7em 0 0.9em 0;
     padding: 0;
+    background-color: #E9E9F0;
 }
 div.relatedbox div.map
 {
     margin: 0 0 10px 0;
     padding: 0;
+    background-color: #E9E9F0;
 }
 
 /****** header elements ******/
