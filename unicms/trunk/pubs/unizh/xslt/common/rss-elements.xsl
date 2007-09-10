@@ -135,7 +135,7 @@
           </ul>
         </xsl:when>
         <xsl:otherwise>
-          no rss
+          <p>&#160;no rss</p>
         </xsl:otherwise>
       </xsl:choose>
     </div>
@@ -162,7 +162,7 @@
          </xsl:if>
        </xsl:for-each>
        <xsl:if test="not(rss/channel/item)">
-         <p> no rss </p>
+         <p>no rss</p>
        </xsl:if>
   </xsl:template> 
 
