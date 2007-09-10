@@ -226,14 +226,21 @@
     <a href="{@href}">
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
+          <xsl:when test="(starts-with(@href, 'http://') or starts-with(@href, 'https://')) and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
             <xsl:text>www</xsl:text>
           </xsl:when>
-          <xsl:when test="starts-with(@href, 'http://') and ((contains(@href, '.unizh.ch')) or (contains(@href, '.uzh.ch')))">
+          <xsl:when test="(starts-with(@href, 'http://') or starts-with(@href, 'https://')) and ((contains(@href, '.unizh.ch')) or (contains(@href, '.uzh.ch')))">
             <xsl:text>uzh</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-             <xsl:text>internal</xsl:text>
+            <xsl:choose>
+              <xsl:when test="/document/unizh:ancestors/unizh:ancestor[1]/@href = @href">
+                <xsl:text>back</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>internal</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -334,10 +341,10 @@
             <a href="{unizh:title/@href}">
               <xsl:attribute name="class">
                 <xsl:choose>
-                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and not(contains(unizh:title/@href, '.unizh.ch')) and not(contains(unizh:title/@href, '.uzh.ch'))">
+                  <xsl:when test="(starts-with(unizh:title/@href, 'http://') or starts-with(unizh:title/@href, 'https://')) and not(contains(unizh:title/@href, '.unizh.ch')) and not(contains(unizh:title/@href, '.uzh.ch'))">
                     <xsl:text>www</xsl:text>
                   </xsl:when>
-                  <xsl:when test="starts-with(unizh:title/@href, 'http://') and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
+                  <xsl:when test="(starts-with(unizh:title/@href, 'http://') or starts-with(unizh:title/@href, 'https://')) and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
                     <xsl:text>uzh</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
@@ -671,10 +678,10 @@
         <a href="{../xhtml:a/@href}">
           <xsl:attribute name="class">
             <xsl:choose>
-              <xsl:when test="starts-with(../xhtml:a/@href, 'http://') and not(contains(../xhtml:a/@href, '.unizh.ch')) and not(contains(../xhtml:a/@href, '.uzh.ch'))">
+              <xsl:when test="(starts-with(../xhtml:a/@href, 'http://') or starts-with(../xhtml:a/@href, 'https://')) and not(contains(../xhtml:a/@href, '.unizh.ch')) and not(contains(../xhtml:a/@href, '.uzh.ch'))">
                 <xsl:text>www</xsl:text>
               </xsl:when>
-              <xsl:when test="starts-with(../xhtml:a/@href, 'http://') and ((contains(../xhtml:a/@href, '.unizh.ch') ) or (contains(../xhtml:a/@href, '.uzh.ch')))">
+              <xsl:when test="(starts-with(../xhtml:a/@href, 'http://') or starts-with(../xhtml:a/@href, 'https://')) and ((contains(../xhtml:a/@href, '.unizh.ch') ) or (contains(../xhtml:a/@href, '.uzh.ch')))">
                 <xsl:text>uzh</xsl:text>
               </xsl:when>
               <xsl:otherwise>
