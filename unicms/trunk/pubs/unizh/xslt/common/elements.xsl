@@ -663,7 +663,6 @@
 
   <xsl:template name="moreLink">
     <xsl:variable name="fulltext" select="normalize-space(../../xhtml:body/xhtml:p)"/>
-    <br/>
     <xsl:if test="$area = 'authoring'">
       <a class="internal right_aligned" href="{$contextprefix}{../../../../@href}"><i18n:text>edit_item</i18n:text></a>
     </xsl:if>

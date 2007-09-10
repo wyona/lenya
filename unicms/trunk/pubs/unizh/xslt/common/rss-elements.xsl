@@ -155,12 +155,10 @@
              <xsl:value-of select="substring(pubDate, 0, $pubDateLength - 12)"/>
            </span>
            </h2>
-           <p><xsl:apply-templates select="description"/>
+           <p><xsl:apply-templates select="description"/></p>
            <xsl:if test="link != ''">
-             <br/>
              <a class="internal" href="{link}"><i18n:text>more</i18n:text></a><br/>
            </xsl:if>
-           </p>
          </xsl:if>
        </xsl:for-each>
        <xsl:if test="not(rss/channel/item)">
