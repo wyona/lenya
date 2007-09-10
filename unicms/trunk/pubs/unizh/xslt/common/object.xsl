@@ -212,7 +212,14 @@
             <xsl:text> </xsl:text>
           </xsl:if>
           <xsl:if test="@popup = 'true'">
-            <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={dc:metadata/lenya:meta/lenya:width},height={dc:metadata/lenya:meta/lenya:height}')">(+)</a>
+            <xsl:choose>
+              <xsl:when test="starts-with(@data, 'http')">
+                <a href="#" onClick="window.open('{@data}', 'Image')">(+)</a>
+              </xsl:when>
+              <xsl:otherwise>
+                <a href="#" onClick="window.open('{$nodeid}/{@data}', 'Image', 'width={dc:metadata/lenya:meta/lenya:width},height={dc:metadata/lenya:meta/lenya:height}')">(+)</a>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:if>
         </div>
       </xsl:if>
