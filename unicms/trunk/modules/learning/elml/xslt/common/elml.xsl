@@ -778,49 +778,53 @@
   </xsl:template>
 
 
+ <!-- Asset Handling -->
 
-  <!-- Asset Handling -->
-
-   <xsl:template match="elml:multimedia">
+  <xsl:template match="elml:multimedia">
     <xsl:if test="not($area = 'live' and @visible='print')">
       <xsl:call-template name="displaymarker"/>
-      <table cellpadding="0" cellspacing="2" border="0" width="100%" class="content_table">
-        <tr>
+      <xsl:variable name="inlineOrBlock">
+        <xsl:for-each select="../text()">
+          <xsl:value-of select="normalize-space(.)"/>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:choose>
+        <xsl:when test="string-length($inlineOrBlock) &gt; 0">
           <xsl:if test="@icon">
-            <td width="40" align="left" valign="top">
-              <img src="{$imageprefix}/icons/{@icon}.gif" width="36" height="36" align="left"
-                title="{@icon}" alt="{@icon}" class="icon"/>
-            </td>
+
+            <img src="{$imageprefix}/icons/{@icon}.gif" width="36" height="36" align="left"
+              title="{@icon}" alt="{@icon}" class="icon_inline"/>
           </xsl:if>
-          <td>
-            <xsl:if test="not(@icon)">
-              <xsl:attribute name="colspan">2</xsl:attribute>
-            </xsl:if>
-            <xsl:call-template name="Alignment">
-              <xsl:with-param name="istd">yes</xsl:with-param>
-            </xsl:call-template>
-            <xsl:choose>
-              <xsl:when test="$rendertype = 'imageupload'">
-                <xsl:variable name="trimmedElementPath">
-                  <xsl:for-each select="(ancestor-or-self::*)">
-                    <xsl:call-template name="compute-path"/>
-                  </xsl:for-each>
-                </xsl:variable>
-                <a
-                  href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
-                  <xsl:call-template name="MultimediaShow"/>
-                </a>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:call-template name="MultimediaShow"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-        </tr>
-        <xsl:if test="@legend or @bibIDRef">
+          <xsl:choose>
+            <xsl:when test="$rendertype = 'imageupload'">
+              <xsl:variable name="trimmedElementPath">
+                <xsl:for-each select="(ancestor-or-self::*)">
+                  <xsl:call-template name="compute-path"/>
+                </xsl:for-each>
+              </xsl:variable>
+              <a
+                href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
+                <xsl:call-template name="MultimediaShow">
+                  <xsl:with-param name="inline">true</xsl:with-param>
+                </xsl:call-template>
+              </a>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:call-template name="MultimediaShow">
+                <xsl:with-param name="inline">true</xsl:with-param>
+              </xsl:call-template>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <table cellpadding="0" cellspacing="2" border="0" width="100%"
+          class="content_table">
           <tr>
             <xsl:if test="@icon">
-              <td width="40" align="left" valign="top"/>
+              <td width="40" align="left" valign="top">
+                <img src="{$imageprefix}/icons/{@icon}.gif" width="36" height="36" align="left"
+                  title="{@icon}" alt="{@icon}" class="icon"/>
+              </td>
             </xsl:if>
             <td>
               <xsl:if test="not(@icon)">
@@ -829,20 +833,51 @@
               <xsl:call-template name="Alignment">
                 <xsl:with-param name="istd">yes</xsl:with-param>
               </xsl:call-template>
-              <xsl:call-template name="Legend">
-                <xsl:with-param name="popup">
-                  <xsl:choose>
-                    <xsl:when test="@thumbnail">true</xsl:when>
-                    <xsl:otherwise>false</xsl:otherwise>
-                  </xsl:choose>
-
-                </xsl:with-param>
-              </xsl:call-template>
-
+              <xsl:choose>
+                <xsl:when test="$rendertype = 'imageupload'">
+                  <xsl:variable name="trimmedElementPath">
+                    <xsl:for-each select="(ancestor-or-self::*)">
+                      <xsl:call-template name="compute-path"/>
+                    </xsl:for-each>
+                  </xsl:variable>
+                  <a
+                    href="asdf?lenya.usecase=asset&amp;lenya.step=showscreen&amp;insert=true&amp;insertimage=true&amp;assetXPath={$trimmedElementPath}&amp;insertWhere=after&amp;insertTemplate=insertMultimedia.xml&amp;insertReplace=true">
+                    <xsl:call-template name="MultimediaShow"/>
+                  </a>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:call-template name="MultimediaShow"/>
+                </xsl:otherwise>
+              </xsl:choose>
             </td>
           </tr>
-        </xsl:if>
-      </table>
+          <xsl:if test="@legend or @bibIDRef">
+            <tr>
+              <xsl:if test="@icon">
+                <td width="40" align="left" valign="top"/>
+              </xsl:if>
+              <td>
+                <xsl:if test="not(@icon)">
+                  <xsl:attribute name="colspan">2</xsl:attribute>
+                </xsl:if>
+                <xsl:call-template name="Alignment">
+                  <xsl:with-param name="istd">yes</xsl:with-param>
+                </xsl:call-template>
+                <xsl:call-template name="Legend">
+                  <xsl:with-param name="popup">
+                    <xsl:choose>
+                      <xsl:when test="@thumbnail">true</xsl:when>
+                      <xsl:otherwise>false</xsl:otherwise>
+                    </xsl:choose>
+
+                  </xsl:with-param>
+                </xsl:call-template>
+              </td>
+            </tr>
+          </xsl:if>
+        </table>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:if>
   </xsl:template>
 
@@ -850,14 +885,15 @@
   <xsl:template name="MultimediaAttributes">
     <xsl:call-template name="WidthHeight"/>
     <xsl:call-template name="Alignment"/>
-      <xsl:if test="@legend">
-        <xsl:attribute name="title">
-          <xsl:value-of select="@legend"/>
-        </xsl:attribute>
+    <xsl:if test="@legend">
+      <xsl:attribute name="title">
+        <xsl:value-of select="@legend"/>
+      </xsl:attribute>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="MultimediaShow">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia">
       <xsl:choose>
         <xsl:when test="@thumbnail">
@@ -873,98 +909,110 @@
     </xsl:param>
     <xsl:choose>
       <xsl:when test="@thumbnail">
-        <a href="#" onClick="window.open('{$pathMultimediaSource}', 'detail','width={@width},height={@height},resizable,menubar=no'); return false;">
-        <xsl:call-template name="Image">
-          <xsl:with-param name="pathMultimedia">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:with-param>
-        </xsl:call-template>
-       </a>
-     </xsl:when>
-     <xsl:when test="@type">
-       <xsl:choose>
-         <xsl:when test="@type='gif' or @type='jpeg' or @type='png'">
-           <xsl:call-template name="Image">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='flash'">
-           <xsl:call-template name="Flash">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='quicktime'">
-           <xsl:call-template name="Quicktime">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='mpeg'">
-           <xsl:call-template name="MPEG">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='svg'">
-           <xsl:call-template name="SVG">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='applet'">
-           <xsl:call-template name="Applet">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='vrml'">
-           <xsl:call-template name="VRML">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='x3d'">
-           <xsl:call-template name="X3D">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='realone'">
-           <xsl:call-template name="RealOne">
-             <xsl:with-param name="pathMultimedia">
-               <xsl:value-of select="$pathMultimedia"/>
-             </xsl:with-param>
-           </xsl:call-template>
-         </xsl:when>
-         <xsl:when test="@type='mathml'">
-           <xsl:copy-of select="child::*"/>
-         </xsl:when>
-         <xsl:when test="@type='div'">
-           <xsl:copy-of select="."/>
-         </xsl:when>
-       </xsl:choose>
-     </xsl:when>
-   </xsl:choose>
-   <xsl:if test="$rendertype = 'imageupload'">
+        <a href="#"
+          onClick="window.open('{$pathMultimediaSource}', 'detail','width={@width},height={@height},resizable,menubar=no'); return false;">
+          <xsl:call-template name="Image">
+            <xsl:with-param name="inline" select="$inline"/>
+            <xsl:with-param name="pathMultimedia">
+              <xsl:value-of select="$pathMultimedia"/>
+            </xsl:with-param>
+          </xsl:call-template>
+        </a>
+      </xsl:when>
+      <xsl:when test="@type">
+        <xsl:choose>
+          <xsl:when test="@type='gif' or @type='jpeg' or @type='png'">
+            <xsl:call-template name="Image">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='flash'">
+            <xsl:call-template name="Flash">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='quicktime'">
+            <xsl:call-template name="Quicktime">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='mpeg'">
+            <xsl:call-template name="MPEG">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='svg'">
+            <xsl:call-template name="SVG">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='applet'">
+            <xsl:call-template name="Applet">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='vrml'">
+            <xsl:call-template name="VRML">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='x3d'">
+            <xsl:call-template name="X3D">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='realone'">
+            <xsl:call-template name="RealOne">
+              <xsl:with-param name="inline" select="$inline"/>
+              <xsl:with-param name="pathMultimedia">
+                <xsl:value-of select="$pathMultimedia"/>
+              </xsl:with-param>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@type='mathml'">
+            <xsl:copy-of select="child::*"/>
+          </xsl:when>
+          <xsl:when test="@type='div'">
+            <xsl:copy-of select="."/>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:if test="$rendertype = 'imageupload'">
       <xsl:call-template name="assetUpload">
         <xsl:with-param name="insertReplace">true</xsl:with-param>
         <xsl:with-param name="insertWhere">after</xsl:with-param>
       </xsl:call-template>
-   </xsl:if>
+    </xsl:if>
   </xsl:template>
 
 
   <xsl:template name="Image">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
     <img src="{$pathMultimedia}">
       <xsl:call-template name="Label"/>
@@ -973,98 +1021,42 @@
       <xsl:attribute name="alt">
         <xsl:value-of select="@legend"/>
       </xsl:attribute>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
     </img>
   </xsl:template>
 
 
   <xsl:template name="Flash">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
-    <object classid="CLSID:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">
-    <xsl:call-template name="Label"/>
-    <xsl:call-template name="MultimediaAttributes"/>
+    <object classid="CLSID:D27CDB6E-AE6D-11cf-96B8-444553540000"
+      codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">
+      <xsl:call-template name="Label"/>
+      <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
      <param name="movie" value="{$pathMultimedia}"/>
-     <param name="quality" value="best"/>
-     <param name="scale" value="exactfit"/>
-     <param name="menu" value="true"/>
-     <param name="play" value="true"/> 
-     <embed src="{$pathMultimedia}" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" quality="best" scale="exactfit" menu="true" play="true">
-       <xsl:call-template name="Label"/>
-       <xsl:call-template name="MultimediaAttributes"/>
-     </embed>
-   </object>
+      <param name="quality" value="best"/>
+      <param name="scale" value="exactfit"/>
+      <param name="menu" value="true"/>
+      <param name="play" value="true"/>
+      <embed src="{$pathMultimedia}" pluginspage="http://www.macromedia.com/go/getflashplayer"
+        type="application/x-shockwave-flash" quality="best" scale="exactfit" menu="true" play="true">
+        <xsl:call-template name="Label"/>
+        <xsl:call-template name="MultimediaAttributes"/>
+
+      </embed>
+    </object>
   </xsl:template>
 
   <xsl:template name="Quicktime">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
-      <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
-        <xsl:call-template name="Label"/>
-        <xsl:call-template name="MultimediaAttributes"/>
-        <param name="src">
-          <xsl:attribute name="value">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:attribute>
-        </param>
-        <param name="kioskmode" value="false"/>
-        <param name="autoplay" value="true"/>
-        <param name="controller" value="true"/>
-        <embed autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime" kioskmode="false">
-           <xsl:call-template name="Label"/>
-           <xsl:attribute name="src">
-             <xsl:value-of select="$pathMultimedia"/>
-           </xsl:attribute>
-           <xsl:call-template name="MultimediaAttributes"/>
-         </embed>
-       </object>
-     </xsl:template>
-
-   <xsl:template name="MPEG">
-     <xsl:param name="pathMultimedia"/>
-       <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
-     <xsl:call-template name="Label"/>
-     <xsl:call-template name="MultimediaAttributes"/>
-       <param name="src">
-         <xsl:attribute name="value">
-           <xsl:value-of select="$pathMultimedia"/>
-         </xsl:attribute>
-       </param>
-       <param name="autostart" value="true"/>
-       <param name="autoplay" value="true"/>
-       <param name="controller" value="true"/>
-       <embed autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/" type="audio/mpeg" autostart="true">
-        <xsl:call-template name="Label"/>
-          <xsl:attribute name="src">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:attribute>
-          <xsl:call-template name="MultimediaAttributes"/>
-        </embed>
-      </object> 
-    </xsl:template>
-
-  <xsl:template name="RealOne">
-    <xsl:param name="pathMultimedia"/>
-    <object classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA">
-      <xsl:call-template name="Label"/>
-      <xsl:call-template name="MultimediaAttributes"/>
-        <param name="src">
-          <xsl:attribute name="value">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:attribute>
-        </param>
-        <param name="autostart" value="true"/>
-        <param name="controls" value="ImageWindow"/>
-          <embed pluginspage="http://www.real.com/" type="audio/x-pn-realaudio-plugin" controls="ImageWindow" autostart="true">
-          <xsl:call-template name="Label"/>
-          <xsl:attribute name="src">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:attribute>
-          <xsl:call-template name="MultimediaAttributes"/>
-          </embed>
-        </object>
-    </xsl:template>
-
-  <xsl:template name="VRML">
-    <xsl:param name="pathMultimedia"/>
-    <object classid="CLSID:4B6E3013-6E45-11D0-9309-0020AFE05CC8  CLSID:86A88967-7A20-11d2-8EDA-00600818EDB1 CLSID:06646724-BCf3-11D0-9518-00C04FC2DD79">
+    <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+      codebase="http://www.apple.com/qtactivex/qtplugin.cab">
       <xsl:call-template name="Label"/>
       <xsl:call-template name="MultimediaAttributes"/>
       <param name="src">
@@ -1072,21 +1064,111 @@
           <xsl:value-of select="$pathMultimedia"/>
         </xsl:attribute>
       </param>
+      <param name="kioskmode" value="false"/>
+      <param name="autoplay" value="true"/>
+      <param name="controller" value="true"/>
+      <embed autoplay="true" controller="true"
+        pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"
+        kioskmode="false">
+        <xsl:call-template name="Label"/>
+        <xsl:attribute name="src">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+        <xsl:call-template name="MultimediaAttributes"/>
+      </embed>
+    </object>
+  </xsl:template>
+
+  <xsl:template name="MPEG">
+    <xsl:param name="inline"/>
+    <xsl:param name="pathMultimedia"/>
+    <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+      codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+      <xsl:call-template name="Label"/>
+      <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+      </param>
+      <param name="autostart" value="true"/>
+      <param name="autoplay" value="true"/>
+      <param name="controller" value="true"/>
+      <embed autoplay="true" controller="true"
+        pluginspage="http://www.apple.com/quicktime/download/" type="audio/mpeg" autostart="true">
+        <xsl:call-template name="Label"/>
+        <xsl:attribute name="src">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+        <xsl:call-template name="MultimediaAttributes"/>
+      </embed>
+    </object>
+  </xsl:template>
+
+  <xsl:template name="RealOne">
+    <xsl:param name="inline"/>
+    <xsl:param name="pathMultimedia"/>
+    <object classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA">
+      <xsl:call-template name="Label"/>
+      <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+      </param>
+      <param name="autostart" value="true"/>
+      <param name="controls" value="ImageWindow"/>
+      <embed pluginspage="http://www.real.com/" type="audio/x-pn-realaudio-plugin"
+        controls="ImageWindow" autostart="true">
+        <xsl:call-template name="Label"/>
+        <xsl:attribute name="src">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+        <xsl:call-template name="MultimediaAttributes"/>
+      </embed>
+    </object>
+  </xsl:template>
+
+  <xsl:template name="VRML">
+    <xsl:param name="inline"/>
+    <xsl:param name="pathMultimedia"/>
+    <object
+      classid="CLSID:4B6E3013-6E45-11D0-9309-0020AFE05CC8  CLSID:86A88967-7A20-11d2-8EDA-00600818EDB1 CLSID:06646724-BCf3-11D0-9518-00C04FC2DD79">
+      <xsl:call-template name="Label"/>
+      <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
+      <param name="src">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
+      </param>
       <embed>
         <xsl:call-template name="Label"/>
-          <xsl:attribute name="src">
-            <xsl:value-of select="$pathMultimedia"/>
-          </xsl:attribute>
+        <xsl:attribute name="src">
+          <xsl:value-of select="$pathMultimedia"/>
+        </xsl:attribute>
         <xsl:call-template name="MultimediaAttributes"/>
-       </embed>
-     </object>
+      </embed>
+    </object>
   </xsl:template>
 
   <xsl:template name="SVG">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
     <object>
       <xsl:call-template name="Label"/>
       <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
       <param name="src">
         <xsl:attribute name="value">
           <xsl:value-of select="$pathMultimedia"/>
@@ -1103,26 +1185,32 @@
   </xsl:template>
 
   <xsl:template name="X3D">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
     <object classid="clsid:918B202D-8E8F-4649-A70B-E9B178FEDC58">
       <xsl:call-template name="Label"/>
       <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
       <param name="src">
         <xsl:attribute name="value">
           <xsl:value-of select="$pathMultimedia"/>
         </xsl:attribute>
       </param>
-      <embed type="model/x3d+xml" pluginspage="http://www.web3d.org/applications/tools/viewers_and_browsers/">
+      <embed type="model/x3d+xml"
+        pluginspage="http://www.web3d.org/applications/tools/viewers_and_browsers/">
         <xsl:call-template name="Label"/>
         <xsl:attribute name="src">
           <xsl:value-of select="$pathMultimedia"/>
         </xsl:attribute>
-         <xsl:call-template name="MultimediaAttributes"/>
-       </embed>
-     </object>
-   </xsl:template>
-  
+        <xsl:call-template name="MultimediaAttributes"/>
+      </embed>
+    </object>
+  </xsl:template>
+
   <xsl:template name="Applet">
+    <xsl:param name="inline"/>
     <xsl:param name="pathMultimedia"/>
     <applet>
       <xsl:call-template name="Label"/>
@@ -1130,6 +1218,9 @@
         <xsl:value-of select="$pathMultimedia"/>
       </xsl:attribute>
       <xsl:call-template name="MultimediaAttributes"/>
+      <xsl:if test="$inline='true'">
+        <xsl:attribute name="class">inlineImg</xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="alt">
         <xsl:value-of select="@legend"/>
       </xsl:attribute>

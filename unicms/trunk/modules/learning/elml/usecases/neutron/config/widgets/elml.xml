@@ -1,6 +1,37 @@
-<bindings xmlns="http://www.example.org/widgetbindings/1.0" ns="http://www.elml.ch">
+<bindings xmlns="http://www.example.org/widgetbindings/1.0" 
+  xmlns:elml="http://www.elml.ch" 
+  ns="http://www.elml.ch">
   <!-- eLML -->
   <!-- Linebreak and Paragraphs -->
+
+
+  <binding element="multimedia[type=jpeg]">
+    <component id="object[@type='image/jpeg']" src="src" title="legend">
+      <template>
+        <elml:multimedia type="jpeg" src="#src" legend="#legend"/>
+      </template>
+    </component>
+    <form-data name="title" target="@legend"/>
+  </binding>
+
+
+  <binding element="multimedia[type=gif]">
+    <component id="object[@type='image/gif']" src="src" title="legend">
+      <template>
+        <elml:multimedia type="gif" src="#src" legend="#legend"/>
+      </template>
+    </component>
+    <form-data name="title" target="@legend"/>
+  </binding>
+
+  <binding element="multimedia[type=png]">
+    <component id="object[@type='image/png']" src="src" title="legend">
+      <template>
+        <elml:multimedia type="png" src="#src" legend="#legend"/>
+      </template>
+    </component>
+    <form-data name="title" target="@legend"/>
+  </binding>
 
   <binding element="newLine">
     <component id="linefeed"/>
