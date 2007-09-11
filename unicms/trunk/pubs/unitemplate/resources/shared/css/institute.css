@@ -1,6 +1,6 @@
 /* institute specific part of header */
 
-// note: style definitions WITHOUT div are needed for login and error screen
+/* note: style definitions WITHOUT div are needed for login and error screen */
 
 #headerarea, div#headerarea {
 	background-color: #666699;
