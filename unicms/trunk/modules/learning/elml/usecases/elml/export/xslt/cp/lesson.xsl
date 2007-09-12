@@ -30,15 +30,17 @@
   <xsl:param name="pagebreak_level"><xsl:value-of select="//elml:pagebreak_level"/></xsl:param>
   <xsl:param name="current_section"/> 
   <xsl:param name="current_label"/>
+  <xsl:param name="header_heading"/>
+  <xsl:param name="header_superscription"/>
+  <xsl:param name="omit_header"/>
 
 
-  <xsl:include href="../doctypes/variables.xsl"/>
-  <xsl:include href="../common/elml-html-head.xsl"/>
-  <xsl:include href="../common/header.xsl"/>
-  <xsl:include href="../common/footer.xsl"/>
-  <xsl:include href="../common/elml-navigation.xsl"/>
-  <xsl:include href="../common/elml.xsl"/> 
-  <xsl:include href="../common/biblio_harvard.xsl"/>
+  <xsl:include href="../../../../../../unizh/xslt/doctypes/variables.xsl"/>
+  <xsl:include href="html-head.xsl"/>
+  <xsl:include href="header.xsl"/>
+  <xsl:include href="footer.xsl"/> 
+  <xsl:include href="../../../../../../unizh/xslt/common/elml.xsl"/> 
+  <xsl:include href="../../../../../../unizh/xslt/common/biblio_harvard.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
@@ -47,15 +49,16 @@
 
   <xsl:template match="content"> 
     <html>
-      <xsl:call-template name="html-head"/>
+      <xsl:call-template name="html-head"/> 
       <body>
-        <div class="bodywidth">
-          <a accesskey="1" title="Zur Navigation springen" href="#navigation"><xsl:comment/></a>
+        <div>
           <a accesskey="2" title="Zum Inhalt springen" href="#content"><xsl:comment/></a>
           <a name="top"><xsl:comment/></a>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
-          <xsl:call-template name="header"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
+          <xsl:if test="$omit_header != 'true'">
+            <xsl:call-template name="header"/> 
+              <br/>
+              <br/>
+          </xsl:if>
           <xsl:call-template name="content"/>
         </div>
       </body>
@@ -64,17 +67,13 @@
 
 
   <xsl:template name="content">
-    <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-      <xsl:apply-templates select="*/unizh:contcol1"/>
-    </div>
-    <div class="contcol2">
+    <div >
       <div class="relatedbox">
         <xsl:comment/>&#160;
       </div>
       <div class="contentarea">
         <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
-        <div class="content">
+        <div class="blacontent">
           <xsl:choose>
             <xsl:when test="$pagebreak_level = 'unit'">
               <xsl:call-template name="section-content"/>
@@ -92,7 +91,14 @@
 
   <xsl:template name="lesson-content">
      <h1>
-       <xsl:value-of select="/document/content/unizh:lessonEnvelope/elml:lesson/@title"/>
+       <xsl:choose>
+         <xsl:when test="/document/content/unizh:lessonEnvelope/elml:lesson/@title">
+           <xsl:value-of select="/document/content/unizh:lessonEnvelope/elml:lesson/@title"/>
+         </xsl:when>
+         <xsl:otherwise>
+           <xsl:value-of select="/document/content/unizh:lessonEnvelope/lenya:meta/dc:title"/>
+         </xsl:otherwise>
+       </xsl:choose>
      </h1>
      <xsl:apply-templates select="/document/content/unizh:lessonEnvelope/elml:lesson/*[not(self::elml:context) and not(self::elml:metadata)]"/>
   </xsl:template>
@@ -143,5 +149,44 @@
   </xsl:template> 
 
   <xsl:template match="elml:metadata"/>
+
+
+  <xsl:template match="elml:link">
+    <xsl:variable name="targetLabel" select="@targetLabel"/> 
+    <xsl:variable name="targetNode" select="//*[@label = $targetLabel]"/>
+    <xsl:variable name="uri">
+      <xsl:choose>
+        <xsl:when test="$targetNode[self::elml:unit]">
+          <xsl:value-of select="$targetNode/@label"/>.html
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:unit]">
+          <xsl:value-of select="//elml:unit[descendant::* = $targetNode]/@label"/>.html#<xsl:value-of select="$targetNode/@label"/>
+        </xsl:when>
+        <xsl:when test="$targetNode[self::elml:selfAssessment]">
+           selfAssessment.html
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:selfAssessment]">
+            selfAssessment.html#<xsl:value-of select="$targetNode/@label"/>
+        </xsl:when>
+        <xsl:when test="$targetNode[self::elml:summary]">
+             summary.html
+        </xsl:when>
+        <xsl:when test="$targetNode[ancestor::elml:summary]">
+             summary.html#<xsl:value-of select="$targetNode/@label"/>
+        </xsl:when>
+        <xsl:otherwise>
+         #<xsl:value-of select="$targetNode/@label"/>
+        </xsl:otherwise>
+
+      </xsl:choose>
+    </xsl:variable>
+    <a href="{$uri}"><xsl:apply-templates/></a>
+  </xsl:template>
+
+
+
+
+
+
 
 </xsl:stylesheet>

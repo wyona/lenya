@@ -47,7 +47,7 @@
         </map:transform>
         <map:transform type="session"/>
 
-        <map:transform src="../unizh/xslt/doctypes/lesson-standard.xsl">
+        <map:transform src="../unizh/xslt/doctypes/lesson-{{version}}.xsl">
           <map:parameter name="root" value="{{request:contextPath}}/{{page-envelope:publication-id}}/{{page-envelope:area}}"/>
           <map:parameter name="publicationid" value="{{page-envelope:publication-id}}"/>
           <map:parameter name="documentid" value="{{page-envelope:document-id}}"/>
