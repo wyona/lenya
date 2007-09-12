@@ -5,12 +5,6 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
-  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:uz="http://unizh.ch"
-  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
-  xmlns:nav="http://apache.org/cocoon/lenya/navigation/1.0"
   >
 
 
