@@ -30,17 +30,16 @@
   <xsl:param name="pagebreak_level"><xsl:value-of select="//elml:pagebreak_level"/></xsl:param>
   <xsl:param name="current_section"/> 
   <xsl:param name="current_label"/>
-  <xsl:param name="header_heading"/>
-  <xsl:param name="header_superscription"/>
-  <xsl:param name="omit_header"/>
 
 
-  <xsl:include href="../../../../../../unizh/xslt/doctypes/variables.xsl"/>
-  <xsl:include href="html-head.xsl"/>
-  <xsl:include href="header.xsl"/>
-  <xsl:include href="footer.xsl"/> 
-  <xsl:include href="../../../../../../unizh/xslt/common/elml.xsl"/> 
-  <xsl:include href="../../../../../../unizh/xslt/common/biblio_harvard.xsl"/>
+  <xsl:include href="../doctypes/variables.xsl"/>
+  <xsl:include href="../common/html-head-print.xsl"/>
+
+  <xsl:include href="../common/header-print.xsl"/>
+  <xsl:include href="../common/footer-print.xsl"/>
+  <xsl:include href="../common/navigation.xsl"/>
+  <xsl:include href="../common/elml.xsl"/> 
+  <xsl:include href="../common/biblio_harvard.xsl"/>
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
@@ -49,31 +48,18 @@
 
   <xsl:template match="content"> 
     <html>
-      <xsl:call-template name="html-head"/> 
-      <body>
-        <div>
-          <a accesskey="2" title="Zum Inhalt springen" href="#content"><xsl:comment/></a>
-          <a name="top"><xsl:comment/></a>
-          <xsl:if test="$omit_header != 'true'">
-            <xsl:call-template name="header"/> 
-              <br/>
-              <br/>
-          </xsl:if>
-          <xsl:call-template name="content"/>
-        </div>
-      </body>
-    </html>
-  </xsl:template>
+      <xsl:call-template name="html-head"/>
+       <body>
+        <div class="bodywidth">
+          <div class="imgunilogo">
+            <img src="{$localsharedresources}/images/logo_print_{$language}.gif" alt="unizh logo" width="148" height="35" border="0" />
+          </div>
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
+          <xsl:call-template name="header"/>
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"  /></div>
 
-
-  <xsl:template name="content">
-    <div >
-      <div class="relatedbox">
-        <xsl:comment/>&#160;
-      </div>
-      <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
-        <div class="blacontent">
+          <div class="content">
           <xsl:choose>
             <xsl:when test="$pagebreak_level = 'unit'">
               <xsl:call-template name="section-content"/>
@@ -82,23 +68,22 @@
               <xsl:call-template name="lesson-content"/>
             </xsl:otherwise>
           </xsl:choose>
+         </div>
+
+          <div class="dotline"><img src="{$imageprefix}/dot_line540.gif" alt="line" width="540" height="1"/></div>
+          <xsl:call-template name="footer-print"/> 
         </div>
-        <xsl:call-template name="footer"/> 
-      </div>
-    </div>
+        <br/>
+      </body>
+
+    </html>
   </xsl:template>
+
 
 
   <xsl:template name="lesson-content">
      <h1>
-       <xsl:choose>
-         <xsl:when test="/document/content/unizh:lessonEnvelope/elml:lesson/@title">
-           <xsl:value-of select="/document/content/unizh:lessonEnvelope/elml:lesson/@title"/>
-         </xsl:when>
-         <xsl:otherwise>
-           <xsl:value-of select="/document/content/unizh:lessonEnvelope/lenya:meta/dc:title"/>
-         </xsl:otherwise>
-       </xsl:choose>
+       <xsl:value-of select="/document/content/unizh:lessonEnvelope/elml:lesson/@title"/>
      </h1>
      <xsl:apply-templates select="/document/content/unizh:lessonEnvelope/elml:lesson/*[not(self::elml:context) and not(self::elml:metadata)]"/>
   </xsl:template>
@@ -149,8 +134,5 @@
   </xsl:template> 
 
   <xsl:template match="elml:metadata"/>
-
-
-
 
 </xsl:stylesheet>

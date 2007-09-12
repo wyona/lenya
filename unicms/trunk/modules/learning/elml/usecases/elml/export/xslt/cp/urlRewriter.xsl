@@ -14,6 +14,56 @@
 <xsl:param name="jsdir">js</xsl:param>
 <xsl:param name="assetdir">resources</xsl:param>
 
+
+<xsl:template match="@href[parent::xhtml:a]">
+
+  <xsl:variable name="section">
+    <xsl:if test="contains(., 'lesson.section')">
+      <xsl:choose>
+        <xsl:when test="substring-before(substring-after(., 'lesson.section='), '&amp;') != ''">
+          <xsl:value-of select="substring-before(substring-after(., 'lesson.section='), '&amp;')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="substring-after(., 'lesson.section=')"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:variable>
+
+  <xsl:variable name="section-label">
+    <xsl:if test="contains(., 'section.label')">
+      <xsl:value-of select="substring-after(., 'section.label=')"/>
+    </xsl:if>
+  </xsl:variable>
+
+  <xsl:attribute name="href">
+
+    <xsl:choose>
+      <xsl:when test="$section = 'unit' and $section-label != ''">
+        <xsl:value-of select="$section-label"/>.html
+      </xsl:when>
+      <xsl:when test="$section = 'selfAssessment'">
+        <xsl:text>selfAssessment.html</xsl:text>
+      </xsl:when>
+      <xsl:when test="$section = 'furtherReading'">
+        <xsl:text>furtherReading.html</xsl:text>
+      </xsl:when>
+      <xsl:when test="starts-with($section, 'glossary')">
+        <xsl:text>glossary.html</xsl:text>
+      </xsl:when>
+      <xsl:when test="starts-with($section, 'bibliography')">
+        <xsl:text>bibliography.html</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>#</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:attribute>
+</xsl:template>
+
+
+
 <xsl:template match="@href[parent::xhtml:link[@type = 'text/css']]">
   <xsl:attribute name="href">
     <xsl:value-of select="concat($cssdir, '/')"/>
