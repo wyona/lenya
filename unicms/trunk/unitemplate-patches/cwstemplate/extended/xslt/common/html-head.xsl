@@ -60,10 +60,51 @@
         </xsl:attribute>
       </link>
     </xsl:if>
+    <xsl:if test="descendant::unizh:map">
+      <script type="text/javascript">
+        <xsl:attribute name="src">
+          <xsl:text>http://maps.google.com/maps?file=api&amp;v=2&amp;key=</xsl:text>
+          <xsl:choose>
+            <xsl:when test="$area = 'live'">
+              <xsl:value-of select="descendant::unizh:map[1]/@key"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$googleKeyAuthoring"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </script>
+    </xsl:if>
     <script type="text/javascript" src="{$contextprefix}/unizh/authoring/javascript/uni.js"/>
     <script type="text/javascript" src="{$localsharedresources}/javascript/institute.js"/>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
+    </xsl:if>
+    <xsl:if test="descendant::unizh:map">
+      <script type="text/javascript">
+        <xsl:text>//</xsl:text>
+        <xsl:comment>
+          <xsl:text>[CDATA[
+          </xsl:text>
+          <xsl:text>var maps = [</xsl:text>
+          <xsl:for-each select="descendant::unizh:map">
+            <xsl:call-template name="mapData"/>
+            <xsl:if test="not(position()=last())">
+              <xsl:text>,</xsl:text>
+            </xsl:if>
+          </xsl:for-each>
+          <xsl:text>];</xsl:text>
+          <![CDATA[
+          window.onload=function(){
+            GMultiMapload(maps);
+          }
+          window.onunload=function(){
+            GUnload();
+          }
+          ]]>
+          <xsl:text>//]]</xsl:text>
+        </xsl:comment>
+      </script>
     </xsl:if>
   </head>
 </xsl:template>
