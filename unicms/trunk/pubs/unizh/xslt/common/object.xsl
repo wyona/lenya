@@ -715,7 +715,7 @@
       <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 2) and (@width > 615)">
         <xsl:text>615</xsl:text>
       </xsl:when>
-      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 3) and (@width > 416)">
+      <xsl:when test="((/document/content/xhtml:html/@unizh:columns = 3) or (/document/content/unizh:homepage)) and (@width > 416)">
         <xsl:text>416</xsl:text>
       </xsl:when>
       <xsl:otherwise>
