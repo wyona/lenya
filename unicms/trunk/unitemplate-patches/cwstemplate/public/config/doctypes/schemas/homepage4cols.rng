@@ -118,6 +118,7 @@
         <ref name="unizh.banner"/>
         <ref name="unizh.teaser"/>
         <ref name="unizh.rss-reader"/>
+        <ref name="unizh.map"/>
       </choice>
     </zeroOrMore>
   </element>
