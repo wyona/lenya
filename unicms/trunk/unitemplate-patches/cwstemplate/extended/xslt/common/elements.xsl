@@ -41,14 +41,4 @@
 
 <!-- overwrite included templates -->
 
-  <xsl:template match="xhtml:p[parent::unizh:short]" priority="1">
-    <xsl:apply-templates/>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:a[parent::unizh:short]" priority="1">
-    <br/>
-    <a class="internal" href="{@href}"><i18n:text>more</i18n:text></a>
-  </xsl:template>
-
 </xsl:stylesheet>
