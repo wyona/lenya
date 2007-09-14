@@ -232,15 +232,11 @@
           <xsl:when test="(starts-with(@href, 'http://') or starts-with(@href, 'https://')) and ((contains(@href, '.unizh.ch')) or (contains(@href, '.uzh.ch')))">
             <xsl:text>uzh</xsl:text>
           </xsl:when>
+          <xsl:when test="/document/unizh:ancestors/unizh:ancestor[1]/@href = @href">
+            <xsl:text>back</xsl:text>
+          </xsl:when>
           <xsl:otherwise>
-            <xsl:choose>
-              <xsl:when test="/document/unizh:ancestors/unizh:ancestor[1]/@href = @href">
-                <xsl:text>back</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>internal</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
+            <xsl:text>internal</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
@@ -505,12 +501,8 @@
     <div class="topnav"><a href="#top">top</a></div>  
   </xsl:template>
 
- 
+
   <xsl:template match="xhtml:h2[ancestor::index:child]" mode="anchor"/> 
- 
-  <xsl:template match="unizh:children[descendant::unizh:newsitem | descendant::unizh:person]">
-    <xsl:apply-templates select="index:child"/>
-  </xsl:template>
 
 
   <xsl:template match="unizh:level">
@@ -577,35 +569,35 @@
 
   <xsl:template match="xhtml:p[parent::unizh:short]">
     <xsl:choose>
+
       <xsl:when test="xhtml:object[@float = 'true']">
         <xsl:choose>
-
           <xsl:when test="ancestor::unizh:children">
             <div class="objectContainer">
-              <xsl:apply-templates>
+              <xsl:apply-templates select="xhtml:object" mode="objectElement">
                 <xsl:with-param name="width-default" select="100"/>
-                <xsl:with-param name="hideCaption" select="'false'"/>
                 <xsl:with-param name="src">
                   <xsl:choose>
-                    <xsl:when test="starts-with(../*/@data, 'http')">
-                      <xsl:value-of select="../*/@data"/>
+                    <xsl:when test="starts-with(xhtml:object/@data, 'http')">
+                      <xsl:value-of select="xhtml:object/@data"/>
                     </xsl:when>
                     <xsl:otherwise>
-                      <xsl:value-of select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', ../*/@data)"/>
+                      <xsl:value-of select="concat($contextprefix, substring-before(../../../../@href, '.html'), '/', xhtml:object/@data)"/>
                     </xsl:otherwise>
                   </xsl:choose>
                 </xsl:with-param>
               </xsl:apply-templates>
-              <xsl:call-template name="moreLink"/>
+              <xsl:apply-templates select="text()"/>
               <br class="floatclear"/>
             </div>
+            <xsl:call-template name="moreLink"/>
           </xsl:when>
           <xsl:when test="ancestor::unizh:newsitem">
             <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
-              <xsl:apply-templates>
+              <xsl:apply-templates select="xhtml:object" mode="objectElement">
                 <xsl:with-param name="width-default" select="100"/>
-                <xsl:with-param name="hideCaption" select="'false'"/>
               </xsl:apply-templates>
+              <xsl:apply-templates select="text()"/>
               <br class="floatclear"/>
             </div>
           </xsl:when>
@@ -618,7 +610,6 @@
             <div class="objectContainer">
               <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
                 <xsl:with-param name="width-default" select="100"/>
-                <xsl:with-param name="hideCaption" select="'false'"/>
                 <xsl:with-param name="src">
                   <xsl:choose>
                     <xsl:when test="starts-with(../*/@data, 'http')">
@@ -631,15 +622,14 @@
                 </xsl:with-param>
               </xsl:apply-templates>
               <xsl:apply-templates/>
-              <xsl:call-template name="moreLink"/>
               <br class="floatclear"/>
             </div>
+            <xsl:call-template name="moreLink"/>
           </xsl:when>
           <xsl:when test="ancestor::unizh:newsitem">
             <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
               <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
                 <xsl:with-param name="width-default" select="100"/>
-                <xsl:with-param name="hideCaption" select="'false'"/>
               </xsl:apply-templates>
               <xsl:apply-templates/>
               <br class="floatclear"/>

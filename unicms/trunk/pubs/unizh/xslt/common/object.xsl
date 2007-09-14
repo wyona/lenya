@@ -168,7 +168,7 @@
     <div>
       <xsl:attribute name="class">
         <xsl:choose>
-          <xsl:when test="( (@float = 'true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p') )">
+          <xsl:when test="( (@float = 'true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p' or parent::xhtml:p) )">
             <xsl:choose>
               <xsl:when test="@align = 'right'">
                 <xsl:text>objectFloat right</xsl:text>
