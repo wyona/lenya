@@ -1,10 +1,16 @@
 /* institute specific part of header */
-#headerarea {
+
+/* note: style definitions WITHOUT div are needed for login and error screen */
+
+#headerarea, div#headerarea {
 	background-color: #666699;
 }
-.imgunilogo {
+#headerarea h1, #headerarea h2, div#headerarea h1, div#headerarea h1 a, div#headerarea h2, div#headerarea a, div#servicenavpos {
+        color: #ffffff;
+}
+div.imgunilogo {
 	background-color: #ccccff;
 }
-.imginstitute {
+div.imginstitute {
 	background-color: #666699;
 }
