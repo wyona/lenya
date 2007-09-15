@@ -68,7 +68,7 @@ code
 {
   font-size: 1.0em;
 }
-div.attention
+span.attention
 {
   color: #C33;
 }
