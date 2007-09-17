@@ -73,7 +73,7 @@ span.attention
 }
 
 /* link */
-a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more
+a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more, div.teaser p a
 {
     text-decoration: none;
     color:#333399;
@@ -129,8 +129,9 @@ a.www
     padding-right:2px;
     margin-left:2px;
 }
-a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover
+a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, div.teaser p a:hover
 {
+    color: #FFFFFF;
     text-decoration: underline;
     background-color:#333333;
 }
@@ -326,7 +327,7 @@ div.rssReader ul li img
 /* object div may contain a img or object element */
 div.objectBlock
 {
-    background-color:#E9E9F0;
+    background-color: #E9E9F0;
     margin: 1em 0 0 0;
     width: 204px;
 }
