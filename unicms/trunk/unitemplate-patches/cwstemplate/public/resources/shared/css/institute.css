@@ -1,4 +1,13 @@
 /* institute specific part of header */
+
+/* note: style definitions WITHOUT div are needed for login and error screen */
+
+#headerarea {
+        background-color: #666699;
+}
+#headerarea h1, #headerarea h2 {
+        color: #ffffff;
+}
 div.imginstitute
 {
     background-color: transparent;
