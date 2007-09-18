@@ -73,7 +73,7 @@ span.attention
 }
 
 /* link */
-a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more, div.teaser p a
+a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more, div.teaser p a, div.navup a
 {
     text-decoration: none;
     color:#333399;
@@ -129,7 +129,7 @@ a.www
     padding-right:2px;
     margin-left:2px;
 }
-a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, div.teaser p a:hover
+a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, div.teaser p a:hover, div.navup a:hover
 {
     color: #FFFFFF;
     text-decoration: underline;
