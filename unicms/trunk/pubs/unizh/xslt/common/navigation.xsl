@@ -52,7 +52,8 @@
       <xsl:when test="@id='search'">
         <xsl:choose>
           <xsl:when test="$publicationid = 'id'">      
-            <label for="formsearch">Suchen:</label>  
+            <xsl:text> | </xsl:text>
+            <label for="formsearch">Suche:</label>  
             <form id="formsearch" action="http://www.id.uzh.ch/search/search.jsp" method="get" accept-charset="UTF-8">
                <div class="serviceform">
                   <input type="text" name="query" accesskey="5" />
