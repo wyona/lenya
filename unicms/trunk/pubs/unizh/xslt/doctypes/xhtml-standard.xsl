@@ -102,7 +102,7 @@
 
   <xsl:template name="one-column">
     <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-    <a accesskey="2" name="content" class="namedanchor"/>
+    <a accesskey="2" name="content"/>
     <div class="contentarea1col">
       <h1>
         <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
@@ -124,7 +124,7 @@
     </div>
     <div class="contcol2">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a accesskey="2" name="content" class="namedanchor"/>
+      <a accesskey="2" name="content"/>
       <div class="content">
         <h1>
           <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -152,7 +152,7 @@
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -183,7 +183,7 @@
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div>
         <xsl:attribute name="class">contentarea</xsl:attribute>
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
             <h1>
@@ -219,7 +219,7 @@
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -255,7 +255,7 @@
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]"/>
           <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]"/>
@@ -276,7 +276,7 @@
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <p>
              <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
@@ -335,7 +335,7 @@
         </div>
       </div> -->
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"/>
+        <a accesskey="2" name="content"/>
         <div class="content">
           <p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
