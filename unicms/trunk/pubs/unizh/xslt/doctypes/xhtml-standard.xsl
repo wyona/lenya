@@ -44,9 +44,9 @@
       <xsl:call-template name="html-head"/>
       <body>
         <div class="bodywidth">
-          <a accesskey="1" title="Zur Navigation springen" href="#navigation"><xsl:comment/></a>
-          <a accesskey="2" title="Zum Inhalt springen" href="#content"><xsl:comment/></a>
-          <a name="top"><xsl:comment/></a>
+          <a accesskey="1" title="Zur Navigation springen" href="#navigation"/>
+          <a accesskey="2" title="Zum Inhalt springen" href="#content"/>
+          <a name="top"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
           <xsl:call-template name="header"/>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
@@ -101,19 +101,19 @@
 
 
   <xsl:template name="one-column">
-   <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-   <div class="contentarea1col">
-    <h1>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
-      <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
-        <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+    <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
+    <a accesskey="2" name="content" class="namedanchor"/>
+    <div class="contentarea1col">
+      <h1>
+        <div bxe_xpath="/{document-element-}/lenya:meta/dc:title">
+          <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+        </div>
+      </h1>
+      <div bxe_xpath="/{$document-element-name}/xhtml:body">
+        <xsl:apply-templates select="*/xhtml:body/*"/>
       </div>
-    </h1>
-    <div bxe_xpath="/{$document-element-name}/xhtml:body">
-      <xsl:apply-templates select="*/xhtml:body/*"/>
+      <xsl:call-template name="footer"/>
     </div>
-    <xsl:call-template name="footer"/>
-   </div>
   </xsl:template>
 
 
@@ -124,7 +124,7 @@
     </div>
     <div class="contcol2">
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+      <a accesskey="2" name="content" class="namedanchor"/>
       <div class="content">
         <h1>
           <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -151,8 +151,8 @@
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
       <div class="contentarea">
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -181,9 +181,9 @@
         <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
-      <a name="content" class="namedanchor"><xsl:comment/></a>
       <div>
         <xsl:attribute name="class">contentarea</xsl:attribute>
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
           <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
             <h1>
@@ -219,7 +219,7 @@
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
           <h1>
             <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
@@ -250,13 +250,15 @@
     </div>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
-        <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
+        <xsl:apply-templates select="*/unizh:related-content"/>
+        <xsl:comment/>
       </div>
       <xsl:apply-templates select="/document/xhtml:div[@id = 'orthonav']"/>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
-          <xsl:apply-templates select="*/xhtml:body/*"/>
+          <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]"/>
+          <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]"/>
         </div>
         <xsl:call-template name="footer"/>
       </div>
@@ -274,7 +276,7 @@
         <xsl:apply-templates select="*/unizh:related-content"/><xsl:comment/>
       </div>
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
           <p>
              <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
@@ -333,7 +335,7 @@
         </div>
       </div> -->
       <div class="contentarea">
-        <a accesskey="2" name="content" class="namedanchor"><xsl:comment/></a>
+        <a accesskey="2" name="content" class="namedanchor"/>
         <div class="content">
           <p>
             <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']"/>
@@ -390,10 +392,10 @@
                     <a>
                       <xsl:attribute name="class">
                         <xsl:choose>
-                          <xsl:when test="starts-with($href, 'http://') and not(contains($href, '.unizh.ch')) and not(contains($href, '.uzh.ch'))">
+                          <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and not(contains($href, '.unizh.ch')) and not(contains($href, '.uzh.ch'))">
                             <xsl:text>www</xsl:text>
                           </xsl:when>
-                          <xsl:when test="starts-with($href, 'http://') and ((contains($href, '.unizh.ch')) or (contains($href, '.uzh.ch')))">
+                          <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and ((contains($href, '.unizh.ch')) or (contains($href, '.uzh.ch')))">
                             <xsl:text>uzh</xsl:text>
                           </xsl:when>
                           <xsl:otherwise>
