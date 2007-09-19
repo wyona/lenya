@@ -45,6 +45,7 @@
         <xsl:for-each select="//index:child">
           <xsl:variable name="fulltext" select="normalize-space(*/unizh:newsitem/xhtml:body/xhtml:p)"/>
           <xsl:variable name="link" select="*/unizh:newsitem/unizh:short/xhtml:a"/>
+          <xsl:variable name="creationdate" select="*/unizh:newsitem/lenya:meta/dcterms:created"/>
           <item>
             <title><xsl:value-of select="*/unizh:newsitem/lenya:meta/dc:title"/></title>
             <link>
@@ -61,7 +62,28 @@
               </xsl:choose> 
             </link>
             <description><xsl:apply-templates select="*/unizh:newsitem/unizh:short/xhtml:p"/></description>
-            <pubDate><xsl:value-of select="concat(substring(*/unizh:newsitem/lenya:meta/dcterms:created,1,3), ',', substring(*/unizh:newsitem/lenya:meta/dcterms:created,4))"/></pubDate>
+            <pubDate>
+              <xsl:choose>
+                <!-- dd. MMM yyyy HH:mm >> dd MMM yyyy HH:mm -->
+                <xsl:when test="string-length($creationdate) &lt; '25'">
+                  <xsl:value-of select="substring($creationdate, 1, 2)"/>
+                  <xsl:text> </xsl:text>
+                  <xsl:value-of select="substring($creationdate, 5)"/>
+                </xsl:when>
+                <!-- EEE MMM dd HH:mm:ss zzz yyyy >> EEE, dd MMM yyy HH:mm:ss zzzz -->
+                <xsl:otherwise>
+                  <xsl:value-of select="substring($creationdate, 1, 3)"/>
+                  <xsl:text>, </xsl:text>
+                  <xsl:value-of select="substring($creationdate, 9, 2)"/>
+                  <xsl:text> </xsl:text>
+                  <xsl:value-of select="substring($creationdate, 5, 3)"/>
+                  <xsl:text> </xsl:text>
+                  <xsl:value-of select="substring($creationdate, 26, 4)"/>
+                  <xsl:text> </xsl:text>
+                  <xsl:value-of select="substring($creationdate, 12, 13)"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </pubDate>
           </item>
         </xsl:for-each>
       </channel>
@@ -69,7 +91,7 @@
   </xsl:template>
 
   <xsl:template match="xhtml:p">
-    <xsl:copy-of select="*|text()"/>
+    <xsl:copy-of select="descendant-or-self::text()"/>
   </xsl:template>
 
 

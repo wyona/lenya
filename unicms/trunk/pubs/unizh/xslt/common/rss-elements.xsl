@@ -150,12 +150,36 @@
         <h2><xsl:value-of select="rss/channel/title"/></h2>
         <xsl:for-each select="rss/channel/item">
           <xsl:if test="$items = '' or position() &lt;= $items">
+            <xsl:variable name="substring1" select="substring(normalize-space(pubDate),1,1)"/>
+            <xsl:variable name="substring3" select="substring(normalize-space(pubDate),1,3)"/>
+            <xsl:variable name="substring4" select="substring(normalize-space(pubDate),1,4)"/>
+            <xsl:variable name="src-pattern">
+              <xsl:choose>
+                <xsl:when test="$substring3 = 'Mon' or $substring3 = 'Tue' or $substring3 = 'Wed' or $substring3 = 'Thu' or $substring3 = 'Fri' or $substring3 = 'Sat' or $substring3 = 'Sun'">
+                  <xsl:text>EEE, d MMM yyyy HH:mm:ss zzz</xsl:text>
+                </xsl:when>
+                <xsl:when test="number($substring4)"/>
+                <xsl:when test="number($substring1)">
+                  <xsl:text>d MMM yyyy HH:mm:ss zzz</xsl:text>
+                </xsl:when>
+                <xsl:otherwise/>
+              </xsl:choose>
+            </xsl:variable>
             <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
             <h2>
-              <xsl:value-of select="title"/>&#160;
+              <xsl:value-of select="title"/>
+              <xsl:text> </xsl:text>
               <span class="datetime">
-                <xsl:variable name="pubDateLength" select="string-length(pubDate)"/>
-                <xsl:value-of select="substring(pubDate, 0, $pubDateLength - 12)"/>
+                <xsl:if test="pubDate and pubDate != ''">
+                  <xsl:choose>
+                    <xsl:when test="$src-pattern = ''">
+                      <xsl:text>invalid date format</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <i18n:date src-pattern="{$src-pattern}" src-locale="en" pattern="d.M.yyyy: " value="{pubDate}"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:if>
               </span>
             </h2>
             <p><xsl:apply-templates select="description"/></p>
