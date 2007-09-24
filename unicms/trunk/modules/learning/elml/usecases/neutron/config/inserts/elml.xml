@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<insertTemplates
-   xmlns:elml="http://www.elml.ch"
->
+<insertTemplates xmlns:elml="http://www.elml.ch">
 
+  <template label="Unit" element="unit">
+    <elml:unit label="label1" title="Title der Unit">
+      <elml:entry>
+        <paragraph>Einleitung zur Unit mit optionalem Bild</paragraph>
+        <toc recurse="false" scope="unit"/>
+      </elml:entry>
+      <elml:learningObject title="Titel des Learning Objects" label="label1_1">
+        <elml:clarify>
+          <elml:paragraph>Erklärung</elml:paragraph>
+        </elml:clarify>
+        <elml:look>
+          <elml:paragraph>Beispiel</elml:paragraph>
+        </elml:look>
+        <elml:act metaSetUpInfo="none">
+          <elml:paragraph>Übung</elml:paragraph>
+        </elml:act>
+      </elml:learningObject>
+    </elml:unit>
+  </template>
 
   <template label="Entry" element="entry">
     <elml:entry>
-      <elml:paragraph>Introduction</elml:paragraph>
+      <elml:paragraph>Einleitung</elml:paragraph>
     </elml:entry>
   </template>
 
   <template label="Goals" element="goals">
     <elml:goals>
       <elml:lObjective>A learning objective</elml:lObjective>
-    </elml:goals> 
+    </elml:goals>
+  </template>
+
+  <template label="LearningObject" element="learningObject">
+    <elml:learningObject title="Titel des Learning Objects" label="labelXX">
+      <elml:clarify>
+        <elml:paragraph>Clarify</elml:paragraph>
+      </elml:clarify>
+    </elml:learningObject>
   </template>
 
   <template label="Clarify" element="clarify">
@@ -36,4 +61,3 @@
   </template>
 
 </insertTemplates>
-
