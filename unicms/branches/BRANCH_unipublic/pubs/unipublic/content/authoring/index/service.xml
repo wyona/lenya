@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <Services xmlns="http://unizh.ch/doctypes/services/1.0">
-  <Service href="http://www.agenda.unizh.ch" id="agenda">Agenda</Service>
-  <Service href="http://www.mediadesk.unizh.ch" id="mediadesk">Mediadesk</Service>
-  <Service href="http://www.unipublic.unizh.ch/service/produkte/"
+  <Service href="http://www.agenda.uzh.ch" id="agenda">Agenda</Service>
+  <Service href="http://www.mediadesk.uzh.ch" id="mediadesk">Mediadesk</Service>
+  <Service href="http://www.uzh.ch/news/produkte/"
     id="neue-produkte">Neue Produkte</Service>
-  <Service href="http://www.unipublic.unizh.ch/service/museen/" id="uni-museen">Uni-Museen</Service>
+  <Service href="http://www.uzh.ch/news/museen/" id="uni-museen">Uni-Museen</Service>
   <Service href="http://www.uzh.ch/services/continuingeducation.html" id="weiterbildung">Weiterbildung</Service>
   <Newsletter href="javascript:aboWindow();" id="newsletter">Newsletter</Newsletter>
 </Services>
