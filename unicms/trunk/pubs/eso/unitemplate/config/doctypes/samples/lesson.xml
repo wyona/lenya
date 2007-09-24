@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:lessonEnvelope 
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:elml="http://www.elml.ch"
+  xmlns="http://www.elml.ch"
+  dc:dummy="FIXME:keepNamespace" 
+  dcterms:dummy="FIXME:keepNamespace"
+  lenya:dummy="FIXME:keepNamespace"
+  elml:dummy="FIXME:keepNamespace" 
+  >
+
+   <lenya:meta>
+    <dc:title>Lesson title</dc:title>
+    <dc:description></dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject></dc:subject>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+
+
+  <config>
+    <general>
+      <!--Enter the contact Email that students will use to contact the tutor -->
+      <contact>joelfisler@users.sourceforge.net</contact>
+      <!--Enter the URL to your servers home page -->
+      <server>http://www.elml.ch</server>
+      <!--Would like to make a transformation for role 'tutor' or 'student'? -->
+      <role>student</role>
+      <!--On which level would like have the page break? To generate just one output use "oneoutput", else "lesson", "unit" or "lo" -->
+      <pagebreak_level>unit</pagebreak_level>
+      <!--If you would like to have chapter titles with numeration, set this to "yes" else to "no" -->
+      <chapter_numeration>yes</chapter_numeration>
+      <!-- Which type of imsmanifest.xml will be produced: IMS CP or SCORM compatible (accepted values are: 'ims' or 'scorm' or 'both') -->
+      <manifest_type>scorm</manifest_type>
+      <!--Define units that should be marked/highlighted as optional for the student. Enter unit-labels separated by a comma or leave empty. -->
+      <optional_units>
+        <labelname/>
+      </optional_units>
+    </general>
+    <!--These parameters are only used for the online version -->
+    <online>
+      <!--Enter an URL to your bugtracker form here (or leave empty if you dont have one) -->
+      <bugtracker>http://sourceforge.net/projects/elml/</bugtracker>
+      <!--Would you like to use a navigation in your online version? "yes" or "no" -->
+      <use_navigation>yes</use_navigation>
+    </online>
+    <!--These parameters are only used for the print version -->
+    <print>
+    <!--Links are also clickable in the PDF version. Should additionally the link URI be written in brackets after the link text? Choose "yes" or "no" -->
+       <display_links>no</display_links>
+       <!--If you use the latest FOP version enter the value "0.9", otherwise use "0.2" -->
+       <fop_version>0.2</fop_version>
+       <!--The height of your page (Eg. "29.7cm" for A4) -->
+      <pageheight>29.7cm</pageheight>
+      <!--The width of your page (Eg. "21cm" for A4) -->
+      <pagewidth>21cm</pagewidth>
+      <!--Your default font size (Eg. "11pt") -->
+      <fontsize>11pt</fontsize>
+      <!--Your default line height  (Eg. "15pt") -->
+      <lineheight>15pt</lineheight>
+      <!--Your default font weight for titles  (Eg. "bold") -->
+      <fontweighttitle>bold</fontweighttitle>
+      <!--The conversion factor from pixel to mm (do NOT change, should be "0.2646") -->
+      <converter_pixel_mm>0.2646</converter_pixel_mm>
+    </print>
+    <!--These parameters are only used for the latex version -->
+    <latex>
+      <!--The type of latex document created: Either article or book -->
+       <documentclass>book</documentclass>
+    </latex>
+  </config>
+
+  <messagebundle>
+
+    <msg name="name_content">Inhaltsverzeichnis</msg>
+    <msg name="name_entry">Einführung</msg>
+    <msg name="name_lObjectives">Lernziele</msg>
+    <msg name="name_glossary">Glossar</msg>
+    <msg name="name_glossary_empty"> ist noch leer.</msg>
+    <msg name="name_keywords">Schlüsselwörter</msg>
+    <msg name="name_summary">Zusammenfassung</msg>
+  	<msg name="name_selfAssessment">Self Assessment</msg>
+    <msg name="name_furtherReading">Empfohlene Literatur</msg>
+    <msg name="name_bibliography">Literatur</msg>
+    <msg name="name_metaSetUpInfo">Installationshinweise (Tutoren): </msg>
+    <msg name="name_metadata">Metadaten</msg>
+    <msg name="name_solution">Lösung</msg>
+    <msg name="name_solutiontext">Klicken Sie hier für mehr Informationen</msg>
+    <msg name="name_anon">Anonym</msg>
+    <msg name="name_size">Grösse</msg>
+    <msg name="name_type">Typ</msg>
+    <msg name="name_internalLink">Link zur</msg>
+    <msg name="name_lesson">Lektion</msg>
+    <msg name="name_page">Seite</msg>
+    <msg name="name_page_of">von</msg>
+    <msg name="name_hint">Hinweis</msg>
+    <msg name="name_nolegend">Legende fehlt</msg>
+    <msg name="name_notanimage">Dieses Element (Animation, Video etc.) kann in der PDF version nicht dargestellt werden und ist nur in der online Version sichtbar.</msg>
+    <msg name="name_download">Herunterladen</msg>
+    <msg name="name_selfCheckCorrect">Prüfen</msg>
+    <msg name="name_selfCheckSolve">Lösung</msg>
+    <msg name="name_selfCheckMissing">Sie haben noch nicht alle richtigen Antworten angekreuzt!</msg>
+    <msg name="name_optionalunits_symbol"> *</msg>
+    <msg name="name_optionalunits_text">Diese Unit wurde als fakultativ markiert.</msg>
+    <msg name="name_index">Index</msg>
+    <msg name="name_context">Anhang</msg>
+    <msg name="name_figures">Abbildungsverzeichnis</msg>
+    <msg name="name_tables">Tabellenverzeichnis</msg>
+    <msg name="name_bugtracker">Fehler gefunden?</msg>
+    <msg name="name_contact">Kontakt</msg>
+    <msg name="name_print">Drucken</msg>
+    <msg name="name_printed">Stand vom: </msg>
+    <msg name="name_responsible">Verantwortliche Personen:</msg>
+    <msg name="name_tutoronly">Diese Unit ist nur für Tutoren und nicht für Studierende sichtbar.</msg>
+    <msg name="name_biblio_book">Monographien (Bücher)</msg>
+    <msg name="name_biblio_contributionInBook">Beiträge aus Sammelbänden</msg>
+    <msg name="name_biblio_journalArticle">Beiträge aus Zeitschriften</msg>
+    <msg name="name_biblio_newspaperArticle">Beiträge aus Zeitungen</msg>
+    <msg name="name_biblio_map">Kartenmaterialien</msg>
+    <msg name="name_biblio_conferencePaper">Beiträge zu einer Konferenz</msg>
+    <msg name="name_biblio_publicationCorporateBody">Publikationen von Körperschaften</msg>
+    <msg name="name_biblio_thesis">Dissertationen, Diplomarbeiten etc.</msg>
+    <msg name="name_biblio_patent">Patente</msg>
+    <msg name="name_biblio_videoFilmBroadcast">Audiovisuelle Medien</msg>
+    <msg name="name_biblio_websites">Veröffentlichungen im Internet</msg>
+    <msg name="name_biblio_eJournals">Beiträge in eJournals</msg>
+    <msg name="name_biblio_mailLists">Veröffentlichungen in Mailing-Listen</msg>
+    <msg name="name_biblio_personalMail">Persönliche E-Mails</msg>
+    <msg name="name_biblio_cdRom">CD-ROM</msg>
+  </messagebundle>
+
+
+
+  <lesson label="label" title="Titel der Lektion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elml.ch ../../../_config/validate.xsd" navTitle="Introduction DBS">
+	<entry>
+		<paragraph>Bild zur Lektion</paragraph>
+		<toc return="false" scope="lesson"/>
+		<paragraph>Einleitungstext <citation bibIDRef="Hotz2006"/></paragraph>
+		<goals>
+			<lObjective>Lernziele</lObjective>
+		</goals>
+	</entry>
+	
+	<unit label="label_1" title="Title der Unit 1">
+		<entry>
+			<paragraph>Einleitung zur Unit mit optionalem Bild</paragraph>
+		</entry>
+		<learningObject title="Titel des Learning Objects" label="label_1_1">
+			<clarify>
+				<paragraph>Erklärung</paragraph>
+			</clarify>
+			<look>
+				<paragraph>Beispiel</paragraph>
+			</look>
+			<act metaSetUpInfo="">
+				<paragraph>Übung</paragraph>
+			</act>
+		</learningObject>
+	</unit>
+	<selfAssessment title="Self Assessment" metaSetUpInfo="none">
+		<paragraph>Übung zur Lektion</paragraph>
+	</selfAssessment>
+	<summary>
+		<paragraph>In dieser Lektion ...</paragraph>
+	</summary>
+	<furtherReading>
+		<resItem bibIDRef="b4">Introduction into Information Systems and Databases, in German</resItem>
+	</furtherReading>
+	<bibliography>
+		<book bibID="Hotz2006" author="Hotz-Hart, Beat / Schmuki, Daniel / Dümmler, Patrick" publicationPlace="Zürich" publicationYear="2006" publisher="vdf" title="Volkswirtschaft der Schweiz: Aufbruch ins 21. Jahrhundert"/>
+	</bibliography>
+	<metadata role="student">
+		<organisation level="Basic" module="DM">
+			<creationPosition>
+				<!--<posNumber>4</posNumber>-->
+				<previous>none</previous>
+				<following></following>
+			</creationPosition>
+		</organisation>
+		<prerequisites>
+			<preReqItem label="none"/>
+		</prerequisites>
+		<keywords>
+			<keywordItem>Database Management</keywordItem>
+		</keywords>
+		<technical>
+			<technicalRequirement>
+				<type>PlugIn</type>
+				<name>Flash</name>
+				<minimumVersion>6.0 (MX)</minimumVersion>
+				<downloadURL>http://www.macromedia.com/shockwave/download/download.cgi</downloadURL>
+				<installationRemarks>The Macromedia website might give help when having trouble installing the flash plugin.</installationRemarks>
+			</technicalRequirement>
+		</technical>
+		<lessonInfo>
+			<language language="en" derived="yes" originalLanguage="de"/>
+			<lifecycle>
+				<version creationDate="2003-03-31" modificationDate="2006-01-06">2</version>
+				<contribute>
+					<person responsible="Overall" name="Person" email="person@iew.ch" institute="IEW" departement=""/>
+					<person responsible="Translation" name="Person" email="person@iew.ch" institute="IEW" departement=""/>
+					<person responsible="Revision" name="Person" email="person@iew.ch" institute="IEW" departement=""/>
+				</contribute>
+				<commentsNextVersion>see original version (german)</commentsNextVersion>
+			</lifecycle>
+			<educational>
+				<difficulty>Medium</difficulty>
+				<typicalLearningTime>
+					<time>3 h</time>
+					<description>Average value from the tests with students in February 2007</description>
+				</typicalLearningTime>
+			</educational>
+		</lessonInfo>
+		<rights>
+			<cost>no</cost>
+			<copyright>ESO 2006-2007</copyright>
+		</rights>
+	</metadata>
+</lesson>
+
+</unizh:lessonEnvelope>
