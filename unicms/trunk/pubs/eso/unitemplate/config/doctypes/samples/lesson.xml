@@ -141,16 +141,17 @@
   <lesson label="label" title="Titel der Lektion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elml.ch ../../../_config/validate.xsd" navTitle="Introduction DBS">
 	<entry>
 		<paragraph>Bild zur Lektion</paragraph>
-		<toc return="false" scope="lesson"/>
+		<toc recurse="false" scope="lesson"/>
 		<paragraph>Einleitungstext <citation bibIDRef="Hotz2006"/></paragraph>
-		<goals>
-			<lObjective>Lernziele</lObjective>
-		</goals>
 	</entry>
+  	<goals>
+  		<lObjective>Lernziele</lObjective>
+  	</goals>
 	
 	<unit label="label_1" title="Title der Unit 1">
 		<entry>
 			<paragraph>Einleitung zur Unit mit optionalem Bild</paragraph>
+			<toc recurse="false" scope="unit"/>
 		</entry>
 		<learningObject title="Titel des Learning Objects" label="label_1_1">
 			<clarify>
@@ -171,7 +172,7 @@
 		<paragraph>In dieser Lektion ...</paragraph>
 	</summary>
 	<furtherReading>
-		<resItem bibIDRef="b4">Introduction into Information Systems and Databases, in German</resItem>
+		<resItem bibIDRef="Hotz2006">Einführung in ...</resItem>
 	</furtherReading>
 	<bibliography>
 		<book bibID="Hotz2006" author="Hotz-Hart, Beat / Schmuki, Daniel / Dümmler, Patrick" publicationPlace="Zürich" publicationYear="2006" publisher="vdf" title="Volkswirtschaft der Schweiz: Aufbruch ins 21. Jahrhundert"/>
