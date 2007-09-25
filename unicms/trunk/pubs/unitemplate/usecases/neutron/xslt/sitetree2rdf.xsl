@@ -28,6 +28,8 @@
     xmlns:map="http://lenya.apache.org/sitemap/"
     >
 
+<xsl:param name="context"/>
+<xsl:param name="area"/>
 <xsl:param name="pub"/>
 <xsl:param name="baseurl"/>
 <xsl:param name="languages"/>
@@ -64,7 +66,21 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <map:resource about="{$url}" dc:name="{.}" dc:language="{@xml:lang}"/>
+      <xsl:variable name="internalUri">
+        <xsl:value-of select="concat($context, '/', $pub, '/', $area)"/>
+        <xsl:for-each select="ancestor::tree:node">
+          <xsl:value-of select="concat('/', @id)"/>
+        </xsl:for-each>
+        <xsl:choose>
+          <xsl:when test="@xml:lang = $defaultlanguage">
+            <xsl:value-of select="concat(@id, '.html')"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="concat('_', @xml:lang, '.html')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <map:resource about="{$url}" map:internalURI="{$internalUri}" dc:name="{.}" dc:language="{@xml:lang}"/>
     </xsl:for-each>     
   </xsl:for-each>
 
