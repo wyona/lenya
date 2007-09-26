@@ -63,6 +63,19 @@
                </div>
             </form>
           </xsl:when>
+          <xsl:when test="$publicationid = 'public'">
+            <form id="formsearch" action="http://www.search.uzh.ch/result.html" method="get" accept-charset="UTF-8">
+               <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
+                <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+                <input type="hidden" name="cof" value="FORID:11" />
+                <div class="serviceform">
+                  <input type="text" name="q" accesskey="5" />
+                </div>
+                <div class="serviceform">
+                  <a href="javascript:document.forms['searchbox_009347054195260226203:hahgnjx1tks'].submit();"><xsl:value-of select="text()"/></a>
+                </div>
+            </form>
+          </xsl:when>
           <xsl:otherwise>
 <!--
    The following switch is necessary to prevent that the id for the form tag i.e. searchbox_0093470....
