@@ -218,7 +218,7 @@
           <map:select type="parameter">
             <map:parameter name="parameter-selector-test" value="{page-envelope:document-type}"/>
             <map:when test="lesson">
-              <map:generate src="usecases/neutron/config/import/html2elml.xsl"/>
+              <map:generate src="usecases/neutron/config/import/xhtml2elml.xsl"/>
             </map:when>
             <map:otherwise>
               <map:generate src="usecases/neutron/config/import/xhtml2uzh.xsl"/>
