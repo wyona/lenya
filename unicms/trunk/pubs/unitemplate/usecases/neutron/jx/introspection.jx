@@ -37,4 +37,9 @@
       <input type="text" name="rights" label="Rights" value="University Of Zuerich"/>
     </form>
   </upload>
+
+  <import>
+    <filter mime-type="application/xhtml+xml" type="xslt" href="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=import.xhtml"/>
+  </import>
+
 </introspection>

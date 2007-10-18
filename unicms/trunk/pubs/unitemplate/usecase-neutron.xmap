@@ -193,9 +193,6 @@
             <map:when test="lesson">
               <map:generate src="usecases/neutron/config/inserts/elml.xml"/>
             </map:when>
-            <map:when test="unit">
-              <map:generate src="usecases/neutron/config/inserts/elml.xml"/>
-            </map:when>
             <map:otherwise>
               <map:generate src="usecases/neutron/config/inserts/unizh.xml"/>
             </map:otherwise> 
@@ -209,18 +206,27 @@
             <map:when test="lesson">
               <map:generate src="usecases/neutron/config/widgets/elml.xml"/>
             </map:when>
-            <map:when test="unit">
-              <map:generate src="usecases/neutron/config/widgets/elml.xml"/>
-            </map:when>
             <map:otherwise>
               <map:generate src="usecases/neutron/config/widgets/unizh.xml"/>
             </map:otherwise>
           </map:select> 
           <map:serialize type="xml"/>
         </map:match>
-      </map:match>
 
- 
+
+        <map:match type="step" pattern="import.xhtml">
+          <map:select type="parameter">
+            <map:parameter name="parameter-selector-test" value="{page-envelope:document-type}"/>
+            <map:when test="lesson">
+              <map:generate src="usecases/neutron/config/import/html2elml.xsl"/>
+            </map:when>
+            <map:otherwise>
+              <map:generate src="usecases/neutron/config/import/xhtml2uzh.xsl"/>
+            </map:otherwise>
+          </map:select>
+          <map:serialize type="xml"/>
+        </map:match>
+      </map:match>
 
 
     </map:pipeline>
