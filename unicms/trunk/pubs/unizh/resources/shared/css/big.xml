@@ -73,7 +73,7 @@ span.attention
 }
 
 /* link */
-a.internal, a.uzh, a.www, a.right_aligned, a.back, a.download, a.block, a.more, div.teaser p a, div.navup a
+a.internal, a.uzh, a.www, a.podcast, a.right_aligned, a.back, a.download, a.block, a.more, div.teaser p a, div.navup a
 {
     text-decoration: none;
     color:#333399;
@@ -129,7 +129,15 @@ a.www
     padding-right:2px;
     margin-left:2px;
 }
-a.internal:hover, a.uzh:hover, a.www:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, div.teaser p a:hover, div.navup a:hover
+a.podcast
+{
+    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
+    padding-left:13px;
+    background-repeat: no-repeat;
+    padding-right:2px;
+    margin-left:2px;
+}
+a.internal:hover, a.uzh:hover, a.www:hover, a.podcast:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, div.teaser p a:hover, div.navup a:hover
 {
     color: #FFFFFF;
     text-decoration: underline;
@@ -167,7 +175,7 @@ div.teaser img
     display:block;
     margin: 0 0 2px 0;
 }
-div.teaser a.internal, div.teaser a.uzh, div.teaser a.www
+div.teaser a.internal, div.teaser a.uzh, div.teaser a.www, div.teaser a.podcast
 {
     display: block;
 }
