@@ -81,6 +81,11 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="dataPodcast">
+        <ref name="URI.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="type">
         <ref name="ContentType.datatype"/>
       </attribute>
@@ -98,6 +103,16 @@
     <optional>
       <attribute name="width">
         <ref name="Length.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="filesize">
+        <ref name="Length.datatype"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="duration">
+        <ref name="Text.datatype"/>
       </attribute>
     </optional>
     <optional>

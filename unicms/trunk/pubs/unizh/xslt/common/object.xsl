@@ -9,16 +9,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
  
-  <xsl:param name="documentid"/>
-  <xsl:param name="nodeid"/>
-  <xsl:param name="contextprefix"/>
-  <xsl:param name="rendertype"/>
+  <xsl:param name="documentid" />
+  <xsl:param name="nodeid" />
+  <xsl:param name="contextprefix" />
+  <xsl:param name="rendertype" />
 
 
   <!-- objects in tables get a default width of 100px -->
   <xsl:template match="xhtml:object[ancestor::xhtml:table]">
     <xsl:apply-templates select="." mode="objectElement">
-      <xsl:with-param name="width-default" select="100"/>
+      <xsl:with-param name="width-default" select="100" />
     </xsl:apply-templates>
   </xsl:template>
 
@@ -44,15 +44,15 @@
     <xsl:variable name="width">
       <xsl:choose>
         <xsl:when test="$numColumns = 3">
-          <xsl:value-of select="171"/>
+          <xsl:value-of select="171" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="178"/>
+          <xsl:value-of select="178" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:call-template name="object">
-      <xsl:with-param name="width" select="$width"/>
+      <xsl:with-param name="width" select="$width" />
     </xsl:call-template>
   </xsl:template>
 
@@ -62,15 +62,15 @@
     <xsl:variable name="width">
       <xsl:choose>
         <xsl:when test="$numColumns = 3">
-          <xsl:value-of select="191"/>
+          <xsl:value-of select="191" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="198"/>
+          <xsl:value-of select="198" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:call-template name="object">
-      <xsl:with-param name="width" select="$width"/>
+      <xsl:with-param name="width" select="$width" />
     </xsl:call-template>
   </xsl:template>
 
@@ -82,27 +82,27 @@
         <xsl:when test="$numColumns = 3">
           <xsl:choose>
             <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
-              <xsl:value-of select="605"/>
+              <xsl:value-of select="605" />
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="191"/>
+              <xsl:value-of select="191" />
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
             <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
-              <xsl:value-of select="416"/>
+              <xsl:value-of select="416" />
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="198"/>
+              <xsl:value-of select="198" />
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:call-template name="object">
-      <xsl:with-param name="width" select="$width"/>
+      <xsl:with-param name="width" select="$width" />
     </xsl:call-template>
   </xsl:template>
 
@@ -111,7 +111,7 @@
     <xsl:choose>
       <xsl:when test="not(@data)">
         <xsl:call-template name="object">
-          <xsl:with-param name="src" select="concat($imageprefix, '/default_head.gif')"/>
+          <xsl:with-param name="src" select="concat($imageprefix, '/default_head.gif')" />
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
@@ -120,13 +120,13 @@
             <xsl:choose>
               <xsl:when test="contains(../../../@href, '_')">
                 <xsl:call-template name="object">
-                  <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../@href, '_'), '/', @data)"/>
+                  <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../@href, '_'), '/', @data)" />
                   <xsl:with-param name="width">100</xsl:with-param>
                 </xsl:call-template>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:call-template name="object">
-                  <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../@href, '.html'), '/', @data)"/>
+                  <xsl:with-param name="src" select="concat($contextprefix, substring-before(../../../@href, '.html'), '/', @data)" />
                   <xsl:with-param name="width">100</xsl:with-param>
                 </xsl:call-template>
               </xsl:otherwise>
@@ -147,9 +147,9 @@
   <xsl:template match="xhtml:object[(ancestor::xhtml:body or ancestor::unizh:description) and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
             <!-- unizh:description -> 'person' doctype -->
     <xsl:choose>
-      <xsl:when test="(@float='true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p')"/>
+      <xsl:when test="(@float='true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p')" />
       <xsl:otherwise>
-        <xsl:apply-templates select="." mode="objectElement"/>
+        <xsl:apply-templates select="." mode="objectElement" />
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -157,12 +157,12 @@
 
   <!-- wrap object element in xhtml div to enable floating, caption. call this template for all content objects -->
   <xsl:template match="xhtml:object" mode="objectElement">
-    <xsl:param name="width-default" select="204"/>
-    <xsl:param name="hideCaption"/>
-    <xsl:param name="src"/>
+    <xsl:param name="width-default" select="204" />
+    <xsl:param name="hideCaption" />
+    <xsl:param name="src" />
     <xsl:variable name="width">
       <xsl:call-template name="width-attribute">
-        <xsl:with-param name="width-default" select="$width-default"/>
+        <xsl:with-param name="width-default" select="$width-default" />
       </xsl:call-template>
     </xsl:variable>
     <div>
@@ -184,30 +184,30 @@
         </xsl:choose>
       </xsl:attribute>
       <xsl:attribute name="style">
-        <xsl:text>width:</xsl:text><xsl:value-of select="$width"/><xsl:text>px;</xsl:text>
+        <xsl:text>width:</xsl:text><xsl:value-of select="$width" /><xsl:text>px;</xsl:text>
       </xsl:attribute>
       <xsl:choose>
         <xsl:when test="$src">
           <xsl:call-template name="object">
             <xsl:with-param name="width">
-              <xsl:value-of select="$width"/>
+              <xsl:value-of select="$width" />
             </xsl:with-param>
             <xsl:with-param name="src">
-              <xsl:value-of select="$src"/>
+              <xsl:value-of select="$src" />
             </xsl:with-param>
           </xsl:call-template>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="object">
             <xsl:with-param name="width">
-              <xsl:value-of select="$width"/>
+              <xsl:value-of select="$width" />
             </xsl:with-param>
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:if test="$hideCaption != 'true' and (((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '')) or (@popup = 'true'))">
         <div>
-          <xsl:value-of select="xhtml:div[@class = 'caption']"/>
+          <xsl:value-of select="xhtml:div[@class = 'caption']" />
           <xsl:if test="((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != ''))">
             <xsl:text> </xsl:text>
           </xsl:if>
@@ -229,108 +229,170 @@
 
   <!-- this template should handle all objects -->
   <xsl:template name="object">
-    <xsl:param name="width"/>
-    <xsl:param name="height" select="@height"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" select="@height" />
     <xsl:param name="src">
       <xsl:choose>
         <xsl:when test="starts-with(@data, 'http')">
-          <xsl:value-of select="@data"/>
+          <xsl:value-of select="@data" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="concat($nodeid, '/', @data)"/>
+          <xsl:value-of select="concat($nodeid, '/', @data)" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:param>
-    <xsl:param name="href" select="@href"/>
-    <xsl:param name="autoplay" select="@autoplay"/>
-    <xsl:param name="controller" select="@controller"/>
+    <xsl:param name="href" select="@href" />
+    <xsl:param name="autoplay" select="@autoplay" />
+    <xsl:param name="controller" select="@controller" />
     <xsl:variable name="alt">
       <xsl:choose>
         <xsl:when test="@title != ''">
-          <xsl:value-of select="@title"/>
+          <xsl:value-of select="@title" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="dc:metadata/dc:title"/>
+          <xsl:value-of select="dc:metadata/dc:title" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name="suffix">
       <xsl:call-template name="substring-after-last">
-        <xsl:with-param name="input" select="$src"/>
+        <xsl:with-param name="input" select="$src" />
         <xsl:with-param name="substr">.</xsl:with-param>
       </xsl:call-template>
     </xsl:variable>
     <xsl:choose>
-      <xsl:when test="$suffix = 'mov'">
+      <xsl:when test="$suffix = 'mov' or $suffix = 'mp4' or $suffix = 'm4v'">
         <xsl:call-template name="objectQuickTimeVideo">
-          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="width" select="$width" />
           <xsl:with-param name="height">
             <xsl:choose>
               <xsl:when test="$controller = 'false'">
-                <xsl:value-of select="$height"/>
+                <xsl:value-of select="$height" />
               </xsl:when>
               <xsl:otherwise>
-                <xsl:value-of select="$height + 16"/>
+                <xsl:value-of select="$height + 16" />
               </xsl:otherwise>
             </xsl:choose>
           </xsl:with-param>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="controller" select="$controller"/>
-          <xsl:with-param name="autoplay" select="$autoplay"/>
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="type">
+            <xsl:choose>
+              <xsl:when test="@type != ''">
+                <xsl:value-of select="@type" />
+              </xsl:when>
+              <xsl:when test="$suffix = 'mov'">
+                <xsl:text>video/quicktime</xsl:text>
+              </xsl:when>
+              <xsl:when test="$suffix = 'mp4'">
+                <xsl:text>video/mp4</xsl:text>
+              </xsl:when>
+              <xsl:when test="$suffix = 'm4v'">
+                <xsl:text>video/x-m4v</xsl:text>
+              </xsl:when>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="controller" select="$controller" />
+          <xsl:with-param name="autoplay" select="$autoplay" />
         </xsl:call-template>
       </xsl:when>
       <xsl:when test="$suffix = 'wmv' or $suffix = 'asf'">
         <xsl:call-template name="objectWindowsMediaVideo">
-          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="width" select="$width" />
           <xsl:with-param name="height">
             <xsl:choose>
               <xsl:when test="$controller = 'false'">
-                <xsl:value-of select="$height"/>
+                <xsl:value-of select="$height" />
               </xsl:when>
               <xsl:otherwise>
-                <xsl:value-of select="$height + 46"/>
+                <xsl:value-of select="$height + 46" />
               </xsl:otherwise>
             </xsl:choose>
           </xsl:with-param>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="controller" select="$controller"/>
-          <xsl:with-param name="autoplay" select="$autoplay"/>
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="type">
+            <xsl:choose>
+              <xsl:when test="@type != ''">
+                <xsl:value-of select="@type" />
+              </xsl:when>
+              <xsl:when test="$suffix = 'wmv'">
+                <xsl:text>video/x-ms-wmv</xsl:text>
+              </xsl:when>
+              <xsl:when test="$suffix = 'asf'">
+                <xsl:text>video/x-ms-asf</xsl:text>
+              </xsl:when>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="controller" select="$controller" />
+          <xsl:with-param name="autoplay" select="$autoplay" />
         </xsl:call-template>
       </xsl:when>
       <xsl:when test="$suffix = 'rm'">
         <xsl:call-template name="objectRealMediaVideo">
-          <xsl:with-param name="width" select="$width"/>
-          <xsl:with-param name="height" select="$height"/>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="controller" select="$controller"/>
-          <xsl:with-param name="autoplay" select="$autoplay"/>
+          <xsl:with-param name="width" select="$width" />
+          <xsl:with-param name="height" select="$height" />
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="type">
+            <xsl:choose>
+              <xsl:when test="@type != ''">
+                <xsl:value-of select="@type" />
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>application/vnd.rn-realmedia</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="controller" select="$controller" />
+          <xsl:with-param name="autoplay" select="$autoplay" />
         </xsl:call-template>
       </xsl:when>
       <xsl:when test="$suffix = 'swf' or starts-with(@data, 'http://www.youtube.com/')">
         <xsl:call-template name="objectShockwaveFlash">
-          <xsl:with-param name="width" select="$width"/>
-          <xsl:with-param name="height" select="$height"/>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="controller" select="$controller"/>
-          <xsl:with-param name="autoplay" select="$autoplay"/>
+          <xsl:with-param name="width" select="$width" />
+          <xsl:with-param name="height" select="$height" />
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="type">
+            <xsl:choose>
+              <xsl:when test="@type != ''">
+                <xsl:value-of select="@type" />
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>application/x-shockwave-flash</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="controller" select="$controller" />
+          <xsl:with-param name="autoplay" select="$autoplay" />
         </xsl:call-template>
       </xsl:when>
-      <xsl:when test="$suffix = 'mp3'">
+      <xsl:when test="$suffix = 'mp3' or $suffix = 'm4a'">
         <xsl:call-template name="objectQuickTimeAudio">
-          <xsl:with-param name="width" select="$width"/>
-          <xsl:with-param name="height" select="$height"/>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="controller" select="$controller"/>
-          <xsl:with-param name="autoplay" select="$autoplay"/>
+          <xsl:with-param name="width" select="$width" />
+          <xsl:with-param name="height" select="$height" />
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="type">
+            <xsl:choose>
+              <xsl:when test="@type != ''">
+                <xsl:value-of select="@type" />
+              </xsl:when>
+              <xsl:when test="$suffix = 'mp3'">
+                <xsl:text>audio/mpeg</xsl:text>
+              </xsl:when>
+              <xsl:when test="$suffix = 'm4a'">
+                <xsl:text>audio/x-m4a</xsl:text>
+              </xsl:when>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="controller" select="$controller" />
+          <xsl:with-param name="autoplay" select="$autoplay" />
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="objectImage">
-          <xsl:with-param name="width" select="$width"/>
-          <xsl:with-param name="height" select="$height"/>
-          <xsl:with-param name="src" select="$src"/>
-          <xsl:with-param name="href" select="$href"/>
-          <xsl:with-param name="alt" select="$alt"/>
+          <xsl:with-param name="width" select="$width" />
+          <xsl:with-param name="height" select="$height" />
+          <xsl:with-param name="src" select="$src" />
+          <xsl:with-param name="href" select="$href" />
+          <xsl:with-param name="alt" select="$alt" />
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -338,11 +400,11 @@
 
 
   <xsl:template name="objectImage">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="href"/>
-    <xsl:param name="alt"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="href" />
+    <xsl:param name="alt" />
 
     <xsl:choose>
       <xsl:when test="$rendertype = 'imageupload'">
@@ -350,12 +412,12 @@
           <img src="{$src}" alt="{$alt}">
             <xsl:if test="$width">
               <xsl:attribute name="width">
-                <xsl:value-of select="$width"/>
+                <xsl:value-of select="$width" />
               </xsl:attribute>
             </xsl:if>
             <xsl:if test="$height">
               <xsl:attribute name="height">
-                <xsl:value-of select="$height"/>
+                <xsl:value-of select="$height" />
               </xsl:attribute>
             </xsl:if>
           </img>
@@ -366,12 +428,12 @@
           <img src="{$src}" alt="{$alt}">
             <xsl:if test="$width">
               <xsl:attribute name="width">
-                <xsl:value-of select="$width"/>
+                <xsl:value-of select="$width" />
               </xsl:attribute>
             </xsl:if>
             <xsl:if test="$height">
               <xsl:attribute name="height">
-                <xsl:value-of select="$height"/>
+                <xsl:value-of select="$height" />
               </xsl:attribute>
             </xsl:if>
           </img>
@@ -381,12 +443,12 @@
         <img src="{$src}" alt="{$alt}">
           <xsl:if test="$width">
             <xsl:attribute name="width">
-              <xsl:value-of select="$width"/>
+              <xsl:value-of select="$width" />
             </xsl:attribute>
           </xsl:if>
           <xsl:if test="$height">
             <xsl:attribute name="height">
-              <xsl:value-of select="$height"/>
+              <xsl:value-of select="$height" />
             </xsl:attribute>
           </xsl:if>
         </img>
@@ -396,22 +458,27 @@
 
 
   <xsl:template name="objectQuickTimeVideo">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="autoplay"/>
-    <xsl:param name="controller"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="type" />
+    <xsl:param name="autoplay" />
+    <xsl:param name="controller" />
     <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
       <xsl:attribute name="width">
-        <xsl:value-of select="$width"/>
+        <xsl:value-of select="$width" />
       </xsl:attribute>
       <xsl:attribute name="height">
-        <xsl:value-of select="$height"/>
+        <xsl:value-of select="$height" />
       </xsl:attribute>
-      <param name="type" value="video/quicktime"/>
+      <param name="type">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
+      </param>
       <param name="src">
         <xsl:attribute name="value">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
       </param>
       <param name="autoplay">
@@ -430,15 +497,18 @@
           </xsl:choose>
         </xsl:attribute>
       </param>
-      <embed type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/">
+      <embed pluginspage="http://www.apple.com/quicktime/download/">
+        <xsl:attribute name="type">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
         <xsl:attribute name="src">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
         <xsl:attribute name="width">
-          <xsl:value-of select="$width"/>
+          <xsl:value-of select="$width" />
         </xsl:attribute>
         <xsl:attribute name="height">
-          <xsl:value-of select="$height"/>
+          <xsl:value-of select="$height" />
         </xsl:attribute>
         <xsl:attribute name="autoplay">
           <xsl:choose>
@@ -458,22 +528,27 @@
 
 
   <xsl:template name="objectWindowsMediaVideo">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="autoplay"/>
-    <xsl:param name="controller"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="type" />
+    <xsl:param name="autoplay" />
+    <xsl:param name="controller" />
     <object classid="clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=x,x,x,x">
       <xsl:attribute name="width">
-        <xsl:value-of select="$width"/>
+        <xsl:value-of select="$width" />
       </xsl:attribute>
       <xsl:attribute name="height">
-        <xsl:value-of select="$height"/>
+        <xsl:value-of select="$height" />
       </xsl:attribute>
-      <param name="type" value="video/x-Ms-WMV" />
+      <param name="type">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
+      </param>
       <param name="url">
         <xsl:attribute name="value">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
       </param>
       <param name="autostart">
@@ -500,15 +575,18 @@
           </xsl:choose>
         </xsl:attribute>
       </param>
-      <embed type="video/x-Ms-WMV" pluginspage="http://www.microsoft.com/windows/windowsmedia/">
+      <embed pluginspage="http://www.microsoft.com/windows/windowsmedia/">
+        <xsl:attribute name="type">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
         <xsl:attribute name="src">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
         <xsl:attribute name="width">
-          <xsl:value-of select="$width"/>
+          <xsl:value-of select="$width" />
         </xsl:attribute>
         <xsl:attribute name="height">
-          <xsl:value-of select="$height"/>
+          <xsl:value-of select="$height" />
         </xsl:attribute>
         <xsl:attribute name="autostart">
           <xsl:choose>
@@ -534,22 +612,27 @@
 
 
   <xsl:template name="objectRealMediaVideo">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="autoplay"/>
-    <xsl:param name="controller"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="type" />
+    <xsl:param name="autoplay" />
+    <xsl:param name="controller" />
     <object classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" id="RAOCX01">
       <xsl:attribute name="width">
-        <xsl:value-of select="$width"/>
+        <xsl:value-of select="$width" />
       </xsl:attribute>
       <xsl:attribute name="height">
-        <xsl:value-of select="$height"/>
+        <xsl:value-of select="$height" />
       </xsl:attribute>
-      <param name="type" value="application/vnd.rn-realmedia" />
+      <param name="type">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
+      </param>
       <param name="src">
         <xsl:attribute name="value">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
       </param>
       <param name="autostart">
@@ -562,15 +645,18 @@
       </param>
       <param name="controls" value="imagewindow" />
       <param name="console" value="delta" />
-      <embed type="application/vnd.rn-realmedia">
+      <embed>
+        <xsl:attribute name="type">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
         <xsl:attribute name="src">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
         <xsl:attribute name="width">
-          <xsl:value-of select="$width"/>
+          <xsl:value-of select="$width" />
         </xsl:attribute>
         <xsl:attribute name="height">
-          <xsl:value-of select="$height"/>
+          <xsl:value-of select="$height" />
         </xsl:attribute>
         <xsl:attribute name="autostart">
           <xsl:choose>
@@ -583,28 +669,28 @@
       </embed>
     </object>
     <xsl:choose>
-      <xsl:when test="$controller = 'false'"/>
+      <xsl:when test="$controller = 'false'" />
       <xsl:otherwise>
         <object width="416" height="26" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" id="RAOCX02">
           <xsl:attribute name="width">
-            <xsl:value-of select="$width"/>
+            <xsl:value-of select="$width" />
           </xsl:attribute>
           <xsl:attribute name="height">
-            <xsl:value-of select="26"/>
+            <xsl:value-of select="26" />
           </xsl:attribute>
           <param name="controls" value="controlpanel" />
           <param name="console" value="delta" />
           <embed>
             <xsl:attribute name="src">
-              <xsl:value-of select="$src"/>
+              <xsl:value-of select="$src" />
             </xsl:attribute>
             <xsl:attribute name="controls">controlpanel</xsl:attribute>
             <xsl:attribute name="console">delta</xsl:attribute>
             <xsl:attribute name="width">
-              <xsl:value-of select="$width"/>
+              <xsl:value-of select="$width" />
             </xsl:attribute>
             <xsl:attribute name="height">
-              <xsl:value-of select="26"/>
+              <xsl:value-of select="26" />
             </xsl:attribute>
           </embed>
         </object>
@@ -614,33 +700,41 @@
 
 
   <xsl:template name="objectShockwaveFlash">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="autoplay"/>
-    <xsl:param name="controller"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="type" />
+    <xsl:param name="autoplay" />
+    <xsl:param name="controller" />
     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
       <xsl:attribute name="width">
-        <xsl:value-of select="$width"/>
+        <xsl:value-of select="$width" />
       </xsl:attribute>
       <xsl:attribute name="height">
-        <xsl:value-of select="$height"/>
+        <xsl:value-of select="$height" />
       </xsl:attribute>
-      <param name="type" value="application/x-shockwave-flash" />
-      <param name="movie">
+      <param name="type">
         <xsl:attribute name="value">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$type" />
         </xsl:attribute>
       </param>
-      <embed type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
+      <param name="movie">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$src" />
+        </xsl:attribute>
+      </param>
+      <embed pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
+        <xsl:attribute name="type">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
         <xsl:attribute name="src">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
         <xsl:attribute name="width">
-          <xsl:value-of select="$width"/>
+          <xsl:value-of select="$width" />
         </xsl:attribute>
         <xsl:attribute name="height">
-          <xsl:value-of select="$height"/>
+          <xsl:value-of select="$height" />
         </xsl:attribute>
       </embed>
     </object>
@@ -648,22 +742,27 @@
 
 
   <xsl:template name="objectQuickTimeAudio">
-    <xsl:param name="width"/>
-    <xsl:param name="height"/>
-    <xsl:param name="src"/>
-    <xsl:param name="autoplay"/>
-    <xsl:param name="controller"/>
+    <xsl:param name="width" />
+    <xsl:param name="height" />
+    <xsl:param name="src" />
+    <xsl:param name="type" />
+    <xsl:param name="autoplay" />
+    <xsl:param name="controller" />
     <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
       <xsl:attribute name="width">
-        <xsl:value-of select="$width"/>
+        <xsl:value-of select="$width" />
       </xsl:attribute>
       <xsl:attribute name="height">
-        <xsl:value-of select="16"/>
+        <xsl:value-of select="16" />
       </xsl:attribute>
-      <param name="type" value="audio/mpeg"/>
+      <param name="type">
+        <xsl:attribute name="value">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
+      </param>
       <param name="src">
         <xsl:attribute name="value">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
       </param>
       <param name="autoplay">
@@ -676,18 +775,21 @@
       </param>
       <param name="controller">
         <xsl:attribute name="value">
-          <xsl:value-of select="'true'"/>
+          <xsl:value-of select="'true'" />
         </xsl:attribute>
       </param>
-      <embed type="audio/mpeg" pluginspage="http://www.apple.com/quicktime/download/">
+      <embed pluginspage="http://www.apple.com/quicktime/download/">
+        <xsl:attribute name="type">
+          <xsl:value-of select="$type" />
+        </xsl:attribute>
         <xsl:attribute name="src">
-          <xsl:value-of select="$src"/>
+          <xsl:value-of select="$src" />
         </xsl:attribute>
         <xsl:attribute name="width">
-          <xsl:value-of select="$width"/>
+          <xsl:value-of select="$width" />
         </xsl:attribute>
         <xsl:attribute name="height">
-          <xsl:value-of select="16"/>
+          <xsl:value-of select="16" />
         </xsl:attribute>
         <xsl:attribute name="autoplay">
           <xsl:choose>
@@ -696,7 +798,7 @@
           </xsl:choose>
         </xsl:attribute>
         <xsl:attribute name="controller">
-          <xsl:value-of select="'true'"/>
+          <xsl:value-of select="'true'" />
         </xsl:attribute>
       </embed>
     </object>
@@ -704,22 +806,22 @@
 
 
   <xsl:template name="width-attribute">
-    <xsl:param name="width-default"/>
+    <xsl:param name="width-default" />
     <xsl:choose>
       <xsl:when test="not(@width) or (@width = '') or contains(@width, 'px')">
-        <xsl:value-of select="$width-default"/>
+        <xsl:value-of select="$width-default" />
       </xsl:when>
-      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 1) and (@width > 800)">
+      <xsl:when test="(/document/content/*/@unizh:columns = 1) and (@width > 800)">
         <xsl:text>800</xsl:text>
       </xsl:when>
-      <xsl:when test="(/document/content/xhtml:html/@unizh:columns = 2) and (@width > 615)">
+      <xsl:when test="(/document/content/*/@unizh:columns = 2) and (@width > 615)">
         <xsl:text>615</xsl:text>
       </xsl:when>
-      <xsl:when test="((/document/content/xhtml:html/@unizh:columns = 3) or (/document/content/unizh:homepage)) and (@width > 416)">
+      <xsl:when test="((/document/content/*/@unizh:columns = 3) or (/document/content/unizh:homepage)) and (@width > 416)">
         <xsl:text>416</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="@width"/>
+        <xsl:value-of select="@width" />
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

@@ -232,6 +232,9 @@
           <xsl:when test="(starts-with(@href, 'http://') or starts-with(@href, 'https://')) and ((contains(@href, '.unizh.ch')) or (contains(@href, '.uzh.ch')))">
             <xsl:text>uzh</xsl:text>
           </xsl:when>
+          <xsl:when test="starts-with(@href, 'itpc://')">
+            <xsl:text>podcast</xsl:text>
+          </xsl:when>
           <xsl:when test="/document/unizh:ancestors/unizh:ancestor[1]/@href = @href">
             <xsl:text>back</xsl:text>
           </xsl:when>
@@ -342,6 +345,9 @@
                   </xsl:when>
                   <xsl:when test="(starts-with(unizh:title/@href, 'http://') or starts-with(unizh:title/@href, 'https://')) and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
                     <xsl:text>uzh</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="starts-with(@href, 'itpc://')">
+                    <xsl:text>podcast</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
                      <xsl:text>internal</xsl:text>

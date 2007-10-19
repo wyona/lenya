@@ -421,7 +421,7 @@
           <map:parameter name="channelhome" value="{proxy-url:{page-envelope:area}:/{2}:{page-envelope:document-language}}"/>
           <map:parameter name="channelpath" value="{2}"/>
         </map:transform>
-        <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+        <!--map:transform src="../../xslt/util/strip_namespaces.xsl"/-->
         <map:serialize type="xml-rss"/>
       </map:match>
 
