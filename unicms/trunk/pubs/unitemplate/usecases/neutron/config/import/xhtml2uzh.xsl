@@ -126,9 +126,9 @@
 
   <xsl:template match="xhtml:table">
     <table class="grid">
-      <xsl:for-each select="tr|tbody/tr">
+      <xsl:for-each select="xhtml:tr|xhtml:tbody/xhtml:tr">
         <tr>
-          <xsl:for-each select="td">
+          <xsl:for-each select="xhtml:td">
             <td rowspan="{@rowspan}" colspan="{@colspan}"><xsl:apply-templates/></td>
           </xsl:for-each>
         </tr>
