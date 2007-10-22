@@ -183,7 +183,7 @@
                   <xsl:text> </xsl:text>
                   <xsl:value-of select="substring($creationdate, 26, 4)" />
                   <xsl:text> </xsl:text>
-                  <xsl:value-of select="substring($creationdate, 12, 8)" />
+                  <xsl:value-of select="substring($creationdate, 12, 13)" />
                 </xsl:otherwise>
               </xsl:choose>
             </pubDate>
