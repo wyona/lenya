@@ -14,281 +14,310 @@ importClass(Packages.org.apache.lenya.cms.publication.ResourcesManager);
 importClass(Packages.org.apache.lenya.cms.publication.PublicationHelper);
 
 
-function selectExportMode() {
+function exportLesson() {
 
-  /* Obtain document from page envelope */
-  var flowHelper = new FlowHelper();
-  var doc = flowHelper.getPageEnvelope(cocoon).getDocument();
+  var exporter = new LessonExporter(); 
+  exporter.run(); 
 
-  /* Send mode selection screen */
-  var label = doc.getLabel();
-  cocoon.sendPageAndWait("select.jx", {"label" : label});
-
-  /* Enter requested export mode  */
-  var mode = cocoon.request.getParameter("mode");
-
-  if (mode.equals("source")) {
-    exportSource(doc);
-  } else if (mode.equals("cp")) {
-    exportCP(doc);
-  } else if (mode.equals("pdf")){
-    exportPDF(doc);
-  }
 }
 
 
-
-/* Export to eLML Source */
-
-function exportSource(doc) {
-
-  var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
-  var flowHelper = new FlowHelper();
-  var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
+function LessonExporter() {
 
 
-  var pub = doc.getPublication();
-  var languages = new Array();
+}
 
-  var filename = doc.getName() + ".zip";
-  
-  var resManager = new ResourcesManager(doc);
-  var zipPath = resManager.getPath().getAbsolutePath() + "/" + filename;
-  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-  var source = resolver.resolveURI(zipPath);
+LessonExporter.prototype = {
 
-  var out = new ZipOutputStream(source.getOutputStream());
+  run: function() {
+ 
+    var flowHelper = new FlowHelper();
+    var lesson = flowHelper.getPageEnvelope(cocoon).getDocument();
 
-  var languages = doc.getLanguages();
+    /* Display initial export screen */
+    cocoon.sendPageAndWait("select.jx", {"label" : lesson.getLabel()});
 
-  for (var i=0; i < languages.length; i++) { 
+    var mode = cocoon.request.getParameter("mode");
 
-    var language = languages[i];
-    var lessonPath = doc.getId() + "/index_" + language + ".xml";
-    var assets = new ArrayList();
-
-    cocoon.log.error("Current language: " + language + "\n");
-
-    var lessonDOM = pipelineUtil.processToDOM("xml/" + lessonPath, null);
-    var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
-
-    var resMgr = new ResourcesManager(doc);
-    var assetsPath = resMgr.getPath().getAbsolutePath();
-    var assetNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
-
-    for (var j = 0; j < assetNodes.length; j++) {
-      var assetNode = assetNodes.item(j);
-      var assetName = assetNode.getAttribute("src");
-      var dir = getAssetExportDir(assetName);
-      var asset = new File(assetsPath + "/" + assetName);
-
-      if (asset.exists()) {
-        cocoon.log.error("Asset exists: " + asset.exists());
-          
-        assets.add({"src" : assetsPath + "/" + assetName, "dest" : dir + "/" + assetName});
-        assetNode.setAttribute("src", "../" + dir + "/" + assetName); // FIXME: path configuration
-      }
+    if (mode == "source") {
+      this.exportSource(lesson); 
+    } else if (mode == "cp") { 
+      this.exportCP(lesson); 
+    } else if (mode == "pdf") {
+      this.exportPDF(lesson); 
     }
 
-    var zipEntry = new ZipEntry(doc.getName() + "/" + language + "/text/" + doc.getName() + ".xml");
-    out.putNextEntry(zipEntry);
-   
-    cocoon.processPipelineTo("lesson.jx", {"dom": lessonNode}, out);
+  },
 
-    for (var j = 0; j < assets.size(); j++) {
-      var src = assets.get(j).src;
-      var dest = assets.get(j).dest;
-      var source = resolver.resolveURI(src);
-      var is = source.getInputStream();
-      
-      var assetName = doc.getName() + "/" + language + "/" + dest;
-      cocoon.log.error("Asset: " + assetName + "\n");
-      var zipEntry = new ZipEntry(assetName);
+
+  exportSource: function(aLesson) {
+
+    var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+    var flowHelper = new FlowHelper();
+    var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
+    var resourcesManager = new ResourcesManager(aLesson);
+    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
+
+    var pub = aLesson.getPublication();
+    var languages = aLesson.getLanguages();
+
+
+    var test = ""; 
+    for (var i=0; i < languages.length; i++) 
+      test += languages[i]; 
+
+
+    var assetsPath = resourcesManager.getPath().getAbsolutePath();
+
+    var filename = aLesson.getName() + ".zip";
+    var zipPath = assetsPath + "/" + filename;
+
+
+    var source = resolver.resolveURI(zipPath);
+    var out = new ZipOutputStream(source.getOutputStream());
+
+    /* Export language versions */
+  
+    for (var i=0; i < languages.length; i++) {
+
+      var language = languages[i];
+      var lessonPath = aLesson.getId() + "/index_" + language + ".xml";
+      var assets = new ArrayList();
+
+      /* Pre process lesson : rewrite asset paths */
+
+      var lessonDOM = pipelineUtil.processToDOM("xml/" + lessonPath, null);
+      var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
+
+      var assetNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+
+      for (var j = 0; j < assetNodes.length; j++) {
+        var assetNode = assetNodes.item(j);
+        var assetName = assetNode.getAttribute("src");
+        var dir = this.getExportAssetDirectoryName(assetName);
+        var asset = new File(assetsPath + "/" + assetName);
+
+        if (asset.exists()) {
+
+          assets.add({"src" : assetsPath + "/" + assetName, "dest" : dir + "/" + assetName});
+          assetNode.setAttribute("src", "../" + dir + "/" + assetName); // FIXME: path configuration
+        }
+      }
+
+      /* Add lesson to archive */
+
+      var zipEntry = new ZipEntry(aLesson.getName() + "/" + language + "/text/" + aLesson.getName() + ".xml");
       out.putNextEntry(zipEntry);
-      var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-      var len;
 
-      while((len = is.read(buffer)) >= 0)
-        out.write(buffer, 0, len);
-      is.close();
-      
-    } 
+      cocoon.processPipelineTo("lesson.jx", {"dom": lessonNode}, out);
 
-  }
+      /* Add assets to archive */
 
-  out.close();
+      for (var j = 0; j < assets.size(); j++) {
+        var src = assets.get(j).src;
+        var dest = assets.get(j).dest;
+        var source = resolver.resolveURI(src);
+        var is = source.getInputStream();
+
+        var assetName = aLesson.getName() + "/" + language + "/" + dest;
+        var zipEntry = new ZipEntry(assetName);
+        out.putNextEntry(zipEntry);
+        var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+        var len;
+
+        while((len = is.read(buffer)) >= 0)
+          out.write(buffer, 0, len);
+        is.close();
+
+      }
+
+    }
+
+    out.close();
 
 
-  var url = doc.getName() + "/" + filename;
-  var size = Math.round(new File(zipPath).length() / 1024) + " KB";
-  cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
+    var url = aLesson.getName() + "/" + filename;
+    var size = Math.round(new File(zipPath).length() / 1024) + " KB";
+    cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
 
-  cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
+    cocoon.redirectTo(pageEnvelope.getContext() + "/" + aLesson.getCompleteURL());
 
-}
+  },
 
 
+  exportCP: function(aLesson) {
 
- /** Export to IMS Content Package format **/
+    var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+    var sourceUtil = Packages.org.apache.lenya.cms.cocoon.source.SourceUtil;
+    var flowHelper = new FlowHelper();
+    var documentHelper = flowHelper.getDocumentHelper(cocoon);
+    var pub = aLesson.getPublication();
+    var filename = aLesson.getName() + "-cp.zip";
 
-function exportCP(doc) {
+    var resourcesManager = new ResourcesManager(aLesson);
+    var path = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/data/" + filename;
+    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
+    var source = resolver.resolveURI(path);
 
-   var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
-   var sourceUtil = Packages.org.apache.lenya.cms.cocoon.source.SourceUtil;
-   var flowHelper = new FlowHelper();
-   var documentHelper = flowHelper.getDocumentHelper(cocoon);
-   var pub = doc.getPublication();
-   var filename = doc.getName() + "-cp.zip";
-   var resManager = new ResourcesManager(doc);
-   var path = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/data/" + filename;
-   var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-   var source = resolver.resolveURI(path);
+    var documentPath = aLesson.getId() + "/index_" + aLesson.getLanguage() + ".xml";
+    var lessonDOM = pipelineUtil.processToDOM("xml/" + documentPath, null);
+    var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
 
-   var documentPath = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
-   var lessonDOM = pipelineUtil.processToDOM("xml/" + documentPath, null);
-   var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
 
-   var headerHeading = lessonNode.getAttribute("title");
-   cocoon.sendPageAndWait("cp-config.jx", {"header_heading" : headerHeading});
+    /* Display CP configuration dialog */
+    var headerHeading = lessonNode.getAttribute("title");
+    cocoon.sendPageAndWait("cp-config.jx", {"header_heading" : headerHeading});
+
+
+    headerHeading = cocoon.request.get("header_heading");
+    var pagebreakLevel = cocoon.request.get("pagebreak_level");
+    var headerSuperscription = cocoon.request.get("header_superscription");
+
+    var omitHeader = "false";
+    if(cocoon.request.get("omit_header")) {
+      omitHeader = "true";
+    };
+
  
-   headerHeading = cocoon.request.get("header_heading");
-   var pagebreakLevel = cocoon.request.get("pagebreak_level");
-   var headerSuperscription = cocoon.request.get("header_superscription");
+    var pageNodes = new Array();
 
-   var omitHeader = "false";
-   if(cocoon.request.get("omit_header")) {
-     omitHeader = "true";
-   };
+    if (pagebreakLevel == "unit") {
 
+      var childNodes = lessonNode.childNodes;
 
-   var sectionNodes = new Array();
+      for (var i=0; i < childNodes.length; i++) {
+        var childNode = childNodes.item(i);
+        var localName = childNode.localName;
 
-  if (pagebreakLevel == "unit") {
-   
-     var childNodes = lessonNode.childNodes;
-   
-     for (var i=0; i < childNodes.length; i++) {
-       var childNode = childNodes.item(i);
-       var localName = childNode.localName;
-
-       if (localName == "unit" ||
+        if (localName == "unit" ||
            localName == "summary" ||
            localName == "selfAssessment" ||
            localName == "furtherReading" ||
            localName == "glossary" ||
            localName == "bibliography") {
-         sectionNodes.push(childNode);
-       }
-     }
-   }
+           pageNodes.push(childNode);
+        }
+      }
+    }
+    
 
-   // circumvent concurrency check
-   var tmpSource = resolver.resolveURI(path + ".tmp");
-   if (tmpSource.exists())
-     tmpSource["delete"]();
-
-   var out = new ZipOutputStream(source.getOutputStream());
-
-
-   var lessonLabel = lessonNode.getAttribute("label");
-   var lessonTitle = lessonNode.getAttribute("title");
-   var sections = new Array();
-
-   for (var i = 0; i < sectionNodes.length; i++) {
-
-     var node = sectionNodes[i];
-     var label = null;
-     var title = null;
-
-     if (node.hasAttribute("label")) {
-       label = node.getAttribute("label");
-     } else {
-       label = node.localName;
-     }
-
-     if (node.hasAttribute("title")) {
-       title = node.getAttribute("title");
-     } else {
-       var messages = lessonDOM.getElementsByTagName("msg");
-       var hasMessage = false;
-
-       for (var j=0; j < messages.length; j++) {
-         if (messages.item(j).getAttribute("name") == "name_" + node.localName) {
-           title = messages.item(j).textContent;
-           hasMessage = true;
-           break;
-         }
-       }
-
-       if (!hasMessage) {
-         title = node.localName;
-       }
-     }
-
-     var section = new Object();
-     section.label = label;
-     section.title = title;
-     section.type = node.localName;
-     sections.push(section);
-   }
+    // remove cocoon cruft                    
+    var tmpSource = resolver.resolveURI(path + ".tmp");
+    if (tmpSource.exists())
+      tmpSource["delete"]();
 
 
-   /* Document */
-   var zipEntry = new ZipEntry("imsmanifest.xml");
-   out.putNextEntry(zipEntry);
-   cocoon.processPipelineTo("manifest.jx", {"lessonLabel" : lessonLabel, "lessonTitle": lessonTitle, "sections" : sections}, out);
+    /* Create Archive */
+
+    var out = new ZipOutputStream(source.getOutputStream());
 
 
-   zipEntry = new ZipEntry(lessonLabel + ".html");
-   out.putNextEntry(zipEntry);
-   cocoon.processPipelineTo("xhtml/cp", {
-     "pagebreak_level": pagebreakLevel,
-     "section": "",
-     "label": "",
-     "cssdir" : "css",
-     "jsdir" : "js",
-     "imgdir" : "images",
-     "assetdir": "resources",
-     "header_heading": headerHeading,
-     "header_superscription": headerSuperscription,
-     "omit_header": omitHeader},
-      out);
+    var lessonLabel = lessonNode.getAttribute("label");
+    var lessonTitle = lessonNode.getAttribute("title");
+    var pages = new Array();
 
-   for (var i=0; i < sections.length; i++) {
-     var section = sections[i];
-     zipEntry = new ZipEntry(section.label + ".html");
-     cocoon.log.error("Section entry: " + zipEntry + "\n");
-     out.putNextEntry(zipEntry);
-     cocoon.log.error("Creating section: " + pagebreakLevel + ", " + section.type + ", " + section.label + "\n");
-     cocoon.processPipelineTo("xhtml/cp", {
-       "pagebreak_level": pagebreakLevel,
-       "current_section": section.type,
-       "current_label": section.label,
-       "cssdir" : "css",
-       "jsdir" : "js",
-       "imgdir" : "images",
-       "assetdir": "resources", 
-       "header_heading": headerHeading, 
-       "header_superscription": headerSuperscription,
-       "omit_header": omitHeader},
+    for (var i = 0; i < pageNodes.length; i++) {
+
+      var node = pageNodes[i];
+      var label = null;
+      var title = null;
+
+      if (node.hasAttribute("label")) {
+        label = node.getAttribute("label");
+      } else {
+        label = node.localName;
+      }
+
+      if (node.hasAttribute("title")) {
+        title = node.getAttribute("title");
+      } else {
+        var messages = lessonDOM.getElementsByTagName("msg");
+        var hasMessage = false;
+
+        for (var j=0; j < messages.length; j++) {
+          if (messages.item(j).getAttribute("name") == "name_" + node.localName) {
+            title = messages.item(j).textContent;
+            hasMessage = true;
+            break;
+          }
+        }
+
+        if (!hasMessage) {
+          title = node.nodeName;
+        }
+      }
+
+      var page = new Object();
+      page.label = label;
+      page.title = title;
+      page.type = node.localName;
+      pages.push(page);
+    }
+
+
+    /* IMS manifest */
+    var zipEntry = new ZipEntry("imsmanifest.xml");
+    out.putNextEntry(zipEntry);
+    cocoon.processPipelineTo("manifest.jx", {"lessonLabel" : lessonLabel, "lessonTitle": lessonTitle, "pages" : pages}, out);
+
+
+    zipEntry = new ZipEntry(lessonLabel + ".html");
+    out.putNextEntry(zipEntry);
+
+    /* Process index page */
+
+    cocoon.processPipelineTo("xhtml/cp", {
+      "pagebreak_level": pagebreakLevel,
+      "section": "",
+      "label": "",
+      "cssdir" : "css",
+      "jsdir" : "js",
+      "imgdir" : "images",
+      "assetdir": "resources",
+      "header_heading": headerHeading,
+      "header_superscription": headerSuperscription,
+      "omit_header": omitHeader},
        out);
-   }
 
 
-   /* Resources */
-   var assets = resManager.getResources();
-   for (var i = 0; i < assets.length; i++) {
+    /* Process individual pages */
+
+    for (var i=0; i < pages.length; i++) {
+      var page = pages[i];
+      zipEntry = new ZipEntry(page.label + ".html");
+      out.putNextEntry(zipEntry);
+
+      cocoon.processPipelineTo("xhtml/cp", {
+        "pagebreak_level": pagebreakLevel,
+        "current_section": page.type,
+        "current_label": page.label,
+        "cssdir" : "css",
+        "jsdir" : "js",
+        "imgdir" : "images",
+        "assetdir": "resources",
+        "header_heading": headerHeading,
+        "header_superscription": headerSuperscription,
+        "omit_header": omitHeader},
+        out);
+    }
+
+
+    /* Process assets */
+    var assets = resourcesManager.getResources();
+
+    for (var i = 0; i < assets.length; i++) {
 
      var source = resolver.resolveURI(assets[i].getAbsolutePath());
      var dir = null;
 
-     if (assets[i].getName() == filename) continue;  // exclude existing cp-archive from being copied into new archive
+     if (assets[i].getName() == filename) continue;  // exclude existing cp-archive from being copied into archive
 
      if (assets[i].getName().indexOf(".swf") > -1) {  // FIXME: Test for mimeType
        dir = "resources";
      } else {
        dir = "images";
      }
+
      var zipEntry = new ZipEntry(dir + "/" + assets[i].getName());
      out.putNextEntry(zipEntry);
 
@@ -301,7 +330,7 @@ function exportCP(doc) {
    }
 
 
-   /* Add static resources (images, css) used by document layout to the archive */
+   /* Add static resources (images, css) used by document layout to archive */
 
    var imgPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/images";
    var dir = new File(imgPath);
@@ -320,9 +349,9 @@ function exportCP(doc) {
        is.close();
      }
    }
-    
-   
-  var cssPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/css";
+
+
+   var cssPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/css";
    var dir = new File(cssPath);
    var files = dir.listFiles();
    if (files != null) {
@@ -340,7 +369,7 @@ function exportCP(doc) {
      }
    }
 
-   
+  
    var jsPath = pub.getDirectory().getAbsolutePath() + "/usecases/elml/export/cp/resources/js";
    var dir = new File(jsPath);
    var files = dir.listFiles();
@@ -358,155 +387,107 @@ function exportCP(doc) {
        is.close();
      }
    }
-   
+
    out.close();
- 
-   var destPath = resManager.getPath().getAbsolutePath() + "/" + filename;
-   var tmpDest = resolver.resolveURI(destPath + ".tmp");
-   if (tmpDest.exists())
-     tmpDests["delete"]();
- 
+
+
+   // Copy archive to assets and display confirmation screen
+
+   var destPath = resourcesManager.getPath().getAbsolutePath() + "/" + filename;
    sourceUtil.copy(resolver, path, destPath);
 
 
-   var url = doc.getName() + "/" + filename;
+   var url = aLesson.getName() + "/" + filename;
    var size = Math.round(new File(path).length() / 1024) + " KB";
    cocoon.sendPageAndWait("download.jx", {"url" : url, "filename" : filename, "length": size});
 
-   cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
-
-}
+   cocoon.redirectTo(pageEnvelope.getContext() + "/" + aLesson.getCompleteURL());
 
 
-function exportPDF(doc) {
-
-  var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
-  var pub = doc.getPublication();
-  var filename = doc.getName() + ".pdf";
-  var resManager = new ResourcesManager(doc);
-  var pdfFile = resManager.getPath().getAbsolutePath() + "/" + filename;
-  var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
-  var source = resolver.resolveURI(pdfFile);
-
-  /* Process lesson document to dom */
-
-  var path = doc.getId() + "/index_" + doc.getLanguage() + ".xml";
-  var lessonDOM = pipelineUtil.processToDOM("xml/" + path, null);
-  var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
+  },
 
 
-  /* Rewrite multimedia tags */
+  exportPDF: function(aLesson) {
 
-  var multimediaNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
+    var pipelineUtil = cocoon.createObject(Packages.org.apache.cocoon.components.flow.util.PipelineUtil);
+    var pub = aLesson.getPublication();
+    var filename = aLesson.getName() + ".pdf";
+    var resourcesManager = new ResourcesManager(aLesson);
+    var pdfFile = resourcesManager.getPath().getAbsolutePath() + "/" + filename;
+    var resolver = cocoon.getComponent(Packages.org.apache.excalibur.source.SourceResolver.ROLE);
 
-  for (var i = 0; i < multimediaNodes.length; i++) {
-    var multimediaNode = multimediaNodes.item(i);
-    var src = multimediaNode.getAttribute("src");
-    multimediaNode.setAttribute("src", resManager.getPath().getAbsolutePath() + "/" + src);
-  }
+    var source = resolver.resolveURI(pdfFile);
 
-  var label = doc.getLabel();
-  var units = new ArrayList();
+    var path = aLesson.getId() + "/index_" + aLesson.getLanguage() + ".xml";
+    var lessonDOM = pipelineUtil.processToDOM("xml/" + path, null);
+    var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);  
 
-  var unitNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "unit");
-  for (var i = 0; i < unitNodes.length; i++) {
-    units.add(unitNodes.item(i));
-  }
+    /* Rewrite multimedia tags */
 
-  cocoon.sendPageAndWait("pdf/configure.jx", {"label" : label, "units" : units});
+    var multimediaNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
 
-  var role = cocoon.request.get("role");
-  var publisher = cocoon.request.get("publisher");
-  var author = cocoon.request.get("author");
-  var url = cocoon.request.get("url");
-  var pagebreak_level = cocoon.request.get("pagebreak_level");
-  var chapter_numbers = cocoon.request.get("chapter_numbers");
-  var font = cocoon.request.get("font");
-  var optional_units = "";
+    for (var i = 0; i < multimediaNodes.length; i++) {
+      var multimediaNode = multimediaNodes.item(i);
+      var src = multimediaNode.getAttribute("src");
+      multimediaNode.setAttribute("src", resourcesManager.getPath().getAbsolutePath() + "/" + src);
+    }
 
-  var date = new Date();
-  var yearMonth = "" + date.getMonth() + ". " + date.getFullYear();
+    var label = aLesson.getLabel();
+    var units = new ArrayList();
 
-  for (var i = 0; i < unitNodes.length; i++) {
-    var label = unitNodes.item(i).getAttribute("label");
-    if (cocoon.request.get(label)) {
-      optional_units += unitNodes.item(i).getAttribute("label");
+    var unitNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "unit");
+    for (var i = 0; i < unitNodes.length; i++) {
+      units.add(unitNodes.item(i));
+    }
+
+    cocoon.sendPageAndWait("pdf/configure.jx", {"label" : label, "units" : units});
+
+    var role = cocoon.request.get("role");
+    var publisher = cocoon.request.get("publisher");
+    var author = cocoon.request.get("author");
+    var url = cocoon.request.get("url");
+    var pagebreak_level = cocoon.request.get("pagebreak_level");
+    var chapter_numbers = cocoon.request.get("chapter_numbers");
+    var font = cocoon.request.get("font");
+    var optional_units = "";
+
+    var date = new Date();
+    var yearMonth = "" + date.getMonth() + ". " + date.getFullYear();
+
+    for (var i = 0; i < unitNodes.length; i++) {
+      var label = unitNodes.item(i).getAttribute("label");
+      if (cocoon.request.get(label)) {
+        optional_units += unitNodes.item(i).getAttribute("label");
+      }
+    }
+
+    var out = source.getOutputStream();
+
+    cocoon.processPipelineTo("pdf/", {"dom": lessonNode, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "font" : font, "optional_units": optional_units}, out);
+    out.close();
+
+    var url = aLesson.getName() + "/" + filename;
+    var size = Math.round(new File(pdfFile).length() / 1024) + " KB";
+    cocoon.sendPageAndWait("pdf/download.jx", {"url" : url, "filename" : filename, "length": size});
+
+    cocoon.redirectTo(pageEnvelope.getContext() + "/" + aLesson.getCompleteURL());
+
+  },
+
+
+  getExportAssetDirectoryName: function (assetName) {
+
+    var suffix = assetName.substring(assetName.indexOf(".") + 1);
+
+    if (suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("gif") || suffix.equals("png")) {
+      return "image";
+    } else {
+      return "multimedia";
     }
   }
 
-   var out = source.getOutputStream();
-
-   cocoon.processPipelineTo("pdf/", {"dom": lessonNode, "date": yearMonth, "role": role, "publisher": publisher, "author" : author, "url": url, "pagebreak_level" : pagebreak_level, "chapter_numbers" : chapter_numbers, "font" : font, "optional_units": optional_units}, out);
-   out.close();
-
-   var url = doc.getName() + "/" + filename;
-   var size = Math.round(new File(pdfFile).length() / 1024) + " KB";
-   cocoon.sendPageAndWait("pdf/download.jx", {"url" : url, "filename" : filename, "length": size});
-
-   cocoon.redirectTo(pageEnvelope.getContext() + "/" + doc.getCompleteURL());
-
 }
 
-
-function getAssetExportDir(assetName) {
-  // FIXME: use metadata to obtain mimeType. Define constants for dir names.
-  var suffix = assetName.substring(assetName.indexOf(".") + 1);
-  if (suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("gif") || suffix.equals("png")) {
-    return "image";
-  } else {
-    return "multimedia";
-  }
-}
-
-function getChildren(doc)  {
-
-  var docs = new ArrayList();
-  var pub = doc.getPublication();
-  var tree = pub.getTree("authoring");
-  var node = tree.getNode(doc.getId());
-
-  var children = node.getChildren();
-  for (var i = 0; i < children.length; i++) {
-    var doc = buildDocument(children[i].getAbsoluteId(), doc.getLanguage());
-    docs.add(doc);
-  }
-  return docs;
-}
-
-
-function buildDocument(id, lang) {
-
-  var flowHelper = new FlowHelper();
-  var pageEnvelope = flowHelper.getPageEnvelope(cocoon);
-  var pub = pageEnvelope.getPublication();
-  var documentBuilder = pub.getDocumentBuilder();
-  var documentHelper = flowHelper.getDocumentHelper(cocoon);
-
-  if (lang == null) {
-    lang = pub.getDefaultLanguage();
-  }
-
-  var url = documentHelper.getDocumentUrl(id, "authoring", lang);
-  if (url.indexOf("lenya") > -1) {
-    url = url.substring(6); // FIXME: obtain prefix
-  }
-
-  var doc = documentBuilder.buildDocument(pub, url);
-  return doc;
-
-}
-
-
-function getDoctype(doc) {
-
-  var parameterizer = cocoon.getComponent(URIParameterizer.ROLE);
-  var parameters = new Parameters();
-  parameters.setParameter("doctype", "cocoon://uri-parameter/" + doc.getPublication().getId() + "/doctype");
-  var map = parameterizer.parameterize("/authoring" + doc.getDocumentURL(), "/authoring" + doc.getDocumentURL(), parameters);
-
-  var doctype = map.get("doctype");
-  return doctype;
-}
 
 
 function sendStatus(sc) {

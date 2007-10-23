@@ -8,9 +8,9 @@
       <imscp:title>${lessonTitle}</imscp:title>
       <imscp:item identifier="item-${lessonLabel}" identifierref="${lessonLabel}">
         <imscp:title>${lessonTitle}</imscp:title>
-        <jx:forEach var="section" items="${sections}">
-          <imscp:item identifier="item-${section.label}" identifierref="${section.label}">
-            <imscp:title>${section.title}</imscp:title>
+        <jx:forEach var="page" items="${pages}">
+          <imscp:item identifier="item-${page.label}" identifierref="${page.label}">
+            <imscp:title>${page.title}</imscp:title>
           </imscp:item>           
         </jx:forEach>
       </imscp:item>
@@ -18,8 +18,8 @@
   </imscp:organizations>
   <imscp:resources>
     <imscp:resource identifier="${lessonLabel}" type="webcontent" href="${lessonLabel}.html"/>
-    <jx:forEach var="section" items="${sections}">
-      <imscp:resource identifier="${section.label}" type="webcontent" href="${section.label}.html"/>
+    <jx:forEach var="page" items="${pages}">
+      <imscp:resource identifier="${page.label}" type="webcontent" href="${page.label}.html"/>
     </jx:forEach>
   </imscp:resources>
 </imscp:manifest>

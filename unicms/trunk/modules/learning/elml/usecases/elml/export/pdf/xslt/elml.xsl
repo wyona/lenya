@@ -50,7 +50,7 @@
 
 
 
-<xsl:template match="elml:lesson">
+  <xsl:template match="elml:lesson">
   <fo:root font-family="{$body-font-family}">
     <fo:layout-master-set>
       <fo:simple-page-master master-name="default-page" page-height="{$page-height}" page-width="{$page-width}" margin-top="10mm" margin-bottom="10mm" margin-left="10mm" margin-right="10mm">
