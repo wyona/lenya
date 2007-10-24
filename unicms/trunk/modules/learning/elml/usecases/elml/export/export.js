@@ -283,6 +283,8 @@ LessonExporter.prototype = {
     out.putNextEntry(zipEntry);
     cocoon.processPipelineTo("manifest.jx", {"lessonLabel" : lessonLabel, "lessonTitle": lessonTitle, "pages" : pages}, out);
 
+    out.closeEntry(); 
+
 
     zipEntry = new ZipEntry(lessonLabel + ".html");
     out.putNextEntry(zipEntry);
@@ -301,6 +303,8 @@ LessonExporter.prototype = {
       "header_superscription": headerSuperscription,
       "omit_header": omitHeader},
        out);
+
+    out.closeEntry(); 
 
 
     /* Process individual pages */
@@ -324,6 +328,7 @@ LessonExporter.prototype = {
         out);
     }
 
+    out.closeEntry(); 
 
     /* Process assets */
     var assets = resourcesManager.getResources();
@@ -349,6 +354,9 @@ LessonExporter.prototype = {
      var len;
      while((len = is.read(buffer)) >= 0)
        out.write(buffer, 0, len);
+
+     out.closeEntry(); 
+
      is.close();
    }
 
@@ -369,6 +377,9 @@ LessonExporter.prototype = {
        var len;
        while((len = is.read(buffer)) >= 0)
          out.write(buffer, 0, len);
+
+       out.closeEntry(); 
+
        is.close();
      }
    }
@@ -388,6 +399,8 @@ LessonExporter.prototype = {
        var len;
        while((len = is.read(buffer)) >= 0)
          out.write(buffer, 0, len);
+
+       out.closeEntry(); 
        is.close();
      }
    }
@@ -407,6 +420,8 @@ LessonExporter.prototype = {
        var len;
        while((len = is.read(buffer)) >= 0)
          out.write(buffer, 0, len);
+
+       out.closeEntry(); 
        is.close();
      }
    }
