@@ -62,15 +62,21 @@ LessonExporter.prototype = {
     var languages = aLesson.getLanguages();
 
 
-    var test = ""; 
-    for (var i=0; i < languages.length; i++) 
-      test += languages[i]; 
-
-
     var assetsPath = resourcesManager.getPath().getAbsolutePath();
 
     var filename = aLesson.getName() + ".zip";
     var zipPath = assetsPath + "/" + filename;
+
+
+    // override previous version. 
+    var oldArchive = resolver.resolveURI(zipPath);
+    if (oldArchive.exists())
+      oldArchive["delete"]();
+
+    // remove .tmp from failed run 
+    var tmpSource = resolver.resolveURI(zipPath + ".tmp");
+    if (tmpSource.exists())
+      tmpSource["delete"]();
 
 
     var source = resolver.resolveURI(zipPath);
@@ -87,14 +93,17 @@ LessonExporter.prototype = {
       /* Pre process lesson : rewrite asset paths */
 
       var lessonDOM = pipelineUtil.processToDOM("xml/" + lessonPath, null);
+
       var lessonNode = lessonDOM.getElementsByTagNameNS("http://www.elml.ch", "lesson").item(0);
 
       var assetNodes = lessonNode.getElementsByTagNameNS("http://www.elml.ch", "multimedia");
 
       for (var j = 0; j < assetNodes.length; j++) {
         var assetNode = assetNodes.item(j);
-        var assetName = assetNode.getAttribute("src");
+        var assetName = assetNode.getAttribute("src"); 
+
         var dir = this.getExportAssetDirectoryName(assetName);
+
         var asset = new File(assetsPath + "/" + assetName);
 
         if (asset.exists()) {
@@ -107,11 +116,18 @@ LessonExporter.prototype = {
       /* Add lesson to archive */
 
       var zipEntry = new ZipEntry(aLesson.getName() + "/" + language + "/text/" + aLesson.getName() + ".xml");
+
+      // cocoon.sendPageAndWait("error.jx", {"msg" : zipEntry});
+
       out.putNextEntry(zipEntry);
 
       cocoon.processPipelineTo("lesson.jx", {"dom": lessonNode}, out);
 
+      out.closeEntry(); 
+
       /* Add assets to archive */
+
+      var archiveIndex = new Object(); 
 
       for (var j = 0; j < assets.size(); j++) {
         var src = assets.get(j).src;
@@ -119,22 +135,29 @@ LessonExporter.prototype = {
         var source = resolver.resolveURI(src);
         var is = source.getInputStream();
 
-        var assetName = aLesson.getName() + "/" + language + "/" + dest;
-        var zipEntry = new ZipEntry(assetName);
-        out.putNextEntry(zipEntry);
-        var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-        var len;
+        var entryName = aLesson.getName() + "/" + language + "/" + dest;
 
-        while((len = is.read(buffer)) >= 0)
-          out.write(buffer, 0, len);
+        if (!archiveIndex[entryName]) {
+          var zipEntry = new ZipEntry(entryName);
+
+          out.putNextEntry(zipEntry);
+          var buffer = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+          var len;
+
+          while((len = is.read(buffer)) >= 0)
+            out.write(buffer, 0, len);
+
+          out.closeEntry();
+
+          archiveIndex[new String(entryName)] = true;
+        }
+         
         is.close();
-
       }
 
     }
 
     out.close();
-
 
     var url = aLesson.getName() + "/" + filename;
     var size = Math.round(new File(zipPath).length() / 1024) + " KB";
