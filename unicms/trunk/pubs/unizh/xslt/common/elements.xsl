@@ -920,7 +920,7 @@
   <xsl:template match="unizh:map">
     <div class="map">
       <xsl:attribute name="id">
-        <xsl:value-of select="@id"/>
+        <xsl:value-of select="generate-id()"/>
       </xsl:attribute>
       <xsl:attribute name="style">
         <xsl:choose>
@@ -947,7 +947,7 @@
   <!-- create javascript array for google map API from unizh:map element (called from html-head.xsl) -->
   <xsl:template name="mapData">
     <xsl:text>{</xsl:text>
-    <xsl:text>"id":"</xsl:text><xsl:value-of select="@id"/><xsl:text>",</xsl:text>
+    <xsl:text>"id":"</xsl:text><xsl:value-of select="generate-id()"/><xsl:text>",</xsl:text>
     <xsl:text>"center":{"lat":</xsl:text><xsl:value-of select="@lat"/><xsl:text>,"lng":</xsl:text><xsl:value-of select="@lng"/><xsl:text>},</xsl:text>
     <xsl:text>"scale":</xsl:text><xsl:value-of select="@scale"/><xsl:text>,</xsl:text>
     <xsl:text>"type":</xsl:text>

@@ -367,9 +367,11 @@
 
 <define name="unizh.map">
   <element name="unizh:map">
-    <attribute name="id">
-      <text/>
-    </attribute>
+    <optional>
+      <attribute name="id">
+        <text/>
+      </attribute>
+    </optional>
     <attribute name="lat">
       <ref name="Number.datatype"/>
     </attribute>
