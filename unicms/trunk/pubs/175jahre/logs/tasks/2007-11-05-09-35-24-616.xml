@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="log.xsl"?>
+
+<build time="1 second">
+	<message priority="debug"><![CDATA[Detected Java version: 1.5 in: /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home]]></message>
+	<message priority="debug"><![CDATA[Detected OS: Mac OS X]]></message>
+	<message priority="debug"><![CDATA[Adding reference: ant.ComponentHelper]]></message>
+	<message priority="debug"><![CDATA[Project base dir set to: /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre]]></message>
+	<message priority="debug"><![CDATA[Adding reference: ant.parsing.context]]></message>
+	<message priority="debug"><![CDATA[Adding reference: ant.targets]]></message>
+	<message priority="debug"><![CDATA[parsing buildfile /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml with URI = file:///Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: ant.project.name -> Ant Test Project]]></message>
+	<message priority="debug"><![CDATA[Adding reference: Ant Test Project]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: ant.file.Ant Test Project -> /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml]]></message>
+	<message priority="debug"><![CDATA[Project base dir set to: /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre]]></message>
+	<message priority="debug"><![CDATA[ +Target: ]]></message>
+	<message priority="debug"><![CDATA[ +Target: notification]]></message>
+	<message priority="debug"><![CDATA[ +Target: create]]></message>
+	<message priority="debug"><![CDATA[ +Target: create-language]]></message>
+	<message priority="debug"><![CDATA[ +Target: remove-language]]></message>
+	<message priority="debug"><![CDATA[ +Target: save-meta-data]]></message>
+	<message priority="debug"><![CDATA[ +Target: remove-asset]]></message>
+	<message priority="debug"><![CDATA[ +Target: insert-asset]]></message>
+	<message priority="debug"><![CDATA[ +Target: newcopydocumentid]]></message>
+	<message priority="debug"><![CDATA[ +Target: newnamedocumentid]]></message>
+	<message priority="debug"><![CDATA[ +Target: newarchivedocumentid]]></message>
+	<message priority="debug"><![CDATA[ +Target: firstdocumentpath]]></message>
+	<message priority="debug"><![CDATA[ +Target: secdocumentpath]]></message>
+	<message priority="debug"><![CDATA[ +Target: livedocumentpath]]></message>
+	<message priority="debug"><![CDATA[ +Target: copyDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: firstareaproperties]]></message>
+	<message priority="debug"><![CDATA[ +Target: secareaproperties]]></message>
+	<message priority="debug"><![CDATA[ +Target: move]]></message>
+	<message priority="debug"><![CDATA[ +Target: rewrite-links]]></message>
+	<message priority="debug"><![CDATA[ +Target: rename-label]]></message>
+	<message priority="debug"><![CDATA[ +Target: change-visibility]]></message>
+	<message priority="debug"><![CDATA[ +Target: moveDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: renameDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: setIdentifier]]></message>
+	<message priority="debug"><![CDATA[ +Target: archiveDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: deleteDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: restoreDocument]]></message>
+	<message priority="debug"><![CDATA[ +Target: deleteTrash]]></message>
+	<message priority="debug"><![CDATA[ +Target: movenode]]></message>
+	<message priority="debug"><![CDATA[Setting project property: pub.dir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:13: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: pub.id -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:14: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: sitetree -> sitetree.xml]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:15: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: authoring.area -> authoring]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:16: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: authoring.dir -> content/authoring]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:17: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: authoring.resource.dir -> resources/authoring]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:18: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: live.dir -> content/live]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:19: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: live.resource.dir -> resources/live]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:20: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: live.area -> live]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:21: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: archive.dir -> content/archive]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:22: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: archive.area -> archive]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:23: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: archive.resource.dir -> resources/archive]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:24: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: trash.dir -> content/trash]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:25: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: trash.area -> trash]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:26: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: trash.resource.dir -> resources/trash]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:27: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: rcml.dir -> content/rcml]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:28: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: rcbak.dir -> content/rcbak]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:29: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: policies.dir -> config/ac/policies]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:30: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: wf.history.trash.dir -> content/workflow/history/trash]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:33: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: replication.dir -> content/replication/pending]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:36: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.server-port -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:37: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.context-path -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:38: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.dir -> work/export/pending]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:39: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.expression -> /lenya/unitemplate/live/]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:40: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.replacement -> /]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:41: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: export.uris -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:42: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: servlet.context -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:44: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: node.firstdocumentid -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:47: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: node.secdocumentid -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:48: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: node.newdocumentid -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:49: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: file.firstdocumentdir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:50: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: file.secdocumentdir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:51: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: firstarea -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:52: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: secarea -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:53: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: copy.userid -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:54: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: copy.ipaddress -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:55: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: node.refdocumentid -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:56: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: firstarea.dir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:59: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: secarea.dir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:60: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting project property: secarea.resource.dir -> ]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:61: " name="property" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.InitWorkflowHistoryTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype init-history org.apache.lenya.cms.ant.InitWorkflowHistoryTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:66: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.InitRCTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype initrc org.apache.lenya.cms.ant.InitRCTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:67: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DocumentCreatorTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype create org.apache.lenya.cms.ant.DocumentCreatorTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:69: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.CopyContentTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype copycontent org.apache.lenya.cms.ant.CopyContentTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:71: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.CopyResourcesTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype copyresources org.apache.lenya.cms.ant.CopyResourcesTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:72: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.InitCopyWorkflowTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype copyworkflow org.apache.lenya.cms.ant.InitCopyWorkflowTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:73: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.CopyPoliciesTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype copypolicies org.apache.lenya.cms.ant.CopyPoliciesTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:74: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.InsertCopyNode loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype insertcopynode org.apache.lenya.cms.ant.InsertCopyNode]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:75: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.InsertLabelTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype insertlabel org.apache.lenya.cms.ant.InsertLabelTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:76: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DeleteContentTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype deletecontent org.apache.lenya.cms.ant.DeleteContentTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:78: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DeleteResourcesTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype deleteresources org.apache.lenya.cms.ant.DeleteResourcesTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:79: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DeletePoliciesTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype deletepolicies org.apache.lenya.cms.ant.DeletePoliciesTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:80: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DeleteRCTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype deleterc org.apache.lenya.cms.ant.DeleteRCTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:81: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DeleteSchedulerEntryTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype deleteschedulerentry org.apache.lenya.cms.ant.DeleteSchedulerEntryTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:82: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.MoveNode loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype movenode org.apache.lenya.cms.ant.MoveNode]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:84: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.MoveWorkflowTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype moveworkflow org.apache.lenya.cms.ant.MoveWorkflowTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:85: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.MoveSiteTreeNodeTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype movenodeupdown org.apache.lenya.cms.ant.MoveSiteTreeNodeTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:86: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.RenameLabelTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype renameLabel org.apache.lenya.cms.ant.RenameLabelTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:88: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.RemoveLabelTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype removelabel org.apache.lenya.cms.ant.RemoveLabelTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:89: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.ChangeVisibilityTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype changeVisibility org.apache.lenya.cms.ant.ChangeVisibilityTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:90: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.ComputeCopyDocumentId loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype computesecdocumentid org.apache.lenya.cms.ant.ComputeCopyDocumentId]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:92: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.ComputeRenameDocumentId loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype computerenamedocumentid org.apache.lenya.cms.ant.ComputeRenameDocumentId]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:93: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.ComputeArchiveDocumentId loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype computearchivedocumentid org.apache.lenya.cms.ant.ComputeArchiveDocumentId]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:94: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DocumentIdToPath loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype mapdocumentidtopath org.apache.lenya.cms.ant.DocumentIdToPath]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:95: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.DocumentIdToFile loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype mapdocumentidtofile org.apache.lenya.cms.ant.DocumentIdToFile]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:96: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.WriteDCParametersTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype write-dc-params org.apache.lenya.cms.ant.WriteDCParametersTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:97: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.SetAreaProperties loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype setareaproperties org.apache.lenya.cms.ant.SetAreaProperties]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:98: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.LinkRewriteTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype linkRewrite org.apache.lenya.cms.ant.LinkRewriteTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:99: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.SetIdentifier loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype setidentifier org.apache.lenya.cms.ant.SetIdentifier]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:100: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Class org.apache.lenya.cms.ant.SiteTreeResetTask loaded from parent loader (parentFirst)]]></message>
+	<message priority="debug"><![CDATA[ +Datatype resetsitetree org.apache.lenya.cms.ant.SiteTreeResetTask]]></message>
+	<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:101: " name="taskdef" time="0 seconds"></task>
+	<message priority="debug"><![CDATA[Setting ro project property: pub.dir -> /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: pub.id -> 175jahre]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: servlet.context -> /Library/Tomcat/webapps/lenya]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: context.prefix -> /lenya]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.child-name -> Unter]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.parent-id -> /ueber]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.creator -> Administrator]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.title -> Unter]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.rights -> Universität Zürich]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.child-id -> unter]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.doctype -> overview]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.child-type -> branch]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.subject -> ]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.date -> Mon Nov 05 09:35:10 CET 2007]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.language -> de]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.ipaddress -> 127.0.0.1]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.publisher -> Universität Zürich]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.userid -> admin1]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.visible -> yes]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.docsubtype -> ]]></message>
+	<message priority="debug"><![CDATA[Setting ro project property: create.description ->  ]]></message>
+	<message priority="debug"><![CDATA[Build sequence for target(s) `create' is [create]]]></message>
+	<message priority="debug"><![CDATA[Complete build sequence is [create, notification, create-language, firstareaproperties, secareaproperties, newarchivedocumentid, firstdocumentpath, secdocumentpath, setIdentifier, move, archiveDocument, newnamedocumentid, rewrite-links, renameDocument, rename-label, livedocumentpath, movenode, newcopydocumentid, remove-asset, deleteTrash, change-visibility, restoreDocument, deleteDocument, insert-asset, save-meta-data, remove-language, moveDocument, , copyDocument]]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.parent-id]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.child-id]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.child-name]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.child-type]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.doctype]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.language]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.title]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.docsubtype]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.creator]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.description]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.subject]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.publisher]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.date]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.rights]]></message>
+	<message priority="debug"><![CDATA[Setting project property: create.columns -> ]]></message>
+	<message priority="debug"><![CDATA[Setting project property: create.tabs -> ]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.userid]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.ipaddress]]></message>
+	<message priority="debug"><![CDATA[Override ignored for property create.visible]]></message>
+	<message priority="debug"><![CDATA[Setting project property: document.file -> ]]></message>
+	<message priority="debug"><![CDATA[Overriding previous definition of property document.file]]></message>
+	<message priority="debug"><![CDATA[Setting project property: document.file -> /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/content/authoring/ueber/unter/index_de.xml]]></message>
+	<message priority="debug"><![CDATA[Setting project property: temp.file -> /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/work/null77340629]]></message>
+	<target name="create" time="0 seconds">
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:129: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:130: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:131: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:132: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:133: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:134: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:135: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:136: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:137: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:138: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:139: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:140: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:141: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:142: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:143: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:144: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:145: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:146: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:147: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:159: " name="create" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:162: " name="echo" time="0 seconds">
+			<message priority="warn"><![CDATA[init the workflow history with document-id: /ueber/unter]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:163: " name="echo" time="0 seconds">
+			<message priority="warn"><![CDATA[with document-type: overview]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:164: " name="echo" time="0 seconds">
+			<message priority="warn"><![CDATA[with language: de]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:165: " name="echo" time="0 seconds">
+			<message priority="warn"><![CDATA[with user ID: admin1]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:166: " name="echo" time="0 seconds">
+			<message priority="warn"><![CDATA[with IP address: 127.0.0.1]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:173: " name="init-history" time="0 seconds">
+			<message priority="info"><![CDATA[.execute(): de]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:176: " name="property" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:182: " name="mapdocumentidtofile" time="0 seconds">
+			<message priority="info"><![CDATA[document-id /ueber/unter]]></message>
+			<message priority="info"><![CDATA[area authoring]]></message>
+			<message priority="info"><![CDATA[language de]]></message>
+			<message priority="info"><![CDATA[property: document.file]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:183: " name="tempfile" time="0 seconds"></task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:187: " name="xslt" time="0 seconds">
+			<message priority="debug"><![CDATA[Using class org.apache.tools.ant.taskdefs.optional.TraXLiaison]]></message>
+			<message priority="debug"><![CDATA[In file /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/content/authoring/ueber/unter/index_de.xml time: 1194251725000]]></message>
+			<message priority="debug"><![CDATA[Out file /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/work/null77340629 time: 0]]></message>
+			<message priority="debug"><![CDATA[Style file /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/../unizh/xslt/authoring/addMetaData.xsl time: 1176756332000]]></message>
+			<message priority="info"><![CDATA[Processing /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/content/authoring/ueber/unter/index_de.xml to /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/work/null77340629]]></message>
+			<message priority="info"><![CDATA[Loading stylesheet /Library/Tomcat/webapps/lenya/lenya/pubs/unizh/xslt/authoring/addMetaData.xsl]]></message>
+		</task>
+		<task location="/Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/config/tasks/targets.xml:200: " name="move" time="0 seconds">
+			<message priority="info"><![CDATA[Moving 1 file to /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/content/authoring/ueber/unter]]></message>
+			<message priority="debug"><![CDATA[Attempting to rename: /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/work/null77340629 to /Library/Tomcat/webapps/lenya/lenya/pubs/175jahre/content/authoring/ueber/unter/index_de.xml]]></message>
+		</task>
+	</target>
+</build>

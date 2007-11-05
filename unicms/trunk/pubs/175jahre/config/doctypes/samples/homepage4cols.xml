@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:homepage4cols xmlns="http://www.w3.org/1999/xhtml"  
+xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/"
+xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+unizh:hideChildren="false"
+dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace"
+lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+
+  <lenya:meta>
+    <dc:title>Homepage title</dc:title>
+    <dc:description></dc:description>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject></dc:subject>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>date of creation</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:header>
+    <unizh:heading>Wissen teilen</unizh:heading>
+    <unizh:superscription>175 Jahre Universität Zürich</unizh:superscription>
+  </unizh:header>
+  <unizh:highlight class="emerald">
+    <unizh:title>Titel</unizh:title>
+    <p>Teaser text.</p>
+  </unizh:highlight>
+  <unizh:partner>
+    <unizh:title>Hauptsponsoren</unizh:title>
+    <object data="logo_ubs.gif" href="http://www.ubs.ch"/>
+    <object data="logo_cs.gif" href="http://www.cs.ch"/>
+  </unizh:partner>
+  <body>
+    <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Titel</unizh:title>
+        <p>Teaser text.</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:teaser>
+    </unizh:column>
+    <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Titel</unizh:title>
+        <p>Teaser text.</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:teaser>
+    </unizh:column>
+    <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Titel</unizh:title>
+        <p>Teaser text.</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:teaser>
+    </unizh:column>
+    <unizh:column>
+      <unizh:teaser>
+        <unizh:title>Titel</unizh:title>
+        <p>Teaser text.</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:teaser>
+    </unizh:column>
+  </body>
+</unizh:homepage4cols>

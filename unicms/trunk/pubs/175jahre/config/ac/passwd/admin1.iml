@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<identity class="org.apache.lenya.ac.file.FileUser" id="admin1">
+  <name>Administrator</name>
+  <email>lenya@id.uzh.ch</email>
+  <password type="md5">e00cf25ad42683b3df678c61f42c6bda</password>
+  <groups>
+    <group>authors</group>
+    <group>managers</group>
+    <group>administrators</group>
+  </groups>
+</identity>

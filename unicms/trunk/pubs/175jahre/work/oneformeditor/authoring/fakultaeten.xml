@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:overview dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:hideChildren="true" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+
+  <lenya:meta>
+    <dc:title />
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Tue Oct 23 11:15:23 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:highlight class="amethyst">
+    <unizh:title href="http://www.example.com">Was liegt hinter dem Menschen?</unizh:title>
+    <p>
+      «weiter denken», universität zürich,<br />
+      19.3.2008, ab 17:00 uhr
+    </p>
+  </unizh:highlight>
+  <unizh:related-content />
+  <body>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title href="/lenya/175jahre/authoring/fakultaeten/theologie.html">Theologische Fakultät</unizh:title><xhtml:object title="Lead Image 1" href="" type="" data="lead_img1.jpg"><xhtml:div class="caption" /></xhtml:object>
+        <p>Mauris mauris velit, dictum non, malesuada sed, malesuada sit amet, neque. Sed ut metus vitae odio feugiat fermentum.</p>
+        <xhtml:a href="#">Link #1 </xhtml:a>
+        <xhtml:a href="#">Link #2 </xhtml:a>
+      </unizh:links>
+      <unizh:links>
+        <unizh:title href="/lenya/175jahre/authoring/fakultaeten/ius.html">Rechtswissen. Fakultät</unizh:title>
+        <p>Mauris mauris velit, dictum non, malesuada sed, malesuada sit amet, neque. Sed ut metus vitae odio feugiat fermentum.</p>
+        <xhtml:a href="#">Link #1 </xhtml:a>
+        <xhtml:a href="#">Link #2 </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <p>Diese Linkliste hat kein Bild, einen Textparagraphen und mehrere Links</p>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">Link 6 </xhtml:a>
+        <xhtml:a href="#">Link 7 </xhtml:a>
+        <xhtml:a href="#">Link 8 </xhtml:a>
+        <xhtml:a href="#">Link 9 </xhtml:a>
+        <xhtml:a href="#">Link 10 </xhtml:a>
+        <xhtml:a href="#">Link 11 </xhtml:a>
+        <xhtml:a href="#">Link 12 </xhtml:a>
+        <xhtml:a href="#">Link 13 </xhtml:a>
+        <xhtml:a href="#">Link 14 </xhtml:a>
+        <xhtml:a href="#">Link 15 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+  </body>
+</unizh:overview>

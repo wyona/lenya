@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xso:stylesheet xmlns:xso="http://www.w3.org/1999/XSL/Transform" xmlns:unizh="http://unizh.ch/doctypes/common/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="unizh" version="1.0">
+<xso:param name="data"/>
+<xso:param name="type"/>
+<xso:param name="width"/>
+<xso:param name="height"/>
+<xso:param name="caption"/>
+<xso:param name="link"/>
+<xso:param name="title"/>
+<xso:template match="/*[1]/*[3]/*[1]">
+<xhtml:object xmlns:xsl="http://www.w3.org/1999/XSL/Transform" data="{$data}" type="{$type}" href="{$link}" title="{$title}" float="true">
+<xhtml:div class="caption">
+<xsl:value-of select="$caption"/>
+</xhtml:div>
+</xhtml:object>
+<xso:copy-of select="."/>
+</xso:template>
+<xso:template match="@*|*">
+<xso:copy>
+<xso:apply-templates select="@*|node()"/>
+</xso:copy>
+</xso:template>
+</xso:stylesheet>

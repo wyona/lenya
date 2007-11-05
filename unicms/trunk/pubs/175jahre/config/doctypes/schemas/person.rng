@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | UniZH XHTML doctype
+    +-->
+
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+         xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         >
+
+<include href="xhtml.rng">
+  
+  <start>
+    <ref name="unizh.person" />
+  </start>
+
+  <define name="html.attlist">
+    <ref name="XHTML.version.attrib" />
+    <ref name="I18n.attrib" />
+    <ref name="unizh.columns.attrib" />
+    <ref name="dummy.attlist" />
+  </define>
+
+</include>
+
+<define name="unizh.person">
+  <element name="unizh:person">
+    <ref name="html.attlist" />
+    <ref name="lenya.meta" />
+    <optional>
+      <ref name="unizh.highlight" />
+    </optional>
+    <optional>
+      <ref name="object" />
+    </optional>
+    <ref name="unizh.firstname" />
+    <ref name="unizh.lastname" />
+    <optional>
+      <ref name="unizh.academictitle" />
+    </optional>
+    <optional>
+      <ref name="unizh.position" />
+    </optional>
+    <optional>
+      <element name="unizh:phone">
+        <text/>
+      </element>
+    </optional>
+    <ref name="unizh.email" />
+    <optional>
+      <element name="unizh:homepage">
+        <text/>
+      </element>
+    </optional>
+    <optional>
+      <element name="unizh:description">
+        <choice>
+          <text/>
+          <ref name="Block.model" />
+        </choice>
+      </element>
+    </optional>
+  </element>
+</define>
+
+<define name="unizh.firstname">
+  <element name="unizh:firstname">
+    <text/>
+  </element>
+</define>
+
+<define name="unizh.lastname">
+  <element name="unizh:lastname">
+    <text/>
+  </element>
+</define>
+
+<define name="unizh.academictitle">
+  <element name="unizh:academictitle">
+    <text/>
+  </element>
+</define>
+
+<define name="unizh.position">
+  <element name="unizh:position">
+    <text/>
+  </element>
+</define>
+
+<define name="unizh.unit">
+  <element name="unizh:unit">
+    <text/>
+  </element>
+</define>
+
+<define name="unizh.email">
+  <element name="unizh:email">
+    <text/>
+  </element>
+</define>
+
+</grammar>

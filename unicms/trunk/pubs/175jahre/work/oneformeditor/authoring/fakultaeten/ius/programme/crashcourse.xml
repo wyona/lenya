@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace"  xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <lenya:meta>
+    <dc:title>Crash-Kurse zu Alltagsfragen</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Thu Oct 25 11:20:41 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <p><strong>Schuldet Ihnen jemand Geld und Sie wissen nicht, wie Sie dazu kommen? Sind Sie in einen Erbstreit verwickelt und möchten erfahren, was für Möglichkeiten der Verteidigung sich Ihnen bieten? Frage zum Steuerrecht? Oder kennen Sie jemanden, der an der Arbeitstelle inkorrekt behandelt wird und würden gerne einen praktischen Rat erteilen?</strong></p>
+    <p>Mit den Crash-Kursen werden Einführungen in Rechtsfragen gegeben, mit denen wir im Alltag konfrontiert werden. Die Kurse richten sich an alle diejenigen, die gerne mehr über die gesetzlichen Hintergründe solcher Situationen erfahren möchten. Vier Professoren der Rechtswissenschaftlichen Fakultät bieten Einblick in ihre Fachbereiche und erklären die grösseren Zusammenhänge. Nach einem kurzen theoretischen Teil ist jeweils Raum für Fragen aus dem Plenum gegeben.</p>
+    <p>Die Kurse werden dreimal angeboten. Am Montag und Mittwoch werden sie parallel geführt. Der Programmaufbau in Modulen von jeweils einer Stunde ermöglicht Interessierten einen einfachen Wechsel zwischen den Themengebieten. Am Samstag finden die Kurse im Rahmen des Tags der offenen Tür statt.</p>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 1999-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!-- $Id: manager.jx 14920 2006-07-03 12:03:58Z thomas $ -->
+
+<page:page xmlns:jx="http://apache.org/cocoon/templates/jx/1.0" 
+           xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0" 
+           xmlns="http://www.w3.org/1999/xhtml" 
+           xmlns:i18n="http://apache.org/cocoon/i18n/2.1" >
+           
+  <page:title><i18n:text>Layout Manager</i18n:text></page:title>
+  <page:body>
+
+    <div class="lenya-box">
+      <div class="lenya-box-title">
+          <i18n:text>Add/Remove Layout Packages</i18n:text>
+      </div>
+      <div class="lenya-box-body">
+        <form enctype="multipart/form-data" method="post" id="form-upload">
+          <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
+          <input type="hidden" name="lenya.step" value="addPackage"/>
+          <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
+
+          <table>
+            <tr>
+              <td>
+                <ul>
+                  <jx:forEach var="package" items="${packages}">
+                    <li>${package.title} [<a href="?lenya.usecase=layoutmanager&#38;lenya.step=deletePackage&#38;filename=${package.name}&#38;lenya.continuation=${continuation.id}">Delete</a>]</li>
+                  </jx:forEach>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <br/>
+                <b>New Package:</b><br/><br/>
+                Title: <input type="text" name="package-title" value="Enter a package title"/> File: <input type="file" name="upload-file"/><input type="submit" name="add" value="Add"/>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+    <div class="lenya-box">
+      <div class="lenya-box-title">
+          <i18n:text>Install Layout Package</i18n:text>
+      </div>
+      <div class="lenya-box-body">
+        <form enctype="multipart/form-data" method="post" id="form-upload">
+          <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
+          <input type="hidden" name="lenya.step" value="installPackage"/>
+          <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
+          <table>
+            <tr>
+              <td>
+                <select name="filename">
+                  <option value="default_package">Default</option>
+                  <jx:forEach var="package" items="${packages}">
+                    <jx:choose>
+                      <jx:when test="${package.installed == 'true'}">
+                        <option value="${package.name}" selected="selected">
+                        ${package.title}
+                        </option>
+                      </jx:when>
+                      <jx:otherwise>
+                        <option value="${package.name}">
+                        ${package.title}
+                        </option>
+                      </jx:otherwise>
+                    </jx:choose>
+                  </jx:forEach>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" name="submit" value="Install"/>
+              </td>
+              <td>
+                <input type="submit" name="submit" value="Done"/>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+
+  </page:body>
+</page:page>

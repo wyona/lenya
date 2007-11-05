@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** title bar ******/
+
+div#titlearea
+{
+    height: 161px;
+    margin-bottom: 0;
+}
+div#titlearea h1
+{
+    font-size: 1.75em;
+    line-height: 1.1em;
+    margin: 0;
+    padding: 10px 0 0 26px;
+}
+div#titlearea h2
+{
+    color: #B371B0;
+    font-weight: normal;
+    font-size: 1.75em;
+    line-height: 1.1em;
+    margin: 0;
+    padding: 0 0 0 25px;
+}
+
+</css>

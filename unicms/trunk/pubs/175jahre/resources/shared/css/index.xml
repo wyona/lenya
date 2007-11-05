@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** content column(s) ******/
+
+div.contentarea
+{
+    margin-right: 0;
+}
+
+/****** common elements ******/
+
+/* teaser on homepage has either p or img, no link */
+div.teaser
+{
+    height: 83px;
+    background-color: #FFF;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+    overflow: hidden;
+}
+div.teaser h3
+{
+    font-size: 1.0em;
+    color: #FFF;
+    padding: 3px 10px 3px 10px;
+    margin: 0;
+}
+div.teaser h3.linked
+{
+    padding: 0;
+}
+div.teaser h3 a
+{
+    color: #FFF;
+    background-image:url(images/arrow_white_right.gif);
+    background-position: 0 3px;
+    padding: 3px 10px 3px 13px;
+    margin: 0 0 0 10px;
+    display: block;
+}
+div.teaser h3 a:hover
+{
+    background-color: transparent;
+}
+div.teaser.moccachino h3
+{
+    background-color: #865F39;
+}
+div.teaser.red h3
+{
+    background-color: #ED001F;
+}
+div.teaser.pumpkin h3
+{
+    background-color: #F97F1F;
+}
+div.teaser.sunshine h3
+{
+    background-color: #FFB51D;
+}
+div.teaser.emerald h3
+{
+    background-color: #005E5D;
+}
+div.teaser.cyan h3
+{
+    background-color: #009DE9;
+}
+div.teaser.marine h3
+{
+    background-color: #211F7E;
+}
+div.teaser.amethyst h3
+{
+    background-color: #80107B;
+}
+div.teaser.magenta h3
+{
+    background-color: #EC0078;
+}
+div.teaser.lime h3
+{
+    background-color: #7FAB16;
+}
+div.teaser p
+{
+    padding: 2px 0 0.5em 0;
+}
+div.teaser img
+{
+    display: block;
+    margin: 0;
+}
+
+/* rssReader on homepage */
+div.rssReader
+{
+    height: 83px;
+    overflow: hidden;
+}
+div.rssReader ul li
+{
+    border-bottom: none;
+}
+
+/* partner element on home page */
+div.partner
+{
+    margin-bottom: 10px;
+    border-top: 1px #999 solid;
+    clear: both;
+}
+div.partner h3
+{
+    font-family: Tahoma, Verdana, sans-serif;
+    color: #999999;
+    font-size: 0.85em;
+    font-weight: normal;
+    line-height: 1.6em;
+    padding: 0;
+    margin: 0 0 1px 0;
+}
+div.partner a
+{
+    margin-right: 50px;
+    text-decoration: none;
+}
+
+/****** footer ******/
+div#footer
+{
+    text-align: left;
+    margin-top: 10px;
+}
+
+</css>

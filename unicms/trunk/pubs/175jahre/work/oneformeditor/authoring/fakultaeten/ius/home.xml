@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:redirect dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+
+  <lenya:meta>
+    <dc:title>Home</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Thu Nov 01 15:18:31 CET 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+    <unizh:redirect-to href="/lenya/175jahre/authoring/fakultaeten/ius.html" />
+  </lenya:meta>
+  <body>
+    <p>Ein <strong>publiziertes</strong> <em>Redirect-</em>Dokument schaltet automatisch auf eine andere Seite der Publikation um.</p> <p>Öffnen Sie das Redirect-Dokument im One-Form Editor und tragen Sie die Zieladdresse im href-Attribut des Elements unizh:redirect-to ein.</p> <p>Sie hat dieselbe Form wie ein interner Link, also z.B.<br /> <em>/lenya/unicms/authoring/docu.html</em> oder <br /> <em>/lenya/ori/authoring/institute/adress.html</em> etc.</p>
+  </body>
+</unizh:redirect>

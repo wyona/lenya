@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:project4cols dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:hideChildren="false" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+
+  <lenya:meta>
+    <dc:title>Theologische Fakultät</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Tue Oct 23 17:06:23 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:header>
+    <unizh:heading>Theologische Fakultät</unizh:heading>
+    <unizh:superscription>Wissen teilen in Religion und Theologie</unizh:superscription>
+  </unizh:header>
+  <unizh:highlight>
+    <unizh:title href="http://www.example.com">Auf den Spuren Zwinglis</unizh:title>
+  </unizh:highlight>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Project Overview</unizh:title>
+      <p>Teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
+    </unizh:teaser>
+    <unizh:calendar>
+      <unizh:title>Steckbrief</unizh:title>
+      <unizh:row label="Wissen teilen in Religion und Theologie" />
+      <unizh:row label="Datum:">4.4.2008</unizh:row>
+      <unizh:row label="Zeit:">9:00 bis 20:00</unizh:row>
+      <unizh:row label="Ort:">Theologiches Seminar<br />Kirchgasse 9, 8001 Zürich</unizh:row>
+      <unizh:row>Die Veranstaltung richtet sich an die interessierte Öffentlichkeit</unizh:row>
+    </unizh:calendar>
+  </unizh:related-content>
+  <body>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+  </body>
+</unizh:project4cols>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** specific styles for /news/ ******/
+
+/* primary navigation */
+div#primarnav a#news, div#primarnav a#ueber, div#primarnav a#agenda, div#primarnav a#veranstaltungen, div#primarnav a#fakultaeten, div#primarnav a#ausstellungen
+{
+    color: #999999;
+}
+
+/* rss reader*/
+div.rssReader h3
+{
+    background-color: #005E5D;
+}
+
+/* links element for use in content columns */
+div.links h3
+{
+    background-color: #005E5D;
+}
+
+/* second and deeper level navigation */
+div#secnav a.selected
+{
+    color: #005E5D;
+}
+
+/* event date box */
+div.relatedbox table.calendar tr th
+{
+    background-color: #005E5D;
+}
+div.relatedbox table.calendar tr td.data
+{
+    color: #005E5D;
+}
+
+</css>

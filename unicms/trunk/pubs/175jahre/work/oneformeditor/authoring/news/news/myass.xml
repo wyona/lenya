@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:newsitem dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+
+  <lenya:meta>
+    <dc:title>article my ass</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Thu Oct 25 18:41:38 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
+    </unizh:teaser>
+  </unizh:related-content>
+  <unizh:short>
+    <xhtml:object float="true" title="Peugeot 302" href="" type="" data="70b5a110b94e80ff14cfb3238211a272.jpg" width="150"><xhtml:div class="caption">Peugeot 302</xhtml:div></xhtml:object><p>Kurzfassung Newseitrag.</p>
+    
+  </unizh:short>
+  <body>
+    <p>Paragraph</p>
+  </body>
+</unizh:newsitem>

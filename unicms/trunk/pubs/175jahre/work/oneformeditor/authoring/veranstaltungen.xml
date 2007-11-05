@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:overview dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:hideChildren="true" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+
+  <lenya:meta>
+    <dc:title />
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Tue Oct 23 11:14:53 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:highlight class="emerald">
+    <object data="bigBanner.jpg" />
+    <unizh:title href="http://www.example.org">Bringen uns unsere Gefühle um den Verstand?</unizh:title>
+    <p>
+      «sechs zelte»,<br />
+      sechseläutenplatz zürich,<br />
+      8.3.2008, ab 9:00 uhr
+    </p>
+  </unizh:highlight>
+  <unizh:related-content />
+  <body>
+    <unizh:column>
+      <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+       <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+       <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+    <unizh:column>
+       <unizh:links>
+        <unizh:title>Thema</unizh:title>
+        <xhtml:a href="#">Link 1 </xhtml:a>
+        <xhtml:a href="#">Link 2 </xhtml:a>
+        <xhtml:a href="#">Link 3 </xhtml:a>
+        <xhtml:a href="#">Link 4 </xhtml:a>
+        <xhtml:a href="#">Link 5 </xhtml:a>
+        <xhtml:a href="#">weitere Angebote... </xhtml:a>
+      </unizh:links>
+    </unizh:column>
+  </body>
+</unizh:overview>

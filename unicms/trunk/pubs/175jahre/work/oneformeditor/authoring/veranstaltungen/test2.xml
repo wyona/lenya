@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unizh:project dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" unizh:hideChildren="false" xhtml:dummy="FIXME:keepNamespace"  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+  <lenya:meta>
+    <dc:title>Document Title I entered</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
+    <dc:subject />
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Mon Nov 05 10:13:51 CET 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:header>
+    <unizh:heading>projekt title</unizh:heading>
+    <unizh:superscription>project claim</unizh:superscription>
+  </unizh:header>
+  <unizh:highlight class="sunshine">
+    <unizh:title href="http://www.uzh.ch">highlight title</unizh:title>
+    <p>highlight text.</p>
+  </unizh:highlight>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>teaser title</unizh:title>
+      <p>teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <h2>Project page</h2>
+    <p>Paragraph</p>
+  </body>
+</unizh:project>
