@@ -131,7 +131,7 @@ a.www
 }
 a.podcast
 {
-    background-image:url(<context-prefix/>/unizh/authoring/images/arrow_right.gif);
+    background-image: url(<context-prefix/>/unizh/authoring/images/podcast.gif);
     padding-left:13px;
     background-repeat: no-repeat;
     padding-right:2px;
