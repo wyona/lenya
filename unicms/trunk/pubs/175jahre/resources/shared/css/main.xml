@@ -80,7 +80,7 @@ p.separated, div.separated
     margin-bottom: 1.0em
 }
 /* link */
-a.internal, a.uzh, a.www, a.podcast, a.back, a.download, a.block, a.more, a.mailto
+a.internal, a.uzh, a.www, a.podcast, a.right_aligned, a.back, a.download, a.block, a.more, a.mailto
 {
     text-decoration: none;
     color: #333333;
@@ -90,6 +90,14 @@ a.internal, a.uzh, a.www, a.podcast, a.back, a.download, a.block, a.more, a.mail
     background-repeat: no-repeat;
     padding-right: 2px;
     margin-left: 2px;
+}
+a.podcast
+{
+    background-image: url(images/podcast.gif);
+}
+a.right_aligned
+{
+    float:right;
 }
 a.back
 {
@@ -103,7 +111,7 @@ a.www
 {
     background-image: url(images/arrow_upright.gif);
 }
-a.internal:hover, a.uzh:hover, a.www:hover, a.podcast:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, a.mailto:hover
+a.internal:hover, a.uzh:hover, a.www:hover, a.podcast:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, a.mailto:hover
 {
     text-decoration: underline;
     background-color:#E9E9F0;
@@ -898,6 +906,50 @@ div.relatedbox
 {
     float:right;
     width: 188px;
+}
+
+/* news level element */
+div.level
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    background-color:#F0F0F0;
+    padding: 0 10px 9px 10px;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    margin: 0 0 10px 0;
+}
+div.level h3
+{
+    font-size: 1.0em;
+    color: #333;
+    background-color: transparent;
+    padding: 4px 0 3px 0;
+    margin: 0;
+}
+div.level ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div.level ul li
+{
+    padding: 0;
+    margin: 0;
+}
+div.level ul li a.block
+{
+    background-image:url(images/arrow_right.gif);
+    background-repeat: no-repeat;
+    background-position: 0 2px;
+    padding: 2px 0 2px 13px;
+    display: block;
+    margin-left: 0;
+}
+div.level ul li a.block:hover
+{
+    background-color: #FAFAFA;
 }
 
 /****** content column(s) ******/

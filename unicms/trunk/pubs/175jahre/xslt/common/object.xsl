@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -27,7 +27,7 @@
   <!-- objects in left column go straight out, no caption, no objectElement -->
   <xsl:template match="xhtml:object[parent::unizh:contcol1]">
     <xsl:call-template name="object">
-      <xsl:with-param name="width">165</xsl:with-param>
+      <xsl:with-param name="width">188</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
@@ -35,20 +35,28 @@
   <!-- no caption for objects in rel con teaser either -->
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:related-content]">
     <xsl:call-template name="object">
-      <xsl:with-param name="width">160</xsl:with-param>
+      <xsl:with-param name="width">168</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
 
-  <!-- the width of teaser images in content columns depends on the number of columns -->
+  <!-- same for partner object -->
+  <xsl:template match="xhtml:object[parent::unizh:partner and ancestor::unizh:related-content]">
+    <xsl:call-template name="object">
+      <xsl:with-param name="width">168</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+
+  <!-- the width of teaser images in content columns depends on the type of column -->
   <xsl:template match="xhtml:object[parent::unizh:teaser and ancestor::unizh:column]">
     <xsl:variable name="width">
       <xsl:choose>
-        <xsl:when test="$numColumns = 3">
-          <xsl:value-of select="171" />
+        <xsl:when test="ancestor::unizh:column[@double = 'true']">
+          <xsl:value-of select="392" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="178" />
+          <xsl:value-of select="188" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -58,15 +66,15 @@
   </xsl:template>
 
 
-  <!-- the width of images in linklists also depends on the number of columns -->
+  <!-- the width of images in linklists also depends on the type of column -->
   <xsl:template match="xhtml:object[parent::unizh:links]">
     <xsl:variable name="width">
       <xsl:choose>
-        <xsl:when test="$numColumns = 3">
-          <xsl:value-of select="191" />
+        <xsl:when test="ancestor::unizh:column[@double = 'true']">
+          <xsl:value-of select="392" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="198" />
+          <xsl:value-of select="188" />
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -80,23 +88,33 @@
   <xsl:template match="xhtml:object[parent::unizh:lead]">
     <xsl:variable name="width">
       <xsl:choose>
-        <xsl:when test="$numColumns = 3">
+        <xsl:when test="( $numColumns + $numDoubles ) = 2">
           <xsl:choose>
             <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
-              <xsl:value-of select="605" />
+              <xsl:value-of select="392" />
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="191" />
+              <xsl:value-of select="188" />
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:when test="( $numColumns + $numDoubles ) = 3">
+          <xsl:choose>
+            <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
+              <xsl:value-of select="596" />
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="188" />
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
             <xsl:when test="not(following-sibling::xhtml:p) or not(following-sibling::xhtml:p/descendant-or-self::*[text()])">
-              <xsl:value-of select="416" />
+              <xsl:value-of select="800" />
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="198" />
+              <xsl:value-of select="188" />
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise>
@@ -146,7 +164,7 @@
 
   <!-- this template filters float objects, which are to be called from their following siblings -->
   <xsl:template match="xhtml:object[(ancestor::xhtml:body or ancestor::unizh:description) and not(parent::unizh:short) and not(parent::unizh:teaser) and not(parent::unizh:links) and not(parent::unizh:lead) and not(ancestor::xhtml:table) and not(parent::unizh:person)]">
-            <!-- unizh:description -> 'person' doctype -->
+    <!-- unizh:description -> 'person' doctype -->
     <xsl:choose>
       <xsl:when test="(@float='true') and (name(following-sibling::*[1]) = 'p' or name(following-sibling::*[1]) = 'xhtml:p')" />
       <xsl:otherwise>
@@ -158,7 +176,7 @@
 
   <!-- wrap object element in xhtml div to enable floating, caption. call this template for all content objects -->
   <xsl:template match="xhtml:object" mode="objectElement">
-    <xsl:param name="width-default" select="204" />
+    <xsl:param name="width-default" select="188" />
     <xsl:param name="hideCaption" />
     <xsl:param name="src" />
     <xsl:variable name="width">
@@ -809,17 +827,17 @@
   <xsl:template name="width-attribute">
     <xsl:param name="width-default" />
     <xsl:choose>
-      <xsl:when test="not(@width) or (@width = '') or contains(@width, 'px')">
+      <xsl:when test="not( @width ) or ( @width = '' ) or contains( @width, 'px' )">
         <xsl:value-of select="$width-default" />
       </xsl:when>
-      <xsl:when test="(/document/content/*/@unizh:columns = 1) and (@width > 800)">
+      <xsl:when test="( /document/content/*/@unizh:columns = 1 ) and ( @width > 800 )">
         <xsl:text>800</xsl:text>
       </xsl:when>
-      <xsl:when test="(/document/content/*/@unizh:columns = 2) and (@width > 615)">
-        <xsl:text>615</xsl:text>
+      <xsl:when test="( /document/content/*/@unizh:columns = 2 ) and ( @width > 596 )">
+        <xsl:text>596</xsl:text>
       </xsl:when>
-      <xsl:when test="((/document/content/*/@unizh:columns = 3) or (/document/content/unizh:homepage)) and (@width > 416)">
-        <xsl:text>416</xsl:text>
+      <xsl:when test="( ( /document/content/*/@unizh:columns = 3 ) or ( /document/content/unizh:homepage ) ) and ( @width > 408 )">
+        <xsl:text>408</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="@width" />

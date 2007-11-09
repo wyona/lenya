@@ -54,6 +54,7 @@
         <ref name="unizh.map"/>
         <ref name="unizh.partner"/>
         <ref name="unizh.calendar"/>
+        <ref name="unizh.level"/>
       </choice>
     </zeroOrMore>
   </element>
@@ -334,6 +335,13 @@
         </choice>
       </attribute>
     </optional>
+  </element>
+</define>
+
+
+<define name="unizh.level">
+  <element name="unizh:level">
+    <empty/>
   </element>
 </define>
 

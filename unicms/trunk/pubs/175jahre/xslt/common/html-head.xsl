@@ -55,25 +55,25 @@
         <xsl:attribute name="href">
           <xsl:value-of select="$localsharedresources"/>
           <xsl:choose>
-            <xsl:when test="$nodeid = 'news' or /document/ancestors/ancestor[@basic-url = 'news']">
+            <xsl:when test="$nodeid = 'news' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'news']">
               <xsl:text>/css/news.css</xsl:text>
             </xsl:when>
-            <xsl:when test="$nodeid = 'ueber' or /document/ancestors/ancestor[@basic-url = 'ueber']">
+            <xsl:when test="$nodeid = 'ueber' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'ueber']">
               <xsl:text>/css/ueber.css</xsl:text>
             </xsl:when>
-            <xsl:when test="$nodeid = 'agenda' or /document/ancestors/ancestor[@basic-url = 'agenda']">
+            <xsl:when test="$nodeid = 'agenda' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'agenda']">
               <xsl:text>/css/agenda.css</xsl:text>
             </xsl:when>
-            <xsl:when test="$nodeid = 'veranstaltungen' or /document/ancestors/ancestor[@basic-url = 'veranstaltungen']">
+            <xsl:when test="$nodeid = 'veranstaltungen' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'veranstaltungen']">
               <xsl:text>/css/veranstaltungen.css</xsl:text>
             </xsl:when>
             <xsl:when test="$nodeid = 'fakultaeten' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'fakultaeten']">
               <xsl:text>/css/fakultaeten.css</xsl:text>
             </xsl:when>
-            <xsl:when test="$nodeid = 'ausstellungen' or /document/ancestors/ancestor[@basic-url = 'ausstellungen']">
+            <xsl:when test="$nodeid = 'ausstellungen' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'ausstellungen']">
               <xsl:text>/css/ausstellungen.css</xsl:text>
             </xsl:when>
-            <xsl:when test="$nodeid = 'blog' or /document/ancestors/ancestor[@basic-url = 'blog']">
+            <xsl:when test="$nodeid = 'blog' or /document/unizh:ancestors/unizh:ancestor[@basic-url = 'blog']">
               <xsl:text>/css/blog.css</xsl:text>
             </xsl:when>
           </xsl:choose>

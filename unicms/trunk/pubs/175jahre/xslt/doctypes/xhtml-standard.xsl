@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -140,18 +140,16 @@
     </xsl:choose>
     <div class="contcol2">
       <a accesskey="2" name="content" />
-      <div class="content">
-        <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
-        </xsl:if>
-        <div bxe_xpath="/{$document-element-name}/xhtml:body">
-          <xsl:apply-templates select="*/xhtml:body/*" />
-          <br/>
-        </div>
+      <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+        <h1>
+          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+            <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+          </div>
+        </h1>
+      </xsl:if>
+      <div bxe_xpath="/{$document-element-name}/xhtml:body">
+        <xsl:apply-templates select="*/xhtml:body/*" />
+        <br/>
       </div>
     </div>
   </xsl:template>
@@ -176,17 +174,15 @@
       </div>
       <div class="contentarea">
         <a accesskey="2" name="content" />
-        <div class="content">
-          <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-            <h1>
-              <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-                <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-              </div>
-            </h1>
-          </xsl:if>
-          <div bxe_xpath="/{$document-element-name}/xhtml:body">
-            <xsl:apply-templates select="*/xhtml:body/*" />
-          </div>
+        <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+          <h1>
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+            </div>
+          </h1>
+        </xsl:if>
+        <div bxe_xpath="/{$document-element-name}/xhtml:body">
+          <xsl:apply-templates select="*/xhtml:body/*" />
         </div>
       </div>
     </div>
@@ -269,57 +265,59 @@
 
 
   <xsl:template name="newsitem">
-    <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
-      <xsl:comment/>
-    </div>
+    <xsl:choose>
+      <xsl:when test="/document/xhtml:div[@id = 'menu']/*">
+        <div id="col1">
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1"/>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="contcol2">
       <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
         <xsl:apply-templates select="*/unizh:related-content" /><xsl:comment/>
       </div>
       <div class="contentarea">
         <a accesskey="2" name="content" />
-        <div class="content">
-          <p>
-             <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
-             <xsl:choose>
-               <xsl:when test="string-length($creationdate) &lt; '25'">
-                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}" /> 
-               </xsl:when>
-               <xsl:otherwise>
-                 <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}" />
-               </xsl:otherwise>
-             </xsl:choose>
-          </p>
-          <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-            <h1>
-              <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-                <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-              </div>
-            </h1>
+        <div class="datetime">
+           <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
+           <xsl:choose>
+             <xsl:when test="string-length($creationdate) &lt; '25'">
+               <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="d. MMM yyyy HH:mm" value="{$creationdate}" /> 
+             </xsl:when>
+             <xsl:otherwise>
+               <i18n:date pattern="EEE, d. MMM yyyy HH:mm" src-locale="en" src-pattern="EEE MMM d HH:mm:ss zzz yyyy" value="{$creationdate}" />
+             </xsl:otherwise>
+           </xsl:choose>
+        </div>
+        <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+          <h1>
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+            </div>
+          </h1>
+        </xsl:if>
+        <xsl:variable name="creator" select="unizh:newsitem/lenya:meta/dc:creator" />
+        <xsl:choose>
+          <xsl:when test="$creator = ''" />
+          <xsl:otherwise>
+            <h3><xsl:value-of select="$creator" /></h3>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$area = 'authoring'">
+          <xsl:apply-templates select="unizh:newsitem/unizh:short/xhtml:p" />
+          <xsl:variable name="fulltext" select="normalize-space(unizh:newsitem/xhtml:body/xhtml:p)" />
+          <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and not(($fulltext = '') or ($fulltext = '&#160;'))">
+            <h3> <i18n:text>error_newsitem</i18n:text> </h3>
+            <br/>
           </xsl:if>
-          <xsl:variable name="creator" select="unizh:newsitem/lenya:meta/dc:creator" />
-          <xsl:choose>
-            <xsl:when test="$creator = ''" />
-            <xsl:otherwise>
-              <h3><xsl:value-of select="$creator" /></h3>
-            </xsl:otherwise>
-          </xsl:choose>
-          <xsl:if test="$area = 'authoring'">
-            <xsl:apply-templates select="unizh:newsitem/unizh:short/xhtml:p" />
-            <xsl:variable name="fulltext" select="normalize-space(unizh:newsitem/xhtml:body/xhtml:p)" />
-            <xsl:if test="(unizh:newsitem/unizh:short/xhtml:a) and not(($fulltext = '') or ($fulltext = '&#160;'))">
-              <h3> <i18n:text>error_newsitem</i18n:text> </h3>
-              <br/>
-            </xsl:if>
-          </xsl:if>
-          <div bxe_xpath="/{$document-element-name}/xhtml:body">
-            <xsl:apply-templates select="*/xhtml:body/*" />
-            <p>&#160;</p>
-            <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']" />
-            <div class="solidline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-            <xsl:apply-templates select="*/unizh:level" />
-          </div>
+        </xsl:if>
+        <div bxe_xpath="/{$document-element-name}/xhtml:body">
+          <xsl:apply-templates select="*/xhtml:body/*" />
         </div>
       </div>
     </div>
@@ -327,10 +325,18 @@
 
 
   <xsl:template name="person">
-    <div id="col1">
-      <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
-      <xsl:comment/>
-    </div>
+    <xsl:choose>
+      <xsl:when test="/document/xhtml:div[@id = 'menu']/*">
+        <div id="col1">
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
+        </div>
+      </xsl:when>
+      <xsl:otherwise>
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1"/>
+        </div>
+      </xsl:otherwise>
+    </xsl:choose>
     <div class="contcol2">
       <!-- <div class="relatedbox">
         <div bxe_xpath="/{$document-element-name}/unizh:related-content">
@@ -339,90 +345,88 @@
       </div> -->
       <div class="contentarea">
         <a accesskey="2" name="content" />
-        <div class="content">
-          <p>
-            <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']" />
-          </p>
-          <div class="solidline">
-            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
+        <p>
+          <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']" />
+        </p>
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
+        </div>
+        <div class="teamBlock">
+          <div class="teamImg">
+            <xsl:apply-templates select="unizh:person/xhtml:object" />
           </div>
-          <div class="teamBlock">
-            <div class="teamImg">
-              <xsl:apply-templates select="unizh:person/xhtml:object" />
-            </div>
-            <div class="teamText">
-              <p>
-                <b>
-                  <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
-                    <xsl:if test="unizh:person/unizh:academictitle !=''">
-                      <xsl:value-of select="unizh:person/unizh:academictitle" />&#160;
-                    </xsl:if>
-                  </span>
-                  <span bxe_xpath="/{$document-element-name}/unizh:firstname">
-                    <xsl:value-of select="unizh:person/unizh:firstname" />&#160;
-                  </span>
-                  <span bxe_xpath="/{$document-element-name}/unizh:lastname">
-                    <xsl:value-of select="unizh:person/unizh:lastname" />
-                  </span>
-                </b>
-                <br/>
-                <span bxe_xpath="/{$document-element-name}/unizh:position">
-                  <xsl:value-of select="unizh:person/unizh:position" />
+          <div class="teamText">
+            <p>
+              <b>
+                <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
+                  <xsl:if test="unizh:person/unizh:academictitle !=''">
+                    <xsl:value-of select="unizh:person/unizh:academictitle" />&#160;
+                  </xsl:if>
                 </span>
-                <br/>
-                Tel.: 
-                <span bxe_xpath="/{$document-element-name}/unizh:phone">
-                  <xsl:value-of select="unizh:person/unizh:phone" />
+                <span bxe_xpath="/{$document-element-name}/unizh:firstname">
+                  <xsl:value-of select="unizh:person/unizh:firstname" />&#160;
                 </span>
-                <br/>
-                <span bxe_xpath="/{$document-element-name}/unizh:email">
-                  <xsl:if test="unizh:person/unizh:email !=''">
-                    <xsl:text>Mail: </xsl:text>
-                    <a>
-                      <xsl:attribute name="href">
-                        <xsl:text>mailto:</xsl:text>
-                        <xsl:value-of select="unizh:person/unizh:email" />
-                      </xsl:attribute>
-                      <xsl:attribute name="class">internal</xsl:attribute>
+                <span bxe_xpath="/{$document-element-name}/unizh:lastname">
+                  <xsl:value-of select="unizh:person/unizh:lastname" />
+                </span>
+              </b>
+              <br/>
+              <span bxe_xpath="/{$document-element-name}/unizh:position">
+                <xsl:value-of select="unizh:person/unizh:position" />
+              </span>
+              <br/>
+              Tel.: 
+              <span bxe_xpath="/{$document-element-name}/unizh:phone">
+                <xsl:value-of select="unizh:person/unizh:phone" />
+              </span>
+              <br/>
+              <span bxe_xpath="/{$document-element-name}/unizh:email">
+                <xsl:if test="unizh:person/unizh:email !=''">
+                  <xsl:text>Mail: </xsl:text>
+                  <a>
+                    <xsl:attribute name="href">
+                      <xsl:text>mailto:</xsl:text>
                       <xsl:value-of select="unizh:person/unizh:email" />
-                    </a>
-                  </xsl:if>
-                </span>
-                <br/>
-                <span bxe_xpath="/{$document-element-name}/unizh:homepage">
-                  <xsl:if test="unizh:person/unizh:homepage and (unizh:person/unizh:homepage !='')">
-                    <xsl:variable name="href" select="unizh:person/unizh:homepage" />
-                    <a>
-                      <xsl:attribute name="class">
-                        <xsl:choose>
-                          <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and not(contains($href, '.unizh.ch')) and not(contains($href, '.uzh.ch'))">
-                            <xsl:text>www</xsl:text>
-                          </xsl:when>
-                          <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and ((contains($href, '.unizh.ch')) or (contains($href, '.uzh.ch')))">
-                            <xsl:text>uzh</xsl:text>
-                          </xsl:when>
-                          <xsl:otherwise>
-                             <xsl:text>internal</xsl:text>
-                          </xsl:otherwise>
-                        </xsl:choose>
-                      </xsl:attribute>
-                      <xsl:attribute name="href">
-                        <xsl:value-of select="$href" />
-                      </xsl:attribute>
+                    </xsl:attribute>
+                    <xsl:attribute name="class">internal</xsl:attribute>
+                    <xsl:value-of select="unizh:person/unizh:email" />
+                  </a>
+                </xsl:if>
+              </span>
+              <br/>
+              <span bxe_xpath="/{$document-element-name}/unizh:homepage">
+                <xsl:if test="unizh:person/unizh:homepage and (unizh:person/unizh:homepage !='')">
+                  <xsl:variable name="href" select="unizh:person/unizh:homepage" />
+                  <a>
+                    <xsl:attribute name="class">
+                      <xsl:choose>
+                        <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and not(contains($href, '.unizh.ch')) and not(contains($href, '.uzh.ch'))">
+                          <xsl:text>www</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="(starts-with($href, 'http://') or starts-with($href, 'https://')) and ((contains($href, '.unizh.ch')) or (contains($href, '.uzh.ch')))">
+                          <xsl:text>uzh</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                          <xsl:text>internal</xsl:text>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
                       <xsl:value-of select="$href" />
-                    </a>
-                  </xsl:if>
-                </span>
-              </p>
-            </div>
-            <div class="floatleftclear"><xsl:comment/></div>
+                    </xsl:attribute>
+                    <xsl:value-of select="$href" />
+                  </a>
+                </xsl:if>
+              </span>
+            </p>
           </div>
-          <div class="solidline">
-            <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-          </div>
-          <div bxe_xpath="/{$document-element-name}/unizh:description">
-            <xsl:apply-templates select="unizh:person/unizh:description" />
-          </div>
+          <div class="floatleftclear"><xsl:comment/></div>
+        </div>
+        <div class="solidline">
+          <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
+        </div>
+        <div bxe_xpath="/{$document-element-name}/unizh:description">
+          <xsl:apply-templates select="unizh:person/unizh:description" />
         </div>
       </div>
     </div>
@@ -440,16 +444,14 @@
     </div>
     <div class="contcol2">
       <div class="contentarea">
-        <div class="content">
-          <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-            <h1>
-              <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-                <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-              </div>
-            </h1>
-          </xsl:if>
-          <xsl:apply-templates select="*/xhtml:body/*" />
-        </div>
+        <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+          <h1>
+            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
+              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
+            </div>
+          </h1>
+        </xsl:if>
+        <xsl:apply-templates select="*/xhtml:body/*" />
       </div>
     </div>
   </xsl:template>

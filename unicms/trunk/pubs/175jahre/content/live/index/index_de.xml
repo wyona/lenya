@@ -2,11 +2,11 @@
 
   <lenya:meta>
     <dc:title/>
-    <dc:description/>
-    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:description> </dc:description>
+    <dc:creator>Administrator</dc:creator>
     <dc:subject/>
     <dc:publisher>Universität Zürich</dc:publisher>
-    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
+    <dcterms:created>Mon Nov 05 08:15:00 CEST 2007</dcterms:created>
     <dcterms:issued>date of publication</dcterms:issued>
     <dc:language>de</dc:language>
     <dc:rights>Universität Zürich</dc:rights>
@@ -16,45 +16,35 @@
     <unizh:superscription>175 Jahre Universität Zürich</unizh:superscription>
   </unizh:header>
   <unizh:highlight class="emerald">
-    <object data="bigBanner.jpg" title="ein total belangloses Stock Image"/>
-    <unizh:title href="http://www.example.com">Was liegt hinter dem Menschen?</unizh:title>
-    <p>
-      «weiter denken», universität zürich,<br/>
-      19.3.2008, ab 17:00 uhr
-    </p>
+    <unizh:title href="http://www.uzh.ch">highlight title</unizh:title>
+    <p>highlight text</p>
   </unizh:highlight>
   <unizh:partner>
     <unizh:title>Hauptsponsoren</unizh:title>
-    <object data="logo_ubs.gif" href="http://www.ubs.ch"/>
-    <object data="logo_cs.gif" href="http://www.cs.ch"/>
   </unizh:partner>
   <body>
     <unizh:column>
       <unizh:teaser>
-        <unizh:title>Sechs Zelte von Spatz</unizh:title>
-        <p>Diese Elemente auf der Einstiegsseite sind Teaser, die entweder einen Text ODER ein Bild haben, nie beides.</p>
+        <unizh:title>teaser title</unizh:title>
+        <p>teaser text</p>
       </unizh:teaser>
     </unizh:column>
     <unizh:column>
       <unizh:teaser>
-        <xhtml:object title="De Villepin" href="" type="" data="devillepin.jpg"/>
-        <unizh:title>Schiffbau im Schiffbau</unizh:title>
-        <p>Teaser text.</p>
-        <xhtml:a href="#">Link</xhtml:a>
+        <unizh:title>teaser title</unizh:title>
+        <p>teaser text</p>
       </unizh:teaser>
     </unizh:column>
     <unizh:column>
       <unizh:teaser>
-        <unizh:title>Titel</unizh:title>
-        <p>Teaser text.</p>
-        <xhtml:a href="#">Link</xhtml:a>
+        <unizh:title>teaser title</unizh:title>
+        <p>teaser text</p>
       </unizh:teaser>
     </unizh:column>
     <unizh:column>
       <unizh:teaser>
-        <unizh:title>Weiter denken</unizh:title>
-        <p>Mit der Leistungsübersicht sehen Sie jederzeit, wo Sie stehen.</p>
-        <xhtml:a href="http://www.example.com">Link</xhtml:a>
+        <unizh:title>teaser title</unizh:title>
+        <p>teaser text</p>
       </unizh:teaser>
     </unizh:column>
   </body>

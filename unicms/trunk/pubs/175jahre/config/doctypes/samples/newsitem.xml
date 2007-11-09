@@ -20,6 +20,7 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
     <dc:rights>Universität Zürich</dc:rights>
   </lenya:meta>
   <unizh:related-content>
+    <unizh:level />
     <unizh:teaser>
       <unizh:title>Title</unizh:title>
       <p>Teaser text</p>
@@ -33,5 +34,4 @@ lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
   <body>
     <p>Paragraph</p>
   </body>
-  <unizh:level/>
 </unizh:newsitem>

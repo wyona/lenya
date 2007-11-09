@@ -7,7 +7,7 @@
 >
 
 
-  <xsl:param name="servername"/>
+  <xsl:param name="servername" />
 
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenav">
@@ -23,12 +23,12 @@
     <xsl:choose>
       <xsl:when test="@id='search'">
         <a href="javascript:showSearch()" accesskey="3">
-          <xsl:value-of select="text()"/>
+          <xsl:value-of select="text()" />
         </a>
       </xsl:when>
       <xsl:otherwise>
         <a>
-          <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+          <xsl:attribute name="href"><xsl:value-of select="@href" /></xsl:attribute>
           <xsl:attribute name="accesskey">
             <xsl:choose>
               <xsl:when test="@id = 'home'">0</xsl:when>
@@ -36,7 +36,7 @@
               <xsl:when test="@id = 'sitemap'">4</xsl:when>
             </xsl:choose>
           </xsl:attribute>
-          <xsl:value-of select="text()"/>
+          <xsl:value-of select="text()" />
         </a>
       </xsl:otherwise>
     </xsl:choose>
@@ -48,13 +48,13 @@
       <form>
         <xsl:attribute name="id">searchbox_009347054195260226203:hahgnjx1tks</xsl:attribute>
         <xsl:attribute name="action">
-          <xsl:value-of select="@href"/>
+          <xsl:value-of select="@href" />
         </xsl:attribute>
         <xsl:attribute name="method">get</xsl:attribute>
         <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
         <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
         <input type="hidden" name="cof" value="FORID:11" />
-        <input type="hidden" id="custom" name="sitesearch" value="{$servername}"/>
+        <input type="hidden" id="custom" name="sitesearch" value="{$servername}" />
         <a href="javascript:hideSearch()" class="iconclose" alt="Suchformular schliessen"><img src="{$imageprefix}/1.gif" width="7" height="7" /></a>
         <div class="inputfield">
           Suchen: <input accesskey="5" name="q" type="text" class="text" />
@@ -67,63 +67,23 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:div[@id = 'toolnav']">
-    <div id="toolnav">
-      <div class="icontextpos">
-        <div id="icontext">&#160;</div>
-      </div>
-      <xsl:choose>
-        <xsl:when test="count(xhtml:div[@class='language']) &gt; 1">
-          <xsl:for-each select="xhtml:div[@class='language']">
-            <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a>
-            <xsl:text> | </xsl:text>
-          </xsl:for-each>
-        </xsl:when>
-        <xsl:when test="count(xhtml:div[@class='language']) = 1">
-          <a>
-            <xsl:attribute name="href"><xsl:value-of select="xhtml:div[@class='language']/@href"/></xsl:attribute>
-            <xsl:choose>
-              <xsl:when test="xhtml:div[@class='language']/text() = 'de'">Deutsch</xsl:when>
-              <xsl:when test="xhtml:div[@class='language']/text() = 'en'">English</xsl:when>
-              <xsl:when test="xhtml:div[@class='language']/text() = 'fr'">Français</xsl:when>
-              <xsl:when test="xhtml:div[@class='language']/text() = 'it'">Italiano</xsl:when>
-              <xsl:otherwise><xsl:value-of select="translate(xhtml:div[@class='language']/text(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></xsl:otherwise>
-            </xsl:choose>
-          </a>
-          <xsl:text> | </xsl:text>
-        </xsl:when>
-      </xsl:choose>
-      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}', '', 'width=700,height=700,menubar=yes,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" /></a> |
-      <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
-        <xsl:attribute name="id">switchFontSize</xsl:attribute>
-        <img src="{$imageprefix}/icon_bigfont.gif" alt="{xhtml:div[@id = 'fontsize']}" width="18" height="9"/></a> |
-      <a href="{xhtml:div[@id = 'simpleview']/@href}" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'simpleview']}')"><img src="{$imageprefix}/icon_pda.gif" alt="{xhtml:div[@id = 'simpleview']}" width="18" height="9" /></a>
-    </div>
-    <div class="floatclear"><xsl:comment/></div>
-  </xsl:template>
-
-
   <xsl:template match="xhtml:div[@id = 'menu']">
-    <xsl:variable name="descendants" select="descendant::xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]"/>
-    <xsl:variable name="current" select="descendant::xhtml:div[@current = 'true']"/>
-    <xsl:variable name="level" select="count($descendants)"/>
+    <xsl:variable name="descendants" select="descendant::xhtml:div[descendant-or-self::xhtml:div[@current = 'true']]" />
+    <xsl:variable name="current" select="descendant::xhtml:div[@current = 'true']" />
+    <xsl:variable name="level" select="count($descendants)" />
 
-    <xsl:apply-templates select="xhtml:div[@class = 'home']"/>
     <div id="secnav">
-      <xsl:if test="not(../xhtml:div[@id = 'tabs'])">
-        <a name="navigation" class="namedanchor"><xsl:comment/></a>
-      </xsl:if>
       <xsl:if test="$level > 3">
-        <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()"/></a>
+        <a href="{$descendants[$level - 3]/@href}">[...] <xsl:value-of select="$descendants[$level - 3]/text()" /></a>
       </xsl:if>
       <xsl:if test="(descendant::xhtml:div[@current = 'true']) or ($hideChildren != 'true')">
         <ul>
           <xsl:choose>
             <xsl:when test="$level > 3">
-              <xsl:apply-templates select="$descendants[$level - 2]"/>
+              <xsl:apply-templates select="$descendants[$level - 2]" />
             </xsl:when>
             <xsl:otherwise>
-              <xsl:apply-templates select="xhtml:div[not(@class = 'home')]"/>
+              <xsl:apply-templates select="xhtml:div" />
             </xsl:otherwise>
           </xsl:choose>
         </ul>
@@ -136,24 +96,22 @@
   <xsl:template match="xhtml:div[ancestor::xhtml:div[@id = 'menu']]">
     <li>
       <a href="{@href}">
-        <xsl:if test="@current = 'true'">
-          <xsl:attribute name="class">activ</xsl:attribute>
-        </xsl:if>
-        <xsl:value-of select="text()"/>
+        <xsl:choose>
+          <xsl:when test="@current = 'true'">
+            <xsl:attribute name="class">selected</xsl:attribute>
+          </xsl:when>
+          <xsl:when test="@selected = 'true'">
+            <xsl:attribute name="class">active</xsl:attribute>
+          </xsl:when>
+        </xsl:choose>
+        <xsl:value-of select="text()" />
       </a>
-      <xsl:if test="xhtml:div and not((@current = 'true') and ($hideChildren = 'true'))">
+      <xsl:if test="xhtml:div">
         <ul>
-          <xsl:apply-templates select="xhtml:div"/>
+          <xsl:apply-templates select="xhtml:div" />
         </ul>
       </xsl:if>
     </li>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:div[parent::xhtml:div[@id = 'menu'] and @class = 'home']">
-    <div class="navup">
-      <a href="{@href}"><xsl:value-of select="."/><xsl:comment/></a>
-    </div>
   </xsl:template>
 
 
@@ -166,7 +124,7 @@
           <xsl:if test="@current = 'true'">
             <xsl:attribute name="class">activ</xsl:attribute>
           </xsl:if>
-          <xsl:value-of select="text()"/>
+          <xsl:value-of select="text()" />
         </a>
       </xsl:for-each>
     </div>
@@ -179,21 +137,7 @@
         <xsl:if test="position() &gt; 1">
           <xsl:text> &gt; </xsl:text>
         </xsl:if>
-        <a href="{@href}"><xsl:value-of select="."/></a>
-      </xsl:for-each>
-    </div>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:div[@id = 'simplenav']">
-    <div id="primarnav">
-      <a name="navigation" class="namedanchor"><xsl:comment/></a>
-      <xsl:for-each select="xhtml:div">
-        <a href="{@href}"><xsl:value-of select="@label"/></a>
-        <xsl:if test="@id = 'up'"><br/></xsl:if>
-        <xsl:if test="not(@id = 'up') and position() &lt; last()">
-          <div class="linkseparator">|</div>
-        </xsl:if>
+        <a href="{@href}"><xsl:value-of select="." /></a>
       </xsl:for-each>
     </div>
   </xsl:template>
