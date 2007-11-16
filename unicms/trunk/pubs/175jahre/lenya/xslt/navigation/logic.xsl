@@ -128,6 +128,7 @@
  
 <xsl:template match="unizh:header">
   <unizh:header>
+    <xsl:apply-templates select="@*" />
     <xsl:choose>
       <!-- publication index and project subpubs get headers -->
       <xsl:when test="$isProject = 'true' or $isHomepage = 'true'">

@@ -11,13 +11,14 @@
 
 <define name="unizh.header">
   <element name="unizh:header">
+    <optional>
+      <ref name="unizh.colors.attrib" />
+    </optional>
     <element name="unizh:heading">
       <text/>
     </element>
     <element name="unizh:superscription">
-      <optional>
-        <text/>
-      </optional>
+      <text/>
     </element>
   </element>
 </define>
@@ -233,20 +234,7 @@
 
 <define name="unizh.highlight">
   <element name="unizh:highlight">
-    <attribute name="class">
-      <choice>
-        <value type="string">moccachino</value>
-        <value type="string">red</value>
-        <value type="string">pumpkin</value>
-        <value type="string">sunshine</value>
-        <value type="string">emerald</value>
-        <value type="string">cyan</value>
-        <value type="string">marine</value>
-        <value type="string">amethyst</value>
-        <value type="string">magenta</value>
-        <value type="string">lime</value>
-      </choice>
-    </attribute>
+    <ref name="unizh.colors.attrib" />
     <optional>
       <ref name="object"/> 
     </optional>
@@ -269,6 +257,24 @@
       </element>
     </optional>
   </element>
+</define>
+
+
+<define name="unizh.colors.attrib">
+  <attribute name="class">
+    <choice>
+      <value type="string">moccachino</value>
+      <value type="string">red</value>
+      <value type="string">pumpkin</value>
+      <value type="string">sunshine</value>
+      <value type="string">emerald</value>
+      <value type="string">cyan</value>
+      <value type="string">marine</value>
+      <value type="string">amethyst</value>
+      <value type="string">magenta</value>
+      <value type="string">lime</value>
+    </choice>
+  </attribute>
 </define>
 
 
@@ -418,6 +424,9 @@
 <define name="unizh.links">
   <element name="unizh:links">
     <element name="unizh:title">
+      <optional>
+        <ref name="unizh.colors.attrib" />
+      </optional>
       <optional>
         <attribute name="href">
           <text/>

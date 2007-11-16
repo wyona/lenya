@@ -17,7 +17,6 @@ div#titlearea h1
 }
 div#titlearea h2
 {
-    color: #B371B0;
     font-weight: normal;
     font-size: 1.75em;
     line-height: 1.1em;

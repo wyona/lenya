@@ -68,6 +68,7 @@
       <map:transform type="cinclude"/>
       <map:transform src="xslt/common/rss-elements.xsl">
         <map:parameter name="contextprefix" value="{request:contextPath}"/>
+        <map:parameter name="document_type" value="{page-envelope:document-type}"/>
       </map:transform>
       <map:transform type="i18n">
         <map:parameter name="locale" value="{page-envelope:document-language}"/>

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -8,7 +10,8 @@
   xmlns:dcterms="http://purl.org/dc/terms/" 
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:uzhfeeds="http://www.uzh.ch/doctypes/rss"
-  >
+>
+
 
   <xsl:param name="servername" />
   <xsl:param name="serverport" />
@@ -160,9 +163,9 @@
                     </xsl:otherwise>
                   </xsl:choose>
                 </uzhfeeds:url>
-                <uzhfeeds:width></uzhfeeds:width>
-                <uzhfeeds:height></uzhfeeds:height>
-                <uzhfeeds:description></uzhfeeds:description>
+                <uzhfeeds:width><xsl:value-of select="*/unizh:newsitem/unizh:short/descendant::xhtml:object[1]/@width" /></uzhfeeds:width>
+                <uzhfeeds:height><xsl:value-of select="*/unizh:newsitem/unizh:short/descendant::xhtml:object[1]/@height" /></uzhfeeds:height>
+                <uzhfeeds:description><xsl:value-of select="*/unizh:newsitem/unizh:short/descendant::xhtml:object[1]/xhtml:div/text()" /></uzhfeeds:description>
               </uzhfeeds:image>
             </xsl:if>
             <pubDate>

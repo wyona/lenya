@@ -11,84 +11,77 @@ div.contentarea
 /****** common elements ******/
 
 /* teaser on homepage has either p or img, no link */
-div.teaser
+div.contentarea div.teaser
 {
     height: 83px;
-    background-color: #FFF;
-    border-top: none;
     border-bottom: none;
     padding: 0;
     overflow: hidden;
 }
-div.teaser h3
-{
-    font-size: 1.0em;
-    color: #FFF;
-    padding: 3px 10px 3px 10px;
-    margin: 0;
-}
-div.teaser h3.linked
+div.contentarea div.teaser h3.linked
 {
     padding: 0;
 }
-div.teaser h3 a
+div.contentarea div.teaser h3 a
 {
     color: #FFF;
+    text-decoration: none;
     background-image:url(images/arrow_white_right.gif);
     background-position: 0 3px;
+    background-repeat: no-repeat;
     padding: 3px 10px 3px 13px;
     margin: 0 0 0 10px;
     display: block;
 }
-div.teaser h3 a:hover
+div.contentarea div.teaser h3 a:hover
 {
-    background-color: transparent;
+    text-decoration: underline;
 }
-div.teaser.moccachino h3
+div.contentarea div.teaser h3.moccachino
 {
     background-color: #865F39;
 }
-div.teaser.red h3
+div.contentarea div.teaser h3.red
 {
     background-color: #ED001F;
 }
-div.teaser.pumpkin h3
+div.contentarea div.teaser h3.pumpkin
 {
     background-color: #F97F1F;
 }
-div.teaser.sunshine h3
+div.contentarea div.teaser h3.sunshine
 {
     background-color: #FFB51D;
 }
-div.teaser.emerald h3
+div.contentarea div.teaser h3.emerald
 {
     background-color: #005E5D;
 }
-div.teaser.cyan h3
+div.contentarea div.teaser h3.cyan
 {
     background-color: #009DE9;
 }
-div.teaser.marine h3
+div.contentarea div.teaser h3.marine
 {
     background-color: #211F7E;
 }
-div.teaser.amethyst h3
+div.contentarea div.teaser h3.amethyst
 {
     background-color: #80107B;
 }
-div.teaser.magenta h3
+div.contentarea div.teaser h3.magenta
 {
     background-color: #EC0078;
 }
-div.teaser.lime h3
+div.contentarea div.teaser h3.lime
 {
     background-color: #7FAB16;
 }
-div.teaser p
+div.contentarea div.teaser p
 {
     padding: 2px 0 0.5em 0;
 }
-div.teaser img
+div.contentarea div.teaser img
 {
     display: block;
     margin: 0;
@@ -100,9 +93,41 @@ div.rssReader
     height: 83px;
     overflow: hidden;
 }
+div.rssReader ul
+{
+    padding-left: 10px;
+}
 div.rssReader ul li
 {
     border-bottom: none;
+}
+div.rssReader h3.pumpkin
+{
+    background-color: #F97F1F;
+}
+div.rssReader h3.emerald
+{
+    background-color: #005E5D;
+}
+div.rssReader h3.cyan
+{
+    background-color: #009DE9;
+}
+div.rssReader h3.marine
+{
+    background-color: #211F7E;
+}
+div.rssReader h3.amethyst
+{
+    background-color: #80107B;
+}
+div.rssReader h3.magenta
+{
+    background-color: #EC0078;
+}
+div.rssReader h3.lime
+{
+    background-color: #7FAB16;
 }
 
 /* partner element on home page */

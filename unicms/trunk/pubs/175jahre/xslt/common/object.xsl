@@ -836,8 +836,8 @@
       <xsl:when test="( /document/content/*/@unizh:columns = 2 ) and ( @width > 596 )">
         <xsl:text>596</xsl:text>
       </xsl:when>
-      <xsl:when test="( ( /document/content/*/@unizh:columns = 3 ) or ( /document/content/unizh:homepage ) ) and ( @width > 408 )">
-        <xsl:text>408</xsl:text>
+      <xsl:when test="( ( /document/content/*/@unizh:columns = 3 ) or ( /document/content/unizh:homepage ) ) and ( @width > 392 )">
+        <xsl:text>392</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="@width" />

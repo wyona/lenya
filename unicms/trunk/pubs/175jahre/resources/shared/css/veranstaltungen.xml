@@ -21,6 +21,12 @@ div.links h3
     background-color: #EC0078;
 }
 
+/* teaser in content columns */
+div.contentarea div.teaser h3
+{
+    background-color: #EC0078;
+}
+
 /* second and deeper level navigation */
 div#secnav a.selected
 {

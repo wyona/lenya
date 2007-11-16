@@ -170,28 +170,28 @@ div.teaser div.asset img
     display: inline;
 }
 
+/* teaser in column */
+div.contentarea div.teaser
+{
+    background-color: transparent;
+    border-top: none;
+    padding: 0 0 9px 0;
+}
+
 /* teaser in double width column */
 div.contentarea div.double div.teaser
 {
-    position: relative;
     width: 392px;
-    background-color: transparent;
-    border: none;
-    padding: 0;
 }
-div.contentarea div.double div.teaser h3
+div.contentarea div.teaser h3
 {
-    font-weight: bold;
+    font-size: 1.0em;
     color: #FFFFFF;
-    font-size: 1.5em;
-    line-height: 1.1em;
-    position: absolute;
-    top: 0;
-    left: 0;
+    background-color: #80107B;
+    padding: 3px 10px 3px 10px;
     margin: 0;
-    padding: 10px 0 0 10px;
 }
-div.contentarea div.double div.teaser img
+div.contentarea div.teaser img
 {
     margin: 0 0 2px 0;
 }
@@ -216,9 +216,9 @@ div.rssReader h3
 {
     font-size: 1.0em;
     color: #FFFFFF;
-    background-color: #80107B;
     padding: 3px 10px 3px 10px;
     margin: 0;
+    background-color: #80107B;
 }
 div.relatedbox div.rssReader h3
 {
@@ -341,6 +341,7 @@ div.rssReader.internal ul li a.more
 div.rssReader ul li img
 {
     display: block;
+    width: 100%;
     margin: 10px 0 0 0;
 }
 div.rssReader ul li.first img
@@ -599,7 +600,7 @@ div#primarnav a#veranstaltungen
 }
 div#primarnav a#fakultaeten
 {
-    color: #211F7E;
+    color: #005E5D;
 }
 div#primarnav a#ausstellungen
 {
@@ -607,7 +608,7 @@ div#primarnav a#ausstellungen
 }
 div#primarnav a#blog
 {
-    color: #005E5D;
+    color: #211F7E;
 }
 
 div#primarnav div.linkseparator
@@ -621,7 +622,8 @@ div#titlearea
 {
     height: 46px;
     text-transform: lowercase;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    background-color: #80107B;
 }
 div#titlearea h1
 {
@@ -630,6 +632,10 @@ div#titlearea h1
     line-height: 1.1em;
     margin: 0;
     padding: 7px 0 0 10px;
+}
+div#titlearea h2
+{
+    color: #A662A4;
 }
 div#titlearea h1 a
 {
@@ -685,7 +691,7 @@ div#highlight
     margin-bottom: 20px;
     position: relative;
 }
-div#highlight.moccachino, div#titlearea.moccachino, div.links.moccachino h3
+div#highlight.moccachino, div#titlearea.moccachino, div.links h3.moccachino
 {
     background-color: #865F39;
 }
@@ -693,7 +699,7 @@ div#highlight.moccachino p
 {
     color: #FFD378;
 }
-div#highlight.red, div#titlearea.red, div.links.red h3
+div#highlight.red, div#titlearea.red, div.links h3.red
 {
     background-color: #ED001F;
 }
@@ -701,7 +707,7 @@ div#highlight.red p
 {
     color: #FFD378;
 }
-div#highlight.pumpkin, div#titlearea.pumpkin, div.links.pumpkin h3
+div#highlight.pumpkin, div#titlearea.pumpkin, div.links h3.pumpkin
 {
     background-color: #F97F1F;
 }
@@ -709,7 +715,7 @@ div#highlight.pumpkin p
 {
     color: #FFD378;
 }
-div#highlight.sunshine, div#titlearea.sunshine, div.links.sunshine h3
+div#highlight.sunshine, div#titlearea.sunshine, div.links h3.sunshine
 {
     background-color: #FFB51D;
 }
@@ -717,7 +723,7 @@ div#highlight.sunshine p
 {
     color: #FFD378;
 }
-div#highlight.emerald, div#titlearea.emerald, div.links.emerald h3
+div#highlight.emerald, div#titlearea.emerald, div.links h3.emerald
 {
     background-color: #005E5D;
 }
@@ -725,7 +731,7 @@ div#highlight.emerald p
 {
     color: #FFD378;
 }
-div#highlight.cyan, div#titlearea.cyan, div.links.cyan h3
+div#highlight.cyan, div#titlearea.cyan, div.links h3.cyan
 {
     background-color: #009DE9;
 }
@@ -733,7 +739,7 @@ div#highlight.cyan p
 {
     color: #FFD378;
 }
-div#highlight.marine, div#titlearea.marine, div.links.marine h3
+div#highlight.marine, div#titlearea.marine, div.links h3.marine
 {
     background-color: #211F7E;
 }
@@ -741,7 +747,7 @@ div#highlight.marine p
 {
     color: #FFD378;
 }
-div#highlight.amethyst, div#titlearea.amethyst, div.links.amethyst h3
+div#highlight.amethyst, div#titlearea.amethyst, div.links h3.amethyst
 {
     background-color: #80107B;
 }
@@ -749,7 +755,7 @@ div#highlight.amethyst p
 {
     color: #FFD378;
 }
-div#highlight.magenta, div#titlearea.magenta, div.links.magenta h3
+div#highlight.magenta, div#titlearea.magenta, div.links h3.magenta
 {
     background-color: #EC0078;
 }
@@ -757,7 +763,7 @@ div#highlight.magenta p
 {
     color: #FFD378;
 }
-div#highlight.lime, div#titlearea.lime, div.links.lime h3
+div#highlight.lime, div#titlearea.lime, div.links h3.lime
 {
     background-color: #7FAB16;
 }
@@ -1050,13 +1056,14 @@ div.links h3
 div.links h3.linked
 {
     padding: 0;
-    margin: 0;
 }
 div.links h3 a
 {
     color: #FFFFFF;
+    text-decoration: none;
     background-image: url(images/arrow_right_weiss.gif);
     background-position: 0 3px;
+    background-repeat: no-repeat;
     padding: 3px 10px 3px 13px;
     margin: 0 0 0 10px;
     display: block;

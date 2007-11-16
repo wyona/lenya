@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: html-head.xsl,v 1.2 2004/02/04 14:34:37 gregor Exp $ -->
+
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
@@ -8,12 +8,8 @@
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" 
   xmlns:cinclude="http://apache.org/cocoon/include/1.0"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
-  >
-  
-<xsl:param name="fontsize"/>
-<xsl:param name="contextprefix"/>
-<xsl:param name="root"/>
-<xsl:param name="area"/>
+>
+
 
   <xsl:template match="unizh:rss-reader">
     <unizh:rss-reader url="{@url}" items="{@items}" image="{@image}" link="{@link}" itemDescription="{@itemDescription}" itemImage="{@itemImage}" itemPubdate="{@itemPubdate}">
@@ -32,11 +28,10 @@
   </xsl:template>
 
 
-<xsl:template match="@*|node()" priority="-3">
-  <xsl:copy>
-    <xsl:apply-templates select="@*|node()"/>
-  </xsl:copy>
-</xsl:template>
-
+  <xsl:template match="@*|node()" priority="-3">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
 
 </xsl:stylesheet>

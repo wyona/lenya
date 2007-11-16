@@ -47,12 +47,7 @@
 
 
   <xsl:template match="dc:title">
-    <h1>
-      <xsl:if test="$rendertype = 'edit'">
-        <xsl:attribute name="bxe_xpath">/xhtml:<xsl:value-of select="$document-element-name" />/lenya:meta/dc:title</xsl:attribute>
-      </xsl:if>
-      <xsl:apply-templates/>
-    </h1>
+    <h1><xsl:apply-templates/></h1>
   </xsl:template>
 
 
@@ -246,6 +241,58 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:teaser[ancestor::unizh:homepage4cols]">
+    <div class="teaser">
+      <h3>
+        <xsl:choose>
+          <xsl:when test="xhtml:a">
+            <xsl:attribute name="class">
+              <xsl:text>linked</xsl:text>
+              <xsl:choose>
+                <xsl:when test="contains( xhtml:a/@href, 'news' )">
+                  <xsl:text> lime</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'ueber' )">
+                  <xsl:text> cyan</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'agenda' )">
+                  <xsl:text> amethyst</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'veranstaltungen' )">
+                  <xsl:text> magenta</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'fakultaeten' )">
+                  <xsl:text> emerald</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'ausstellungen' )">
+                  <xsl:text> pumpkin</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains( xhtml:a/@href, 'blog' )">
+                  <xsl:text> marine</xsl:text>
+                </xsl:when>
+              </xsl:choose>
+            </xsl:attribute>
+            <a href="{xhtml:a/@href}">
+              <xsl:value-of select="unizh:title" />
+            </a>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="unizh:title" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </h3>
+      <xsl:choose>
+        <xsl:when test="xhtml:object">
+          <xsl:apply-templates select="xhtml:object" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="xhtml:p" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </div>
+  </xsl:template>
+
+
   <xsl:template match="unizh:teaser">
     <div class="teaser">
       <h3><xsl:value-of select="unizh:title" /><xsl:comment/></h3>
@@ -266,38 +313,19 @@
       <h3>
         <xsl:choose>
           <xsl:when test="unizh:title/@href">
-            <xsl:choose>
-              <xsl:when test="xhtml:object">
-                <xsl:attribute name="class">linked</xsl:attribute>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:attribute name="class">noimage linked</xsl:attribute>
-              </xsl:otherwise>
-            </xsl:choose>
+            <xsl:attribute name="class">
+              <xsl:text>linked</xsl:text>
+              <xsl:if test="unizh:title/@class">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="unizh:title/@class" />
+              </xsl:if>
+            </xsl:attribute>
             <a href="{unizh:title/@href}">
-              <xsl:attribute name="class">
-                <xsl:choose>
-                  <xsl:when test="(starts-with(unizh:title/@href, 'http://') or starts-with(unizh:title/@href, 'https://')) and not(contains(unizh:title/@href, '.unizh.ch')) and not(contains(unizh:title/@href, '.uzh.ch'))">
-                    <xsl:text>www</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="(starts-with(unizh:title/@href, 'http://') or starts-with(unizh:title/@href, 'https://')) and ((contains(unizh:title/@href, '.unizh.ch') ) or (contains(unizh:title/@href, '.uzh.ch')))">
-                    <xsl:text>uzh</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="starts-with(@href, 'itpc://')">
-                    <xsl:text>podcast</xsl:text>
-                  </xsl:when>
-                  <xsl:otherwise>
-                     <xsl:text>internal</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:attribute>
               <xsl:value-of select="unizh:title" />
             </a>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:if test="not(xhtml:object)">
-              <xsl:attribute name="class">noimage</xsl:attribute>
-            </xsl:if>
+            <xsl:apply-templates select="unizh:title/@class" />
             <xsl:value-of select="unizh:title" />
           </xsl:otherwise>
         </xsl:choose>
@@ -465,7 +493,6 @@
           <xsl:when test="ancestor::unizh:children">
             <div class="objectContainer separated">
               <xsl:apply-templates select="xhtml:object" mode="objectElement">
-                <xsl:with-param name="width-default" select="100" />
                 <xsl:with-param name="src">
                   <xsl:choose>
                     <xsl:when test="starts-with(xhtml:object/@data, 'http')">
@@ -483,10 +510,8 @@
             </div>
           </xsl:when>
           <xsl:when test="ancestor::unizh:newsitem">
-            <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
-              <xsl:apply-templates select="xhtml:object" mode="objectElement">
-                <xsl:with-param name="width-default" select="100" />
-              </xsl:apply-templates>
+            <div class="objectContainer editview" id="short">
+              <xsl:apply-templates select="xhtml:object" mode="objectElement" />
               <xsl:apply-templates select="text()" />
               <br class="floatclear" />
             </div>
@@ -499,7 +524,6 @@
           <xsl:when test="ancestor::unizh:children">
             <div class="objectContainer separated">
               <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
-                <xsl:with-param name="width-default" select="100" />
                 <xsl:with-param name="src">
                   <xsl:choose>
                     <xsl:when test="starts-with(../*/@data, 'http')">
@@ -517,10 +541,8 @@
             </div>
           </xsl:when>
           <xsl:when test="ancestor::unizh:newsitem">
-            <div class="objectContainer editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
-              <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement">
-                <xsl:with-param name="width-default" select="100" />
-              </xsl:apply-templates>
+            <div class="objectContainer editview" id="short">
+              <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement" />
               <xsl:apply-templates/>
               <br class="floatclear" />
             </div>
@@ -539,7 +561,7 @@
             </xsl:copy>
           </xsl:when>
           <xsl:when test="ancestor::unizh:newsitem">
-            <div class="editview" bxe_xpath="/unizh:newsitem/unizh:short" id="short">
+            <div class="editview" id="short">
               <xsl:apply-templates/>
             </div>
           </xsl:when>
@@ -693,7 +715,7 @@
   <xsl:template match="unizh:lead[parent::xhtml:body]">
     <xsl:choose>
       <xsl:when test="xhtml:p/descendant-or-self::*[text()]">
-        <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
+        <div class="leadblock">
           <p>
             <xsl:if test="xhtml:object">
               <xsl:apply-templates select="xhtml:object" />
@@ -703,7 +725,7 @@
         </div>
       </xsl:when>
       <xsl:when test="xhtml:object">
-        <div class="leadblock" bxe_xpath="/{$document-element-name}/xhtml:body/unizh:lead">
+        <div class="leadblock">
           <xsl:apply-templates select="xhtml:object" />
         </div>
       </xsl:when>
@@ -945,6 +967,42 @@
         </xsl:call-template>
       </xsl:for-each>
     </div>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:calendar">
+    <table class="calendar" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="2"><xsl:value-of select="unizh:title/text()" /></th>
+      </tr>
+      <xsl:for-each select="unizh:row">
+        <tr>
+          <xsl:if test="( position() div 2 ) != round( position() div 2 )">
+            <xsl:attribute name="class">odd</xsl:attribute>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="( @label ) and ( node() )">
+              <td>
+                <xsl:value-of select="@label" />
+              </td>
+              <td class="data">
+                <xsl:apply-templates />
+              </td>
+            </xsl:when>
+            <xsl:when test=" @label ">
+              <td colspan="2">
+                <xsl:value-of select="@label" />
+              </td>
+            </xsl:when>
+            <xsl:when test=" node() ">
+              <td colspan="2" class="remarks">
+                <xsl:apply-templates />
+              </td>
+            </xsl:when>
+          </xsl:choose>
+        </tr>
+      </xsl:for-each>
+    </table>
   </xsl:template>
 
 </xsl:stylesheet>

@@ -12,29 +12,35 @@ div#primarnav a#news, div#primarnav a#ueber, div#primarnav a#agenda, div#primarn
 /* rss reader*/
 div.rssReader h3
 {
-    background-color: #211F7E;
+    background-color: #005E5D;
 }
 
 /* links element for use in content columns */
 div.links h3
 {
-    background-color: #211F7E;
+    background-color: #005E5D;
+}
+
+/* teaser in content columns */
+div.contentarea div.teaser h3
+{
+    background-color: #005E5D;
 }
 
 /* second and deeper level navigation */
 div#secnav a.selected
 {
-    color: #211F7E;
+    color: #005E5D;
 }
 
 /* event date box */
 div.relatedbox table.calendar tr th
 {
-    background-color: #211F7E;
+    background-color: #005E5D;
 }
 div.relatedbox table.calendar tr td.data
 {
-    color: #211F7E;
+    color: #005E5D;
 }
 
 </css>

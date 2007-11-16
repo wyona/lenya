@@ -112,15 +112,9 @@
     <a accesskey="2" name="content" />
     <div class="contentarea1col">
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-        <h1>
-          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-            <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-          </div>
-        </h1>
+        <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
       </xsl:if>
-      <div bxe_xpath="/{$document-element-name}/xhtml:body">
-        <xsl:apply-templates select="*/xhtml:body/*" />
-      </div>
+      <xsl:apply-templates select="*/xhtml:body/*" />
     </div>
   </xsl:template>
 
@@ -141,16 +135,9 @@
     <div class="contcol2">
       <a accesskey="2" name="content" />
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-        <h1>
-          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-            <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-          </div>
-        </h1>
+        <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
       </xsl:if>
-      <div bxe_xpath="/{$document-element-name}/xhtml:body">
-        <xsl:apply-templates select="*/xhtml:body/*" />
-        <br/>
-      </div>
+      <xsl:apply-templates select="*/xhtml:body/*" />
     </div>
   </xsl:template>
 
@@ -169,21 +156,15 @@
       </xsl:otherwise>
     </xsl:choose>
     <div class="contcol2">
-      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+      <div class="relatedbox">
         <xsl:apply-templates select="*/unizh:related-content" /><xsl:comment/>
       </div>
       <div class="contentarea">
         <a accesskey="2" name="content" />
         <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
+          <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
         </xsl:if>
-        <div bxe_xpath="/{$document-element-name}/xhtml:body">
-          <xsl:apply-templates select="*/xhtml:body/*" />
-        </div>
+        <xsl:apply-templates select="*/xhtml:body/*" />
       </div>
     </div>
   </xsl:template>
@@ -225,11 +206,7 @@
           </xsl:choose>
         </xsl:attribute>
         <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
+          <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
         </xsl:if>
         <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:lead"/>
         <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]" />
@@ -249,11 +226,7 @@
     <a accesskey="2" name="content" />
     <div class="contentarea">
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-        <h1>
-          <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-            <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-          </div>
-        </h1>
+        <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
       </xsl:if>
       <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]" />
       <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]" />
@@ -278,7 +251,7 @@
       </xsl:otherwise>
     </xsl:choose>
     <div class="contcol2">
-      <div class="relatedbox" bxe_xpath="/{$document-element-name}/unizh:related-content">
+      <div class="relatedbox">
         <xsl:apply-templates select="*/unizh:related-content" /><xsl:comment/>
       </div>
       <div class="contentarea">
@@ -295,11 +268,7 @@
            </xsl:choose>
         </div>
         <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
+          <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
         </xsl:if>
         <xsl:variable name="creator" select="unizh:newsitem/lenya:meta/dc:creator" />
         <xsl:choose>
@@ -316,9 +285,7 @@
             <br/>
           </xsl:if>
         </xsl:if>
-        <div bxe_xpath="/{$document-element-name}/xhtml:body">
-          <xsl:apply-templates select="*/xhtml:body/*" />
-        </div>
+        <xsl:apply-templates select="*/xhtml:body/*" />
       </div>
     </div>
   </xsl:template>
@@ -338,11 +305,6 @@
       </xsl:otherwise>
     </xsl:choose>
     <div class="contcol2">
-      <!-- <div class="relatedbox">
-        <div bxe_xpath="/{$document-element-name}/unizh:related-content">
-          <xsl:apply-templates select="*/unizh:related-content" />
-        </div>
-      </div> -->
       <div class="contentarea">
         <a accesskey="2" name="content" />
         <p>
@@ -358,29 +320,29 @@
           <div class="teamText">
             <p>
               <b>
-                <span bxe_xpath="/{$document-element-name}/unizh:academictitle">
+                <span>
                   <xsl:if test="unizh:person/unizh:academictitle !=''">
                     <xsl:value-of select="unizh:person/unizh:academictitle" />&#160;
                   </xsl:if>
                 </span>
-                <span bxe_xpath="/{$document-element-name}/unizh:firstname">
+                <span>
                   <xsl:value-of select="unizh:person/unizh:firstname" />&#160;
                 </span>
-                <span bxe_xpath="/{$document-element-name}/unizh:lastname">
+                <span>
                   <xsl:value-of select="unizh:person/unizh:lastname" />
                 </span>
               </b>
               <br/>
-              <span bxe_xpath="/{$document-element-name}/unizh:position">
+              <span>
                 <xsl:value-of select="unizh:person/unizh:position" />
               </span>
               <br/>
               Tel.: 
-              <span bxe_xpath="/{$document-element-name}/unizh:phone">
+              <span>
                 <xsl:value-of select="unizh:person/unizh:phone" />
               </span>
               <br/>
-              <span bxe_xpath="/{$document-element-name}/unizh:email">
+              <span>
                 <xsl:if test="unizh:person/unizh:email !=''">
                   <xsl:text>Mail: </xsl:text>
                   <a>
@@ -394,7 +356,7 @@
                 </xsl:if>
               </span>
               <br/>
-              <span bxe_xpath="/{$document-element-name}/unizh:homepage">
+              <span>
                 <xsl:if test="unizh:person/unizh:homepage and (unizh:person/unizh:homepage !='')">
                   <xsl:variable name="href" select="unizh:person/unizh:homepage" />
                   <a>
@@ -425,9 +387,7 @@
         <div class="solidline">
           <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
         </div>
-        <div bxe_xpath="/{$document-element-name}/unizh:description">
-          <xsl:apply-templates select="unizh:person/unizh:description" />
-        </div>
+        <xsl:apply-templates select="unizh:person/unizh:description" />
       </div>
     </div>
   </xsl:template>
@@ -445,11 +405,7 @@
     <div class="contcol2">
       <div class="contentarea">
         <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-          <h1>
-            <div bxe_xpath="/{$document-element-name}/lenya:meta/dc:title">
-              <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-            </div>
-          </h1>
+          <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
         </xsl:if>
         <xsl:apply-templates select="*/xhtml:body/*" />
       </div>

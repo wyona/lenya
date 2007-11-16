@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
@@ -33,7 +33,8 @@
     <!-- simply display titlearea if the needed data is in the XML tree (project and home pages, plus children of project pages) -->
     <!-- logic is in the aggregation / transformation -->
     <xsl:if test="/document/content/*/unizh:header/*">
-      <div id="titlearea" class="amethyst">
+      <div id="titlearea">
+        <xsl:apply-templates select="/document/content/*/unizh:header/@class" />
         <h1>
           <a href="{/document/content/*/unizh:header/unizh:heading/@href}">
             <xsl:value-of select="/document/content/*/unizh:header/unizh:heading" />
@@ -73,5 +74,3 @@
   </xsl:template>
 
 </xsl:stylesheet>
-
-
