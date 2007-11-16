@@ -10,6 +10,19 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
   xmlns:i18n="http://apache.org/cocoon/i18n/2.1"
+   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
+     xmlns:level="http://apache.org/cocoon/lenya/documentlevel/1.0"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lenya:dummy="bar"
+      xhtml:dummy="bar"
+      dc:dummy="bar"
+      dcterms:dummy="bar"
+      unizh:dummy="bar"
+      uz:dummy="bar"
+      index:dummy="bar"
+      level:dummy="bar"
+      i18n:dummy="bar"
+      tal:dummy="foo"
 >
 
 

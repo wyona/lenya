@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Text Module -->
-<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar
+ns="http://www.w3.org/1999/xhtml"
+xmlns:bxe="http://bitfluxeditor.org/schema/2.0" 
+xmlns="http://relaxng.org/ns/structure/1.0">
 
 <define name="br">
   <element name="br">
@@ -163,6 +166,7 @@
 
 <define name="p">
   <element name="p">
+    <bxe:nextelement ns="http://www.w3.org/1999/xhtml">p</bxe:nextelement> 
     <ref name="p.attlist"/>
     <ref name="Inline.model"/>
   </element>

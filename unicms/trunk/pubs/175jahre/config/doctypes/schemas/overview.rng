@@ -4,13 +4,14 @@
     | UniZH XHTML doctype
     +-->
 
-<grammar ns="http://www.w3.org/1999/xhtml"
-         xmlns="http://relaxng.org/ns/structure/1.0"
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:bxe="http://bitfluxeditor.org/schema/2.0" 
+
          >
 
 <include href="xhtml.rng">
@@ -40,7 +41,7 @@
       <ref name="unizh.contcol1"/> 
     </optional>
     <ref name="unizh.related-content" />
-    <element name="body">
+    <element name="xhtml:body">
       <optional>
         <ref name="unizh.lead" />
       </optional>

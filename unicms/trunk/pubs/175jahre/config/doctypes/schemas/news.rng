@@ -4,8 +4,7 @@
     | UniZH XHTML doctype
     +-->
 
-<grammar ns="http://www.w3.org/1999/xhtml"
-         xmlns="http://relaxng.org/ns/structure/1.0"
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -36,12 +35,12 @@
       <ref name="unizh.highlight" />
     </optional>
     <ref name="unizh.related-content" />
-    <element name="body">
+    <element name="xhtml:body">
       <optional>
         <ref name="object" />
       </optional>
       <zeroOrMore>
-        <element name="p">
+        <element name="xhtml:p">
           <ref name="Inline.model" />
         </element>
       </zeroOrMore>

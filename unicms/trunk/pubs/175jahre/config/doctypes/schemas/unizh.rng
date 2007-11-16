@@ -7,6 +7,7 @@
          xmlns:dcterms="http://purl.org/dc/terms/"
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
          xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:bxe="http://bitfluxeditor.org/schema/2.0" 
          >
 
 <define name="unizh.header">
@@ -155,6 +156,8 @@
 
 <define name="teaser.p">
   <element name="p">
+  	<bxe:nextelement ns="http://www.w3.org/1999/xhtml">p</bxe:nextelement> 
+    
     <ref name="teaser.model"/>
   </element>
 </define>
@@ -248,6 +251,7 @@
     </optional>
     <optional>
       <element name="p">
+      <bxe:nextelement ns="http://www.w3.org/1999/xhtml">p</bxe:nextelement> 
         <oneOrMore>
           <choice>
             <text />

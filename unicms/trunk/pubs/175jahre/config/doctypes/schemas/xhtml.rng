@@ -4,8 +4,7 @@
     | UniZH XHTML doctype
     +-->
 
-<grammar ns="http://www.w3.org/1999/xhtml"
-         xmlns="http://relaxng.org/ns/structure/1.0"
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -19,9 +18,12 @@
 
 <!-- include original XHTML schema -->
 <include href="xhtml/xhtml-strict.rng">
+<start>
+  <ref name="html"/>
+</start>
 
   <define name="html">
-    <element name="html">
+    <element name="xhtml:html">
       <ref name="html.attlist" />
       <ref name="lenya.meta" />
       <optional>

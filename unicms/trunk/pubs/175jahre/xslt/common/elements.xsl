@@ -165,7 +165,7 @@
 
 
   <xsl:template match="xhtml:a[@href != '']">
-    <a href="{@href}">
+    <a href="{@href}" __bxe_id="{@__bxe_id}">
       <xsl:attribute name="class">
         <xsl:choose>
           <xsl:when test="(starts-with(@href, 'http://') or starts-with(@href, 'https://')) and not(contains(@href, '.unizh.ch')) and not(contains(@href, '.uzh.ch'))">
@@ -351,7 +351,7 @@
   
   <xsl:template match="xhtml:body//xhtml:h2 | unizh:description//xhtml:h2">
     <!-- unizh:description -> 'person' doctype -->
-    <h2>
+    <h2 __bxe_id="{@__bxe_id}">
       <xsl:if test="@class">
         <xsl:copy-of select="@class" />
       </xsl:if>
