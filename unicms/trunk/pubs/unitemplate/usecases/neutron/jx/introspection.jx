@@ -31,8 +31,8 @@
   <sitemap type="lenya-rdf" name="${cocoon.parameters['publicationid']}" href="${cocoon.parameters['base-url']}/site.rdf"/>
   <upload method="POST" url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=upload">
     <form>
-      <input type="file" name="upload-file" label="File"/>
-      <input type="text" name="title" label="Title" value=""/>
+      <input type="file" name="upload-file" label="File" extensions="doc dot rtf txt asc ascii xls xlw xlt ppt pot gif jpg png tif eps pct m3u kar mid smf mp3 swa mml mpg mpv mp4 mov bin sea hqx sit zip jmx jcl qz jbc jmt cfg pdf swf"/>
+      <input type="text" name="title" label="Title" value="" required="true"/>
       <input type="text" name="creator" label="Creator" value=""/>
       <input type="text" name="rights" label="Rights" value="University Of Zuerich"/>
     </form>
