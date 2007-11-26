@@ -5,23 +5,27 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
 
-  <template label="Rechte Spalte (standard)" element="related-content">
+
+ <template label="Image Caption" context="//xhtml:object">
+   <xhtml:div class="caption">Caption</xhtml:div>
+ </template>
+
+
+  <template label="Rechte Spalte (standard)" context="/">
     <unizh:related-content>
       <ref name="teaser"/>
       <ref name="rss-reader"/>
     </unizh:related-content>
   </template>
 
-
-  <template label="Quicklink" element="quicklink">
+  <template label="Quicklink" context="/">
     <unizh:quicklink>
       <xhtml:p>Kategorie</xhtml:p>
       <xhtml:a href="#">Link</xhtml:a>
     </unizh:quicklink>
   </template>
 
-
-  <template label="Beispiel-Teaser" element="teaser" name="teaser">
+  <template label="Beispiel-Teaser" name="teaser" context="//unizh:related-content">
     <unizh:teaser name="Beispiel">
       <unizh:title>Beispiel-Teaser</unizh:title>
       <xhtml:p>Beispiel fur einen Teaser.</xhtml:p>
@@ -29,20 +33,20 @@
     </unizh:teaser>
   </template>
 
-  <template label="Unipublic RSS" element="rss-reader" name="rss-reader">
+  <template label="Unipublic RSS" name="rss-reader" context="//*[self::unizh:related-content | self::xhtml:body]">
     <unizh:rss-reader url="http://www.unipublic.uzh.ch/index.rss.xml" items="1">
       <unizh:title>Unipublic</unizh:title>
     </unizh:rss-reader>
   </template>
 
 
-  <template label="Text-Baustein" element="p" name="rss-reader">
+  <template label="Text-Baustein" context="//xhtml:body">
     <xhtml:p>
       Dies ist ein Textbaustein. 
     </xhtml:p>
   </template>
 
-  <template label="Anderer Text-Baustein" element="p" name="rss-reader">
+  <template label="Anderer Text-Baustein" context="//xhtml:body">
     <xhtml:p>
       Dies ist ein anderer Textbaustein mit einem <xhtml:a href="#">Link</xhtml:a>.
     </xhtml:p>
