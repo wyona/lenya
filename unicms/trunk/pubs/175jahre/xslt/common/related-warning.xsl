@@ -2,8 +2,8 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
-  
-  >
+>
+
 
   <xsl:template match="unizh:related-content">
     <xsl:choose>

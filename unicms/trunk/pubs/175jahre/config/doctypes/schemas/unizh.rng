@@ -462,9 +462,11 @@
     <attribute name="scale">
       <ref name="Number.datatype"/>
     </attribute>
-    <attribute name="key">
-      <text/>
-    </attribute>
+    <optional>
+      <attribute name="key">
+        <text/>
+      </attribute>
+    </optional>
     <optional>
       <attribute name="type">
         <choice>

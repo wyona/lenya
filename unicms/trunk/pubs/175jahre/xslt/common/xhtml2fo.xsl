@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <xsl:stylesheet
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
-    xmlns:elt="http://www.unizh.ch/elt/1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:fo="http://www.w3.org/1999/XSL/Format"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+  xmlns:elt="http://www.unizh.ch/elt/1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:fo="http://www.w3.org/1999/XSL/Format"
 >
+
 
  <xsl:param name="imageuriprefix"/>
 

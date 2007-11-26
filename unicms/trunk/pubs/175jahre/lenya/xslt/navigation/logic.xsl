@@ -128,10 +128,10 @@
  
 <xsl:template match="unizh:header">
   <unizh:header>
-    <xsl:apply-templates select="@*" />
     <xsl:choose>
       <!-- publication index and project subpubs get headers -->
       <xsl:when test="$isProject = 'true' or $isHomepage = 'true'">
+        <xsl:apply-templates select="@*" />
         <unizh:heading href="{$home-href}">
           <xsl:value-of select="/document/content/*/unizh:header/unizh:heading"/>
         </unizh:heading>
@@ -143,6 +143,7 @@
       <xsl:when test="$home-basic-url = 'index'" />
       <!-- pages inside project subpubs get headers -->
       <xsl:otherwise>
+        <xsl:apply-templates select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage4cols | unizh:project | unizh:project4cols][1]/*/unizh:header/@*" />
         <unizh:heading href="{$home-href}">
           <xsl:value-of select="/document/unizh:ancestors/unizh:ancestor[unizh:homepage4cols | unizh:project | unizh:project4cols][1]/*/unizh:header/unizh:heading" />
         </unizh:heading>

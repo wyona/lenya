@@ -18,7 +18,7 @@
       <xsl:if test="$document-element-name != 'unizh:homepage4cols'">
         <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']" />
       </xsl:if>
-      <div>
+      <div id="credits">
         &#169;&#160;<xsl:value-of select="/document/content/*/lenya:meta/dc:rights" />
         | <i18n:date src-pattern="yyyy-MM-dd" value="{$date}" />
         <xsl:if test="/document/xhtml:div[@id = 'footnav']/xhtml:div[@id = 'impressum']">

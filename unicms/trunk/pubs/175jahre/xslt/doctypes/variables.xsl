@@ -76,7 +76,10 @@
     </xsl:choose>
   </xsl:variable>
 
-  <!-- this key is valid for all maps in http://cms.uzh.ch/ and is registered for stefan.paschke@gmail.com -->
-  <xsl:variable name="googleKeyAuthoring">ABQIAAAA71si2DaO4nTRE11c0Y-9rRTBfUk9TZrBRaIteybtnU2KziHEpRTsFYn75zZeZJ8WoDN0lQORnC4jsA</xsl:variable>
+  <!-- this key is valid for all maps in http://idcms175.uzh.ch/ and is registered for stefan.paschke@gmail.com -->
+  <xsl:variable name="googleKeyAuthoring">ABQIAAAA71si2DaO4nTRE11c0Y-9rRQwabhAXyt6PQhE4sVuKb2gJc-Z5xT_AP5yRCiTQEq8MTBb5cgHje3DUg</xsl:variable>
+
+  <!-- this key is valid for all maps in http://idcms175.uzh.ch/ and is registered for stefan.paschke@gmail.com -->
+  <xsl:variable name="googleKeyLive">ABQIAAAA71si2DaO4nTRE11c0Y-9rRQwabhAXyt6PQhE4sVuKb2gJc-Z5xT_AP5yRCiTQEq8MTBb5cgHje3DUg</xsl:variable>
 
 </xsl:stylesheet>

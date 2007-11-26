@@ -122,7 +122,7 @@
 
 
   <xsl:template name="one-column">
-    <a accesskey="2" name="content" />
+    <a accesskey="2" name="content"><xsl:comment /></a>
     <div class="contentarea1col">
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
         <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
@@ -146,7 +146,7 @@
       </xsl:otherwise>
     </xsl:choose>
     <div class="contcol2">
-      <a accesskey="2" name="content" />
+      <a accesskey="2" name="content"><xsl:comment /></a>
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
         <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
       </xsl:if>
@@ -173,7 +173,7 @@
         <xsl:apply-templates select="*/unizh:related-content" /><xsl:comment/>
       </div>
       <div class="contentarea">
-        <a accesskey="2" name="content" />
+        <a accesskey="2" name="content"><xsl:comment /></a>
         <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
           <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
         </xsl:if>
@@ -210,7 +210,7 @@
           <xsl:comment/>
         </div>
       </xsl:if>
-      <a accesskey="2" name="content" />
+      <a accesskey="2" name="content"><xsl:comment /></a>
       <div>
         <xsl:attribute name="class">
           <xsl:choose>
@@ -236,7 +236,7 @@
 
 
   <xsl:template name="homepage4columns">
-    <a accesskey="2" name="content" />
+    <a accesskey="2" name="content"><xsl:comment /></a>
     <div class="contentarea">
       <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
         <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
@@ -268,7 +268,7 @@
         <xsl:apply-templates select="*/unizh:related-content" /><xsl:comment/>
       </div>
       <div class="contentarea">
-        <a accesskey="2" name="content" />
+        <a accesskey="2" name="content"><xsl:comment /></a>
         <div class="datetime">
            <!-- FIXME: just a temporary solution because different time stamps exist for newsitem documents -->
            <xsl:choose>
@@ -319,7 +319,7 @@
     </xsl:choose>
     <div class="contcol2">
       <div class="contentarea">
-        <a accesskey="2" name="content" />
+        <a accesskey="2" name="content"><xsl:comment /></a>
         <p>
           <xsl:apply-templates select="/document/xhtml:div[@id = 'link-to-parent']" />
         </p>

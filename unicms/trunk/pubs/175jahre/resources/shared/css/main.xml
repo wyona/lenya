@@ -71,7 +71,7 @@ span.attention
 div.datetime
 {
     color: #999;
-    margin: 0.8em 0 -0.5em 0;
+    margin: 0.8em 0 -1.0em 0;
 }
 p.separated, div.separated
 {
@@ -111,11 +111,16 @@ a.www
 {
     background-image: url(images/arrow_upright.gif);
 }
-a.internal:hover, a.uzh:hover, a.www:hover, a.podcast:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, a.mailto:hover
+a.internal:hover, a.uzh:hover, a.www:hover, a.podcast:hover, a.right_aligned:hover, a.back:hover, a.download:hover, a.block:hover, a.more:hover, a.mailto:hover, div.teaser p a:hover
 {
     text-decoration: underline;
-    background-color:#E9E9F0;
 }
+div.teaser p a
+{
+    text-decoration: none;
+    color: #333333;
+}
+
 img
 {
     border:0px;
@@ -125,21 +130,22 @@ img.icon
     vertical-align: middle;    
 }
 
-/* teaser for use in related content or content */
+/* teaser for use in content or related content */
+
 div.teaser
 {
     line-height: 1.3em;
     font-size: 0.95em;
-    background-color:#F0F0F0;
-    border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
-    padding: 3px 10px 9px 10px;
+    padding: 0 0 9px 0;
     margin: 0 0 10px 0;
 }
 div.teaser h3
 {
     font-size: 1.0em;
-    padding: 0 0 0.5em 0;
+    color: #FFFFFF;
+    background-color: #80107B;
+    padding: 3px 10px 3px 10px;
     margin: 0;
 }
 div.teaser p
@@ -151,7 +157,7 @@ div.teaser img
 {
     width: 100%;
     display: block;
-    margin: 3px 0 2px 0;
+    margin: 0 0 2px 0;
 }
 div.teaser a.internal, div.teaser a.uzh, div.teaser a.www
 {
@@ -163,37 +169,29 @@ div.teaser img.icon
     vertical-align: bottom;
 }
 
+/* teaser in related content */
+div.relatedbox div.teaser
+{
+    background-color:#F0F0F0;
+    border-top: 1px solid #CCCCCC;
+    padding: 3px 10px 9px 10px;
+}
+div.relatedbox div.teaser h3
+{
+    color: #333333;
+    background-color: transparent;
+    padding: 0 0 0.5em 0;
+}
+div.relatedbox div.teaser img
+{
+    margin: 3px 0 2px 0;
+}
+
 /* asset link */
 div.teaser div.asset img
 {
     margin: 0;
     display: inline;
-}
-
-/* teaser in column */
-div.contentarea div.teaser
-{
-    background-color: transparent;
-    border-top: none;
-    padding: 0 0 9px 0;
-}
-
-/* teaser in double width column */
-div.contentarea div.double div.teaser
-{
-    width: 392px;
-}
-div.contentarea div.teaser h3
-{
-    font-size: 1.0em;
-    color: #FFFFFF;
-    background-color: #80107B;
-    padding: 3px 10px 3px 10px;
-    margin: 0;
-}
-div.contentarea div.teaser img
-{
-    margin: 0 0 2px 0;
 }
 
 /* rss reader*/
@@ -284,6 +282,7 @@ div.rssReader ul li
 }
 div.relatedbox div.rssReader ul li
 {
+    padding: 3px 0 3px 0;
     border-top: 1px solid #CCCCCC;
     border-bottom: none;
 }
@@ -320,10 +319,6 @@ div.rssReader.internal ul li a.block
 {
     background-image:url(images/arrow_right.gif);
 }
-div.rssReader ul li a.block:hover
-{
-    background-color: #FAFAFA;
-}
 div.rssReader ul li a.more
 {
     background-image:url(images/arrow_right.gif);
@@ -352,7 +347,7 @@ div.rssReader ul li.first img
 /* object div may contain a img or object element */
 div.objectBlock
 {
-    background-color:#E9E9F0;
+    background-color: #F0F0F0;
     margin: 1em 0 0 0;
 }
 div.objectBlock img, div.objectFloat img, div.objectBlock object, div.objectFloat object
@@ -375,7 +370,7 @@ div.objectContainer
 }
 div.objectContainer div.objectFloat
 {
-    background-color:#E9E9F0;
+    background-color: #F0F0F0;
     width:204px;
 }
 div.objectContainer div.left
@@ -436,6 +431,7 @@ div.relatedbox table.calendar tr td.remarks
 {
     font-weight: normal;
     line-height: 1.3em;
+    padding: 5px 10px 6px 10px;
 }
 
 /* partner element in related content */
@@ -506,7 +502,6 @@ div#headerarea div#servicenav a
 }
 div#headerarea div#servicenav a:hover
 {
-    background-color: transparent;
     text-decoration: underline;
 }
 div#headerarea div#servicenav div#searchform
@@ -1072,7 +1067,6 @@ div.links h3 a:hover
 {
     text-decoration: underline;
     color: #FFFFFF;
-    background-color: transparent;
 }
 div.links p
 {
@@ -1335,7 +1329,8 @@ ul.sitemap ul ul ul li a {
 div#footer
 {
     clear: both;
-    margin: 50px 0 20px 0;
+    padding-top: 90px;
+    margin: 0 0 20px 0;
     font-size: 0.8em;
     font-family: Tahoma, Verdana, sans-serif;
     color: #999999;

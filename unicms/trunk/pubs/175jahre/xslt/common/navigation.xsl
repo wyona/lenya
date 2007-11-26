@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
@@ -33,7 +33,6 @@
             <xsl:choose>
               <xsl:when test="@id = 'home'">0</xsl:when>
               <xsl:when test="@id = 'contact'">3</xsl:when>
-              <xsl:when test="@id = 'sitemap'">4</xsl:when>
             </xsl:choose>
           </xsl:attribute>
           <xsl:value-of select="text()" />
@@ -144,5 +143,3 @@
 
 
 </xsl:stylesheet>
-
-

@@ -5,8 +5,8 @@
   xmlns:index="http://apache.org/cocoon/lenya/documentindex/1.0"
   xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
-  
-  >
+>
+
 
   <xsl:param name="element"/>
 

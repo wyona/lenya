@@ -164,7 +164,7 @@
   </xsl:template>
 
 
-  <xsl:template match="xhtml:a[@href != '']">
+  <xsl:template match="xhtml:a[ normalize-space( @href ) != '' and text() ]">
     <a href="{@href}" __bxe_id="{@__bxe_id}">
       <xsl:attribute name="class">
         <xsl:choose>
@@ -185,49 +185,42 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
-      <xsl:copy-of select="@target" />
-      <xsl:apply-templates/><xsl:comment/>
-    </a>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:a[ancestor::unizh:teaser and not(parent::unizh:teaser)]">
-    <a href="{@href}">
-      <xsl:copy-of select="@target" />
-      <xsl:value-of select="text()" />
-      <xsl:comment/>
-    </a>
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:a[normalize-space(.) = '' and @name != '']">
-    <a name="{@name}" class="namedanchor" />
-  </xsl:template>
-
-
-  <xsl:template match="xhtml:a[(@name != '') and (not(@href) or (@href = ''))]">
-    <xsl:copy>
-      <xsl:attribute name="class">
-        <xsl:text>namedanchor</xsl:text>
-      </xsl:attribute>
       <xsl:apply-templates select="@*|node()" />
-    </xsl:copy>
+    </a>
   </xsl:template>
 
-  <!--
-  <xsl:template match="xhtml:a[starts-with(@href, 'mailto:')]">
+
+  <xsl:template match="xhtml:a[ normalize-space( @href ) != '' and text() and ancestor::unizh:teaser and not( parent::unizh:teaser ) ]">
+    <a href="{@href}" __bxe_id="{@__bxe_id}">
+      <xsl:apply-templates select="@*|node()" />
+    </a>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:a[ normalize-space( @href ) = '' and @name != '' ]">
+    <a name="{@name}" class="namedanchor" />
+    <xsl:apply-templates />
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:a[ starts-with( @href, 'mailto:' ) ]">
     <script language="javascript">
       <xsl:comment>
            var mailtouser = "<xsl:value-of select="substring-before(@href , '@')" />"; 
            var hostname = "<xsl:value-of select="substring-after(@href, '@')" />"; 
            var linktext = "<xsl:value-of select="." />";
            <![CDATA[ 
-             document.write("<a href=" + mailtouser + "@" + hostname + ">" + linktext + "</a>");
+             document.write("<a href=" + mailtouser + "@" + hostname + " class='mailto'>" + linktext + "</a>");
            ]]>
       </xsl:comment>
     </script>
   </xsl:template>
-  -->
+
+
+  <xsl:template match="xhtml:a">
+    <xsl:apply-templates />
+  </xsl:template>
+
 
   <xsl:template match="unizh:attention">
     <span class="attention">
@@ -640,9 +633,9 @@
       </xsl:when>
 
       <xsl:otherwise>
-        <xsl:copy>
+        <p __bxe_id="{@__bxe_id}">
           <xsl:apply-templates/>
-        </xsl:copy>
+        </p>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

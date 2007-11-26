@@ -28,6 +28,9 @@
       <meta name="dc:rights" content="{/document/content/*/lenya:meta/dc:rights}"/>
     </xsl:if>
     <link rel="neutron-introspection" type="application/neutron+xml" href="?lenya.usecase=neutron&amp;lenya.step=introspect"/>
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon">
+      <xsl:attribute name="href"><xsl:value-of select="$localsharedresources"/><xsl:text>/images/favicon.ico</xsl:text></xsl:attribute>
+    </link>
     <link rel="stylesheet" type="text/css" media="screen">
       <xsl:attribute name="href">
         <xsl:value-of select="$localsharedresources"/>
@@ -89,7 +92,7 @@
           <xsl:text>http://maps.google.com/maps?file=api&amp;v=2&amp;key=</xsl:text>
           <xsl:choose>
             <xsl:when test="$area = 'live'">
-              <xsl:value-of select="descendant::unizh:map[1]/@key"/>
+              <xsl:value-of select="$googleKeyLive"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="$googleKeyAuthoring"/>
