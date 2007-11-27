@@ -83,6 +83,20 @@
         </xsl:attribute>
       </link>
     </xsl:if>
+    <link rel="stylesheet" type="text/css" media="print">
+      <xsl:attribute name="href">
+        <xsl:value-of select="$localsharedresources"/>
+        <xsl:text>/css/print.css</xsl:text>
+      </xsl:attribute>
+    </link>
+    <xsl:if test="$document-element-name = 'unizh:homepage4cols'">
+      <link rel="stylesheet" type="text/css" media="print">
+        <xsl:attribute name="href">
+          <xsl:value-of select="$localsharedresources"/>
+          <xsl:text>/css/indexPrint.css</xsl:text>
+        </xsl:attribute>
+      </link>
+    </xsl:if>
     <xsl:if test="$document-element-name = 'unizh:news'">
       <link rel="alternate" type="application/rss+xml" title="{/document/content/unizh:news/lenya:meta/dc:title}" href="{$nodeid}.rss.xml"/> 
     </xsl:if>

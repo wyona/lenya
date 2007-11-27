@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** content column(s) ******/
+
+/****** common elements ******/
+
+/* teaser on homepage has either p or img, no link */
+div.teaser
+{
+    height: 7em;
+    border-bottom: none;
+    padding: 0;
+    overflow: hidden;
+}
+div.teaser p
+{
+    padding: 0 0 0.5em 0;
+}
+div.teaser img
+{
+    display: block;
+    margin: 0;
+}
+
+/* rssReader on homepage */
+div.rssReader
+{
+    height: 7em;
+    overflow: hidden;
+}
+div.rssReader ul li
+{
+    padding: 0 0 0.5em 0;
+}
+
+/* partner element on home page */
+div.partner
+{
+    margin-bottom: 1em;
+    clear: both;
+}
+div.partner h3
+{
+    font-size: inherit;
+    margin: 0.5em 0;
+}
+div.partner a
+{
+    margin-right: 0;
+    text-decoration: none;
+}
+
+</css>

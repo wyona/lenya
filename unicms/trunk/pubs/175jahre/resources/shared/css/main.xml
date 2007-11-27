@@ -201,7 +201,6 @@ div.rssReader
     font-size: 0.95em;
     padding: 0;
     margin: 0 0 10px 0;
-
 }
 div.relatedbox div.rssReader
 {
@@ -882,18 +881,6 @@ div#secnav ul li ul li ul li ul li a
     padding: 3px 0px 4px 40px;
 }
 
-/* tool navigation */
-div#toolnav
-{
-    font-size: 0.75em;
-    line-height: 1.5em;
-    font-family: Verdana, sans-serif;
-    width:171px;
-    height:51px;
-    color:#666;
-    float:right;
-}
-
 /* object im contcol1 */
 div.contcol1 img
 {
@@ -1124,13 +1111,9 @@ ul.type4 li
 {
     padding-left:1em;
 }
-ol.type2, ol.type1 li ol.type1
+ol.type2
 {
     list-style-type: lower-alpha;
-}
-ol.type2 li ol.type2
-{
-    list-style-type: decimal;
 }
 
 /* team type elements */

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<css>
+
+/****** all ******/
+
+body
+{
+    font-family: Arial, sans-serif;
+    font-size: 0.75em;
+    line-height: 1.5em;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+/****** common elements ******/
+
+h1, h2
+{
+    font-size: 1.5em;
+    line-height: 1.2em;
+}
+h3, h4, h5, h6
+{
+    line-height: 1.2em;
+}
+h3
+{
+    font-size: 1.2em;
+    line-height: inherit;
+}
+h4
+{
+    font-size: 1.0em;
+    line-height: inherit;
+}
+h5, h6
+{
+    font-size: 1.0em;
+    font-style: italic;
+    font-weight:bold;
+}
+code
+{
+    font-size: 1.0em;
+}
+span.attention
+{
+    text-decoration: underline;
+    font-weight: bold;
+}
+div.datetime
+{
+    margin: 0.8em 0 -1.0em 0;
+}
+p.separated, div.separated
+{
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 1.0em;
+    margin-bottom: 1.0em
+}
+a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+img
+{
+    border: 0px;
+}
+img.icon
+{
+    vertical-align: middle;    
+}
+
+/* teaser for use in content or related content */
+
+div.teaser
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    border-bottom: 1px solid #CCCCCC;
+    margin: 0 0 1em 0;
+}
+div.relatedbox div.teaser
+{
+    padding: 0 0.8em 0.5em 0.8em;
+    border: 1px solid #CCC;
+}
+div.teaser h3
+{
+    font-size: inherit;
+    margin: 0.5em 0;
+}
+div.teaser p
+{
+    margin: 0.3em 0;
+}
+div.teaser img
+{
+    width: 100%;
+    display: block;
+    margin: 0.3em 0;
+}
+div.teaser a.internal, div.teaser a.uzh, div.teaser a.www, div.teaser a.podcast
+{
+    display: block;
+    margin: 0.3em 0;
+}
+div.teaser img.icon
+{
+    display: inline;
+    vertical-align: bottom;
+}
+
+/* asset link */
+div.teaser div.asset img
+{
+    margin: 0;
+    display: inline;
+}
+
+/* rss reader*/
+div.rssReader
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    margin: 0 0 1em 0;
+}
+div.relatedbox div.rssReader
+{
+    border: 1px solid #CCC;
+}
+div.rssReader h3
+{
+    font-size: inherit;
+    margin: 0;
+    padding: 0.5em 0
+}
+div.relatedbox div.rssReader h3
+{
+    padding: 0.5em 0.8em;
+    border-bottom: 1px solid #CCC;
+}
+div.rssReader p
+{
+    margin: 0.5em 0;
+}
+div.rssReader ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div.relatedbox div.rssReader ul
+{
+    padding: 0 0.8em;
+}
+div.rssReader ul li
+{
+    padding: 0.5em 0;
+    margin: 0;
+    border-bottom: 1px solid #CCC;
+}
+div.relatedbox div.rssReader ul li
+{
+    border-top: 1px solid #CCC;
+    border-bottom: none;
+}
+div.relatedbox div.rssReader ul li.first
+{
+    border-top: none;
+}
+div.rssReader ul li h4
+{
+    font-weight: bold;
+    font-size: inherit;
+    margin: 0;
+    padding: 0.3em 0
+}
+div.rssReader ul li a.block
+{
+    padding: 0.5em 0;
+}
+div.rssReader ul li a.more
+{
+    display: none;
+}
+div.rssReader ul li img
+{
+    display: block;
+    width: 100%;
+    margin: 1em 0 0 0;
+}
+div.rssReader ul li.first img
+{
+    margin: 0;
+}
+
+/* object div may contain a img or object element */
+div.objectBlock
+{
+    margin: 1em 0 0 0;
+    border: 1px solid #CCC;
+}
+div.objectBlock img, div.objectFloat img
+{
+    display: block;
+}
+div.objectBlock object, div.objectFloat object
+{
+    display: none;
+}
+/* caption */
+div.objectBlock div, div.objectFloat div
+{
+    font-size: 0.95em;
+    line-height: 1.3em;
+    font-style: italic;
+    padding: 5px 6px 18px 6px;
+}
+/* container for float objects */
+div.objectContainer
+{
+    overflow: hidden;
+    margin: 0.7em 0 0 0;
+}
+div.objectContainer div.objectFloat
+{
+    width:204px;
+    border: 1px solid #CCC;
+}
+div.objectContainer div.left
+{
+    margin: 4px 10px 0 0; float: left;
+}
+div.objectContainer div.right
+{
+    margin: 4px 0 0 10px; float: right;
+}
+
+/* google map in related content or content */
+div.contentarea div.map
+{
+    display: none;
+}
+div.relatedbox div.map
+{
+    display: none;
+}
+
+/* event date box */
+div.relatedbox table.calendar
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    font-weight: bold;
+    margin: 0 0 1em 0;
+    padding: 0;
+    border: 1px solid #CCC;
+}
+div.relatedbox table.calendar tr th
+{
+    padding: 0.6em 0.8em;
+    border-bottom: 1px solid #CCC;
+    text-align: left;
+}
+div.relatedbox table.calendar tr td
+{
+    padding: 0.3em 0.8em;
+    margin: 0;
+    vertical-align: text-top;
+    border-bottom: 1px solid #CCC;
+}
+div.relatedbox table.calendar tr td.remarks
+{
+    font-weight: normal;
+    padding: 0.3em 0.8em;
+    border-bottom: none;
+}
+
+/* partner element in related content */
+div.relatedbox div.partner
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    border: 1px solid #CCC;
+    padding: 0 0.8em 0 0.8em;
+    margin: 0 0 1em 0;
+}
+div.relatedbox div.partner h3
+{
+    font-size: 1.0em;
+    margin: 0.5em 0 0.5em 0;
+}
+div.relatedbox div.partner img
+{
+    width: 100%;
+    display: block;
+    margin: 1em 0;
+}
+
+
+/****** header elements ******/
+
+div#headerarea
+{
+    height: 100px;
+    margin-top: 0;
+    border-bottom: solid #000 2px;
+}
+div#headerarea div.imgunilogo
+{
+    float: right;
+    margin-top: 6px;
+}
+div#headerarea div.imgjubilogo {
+    float: left;
+    background-color: transparent;
+}
+
+/* service navigation */
+div#headerarea div#servicenav
+{
+    display: none;
+}
+
+/* primary navigation */
+div#primarnav
+{
+    display: none;
+}
+
+/* titlearea */
+div#titlearea
+{
+    text-transform: lowercase;
+    height: 6em;
+    margin-top: 0;
+    border-bottom: solid #000 2px;
+}
+
+/****** highlight ******/
+div#highlight
+{
+    text-transform: lowercase;
+    margin-bottom: 20px;
+    position: relative;
+}
+div#highlight img
+{
+    display: none;
+}
+
+/****** left column ******/
+
+div#col1
+{
+    float:left;
+    width: 25%;
+}
+
+/* second and deeper level navigation */
+div#secnav
+{
+    display: none;
+}
+
+/****** related content column ******/
+div.relatedbox
+{
+    float: right;
+    width: 24%;
+    margin-left: 1%;
+    background-color: #FFF;
+}
+
+/* news level element */
+div.level
+{
+    display: none;
+}
+
+/****** content column(s) ******/
+
+div.contentarea
+{
+    margin: 0 25% 0 0;
+}
+div.contentarea.wide
+{
+    margin: 0;
+}
+div.contcol2 div.contentarea div.column
+{
+    width: 48%;
+    float: left;
+    margin: 0 0 1em 2%;
+    padding-left: 2%;
+    border-left: 1px solid #CCC;
+}
+div.contcol2 div.contentarea.wide div.column, div.contcol2.wide div.contentarea div.column
+{
+    width: 30%;
+    float: left;
+    margin: 0 0 1em 2%;
+    padding-left: 2%;
+    border-left: 1px solid #CCC;
+}
+div.contcol2.wide div.contentarea.wide div.column
+{
+    width: 22%;
+    float: left;
+    margin: 0 0 1em 2%;
+    padding-left: 2%;
+    border-left: 1px solid #CCC;
+}
+
+/*  double width column */
+div.contcol2 div.contentarea div.column.double
+{
+    width: 100%;
+}
+div.contcol2 div.contentarea.wide div.column.double, div.contcol2.wide div.contentarea div.column.double
+{
+    width: 66%;
+}
+div.contcol2.wide div.contentarea.wide div.column.double
+{
+    width: 48%;
+}
+div.contentarea div.column#c1
+{
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+}
+
+/* lead block for overview */
+div.leadblock
+{
+    display: block;
+    font-weight: bold;
+}
+div.leadblock img
+{
+    margin: 0 0 1em 0;
+}
+div.leadblock p
+{
+    margin: 0 0 1em 0;
+}
+div.leadblock p img
+{
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+/* links element for use in content columns */
+div.links
+{
+    line-height: 1.3em;
+    font-size: 0.95em;
+    margin: 0 0 1em 0;
+}
+div.links img
+{ 
+    display: block;
+    width: 100%;
+    margin: 1em 0 0 0;
+} 
+div.links h3
+{
+    font-size: inherit;
+    margin: 0;
+    padding: 0.5em 0;
+}
+div.links p
+{
+    margin: 0.5em 0;
+}
+div.links ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div.links ul li
+{
+    padding: 0.5em 0;
+    margin: 0;
+    border-bottom: 1px dotted #CCC;
+}
+
+/* list elements */
+ol
+{
+    margin-top: 0;
+}
+ul.type1, ul.type2, ul.type3, ol.type1, ol.type2
+{
+    padding-left:1.5em;
+}
+ul.type4
+{
+    list-style-type:none;
+    padding-left:0;
+}
+ul.type4 li
+{
+    padding-left:1em;
+}
+ol.type2
+{
+    list-style-type: hebrew;
+}
+
+/* team type elements */
+
+div.floatleftclear
+{
+    clear:left;
+    line-height:1px;
+}
+
+div.floatrightclear
+{
+    clear:right;
+    line-height:1px;
+}
+
+/* search page elements */
+
+/* tables */
+
+/****** footer ******/
+div#footer
+{
+    position: absolute;
+    top: 60px;
+    font-size: 0.8em;
+    font-family: Tahoma, Verdana, sans-serif;
+    color: #999999;
+}
+div#footer a
+{
+    text-decoration: underline;
+    color: #999999;
+}
+div#footer div#credits
+{
+    display: none;
+}
+
+</css>

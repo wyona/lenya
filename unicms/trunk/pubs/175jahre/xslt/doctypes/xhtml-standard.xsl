@@ -236,15 +236,17 @@
 
 
   <xsl:template name="homepage4columns">
-    <a accesskey="2" name="content"><xsl:comment /></a>
-    <div class="contentarea">
-      <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
-        <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
-      </xsl:if>
-      <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]" />
-      <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]" />
-      <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[3]" />
-      <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[4]" />
+    <div class="contcol2 wide">
+      <a accesskey="2" name="content"><xsl:comment /></a>
+      <div class="contentarea wide">
+        <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+          <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
+        </xsl:if>
+        <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[1]" />
+        <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[2]" />
+        <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[3]" />
+        <xsl:apply-templates select="/document/content/*/xhtml:body/unizh:column[4]" />
+      </div>
     </div>
     <xsl:apply-templates select="/document/content/*/unizh:partner" />
   </xsl:template>

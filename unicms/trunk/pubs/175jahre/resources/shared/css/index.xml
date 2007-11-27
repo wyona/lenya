@@ -3,11 +3,6 @@
 
 /****** content column(s) ******/
 
-div.contentarea
-{
-    margin-right: 0;
-}
-
 /****** common elements ******/
 
 /* teaser on homepage has either p or img, no link */
