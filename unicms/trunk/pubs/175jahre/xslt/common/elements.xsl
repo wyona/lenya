@@ -998,4 +998,16 @@
     </table>
   </xsl:template>
 
+
+  <!-- BXE 2 needs this template -->
+  <xsl:template match="text()">
+    <xsl:value-of select="."/>
+  </xsl:template>
+
+
+  <!-- BXE 2 needs this template -->
+  <xsl:template match="@*">
+    <xsl:attribute name="{name()}"><xsl:value-of select="."/></xsl:attribute>
+  </xsl:template>
+
 </xsl:stylesheet>
