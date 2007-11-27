@@ -37,28 +37,36 @@
     <ref name="unizh.partner" />
     <element name="body">
       <element name="unizh:column">
-        <choice>
-          <ref name="unizh.teaser" />
-          <ref name="unizh.rss-reader" />
-        </choice>
+        <optional>
+          <choice>
+            <ref name="unizh.teaser" />
+            <ref name="unizh.rss-reader" />
+          </choice>
+        </optional>
       </element>
       <element name="unizh:column">
-        <choice>
-          <ref name="unizh.teaser" />
-          <ref name="unizh.rss-reader" />
-        </choice>
+        <optional>
+          <choice>
+            <ref name="unizh.teaser" />
+            <ref name="unizh.rss-reader" />
+          </choice>
+        </optional>
       </element>
       <element name="unizh:column">
-        <choice>
-          <ref name="unizh.teaser" />
-          <ref name="unizh.rss-reader" />
-        </choice>
+        <optional>
+          <choice>
+            <ref name="unizh.teaser" />
+            <ref name="unizh.rss-reader" />
+          </choice>
+        </optional>
       </element>
       <element name="unizh:column">
-        <choice>
-          <ref name="unizh.teaser" />
-          <ref name="unizh.rss-reader" />
-        </choice>
+        <optional>
+          <choice>
+            <ref name="unizh.teaser" />
+            <ref name="unizh.rss-reader" />
+          </choice>
+        </optional>
       </element>
     </element>
   </element>
