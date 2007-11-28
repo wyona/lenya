@@ -463,9 +463,9 @@
 
 
   <xsl:template match="@*|node()" priority="-1">
-    <xsl:copy>
+    <xsl:element name="{local-name()}" namespace="{namespace-uri()}">
       <xsl:apply-templates select="@*|node()" />
-    </xsl:copy>
+    </xsl:element>
   </xsl:template> 
   
 </xsl:stylesheet>
