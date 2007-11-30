@@ -282,6 +282,7 @@
           <xsl:apply-templates select="xhtml:p" />
         </xsl:otherwise>
       </xsl:choose>
+      <xsl:apply-templates select="unizh:title/lenya:asset-dot" />
     </div>
   </xsl:template>
 
