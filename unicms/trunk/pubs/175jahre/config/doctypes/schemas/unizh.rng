@@ -239,9 +239,6 @@
   <element name="unizh:highlight">
     <ref name="unizh.colors.attrib" />
     <optional>
-      <ref name="object"/> 
-    </optional>
-    <optional>
       <element name="unizh:title">
         <text/>
         <attribute name="href">
@@ -259,6 +256,9 @@
           </choice>
         </oneOrMore>
       </element>
+    </optional>
+    <optional>
+      <ref name="object"/> 
     </optional>
   </element>
 </define>

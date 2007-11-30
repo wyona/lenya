@@ -155,7 +155,6 @@ div.teaser p
 }
 div.teaser img
 {
-    width: 100%;
     display: block;
     margin: 0 0 2px 0;
 }
@@ -452,7 +451,6 @@ div.relatedbox div.partner h3
 }
 div.relatedbox div.partner img
 {
-    width: 100%;
     display: block;
     margin: 3px 0 2px 0;
 }
@@ -629,7 +627,7 @@ div#titlearea h1
 }
 div#titlearea h2
 {
-    color: #A662A4;
+    color: #B371B0;
 }
 div#titlearea h1 a
 {
@@ -638,39 +636,39 @@ div#titlearea h1 a
 }
 div#titlearea.moccachino h2
 {
-    color: #AC8E6F;
+    color: #B7A089;
 }
 div#titlearea.red h2
 {
-    color: #F66D55;
+    color: #F46779;
 }
 div#titlearea.pumpkin h2
 {
-    color: #FEAE66;
+    color: #FBB379;
 }
 div#titlearea.sunshine h2
 {
-    color: #FED06E;
+    color: #FFD378;
 }
 div#titlearea.emerald h2
 {
-    color: #45888A;
+    color: #679F9E;
 }
 div#titlearea.cyan h2
 {
-    color: #2ABBF0;
+    color: #67C5F2;
 }
 div#titlearea.marine h2
 {
-    color: #6259A3;
+    color: #7B79B2;
 }
 div#titlearea.amethyst h2
 {
-    color: #A662A4;
+    color: #B371B0;
 }
 div#titlearea.magenta h2
 {
-    color: #F26EA7;
+    color: #F467AF;
 }
 div#titlearea.lime h2
 {
@@ -691,7 +689,7 @@ div#highlight.moccachino, div#titlearea.moccachino, div.links h3.moccachino
 }
 div#highlight.moccachino p
 {
-    color: #FFD378;
+    color: #E7E0D8;
 }
 div#highlight.red, div#titlearea.red, div.links h3.red
 {
@@ -699,7 +697,7 @@ div#highlight.red, div#titlearea.red, div.links h3.red
 }
 div#highlight.red p
 {
-    color: #FFD378;
+    color: #FBCDD3;
 }
 div#highlight.pumpkin, div#titlearea.pumpkin, div.links h3.pumpkin
 {
@@ -707,7 +705,7 @@ div#highlight.pumpkin, div#titlearea.pumpkin, div.links h3.pumpkin
 }
 div#highlight.pumpkin p
 {
-    color: #FFD378;
+    color: #FEE6D3;
 }
 div#highlight.sunshine, div#titlearea.sunshine, div.links h3.sunshine
 {
@@ -715,7 +713,7 @@ div#highlight.sunshine, div#titlearea.sunshine, div.links h3.sunshine
 }
 div#highlight.sunshine p
 {
-    color: #FFD378;
+    color: #FFF0D3;
 }
 div#highlight.emerald, div#titlearea.emerald, div.links h3.emerald
 {
@@ -723,7 +721,7 @@ div#highlight.emerald, div#titlearea.emerald, div.links h3.emerald
 }
 div#highlight.emerald p
 {
-    color: #FFD378;
+    color: #CDDFDF;
 }
 div#highlight.cyan, div#titlearea.cyan, div.links h3.cyan
 {
@@ -731,7 +729,7 @@ div#highlight.cyan, div#titlearea.cyan, div.links h3.cyan
 }
 div#highlight.cyan p
 {
-    color: #FFD378;
+    color: #CDECFB;
 }
 div#highlight.marine, div#titlearea.marine, div.links h3.marine
 {
@@ -739,7 +737,7 @@ div#highlight.marine, div#titlearea.marine, div.links h3.marine
 }
 div#highlight.marine p
 {
-    color: #FFD378;
+    color: #D3D3E6;
 }
 div#highlight.amethyst, div#titlearea.amethyst, div.links h3.amethyst
 {
@@ -747,7 +745,7 @@ div#highlight.amethyst, div#titlearea.amethyst, div.links h3.amethyst
 }
 div#highlight.amethyst p
 {
-    color: #FFD378;
+    color: #E6D0E5;
 }
 div#highlight.magenta, div#titlearea.magenta, div.links h3.magenta
 {
@@ -755,7 +753,7 @@ div#highlight.magenta, div#titlearea.magenta, div.links h3.magenta
 }
 div#highlight.magenta p
 {
-    color: #FFD378;
+    color: #FBCDE5;
 }
 div#highlight.lime, div#titlearea.lime, div.links h3.lime
 {
@@ -763,12 +761,10 @@ div#highlight.lime, div#titlearea.lime, div.links h3.lime
 }
 div#highlight.lime p
 {
-    color: #FFD378;
+    color: #FFF;
 }
 div#highlight img
 {
-    width: 100%;
-    height: 100%;
     position: absolute;
 }
 div#highlight h3

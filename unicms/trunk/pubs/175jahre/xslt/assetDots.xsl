@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<!-- difference -->
 
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -216,6 +217,17 @@
   </xsl:template>
 
 
+  <xsl:template match="unizh:partner[$rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:call-template name="asset-dot">
+        <xsl:with-param name="insertWhat">image</xsl:with-param>
+        <xsl:with-param name="insertWhere">inside</xsl:with-param>
+      </xsl:call-template>
+    </xsl:copy>
+  </xsl:template>
+
+
   <xsl:template match="xhtml:p[parent::unizh:lead and $rendertype = 'imageupload']">
     <xsl:copy>
       <xsl:if test="not(preceding-sibling::xhtml:object)">
@@ -234,6 +246,19 @@
       <xsl:apply-templates select="@*|node()"/>
       <xsl:if test=". = '' or . = '&#160;'">
          <xsl:call-template name="asset-dot">
+          <xsl:with-param name="insertWhat">image</xsl:with-param>
+          <xsl:with-param name="insertWhere">inside</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:highlight[$rendertype = 'imageupload']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+      <xsl:if test="not( xhtml:object )">
+        <xsl:call-template name="asset-dot">
           <xsl:with-param name="insertWhat">image</xsl:with-param>
           <xsl:with-param name="insertWhere">inside</xsl:with-param>
         </xsl:call-template>

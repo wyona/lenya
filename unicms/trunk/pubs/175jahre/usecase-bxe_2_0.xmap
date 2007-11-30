@@ -203,6 +203,7 @@
 			
 <map:parameter name="contextPath" value="{request:contextPath}"/>
 <map:parameter name="publication-id" value="{page-envelope:publication-id}"/>
+<map:parameter name="nodeid" value="{page-envelope:document-node-id}"/>
 <map:parameter name="area" value="{page-envelope:area}"/>
           </map:transform>
           <map:transform type="cinclude"/>

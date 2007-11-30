@@ -157,6 +157,7 @@
 
 <xsl:template match="unizh:highlight">
   <xsl:choose>
+    <!-- if unizh:highlight doesn't have attributes or children, it's a placeholder and can be ignored -->
     <xsl:when test="* or @*">
       <xsl:copy>
         <xsl:attribute name="class">
@@ -170,13 +171,15 @@
             <xsl:attribute name="title">
               <xsl:value-of select="xhtml:object/@title" />
             </xsl:attribute>
+            <xsl:copy-of select="xhtml:object/lenya:asset-dot" />
           </xhtml:object>
         </xsl:if>
+        <xsl:copy-of select="lenya:asset-dot" />
         <xsl:copy-of select="unizh:title" />
         <xsl:copy-of select="xhtml:p" />
       </xsl:copy>
     </xsl:when>
-    <!-- normal pages without highlight fetch parent's highlight -->
+    <!-- pages outside project subtrees, wich do not have their own highlight, fetch parent's highlight -->
     <xsl:when test="$home-basic-url = 'index'">
       <xsl:copy>
         <xsl:attribute name="class">

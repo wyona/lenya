@@ -5,6 +5,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml" 
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" 
+  xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
 >
 
 
@@ -51,13 +52,7 @@
         <xsl:attribute name="class">
           <xsl:value-of select="/document/content/*/unizh:highlight/@class" />
         </xsl:attribute>
-        <xsl:if test="/document/content/*/unizh:highlight/xhtml:object">
-          <xsl:call-template name="objectImage">
-            <xsl:with-param name="width" select="800" />
-            <xsl:with-param name="src" select="/document/content/*/unizh:highlight/xhtml:object/@data" />
-            <xsl:with-param name="alt" select="/document/content/*/unizh:highlight/xhtml:object/@title" />
-          </xsl:call-template>
-        </xsl:if>
+        <xsl:apply-templates select="/document/content/*/unizh:highlight/xhtml:object" />
         <xsl:if test="/document/content/*/unizh:highlight/unizh:title">
           <h3>
             <a href="{/document/content/*/unizh:highlight/unizh:title/@href}">
@@ -68,9 +63,19 @@
         <xsl:if test="/document/content/*/unizh:highlight/xhtml:p">
           <xsl:copy-of select="/document/content/*/unizh:highlight/xhtml:p" />
         </xsl:if>
+        <xsl:apply-templates select="/document/content/*/unizh:highlight/lenya:asset-dot" />
         <xsl:comment />
       </div>
     </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:object[parent::unizh:highlight]">
+    <xsl:call-template name="objectImage">
+      <xsl:with-param name="width" select="800" />
+      <xsl:with-param name="src" select="@data" />
+      <xsl:with-param name="alt" select="@title" />
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:stylesheet>

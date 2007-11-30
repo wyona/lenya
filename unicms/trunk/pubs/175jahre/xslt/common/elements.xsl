@@ -932,6 +932,7 @@
     <div class="partner">
       <h3><xsl:value-of select="unizh:title" /><xsl:comment/></h3>
       <xsl:apply-templates select="xhtml:object" />
+      <xsl:apply-templates select="lenya:asset-dot" />
     </div>
   </xsl:template>
 
