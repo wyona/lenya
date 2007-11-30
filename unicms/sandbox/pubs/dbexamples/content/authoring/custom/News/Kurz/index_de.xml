@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><unizh:newsitem xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" unizh:columns="3" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Beispiel-Beitrag (Kurzfassung)</dc:title>
+    <dc:description/>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <unizh:short>
+    <p>Beispiel eines kurzen News-Eintrags. Kurzeinträge können einen Textblock, ein Bild und einen Hyperlink auf eine beliebige Zielseite enthalten.</p>
+    <a href="http://www.uzh.ch">Zielseite</a>
+  </unizh:short>
+  <body>
+    <p/>
+  </body>
+  <unizh:level/>
+</unizh:newsitem>

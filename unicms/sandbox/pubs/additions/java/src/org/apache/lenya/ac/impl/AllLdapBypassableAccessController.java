@@ -43,6 +43,9 @@ import org.apache.lenya.cms.publication.Publication;
 import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentBuildException;
+import org.apache.lenya.cms.publication.SiteTree;
+import org.apache.lenya.cms.publication.SiteTreeException;
+import org.apache.lenya.cms.publication.SiteTreeNode;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceResolver;
 import org.apache.excalibur.source.SourceUtil;
@@ -240,6 +243,7 @@ public boolean authenticate(Request request) throws AccessControlException {
                             ii++;
                         }
                         if (authenticated) {
+                        	Document firstAcDoc = getFirstAcEntry(doc,this.LDAP_GROUP);
                             Session session = request.getSession(true);
                             session.setAttribute(this.LDAP_USER, "true");
                             session.setAttribute("DocId", doc);
@@ -379,6 +383,23 @@ public boolean authenticate(Request request) throws AccessControlException {
             }
         }
         return true;
+    }
+    
+    protected Document getFirstAcEntry(Document doc, String groupid){
+    	
+
+    	try {
+    		SiteTree siteTree = doc.getPublication().getTree(doc.getArea());
+    		String docid = doc.getId();
+    		SiteTreeNode node = siteTree.getNode(doc.getId());
+    		String thisid = node.getAbsoluteId();
+    		String parentid = node.getParentId();
+    		String jkl = parentid;
+    	} catch (SiteTreeException e) {
+    		getLogger().warn("Could not load sitetree: " + e);
+    	}
+    	
+    	return doc;
     }
     
 }

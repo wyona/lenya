@@ -25,7 +25,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 
 public class LdapACHelper {
-    
+     
     public Vector getAcGroups (File file) {
         
         Vector groups = new Vector();
@@ -39,7 +39,8 @@ public class LdapACHelper {
         return groups;
         
     }
-    
+
+	
     protected Document getDomDocument(String filename, boolean validating) {
         try {
             // Create a builder factory

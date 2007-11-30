@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<identity id="lenya" class="org.apache.lenya.ac.file.FileUser">
+  <name>Levi Vanya</name>
+  <email>lenya@id.uzh.ch</email>
+  <password type="md5">8e07dafd13495561db9063ebe4db4b27</password>
+  <groups>
+    <group>authors</group>
+    <group>managers</group>
+    <group>administrators</group>
+  </groups>
+</identity>

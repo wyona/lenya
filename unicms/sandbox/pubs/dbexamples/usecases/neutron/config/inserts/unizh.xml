@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<insertTemplates
+   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+
+  <template label="Rechte Spalte (standard)" element="related-content">
+    <unizh:related-content>
+      <ref name="teaser"/>
+      <ref name="rss-reader"/>
+    </unizh:related-content>
+  </template>
+
+
+  <template label="Quicklink" element="quicklink">
+    <unizh:quicklink>
+      <xhtml:p>Kategorie</xhtml:p>
+      <xhtml:a href="#">Link</xhtml:a>
+    </unizh:quicklink>
+  </template>
+
+
+  <template label="Beispiel-Teaser" element="teaser" name="teaser">
+    <unizh:teaser name="Beispiel">
+      <unizh:title>Beispiel-Teaser</unizh:title>
+      <xhtml:p>Beispiel fur einen Teaser.</xhtml:p>
+      <xhtml:a href="#" title="Teaser Link">Link</xhtml:a>
+    </unizh:teaser>
+  </template>
+
+  <template label="Unipublic RSS" element="rss-reader" name="rss-reader">
+    <unizh:rss-reader url="http://www.unipublic.uzh.ch/index.rss.xml" items="1">
+      <unizh:title>Unipublic</unizh:title>
+    </unizh:rss-reader>
+  </template>
+
+
+  <template label="Text-Baustein" element="p" name="rss-reader">
+    <xhtml:p>
+      Dies ist ein Textbaustein. 
+    </xhtml:p>
+  </template>
+
+  <template label="Anderer Text-Baustein" element="p" name="rss-reader">
+    <xhtml:p>
+      Dies ist ein anderer Textbaustein mit einem <xhtml:a href="#">Link</xhtml:a>.
+    </xhtml:p>
+  </template>
+
+
+</insertTemplates>
+

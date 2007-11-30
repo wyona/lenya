@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<notification
+    xmlns="http://apache.org/cocoon/lenya/notification/1.0"
+    enabled="true">
+
+  <message usecase="publish">
+    <subject>UniCMS Notification: Publish</subject>
+    <body>
+      A document was published: 
+      <document-url area="live"/>
+    </body>
+  </message>
+
+  <message usecase="schedule">
+    <subject>UniCMS Notification: Publish / Deactivate</subject>
+    <body>
+      A document was published or deactivated:
+      <document-url area="authoring"/>
+      <document-url area="live"/>
+    </body>
+  </message>
+
+  <message usecase="submit">
+    <subject>UniCMS Notification: Submit</subject>
+    <body>
+      A document was submitted:
+      <document-url area="authoring"/>
+    </body>
+  </message>
+
+  <message usecase="reject">
+    <subject>UniCMS Notification: Reject</subject>
+    <body>
+      A document was rejected:
+      <document-url area="authoring"/>
+    </body>
+  </message>
+
+  <message usecase="deactivate">
+    <subject>UniCMS Notification: Deactivate</subject>
+    <body>
+      A document was deactivated:
+      <document-url area="authoring"/>
+    </body>
+  </message>
+
+</notification> 

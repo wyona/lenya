@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:sql="http://apache.org/cocoon/SQL/2.0"
+         >
+
+<define name="sql.execute-query">
+  <element name="sql:execute-query">
+     <element name="sql:query">
+       <text/>
+     </element>
+  </element>
+</define>
+
+</grammar>

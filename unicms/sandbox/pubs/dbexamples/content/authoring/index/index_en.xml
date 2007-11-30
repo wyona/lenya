@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><unizh:homepage  xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" unizh:tabs="false" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>Welcome!</dc:title>
+    <dc:description/>
+    <dc:creator>Autor des Dokuments</dc:creator>
+    <dc:subject/>
+    <dc:publisher>University of Zurich</dc:publisher>
+    <dcterms:created>Wed Aug 22 08:00:00 CEST 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>en</dc:language>
+    <dc:rights>University of Zurich</dc:rights>
+  </lenya:meta>
+  <unizh:header>
+    <unizh:superscription>University of Zurich</unizh:superscription>
+    <unizh:heading>Publication title</unizh:heading>
+  </unizh:header>
+  <unizh:contcol1>
+    <unizh:quicklinks label="Quick Links">
+      <unizh:quicklink>
+        <p>Topic</p>
+        <xhtml:a href="#">Link</xhtml:a>
+      </unizh:quicklink>
+    </unizh:quicklinks>
+  </unizh:contcol1>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text.</p>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <p>UniCMS, das Content Management System der Universität Zürich, steht allen Institutionen der 
+Universität Zürich zur Verfügung, um dezentral und browserbasiert Webseiten zu erstellen 
+und bewirtschaften.</p>
+  </body>
+</unizh:homepage>

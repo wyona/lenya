@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<catalogue xml:lang="de">
+  <!-- <message key="key">Value</message> -->
+  <message key="edit_item">Bearbeiten</message>
+  <message key="error_newsitem">FEHLER: Löschen Sie entweder den Text im folgenden Paragraphen (vorzugsweise mit dem BXE-Editor!) oder den Link in obenstehender Zusammenfassung (Element 'a'). Ein News-Item kann nur eines von beidem enthalten.</message>
+  <message key="more">Mehr...</message>
+  <message key="Further options">Mehr Optionen</message>
+  <message key="Search">Suchen</message>
+  <message key="Search the telephone directory">Suche im Telefon- und E-Mail-Verzeichnis der Universität Zürich</message>
+  <message key="Search the website">Suche auf der Website</message>
+</catalogue>

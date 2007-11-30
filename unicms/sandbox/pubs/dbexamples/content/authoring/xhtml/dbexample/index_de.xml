@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:unizh="http://unizh.ch/doctypes/elements/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0" unizh:columns="3" dc:dummy="FIXME:keepNamespace" dcterms:dummy="FIXME:keepNamespace" lenya:dummy="FIXME:keepNamespace" xhtml:dummy="FIXME:keepNamespace" sql:dummy="FIXME:keepNamespace">
+  <lenya:meta>
+    <dc:title>dbexample</dc:title>
+    <dc:description> </dc:description>
+    <dc:creator>Levi Vanya</dc:creator>
+    <dc:subject/>
+    <dc:publisher>Universität Zürich</dc:publisher>
+    <dcterms:created>Fri Nov 30 10:18:11 CET 2007</dcterms:created>
+    <dcterms:issued>date of publication</dcterms:issued>
+    <dc:language>de</dc:language>
+    <dc:rights>Universität Zürich</dc:rights>
+  </lenya:meta>
+  <unizh:related-content>
+    <unizh:teaser>
+      <unizh:title>Title</unizh:title>
+      <p>Teaser text</p>
+      <a href="http://www.uzh.ch">Zum UZH Portal</a>
+    </unizh:teaser>
+  </unizh:related-content>
+  <body>
+    <h2>Headline</h2>
+    <p>Paragraph</p>
+    <sql:execute-query>
+       <sql:query>SELECT a,b,c FROM table ORDER by name;</sql:query>
+    </sql:execute-query>
+  </body>
+</html>
