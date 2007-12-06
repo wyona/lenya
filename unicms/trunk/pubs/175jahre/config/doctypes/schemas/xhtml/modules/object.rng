@@ -2,11 +2,13 @@
 <!-- Object Module -->
 <grammar 
 ns="http://www.w3.org/1999/xhtml"
-
-xmlns="http://relaxng.org/ns/structure/1.0">
+xmlns:bxe="http://bitfluxeditor.org/schema/2.0"
+xmlns="http://relaxng.org/ns/structure/1.0"
+>
 
 <define name="object">
   <element name="object">
+    <bxe:onnew type="popup">?lenya.usecase=bxeng&amp;lenya.step=image-upload-show</bxe:onnew>
     <ref name="object.attlist"/>
     <!-- No restrictions on mixed content in TREX. -->
     <zeroOrMore>

@@ -5,6 +5,7 @@
          xmlns:lenya="http://apache.org/cocoon/lenya/page-envelope/1.0"
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:bxe="http://bitfluxeditor.org/schema/2.0"
          xmlns:xhtml="http://www.w3.org/1999/xhtml"
          >
 
@@ -21,6 +22,7 @@
 
 <define name="lenya.asset">
   <element name="lenya:asset">
+    <bxe:onnew type="popup">?lenya.usecase=bxeng&amp;lenya.step=asset-upload-show</bxe:onnew>
     <attribute name="size"><ref name="Text.datatype"/></attribute>
     <attribute name="src"><ref name="Text.datatype"/></attribute>
     <attribute name="type"><ref name="Text.datatype"/></attribute>

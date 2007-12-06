@@ -9,6 +9,7 @@ xmlns="http://relaxng.org/ns/structure/1.0">
 
 <define name="a">
   <element name="a">
+    <bxe:onnew type="popup">?lenya.usecase=bxeng&amp;lenya.step=link-show</bxe:onnew>
     <bxe:nextelement ns="http://www.w3.org/1999/xhtml">a</bxe:nextelement> 
     <ref name="a.attlist"/>
     <ref name="Inline.model"/>

@@ -12,6 +12,7 @@
       <xsl:apply-templates select="descendant-or-self::nav:node[@basic-url = 'news/media']" />
       <xsl:apply-templates select="descendant-or-self::nav:node[@basic-url = 'ueber/partner']" />
       <xsl:apply-templates select="descendant-or-self::nav:node[@id = 'contact']" />
+      <xsl:apply-templates select="descendant-or-self::nav:node[@id = 'intern']" />
       <xsl:apply-templates select="descendant-or-self::nav:node[@id = 'search']" />
     </div>
   </xsl:template>

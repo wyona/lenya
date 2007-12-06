@@ -444,7 +444,7 @@
       </xsl:when>
       <xsl:when test="$href != ''">
         <a href="{$href}">
-          <img src="{$src}" alt="{$alt}">
+          <img __bxe_id="{@__bxe_id}" src="{$src}" alt="{$alt}">
             <xsl:if test="$width">
               <xsl:attribute name="width">
                 <xsl:value-of select="$width" />
@@ -459,7 +459,7 @@
         </a>
       </xsl:when>
       <xsl:otherwise>
-        <img src="{$src}" alt="{$alt}">
+        <img __bxe_id="{@__bxe_id}" src="{$src}" alt="{$alt}">
           <xsl:if test="$width">
             <xsl:attribute name="width">
               <xsl:value-of select="$width" />
