@@ -18,7 +18,21 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                               xmlns:sql="http://apache.org/cocoon/SQL/2.0">
 
+  <xsl:template name="generateJavascript">
+   <script language="javascript">
+   <xsl:comment>
+    function init()
+   {
+	var Table1Sorter = new TSorter;
+	Table1Sorter.init('dbTable');
+   }
+   window.onload = init;
+   </xsl:comment>
+   </script>
+  </xsl:template>
+
   <xsl:template match="sql:rowset">
+  <xsl:call-template name="generateJavascript"/>
    <xsl:choose>
     <xsl:when test="ancestor::sql:rowset">
      <tr>
@@ -30,13 +44,17 @@
      </tr>
     </xsl:when>
     <xsl:otherwise>
-     <table class="grid">
+     <table class="grid" id="dbTable">
+       <thead>
        <tr>
 	 <xsl:for-each select="./sql:row[1]/sql:*">
-	   <th><xsl:value-of select="local-name()"/></th>
+	   <th class="descend"><xsl:value-of select="local-name()"/></th>
 	 </xsl:for-each>
        </tr>
+       </thead>
+       <tbody>
        <xsl:apply-templates/>
+       </tbody>
      </table>
     </xsl:otherwise>
    </xsl:choose>
