@@ -139,9 +139,14 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
         </div>
       </xsl:when>
+      <xsl:when test="*/unizh:contcol1/*">
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1/*" />
+        </div>
+      </xsl:when>
       <xsl:otherwise>
         <div id="col1">
-          <xsl:apply-templates select="*/unizh:contcol1"/>
+          <xsl:comment />
         </div>
       </xsl:otherwise>
     </xsl:choose>
@@ -162,9 +167,14 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
         </div>
       </xsl:when>
+      <xsl:when test="*/unizh:contcol1/*">
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1/*" />
+        </div>
+      </xsl:when>
       <xsl:otherwise>
         <div id="col1">
-          <xsl:apply-templates select="*/unizh:contcol1"/>
+          <xsl:comment />
         </div>
       </xsl:otherwise>
     </xsl:choose>
@@ -191,10 +201,18 @@
         </div>
       </xsl:when>
       <xsl:when test="( $numColumns + $numDoubles ) = 2">
-        <div id="col1">
-          <xsl:apply-templates select="*/unizh:contcol1"/>
-          <xsl:comment/>
-        </div>
+        <xsl:choose>
+          <xsl:when test="*/unizh:contcol1/*">
+            <div id="col1">
+              <xsl:apply-templates select="*/unizh:contcol1/*" />
+            </div>
+          </xsl:when>
+          <xsl:otherwise>
+            <div id="col1">
+              <xsl:comment />
+            </div>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:when>
     </xsl:choose>
     <div>
@@ -259,9 +277,14 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
         </div>
       </xsl:when>
+      <xsl:when test="*/unizh:contcol1/*">
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1/*" />
+        </div>
+      </xsl:when>
       <xsl:otherwise>
         <div id="col1">
-          <xsl:apply-templates select="*/unizh:contcol1"/>
+          <xsl:comment />
         </div>
       </xsl:otherwise>
     </xsl:choose>
@@ -313,9 +336,14 @@
           <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']" />
         </div>
       </xsl:when>
+      <xsl:when test="*/unizh:contcol1/*">
+        <div id="col1">
+          <xsl:apply-templates select="*/unizh:contcol1/*" />
+        </div>
+      </xsl:when>
       <xsl:otherwise>
         <div id="col1">
-          <xsl:apply-templates select="*/unizh:contcol1"/>
+          <xsl:comment />
         </div>
       </xsl:otherwise>
     </xsl:choose>

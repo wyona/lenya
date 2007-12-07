@@ -626,9 +626,9 @@
       </xsl:when>
 
       <xsl:when test="preceding-sibling::*[1]/@float = 'true'">
-        <div class="objectContainer">
+        <div class="objectContainer" __bxe_id="{@__bxe_id}">
           <xsl:apply-templates select="preceding-sibling::*[1]" mode="objectElement" />
-          <xsl:apply-templates/>
+          <xsl:apply-templates />
           <br class="floatclear" />
         </div>
       </xsl:when>

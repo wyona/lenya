@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- $Id: xhtml-standard.xsl,v 1.11 2005/01/17 09:15:14 thomas Exp $ -->
-
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml"
@@ -12,7 +10,8 @@
   xmlns:unizh="http://unizh.ch/doctypes/elements/1.0"
   xmlns:uz="http://unizh.ch"
   >
-  
+
+
   <xsl:param name="contextprefix"/>
   <xsl:param name="area"/>
   <xsl:param name="rendertype"/>
@@ -23,7 +22,6 @@
   <xsl:param name="querystring"/>
   <xsl:param name="servername"/>
   <xsl:param name="proxy-url-live"/>
-
 
   <xsl:include href="../doctypes/variables.xsl"/>
   <xsl:include href="../common/html-head.xsl"/>
@@ -44,66 +42,55 @@
       <xsl:call-template name="html-head"/>
       <body>
         <div class="bodywidth">
-          <a name="top"><xsl:comment/></a>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'breadcrumb']"/>
-          <xsl:call-template name="header"/>
-          <xsl:apply-templates select="/document/xhtml:div[@id = 'toolnav']"/>
-          <div id="col1">
-            <xsl:apply-templates select="/document/xhtml:div[@id = 'menu']"/>
-            <xsl:apply-templates select="/document/unizh:contcol1"/>
-          </div>
+          <a accesskey="1" title="Zur Navigation springen" href="#navigation" />
+          <a accesskey="2" title="Zum Inhalt springen" href="#content" />
+          <a name="top" />
+          <xsl:call-template name="header" />
+          <xsl:choose>
+            <xsl:when test="*/unizh:contcol1/*">
+              <div id="col1">
+                <xsl:apply-templates select="*/unizh:contcol1/*" />
+              </div>
+            </xsl:when>
+            <xsl:otherwise>
+              <div id="col1">
+                <xsl:comment />
+              </div>
+            </xsl:otherwise>
+          </xsl:choose>
           <div class="contcol2">
-            <div class="content">
-              <h1> 
-                <div bxe_xpath="/{document-element-name}/lenya:meta/dc:title">
-                  <xsl:value-of select="/document/content/*/lenya:meta/dc:title"/>
-                </div>
-              </h1>
-              <xsl:apply-templates select="/document/xhtml:form[@id = 'search']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'exception']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
-              <xsl:apply-templates select="/document/xhtml:div[@id = 'pages']"/>
-            </div>
-            <xsl:call-template name="footer"/>
+            <a accesskey="2" name="content"><xsl:comment /></a>
+            <xsl:if test="string-length(/document/content/*/lenya:meta/dc:title) &gt; 0">
+              <h1><xsl:value-of select="/document/content/*/lenya:meta/dc:title" /></h1>
+            </xsl:if>
+            <xsl:apply-templates select="/document/xhtml:form[@id = 'search']"/>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'exception']"/>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'results']"/>
+            <xsl:apply-templates select="/document/xhtml:div[@id = 'pages']"/>
           </div>
+          <xsl:call-template name="footer"/>
         </div>
       </body>
     </html>
   </xsl:template>
 
-  <xsl:template match="xhtml:div[@id = 'toolnav']">
-    <div id="toolnav">
-      <div class="icontextpos">
-        <div id="icontext">&#160;</div>
-      </div>
-      <xsl:for-each select="xhtml:div[@class='language']">
-        <a href="{@href}"><xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/></a> |
-      </xsl:for-each>
-      <a href="#" onClick="window.open('{xhtml:div[@id = 'print']/@href}?{$querystring}', '', 'width=700,height=700,menubar=yes,scrollbars')" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'print']}')"><img src="{$imageprefix}/icon_print.gif" alt="{xhtml:div[@id = 'print']}" width="10" height="10" border="0" /></a> |
-      <a onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'fontsize']}')">
-        <xsl:attribute name="id">switchFontSize</xsl:attribute>
-        <img src="{$imageprefix}/icon_bigfont.gif" alt="{xhtml:div[@id = 'fontsize']}" border="0" width="18" height="9"/></a> |
-      <a href="{xhtml:div[@id = 'simpleview']/@href}" onmouseout="changeIcontext('')" onmouseover="changeIcontext('{xhtml:div[@id = 'simpleview']}')"><img src="{$imageprefix}/icon_pda.gif" alt="{xhtml:div[@id = 'simpleview']}" width="18" height="9" border="0" /></a>
-    </div>
-    <div class="floatclear"><xsl:comment/></div>
-  </xsl:template>
 
   <xsl:template match="xhtml:form[@id = 'search']">
     <div class="searchtextblock">
-    <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{$proxy-url-live}" accept-charset="UTF-8">
-      <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
-      <input name="q" type="text" size="40"/>
-      <input type="submit" name="sa" value="Search" />
-      <input type="hidden" name="cof" value="FORID:11" /><br />
-      <input id="custom" name="sitesearch" value="{$servername}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$servername"/></label>
-      <input id="custom" name="sitesearch" value="*.uzh.ch" type="radio"/><label for="custom"> UZH Search</label>
-    </form>
-    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_009347054195260226203%3Ahahgnjx1tks"></script>
-    <a href="http://www.google.com" target="_blank"><img src="{$imageprefix}/poweredby_FFFFFF.gif" align="right"/></a>
+      <form id="searchbox_009347054195260226203:hahgnjx1tks" action="{$proxy-url-live}" accept-charset="UTF-8">
+        <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
+        <input name="q" type="text" size="40"/>
+        <input type="submit" name="sa" value="Search" />
+        <input type="hidden" name="cof" value="FORID:11" /><br />
+        <input id="custom" name="sitesearch" value="{$servername}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$servername"/></label>
+        <input id="custom" name="sitesearch" value="*.uzh.ch" type="radio"/><label for="custom"> UZH Search</label>
+      </form>
+      <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_009347054195260226203%3Ahahgnjx1tks"></script>
+      <a href="http://www.google.com" target="_blank"><img src="{$imageprefix}/poweredby_FFFFFF.gif" align="right"/></a>
     </div>
 
     <!-- Google Search Result Snippet Begins -->
-    <div id="results_009347054195260226203:hahgnjx1tks"></div>
+    <div id="results_009347054195260226203:hahgnjx1tks"><xsl:comment /></div>
       <script type="text/javascript">
          var googleSearchIframeName = "results_009347054195260226203:hahgnjx1tks";
          var googleSearchFormName = "searchbox_009347054195260226203:hahgnjx1tks";
@@ -117,19 +104,6 @@
 
   </xsl:template>
 
-
-<!--
-  <xsl:template match="xhtml:input[@type = 'radio' and @name = 'publication-id']">
-    <div class="searchoptionblock">
-      <input class="searchoption" type="radio" name="{@name}" value="{@value}">
-        <xsl:if test="@checked">
-           <xsl:attribute name="checked">checked</xsl:attribute>
-        </xsl:if>
-      </input>
-      <xsl:value-of select="."/>
-    </div>
-  </xsl:template> 
--->
 
   <xsl:template match="xhtml:div[@id = 'exception']">
     <xsl:value-of select="."/>
