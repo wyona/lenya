@@ -94,7 +94,7 @@
       <script type="text/javascript">
          var googleSearchIframeName = "results_009347054195260226203:hahgnjx1tks";
          var googleSearchFormName = "searchbox_009347054195260226203:hahgnjx1tks";
-         var googleSearchFrameWidth = 600;
+         var googleSearchFrameWidth = 596;
          var googleSearchFrameborder = 0;
          var googleSearchDomain = "www.google.com";
          var googleSearchPath = "/cse";
