@@ -295,9 +295,9 @@
           <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/{page-envelope:document-type}?doctype={page-envelope:document-type}"/> 
           <map:transform src="../unizh/xslt/strip_bxe_xpath.xsl"/>
 	  <map:transform type="sql">
-	     <map:parameter name="dburl" value="jdbc:mysql://mysql.unizh.ch:3306/idsw"/>
-	     <map:parameter name="username" value="idsw"/>
-             <map:parameter name="password" value="W3+proxy"/>
+	     <map:parameter name="dburl" value="jdbc:mysql://mysql.unizh.ch:3306/{dbconinfo:{page-envelope:document-name}:dbName}"/>
+	     <map:parameter name="username" value="{dbconinfo:{page-envelope:document-name}:userName}"/>
+             <map:parameter name="password" value="{dbconinfo:{page-envelope:document-name}:password}"/>
 	  </map:transform>
 <!--
           <map:transform type="sql">

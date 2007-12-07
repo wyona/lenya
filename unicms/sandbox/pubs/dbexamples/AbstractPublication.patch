@@ -1,0 +1,71 @@
+Index: org/apache/lenya/cms/publication/AbstractPublication.java
+===================================================================
+--- org/apache/lenya/cms/publication/AbstractPublication.java	(revision 598970)
++++ org/apache/lenya/cms/publication/AbstractPublication.java	(working copy)
+@@ -63,6 +63,13 @@
+     private static final String ELEMENT_REWRITE_ATTRIBUTE = "link-attribute";
+     private static final String ATTRIBUTE_XPATH = "xpath";
+ 	private static final String ELEMENT_CONTENT_DIR = "content-dir";
++	private static final String ELEMENT_DB = "database";
++	private static final String DB_CONN_NAME ="conname";
++	private static final String DB_NAME ="dbname";	
++	private static final String DB_SERVER = "server";
++	private static final String DB_USER   = "user";
++	private static final String DB_PASSWD   = "password";
++		
+ 
+     /**
+      * Creates a new instance of Publication
+@@ -154,6 +161,25 @@
+                 }
+             }
+             
++            Configuration[] dbConfigs = config.getChildren(ELEMENT_DB);
++            for (int i = 0; i < dbConfigs.length; i++) {
++                String conName = dbConfigs[i].getAttribute(DB_CONN_NAME);
++                String server = dbConfigs[i].getAttribute(DB_SERVER);
++                String dbName = dbConfigs[i].getAttribute(DB_NAME);
++                String user   = dbConfigs[i].getAttribute(DB_USER);
++                String passwd = dbConfigs[i].getAttribute(DB_PASSWD);
++                
++                DbHelper sqlhelper = new DbHelper();
++                sqlhelper.setServerName(server);
++                sqlhelper.setDbName(dbName);
++                sqlhelper.setUserName(user);
++                sqlhelper.setPassword(passwd);
++                
++                Object key = getSQLConnKey(conName);
++                this.sqlConnNames.put(key, sqlhelper);
++                
++            }
++            
+             Configuration[] rewriteAttributeConfigs = config.getChildren(ELEMENT_REWRITE_ATTRIBUTE);
+             List xPaths = new ArrayList();
+             for (int i = 0; i < rewriteAttributeConfigs.length; i++) {
+@@ -627,7 +653,7 @@
+     protected Object getProxyKey(String area, boolean isSslProtected) {
+         return area + ":" + isSslProtected;
+     }
+-
++    
+     /**
+      * @see org.apache.lenya.cms.publication.Publication#getProxy(org.apache.lenya.cms.publication.Document,
+      *      boolean)
+@@ -657,4 +683,17 @@
+     protected Object getContentDirKey(String area) {
+         return area;
+     }
++    
++    public DbHelper getDbHelper(String conName){
++    		Object key = getSQLConnKey(conName);
++    		DbHelper dbHelper = (DbHelper) this.sqlConnNames.get(key);
++    		return dbHelper;
++    }
++
++    private Map sqlConnNames = new HashMap();
++    
++    protected Object getSQLConnKey(String conName){
++	    return conName;	    	
++    }
++
+ }
