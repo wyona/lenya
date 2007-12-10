@@ -229,6 +229,7 @@
 
 <define name="teaser.a">
   <element name="a">
+    <bxe:onnew type="popup">?lenya.usecase=bxeng&amp;lenya.step=link-show</bxe:onnew>
     <ref name="a.attlist"/>
     <ref name="teaser.model"/>
   </element>
