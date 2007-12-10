@@ -710,7 +710,7 @@
     <xsl:choose>
       <xsl:when test="xhtml:p/descendant-or-self::*[text()]">
         <div class="leadblock">
-          <p>
+          <p __bxe_id="{xhtml:p/@__bxe_id}">
             <xsl:if test="xhtml:object">
               <xsl:apply-templates select="xhtml:object" />
             </xsl:if>
@@ -980,7 +980,7 @@
               <td>
                 <xsl:value-of select="@label" />
               </td>
-              <td class="data">
+              <td class="data" __bxe_id="{@__bxe_id}">
                 <xsl:apply-templates />
               </td>
             </xsl:when>
@@ -990,7 +990,7 @@
               </td>
             </xsl:when>
             <xsl:when test=" node() ">
-              <td colspan="2" class="remarks">
+              <td colspan="2" class="remarks" __bxe_id="{@__bxe_id}">
                 <xsl:apply-templates />
               </td>
             </xsl:when>

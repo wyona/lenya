@@ -226,8 +226,8 @@
       </xsl:choose>
       <xsl:if test="$hideCaption != 'true' and (((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != '')) or (@popup = 'true'))">
         <div>
-          <xsl:value-of select="xhtml:div[@class = 'caption']" />
           <xsl:if test="((xhtml:div[@class = 'caption']) and (xhtml:div[@class = 'caption'] != ''))">
+            <xsl:value-of select="xhtml:div" />
             <xsl:text> </xsl:text>
           </xsl:if>
           <xsl:if test="@popup = 'true'">
