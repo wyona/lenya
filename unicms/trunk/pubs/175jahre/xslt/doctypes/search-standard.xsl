@@ -31,6 +31,9 @@
   <xsl:include href="../common/elements.xsl"/> 
   <xsl:include href="../common/object.xsl"/> 
 
+  <xsl:variable name="temp" select="substring-after($servername, 'http://')"/>
+  <xsl:variable name="hostname" select="substring-before($temp, '/index.html')"/>
+
 
   <xsl:template match="document">
     <xsl:apply-templates select="content"/>
@@ -82,7 +85,7 @@
         <input name="q" type="text" size="40"/>
         <input type="submit" name="sa" value="Search" />
         <input type="hidden" name="cof" value="FORID:11" /><br />
-        <input id="custom" name="sitesearch" value="{$servername}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$servername"/></label>
+        <input id="custom" name="sitesearch" value="{$hostname}" checked="true" type="radio"/><label for="custom"><xsl:value-of select="$hostname"/></label>
         <input id="custom" name="sitesearch" value="*.uzh.ch" type="radio"/><label for="custom"> UZH Search</label>
       </form>
       <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_009347054195260226203%3Ahahgnjx1tks"></script>

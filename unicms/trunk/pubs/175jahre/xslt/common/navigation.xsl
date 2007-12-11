@@ -9,6 +9,11 @@
 
   <xsl:param name="servername" />
 
+
+  <xsl:variable name="temp" select="substring-after($servername, 'http://')"/>
+  <xsl:variable name="hostname" select="substring-before($temp, '/index.html')"/>
+
+
   <xsl:template match="xhtml:div[@id = 'servicenav']">
     <div id="servicenav">
       <xsl:apply-templates />
@@ -53,7 +58,7 @@
         <xsl:attribute name="accept-charset">UTF-8</xsl:attribute>
         <input type="hidden" name="cx" value="009347054195260226203:hahgnjx1tks" />
         <input type="hidden" name="cof" value="FORID:11" />
-        <input type="hidden" id="custom" name="sitesearch" value="{$servername}" />
+        <input type="hidden" id="custom" name="sitesearch" value="{$hostname}" />
         <a href="javascript:hideSearch()" class="iconclose" alt="Suchformular schliessen"><img src="{$imageprefix}/1.gif" width="7" height="7" /></a>
         <div class="inputfield">
           Suchen: <input accesskey="5" name="q" type="text" class="text" />
