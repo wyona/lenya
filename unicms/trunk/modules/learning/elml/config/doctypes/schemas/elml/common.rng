@@ -51,12 +51,19 @@
     </element>
   </define>
 
+
   <define name="lObjective">
     <element name="lObjective">
       <ref name="RoleImp"/>
-      <text/>
+      <oneOrMore>
+        <choice>
+          <ref name="formatted"/>
+          <text/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
+
 
   <define name="selfAssessment">
     <element name="selfAssessment">
@@ -184,7 +191,7 @@
 
   <define name="box">
     <element name="box">
-      <ref name="ParaType"/>
+      <ref name="ParaTypeBox"/>
     </element>
   </define>
 
@@ -386,6 +393,7 @@
         <ref name="citation"/>
         <ref name="paragraph"/>
         <ref name="annotation"/>
+        <ref name="selfCheck"/>
       </choice>
     </zeroOrMore>
   </define>
@@ -498,9 +506,159 @@
     </zeroOrMore>
   </define>
 
+
+  <define name="ParaTypeBox">
+    <ref name="LabelImp"/>
+    <ref name="TitleImp"/>
+    <ref name="IconImp"/>
+    <ref name="CSSClassImp"/>
+    <zeroOrMore>
+      <choice>
+        <ref name="column"/>
+        <ref name="table"/>
+        <ref name="list"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="paragraph"/>
+        <ref name="indexItem"/>
+        <ref name="annotation"/>
+        <ref name="popup"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+
   <define name="mdType">
     <ref name="RoleImp"/>
   </define>
+
+  <define name="index">
+    <element name="index">
+      <ref name="VisibleImp"/>
+    </element>
+  </define>
+
+  <define name="listOfFigures">
+    <element name="listOfFigures">
+      <ref name="VisibleImp"/>
+    </element>
+  </define>
+
+  <define name="listOfTables">
+    <element name="listOfTables">
+      <ref name="VisibleImp"/>
+    </element>
+  </define>
+
+
+  <define name="selfCheck">
+    <element name="selfCheck">
+      <ref name="LabelImp"/>
+      <ref name="TitleImp"/>
+      <ref name="QuestionReq"/>
+      <choice>
+        <ref name="multipleChoice"/>
+        <ref name="fillInBlanks"/>
+      </choice>
+    </element>
+  </define>
+
+
+  <define name="multipleChoice">
+    <element name="multipleChoice">
+      <ref name="question"/>
+      <oneOrMore>
+        <ref name="answer"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="solution"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+
+  <define name="fillInBlanks">
+    <element name="fillInBlanks">
+      <ref name="question"/>
+      <ref name="gapText"/>
+      <zeroOrMore>
+        <ref name="solution"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+
+  <define name="question">
+    <element name="question">
+      <ref name="AnswerType"/>
+    </element>
+  </define>
+
+
+  <define name="answer">
+    <element name="answer">
+      <ref name="AnswersReq"/>
+      <ref name="AnswerType"/>
+    </element>
+  </define>
+
+  <define name="gapText">
+    <element name="gapText">
+      <zeroOrMore>
+        <choice>
+          <ref name="gap"/>
+          <ref name="list"/>
+          <ref name="term"/>
+          <ref name="multimedia"/>
+          <ref name="formatted"/>
+          <ref name="link"/>
+          <ref name="citation"/>
+          <ref name="newLine"/>
+          <ref name="indexItem"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="gap">
+    <element name="gap">
+      <attribute name="answers">
+        <text/>
+      </attribute>
+      <text/>
+    </element>
+  </define>
+
+ 
+   <define name="solution">
+    <element name="solution">
+      <ref name="AnswerType"/>
+    </element>
+  </define>
+
+
+  <define name="AnswerType">
+    <zeroOrMore>
+      <choice>
+        <ref name="list"/>
+        <ref name="term"/>
+        <ref name="multimedia"/>
+        <ref name="formatted"/>
+        <ref name="link"/>
+        <ref name="citation"/>
+        <ref name="newLine"/>
+        <ref name="indexItem"/>
+        <text/>
+      </choice>
+    </zeroOrMore>
+  </define>
+
+
 
   <!-- Attributes -->
 
@@ -786,6 +944,37 @@
       </attribute>
     </optional>
   </define>
+
+
+  <define name="QuestionReq">
+    <optional>
+      <attribute name="category">
+        <text/>
+      </attribute>
+    </optional>
+    <attribute name="shuffle">
+      <choice>
+        <value>yes</value>
+        <value>no</value>
+      </choice>
+    </attribute>
+  </define>
+
+   <define name="AnswersReq">
+    <attribute name="correct">
+      <choice>
+        <value>yes</value>
+        <value>no</value>
+      </choice>
+    </attribute>
+    <optional>
+      <attribute name="feedback">
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+
 
   <define name="IndexAttImp">
     <optional>

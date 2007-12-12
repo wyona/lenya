@@ -65,6 +65,15 @@
         <ref name="bibliography"/>
       </optional>
       <optional>
+        <ref name="index"/>
+      </optional>
+      <optional>
+        <ref name="listOfFigures"/>
+      </optional>
+      <optional>
+        <ref name="listOfTables"/>
+      </optional>
+      <optional>
         <element name="metadata">
           <ref name="RoleImp"/>
           <ref name="MetaDataType"/>

@@ -2,7 +2,7 @@
 
 <insertTemplates xmlns:elml="http://www.elml.ch">
 
-  <template label="Unit" element="unit">
+  <template label="Unit" context="//elml:lesson">
     <elml:unit label="label1" title="Title der Unit">
       <elml:entry>
         <paragraph>Einleitung zur Unit mit optionalem Bild</paragraph>
@@ -22,19 +22,19 @@
     </elml:unit>
   </template>
 
-  <template label="Entry" element="entry">
+  <template label="Entry" context="//elml:lesson">
     <elml:entry>
       <elml:paragraph>Einleitung</elml:paragraph>
     </elml:entry>
   </template>
 
-  <template label="Goals" element="goals">
+  <template label="Goals" context="//elml:entry">
     <elml:goals>
       <elml:lObjective>A learning objective</elml:lObjective>
     </elml:goals>
   </template>
 
-  <template label="LearningObject" element="learningObject">
+  <template label="LearningObject" context="//elml:unit">
     <elml:learningObject title="Titel des Learning Objects" label="labelXX">
       <elml:clarify>
         <elml:paragraph>Clarify</elml:paragraph>
@@ -42,19 +42,19 @@
     </elml:learningObject>
   </template>
 
-  <template label="Clarify" element="clarify">
+  <template label="Clarify" context="//elml:learningObject">
     <elml:clarify>
       <elml:paragraph>Clarify</elml:paragraph>
     </elml:clarify>
   </template>
 
-  <template label="Look" element="look">
+  <template label="Look" context="//elml:learningObject">
     <elml:look>
       <elml:paragraph>Look</elml:paragraph>
     </elml:look>
   </template>
 
-  <template label="Act" element="act">
+  <template label="Act" context="//elml:learningObject">
     <elml:act metaSetUpInfo="setup description">
       <elml:paragraph>Act</elml:paragraph>
     </elml:act>

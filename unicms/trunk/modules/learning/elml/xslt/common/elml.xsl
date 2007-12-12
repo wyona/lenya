@@ -67,7 +67,7 @@
 
 
   <xsl:template match="elml:unit">
-    <xsl:if test="$pagebreak_level = 'lesson'">
+    <xsl:if test="$pagebreak_level != 'unit'">
       <h2><xsl:value-of select="@title"/></h2>
     </xsl:if>
     <div>
@@ -1446,22 +1446,5 @@
     </xsl:if>
   </xsl:template>
 
-
-  <xsl:template match="xhtml:a[@href != '']">
-    <a href="{@href}">
-      <xsl:attribute name="class">
-        <xsl:choose>
-          <xsl:when test="starts-with(@href, 'http://') and not(contains(@href, '.unizh.ch'))">
-            <xsl:text>extern</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-             <xsl:text>arrow</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
-      <xsl:copy-of select="@target"/>
-      <xsl:apply-templates/><xsl:comment/>
-    </a>
-  </xsl:template>
 
 </xsl:stylesheet>
