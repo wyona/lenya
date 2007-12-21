@@ -41,9 +41,11 @@
             <xsl:value-of select="/document/content/*/unizh:header/unizh:heading" />
           </a>
         </h1>
-        <h2>
-          <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription" />
-        </h2>
+        <xsl:if test="/document/content/*/unizh:header/unizh:superscription and normalize-space( /document/content/*/unizh:header/unizh:superscription ) != ''">
+          <h2>
+            <xsl:value-of select="/document/content/*/unizh:header/unizh:superscription" />
+          </h2>
+        </xsl:if>
       </div>
     </xsl:if>
     <!-- highlight -->

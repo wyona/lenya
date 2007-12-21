@@ -40,6 +40,7 @@ div.relatedbox table.calendar tr th
 }
 div.relatedbox table.calendar tr td.data
 {
+    padding-left: 0;
     color: #80107B;
 }
 

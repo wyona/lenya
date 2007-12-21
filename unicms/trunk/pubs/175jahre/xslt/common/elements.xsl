@@ -762,55 +762,46 @@
     <xsl:value-of select="." />
   </xsl:template>
 
-  <xsl:template match="xhtml:table[@class = 'ornate']">
-    <xsl:variable name="cols">
-      <xsl:value-of select="count(xhtml:tr[1]/xhtml:td [not(@colspan)]) + count(xhtml:tr[1]/xhtml:th [not(@colspan)]) + sum (xhtml:tr[1]/xhtml:td/@colspan) + sum (xhtml:tr[1]/xhtml:th/@colspan)" />
-    </xsl:variable>
-    <div class="solidlinetable">
-      <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-    </div> 
-    <xsl:if test="xhtml:caption">
-      <div class="tabletitel">
-        <xsl:value-of select="xhtml:caption" />
-      </div>
-      <div class="dotline"><img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" /></div>
-    </xsl:if>
+
+  <xsl:template match="xhtml:table[@class = 'basic']">
     <xsl:copy>
-      <xsl:attribute name="width">100%</xsl:attribute>
-      <xsl:for-each select="xhtml:tr">
-        <tr>
-          <xsl:apply-templates select="xhtml:td | xhtml:th" />
-        </tr>
-        <tr>
-          <td colspan="{$cols}" align="left">
-            <div class="dotline">
-              <img src="{$imageprefix}/1.gif" alt="separation line" width="1" height="1" />
-            </div>
-          </td>
-        </tr>
-      </xsl:for-each>
+      <xsl:attribute name="class">basic</xsl:attribute>
+      <xsl:attribute name="cellspacing">0</xsl:attribute>
+      <xsl:attribute name="cellpadding">0</xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+
+  <xsl:template match="xhtml:table[@class = 'ornate']">
+    <xsl:copy>
+      <xsl:attribute name="class">ornate</xsl:attribute>
+      <xsl:attribute name="cellspacing">0</xsl:attribute>
+      <xsl:attribute name="cellpadding">0</xsl:attribute>
+      <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
 
 
   <xsl:template match="xhtml:table[@class = 'grid']">
     <xsl:copy>
-      <xsl:copy-of select="@class" />
-      <xsl:attribute name="width">100%</xsl:attribute>
-        <xsl:apply-templates/>
+      <xsl:attribute name="class">grid</xsl:attribute>
+      <xsl:attribute name="cellspacing">0</xsl:attribute>
+      <xsl:attribute name="cellpadding">0</xsl:attribute>
+      <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
 
 
   <xsl:template match="xhtml:table[@class = 'striped']">
     <xsl:copy>
-      <xsl:copy-of select="@class" />
-      <xsl:attribute name="width">100%</xsl:attribute>
+      <xsl:attribute name="class">striped</xsl:attribute>
+      <xsl:attribute name="cellspacing">0</xsl:attribute>
+      <xsl:attribute name="cellpadding">0</xsl:attribute>
       <xsl:for-each select="xhtml:tr">
-        <xsl:variable name="eins"><xsl:value-of select="position()" /></xsl:variable>
         <xsl:copy>
-          <xsl:if test="($eins div 2) != round($eins div 2)">
-            <xsl:attribute name="class">strip</xsl:attribute>
+          <xsl:if test="( position() div 2 ) != round( position() div 2 )">
+            <xsl:attribute name="class">odd</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates/>
         </xsl:copy>

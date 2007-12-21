@@ -1150,53 +1150,70 @@ div.searchtextblock
 }
 
 /* tables */
+table
+{
+    margin: 0.7em 0 0.9em 0;
+}
 tr
 {
     vertical-align: top; 
 }
-th
+td div.objectBlock
 {
-    height:30px;
+    margin: 0;
 }
-div.solidlinetable
+
+
+table.basic td
 {
-    background-color: #999999;
-    height:1px;
-    width:100%;
-    margin:26px 0 0 0;
-    border:0px;
+    padding: 0;
 }
+
 table.grid
 {
-    margin: 0px auto 0px auto;
+    width: 100%;
     border-width: 1px;
     border-spacing: 3px;
     border-style: solid;
     border-color: #999;
     border-collapse: collapse;
 }
-table.grid tr td
-{
-    border: 1px solid #999;
-}
-table.grid td
+table.grid td, table.grid th
 {
     border-width: 1px;
-    padding: 2px;
     border-style: solid;
     border-color: #999;
-}
-table.grid th
-{
-    border-width: 1px;
     padding: 2px;
-    border-style: solid;
-    border-color: #999;
 }
 
-tr.strip
+table.ornate
+{
+    width: 100%;
+    border-top: solid 1px #999;
+}
+table.ornate tr
+{
+    background-image: url(<context-prefix/>/unizh/authoring/images/dot_line66.gif);
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    padding: 0 0 1px 0;
+}
+table.ornate td
+{
+    padding: 2px 0;
+}
+
+table.striped
+{
+    width: 100%;
+}
+table.striped tr.odd
 {
     background-color: #f0f0f0;
+}
+table.striped td, table.striped th
+{
+    padding: 2px;
 }
 
 /* Misc*/
