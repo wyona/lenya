@@ -57,6 +57,7 @@
         <ref name="unizh.partner"/>
         <ref name="unizh.calendar"/>
         <ref name="unizh.level"/>
+        <ref name="unizh.events"/>
       </choice>
     </zeroOrMore>
   </element>
@@ -514,6 +515,11 @@
       <ref name="teaser.p" />
     </optional>
   </element>
+</define>
+
+
+<define name="unizh.events">
+  <element name="unizh:events"><empty /></element>
 </define>
 
 </grammar>
