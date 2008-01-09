@@ -427,7 +427,7 @@
   </xsl:template>
 
   <xsl:template match="unizh:description[parent::unizh:person]">
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="*"/>
   </xsl:template>
 
 
