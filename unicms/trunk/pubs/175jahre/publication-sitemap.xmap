@@ -64,6 +64,7 @@
         <map:parameter name="contextprefix" value="{request:contextPath}"/>
         <map:parameter name="root" value="{request:contextPath}/{page-envelope:publication-id}/{page-envelope:area}"/>
         <map:parameter name="area" value="{page-envelope:area}"/>
+        <map:parameter name="documenturl" value="{page-envelope:document-url}"/>
       </map:transform>
       <map:transform type="cinclude"/>
       <map:transform src="xslt/common/rss-elements.xsl">
@@ -411,7 +412,6 @@
           <map:parameter name="channelhome" value="{proxy-url:{page-envelope:area}:/{2}:{page-envelope:document-language}}"/>
           <map:parameter name="channelpath" value="{2}"/>
         </map:transform>
-        <!--map:transform src="../../xslt/util/strip_namespaces.xsl"/-->
         <map:serialize type="xml-rss"/>
       </map:match>
 

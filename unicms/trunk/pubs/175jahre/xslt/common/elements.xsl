@@ -992,13 +992,6 @@
   </xsl:template>
 
 
-  <xsl:template match="unizh:events">
-    <div class="events">
-      <xsl:comment>with JavaScript enabled, this will be replaced by the AJAX events function</xsl:comment>
-    </div>
-  </xsl:template>
-
-
   <!-- BXE 2 needs this template -->
   <xsl:template match="text()">
     <xsl:value-of select="."/>

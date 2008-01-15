@@ -11,6 +11,9 @@
 >
 
 
+  <xsl:param name="documenturl" />
+
+
   <xsl:template match="unizh:rss-reader">
     <unizh:rss-reader url="{@url}" items="{@items}" image="{@image}" link="{@link}" itemDescription="{@itemDescription}" itemImage="{@itemImage}" itemPubdate="{@itemPubdate}">
       <unizh:title><xsl:value-of select="unizh:title"/></unizh:title>
@@ -23,6 +26,15 @@
             <cinclude:src>cocoon:/include-rss/<xsl:value-of select="@url"/></cinclude:src>
           </xsl:otherwise>
         </xsl:choose>
+      </cinclude:includexml>
+    </unizh:rss-reader>
+  </xsl:template>
+
+
+  <xsl:template match="unizh:events">
+    <unizh:rss-reader url="http://www.175jahre.uzh.ch/static/rss/einzel.php?url={$documenturl}" items="{@items}" image="{@image}" link="{@link}" itemDescription="{@itemDescription}" itemImage="{@itemImage}" itemPubdate="{@itemPubdate}">
+      <cinclude:includexml ignoreErrors="true">
+        <cinclude:src>http://www.175jahre.uzh.ch/static/rss/einzel.php?url=<xsl:value-of select="$documenturl"/></cinclude:src>
       </cinclude:includexml>
     </unizh:rss-reader>
   </xsl:template>

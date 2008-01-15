@@ -10,6 +10,7 @@
   xmlns:dcterms="http://purl.org/dc/terms/" 
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:uzhfeeds="http://www.uzh.ch/doctypes/rss"
+  exclude-result-prefixes="xsl xhtml unizh index lenya dc dcterms"
 >
 
 
