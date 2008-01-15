@@ -519,7 +519,59 @@
 
 
 <define name="unizh.events">
-  <element name="unizh:events"><empty /></element>
+  <element name="unizh:events">
+    <optional>
+      <attribute name="items">
+        <text/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="link">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemDescription">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemImage">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="itemPubdate">
+        <choice>
+          <value type="string">true</value>
+          <value type="string">false</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <element name="unizh:title">
+        <text/>
+      </element>
+    </optional>
+  </element>
 </define>
+
 
 </grammar>
