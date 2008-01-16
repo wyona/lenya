@@ -948,7 +948,7 @@ div.contcol2
     margin-left: 201px;
 }
 /* this extends contcol2 */
-div.contcol2.wide
+div.contcol2.wide, * html div.contcol2.wide
 {
     margin-left: 0;
 }
@@ -961,7 +961,7 @@ div.contentarea
     margin-right: 201px;
     height: 100%; /* this gets IE6 to nicely display content and related content next to each other */
 }
-div.contentarea.wide
+div.contentarea.wide, * html div.contentarea.wide
 {
     margin: 0;
 }
