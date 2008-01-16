@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <introspection xmlns="http://www.wyona.org/neutron/1.0" xmlns:jx="http://apache.org/cocoon/templates/jx/1.0"> 
-  <edit mime-type="text/xml" name="${cocoon.parameters['document-label']}">
+  <edit mime-type="application/uzh-${cocoon.parameters['document-type']}+xml" name="${cocoon.parameters['document-label']}">
     <open url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=open" method="GET"/>
     <save url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=save" method="PUT"/> 
     <checkout url="${cocoon.parameters['base-url']}${cocoon.parameters['document-url']}?lenya.usecase=neutron&#38;lenya.step=checkout" method="GET"/>
