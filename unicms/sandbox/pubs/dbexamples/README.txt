@@ -17,18 +17,22 @@ Procedure to make it work
     <component-instance name="dbconinfo" logger="sitemap.modules.input.dbconinfo" 
                         class="org.apache.lenya.cms.cocoon.components.modules.input.SqlModule"/>
 
-3.) You need a mysql connector jar, put in the WEB-INF/lib direcotry of your servlet engine 
-     and define it in the cocoon.xconf file:
+3.) You need a connector jar-file for the database you use, put it in the WEB-INF/lib direcotry of 
+    your servlet engine and define it in the cocoon.xconf file:
+
+    for mysql:
        <jdbc name="mysqlPool">
          <pool-controller min="5" max="10"/>
          <auto-commit>true</auto-commit>
          <driver>com.mysql.jdbc.Driver</driver>
        </jdbc>
- 
-     and web xml file:
-       <init-param>
-         <param-name>load-class</param-name>
-         <param-value>org.gjt.mm.mysql.Driver</param-value>
-       </init-param>
 
+     or for oracle
+       <jdbc> 
+         <jdbc name="oraclePool">
+         <pool-controller min="5" max="10"/>
+         <auto-commit>true</auto-commit>
+         <driver>oracle.jdbc.driver.OracleDriver</driver>
+       </jdbc>
+ 
 
