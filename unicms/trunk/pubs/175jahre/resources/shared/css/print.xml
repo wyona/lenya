@@ -392,49 +392,62 @@ div.contentarea.wide
 {
     margin: 0;
 }
+/* all columns get 2% padding on either side, unless they are on the extreme left or right */
 div.contcol2 div.contentarea div.column
 {
-    width: 48%;
+    width: 47.9%;
     float: left;
-    margin: 0 0 1em 2%;
-    padding-left: 2%;
-    border-left: 1px solid #CCC;
+    margin: 0 0 1em 0;
 }
 div.contcol2 div.contentarea.wide div.column, div.contcol2.wide div.contentarea div.column
 {
-    width: 30%;
+    width: 30.6%;
     float: left;
-    margin: 0 0 1em 2%;
-    padding-left: 2%;
-    border-left: 1px solid #CCC;
+    margin: 0 0 1em 0;
 }
 div.contcol2.wide div.contentarea.wide div.column
 {
     width: 22%;
     float: left;
-    margin: 0 0 1em 2%;
-    padding-left: 2%;
-    border-left: 1px solid #CCC;
+    margin: 0 0 1em 0;
 }
 
 /*  double width column */
 div.contcol2 div.contentarea div.column.double
 {
-    width: 100%;
+    width: 99.9%;
 }
 div.contcol2 div.contentarea.wide div.column.double, div.contcol2.wide div.contentarea div.column.double
 {
-    width: 66%;
+    width: 63.3%;
 }
 div.contcol2.wide div.contentarea.wide div.column.double
 {
-    width: 48%;
+    width: 46.0%;
 }
-div.contentarea div.column#c1
+div.contcol2 div.contentarea div.column#c1
 {
-    margin-left: 0;
-    padding-left: 0;
-    border-left: none;
+    padding: 0 2% 0 0;
+}
+div.contcol2 div.contentarea div.column#c2
+{
+    padding: 0 0 0 2%;
+}
+div.contcol2 div.contentarea.wide div.column#c2, div.contcol2.wide div.contentarea div.column#c2
+{
+    padding-right: 2%;
+}
+div.contcol2 div.contentarea.wide div.column#c3, div.contcol2.wide div.contentarea div.column#c3
+{
+    padding: 0 0 0 2%;
+}
+div.contcol2.wide div.contentarea.wide div.column#c3
+{
+    padding-right: 2%;
+}
+div.contcol2.wide div.contentarea.wide div.column#c4
+{
+    padding-left: 2%;
 }
 
 /* lead block for overview */
@@ -539,6 +552,7 @@ div#footer
 {
     position: absolute;
     top: 60px;
+    left: 0;
     font-size: 0.8em;
     font-family: Tahoma, Verdana, sans-serif;
     color: #999999;
